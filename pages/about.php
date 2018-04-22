@@ -1,6 +1,6 @@
 <div>
     <div class="group">
-        <h2>What is the Pokémon Breeding Simulator?</h2>
+        <h2>What is the PokéBox Breeding Simulator?</h2>
         <p>Add up to 10 different Pokémon to the zone and then watch as they grow, evolve, multiply, and eventually faint leaving their offspring to continue the cycle.</p>
         <p>The kinds of Pokémon you add to a zone can alter it's appeal to other species and can either positively or negatively affect their growth and breeding behaviors over time.</p>
         <p>Pokémon will typically only breed with their own species, but adding a single Ditto to your zone at the beginning can give every species a head-start on egg production.</p>

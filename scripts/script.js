@@ -16,7 +16,7 @@
     // GLOBAL ZONE DATA
 
     var thisZoneData = {
-        name: 'Plain Zone',
+        name: 'Default Box',
         width: 20,
         height: 5,
         size: 100,

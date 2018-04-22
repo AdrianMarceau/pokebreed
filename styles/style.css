@@ -94,7 +94,7 @@ p:last-child {
 .panel h1 .logo {
     width: 200px;
     height: 74px;
-    background-image: url(../images/pokemon-logo.png);
+    background-image: url(../images/pokebox-logo.png);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 100% auto;
