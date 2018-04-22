@@ -16,6 +16,184 @@
 
         // Base Pokedex
 
+        'turtwig': {
+            order: indexOrder++,
+            token: 'turtwig',
+            name: 'Turtwig',
+            number: 387,
+            types: ['grass'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 55, phAttack: 68, phDefense: 64, spAttack: 45, spDefense: 55, speed: 31},
+            abilities: {0: 'overgrow', hidden: 'shell-armor'},
+            height: 0.4,
+            weight: 10.2,
+            colors: ['green', 'yellow', 'brown', 'black'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'grass'],
+            nextEvolutions: [{
+                species: 'grotle',
+                method: 'level-up',
+                value: 18
+                }]
+            },
+        'grotle': {
+            order: indexOrder++,
+            token: 'Grotle',
+            name: 'Grotle',
+            number: 388,
+            types: ['grass'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 75, phAttack: 89, phDefense: 85, spAttack: 55, spDefense: 65, speed: 36},
+            abilities: {0: 'overgrow', hidden: 'shell-armor'},
+            height: 1.1,
+            weight: 97,
+            colors: ['green', 'yellow', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'grass'],
+            prevEvolution: 'turtwig',
+            nextEvolutions: [{
+                species: 'torterra',
+                method: 'level-up',
+                value: 32
+                }]
+            },
+        'torterra': {
+            order: indexOrder++,
+            token: 'torterra',
+            name: 'Torterra',
+            number: 389,
+            types: ['grass', 'ground'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 95, phAttack: 109, phDefense: 105, spAttack: 75, spDefense: 85, speed: 56},
+            abilities: {0: 'overgrow', hidden: 'shell-armor'},
+            height: 2.2,
+            weight: 310,
+            colors: ['green', 'gray', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'grass'],
+            prevEvolution: 'grotle'
+            },
+
+        'chimchar': {
+            order: indexOrder++,
+            token: 'chimchar',
+            name: 'Chimchar',
+            number: 390,
+            types: ['fire'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 44, phAttack: 58, phDefense: 44, spAttack: 58, spDefense: 44, speed: 61},
+            abilities: {0: 'blaze', hidden: 'iron-fist'},
+            height: 0.5,
+            weight: 6.2,
+            colors: ['orange', 'yellow', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field', 'human-like'],
+            nextEvolutions: [{
+                species: 'monferno',
+                method: 'level-up',
+                value: 14
+                }]
+            },
+        'monferno': {
+            order: indexOrder++,
+            token: 'monferno',
+            name: 'Monferno',
+            number: 391,
+            types: ['fire', 'fighting'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 64, phAttack: 78, phDefense: 52, spAttack: 78, spDefense: 52, speed: 81},
+            abilities: {0: 'blaze', hidden: 'iron-fist'},
+            height: 0.9,
+            weight: 22,
+            colors: ['orange', 'blue', 'yellow', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field', 'human-like'],
+            prevEvolution: 'chimchar',
+            nextEvolutions: [{
+                species: 'infernape',
+                method: 'level-up',
+                value: 36
+                }]
+            },
+        'infernape': {
+            order: indexOrder++,
+            token: 'infernape',
+            name: 'Infernape',
+            number: 392,
+            types: ['fire', 'fighting'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 76, phAttack: 104, phDefense: 71, spAttack: 104, spDefense: 71, speed: 108},
+            abilities: {0: 'blaze', hidden: 'iron-fist'},
+            height: 1.2,
+            weight: 55,
+            colors: ['orange', 'white', 'yellow', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field', 'human-like'],
+            prevEvolution: 'monferno'
+            },
+
+        'piplup': {
+            order: indexOrder++,
+            token: 'piplup',
+            name: 'Piplup',
+            number: 393,
+            types: ['water'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 53, phAttack: 51, phDefense: 53, spAttack: 61, spDefense: 56, speed: 40},
+            abilities: {0: 'torrent', hidden: 'defiant'},
+            height: 0.4,
+            weight: 5.2,
+            colors: ['blue', 'white', 'yellow'],
+            evos: ['prinplup'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'field'],
+            nextEvolutions: [{
+                species: 'prinplup',
+                method: 'level-up',
+                value: 16
+                }]
+            },
+        'prinplup': {
+            order: indexOrder++,
+            token: 'prinplup',
+            name: 'Prinplup',
+            number: 394,
+            types: ['water'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 64, phAttack: 66, phDefense: 68, spAttack: 81, spDefense: 76, speed: 50},
+            abilities: {0: 'torrent', hidden: 'defiant'},
+            height: 0.8,
+            weight: 23,
+            colors: ['blue', 'yellow', 'white'],
+            prevo: 'piplup',
+            evos: ['empoleon'],
+            evoLevel: 16,
+            eggCycles: 20,
+            eggGroups: ['water-1', 'field'],
+            prevEvolution: 'piplup',
+            nextEvolutions: [{
+                species: 'empoleon',
+                method: 'level-up',
+                value: 36
+                }]
+            },
+        'empoleon': {
+            order: indexOrder++,
+            token: 'empoleon',
+            name: 'Empoleon',
+            number: 395,
+            types: ['water', 'steel'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 84, phAttack: 86, phDefense: 88, spAttack: 111, spDefense: 101, speed: 60},
+            abilities: {0: 'torrent', hidden: 'defiant'},
+            height: 1.7,
+            weight: 84.5,
+            colors: ['blue', 'yellow', 'black', 'white'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'field'],
+            prevEvolution: 'prinplup'
+            },
+
         'mime-jr': {
             order: thisIndex.beforeOrder('mr-mime'),
             token: 'mime-jr',
