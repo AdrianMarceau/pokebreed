@@ -16,6 +16,180 @@
 
         // Base Pokedex
 
+        'snivy': {
+            order: indexOrder++,
+            token: 'snivy',
+            name: 'Snivy',
+            number: 495,
+            types: ['grass'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 45, phAttack: 45, phDefense: 55, spAttack: 45, spDefense: 55, speed: 63},
+            abilities: {0: 'overgrow', hidden: 'contrary'},
+            height: 0.6,
+            weight: 8.1,
+            colors: ['green', 'yellow', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field', 'grass'],
+            nextEvolutions: [{
+                species: 'servine',
+                method: 'level-up',
+                value: 17
+                }]
+            },
+        'servine': {
+            order: indexOrder++,
+            token: 'servine',
+            name: 'Servine',
+            number: 496,
+            types: ['grass'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 60, phAttack: 60, phDefense: 75, spAttack: 60, spDefense: 75, speed: 83},
+            abilities: {0: 'overgrow', hidden: 'contrary'},
+            height: 0.8,
+            weight: 16,
+            colors: ['green', 'yellow', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field', 'grass'],
+            prevEvolution: 'snivy',
+            nextEvolutions: [{
+                species: 'serperior',
+                method: 'level-up',
+                value: 36
+                }]
+            },
+        'serperior': {
+            order: indexOrder++,
+            token: 'serperior',
+            name: 'Serperior',
+            number: 497,
+            types: ['grass'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 75, phAttack: 75, phDefense: 95, spAttack: 75, spDefense: 95, speed: 113},
+            abilities: {0: 'overgrow', hidden: 'contrary'},
+            height: 3.3,
+            weight: 63,
+            colors: ['green', 'yellow', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field', 'grass'],
+            prevEvolution: 'servine'
+            },
+
+        'tepig': {
+            order: indexOrder++,
+            token: 'tepig',
+            name: 'Tepig',
+            number: 498,
+            types: ['fire'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 65, phAttack: 63, phDefense: 45, spAttack: 45, spDefense: 45, speed: 45},
+            abilities: {0: 'blaze', hidden: 'thick-fat'},
+            height: 0.5,
+            weight: 9.9,
+            colors: ['orange', 'brown', 'yellow', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'pignite',
+                method: 'level-up',
+                value: 17
+                }]
+            },
+        'pignite': {
+            order: indexOrder++,
+            token: 'pignite',
+            name: 'Pignite',
+            number: 499,
+            types: ['fire', 'fighting'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 90, phAttack: 93, phDefense: 55, spAttack: 70, spDefense: 55, speed: 55},
+            abilities: {0: 'blaze', hidden: 'thick-fat'},
+            height: 1,
+            weight: 55.5,
+            colors: ['orange', 'brown', 'yellow', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'tepig',
+            nextEvolutions: [{
+                species: 'emboar',
+                method: 'level-up',
+                value: 36
+                }]
+            },
+        'emboar': {
+            order: indexOrder++,
+            token: 'emboar',
+            name: 'Emboar',
+            number: 500,
+            types: ['fire', 'fighting'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 110, phAttack: 123, phDefense: 65, spAttack: 100, spDefense: 65, speed: 65},
+            abilities: {0: 'blaze', hidden: 'reckless'},
+            height: 1.6,
+            weight: 150,
+            colors: ['orange', 'black', 'red', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'pignite'
+            },
+
+        'oshawott': {
+            order: indexOrder++,
+            token: 'oshawott',
+            name: 'Oshawott',
+            number: 501,
+            types: ['water'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 55, phAttack: 55, phDefense: 45, spAttack: 63, spDefense: 45, speed: 45},
+            abilities: {0: 'torrent', hidden: 'shell-armor'},
+            height: 0.5,
+            weight: 5.9,
+            colors: ['blue', 'white', 'orange'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'dewott',
+                method: 'level-up',
+                value: 17
+                }]
+            },
+        'dewott': {
+            order: indexOrder++,
+            token: 'dewott',
+            name: 'Dewott',
+            number: 502,
+            types: ['water'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 75, phAttack: 75, phDefense: 60, spAttack: 83, spDefense: 60, speed: 60},
+            abilities: {0: 'torrent', hidden: 'shell-armor'},
+            height: 0.8,
+            weight: 24.5,
+            colors: ['blue', 'black', 'white', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'oshawott',
+            nextEvolutions: [{
+                species: 'samurott',
+                method: 'level-up',
+                value: 36
+                }]
+            },
+        'samurott': {
+            order: indexOrder++,
+            token: 'samurott',
+            name: 'Samurott',
+            number: 503,
+            types: ['water'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 95, phAttack: 100, phDefense: 85, spAttack: 108, spDefense: 70, speed: 70},
+            abilities: {0: 'torrent', hidden: 'shell-armor'},
+            height: 1.5,
+            weight: 94.6,
+            colors: ['blue', 'yellow', 'white', 'black'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'dewott'
+            },
+
         'frillish-m': {
             order: indexOrder++,
             token: 'frillish-m',
