@@ -1,2 +1,2 @@
 # pokebreed
-An unofficial Pokémon breeding simulator that's less about battle and more about hatching eggs.
+An unofficial Pokémon breeding simulator that's less about building strong teams and more about hatching lots of eggs.
