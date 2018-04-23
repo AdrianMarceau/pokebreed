@@ -7,5 +7,6 @@ require('version.php');
 define('ZLIBS_ROOT_DIR', '/var/www/html/libs/');
 define('POKEBS_ROOT_DIR', '/var/www/html/pokebox.net/public_html/');
 define('POKEBS_ROOT_URL', 'http://pokebox.net/');
+define('GA_ACCOUNT_ID', false);
 
 ?>
