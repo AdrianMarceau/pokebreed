@@ -332,6 +332,120 @@
             prevEvolution: 'cascoon'
             },
 
+        'lotad': {
+            order: indexOrder++,
+            token: 'lotad',
+            name: 'Lotad',
+            number: 270,
+            types: ['water', 'grass'],
+            baseStats: {hp: 40, phAttack: 30, phDefense: 30, spAttack: 40, spDefense: 50, speed: 30},
+            abilities: {0: 'swift-swim', 1: 'rain-dish', hidden: 'own-tempo'},
+            height: 0.5,
+            weight: 2.6,
+            color: ['green', 'blue', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['water-1', 'grass'],
+            nextEvolutions: [{
+                species: 'lombre',
+                method: 'level-up',
+                value: 14
+                }]
+            },
+        'lombre': {
+            order: indexOrder++,
+            token: 'lombre',
+            name: 'Lombre',
+            number: 271,
+            types: ['water', 'grass'],
+            baseStats: {hp: 60, phAttack: 50, phDefense: 50, spAttack: 60, spDefense: 70, speed: 50},
+            abilities: {0: 'swift-swim', 1: 'rain-dish', hidden: 'own-tempo'},
+            height: 1.2,
+            weight: 32.5,
+            color: ['green', 'blue', 'red'],
+            eggCycles: 15,
+            eggGroups: ['water-1', 'grass'],
+            prevEvolution: 'lotad',
+            nextEvolutions: [{
+                species: 'ludicolo',
+                method: 'evolution-stone',
+                value: 'water-stone',
+                method2: 'type-appeal',
+                value2: ['water', 'grass']
+                }]
+            },
+        'ludicolo': {
+            order: indexOrder++,
+            token: 'ludicolo',
+            name: 'Ludicolo',
+            number: 272,
+            types: ['water', 'grass'],
+            baseStats: {hp: 80, phAttack: 70, phDefense: 70, spAttack: 90, spDefense: 100, speed: 70},
+            abilities: {0: 'swift-swim', 1: 'rain-dish', hidden: 'own-tempo'},
+            height: 1.5,
+            weight: 55,
+            color: ['green', 'yellow', 'brown'],
+            eggCycles: 15,
+            eggGroups: ['water-1', 'grass'],
+            prevEvolution: 'lombre'
+            },
+
+        'seedot': {
+            order: indexOrder++,
+            token: 'seedot',
+            name: 'Seedot',
+            number: 273,
+            types: ['grass'],
+            baseStats: {hp: 40, phAttack: 40, phDefense: 50, spAttack: 30, spDefense: 30, speed: 30},
+            abilities: {0: 'chlorophyll', 1: 'early-bird', hidden: 'pickpocket'},
+            height: 0.5,
+            weight: 4,
+            color: ['brown', 'black', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['field', 'grass'],
+            nextEvolutions: [{
+                species: 'nuzleaf',
+                method: 'level-up',
+                value: 14
+                }]
+            },
+        'nuzleaf': {
+            order: indexOrder++,
+            token: 'nuzleaf',
+            name: 'Nuzleaf',
+            number: 274,
+            types: ['grass', 'dark'],
+            baseStats: {hp: 70, phAttack: 70, phDefense: 40, spAttack: 60, spDefense: 40, speed: 60},
+            abilities: {0: 'chlorophyll', 1: 'early-bird', hidden: 'pickpocket'},
+            height: 1,
+            weight: 28,
+            color: ['brown', 'green', 'white'],
+            eggCycles: 15,
+            eggGroups: ['field', 'grass'],
+            prevEvolution: 'seedot',
+            nextEvolutions: [{
+                species: 'shiftry',
+                method: 'evolution-stone',
+                value: 'leaf-stone',
+                method2: 'type-appeal',
+                value2: ['grass', 'dark']
+                }]
+            },
+        'shiftry': {
+            order: indexOrder++,
+            token: 'shiftry',
+            name: 'Shiftry',
+            number: 275,
+            types: ['grass', 'dark'],
+            baseStats: {hp: 90, phAttack: 100, phDefense: 60, spAttack: 90, spDefense: 60, speed: 80},
+            abilities: {0: 'chlorophyll', 1: 'early-bird', hidden: 'pickpocket'},
+            height: 1.3,
+            weight: 59.6,
+            color: ['brown', 'white', 'green'],
+            eggCycles: 15,
+            eggGroups: ['field', 'grass'],
+            prevEvolution: 'nuzleaf'
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
