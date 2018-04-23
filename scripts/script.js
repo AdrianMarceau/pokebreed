@@ -1210,6 +1210,7 @@
                     for (var key in thisZoneData.currentPokemon){
                         var pokemonInfo = thisZoneData.currentPokemon[key];
                         if (pokemonInfo.eggCycles > 0){ continue; }
+                        else if (pokemonInfo.token === 'vivillon'){ continue; }
                         var indexInfo = PokemonSpeciesIndex[pokemonInfo.token];
                         if (typeof indexInfo.color !== 'undefined'){
                             if (typeof currentColourStats[indexInfo.color] === 'undefined'){ currentColourStats[indexInfo.color] = 0; }
