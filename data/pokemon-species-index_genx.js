@@ -16,6 +16,78 @@
 
         // Base Pokedex
 
+        'estrus-nidoqueen': {
+            order: thisIndex.afterOrder('nidoqueen'),
+            token: 'estrus-nidoqueen',
+            name: 'Estrus Nidoqueen',
+            formClass: 'burst-evolution',
+            formToken: 'estrus',
+            baseSpecies: 'nidoqueen',
+            number: 31,
+            types: ['poison', 'ground'],
+            genderRatio: {female: 1.000},
+            baseStats: {hp: 90, phAttack: 117, phDefense: 87, spAttack: 100, spDefense: 85, speed: 126},
+            abilities: {0: 'poison-point', 1: 'rivalry', hidden: 'sheer-force'},
+            height: 0.2,
+            weight: 0.9,
+            color: 'white',
+            eggCycles: 20,
+            eggPartner: 'nidoking',
+            eggGroups: ['monster', 'field'],
+            prevEvolution: 'nidoqueen'
+            },
+
+        'burst-machamp': {
+            order: thisIndex.afterOrder('machamp'),
+            token: 'burst-machamp',
+            name: 'Burst Machamp',
+            formClass: 'burst-evolution',
+            formToken: 'burst',
+            baseSpecies: 'machamp',
+            number: 68,
+            types: ['fighting'],
+            genderRatio: {male: 0.75, female: 0.25},
+            baseStats: {hp: 90, phAttack: 130, phDefense: 80, spAttack: 65, spDefense: 85, speed: 55},
+            abilities: {0: 'guts', 1: 'no-guard', hidden: 'steadfast'},
+            height: 1.6,
+            weight: 130,
+            color: 'gray',
+            eggCycles: 20,
+            eggGroups: ['human-like'],
+            prevEvolution: 'machamp'
+            },
+
+        'baby-kangaskhan': {
+            order: thisIndex.beforeOrder('kangaskhan'),
+            token: 'baby-kangaskhan',
+            name: 'Baby Kangaskhan',
+            class: 'baby',
+            formClass: 'baby-evolution',
+            formToken: 'baby',
+            number: 115,
+            types: ['normal'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 26, phAttack: 24, phDefense: 20, spAttack: 10, spDefense: 20, speed: 23},
+            abilities: {0: 'early-bird', 1: 'scrappy', hidden: 'inner-focus'},
+            height: 0.55,
+            weight: 20,
+            colors: ['gray', 'yellow', 'brown'],
+            eggCycles: 20,
+            eggParent: 'kangaskhan',
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'kangaskhan',
+                method: 'happiness',
+                value: 'high',
+                method2: 'affection',
+                value2: 'high'
+                }, {
+                species: 'cubone',
+                method: 'extinction',
+                value: true
+                }]
+            },
+
         'ms-mime': {
             order: thisIndex.afterOrder('mr-mime'),
             token: 'ms-mime',
@@ -54,47 +126,6 @@
             eggGroups: ['ditto']
             },
 
-        'burst-machamp': {
-            order: thisIndex.afterOrder('machamp'),
-            token: 'burst-machamp',
-            name: 'Burst Machamp',
-            formClass: 'burst-evolution',
-            formToken: 'burst',
-            baseSpecies: 'machamp',
-            number: 68,
-            types: ['fighting'],
-            genderRatio: {male: 0.75, female: 0.25},
-            baseStats: {hp: 90, phAttack: 130, phDefense: 80, spAttack: 65, spDefense: 85, speed: 55},
-            abilities: {0: 'guts', 1: 'no-guard', hidden: 'steadfast'},
-            height: 1.6,
-            weight: 130,
-            color: 'gray',
-            eggCycles: 20,
-            eggGroups: ['human-like'],
-            prevEvolution: 'machamp'
-            },
-
-        'estrus-nidoqueen': {
-            order: thisIndex.afterOrder('nidoqueen'),
-            token: 'estrus-nidoqueen',
-            name: 'Estrus Nidoqueen',
-            formClass: 'burst-evolution',
-            formToken: 'estrus',
-            baseSpecies: 'nidoqueen',
-            number: 31,
-            types: ['poison', 'ground'],
-            genderRatio: {female: 1.000},
-            baseStats: {hp: 90, phAttack: 117, phDefense: 87, spAttack: 100, spDefense: 85, speed: 126},
-            abilities: {0: 'poison-point', 1: 'rivalry', hidden: 'sheer-force'},
-            height: 0.2,
-            weight: 0.9,
-            color: 'white',
-            eggCycles: 20,
-            eggPartner: 'nidoking',
-            eggGroups: ['monster', 'field'],
-            prevEvolution: 'nidoqueen'
-            },
-
         'eternal-floette': {
             order: thisIndex.afterOrder('floette'),
             token: 'eternal-floette',
@@ -113,37 +144,6 @@
             eggCycles: 20,
             eggGroups: ['undiscovered'],
             prevEvolution: 'floette',
-            },
-
-        'baby-kangaskhan': {
-            order: thisIndex.beforeOrder('kangaskhan'),
-            token: 'baby-kangaskhan',
-            name: 'Baby Kangaskhan',
-            class: 'baby',
-            formClass: 'baby-evolution',
-            formToken: 'baby',
-            number: 115,
-            types: ['normal'],
-            genderRatio: {none: 1.0000},
-            baseStats: {hp: 26, phAttack: 24, phDefense: 20, spAttack: 10, spDefense: 20, speed: 23},
-            abilities: {0: 'early-bird', 1: 'scrappy', hidden: 'inner-focus'},
-            height: 0.55,
-            weight: 20,
-            colors: ['gray', 'yellow', 'brown'],
-            eggCycles: 20,
-            eggParent: 'kangaskhan',
-            eggGroups: ['undiscovered'],
-            nextEvolutions: [{
-                species: 'kangaskhan',
-                method: 'happiness',
-                value: 'high',
-                method2: 'affection',
-                value2: 'high'
-                }, {
-                species: 'cubone',
-                method: 'extinction',
-                value: true
-                }]
             },
 
         });
