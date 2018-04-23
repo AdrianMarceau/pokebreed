@@ -16,6 +16,181 @@
 
         // Base Pokedex
 
+        'chespin': {
+            order: indexOrder++,
+            token: 'chespin',
+            name: 'Chespin',
+            number: 650,
+            types: ['grass'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 56, phAttack: 61, phDefense: 65, spAttack: 48, spDefense: 45, speed: 38},
+            abilities: {0: 'overgrow', hidden: 'bulletproof'},
+            height: 0.4,
+            weight: 9,
+            colors: ['green', 'brown', 'orange'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'quilladin',
+                method: 'level-up',
+                value: 16
+                }]
+            },
+        'quilladin': {
+            order: indexOrder++,
+            token: 'quilladin',
+            name: 'Quilladin',
+            number: 651,
+            types: ['grass'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 61, phAttack: 78, phDefense: 95, spAttack: 56, spDefense: 58, speed: 57},
+            abilities: {0: 'overgrow', hidden: 'bulletproof'},
+            height: 0.7,
+            weight: 29,
+            colors: ['green', 'brown', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'chespin',
+            nextEvolutions: [{
+                species: 'chesnaught',
+                method: 'level-up',
+                value: 36
+                }]
+            },
+        'chesnaught': {
+            order: indexOrder++,
+            token: 'chesnaught',
+            name: 'Chesnaught',
+            number: 652,
+            types: ['grass', 'fighting'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 88, phAttack: 107, phDefense: 122, spAttack: 74, spDefense: 75, speed: 64},
+            abilities: {0: 'overgrow', hidden: 'bulletproof'},
+            height: 1.6,
+            weight: 90,
+            colors: ['white', 'green', 'brown', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'quilladin'
+            },
+
+        'fennekin': {
+            order: indexOrder++,
+            token: 'fennekin',
+            name: 'Fennekin',
+            number: 653,
+            types: ['fire'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 40, phAttack: 45, phDefense: 40, spAttack: 62, spDefense: 60, speed: 60},
+            abilities: {0: 'blaze', hidden: 'magician'},
+            height: 0.4,
+            weight: 9.4,
+            colors: ['yellow', 'orange', 'white'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'braixen',
+                method: 'level-up',
+                value: 16
+                }]
+            },
+        'braixen': {
+            order: indexOrder++,
+            token: 'braixen',
+            name: 'Braixen',
+            number: 654,
+            types: ['fire'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 59, phAttack: 59, phDefense: 58, spAttack: 90, spDefense: 70, speed: 73},
+            abilities: {0: 'blaze', hidden: 'magician'},
+            height: 1,
+            weight: 14.5,
+            colors: ['yellow', 'white', 'orange', 'black'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'fennekin',
+            nextEvolutions: [{
+                species: 'delphox',
+                method: 'level-up',
+                value: 36
+                }]
+            },
+        'delphox': {
+            order: indexOrder++,
+            token: 'delphox',
+            name: 'Delphox',
+            number: 655,
+            types: ['fire', 'psychic'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 75, phAttack: 69, phDefense: 72, spAttack: 114, spDefense: 100, speed: 104},
+            abilities: {0: 'blaze', hidden: 'magician'},
+            height: 1.5,
+            weight: 39,
+            colors: ['red', 'yellow', 'orange', 'white'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'braixen'
+            },
+
+        'froakie': {
+            order: indexOrder++,
+            token: 'froakie',
+            name: 'Froakie',
+            number: 656,
+            types: ['water'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 41, phAttack: 56, phDefense: 40, spAttack: 62, spDefense: 44, speed: 71},
+            abilities: {0: 'torrent', hidden: 'protean'},
+            height: 0.3,
+            weight: 7,
+            colors: ['blue', 'white', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['water-1'],
+            nextEvolutions: [{
+                species: 'frogadier',
+                method: 'level-up',
+                value: 16
+                }]
+            },
+        'frogadier': {
+            order: indexOrder++,
+            token: 'frogadier',
+            name: 'Frogadier',
+            number: 657,
+            types: ['water'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 54, phAttack: 63, phDefense: 52, spAttack: 83, spDefense: 56, speed: 97},
+            abilities: {0: 'torrent', hidden: 'protean'},
+            height: 0.6,
+            weight: 10.9,
+            colors: ['blue', 'white'],
+            eggCycles: 20,
+            eggGroups: ['water-1'],
+            prevEvolution: 'froakie',
+            nextEvolutions: [{
+                species: 'greninja',
+                method: 'level-up',
+                value: 36
+                }]
+            },
+        'greninja': {
+            order: indexOrder++,
+            token: 'greninja',
+            name: 'Greninja',
+            number: 658,
+            types: ['water', 'dark'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 72, phAttack: 95, phDefense: 67, spAttack: 103, spDefense: 71, speed: 122},
+            abilities: {0: 'torrent', hidden: 'protean', S: 'battle-bond'},
+            height: 1.5,
+            weight: 40,
+            colors: ['blue', 'white', 'pink'],
+            evoLevel: 36,
+            eggCycles: 20,
+            eggGroups: ['water-1'],
+            prevEvolution: 'frogadier'
+            },
+
         'flabebe': {
             order: indexOrder++,
             token: 'flabebe',
