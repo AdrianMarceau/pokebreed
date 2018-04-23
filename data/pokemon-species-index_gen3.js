@@ -28,7 +28,6 @@
             height: 0.5,
             weight: 5,
             colors: ['green', 'red', 'yellow'],
-            evos: ['grovyle'],
             eggCycles: 20,
             eggGroups: ['monster', 'dragon'],
             nextEvolutions: [{
@@ -87,7 +86,6 @@
             height: 0.4,
             weight: 2.5,
             colors: ['orange', 'yellow'],
-            evos: ['combusken'],
             eggCycles: 20,
             eggGroups: ['field'],
             nextEvolutions: [{
@@ -108,7 +106,6 @@
             height: 0.9,
             weight: 19.5,
             colors: ['orange', 'yellow'],
-            prevo: 'torchic',
             eggCycles: 20,
             eggGroups: ['field'],
             prevEvolution: 'torchic',
@@ -147,7 +144,6 @@
             height: 0.4,
             weight: 7.6,
             colors: ['blue', 'orange', 'white'],
-            evos: ['marshtomp'],
             eggCycles: 20,
             eggGroups: ['monster', 'water-1'],
             nextEvolutions: [{
@@ -168,9 +164,6 @@
             height: 0.7,
             weight: 28,
             colors: ['blue', 'orange', 'gray'],
-            prevo: 'mudkip',
-            evos: ['swampert'],
-            evoLevel: 16,
             eggCycles: 20,
             eggGroups: ['monster', 'water-1'],
             prevEvolution: 'mudkip',
@@ -192,8 +185,6 @@
             height: 1.5,
             weight: 81.9,
             colors: ['blue', 'orange', 'gray', 'white'],
-            prevo: 'marshtomp',
-            evoLevel: 36,
             eggCycles: 20,
             eggGroups: ['monster', 'water-1'],
             prevEvolution: 'marshtomp'
@@ -209,7 +200,7 @@
             abilities: {0: 'run-away', 1: 'quick-feet', hidden: 'rattled'},
             height: 0.5,
             weight: 13.6,
-            color: 'gray',
+            colors: ['gray', 'black'],
             eggCycles: 15,
             eggGroups: ['field'],
             nextEvolutions: [{
@@ -228,7 +219,7 @@
             abilities: {0: 'intimidate', 1: 'quick-feet', hidden: 'moxie'},
             height: 1,
             weight: 37,
-            color: 'gray',
+            color: ['gray', 'black'],
             eggCycles: 15,
             eggGroups: ['field'],
             prevEvolution: 'poochyena'
