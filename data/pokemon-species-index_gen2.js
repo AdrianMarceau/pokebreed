@@ -343,7 +343,42 @@
             colors: ['purple', 'blue', 'yellow', 'red'],
             eggCycles: 15,
             eggGroups: ['flying'],
-            prevEvolution: 'golbat',
+            prevEvolution: 'golbat'
+            },
+
+        'chinchou': {
+            order: indexOrder++,
+            token: 'chinchou',
+            name: 'Chinchou',
+            number: 170,
+            types: ['water', 'electric'],
+            baseStats: {hp: 75, phAttack: 38, phDefense: 38, spAttack: 56, spDefense: 56, speed: 67},
+            abilities: {0: 'volt-absorb', 1: 'illuminate', hidden: 'water-absorb'},
+            height: 0.5,
+            weight: 12,
+            colors: ['blue', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['water-2'],
+            nextEvolutions: [{
+                species: 'lanturn',
+                method: 'level-up',
+                value: 27
+                }]
+            },
+        'lanturn': {
+            order: indexOrder++,
+            token: 'lanturn',
+            name: 'Lanturn',
+            number: 171,
+            types: ['water', 'electric'],
+            baseStats: {hp: 125, phAttack: 58, phDefense: 58, spAttack: 76, spDefense: 76, speed: 67},
+            abilities: {0: 'volt-absorb', 1: 'illuminate', hidden: 'water-absorb'},
+            height: 1.2,
+            weight: 22.5,
+            colors: ['blue', 'yellow', 'red'],
+            eggCycles: 20,
+            eggGroups: ['water-2'],
+            prevEvolution: 'chinchou'
             },
 
         pichu: {
