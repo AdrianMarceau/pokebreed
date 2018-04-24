@@ -71,7 +71,7 @@
             colors: ['green', 'pink', 'yellow'],
             eggCycles: 20,
             eggGroups: ['monster', 'grass'],
-            prevEvolution: 'bayleef',
+            prevEvolution: 'bayleef'
             },
 
         'cyndaquil': {
@@ -129,7 +129,7 @@
             colors: ['yellow', 'black', 'orange', 'red'],
             eggCycles: 20,
             eggGroups: ['field'],
-            prevEvolution: 'quilava',
+            prevEvolution: 'quilava'
             },
 
         'totodile': {
@@ -187,7 +187,147 @@
             colors: ['blue', 'red', 'yellow'],
             eggCycles: 20,
             eggGroups: ['monster', 'water-1'],
-            prevEvolution: 'croconaw',
+            prevEvolution: 'croconaw'
+            },
+
+        'sentret': {
+            order: indexOrder++,
+            token: 'sentret',
+            name: 'Sentret',
+            number: 161,
+            types: ['normal'],
+            baseStats: {hp: 35, phAttack: 46, phDefense: 34, spAttack: 35, spDefense: 45, speed: 20},
+            abilities: {0: 'run-away', 1: 'keen-eye', hidden: 'frisk'},
+            height: 0.8,
+            weight: 6,
+            colors: ['brown', 'black', 'white'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'furret',
+                method: 'level-up',
+                value: 15
+                }]
+            },
+        'furret': {
+            order: indexOrder++,
+            token: 'furret',
+            name: 'Furret',
+            number: 162,
+            types: ['normal'],
+            baseStats: {hp: 85, phAttack: 76, phDefense: 64, spAttack: 45, spDefense: 55, speed: 90},
+            abilities: {0: 'run-away', 1: 'keen-eye', hidden: 'frisk'},
+            height: 1.8,
+            weight: 32.5,
+            colors: ['brown', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            prevEvolution: 'sentret'
+            },
+
+        'hoothoot': {
+            order: indexOrder++,
+            token: 'hoothoot',
+            name: 'Hoothoot',
+            number: 163,
+            types: ['normal', 'flying'],
+            baseStats: {hp: 60, phAttack: 30, phDefense: 30, spAttack: 36, spDefense: 56, speed: 50},
+            abilities: {0: 'insomnia', 1: 'keen-eye', hidden: 'tinted-lens'},
+            height: 0.7,
+            weight: 21.2,
+            colors: ['brown', 'black', 'red'],
+            eggCycles: 15,
+            eggGroups: ['flying'],
+            nextEvolutions: [{
+                species: 'noctowl',
+                method: 'level-up',
+                value: 20
+                }]
+            },
+        'noctowl': {
+            order: indexOrder++,
+            token: 'noctowl',
+            name: 'Noctowl',
+            number: 164,
+            types: ['normal', 'flying'],
+            baseStats: {hp: 100, phAttack: 50, phDefense: 50, spAttack: 86, spDefense: 96, speed: 70},
+            abilities: {0: 'insomnia', 1: 'keen-eye', hidden: 'tinted-lens'},
+            height: 1.6,
+            weight: 40.8,
+            colors: ['brown', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['flying'],
+            prevEvolution: 'hoothoot'
+            },
+
+        'ledyba': {
+            order: indexOrder++,
+            token: 'ledyba',
+            name: 'Ledyba',
+            number: 165,
+            types: ['bug', 'flying'],
+            baseStats: {hp: 40, phAttack: 20, phDefense: 30, spAttack: 40, spDefense: 80, speed: 55},
+            abilities: {0: 'swarm', 1: 'early-bird', hidden: 'rattled'},
+            height: 1,
+            weight: 10.8,
+            colors: ['red', 'black', 'yellow', 'white'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            nextEvolutions: [{
+                species: 'ledian',
+                method: 'level-up',
+                value: 18
+                }]
+            },
+        'ledian': {
+            order: indexOrder++,
+            token: 'ledian',
+            name: 'Ledian',
+            number: 166,
+            types: ['bug', 'flying'],
+            baseStats: {hp: 55, phAttack: 35, phDefense: 50, spAttack: 55, spDefense: 110, speed: 85},
+            abilities: {0: 'swarm', 1: 'early-bird', hidden: 'iron-fist'},
+            height: 1.4,
+            weight: 35.6,
+            colors: ['red', 'yellow', 'black', 'white'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            prevEvolution: 'ledyba'
+            },
+
+        'spinarak': {
+            order: indexOrder++,
+            token: 'spinarak',
+            name: 'Spinarak',
+            number: 167,
+            types: ['bug', 'poison'],
+            baseStats: {hp: 40, phAttack: 60, phDefense: 40, spAttack: 40, spDefense: 40, speed: 30},
+            abilities: {0: 'swarm', 1: 'insomnia', hidden: 'sniper'},
+            height: 0.5,
+            weight: 8.5,
+            colors: ['green', 'black', 'yellow', 'white', 'white'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            nextEvolutions: [{
+                species: 'ariados',
+                method: 'level-up',
+                value: 22
+                }]
+            },
+        'ariados': {
+            order: indexOrder++,
+            token: 'ariados',
+            name: 'Ariados',
+            number: 168,
+            types: ['bug', 'poison'],
+            baseStats: {hp: 70, phAttack: 90, phDefense: 70, spAttack: 60, spDefense: 70, speed: 40},
+            abilities: {0: 'swarm', 1: 'insomnia', hidden: 'sniper'},
+            height: 1.1,
+            weight: 33.5,
+            colors: ['red', 'yellow', 'black', 'purple', 'white'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            prevEvolution: 'spinarak'
             },
 
         'crobat': {
@@ -214,7 +354,7 @@
             number: 172,
             types: ['electric'],
             baseStats: {hp: 20, phAttack: 40, phDefense: 15, spAttack: 35, spDefense: 35, speed: 60},
-            abilities: {0: 'Static', H: 'Lightning-Rod'},
+            abilities: {0: 'static', H: 'lightning-rod'},
             height: 0.3,
             weight: 2,
             colors: ['yellow', 'black', 'red'],
