@@ -722,7 +722,7 @@
             },
 
         'mega-aerodactyl': {
-            order: indexOrder++,
+            order: thisIndex.afterOrder('aerodactyl'),
             token: 'mega-aerodactyl',
             name: 'Mega Aerodactyl',
             formClass: 'mega-evolution',
