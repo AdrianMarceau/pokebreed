@@ -174,7 +174,7 @@ if (isset($_GET['gen'])
         </script>
         <? if (!$is_local && GA_ACCOUNT_ID){ ?>
             <!-- Global site tag (gtag.js) - Google Analytics -->
-            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-2569587-04"></script>
+            <script async src="https://www.googletagmanager.com/gtag/js?id=<?= GA_ACCOUNT_ID ?>"></script>
             <script>
               window.dataLayer = window.dataLayer || [];
               function gtag(){dataLayer.push(arguments);}
