@@ -1691,6 +1691,15 @@
         // If we're at or over capacity, no more breeding action should take place
         if (thisZoneData.currentPokemon.length >= thisZoneData.capacity){ return false; }
 
+        // Check to see if we're at high (90%) zone capacity already
+        var zoneCapacityPercent = ((thisZoneData.currentPokemon.length / thisZoneData.capacity) * 100);
+        var zoneIsOvercrowded = zoneCapacityPercent >= 99 ? true : false;
+        //console.log('zoneCapacityPercent = ', zoneCapacityPercent);
+        //console.log('zoneIsOvercrowded = ', zoneIsOvercrowded);
+
+        // If we're already at high capacity, do not initiate breeding
+        if (zoneIsOvercrowded){ return false; }
+
         // Loop though and count population by types & species (do not count eggs)
         var pokeTypes = {};
         var pokeSpecies = {};
@@ -1910,7 +1919,12 @@
                         if (existingShinyDitto > 0){ addPokemonToZone(pokeToken, true, existingShinyDitto); }
                         else { addPokemonToZone(pokeToken, true); }
                         eggsAddedCount++;
-                        eggsToAddIndex[pokeToken] -= 1;
+                        zoneCapacityPercent = ((thisZoneData.currentPokemon.length / thisZoneData.capacity) * 100);
+                        zoneIsOvercrowded = zoneCapacityPercent >= 90 ? true : false;
+                        //console.log('zoneCapacityPercent = ', zoneCapacityPercent);
+                        //console.log('zoneIsOvercrowded = ', zoneIsOvercrowded);
+                        if (zoneIsOvercrowded){ eggsToAddIndex[pokeToken] = 0; }
+                        else { eggsToAddIndex[pokeToken] -= 1; }
                         if (eggsToAddIndex[pokeToken] == 0){
                             delete eggsToAddIndex[pokeToken];
                             }
