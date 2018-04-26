@@ -656,6 +656,61 @@
             prevEvolution: 'poliwhirl'
             },
 
+        'hoppip': {
+            order: indexOrder++,
+            token: 'hoppip',
+            name: 'Hoppip',
+            number: 187,
+            types: ['grass', 'flying'],
+            baseStats: {hp: 35, phAttack: 35, phDefense: 40, spAttack: 35, spDefense: 55, speed: 50},
+            abilities: {0: 'chlorophyll', 1: 'leaf-guard', hidden: 'infiltrator'},
+            height: 0.4,
+            weight: 0.5,
+            colors: ['pink', 'green', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'grass'],
+            nextEvolutions: [{
+                species: 'skiploom',
+                method: 'level-up',
+                value: 18
+                }]
+            },
+        'skiploom': {
+            order: indexOrder++,
+            token: 'skiploom',
+            name: 'Skiploom',
+            number: 188,
+            types: ['grass', 'flying'],
+            baseStats: {hp: 55, phAttack: 45, phDefense: 50, spAttack: 45, spDefense: 65, speed: 80},
+            abilities: {0: 'chlorophyll', 1: 'leaf-guard', hidden: 'infiltrator'},
+            height: 0.6,
+            weight: 1,
+            colors: ['green', 'yellow', 'red'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'grass'],
+            prevEvolution: 'hoppip',
+            nextEvolutions: [{
+                species: 'jumpluff',
+                method: 'level-up',
+                value: 27
+                }]
+            },
+        'jumpluff': {
+            order: indexOrder++,
+            token: 'jumpluff',
+            name: 'Jumpluff',
+            number: 189,
+            types: ['grass', 'flying'],
+            baseStats: {hp: 75, phAttack: 55, phDefense: 70, spAttack: 55, spDefense: 95, speed: 110},
+            abilities: {0: 'chlorophyll', 1: 'leaf-guard', hidden: 'infiltrator'},
+            height: 0.8,
+            weight: 3,
+            colors: ['blue', 'white', 'green', 'red'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'grass'],
+            prevEvolution: 'skiploom'
+            },
+
         'espeon': {
             order: thisIndex.afterOrder('flareon', 1),
             token: 'espeon',
@@ -670,7 +725,7 @@
             colors: ['purple', 'red'],
             eggCycles: 35,
             eggGroups: ['field'],
-            prevEvolution: 'eevee',
+            prevEvolution: 'eevee'
             },
         'umbreon': {
             order: thisIndex.afterOrder('flareon', 2),
@@ -686,7 +741,7 @@
             colors: ['black', 'yellow'],
             eggCycles: 35,
             eggGroups: ['field'],
-            prevEvolution: 'eevee',
+            prevEvolution: 'eevee'
             },
 
         'slowking': {
