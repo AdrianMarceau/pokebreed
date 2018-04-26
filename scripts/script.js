@@ -10,7 +10,9 @@
     var maxIndexKeyToLoad = 8;
 
     var PokemonSpeciesIndex = {};
+    var PokemonSpeciesIndexTokens = [];
     var PokemonTypesIndex = {};
+    var PokemonTypesIndexTokens = [];
 
 
     // GLOBAL ZONE DATA
@@ -107,7 +109,10 @@
 
         // Collect local references to global indexes
         PokemonSpeciesIndex = window.PokemonSpeciesIndex.indexList;
+        PokemonSpeciesIndexTokens = Object.keys(PokemonSpeciesIndex);
         PokemonTypesIndex = window.PokemonTypesIndex;
+        PokemonTypesIndexTokens = Object.keys(PokemonTypesIndex);
+
 
         // Optimize the pokemon indexes for faster calculation speeds
         optimizeIndexes();
@@ -187,8 +192,10 @@
     // Define a function for looping through indexes and generating helpful values
     function optimizeIndexes(){
         $pokePanelLoading.append('.'); // append loading dot
-        if (!jQuery.isEmptyObject(PokemonSpeciesIndex)){
-            for (var token in PokemonSpeciesIndex){
+        if (PokemonSpeciesIndexTokens.length){
+            var possibleGenders = ['male', 'female', 'none'];
+            for (var key = 0; key < PokemonSpeciesIndexTokens.length; key++){
+                var token = PokemonSpeciesIndexTokens[key];
 
                 // Calculate life and breed points now so we don't have to later
                 var indexInfo = PokemonSpeciesIndex[token];
@@ -201,7 +208,8 @@
                 indexInfo.hasNoGender = false;
                 var defaultGenderRatio = {male: 0.5, female: 0.5, none: 0};
                 if (typeof indexInfo.genderRatio === 'undefined'){ indexInfo.genderRatio = {}; }
-                for (var genderToken in defaultGenderRatio){
+                for (var key2 = 0; key2 < possibleGenders.length; key2++){
+                    var genderToken = possibleGenders[key2];
                     if (typeof indexInfo.genderRatio[genderToken] === 'undefined'){
                         indexInfo.genderRatio[genderToken] = defaultGenderRatio[genderToken];
                         }
@@ -315,17 +323,14 @@
         //console.log('generateTypeStyles()');
         $pokePanelLoading.append('.'); // append loading dot
         var styleSheet = '';
-        for (var typeToken in PokemonTypesIndex){
+        for (var key = 0; key < PokemonTypesIndexTokens.length; key++){
+            var typeToken = PokemonTypesIndexTokens[key];
             var typeData = PokemonTypesIndex[typeToken];
             var colourHEX = typeData['colour'];
             var colourRGB = convertHexToRgb(colourHEX).join(',');
             styleSheet += '.type.'+ typeToken +' { background-color: #'+ colourHEX +' !important; } \n';
             styleSheet += '.type.'+ typeToken +'2:after { \n';
                 styleSheet += 'background-color: rgba('+colourRGB+', 0.9) !important; \n';
-                //styleSheet += 'background: -moz-linear-gradient(top, rgba('+ colourRGB +',0) 40%, rgba('+ colourRGB +',1.00) 60%) !important; \n';
-                //styleSheet += 'background: -webkit-linear-gradient(top, rgba('+ colourRGB +',0) 40%,rgba('+ colourRGB +',1.00) 60%) !important; \n';
-                //styleSheet += 'background: linear-gradient(to right, rgba('+ colourRGB +',0) 40%,rgba('+ colourRGB +',1.00) 60%) !important; \n';
-                //styleSheet += 'filter: progid:DXImageTransform.Microsoft.gradient( startColorstr=\'#00'+ colourHEX +'\', endColorstr=\'#a6'+ colourHEX +'\',GradientType=0 ) !important; \n';
             styleSheet += '} \n';
             }
         $('head').append('<style type="text/css">\n'+ styleSheet +'</style>');
@@ -366,7 +371,8 @@
 
         // Loop through the index searching for basic pokemon
         var allBasicPokemon = [];
-        for (var pokeToken in PokemonSpeciesIndex){
+        for (var key = 0; key < PokemonSpeciesIndexTokens.length; key++){
+            var pokeToken = PokemonSpeciesIndexTokens[key];
 
             var pokeInfo = PokemonSpeciesIndex[pokeToken];
             var isBasicPokemon = true;
@@ -615,13 +621,15 @@
         matchMode = matchMode.toLowerCase();
         if (matchMode !== 'and' && matchMode !== 'or'){ matchMode = 'and'; }
         //console.log('getZonePokemonByFilter(filterParams, matchMode):after', filterParams, matchMode);
+        var filterParamsTokens = Object.keys(filterParams);
         var pokemonMatches = [];
         if (thisZoneData.currentPokemon.length){
-            for (var key in thisZoneData.currentPokemon){
+            for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
                 var totalProps = 0;
                 var matchedProps = 0;
                 var thisPokemon = thisZoneData.currentPokemon[key];
-                for (var param in filterParams){
+                for (var key2 = 0; key2 < filterParamsTokens.length; key2++){
+                    var param = filterParamsTokens[key2];
                     totalProps++;
                     if (typeof thisPokemon[param] === 'array' && typeof filterParams[param] !== 'array'){
                         if (thisPokemon[param].indexOf(filterParams[param]) !== -1){
@@ -696,13 +704,15 @@
 
         // Loop though and count population by types & species
         var pokeSpeciesActive = {};
+        var pokeSpeciesActiveTokens = [];
         if (thisZoneData.currentPokemon.length){
-            for (var key in thisZoneData.currentPokemon){
+            for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
                 var pokemonInfo = thisZoneData.currentPokemon[key];
                 if (pokemonInfo.eggCycles > 0){ continue; }
                 var indexInfo = PokemonSpeciesIndex[pokemonInfo.token];
                 if (typeof pokeSpeciesActive[pokemonInfo.token] == 'undefined'){ pokeSpeciesActive[pokemonInfo.token] = 0; }
                 pokeSpeciesActive[pokemonInfo.token] += 1;
+                pokeSpeciesActiveTokens.push(pokemonInfo.token);
                 }
             }
         //console.log('pokeSpeciesActive = ', pokeSpeciesActive);
@@ -713,14 +723,17 @@
         var totalActiveUnits = 0;
         var totalSpeciesCurrent = 0;
         var totalSpeciesSeen = 0;
-        if (!jQuery.isEmptyObject(pokeSpeciesActive)){
-            for (token in pokeSpeciesActive){
+        if (pokeSpeciesActiveTokens.length){
+            for (var key = 0; key < pokeSpeciesActiveTokens.length; key++){
+                var token = pokeSpeciesActiveTokens[key];
                 totalSpeciesCurrent += 1;
                 totalActiveUnits += pokeSpeciesActive[token];
                 }
             }
         if (!jQuery.isEmptyObject(thisZoneData.addedPokemonSpecies)){
-            for (token in thisZoneData.addedPokemonSpecies){
+            var addedPokemonSpeciesTokens = Object.keys(thisZoneData.addedPokemonSpecies);
+            for (var key = 0; key < addedPokemonSpeciesTokens.length; key++){
+                var token = addedPokemonSpeciesTokens[key];
                 var addedCount = thisZoneData.addedPokemonSpecies[token];
                 if (typeof thisZoneData.currentStats['eggs'][token] !== 'undefined'){
                     addedCount -= thisZoneData.currentStats['eggs'][token];
@@ -740,7 +753,7 @@
         // Loop though and count population by types & species
         var pokeSpecies = {};
         if (thisZoneData.currentPokemon.length){
-            for (var key in thisZoneData.currentPokemon){
+            for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
                 var pokemonInfo = thisZoneData.currentPokemon[key];
                 var indexInfo = PokemonSpeciesIndex[pokemonInfo.token];
                 if (typeof pokeSpecies[pokemonInfo.token] == 'undefined'){ pokeSpecies[pokemonInfo.token] = 0; }
@@ -763,10 +776,10 @@
 
         // Loop through and show all pokemon on the field, with eggs last
         var pokeListMarkup = '';
-        for (var key in sortedSpeciesTokens){
+        for (var key = 0; key < sortedSpeciesTokens.length; key++){
             var token = sortedSpeciesTokens[key];
             var pokeList = getZonePokemonByToken(token);
-            for (var key2 in pokeList){
+            for (var key2 = 0; key2 < pokeList.length; key2++){
                 var pokeInfo = pokeList[key2];
 
                 // Check if the pokemon is in its egg before drawing the sprite
@@ -810,7 +823,9 @@
         if (!jQuery.isEmptyObject(thisZoneData.currentStats['types'])){
             var positiveTypes = {};
             var negativeTypes = {};
-            for (typeToken in thisZoneData.currentStats['types']){
+            var currentTypeTokens = Object.keys(thisZoneData.currentStats['types']);
+            for (var key = 0; key < currentTypeTokens.length; key++){
+                var typeToken = currentTypeTokens[key];
                 var typeValue = thisZoneData.currentStats['types'][typeToken];
                 if (typeValue > 0){ positiveTypes[typeToken] = typeValue; }
                 else if (typeValue < 0){ negativeTypes[typeToken] = typeValue; }
@@ -818,7 +833,7 @@
             if (!jQuery.isEmptyObject(positiveTypes)){
                 var sortedKeys = getSortedKeys(positiveTypes);
                 var statListMarkup = '';
-                for (var key in sortedKeys){
+                for (var key = 0; key < sortedKeys.length; key++){
                     var type = sortedKeys[key];
                     var typeInfo = PokemonTypesIndex[type];
                     var val = Math.floor(positiveTypes[type]);
@@ -838,7 +853,7 @@
                 var sortedKeys = getSortedKeys(negativeTypes);
                 var statListMarkup = '';
                 sortedKeys.reverse();
-                for (var key in sortedKeys){
+                for (var key = 0; key < sortedKeys.length; key++){
                     var type = sortedKeys[key];
                     var typeInfo = PokemonTypesIndex[type];
                     var val = Math.floor(negativeTypes[type]);
@@ -870,7 +885,7 @@
         var activePokemonSpecies = {};
         if (!jQuery.isEmptyObject(addedPokemonSpecies)){
             var speciesTokens = Object.keys(addedPokemonSpecies);
-            for (var key in speciesTokens){
+            for (var key = 0; key < speciesTokens.length; key++){
                 var poke = speciesTokens[key];
                 var pokeInfo = PokemonSpeciesIndex[poke];
                 var pokeCount = addedPokemonSpecies[poke];
@@ -889,7 +904,7 @@
         var speciesListMarkup = '';
         if (!jQuery.isEmptyObject(activePokemonSpecies)){
             var sortedTokens = getSortedKeys(activePokemonSpecies);
-            for (var key in sortedTokens){
+            for (var key = 0; key < sortedTokens.length; key++){
                 var poke = sortedTokens[key];
                 var pokeInfo = PokemonSpeciesIndex[poke];
                 var pokeCount = activePokemonSpecies[poke];
@@ -916,7 +931,7 @@
         var speciesListMarkup = '';
         if (!jQuery.isEmptyObject(faintedPokemonSpecies)){
             var sortedTokens = getSortedKeys(faintedPokemonSpecies);
-            for (var key in sortedTokens){
+            for (var key = 0; key < sortedTokens.length; key++){
                 var poke = sortedTokens[key];
                 var pokeInfo = PokemonSpeciesIndex[poke];
                 var pokeCount = faintedPokemonSpecies[poke];
@@ -968,7 +983,7 @@
         var $pokeList = $('.list.pokemon', $pokeWrap);
         var $pokeItem = $('li[data-id="'+ id +'"]', $pokeList);
         // Loop through list of current pokemon looking for ID
-        for (var key in thisZoneData.currentPokemon){
+        for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
             var pokeInfo = thisZoneData.currentPokemon[key];
             if (pokeInfo.id === id){
                 // Move this pokemon's data to the fainted array and remove from display
@@ -1035,13 +1050,13 @@
         var pokeTypes = {};
         var pokeSpecies = {};
         if (thisZoneData.currentPokemon.length){
-            for (var key in thisZoneData.currentPokemon){
+            for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
                 var pokemonInfo = thisZoneData.currentPokemon[key];
                 if (pokemonInfo.eggCycles > 0){ continue; }
                 var indexInfo = PokemonSpeciesIndex[pokemonInfo.token];
                 if (typeof pokeSpecies[pokemonInfo.token] == 'undefined'){ pokeSpecies[pokemonInfo.token] = 0; }
                 pokeSpecies[pokemonInfo.token] += 1;
-                for (var key2 in pokemonInfo.types){
+                for (var key2 = 0; key2 < pokemonInfo.types.length; key2++){
                     var type = pokemonInfo.types[key2];
                     if (typeof pokeTypes[type] == 'undefined'){ pokeTypes[type] = 0; }
                     pokeTypes[type] += 1;
@@ -1057,13 +1072,14 @@
 
         // Predefine all the types with zero points
         if (typeof PokemonTypesIndex !== 'undefined'){
-            for (var typeToken in PokemonTypesIndex){
+            for (var key = 0; key < PokemonTypesIndexTokens.length; key++){
+                var typeToken = PokemonTypesIndexTokens[key];
                 currentZoneStats['types'][typeToken] = 0;
                 }
             }
 
         // Loop through and count pokemon by species
-        for (var key in thisZoneData.currentPokemon){
+        for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
             var currentPoke = thisZoneData.currentPokemon[key];
             var pokeToken = currentPoke.token;
             if (currentPoke.eggCycles === 0){
@@ -1077,7 +1093,9 @@
 
         // Loop through and add base stats for area, if any
         if (thisZoneData.baseStats){
-            for (var typeToken in thisZoneData.baseStats){
+            var baseStatsTokens = Object.keys(thisZoneData.baseStats);
+            for (var key = 0; key < baseStatsTokens.length; key++){
+                var typeToken = baseStatsTokens[key];
                 var val = thisZoneData.baseStats[type];
                 if (typeof currentZoneStats['types'][typeToken] == 'undefined'){ currentZoneStats['types'][typeToken] = 0; }
                 currentZoneStats['types'][typeToken] += val;
@@ -1086,12 +1104,14 @@
 
         // Loop through species and add/subtract appeal points based on type and class
         if (!jQuery.isEmptyObject(currentZoneStats['species'])){
-            for (var pokeToken in currentZoneStats['species']){
+            var currentZoneSpecies = Object.keys(currentZoneStats['species']);
+            for (var key = 0; key < currentZoneSpecies.length; key++){
+                var pokeToken = currentZoneSpecies[key];
                 var pokeCount = currentZoneStats['species'][pokeToken];
                 var pokeIndex = PokemonSpeciesIndex[pokeToken];
-                for (var key in pokeIndex.types){
+                for (var key2 = 0; key2 < pokeIndex.types.length; key2++){
 
-                    var typeToken = pokeIndex.types[key];
+                    var typeToken = pokeIndex.types[key2];
                     var typeInfo = PokemonTypesIndex[typeToken];
 
                     // Add +1 appeal point for this pokemon's type
@@ -1100,8 +1120,8 @@
 
                     // Add +1 appeal point for any type this pokemon is prey to
                     if (typeInfo['matchups']['weaknesses'].length){
-                        for (var key in typeInfo['matchups']['weaknesses']){
-                            var type = typeInfo['matchups']['weaknesses'][key];
+                        for (var key3 = 0; key3 < typeInfo['matchups']['weaknesses'].length; key3++){
+                            var type = typeInfo['matchups']['weaknesses'][key3];
                             if (typeof currentZoneStats['types'][type] === 'undefined'){ currentZoneStats['types'][type] = 0; }
                             currentZoneStats['types'][type] += pokeCount * pokeIndex.influencePoints * 0.5;
                             }
@@ -1109,8 +1129,8 @@
 
                     // Add -1 appeal point for any type this pokemon is predator to
                     if (typeInfo['matchups']['strengths'].length){
-                        for (var key in typeInfo['matchups']['strengths']){
-                            var type = typeInfo['matchups']['strengths'][key];
+                        for (var key3 = 0; key3 < typeInfo['matchups']['strengths'].length; key3++){
+                            var type = typeInfo['matchups']['strengths'][key3];
                             if (typeof currentZoneStats['types'][type] === 'undefined'){ currentZoneStats['types'][type] = 0; }
                             currentZoneStats['types'][type] -= pokeCount * pokeIndex.influencePoints * 0.5;
                             }
@@ -1252,7 +1272,7 @@
                 // Precalculate current colour stats by looping through all pokemon
                 var currentColourStats = {};
                 if (thisZoneData.currentPokemon.length){
-                    for (var key in thisZoneData.currentPokemon){
+                    for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
                         var pokemonInfo = thisZoneData.currentPokemon[key];
                         if (pokemonInfo.eggCycles > 0){ continue; }
                         else if (pokemonInfo.token === 'vivillon'){ continue; }
@@ -1275,8 +1295,10 @@
 
                 // Loop through and calculate likelihood of each pattern
                 var possibleFormsColors = PokemonSpeciesIndex['vivillon']['possibleFormsColors'];
+                var possibleFormsColorsTokens = Object.keys(possibleFormsColors);
                 var possibleFormsChances = {};
-                for (var formToken in possibleFormsColors){
+                for (var key = 0; key < possibleFormsColorsTokens.length; key++){
+                    var formToken = possibleFormsColorsTokens[key];
                     var formChance = 0;
                     var formColors = possibleFormsColors[formToken];
                     for (var i = 0; i < formColors.length; i++){
@@ -1302,7 +1324,7 @@
 
         // First, loop through all the non-egg pokemon and increment growth cycle
         if (thisZoneData.currentPokemon.length){
-            for (var key in thisZoneData.currentPokemon){
+            for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
 
                 var pokemonInfo = thisZoneData.currentPokemon[key];
                 var indexInfo = PokemonSpeciesIndex[pokemonInfo.token];
@@ -1485,7 +1507,7 @@
 
                     // Create an array for queued evolutions (in case many) and start looping to check each
                     var queuedEvolutions = [];
-                    for (var i in indexInfo.nextEvolutions){
+                    for (var i = 0; i < indexInfo.nextEvolutions.length; i++){
 
                         // Collect the details of the next evolution
                         var nextEvolution = indexInfo.nextEvolutions[i];
@@ -1645,7 +1667,7 @@
 
         // First, loop through any eggs and decrement their cycles by one
         if (thisZoneData.currentPokemon.length){
-            for (var key in thisZoneData.currentPokemon){
+            for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
                 var pokemonInfo = thisZoneData.currentPokemon[key];
                 if (pokemonInfo.eggCycles > 0){ pokemonInfo.eggCycles--; }
                 if (pokemonInfo.eggCycles === 0
@@ -1675,7 +1697,7 @@
         var pokeSpecies = {};
         var pokeEggs = {};
         if (thisZoneData.currentPokemon.length){
-            for (var key in thisZoneData.currentPokemon){
+            for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
                 var pokemonInfo = thisZoneData.currentPokemon[key];
                 // Add to species of egg array based on remaining cycles
                 if (pokemonInfo.eggCycles === 0){
@@ -1686,8 +1708,8 @@
                     pokeEggs[pokemonInfo.token] += 1;
                     }
                 // Increment the types array regardless of egg state
-                for (var key2 in pokemonInfo.type){
-                    var type = pokemonInfo.type[key2];
+                for (var key2 = 0; key2 < pokemonInfo.types.length; key2++){
+                    var type = pokemonInfo.types[key2];
                     if (typeof pokeTypes[type] == 'undefined'){ pokeTypes[type] = 0; }
                     pokeTypes[type] += 1;
                     }
@@ -1713,7 +1735,7 @@
             // First generate an array of eggs to add (by species) with counts
             var eggsToAddIndex = {};
             var eggsToAddCount = 0;
-            for (key in sortedSpeciesTokens){
+            for (var key = 0; key < sortedSpeciesTokens.length; key++){
 
                 // Collect the token and index info for the species
                 var pokeToken = sortedSpeciesTokens[key];
@@ -1875,14 +1897,16 @@
 
             // Loop through through and generate required eggs, in order,
             // one per species, until done or at capacity
-           //console.log('----------\nLoop through through and generate required eggs...');
+            //console.log('----------\nLoop through through and generate required eggs...');
             var eggsAddedCount = 0;
+            var eggsToAddIndexTokens = !jQuery.isEmptyObject(eggsToAddIndex) ? Object.keys(eggsToAddIndex) : [];
             while ((eggsAddedCount < eggsToAddCount)
                 && (thisZoneData.currentPokemon.length < thisZoneData.capacity)){
-               //console.log('(eggsAddedCount('+eggsAddedCount+') < eggsToAddCount('+eggsToAddCount+')) && (thisZoneData.currentPokemon.length('+thisZoneData.currentPokemon.length+') < thisZoneData.capacity('+thisZoneData.capacity+'))');
-               //console.log('eggsToAddIndex = ', eggsToAddIndex);
-                for (var pokeToken in eggsToAddIndex){
-                   //console.log('eggsToAddIndex[pokeToken] = ', pokeToken, eggsToAddIndex[pokeToken]);
+                //console.log('(eggsAddedCount('+eggsAddedCount+') < eggsToAddCount('+eggsToAddCount+')) && (thisZoneData.currentPokemon.length('+thisZoneData.currentPokemon.length+') < thisZoneData.capacity('+thisZoneData.capacity+'))');
+                //console.log('eggsToAddIndex = ', eggsToAddIndex);
+                for (var key = 0; key < eggsToAddIndexTokens.length; key++){
+                    var pokeToken = eggsToAddIndexTokens[key];
+                    //console.log('eggsToAddIndex[pokeToken] = ', pokeToken, eggsToAddIndex[pokeToken]);
                     if (eggsToAddIndex[pokeToken] > 0){
                         if (existingShinyDitto > 0){ addPokemonToZone(pokeToken, true, existingShinyDitto); }
                         else { addPokemonToZone(pokeToken, true); }
@@ -1921,7 +1945,9 @@
         var indexInfo = PokemonSpeciesIndex[baseToken];
         if (typeof indexInfo.nextEvolutions !== 'undefined'){
             var nextEvolutions = [];
-            for (var key in indexInfo.nextEvolutions){ nextEvolutions.push(indexInfo.nextEvolutions[key]); }
+            for (var key = 0; key < indexInfo.nextEvolutions.length; key++){
+                nextEvolutions.push(indexInfo.nextEvolutions[key]);
+                }
             return nextEvolutions;
             } else {
             return [];
@@ -1948,7 +1974,7 @@
                     token: indexInfo.token,
                     chance: 1 + thisZoneData.currentStats['types'][indexInfo.types[0]]
                     });
-                for (var i in indexInfo.altBaseEvolutions){
+                for (var i = 0; i < indexInfo.altBaseEvolutions.length; i++){
                     var baseEvolution = indexInfo.altBaseEvolutions[i];
                     var baseEvolutionInfo = PokemonSpeciesIndex[baseEvolution.species];
                     if (baseEvolution.method === 'type-appeal'
@@ -2150,61 +2176,74 @@
     }
 
     // Define a function for getting all species related to a token
+    var relatedSpeciesIndex = {};
     function getRelatedSpeciesTokens(startToken){
 
-        var relatedSpeciesTokens = [];
+        if (typeof relatedSpeciesIndex[startToken] !== 'undefined'){
 
-        var baseToken = pokemonGetBaseEvolution(startToken);
-        var baseIndex = PokemonSpeciesIndex[baseToken];
+            var relatedSpeciesTokens = relatedSpeciesIndex[startToken];
 
-        if (typeof baseIndex.eggSpecies !== 'undefined'){
-            relatedSpeciesTokens.push(baseIndex.eggSpecies);
-            }
+            } else {
 
-        // Add the stage 1 and check for stage 2
-        relatedSpeciesTokens.push(baseToken);
-        var nextEvolutions = pokemonGetNextEvolutions(baseToken);
-        if (nextEvolutions.length > 0){
-            //console.log('(0)nextEvolutions = ', nextEvolutions);
-            //console.log('(0)nextEvolutions.length = ', nextEvolutions.length);
-            for (var key = 0; key < nextEvolutions.length; key++){
+            var relatedSpeciesTokens = [];
 
-                // Add stage 2 and check for stage 3
-                var nextInfo = nextEvolutions[key];
-                var nextToken = nextInfo.species;
-                var nextEvolution = PokemonSpeciesIndex[nextToken];
-                relatedSpeciesTokens.push(nextToken);
-                nextEvolutions2 = pokemonGetNextEvolutions(nextToken);
-                if (nextEvolutions2.length > 0){
-                    //console.log('(1)nextEvolutions2 = ', nextEvolutions2);
-                    //console.log('(1)nextEvolutions2.length = ', nextEvolutions2.length);
-                    for (var key2 = 0; key2 < nextEvolutions2.length; key2++){
+            var baseToken = pokemonGetBaseEvolution(startToken);
+            var baseIndex = PokemonSpeciesIndex[baseToken];
 
-                        // Add stage 3 and check for stage 4
-                        var nextInfo = nextEvolutions2[key2];
-                        var nextToken = nextInfo.species;
-                        var nextEvolution = PokemonSpeciesIndex[nextToken];
-                        relatedSpeciesTokens.push(nextToken);
-                        nextEvolutions3 = pokemonGetNextEvolutions(nextToken);
-                        if (nextEvolutions3.length > 0){
-                            //console.log('(2)nextEvolutions3 = ', nextEvolutions3);
-                            //console.log('(2)nextEvolutions3.length = ', nextEvolutions3.length);
-                            for (var key3 = 0; key3 < nextEvolutions3.length; key3++){
+            if (typeof baseIndex.eggSpecies !== 'undefined'){
+                relatedSpeciesTokens.push(baseIndex.eggSpecies);
+                }
 
-                                // Add stage 4 and (there is no stage 5)
-                                var nextInfo = nextEvolutions3[key3];
-                                var nextToken = nextInfo.species;
-                                var nextEvolution = PokemonSpeciesIndex[nextToken];
-                                relatedSpeciesTokens.push(nextToken);
+            // Add the stage 1 and check for stage 2
+            relatedSpeciesTokens.push(baseToken);
+            var nextEvolutions = pokemonGetNextEvolutions(baseToken);
+            if (nextEvolutions.length > 0){
+                //console.log('(0)nextEvolutions = ', nextEvolutions);
+                //console.log('(0)nextEvolutions.length = ', nextEvolutions.length);
+                for (var key = 0; key < nextEvolutions.length; key++){
 
+                    // Add stage 2 and check for stage 3
+                    var nextInfo = nextEvolutions[key];
+                    var nextToken = nextInfo.species;
+                    var nextEvolution = PokemonSpeciesIndex[nextToken];
+                    relatedSpeciesTokens.push(nextToken);
+                    nextEvolutions2 = pokemonGetNextEvolutions(nextToken);
+                    if (nextEvolutions2.length > 0){
+                        //console.log('(1)nextEvolutions2 = ', nextEvolutions2);
+                        //console.log('(1)nextEvolutions2.length = ', nextEvolutions2.length);
+                        for (var key2 = 0; key2 < nextEvolutions2.length; key2++){
+
+                            // Add stage 3 and check for stage 4
+                            var nextInfo = nextEvolutions2[key2];
+                            var nextToken = nextInfo.species;
+                            var nextEvolution = PokemonSpeciesIndex[nextToken];
+                            relatedSpeciesTokens.push(nextToken);
+                            nextEvolutions3 = pokemonGetNextEvolutions(nextToken);
+                            if (nextEvolutions3.length > 0){
+                                //console.log('(2)nextEvolutions3 = ', nextEvolutions3);
+                                //console.log('(2)nextEvolutions3.length = ', nextEvolutions3.length);
+                                for (var key3 = 0; key3 < nextEvolutions3.length; key3++){
+
+                                    // Add stage 4 and (there is no stage 5)
+                                    var nextInfo = nextEvolutions3[key3];
+                                    var nextToken = nextInfo.species;
+                                    var nextEvolution = PokemonSpeciesIndex[nextToken];
+                                    relatedSpeciesTokens.push(nextToken);
+
+                                    }
                                 }
                             }
                         }
                     }
                 }
+
+                relatedSpeciesIndex[startToken] = relatedSpeciesTokens;
+
             }
+
         // Return the list of related pokemon species tokens
         return relatedSpeciesTokens;
+
     }
 
     // Define a function for counting all zone pokemon related to a given token
@@ -2212,7 +2251,7 @@
         var relatedSpeciesTokens = getRelatedSpeciesTokens(startToken);
         //console.log('getRelatedSpeciesTokens('+startToken+') = ', relatedSpeciesTokens);
         var relatedSpeciesUnits = 0;
-        for (var key in relatedSpeciesTokens){
+        for (var key = 0; key < relatedSpeciesTokens.length; key++){
             var relatedToken = relatedSpeciesTokens[key];
             if (typeof thisZoneData.currentStats['species'][relatedToken] !== 'undefined'
                 && thisZoneData.currentStats['species'][relatedToken] > 0){
