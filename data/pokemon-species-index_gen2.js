@@ -519,6 +519,61 @@
             prevEvolution: 'natu'
             },
 
+        'mareep': {
+            order: indexOrder++,
+            token: 'mareep',
+            name: 'Mareep',
+            number: 179,
+            types: ['electric'],
+            baseStats: {hp: 55, phAttack: 40, phDefense: 40, spAttack: 65, spDefense: 45, speed: 35},
+            abilities: {0: 'static', hidden: 'plus'},
+            height: 0.6,
+            weight: 7.8,
+            colors: ['white', 'blue', 'yellow', 'black', 'orange'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'field'],
+            nextEvolutions: [{
+                species: 'flaaffy',
+                method: 'level-up',
+                value: 15
+                }]
+            },
+        'flaaffy': {
+            order: indexOrder++,
+            token: 'flaaffy',
+            name: 'Flaaffy',
+            number: 180,
+            types: ['electric'],
+            baseStats: {hp: 70, phAttack: 55, phDefense: 55, spAttack: 80, spDefense: 60, speed: 45},
+            abilities: {0: 'static', hidden: 'plus'},
+            height: 0.8,
+            weight: 13.3,
+            colors: ['pink', 'white', 'black', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'field'],
+            prevEvolution: 'mareep',
+            nextEvolutions: [{
+                species: 'ampharos',
+                method: 'level-up',
+                value: 30
+                }]
+            },
+        'ampharos': {
+            order: indexOrder++,
+            token: 'ampharos',
+            name: 'Ampharos',
+            number: 181,
+            types: ['electric'],
+            baseStats: {hp: 90, phAttack: 75, phDefense: 85, spAttack: 115, spDefense: 90, speed: 55},
+            abilities: {0: 'static', hidden: 'plus'},
+            height: 1.4,
+            weight: 61.5,
+            colors: ['yellow', 'white', 'black', 'red'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'field'],
+            prevEvolution: 'flaaffy'
+            },
+
         'bellossom': {
             order: thisIndex.afterOrder('vileplume'),
             token: 'bellossom',
@@ -536,7 +591,7 @@
             },
 
         'politoed': {
-            order: thisIndex.afterOrder('poliwhirl'),
+            order: thisIndex.afterOrder('poliwrath'),
             token: 'politoed',
             name: 'Politoed',
             number: 186,

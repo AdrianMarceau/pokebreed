@@ -741,6 +741,25 @@
             prevEvolution: 'aerodactyl'
             },
 
+        'mega-ampharos': {
+            order: thisIndex.afterOrder('ampharos'),
+            token: 'mega-ampharos',
+            name: 'Mega Ampharos',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'ampharos',
+            number: 181,
+            types: ['electric', 'dragon'],
+            baseStats: {hp: 90, phAttack: 95, phDefense: 105, spAttack: 165, spDefense: 110, speed: 45},
+            abilities: {0: 'mold-breaker'},
+            height: 1.4,
+            weight: 61.5,
+            colors: ['white', 'yellow', 'black', 'red'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'field'],
+            prevEvolution: 'ampharos'
+            },
+
         'mega-steelix': {
             order: thisIndex.afterOrder('steelix'),
             token: 'mega-steelix',
@@ -899,6 +918,7 @@
         {base: 'gyarados', species: 'mega-gyarados', method: 'mega-evolution', value: 'gyaradosite'},
         {base: 'aerodactyl', species: 'mega-aerodactyl', method: 'mega-evolution', value: 'aerodactylite'},
 
+        {base: 'ampharos', species: 'mega-ampharos', method: 'mega-evolution', value: 'ampharosite'},
         {base: 'steelix', species: 'mega-steelix', method: 'mega-evolution', value: 'steelixite'},
         {base: 'scizor', species: 'mega-scizor', method: 'mega-evolution', value: 'scizorite'},
 
