@@ -625,6 +625,21 @@
             prevEvolution: 'marill'
             },
 
+        'sudowoodo': {
+            order: indexOrder++,
+            token: 'sudowoodo',
+            name: 'Sudowoodo',
+            number: 185,
+            types: ['rock'],
+            baseStats: {hp: 70, phAttack: 100, phDefense: 115, spAttack: 30, spDefense: 65, speed: 30},
+            abilities: {0: 'sturdy', 1: 'rock-head', hidden: 'rattled'},
+            height: 1.2,
+            weight: 38,
+            colors: ['brown', 'green', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['mineral'],
+            },
+
         'politoed': {
             order: thisIndex.afterOrder('poliwrath'),
             token: 'politoed',

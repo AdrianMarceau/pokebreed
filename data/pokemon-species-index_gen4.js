@@ -194,6 +194,29 @@
             prevEvolution: 'prinplup'
             },
 
+        'bonsly': {
+            order: thisIndex.beforeOrder('sudowoodo'),
+            token: 'bonsly',
+            name: 'Bonsly',
+            class: 'baby',
+            number: 438,
+            types: ['rock'],
+            baseStats: {hp: 50, phAttack: 80, phDefense: 95, spAttack: 10, spDefense: 45, speed: 10},
+            abilities: {0: 'sturdy', 1: 'rock-head', hidden: 'rattled'},
+            height: 0.5,
+            weight: 15,
+            colors: ['brown', 'green', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'sudowoodo',
+                method: 'evolution-move',
+                value: 'mimic',
+                method2: 'happiness',
+                value2: 'high'
+                }]
+            },
+
         'mime-jr': {
             order: thisIndex.beforeOrder('mr-mime'),
             token: 'mime-jr',
@@ -478,6 +501,7 @@
 
     // Update previous gen pokemon with new prev evolution data
     thisIndex.addPrevEvolutions([
+        {base: 'sudowoodo', species: 'bonsly'},
         {base: 'mr-mime', species: 'mime-jr'},
         {base: 'chansey', species: 'happiny'},
         {base: 'snorlax', species: 'munchlax'},
