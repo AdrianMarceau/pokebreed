@@ -484,6 +484,41 @@
             prevEvolution: 'togepi'
             },
 
+        'natu': {
+            order: indexOrder++,
+            token: 'natu',
+            name: 'Natu',
+            number: 177,
+            types: ['psychic', 'flying'],
+            baseStats: {hp: 40, phAttack: 50, phDefense: 45, spAttack: 70, spDefense: 45, speed: 70},
+            abilities: {0: 'synchronize', 1: 'early-bird', hidden: 'magic-bounce'},
+            height: 0.2,
+            weight: 2,
+            colors: ['green', 'red', 'yellow', 'black'],
+            eggCycles: 20,
+            eggGroups: ['flying'],
+            nextEvolutions: [{
+                species: 'xatu',
+                method: 'level-up',
+                value: 25
+                }]
+            },
+        'xatu': {
+            order: indexOrder++,
+            token: 'xatu',
+            name: 'Xatu',
+            number: 178,
+            types: ['psychic', 'flying'],
+            baseStats: {hp: 65, phAttack: 75, phDefense: 70, spAttack: 95, spDefense: 70, speed: 95},
+            abilities: {0: 'synchronize', 1: 'early-bird', hidden: 'magic-bounce'},
+            height: 1.5,
+            weight: 15,
+            colors: ['green', 'white', 'red', 'yellow', 'red'],
+            eggCycles: 20,
+            eggGroups: ['flying'],
+            prevEvolution: 'natu'
+            },
+
         'bellossom': {
             order: thisIndex.afterOrder('vileplume'),
             token: 'bellossom',
