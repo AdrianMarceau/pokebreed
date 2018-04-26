@@ -997,27 +997,32 @@
     function zonePokemonClickEvent(e){
         e.preventDefault();
 
-        //if (!simulationStarted){ return false; }
-        var id = parseInt($(this).attr('data-id'));
-        for (var key in thisZoneData.currentPokemon){
-            var pokeInfo = thisZoneData.currentPokemon[key];
-            if (pokeInfo.id === id){
-                pokeInfo.watchFlag = pokeInfo.watchFlag !== true ? true : false;
-                updateOverview();
+        // Collect the ID of the clicked pokemon
+        var $li = $(this);
+        var id = parseInt($li.attr('data-id'));
+        var pokeKey = false;
+        var pokeInfo = false;
+        for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
+            if (thisZoneData.currentPokemon[key].id === id){
+                pokeKey = key;
+                pokeInfo = thisZoneData.currentPokemon[key];
+                break;
                 }
             }
-        /*
-        if (simulationStarted){ return false; }
-        var id = parseInt($(this).attr('data-id'));
-        for (var key in thisZoneData.currentPokemon){
-            var pokeInfo = thisZoneData.currentPokemon[key];
-            if (pokeInfo.id === id){
-                thisZoneData.faintedPokemon.push(thisZoneData.currentPokemon.splice(key, 1));
-                $(this).remove();
-                updateOverview();
-                }
+
+        // If simulator has NOT started, clicking removes a pokemon from the zone
+        if (!simulationStarted){
+            $li.remove();
+            thisZoneData.addedPokemonSpecies[pokeInfo.token]--;
+            thisZoneData.currentPokemon.splice(pokeKey, 1);
             }
-            */
+        // Otherwise, clicking simply places a "watched" indicator on the pokemon
+        else {
+            pokeInfo.watchFlag = pokeInfo.watchFlag !== true ? true : false;
+            }
+
+        // Update the overview with changes
+        updateOverview();
 
     }
 
