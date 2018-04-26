@@ -177,6 +177,11 @@
                 }
             });
 
+
+        // Generate a live button event for any pokemon added to the zone
+        var $pokeList = $('.details.pokemon .wrap .list.pokemon', $panelMainOverview);
+        $pokeList.on('click', 'li[data-id]', zonePokemonClickEvent);
+
     }
 
     // Define a function for looping through indexes and generating helpful values
@@ -295,12 +300,14 @@
         var $pokeSlots = $('.pokemon .list.slots', $panelMainOverview);
         //console.log('$pokeSlots = ', $pokeSlots);
         //console.log('thisZoneData.capacity = ', thisZoneData.capacity);
+        var slotMarkup = '';
         for (var i = 0; i < thisZoneData.capacity; i++){
             //console.log('append another slot');
             var liClass = 'slot';
             if (i < pokemonRequiredToStart){ liClass += ' waiting'; }
-            $pokeSlots.append('<li class="'+liClass+'"></li>');
+            slotMarkup += '<li class="'+liClass+'"></li>';
             }
+        $pokeSlots.append(slotMarkup);
     }
 
     // Define a function for generating type styles for display
@@ -447,6 +454,7 @@
         // Loop through and generate buttons for each Pokemon
         var dittoBreaker = false;
         var specialBreaker = false;
+        var pokePanelMarkup = '';
         for (var key = 0; key < allBasicPokemon.length; key++){
             var pokemonToken = allBasicPokemon[key];
             //console.log('pokemonToken = ', pokemonToken);
@@ -457,26 +465,49 @@
                 && (pokemonToken !== 'ditto'
                 && pokemonToken !== 'shiny-ditto')){
                 dittoBreaker = true;
-                $pokePanelButtons.append('<hr class="breaker" />');
+                pokePanelMarkup += '<hr class="breaker" />';
                 } else if (specialBreaker === false
                 && (pokemonData['class'] === 'legendary'
                 || pokemonData['class'] === 'mythical'
                 || pokemonData['class'] === 'ultra-beast')){
                 specialBreaker = true;
-                $pokePanelButtons.append('<hr class="breaker" />');
+                pokePanelMarkup += '<hr class="breaker" />';
                 }
+
+            // Collect the pokemon's image icon
             var pokemonIcon = getPokemonIcon(pokemonToken);
+
+            // Generate the pokemon's name for the hover
             var pokemonName = pokemonData.name;
             pokemonName += ' ('+ (pokemonData.types.join(' / ').toLowerCase().replace(/\b[a-z]/g, function(l) { return l.toUpperCase(); })) +')';
-            var $button = $('<button title="'+ pokemonName +'"><span class="gloss"></span><span class="plus">+</span> '+ pokemonIcon + ' <strong>' + pokemonData['name'] +'</strong></button>');
-            $button.attr('data-action', 'add');
-            $button.attr('data-kind', 'pokemon');
-            $button.attr('data-token', pokemonToken);
-            $button.addClass('button type');
-            if (typeof pokemonTypes[0] === 'string'){ $button.addClass(pokemonTypes[0]); }
-            if (typeof pokemonTypes[1] === 'string'){ $button.addClass(pokemonTypes[1]+'2'); }
-            $button.appendTo($pokePanelButtons);
+
+            // Define the class for the pokemon button
+            var buttonClass = 'button type ';
+            if (typeof pokemonTypes[0] === 'string'){ buttonClass += pokemonTypes[0]+' '; }
+            if (typeof pokemonTypes[1] === 'string'){ buttonClass += pokemonTypes[1]+'2 '; }
+
+            // Generate the markup for the pokemon button
+            var buttonMarkup = '';
+            buttonMarkup += '<button '+
+                'class="'+ buttonClass +'" '+
+                'data-action="add" '+
+                'data-kind="pokemon" '+
+                'data-token="'+ pokemonToken +'" '+
+                'title="'+ pokemonName +'" '+
+                '>';
+                buttonMarkup += '<span class="gloss"></span>';
+                buttonMarkup += '<span class="plus">+</span>';
+                buttonMarkup += pokemonIcon;
+                //buttonMarkup += '<strong>' + pokemonData['name'] +'</strong>';
+            buttonMarkup += '</button>';
+
+            // Appent this button's markup the full list
+            pokePanelMarkup += buttonMarkup;
+
             }
+
+        // Append generated markup to the panel at once
+        $pokePanelButtons.append(pokePanelMarkup);
 
         // Remove the loading dotts
         $pokePanelLoading.remove();
@@ -729,9 +760,9 @@
         var $pokeList = $('.list.pokemon', $pokeWrap);
         //var zoneMaxWidth = (thisZoneData.capacity / 10) * (40 + 5);
         //$pokeWrap.css({width:zoneMaxWidth+'px'});
-        $pokeList.empty();
 
         // Loop through and show all pokemon on the field, with eggs last
+        var pokeListMarkup = '';
         for (var key in sortedSpeciesTokens){
             var token = sortedSpeciesTokens[key];
             var pokeList = getZonePokemonByToken(token);
@@ -747,9 +778,7 @@
                     var itemClass = 'pokemon ';
                     if (pokeInfo.reachedAdulthood === true){ itemClass += 'adult '; }
                     if (pokeInfo.watchFlag === true){ itemClass += 'watched '; }
-                    var $listItem = $('<li class="'+ itemClass +'" data-id="'+ pokeInfo.id +'">'+ pokeIcon + pokeCount + '</li>');
-                    $listItem.appendTo($pokeList);
-                    $listItem.bind('click', zonePokemonClickEvent);
+                    pokeListMarkup += '<li class="'+ itemClass +'" data-id="'+ pokeInfo.id +'">'+ pokeIcon + pokeCount + '</li>';
 
                     } else if (pokeInfo.eggCycles > 0){
 
@@ -758,14 +787,17 @@
                     var pokeCount = '<span class="count egg">-'+pokeInfo.eggCycles+'</span>';
                     var itemClass = 'egg ';
                     if (pokeInfo.watchFlag === true){ itemClass += 'watched '; }
-                    var $listItem = $('<li class="'+ itemClass +'" data-id="'+ pokeInfo.id +'">'+ pokeIcon + pokeCount + '</li>');
-                    $listItem.appendTo($pokeList);
-                    $listItem.bind('click', zonePokemonClickEvent);
+                    pokeListMarkup += '<li class="'+ itemClass +'" data-id="'+ pokeInfo.id +'">'+ pokeIcon + pokeCount + '</li>';
 
                     }
 
                 }
             }
+
+        // Empty current list and append new markup
+        $pokeList.empty();
+        $pokeList.append(pokeListMarkup);
+
 
         // Define vars to hold the number of stat slots shown
         var numPositivesShown = 0;
@@ -785,23 +817,26 @@
                 }
             if (!jQuery.isEmptyObject(positiveTypes)){
                 var sortedKeys = getSortedKeys(positiveTypes);
+                var statListMarkup = '';
                 for (var key in sortedKeys){
                     var type = sortedKeys[key];
                     var typeInfo = PokemonTypesIndex[type];
                     var val = Math.floor(positiveTypes[type]);
                     if (val === 0){ continue; }
                     var liClass = 'type '+type+' ';
-                    $('.stats .list.positive', $panelTypesOverview).append('<li class="'+liClass+'">'+
+                    statListMarkup += '<li class="'+liClass+'">'+
                             '<div class="bubble">'+
                                 '<span class="name">'+ typeInfo['name'] +'</span> '+
                                 '<span class="val">+'+ val +'</span>'+
                             '</div>'+
-                        '</li>');
+                        '</li>';
                     numPositivesShown++;
                     }
+                $('.stats .list.positive', $panelTypesOverview).append(statListMarkup);
                 }
             if (!jQuery.isEmptyObject(negativeTypes)){
                 var sortedKeys = getSortedKeys(negativeTypes);
+                var statListMarkup = '';
                 sortedKeys.reverse();
                 for (var key in sortedKeys){
                     var type = sortedKeys[key];
@@ -809,14 +844,15 @@
                     var val = Math.floor(negativeTypes[type]);
                     if (val === 0){ continue; }
                     var liClass = 'type '+type+' ';
-                    $('.stats .list.negative', $panelTypesOverview).append('<li class="'+liClass+'">'+
+                    statListMarkup += '<li class="'+liClass+'">'+
                             '<div class="bubble">'+
                                 '<span class="name">'+ typeInfo['name'] +'</span> '+
                                 '<span class="val">'+ val +'</span>'+
                             '</div>'+
-                        '</li>');
+                        '</li>';
                     numNegativesShown++;
                     }
+                $('.stats .list.negative', $panelTypesOverview).append(statListMarkup);
                 }
             }
 
@@ -850,6 +886,7 @@
 
         // Update the active species list with current numbers
         $('.list.active', $panelSpeciesOverview).empty();
+        var speciesListMarkup = '';
         if (!jQuery.isEmptyObject(activePokemonSpecies)){
             var sortedTokens = getSortedKeys(activePokemonSpecies);
             for (var key in sortedTokens){
@@ -859,22 +896,24 @@
                 var liClass = 'species ';
                 liClass += 'type '+pokeInfo['types'][0]+' ';
                 if (typeof pokeInfo['types'][1] !== 'undefined'){ liClass += pokeInfo['types'][1]+'2 '; }
-                $('.list.active', $panelSpeciesOverview).append('<li class="'+liClass+'">'+
+                speciesListMarkup += '<li class="'+liClass+'">'+
                         '<div class="bubble">'+
                             '<span class="name">'+ pokeInfo['name'] +'</span> '+
                             '<span class="val">+'+ pokeCount +'</span>'+
                         '</div>'+
-                    '</li>');
+                    '</li>';
                 numActiveShown++;
                 }
             } else {
-            $('.list.active', $panelSpeciesOverview).append('<li class="species spacer">'+
+            speciesListMarkup += '<li class="species spacer">'+
                     '<div class="bubble"><span class="name">&nbsp;</span></div>'+
-                '</li>');
+                '</li>';
             }
+        $('.list.active', $panelSpeciesOverview).append(speciesListMarkup);
 
         // Update the fainted species list with past numbers
         $('.list.fainted', $panelSpeciesOverview).empty();
+        var speciesListMarkup = '';
         if (!jQuery.isEmptyObject(faintedPokemonSpecies)){
             var sortedTokens = getSortedKeys(faintedPokemonSpecies);
             for (var key in sortedTokens){
@@ -887,19 +926,20 @@
                 var liClass = 'species ';
                 liClass += 'type '+pokeInfo['types'][0]+' ';
                 if (typeof pokeInfo['types'][1] !== 'undefined'){ liClass += pokeInfo['types'][1]+'2 '; }
-                $('.list.fainted', $panelSpeciesOverview).append('<li class="'+liClass+'">'+
+                speciesListMarkup += '<li class="'+liClass+'">'+
                         '<div class="bubble">'+
                             '<span class="name">'+ pokeInfo['name'] +'</span> '+
                             '<span class="val">-'+ pokeCount +'</span>'+
                         '</div>'+
-                    '</li>');
+                    '</li>';
                 numFaintedShown++;
                 }
             } else {
-            $('.list.fainted', $panelSpeciesOverview).append('<li class="species spacer">'+
+            speciesListMarkup += '<li class="species spacer">'+
                     '<div class="bubble"><span class="name">&nbsp;</span></div>'+
-                '</li>');
+                '</li>';
             }
+        $('.list.fainted', $panelSpeciesOverview).append(speciesListMarkup);
 
         // If the simulation has started, make sure there's room to show the lists
         if (simulationStarted && thisDeviceWidth >= 1024){
