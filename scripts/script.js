@@ -704,7 +704,6 @@
 
         // Loop though and count population by types & species
         var pokeSpeciesActive = {};
-        var pokeSpeciesActiveTokens = [];
         if (thisZoneData.currentPokemon.length){
             for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
                 var pokemonInfo = thisZoneData.currentPokemon[key];
@@ -712,7 +711,6 @@
                 var indexInfo = PokemonSpeciesIndex[pokemonInfo.token];
                 if (typeof pokeSpeciesActive[pokemonInfo.token] == 'undefined'){ pokeSpeciesActive[pokemonInfo.token] = 0; }
                 pokeSpeciesActive[pokemonInfo.token] += 1;
-                pokeSpeciesActiveTokens.push(pokemonInfo.token);
                 }
             }
         //console.log('pokeSpeciesActive = ', pokeSpeciesActive);
@@ -723,6 +721,7 @@
         var totalActiveUnits = 0;
         var totalSpeciesCurrent = 0;
         var totalSpeciesSeen = 0;
+        var pokeSpeciesActiveTokens = Object.keys(pokeSpeciesActive);
         if (pokeSpeciesActiveTokens.length){
             for (var key = 0; key < pokeSpeciesActiveTokens.length; key++){
                 var token = pokeSpeciesActiveTokens[key];
