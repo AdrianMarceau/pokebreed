@@ -574,6 +574,22 @@
             prevEvolution: 'flaaffy'
             },
 
+        'bellossom': {
+            order: thisIndex.afterOrder('vileplume'),
+            token: 'bellossom',
+            name: 'Bellossom',
+            number: 182,
+            types: ['grass'],
+            baseStats: {hp: 75, phAttack: 80, phDefense: 95, spAttack: 90, spDefense: 100, speed: 50},
+            abilities: {0: 'chlorophyll', hidden: 'healer'},
+            height: 0.4,
+            weight: 5.8,
+            colors: ['green', 'red', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['grass'],
+            prevEvolution: 'gloom'
+            },
+
         'marill': {
             order: indexOrder++,
             token: 'marill',
@@ -607,22 +623,6 @@
             eggCycles: 10,
             eggGroups: ['water-1', 'fairy'],
             prevEvolution: 'marill'
-            },
-
-        'bellossom': {
-            order: thisIndex.afterOrder('vileplume'),
-            token: 'bellossom',
-            name: 'Bellossom',
-            number: 182,
-            types: ['grass'],
-            baseStats: {hp: 75, phAttack: 80, phDefense: 95, spAttack: 90, spDefense: 100, speed: 50},
-            abilities: {0: 'chlorophyll', hidden: 'healer'},
-            height: 0.4,
-            weight: 5.8,
-            colors: ['green', 'red', 'yellow'],
-            eggCycles: 20,
-            eggGroups: ['grass'],
-            prevEvolution: 'gloom'
             },
 
         'politoed': {
