@@ -574,6 +574,41 @@
             prevEvolution: 'flaaffy'
             },
 
+        'marill': {
+            order: indexOrder++,
+            token: 'marill',
+            name: 'Marill',
+            number: 183,
+            types: ['water', 'fairy'],
+            baseStats: {hp: 70, phAttack: 20, phDefense: 50, spAttack: 20, spDefense: 50, speed: 40},
+            abilities: {0: 'thick-fat', 1: 'huge-power', hidden: 'sap-sipper'},
+            height: 0.4,
+            weight: 8.5,
+            colors: ['blue', 'white', 'red'],
+            eggCycles: 10,
+            eggGroups: ['water-1', 'fairy'],
+            nextEvolutions: [{
+                species: 'azumarill',
+                method: 'level-up',
+                value: 18
+                }]
+            },
+        'azumarill': {
+            order: indexOrder++,
+            token: 'azumarill',
+            name: 'Azumarill',
+            number: 184,
+            types: ['water', 'fairy'],
+            baseStats: {hp: 100, phAttack: 50, phDefense: 80, spAttack: 60, spDefense: 80, speed: 50},
+            abilities: {0: 'thick-fat', 1: 'huge-power', hidden: 'sap-sipper'},
+            height: 0.8,
+            weight: 28.5,
+            colors: ['blue', 'white', 'pink'],
+            eggCycles: 10,
+            eggGroups: ['water-1', 'fairy'],
+            prevEvolution: 'marill'
+            },
+
         'bellossom': {
             order: thisIndex.afterOrder('vileplume'),
             token: 'bellossom',

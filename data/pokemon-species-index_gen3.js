@@ -437,7 +437,34 @@
             prevEvolution: 'nuzleaf'
             },
 
+        'azurill': {
+            order: thisIndex.beforeOrder('marill'),
+            token: 'azurill',
+            name: 'Azurill',
+            class: 'baby',
+            number: 298,
+            types: ['normal', 'fairy'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 50, phAttack: 20, phDefense: 40, spAttack: 20, spDefense: 40, speed: 20},
+            abilities: {0: 'thick-fat', 1: 'huge-power', hidden: 'sap-sipper'},
+            height: 0.2,
+            weight: 2,
+            colors: ['blue', 'pink', 'white'],
+            eggCycles: 10,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'marill',
+                method: 'happiness',
+                value: 'high'
+                }]
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
+
+    // Update previous gen pokemon with new prev evolution data
+    thisIndex.addPrevEvolutions([
+        {base: 'marill', species: 'azurill'},
+        ]);
 
 })();
