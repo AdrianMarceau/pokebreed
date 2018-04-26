@@ -14,7 +14,6 @@
             <li>Keep track of which species the player has seen so-far and have it persistant between sessions, display somewhere</li>
             <li>Revise breeding so that gender ratios and egg groups can be respected so that Pokémon like Jynx and Hitmonlee can breed and function</li>
             <li>Program a predator/prey relationship so that the more perasive species (looking at you, Magikarp) can be kept in check by stronger ones</li>
-            <li>Optimize the code so that it's faster and the animations / redraw functions are smoother and less resource-intensive</li>
         </ul>
     </div>
 </div>
