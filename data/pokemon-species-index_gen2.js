@@ -711,6 +711,21 @@
             prevEvolution: 'skiploom'
             },
 
+        'aipom': {
+            order: indexOrder++,
+            token: 'aipom',
+            name: 'Aipom',
+            number: 190,
+            types: ['normal'],
+            baseStats: {hp: 55, phAttack: 70, phDefense: 55, spAttack: 40, spDefense: 55, speed: 85},
+            abilities: {0: 'run-away', 1: 'pickup', hidden: 'skill-link'},
+            height: 0.8,
+            weight: 11.5,
+            colors: ['purple', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['field']
+            },
+
         'espeon': {
             order: thisIndex.afterOrder('flareon', 1),
             token: 'espeon',

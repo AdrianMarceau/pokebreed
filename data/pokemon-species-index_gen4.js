@@ -194,6 +194,22 @@
             prevEvolution: 'prinplup'
             },
 
+        'ambipom': {
+            order: thisIndex.afterOrder('aipom'),
+            token: 'ambipom',
+            name: 'Ambipom',
+            number: 424,
+            types: ['normal'],
+            baseStats: {hp: 75, phAttack: 100, phDefense: 66, spAttack: 60, spDefense: 66, speed: 115},
+            abilities: {0: 'technician', 1: 'pickup', hidden: 'skill-link'},
+            height: 1.2,
+            weight: 20.3,
+            colors: ['purple', 'brown', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'aipom'
+            },
+
         'bonsly': {
             order: thisIndex.beforeOrder('sudowoodo'),
             token: 'bonsly',
@@ -509,6 +525,7 @@
 
     // Update previous gen pokemon with new next evolution data
     thisIndex.addNextEvolutions([
+        {base: 'aipom', species: 'ambipom', method: 'evolution-move', value: 'double-hit', method2: 'trade', value2: true},
         {base: 'magneton', species: 'magnezone', method: 'evolution-location', value: 'magnetic-field', method2: 'type-surge', value2: ['electric', 'steel']},
         {base: 'lickitung', species: 'lickilicky', method: 'evolution-move', value: 'rollout', method2: 'type-surge', value2: ['normal', 'rock']},
         {base: 'rhydon', species: 'rhyperior', method: 'evolution-item', value: 'protector', method2: 'type-surge', value2: ['rock', 'ground']},
