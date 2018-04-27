@@ -910,6 +910,21 @@
             eggGroups: ['amorphous'],
             },
 
+        'girafarig': {
+            order: indexOrder++,
+            token: 'girafarig',
+            name: 'Girafarig',
+            number: 203,
+            types: ['normal', 'psychic'],
+            baseStats: {hp: 70, phAttack: 80, phDefense: 65, spAttack: 90, spDefense: 65, speed: 85},
+            abilities: {0: 'inner-focus', 1: 'early-bird', hidden: 'sap-sipper'},
+            height: 1.5,
+            weight: 41.5,
+            colors: ['yellow', 'black', 'white', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            },
+
         'steelix': {
             order: thisIndex.afterOrder('onix'),
             token: 'steelix',
