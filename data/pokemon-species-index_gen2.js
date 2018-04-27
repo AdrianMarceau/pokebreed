@@ -925,6 +925,41 @@
             eggGroups: ['field'],
             },
 
+        'pineco': {
+            order: indexOrder++,
+            token: 'pineco',
+            name: 'Pineco',
+            number: 204,
+            types: ['bug'],
+            baseStats: {hp: 50, phAttack: 65, phDefense: 90, spAttack: 35, spDefense: 35, speed: 15},
+            abilities: {0: 'sturdy', hidden: 'overcoat'},
+            height: 0.6,
+            weight: 7.2,
+            colors: ['gray'],
+            eggCycles: 20,
+            eggGroups: ['bug'],
+            nextEvolutions: [{
+                species: 'forretress',
+                method: 'level-up',
+                value: 31
+                }]
+            },
+        'forretress': {
+            order: indexOrder++,
+            token: 'forretress',
+            name: 'Forretress',
+            number: 205,
+            types: ['bug', 'steel'],
+            baseStats: {hp: 75, phAttack: 90, phDefense: 140, spAttack: 60, spDefense: 60, speed: 40},
+            abilities: {0: 'sturdy', hidden: 'overcoat'},
+            height: 1.2,
+            weight: 125.8,
+            colors: ['gray', 'red'],
+            eggCycles: 20,
+            eggGroups: ['bug'],
+            prevEvolution: 'pineco'
+            },
+
         'steelix': {
             order: thisIndex.afterOrder('onix'),
             token: 'steelix',
