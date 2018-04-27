@@ -421,6 +421,22 @@
             prevEvolution: 'togetic'
             },
 
+        'yanmega': {
+            order: thisIndex.afterOrder('yanma'),
+            token: 'yanmega',
+            name: 'Yanmega',
+            number: 469,
+            types: ['bug', 'flying'],
+            baseStats: {hp: 86, phAttack: 76, phDefense: 86, spAttack: 116, spDefense: 56, speed: 95},
+            abilities: {0: 'speed-boost', 1: 'compound-eyes', hidden: 'frisk'},
+            height: 1.9,
+            weight: 51.5,
+            colors: ['green', 'red', 'black', 'white'],
+            eggCycles: 20,
+            eggGroups: ['bug'],
+            prevEvolution: 'yanma'
+            },
+
         'leafeon': {
             order: thisIndex.afterOrder('umbreon', 1),
             token: 'leafeon',
@@ -525,7 +541,7 @@
 
     // Update previous gen pokemon with new next evolution data
     thisIndex.addNextEvolutions([
-        {base: 'aipom', species: 'ambipom', method: 'evolution-move', value: 'double-hit', method2: 'trade', value2: true},
+        {base: 'aipom', species: 'ambipom', method: 'evolution-move', value: 'double-hit', method2: 'type-surge', value2: 'normal'},
         {base: 'magneton', species: 'magnezone', method: 'evolution-location', value: 'magnetic-field', method2: 'type-surge', value2: ['electric', 'steel']},
         {base: 'lickitung', species: 'lickilicky', method: 'evolution-move', value: 'rollout', method2: 'type-surge', value2: ['normal', 'rock']},
         {base: 'rhydon', species: 'rhyperior', method: 'evolution-item', value: 'protector', method2: 'type-surge', value2: ['rock', 'ground']},
@@ -533,6 +549,7 @@
         {base: 'electabuzz', species: 'electivire', method: 'evolution-item', value: 'electirizer', method2: 'type-surge', value2: 'electric'},
         {base: 'magmar', species: 'magmortar', method: 'evolution-item', value: 'magmarizer', method2: 'type-surge', value2: 'fire'},
         {base: 'togetic', species: 'togekiss', method: 'evolution-stone', value: 'shiny-stone', method2: 'type-surge', value2: ['fairy', 'flying']},
+        {base: 'yanma', species: 'yanmega', method: 'evolution-move', value: 'ancient-power', method2: 'type-surge', value2: ['bug', 'rock']},
         {base: 'eevee', species: 'leafeon', method: 'evolution-location', value: 'moss-rock', method2: 'type-appeal', value2: 'grass'},
         {base: 'eevee', species: 'glaceon', method: 'evolution-location', value: 'icy-rock', method2: 'type-appeal', value2: 'ice'},
         {base: 'porygon2', species: 'porygon-z', method: 'evolution-item', value: 'dubious-disc', method2: 'type-appeal', value2: ['fire', 'ice', 'electric']},

@@ -743,8 +743,8 @@
                 species: 'sunflora',
                 method: 'evolution-stone',
                 value: 'sun-stone',
-                method2: 'type-surge',
-                value2: 'grass'
+                method2: 'type-appeal',
+                value2: ['grass', 'fire']
                 }]
             },
         'sunflora': {
@@ -761,6 +761,21 @@
             eggCycles: 20,
             eggGroups: ['grass'],
             prevEvolution: 'sunkern'
+            },
+
+        'yanma': {
+            order: indexOrder++,
+            token: 'yanma',
+            name: 'Yanma',
+            number: 193,
+            types: ['bug', 'flying'],
+            baseStats: {hp: 65, phAttack: 65, phDefense: 45, spAttack: 75, spDefense: 45, speed: 95},
+            abilities: {0: 'speed-boost', 1: 'compound-eyes', hidden: 'frisk'},
+            height: 1.2,
+            weight: 38,
+            colors: ['red', 'green', 'white', 'orange'],
+            eggCycles: 20,
+            eggGroups: ['bug'],
             },
 
         'espeon': {
