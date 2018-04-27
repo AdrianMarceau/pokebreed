@@ -778,6 +778,41 @@
             eggGroups: ['bug'],
             },
 
+        'wooper': {
+            order: indexOrder++,
+            token: 'wooper',
+            name: 'Wooper',
+            number: 194,
+            types: ['water', 'ground'],
+            baseStats: {hp: 55, phAttack: 45, phDefense: 45, spAttack: 25, spDefense: 25, speed: 15},
+            abilities: {0: 'damp', 1: 'water-absorb', hidden: 'unaware'},
+            height: 0.4,
+            weight: 8.5,
+            colors: ['blue', 'purple'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'field'],
+            nextEvolutions: [{
+                species: 'quagsire',
+                method: 'level-up',
+                value: 20
+                }]
+            },
+        'quagsire': {
+            order: indexOrder++,
+            token: 'quagsire',
+            name: 'Quagsire',
+            number: 195,
+            types: ['water', 'ground'],
+            baseStats: {hp: 95, phAttack: 85, phDefense: 85, spAttack: 65, spDefense: 65, speed: 35},
+            abilities: {0: 'damp', 1: 'water-absorb', hidden: 'unaware'},
+            height: 1.4,
+            weight: 75,
+            colors: ['blue', 'purple'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'field'],
+            prevEvolution: 'wooper'
+            },
+
         'espeon': {
             order: thisIndex.afterOrder('flareon', 1),
             token: 'espeon',
