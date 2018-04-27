@@ -210,6 +210,21 @@
             prevEvolution: 'aipom'
             },
 
+        'mismagius': {
+            order: thisIndex.afterOrder('misdreavus'),
+            token: 'mismagius',
+            name: 'Mismagius',
+            number: 429,
+            types: ['ghost'],
+            baseStats: {hp: 60, phAttack: 60, phDefense: 60, spAttack: 105, spDefense: 105, speed: 105},
+            abilities: {0: 'levitate'},
+            height: 0.9,
+            weight: 4.4,
+            colors: ['purple', 'red', 'yellow'],
+            eggCycles: 25,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'misdreavus'
+            },
         'honchkrow': {
             order: thisIndex.afterOrder('murkrow'),
             token: 'honchkrow',
@@ -558,6 +573,7 @@
     // Update previous gen pokemon with new next evolution data
     thisIndex.addNextEvolutions([
         {base: 'aipom', species: 'ambipom', method: 'evolution-move', value: 'double-hit', method2: 'type-surge', value2: 'normal'},
+        {base: 'misdreavus', species: 'mismagius', method: 'evolution-stone', value: 'dusk-stone', method2: 'type-appeal', value2: ['ghost']},
         {base: 'murkrow', species: 'honchkrow', method: 'evolution-stone', value: 'dusk-stone', method2: 'type-appeal', value2: ['dark', 'flying']},
         {base: 'magneton', species: 'magnezone', method: 'evolution-location', value: 'magnetic-field', method2: 'type-surge', value2: ['electric', 'steel']},
         {base: 'lickitung', species: 'lickilicky', method: 'evolution-move', value: 'rollout', method2: 'type-surge', value2: ['normal', 'rock']},

@@ -878,6 +878,21 @@
             prevEvolution: 'slowpoke'
             },
 
+        'misdreavus': {
+            order: indexOrder++,
+            token: 'misdreavus',
+            name: 'Misdreavus',
+            number: 200,
+            types: ['ghost'],
+            baseStats: {hp: 60, phAttack: 60, phDefense: 60, spAttack: 85, spDefense: 85, speed: 85},
+            abilities: {0: 'levitate'},
+            height: 0.7,
+            weight: 1,
+            colors: ['blue', 'red', 'purple', 'yellow'],
+            eggCycles: 25,
+            eggGroups: ['amorphous'],
+            },
+
         'steelix': {
             order: thisIndex.afterOrder('onix'),
             token: 'steelix',
