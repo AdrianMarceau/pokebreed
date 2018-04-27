@@ -893,6 +893,23 @@
             eggGroups: ['amorphous'],
             },
 
+        /* -- { #201 Unown ... } -- */
+
+        'wobbuffet': {
+            order: indexOrder++,
+            token: 'wobbuffet',
+            name: 'Wobbuffet',
+            number: 202,
+            types: ['psychic'],
+            baseStats: {hp: 190, phAttack: 33, phDefense: 58, spAttack: 33, spDefense: 58, speed: 33},
+            abilities: {0: 'shadow-tag', hidden: 'telepathy'},
+            height: 1.3,
+            weight: 28.5,
+            colors: ['blue', 'black', 'pink', 'white'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            },
+
         'steelix': {
             order: thisIndex.afterOrder('onix'),
             token: 'steelix',

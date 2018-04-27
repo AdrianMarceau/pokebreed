@@ -459,12 +459,35 @@
                 }]
             },
 
+        'wynaut': {
+            order: thisIndex.beforeOrder('wobbuffet'),
+            token: 'wynaut',
+            name: 'Wynaut',
+            class: 'baby',
+            number: 360,
+            types: ['psychic'],
+            baseStats: {hp: 95, phAttack: 23, phDefense: 48, spAttack: 23, spDefense: 48, speed: 23},
+            abilities: {0: 'shadow-tag', hidden: 'telepathy'},
+            height: 0.6,
+            weight: 14,
+            colors: ['blue', 'black', 'pink', 'white'],
+            evos: ['wobbuffet'],
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'wobbuffet',
+                method: 'level-up',
+                value: 15
+                }]
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
     // Update previous gen pokemon with new prev evolution data
     thisIndex.addPrevEvolutions([
         {base: 'marill', species: 'azurill'},
+        {base: 'wobbuffet', species: 'wynaut'},
         ]);
 
 })();
