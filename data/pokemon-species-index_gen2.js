@@ -726,6 +726,43 @@
             eggGroups: ['field']
             },
 
+        'sunkern': {
+            order: indexOrder++,
+            token: 'sunkern',
+            name: 'Sunkern',
+            number: 191,
+            types: ['grass'],
+            baseStats: {hp: 30, phAttack: 30, phDefense: 30, spAttack: 30, spDefense: 30, speed: 30},
+            abilities: {0: 'chlorophyll', 1: 'solar-power', hidden: 'early-bird'},
+            height: 0.3,
+            weight: 1.8,
+            colors: ['yellow', 'brown', 'green', 'black'],
+            eggCycles: 20,
+            eggGroups: ['grass'],
+            nextEvolutions: [{
+                species: 'sunflora',
+                method: 'evolution-stone',
+                value: 'sun-stone',
+                method2: 'type-surge',
+                value2: 'grass'
+                }]
+            },
+        'sunflora': {
+            order: indexOrder++,
+            token: 'sunflora',
+            species: 'Sunflora',
+            number: 192,
+            types: ['grass'],
+            baseStats: {hp: 75, phAttack: 75, phDefense: 55, spAttack: 105, spDefense: 85, speed: 30},
+            abilities: {0: 'chlorophyll', 1: 'solar-power', hidden: 'early-bird'},
+            height: 0.8,
+            weight: 8.5,
+            colors: ['yellow', 'green'],
+            eggCycles: 20,
+            eggGroups: ['grass'],
+            prevEvolution: 'sunkern'
+            },
+
         'espeon': {
             order: thisIndex.afterOrder('flareon', 1),
             token: 'espeon',
