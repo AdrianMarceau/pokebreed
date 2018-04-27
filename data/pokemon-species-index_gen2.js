@@ -960,6 +960,21 @@
             prevEvolution: 'pineco'
             },
 
+        'dunsparce': {
+            order: indexOrder++,
+            token: 'dunsparce',
+            name: 'Dunsparce',
+            number: 206,
+            types: ['normal'],
+            baseStats: {hp: 100, phAttack: 70, phDefense: 70, spAttack: 65, spDefense: 65, speed: 45},
+            abilities: {0: 'serene-grace', 1: 'run-away', hidden: 'rattled'},
+            height: 1.5,
+            weight: 14,
+            colors: ['yellow', 'blue', 'white'],
+            eggCycles: 20,
+            eggGroups: ['field']
+            },
+
         'steelix': {
             order: thisIndex.afterOrder('onix'),
             token: 'steelix',
