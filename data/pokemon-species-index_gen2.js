@@ -846,6 +846,22 @@
             prevEvolution: 'eevee'
             },
 
+        'murkrow': {
+            order: indexOrder++,
+            token: 'murkrow',
+            name: 'Murkrow',
+            number: 198,
+            types: ['dark', 'flying'],
+            baseStats: {hp: 60, phAttack: 85, phDefense: 42, spAttack: 85, spDefense: 42, speed: 91},
+            abilities: {0: 'insomnia', 1: 'super-luck', hidden: 'prankster'},
+            height: 0.5,
+            weight: 2.1,
+            colors: ['black', 'yellow', 'red'],
+            evos: ['honchkrow'],
+            eggCycles: 20,
+            eggGroups: ['flying'],
+            },
+
         'slowking': {
             order: thisIndex.afterOrder('slowbro', 2),
             token: 'slowking',

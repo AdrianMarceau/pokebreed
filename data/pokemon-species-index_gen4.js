@@ -210,6 +210,22 @@
             prevEvolution: 'aipom'
             },
 
+        'honchkrow': {
+            order: thisIndex.afterOrder('murkrow'),
+            token: 'honchkrow',
+            name: 'Honchkrow',
+            number: 430,
+            types: ['dark', 'flying'],
+            baseStats: {hp: 100, phAttack: 125, phDefense: 52, spAttack: 105, spDefense: 52, speed: 71},
+            abilities: {0: 'insomnia', 1: 'super-luck', hidden: 'moxie'},
+            height: 0.9,
+            weight: 27.3,
+            colors: ['black', 'white', 'red', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['flying'],
+            prevEvolution: 'murkrow'
+            },
+
         'bonsly': {
             order: thisIndex.beforeOrder('sudowoodo'),
             token: 'bonsly',
@@ -542,6 +558,7 @@
     // Update previous gen pokemon with new next evolution data
     thisIndex.addNextEvolutions([
         {base: 'aipom', species: 'ambipom', method: 'evolution-move', value: 'double-hit', method2: 'type-surge', value2: 'normal'},
+        {base: 'murkrow', species: 'honchkrow', method: 'evolution-stone', value: 'dusk-stone', method2: 'type-appeal', value2: ['dark', 'flying']},
         {base: 'magneton', species: 'magnezone', method: 'evolution-location', value: 'magnetic-field', method2: 'type-surge', value2: ['electric', 'steel']},
         {base: 'lickitung', species: 'lickilicky', method: 'evolution-move', value: 'rollout', method2: 'type-surge', value2: ['normal', 'rock']},
         {base: 'rhydon', species: 'rhyperior', method: 'evolution-item', value: 'protector', method2: 'type-surge', value2: ['rock', 'ground']},
