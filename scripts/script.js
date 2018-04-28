@@ -342,6 +342,7 @@
         if (typeof info === 'undefined'){ info = {}; }
         var indexInfo = PokemonSpeciesIndex[token];
         var image = '';
+        var filter = '';
         var markup = '';
         if (egg){
             image = 'images/icons/eggs/'+indexInfo['types'][0]+'.png';
@@ -355,7 +356,9 @@
             if (typeof info['formToken'] !== 'undefined'){ image += indexInfo['number']+'-'+info['formToken']+'.png'; }
             else if (typeof indexInfo['formToken'] !== 'undefined'){ image += indexInfo['number']+'-'+indexInfo['formToken']+'.png'; }
             else { image += indexInfo['number']+'.png'; }
-            markup += '<img class="sprite" src="'+ image +'" data-token="'+ token +'" />';
+            if (typeof info.variantHueOffset !== 'undefined'){ filter += 'hue-rotate('+ info.variantHueOffset +'deg) '; }
+            if (typeof info.variantSatOffset !== 'undefined'){ filter += 'saturate('+ info.variantSatOffset +'%) '; }
+            markup += '<img class="sprite" '+ (filter.length ? 'style="filter: '+ filter +';"' : '') +' src="'+ image +'" data-token="'+ token +'" />';
             }
         return markup;
     }
@@ -571,6 +574,39 @@
             growthCycles: 0,
             reachedAdulthood: false,
             };
+
+        // Check to see if this pokemon should be a variant
+        var allowVariant = true;
+        if (pokemonToken === 'ditto' || pokemonToken === 'shiny-ditto'){ allowVariant = false; }
+        if (indexData.class === 'legendary' || indexData.class === 'mythical' || indexData.class === 'ultra-beast'){ allowVariant = false; }
+        if (allowVariant
+            && Math.random() >= 0.66){
+
+            // Use the max and min to define the hue offset
+            var minOffset = 0;
+            var maxOffset = 30;
+            if (Math.random() >= 0.88){ maxOffset += 30; }
+            if (Math.random() >= 0.99){ maxOffset += 30; }
+            var variantHueOffset = ((Math.random() * (maxOffset - minOffset)) + minOffset);
+            newPokemon.variantHueOffset = variantHueOffset;
+            if (typeof indexData.colors !== 'undefined'
+                && (indexData.colors[0] === 'yellow'
+                    || indexData.colors[0] === 'orange'
+                    || indexData.colors[0] === 'brown')){
+                    newPokemon.variantHueOffset *= -1;
+                    } else if (Math.random() >= 0.99){
+                    newPokemon.variantHueOffset *= -1;
+                    }
+
+            // Use the max and min to define the saturation offset
+            var minOffset = 60;
+            var maxOffset = 110;
+            if (Math.random() >= 0.88){ minOffset -= 10; maxOffset += 10; }
+            if (Math.random() >= 0.99){ minOffset -= 10; maxOffset += 10; }
+            var variantSatOffset = ((Math.random() * (maxOffset - minOffset)) + minOffset);
+            newPokemon.variantSatOffset = variantSatOffset;
+
+            }
 
         // If this pokemon has a randomized forme, decide it now
         if (typeof indexData['randomizeForms'] !== 'undefined'
