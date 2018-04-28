@@ -579,7 +579,10 @@
         var allowVariant = true;
         if (!isEgg){ allowVariant = false; }
         if (pokemonToken === 'ditto' || pokemonToken === 'shiny-ditto'){ allowVariant = false; }
-        if (indexData.class === 'legendary' || indexData.class === 'mythical' || indexData.class === 'ultra-beast'){ allowVariant = false; }
+        if ((indexData.class === 'legendary'
+            || indexData.class === 'mythical'
+            || indexData.class === 'ultra-beast')
+            && pokemonToken !== 'phione'){ allowVariant = false; }
         if (allowVariant
             && Math.random() >= 0.66){
 
