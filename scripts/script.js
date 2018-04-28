@@ -354,21 +354,21 @@
         var image = '';
         var filter = '';
         var markup = '';
+        if (typeof info.variantHueOffset !== 'undefined'){ filter += 'hue-rotate('+ info.variantHueOffset +'deg) '; }
+        if (typeof info.variantSatOffset !== 'undefined'){ filter += 'saturate('+ info.variantSatOffset +'%) '; }
         if (egg){
             image = 'images/icons/eggs/'+indexInfo['types'][0]+'.png';
-            markup += '<img class="sprite" src="'+ image +'" data-token="'+ token +'" />';
+            markup += '<img class="sprite"'+ (filter.length ? ' style="-webkit-filter: '+ filter +'; filter: '+ filter +';"' : '') +' src="'+ image +'" data-token="'+ token +'" />';
             if (typeof indexInfo['types'][1] === 'string'){
                 image = 'images/icons/eggs/'+indexInfo['types'][1]+'2.png';
-                markup += '<img class="sprite overlay" src="'+ image +'" data-token="'+ token +'" />';
+                markup += '<img class="sprite overlay"'+ (filter.length ? ' style="-webkit-filter: '+ filter +'; filter: '+ filter +';"' : '') +' src="'+ image +'" data-token="'+ token +'" />';
                 }
             } else {
             image = 'images/icons/pokemon/';
             if (typeof info['formToken'] !== 'undefined'){ image += indexInfo['number']+'-'+info['formToken']+'.png'; }
             else if (typeof indexInfo['formToken'] !== 'undefined'){ image += indexInfo['number']+'-'+indexInfo['formToken']+'.png'; }
             else { image += indexInfo['number']+'.png'; }
-            if (typeof info.variantHueOffset !== 'undefined'){ filter += 'hue-rotate('+ info.variantHueOffset +'deg) '; }
-            if (typeof info.variantSatOffset !== 'undefined'){ filter += 'saturate('+ info.variantSatOffset +'%) '; }
-            markup += '<img class="sprite" '+ (filter.length ? 'style="-webkit-filter: '+ filter +'; filter: '+ filter +';"' : '') +' src="'+ image +'" data-token="'+ token +'" />';
+            markup += '<img class="sprite"'+ (filter.length ? ' style="-webkit-filter: '+ filter +'; filter: '+ filter +';"' : '') +' src="'+ image +'" data-token="'+ token +'" />';
             }
         return markup;
     }
