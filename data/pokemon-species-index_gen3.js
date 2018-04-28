@@ -484,6 +484,12 @@
         });
     thisIndex.indexOrder = indexOrder;
 
+    // Update previous gen pokemon with new possible form data
+    thisIndex.addPossibleForms([
+        {base: 'unown', form: 'exclamation'},
+        {base: 'unown', form: 'question'},
+        ]);
+
     // Update previous gen pokemon with new prev evolution data
     thisIndex.addPrevEvolutions([
         {base: 'marill', species: 'azurill'},

@@ -893,7 +893,25 @@
             eggGroups: ['amorphous'],
             },
 
-        /* -- { #201 Unown ... } -- */
+        'unown': {
+            order: indexOrder++,
+            token: 'unown',
+            name: 'Unown',
+            number: 201,
+            formClass: 'random-variant',
+            possibleForms: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
+            randomizeForms: true,
+            baseForme: 'a',
+            types: ['psychic'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 48, phAttack: 72, phDefense: 48, spAttack: 72, spDefense: 48, speed: 48},
+            abilities: {0: 'levitate'},
+            height: 0.5,
+            weight: 5,
+            colors: ['black', 'white'],
+            eggCycles: 40,
+            eggGroups: ['undiscovered']
+            },
 
         'wobbuffet': {
             order: indexOrder++,
