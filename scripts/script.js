@@ -584,29 +584,27 @@
             || indexData.class === 'ultra-beast')
             && pokemonToken !== 'phione'){ allowVariant = false; }
         if (allowVariant
-            && Math.random() >= 0.66){
+            && Math.random() >= 0.75){
 
             // Use the max and min to define the hue offset
+            var randNum = Math.random();
             var minOffset = 0;
             var maxOffset = 30;
-            if (Math.random() >= 0.88){ maxOffset += 30; }
-            if (Math.random() >= 0.99){ maxOffset += 30; }
+            if (randNum >= 0.77){ maxOffset += 20; }
+            if (randNum >= 0.88){ maxOffset += 20; }
+            if (randNum >= 0.99){ maxOffset += 20; }
             var variantHueOffset = Math.ceil((Math.random() * (maxOffset - minOffset)) + minOffset);
-            newPokemon.variantHueOffset = variantHueOffset;
-            if (typeof indexData.colors !== 'undefined'
-                && (indexData.colors[0] === 'yellow'
-                    || indexData.colors[0] === 'orange'
-                    || indexData.colors[0] === 'brown')){
-                    newPokemon.variantHueOffset *= -1;
-                    } else if (Math.random() >= 0.99){
-                    newPokemon.variantHueOffset *= -1;
-                    }
+            newPokemon.variantHueOffset = variantHueOffset * -1;
+            var randNum = Math.random();
+            if (randNum >= 0.99){ newPokemon.variantHueOffset *= -1; }
 
             // Use the max and min to define the saturation offset
+            var randNum = Math.random();
             var minOffset = 60;
             var maxOffset = 110;
-            if (Math.random() >= 0.88){ minOffset -= 10; maxOffset += 10; }
-            if (Math.random() >= 0.99){ minOffset -= 10; maxOffset += 10; }
+            if (randNum >= 0.77){ minOffset -= 10; maxOffset += 10; }
+            if (randNum >= 0.88){ minOffset -= 10; maxOffset += 10; }
+            if (randNum >= 0.99){ minOffset -= 30; }
             var variantSatOffset = Math.ceil((Math.random() * (maxOffset - minOffset)) + minOffset);
             newPokemon.variantSatOffset = variantSatOffset;
 
