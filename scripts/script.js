@@ -586,28 +586,58 @@
             && pokemonToken !== 'phione'){ allowVariant = false; }
         if (allowVariant
             && Math.random() >= 0.75){
+            //console.log('allowVariant for '+ pokemonToken +'! ');
 
             // Use the max and min to define the hue offset
+            //console.log('|- Randomize the hue offset...');
             var randNum = Math.random();
             var minOffset = 0;
             var maxOffset = 30;
-            if (randNum >= 0.77){ maxOffset += 20; }
-            if (randNum >= 0.88){ maxOffset += 20; }
-            if (randNum >= 0.99){ maxOffset += 20; }
+            //console.log('|-- randNum = '+ randNum +' | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
+            if (randNum >= 0.75){
+                maxOffset += 20;
+                //console.log('|-- randNum >= 0.75 | maxOffset += 20 | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
+                }
+            if (randNum >= 0.85){
+                maxOffset += 20;
+                //console.log('|-- randNum >= 0.85 | maxOffset += 20 | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
+                }
+            if (randNum >= 0.95){
+                maxOffset += 20;
+                //console.log('|-- randNum >= 0.95 | maxOffset += 20 | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
+                }
             var variantHueOffset = Math.ceil((Math.random() * (maxOffset - minOffset)) + minOffset);
             newPokemon.variantHueOffset = variantHueOffset * -1;
+            //console.log('|- set the variantHueOffset = ', newPokemon.variantHueOffset);
             var randNum = Math.random();
-            if (randNum >= 0.99){ newPokemon.variantHueOffset *= -1; }
+            //console.log('|- randNum = '+ randNum +' | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
+            if (randNum >= 0.90){
+                //console.log('|- invert the variantHueOffset = ', newPokemon.variantHueOffset, newPokemon.variantHueOffset * -1);
+                newPokemon.variantHueOffset *= -1;
+                }
 
             // Use the max and min to define the saturation offset
             var randNum = Math.random();
             var minOffset = 60;
             var maxOffset = 110;
-            if (randNum >= 0.77){ minOffset -= 10; maxOffset += 10; }
-            if (randNum >= 0.88){ minOffset -= 10; maxOffset += 10; }
-            if (randNum >= 0.99){ minOffset -= 30; }
+            //console.log('|-- randNum = '+ randNum +' | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
+            if (randNum >= 0.75){
+                minOffset -= 10;
+                maxOffset += 10;
+                //console.log('|-- randNum >= 0.75 | minOffset -= 10 && maxOffset += 10 | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
+                }
+            if (randNum >= 0.85){
+                minOffset -= 10;
+                maxOffset += 10;
+                //console.log('|-- randNum >= 0.85 | minOffset -= 10 && maxOffset += 10 | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
+                }
+            if (randNum >= 0.95){
+                minOffset -= 30;
+                //console.log('|-- randNum >= 0.95 | minOffset -= 30 | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
+                }
             var variantSatOffset = Math.ceil((Math.random() * (maxOffset - minOffset)) + minOffset);
             newPokemon.variantSatOffset = variantSatOffset;
+            //console.log('|- set the variantSatOffset = ', newPokemon.variantSatOffset);
 
             }
 
@@ -1974,36 +2004,6 @@
                     if (thisZoneData.currentPokemon.length >= thisZoneData.capacity){ break; }
                     }
                 }
-
-            /*
-            while ((eggsAddedCount < eggsToAddCount)
-                && (thisZoneData.currentPokemon.length < thisZoneData.capacity)){
-                //console.log('(eggsAddedCount('+eggsAddedCount+') < eggsToAddCount('+eggsToAddCount+')) && (thisZoneData.currentPokemon.length('+thisZoneData.currentPokemon.length+') < thisZoneData.capacity('+thisZoneData.capacity+'))');
-                //console.log('eggsToAddIndex = ', eggsToAddIndex);
-                for (var key = 0; key < eggsToAddIndexTokens.length; key++){
-                    var pokeToken = eggsToAddIndexTokens[key];
-                    //console.log('eggsToAddIndex[pokeToken] = ', pokeToken, eggsToAddIndex[pokeToken]);
-                    if (eggsToAddIndex[pokeToken] > 0){
-                        if (existingShinyDitto > 0){ addPokemonToZone(pokeToken, true, existingShinyDitto); }
-                        else { addPokemonToZone(pokeToken, true); }
-                        eggsAddedCount++;
-                        zoneCapacityPercent = ((thisZoneData.currentPokemon.length / thisZoneData.capacity) * 100);
-                        zoneIsOvercrowded = zoneCapacityPercent >= 90 ? true : false;
-                        //console.log('zoneCapacityPercent = ', zoneCapacityPercent);
-                        //console.log('zoneIsOvercrowded = ', zoneIsOvercrowded);
-                        if (zoneIsOvercrowded){ eggsToAddIndex[pokeToken] = 0; }
-                        else { eggsToAddIndex[pokeToken] -= 1; }
-                        if (eggsToAddIndex[pokeToken] == 0){
-                            delete eggsToAddIndex[pokeToken];
-                            }
-                        }
-                    if (jQuery.isEmptyObject(eggsToAddIndex)){ break; }
-                    if (thisZoneData.currentPokemon.length >= thisZoneData.capacity){ break; }
-                    }
-                if (jQuery.isEmptyObject(eggsToAddIndex)){ break; }
-                if (thisZoneData.currentPokemon.length >= thisZoneData.capacity){ break; }
-                }
-                */
 
         }
 
