@@ -358,7 +358,7 @@
             else { image += indexInfo['number']+'.png'; }
             if (typeof info.variantHueOffset !== 'undefined'){ filter += 'hue-rotate('+ info.variantHueOffset +'deg) '; }
             if (typeof info.variantSatOffset !== 'undefined'){ filter += 'saturate('+ info.variantSatOffset +'%) '; }
-            markup += '<img class="sprite" '+ (filter.length ? 'style="filter: '+ filter +';"' : '') +' src="'+ image +'" data-token="'+ token +'" />';
+            markup += '<img class="sprite" '+ (filter.length ? 'style="-webkit-filter: '+ filter +'; filter: '+ filter +';"' : '') +' src="'+ image +'" data-token="'+ token +'" />';
             }
         return markup;
     }
