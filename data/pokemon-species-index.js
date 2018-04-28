@@ -102,6 +102,18 @@
             }
     }
 
+    // Define a function for adding possible form data to a given species
+    function addPossibleForm(possibleForm){
+        //console.log('addPossibleForm(possibleForm)', possibleForm);
+        if (typeof possibleForm.base !== 'undefined'
+            && typeof PokemonSpeciesIndex.indexList[possibleForm.base] !== 'undefined'){
+            var basePokemon = PokemonSpeciesIndex.indexList[possibleForm.base];
+            if (typeof basePokemon.possibleForms === 'undefined'){ basePokemon.possibleForms = []; }
+            basePokemon.possibleForms.push(possibleForm.form);
+            //console.log('|- basePokemon = ', basePokemon);
+            }
+    }
+
 
     // Define a function for adding gender ratio data to a list of given species
     function addGenderRatios(genderRatios){
@@ -144,6 +156,14 @@
             }
     }
 
+    // Define a function for adding possible form data to a list of given species
+    function addPossibleForms(possibleForms){
+        //console.log('addPossibleForms(possibleForms)', possibleForms);
+        for (var key = 0; key < possibleForms.length; key++){
+            addPossibleForm(possibleForms[key]);
+            }
+    }
+
 
     // Define a function for getting the prev order value before an existing species
     function beforeOrder(baseSpecies, orderIncrement){
@@ -174,12 +194,14 @@
     PokemonSpeciesIndex.addNextEvolution = addNextEvolution;
     PokemonSpeciesIndex.addEggPartner = addEggPartner;
     PokemonSpeciesIndex.addAltBaseEvolution = addAltBaseEvolution;
+    PokemonSpeciesIndex.addPossibleForm = addPossibleForm;
 
     PokemonSpeciesIndex.addGenderRatios = addGenderRatios;
     PokemonSpeciesIndex.addPrevEvolutions = addPrevEvolutions;
     PokemonSpeciesIndex.addNextEvolutions = addNextEvolutions;
     PokemonSpeciesIndex.addEggPartners = addEggPartners;
     PokemonSpeciesIndex.addAltBaseEvolutions = addAltBaseEvolutions;
+    PokemonSpeciesIndex.addPossibleForms = addPossibleForms;
 
     PokemonSpeciesIndex.beforeOrder = beforeOrder;
     PokemonSpeciesIndex.afterOrder = afterOrder;
