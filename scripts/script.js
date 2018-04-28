@@ -577,6 +577,7 @@
 
         // Check to see if this pokemon should be a variant
         var allowVariant = true;
+        if (!isEgg){ allowVariant = false; }
         if (pokemonToken === 'ditto' || pokemonToken === 'shiny-ditto'){ allowVariant = false; }
         if (indexData.class === 'legendary' || indexData.class === 'mythical' || indexData.class === 'ultra-beast'){ allowVariant = false; }
         if (allowVariant
