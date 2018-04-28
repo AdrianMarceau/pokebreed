@@ -1122,6 +1122,21 @@
             eggGroups: ['bug']
             },
 
+        'sneasel': {
+            order: indexOrder++,
+            token: 'sneasel',
+            name: 'Sneasel',
+            number: 215,
+            types: ['dark', 'ice'],
+            baseStats: {hp: 55, phAttack: 95, phDefense: 55, spAttack: 35, spDefense: 75, speed: 115},
+            abilities: {0: 'inner-focus', 1: 'keen-eye', hidden: 'pickpocket'},
+            height: 0.9,
+            weight: 28,
+            colors: ['black', 'blue', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field']
+            },
+
         'skarmory': {
             order: indexOrder++,
             token: 'skarmory',

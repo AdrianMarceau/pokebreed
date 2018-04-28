@@ -333,6 +333,22 @@
                 }]
             },
 
+        'weavile': {
+            order: thisIndex.afterOrder('sneasel'),
+            token: 'weavile',
+            name: 'Weavile',
+            number: 461,
+            types: ['dark', 'ice'],
+            baseStats: {hp: 70, phAttack: 120, phDefense: 65, spAttack: 45, spDefense: 85, speed: 125},
+            abilities: {0: 'pressure', hidden: 'pickpocket'},
+            height: 1.1,
+            weight: 34,
+            colors: ['black', 'gray', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'sneasel'
+            },
+
         'magnezone': {
             order: thisIndex.afterOrder('magneton'),
             token: 'magnezone',
@@ -590,6 +606,7 @@
         {base: 'aipom', species: 'ambipom', method: 'evolution-move', value: 'double-hit', method2: 'type-surge', value2: 'normal'},
         {base: 'misdreavus', species: 'mismagius', method: 'evolution-stone', value: 'dusk-stone', method2: 'type-appeal', value2: ['ghost']},
         {base: 'murkrow', species: 'honchkrow', method: 'evolution-stone', value: 'dusk-stone', method2: 'type-appeal', value2: ['dark', 'flying']},
+        {base: 'sneasel', species: 'weavile', method: 'evolution-item', value: 'razor-claw', method2: 'type-surge', value2: ['dark', 'ice']},
         {base: 'magneton', species: 'magnezone', method: 'evolution-location', value: 'magnetic-field', method2: 'type-surge', value2: ['electric', 'steel']},
         {base: 'lickitung', species: 'lickilicky', method: 'evolution-move', value: 'rollout', method2: 'type-surge', value2: ['normal', 'rock']},
         {base: 'rhydon', species: 'rhyperior', method: 'evolution-item', value: 'protector', method2: 'type-surge', value2: ['rock', 'ground']},
