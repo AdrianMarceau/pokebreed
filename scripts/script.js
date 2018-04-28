@@ -588,7 +588,7 @@
             var maxOffset = 30;
             if (Math.random() >= 0.88){ maxOffset += 30; }
             if (Math.random() >= 0.99){ maxOffset += 30; }
-            var variantHueOffset = ((Math.random() * (maxOffset - minOffset)) + minOffset);
+            var variantHueOffset = Math.ceil((Math.random() * (maxOffset - minOffset)) + minOffset);
             newPokemon.variantHueOffset = variantHueOffset;
             if (typeof indexData.colors !== 'undefined'
                 && (indexData.colors[0] === 'yellow'
@@ -604,7 +604,7 @@
             var maxOffset = 110;
             if (Math.random() >= 0.88){ minOffset -= 10; maxOffset += 10; }
             if (Math.random() >= 0.99){ minOffset -= 10; maxOffset += 10; }
-            var variantSatOffset = ((Math.random() * (maxOffset - minOffset)) + minOffset);
+            var variantSatOffset = Math.ceil((Math.random() * (maxOffset - minOffset)) + minOffset);
             newPokemon.variantSatOffset = variantSatOffset;
 
             }
