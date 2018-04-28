@@ -471,7 +471,6 @@
             height: 0.6,
             weight: 14,
             colors: ['blue', 'black', 'pink', 'white'],
-            evos: ['wobbuffet'],
             eggCycles: 20,
             eggGroups: ['undiscovered'],
             nextEvolutions: [{

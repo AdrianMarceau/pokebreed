@@ -1092,6 +1092,21 @@
             prevEvolution: 'scyther'
             },
 
+        'shuckle': {
+            order: indexOrder++,
+            token: 'shuckle',
+            name: 'Shuckle',
+            number: 213,
+            types: ['bug', 'rock'],
+            baseStats: {hp: 20, phAttack: 10, phDefense: 230, spAttack: 10, spDefense: 230, speed: 5},
+            abilities: {0: 'sturdy', 1: 'gluttony', hidden: 'contrary'},
+            height: 0.6,
+            weight: 20.5,
+            colors: ['yellow', 'red', 'white'],
+            eggCycles: 20,
+            eggGroups: ['bug'],
+            },
+
         'skarmory': {
             order: indexOrder++,
             token: 'skarmory',
