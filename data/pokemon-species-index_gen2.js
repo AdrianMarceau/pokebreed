@@ -1024,6 +1024,43 @@
             prevEvolution: 'onix'
             },
 
+        'snubbull': {
+            order: indexOrder++,
+            token: 'snubbull',
+            name: 'Snubbull',
+            number: 209,
+            types: ['fairy'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 60, phAttack: 80, phDefense: 50, spAttack: 40, spDefense: 40, speed: 30},
+            abilities: {0: 'intimidate', 1: 'run-away', hidden: 'rattled'},
+            height: 0.6,
+            weight: 7.8,
+            colors: ['pink', 'black', 'blue', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['field', 'fairy'],
+            nextEvolutions: [{
+                species: 'granbull',
+                method: 'level-up',
+                value: 23
+                }]
+            },
+        'granbull': {
+            order: indexOrder++,
+            token: 'granbull',
+            name: 'Granbull',
+            number: 210,
+            types: ['fairy'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 90, phAttack: 120, phDefense: 75, spAttack: 60, spDefense: 60, speed: 45},
+            abilities: {0: 'intimidate', 1: 'quick-feet', hidden: 'rattled'},
+            height: 1.4,
+            weight: 48.7,
+            colors: ['purple', 'black', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['field', 'fairy'],
+            prevEvolution: 'snubbull'
+            },
+
         'scizor': {
             order: thisIndex.afterOrder('scyther'),
             token: 'scizor',
