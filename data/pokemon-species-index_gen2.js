@@ -1107,6 +1107,21 @@
             eggGroups: ['bug'],
             },
 
+        'heracross': {
+            order: indexOrder++,
+            token: 'heracross',
+            name: 'Heracross',
+            number: 214,
+            types: ['bug', 'fighting'],
+            baseStats: {hp: 80, phAttack: 125, phDefense: 75, spAttack: 40, spDefense: 95, speed: 85},
+            abilities: {0: 'swarm', 1: 'guts', hidden: 'moxie'},
+            height: 1.5,
+            weight: 54,
+            colors: ['blue', 'yellow'],
+            eggCycles: 25,
+            eggGroups: ['bug']
+            },
+
         'skarmory': {
             order: indexOrder++,
             token: 'skarmory',

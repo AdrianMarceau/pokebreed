@@ -837,6 +837,25 @@
             prevEvolution: 'mewtwo'
             },
 
+        'mega-heracross': {
+            order: thisIndex.afterOrder('heracross'),
+            token: 'mega-heracross',
+            name: 'Mega Heracross',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'heracross',
+            number: 214,
+            types: ['bug', 'fighting'],
+            baseStats: {hp: 80, phAttack: 185, phDefense: 115, spAttack: 40, spDefense: 105, speed: 75},
+            abilities: {0: 'skill-link'},
+            height: 1.7,
+            weight: 62.5,
+            colors: ['blue', 'red', 'yellow'],
+            eggCycles: 25,
+            eggGroups: ['bug'],
+            prevEvolution: 'heracross'
+            },
+
         'mega-sceptile': {
             order: thisIndex.afterOrder('sceptile'),
             token: 'mega-sceptile',
@@ -924,6 +943,8 @@
 
         {base: 'mewtwo', species: 'mega-mewtwo-x', method: 'mega-evolution', value: 'mewtwonite-x', method2: 'type-appeal', value2: 'fighting'},
         {base: 'mewtwo', species: 'mega-mewtwo-y', method: 'mega-evolution', value: 'mewtwonite-y', method2: 'type-appeal', value2: 'psychic'},
+
+        {base: 'heracross', species: 'mega-heracross', method: 'mega-evolution', value: 'heracronite'},
 
         {base: 'sceptile', species: 'mega-sceptile', method: 'mega-evolution', value: 'sceptilite'},
         {base: 'blaziken', species: 'mega-blaziken', method: 'mega-evolution', value: 'blazikenite'},
