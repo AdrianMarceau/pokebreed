@@ -571,8 +571,9 @@
             token: pokemonToken,
             types: indexData.types,
             eggCycles: eggCycles,
+            daysOld: 0,
             growthCycles: 0,
-            reachedAdulthood: false,
+            reachedAdulthood: false
             };
 
         // Check to see if this pokemon should be a variant
@@ -821,6 +822,7 @@
                     var pokeCount = '<span class="count growth">+'+pokeInfo.growthCycles+'</span>';
                     var itemClass = 'pokemon ';
                     if (pokeInfo.reachedAdulthood === true){ itemClass += 'adult '; }
+                    if (pokeInfo.reachedAdulthood === true && pokeInfo.growthCycles <= 0){ itemClass += 'fainted '; }
                     if (pokeInfo.watchFlag === true){ itemClass += 'watched '; }
                     pokeListMarkup += '<li class="'+ itemClass +'" data-id="'+ pokeInfo.id +'">'+ pokeIcon + pokeCount + '</li>';
 
@@ -831,6 +833,7 @@
                     var pokeCount = '<span class="count egg">-'+pokeInfo.eggCycles+'</span>';
                     var itemClass = 'egg ';
                     if (pokeInfo.watchFlag === true){ itemClass += 'watched '; }
+                    if (pokeInfo.daysOld == 0){ itemClass += 'new '; }
                     pokeListMarkup += '<li class="'+ itemClass +'" data-id="'+ pokeInfo.id +'">'+ pokeIcon + pokeCount + '</li>';
 
                     }
@@ -1361,14 +1364,15 @@
                 var indexInfo = PokemonSpeciesIndex[pokemonInfo.token];
                 //console.log('-----\nChecking evolution data for ' + pokemonInfo.token, pokemonInfo, indexInfo);
 
+                // Always increment the days old, even in egg form
+                pokemonInfo.daysOld += 1;
+
                 // If pokemon is still an egg, skip growth cycles for now
                 if (pokemonInfo.eggCycles > 0){ continue; }
 
                 // Only increment growth cycles if still growing, else start decrementing
                 if (pokemonInfo.reachedAdulthood === false){
                     pokemonInfo.growthCycles += 1;
-                    } else if (pokemonInfo.reachedAdulthood === true){
-                    pokemonInfo.growthCycles -= Math.ceil(indexInfo.lifePoints * 0.10);
                     }
 
                 // If this Pokemon has any evolutions, check to see if should be triggered
@@ -1685,6 +1689,11 @@
 
                     }
 
+                // If this pokemon has reached adulthood, every day they loose a little growth
+                if (pokemonInfo.reachedAdulthood === true){
+                    pokemonInfo.growthCycles -= Math.ceil(indexInfo.lifePoints * 0.10);
+                    }
+
                 }
             }
 
@@ -1940,6 +1949,33 @@
             //console.log('----------\nLoop through through and generate required eggs...');
             var eggsAddedCount = 0;
             var eggsToAddIndexTokens = !jQuery.isEmptyObject(eggsToAddIndex) ? Object.keys(eggsToAddIndex) : [];
+            if ((eggsAddedCount < eggsToAddCount)
+                && (thisZoneData.currentPokemon.length < thisZoneData.capacity)){
+                //console.log('(eggsAddedCount('+eggsAddedCount+') < eggsToAddCount('+eggsToAddCount+')) && (thisZoneData.currentPokemon.length('+thisZoneData.currentPokemon.length+') < thisZoneData.capacity('+thisZoneData.capacity+'))');
+                //console.log('eggsToAddIndex = ', eggsToAddIndex);
+                for (var key = 0; key < eggsToAddIndexTokens.length; key++){
+                    var pokeToken = eggsToAddIndexTokens[key];
+                    //console.log('eggsToAddIndex[pokeToken] = ', pokeToken, eggsToAddIndex[pokeToken]);
+                    if (eggsToAddIndex[pokeToken] > 0){
+                        if (existingShinyDitto > 0){ addPokemonToZone(pokeToken, true, existingShinyDitto); }
+                        else { addPokemonToZone(pokeToken, true); }
+                        eggsAddedCount++;
+                        zoneCapacityPercent = ((thisZoneData.currentPokemon.length / thisZoneData.capacity) * 100);
+                        zoneIsOvercrowded = zoneCapacityPercent >= 90 ? true : false;
+                        //console.log('zoneCapacityPercent = ', zoneCapacityPercent);
+                        //console.log('zoneIsOvercrowded = ', zoneIsOvercrowded);
+                        if (zoneIsOvercrowded){ eggsToAddIndex[pokeToken] = 0; }
+                        else { eggsToAddIndex[pokeToken] -= 1; }
+                        if (eggsToAddIndex[pokeToken] == 0){
+                            delete eggsToAddIndex[pokeToken];
+                            }
+                        }
+                    if (jQuery.isEmptyObject(eggsToAddIndex)){ break; }
+                    if (thisZoneData.currentPokemon.length >= thisZoneData.capacity){ break; }
+                    }
+                }
+
+            /*
             while ((eggsAddedCount < eggsToAddCount)
                 && (thisZoneData.currentPokemon.length < thisZoneData.capacity)){
                 //console.log('(eggsAddedCount('+eggsAddedCount+') < eggsToAddCount('+eggsToAddCount+')) && (thisZoneData.currentPokemon.length('+thisZoneData.currentPokemon.length+') < thisZoneData.capacity('+thisZoneData.capacity+'))');
@@ -1967,6 +2003,7 @@
                 if (jQuery.isEmptyObject(eggsToAddIndex)){ break; }
                 if (thisZoneData.currentPokemon.length >= thisZoneData.capacity){ break; }
                 }
+                */
 
         }
 
