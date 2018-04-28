@@ -11,6 +11,7 @@
 
     var PokemonSpeciesIndex = {};
     var PokemonSpeciesIndexTokens = [];
+    var PokemonSpeciesDisplayOrder = [];
     var PokemonTypesIndex = {};
     var PokemonTypesIndexTokens = [];
 
@@ -203,7 +204,11 @@
     function optimizeIndexes(){
         $pokePanelLoading.append('.'); // append loading dot
         if (PokemonSpeciesIndexTokens.length){
+
+            // Define possible genders to loop through
             var possibleGenders = ['male', 'female', 'none'];
+
+            // Loop through individual species and pre-generate certain attributes
             for (var key = 0; key < PokemonSpeciesIndexTokens.length; key++){
                 var token = PokemonSpeciesIndexTokens[key];
 
@@ -235,7 +240,69 @@
                     indexInfo.hasEggPartner = true;
                     }
 
+                // Add a reference to this pokemon's base evolution
+                indexInfo.baseEvolution = pokemonGetBaseEvolution(indexInfo.token, true, false);
+
                 }
+
+            // Create a sorted list of pokemon species tokens so we don't have to later
+            for (var key = 0; key < PokemonSpeciesIndexTokens.length; key++){
+                var token = PokemonSpeciesIndexTokens[key];
+                PokemonSpeciesDisplayOrder.push(token);
+                }
+            PokemonSpeciesDisplayOrder.sort(function(tokenA, tokenB){
+
+                var infoA = PokemonSpeciesIndex[tokenA];
+                var infoB = PokemonSpeciesIndex[tokenB];
+
+                var baseInfoA = PokemonSpeciesIndex[infoA.baseEvolution];
+                var baseInfoB = PokemonSpeciesIndex[infoB.baseEvolution];
+
+                var dittoA = false;
+                var dittoB = false;
+                if (tokenA === 'ditto'){ dittoA = true; }
+                if (tokenB === 'ditto'){ dittoB = true; }
+
+                var shinyDittoA = false;
+                var shinyDittoB = false;
+                if (tokenA === 'shiny-ditto'){ shinyDittoA = true; }
+                if (tokenB === 'shiny-ditto'){ shinyDittoB = true; }
+
+                var unownA = false;
+                var unownB = false;
+                if (tokenA === 'unown'){ unownA = true; }
+                if (tokenB === 'unown'){ unownB = true; }
+
+                var specialA = false;
+                var specialB = false;
+                if (infoA['class'] === 'legendary' || infoA['class'] === 'mythical' || infoA['class'] === 'ultra-beast'){ specialA = true; }
+                if (infoB['class'] === 'legendary' || infoB['class'] === 'mythical' || infoB['class'] === 'ultra-beast'){ specialB = true; }
+
+                if (false){ return 0; }
+
+                else if (dittoA && !dittoB){ return -1; }
+                else if (!dittoA && dittoB){ return 1; }
+
+                else if (shinyDittoA && !shinyDittoB){ return -1; }
+                else if (!shinyDittoA && shinyDittoB){ return 1; }
+
+                else if (specialA && !specialB){ return 1; }
+                else if (!specialA && specialB){ return -1; }
+
+                else if (unownA && !unownB){ return 1; }
+                else if (!unownA && unownB){ return -1; }
+
+                else if (baseInfoA['number'] < baseInfoB['number']){ return -1; }
+                else if (baseInfoA['number'] > baseInfoB['number']){ return 1; }
+
+                else if (infoA['order'] > infoB['order']){ return -1; }
+                else if (infoA['order'] < infoB['order']){ return 1; }
+
+                else { return 0; }
+
+                });
+            //console.log('PokemonSpeciesDisplayOrder = ', PokemonSpeciesDisplayOrder);
+
             }
     }
 
@@ -423,44 +490,11 @@
 
         // Sort allowed pokemon by a few criteria
         allBasicPokemon.sort(function(tokenA, tokenB){
-
-            var infoA = PokemonSpeciesIndex[tokenA];
-            var infoB = PokemonSpeciesIndex[tokenB];
-
-            var dittoA = false;
-            var dittoB = false;
-            if (tokenA === 'ditto' || tokenA === 'shiny-ditto'){ dittoA = true; }
-            if (tokenB === 'ditto' || tokenB === 'shiny-ditto'){ dittoB = true; }
-
-            var unownA = false;
-            var unownB = false;
-            if (tokenA === 'unown'){ unownA = true; }
-            if (tokenB === 'unown'){ unownB = true; }
-
-            var specialA = false;
-            var specialB = false;
-            if (infoA['class'] === 'legendary' || infoA['class'] === 'mythical' || infoA['class'] === 'ultra-beast'){ specialA = true; }
-            if (infoB['class'] === 'legendary' || infoB['class'] === 'mythical' || infoB['class'] === 'ultra-beast'){ specialB = true; }
-
-            if (false){ return 0; }
-
-            else if (dittoA && !dittoB){ return -1; }
-            else if (!dittoA && dittoB){ return 1; }
-
-            else if (specialA && !specialB){ return 1; }
-            else if (!specialA && specialB){ return -1; }
-
-            else if (unownA && !unownB){ return 1; }
-            else if (!unownA && unownB){ return -1; }
-
-            else if (infoA['number'] < infoB['number']){ return -1; }
-            else if (infoA['number'] > infoB['number']){ return 1; }
-
-            else if (infoA['order'] < infoB['order']){ return -1; }
-            else if (infoA['order'] > infoB['order']){ return 1; }
-
+            var orderA = PokemonSpeciesDisplayOrder.indexOf(tokenA);
+            var orderB = PokemonSpeciesDisplayOrder.indexOf(tokenB);
+            if (orderA < orderB){ return -1; }
+            else if (orderA > orderB){ return 1; }
             else { return 0; }
-
             });
 
         // Loop through and generate buttons for each Pokemon
@@ -721,21 +755,15 @@
                 }
             }
         pokemonMatches.sort(function(pokeA, pokeB){
-
-            if (pokeA.token === 'ditto' && pokeB.token !== 'ditto'){ return -1; }
-            else if (pokeA.token !== 'ditto' && pokeB.token === 'ditto'){ return 1; }
-
-            else if (pokeA.token === 'shiny-ditto' && pokeB.token !== 'shiny-ditto'){ return -1; }
-            else if (pokeA.token !== 'shiny-ditto' && pokeB.token === 'shiny-ditto'){ return 1; }
-
-            else if (pokeA.eggCycles < pokeB.eggCycles){ return -1; }
-            else if (pokeA.eggCycles > pokeB.eggCycles){ return 1; }
-
-            else if (pokeA.order < pokeB.order){ return -1; }
-            else if (pokeA.order > pokeB.order){ return 1; }
-
+            var eggA = pokeA.eggCycles > 0 ? true : false;
+            var eggB = pokeB.eggCycles > 0 ? true : false;
+            var orderA = PokemonSpeciesDisplayOrder.indexOf(pokeA.token);
+            var orderB = PokemonSpeciesDisplayOrder.indexOf(pokeB.token);
+            if (!eggA && eggB){ return -1; }
+            else if (eggA && !eggB){ return 1; }
+            else if (orderA < orderB){ return -1; }
+            else if (orderA > orderB){ return 1; }
             else { return 0; }
-
             });
         return pokemonMatches;
     }
@@ -835,7 +863,7 @@
         //console.log('pokeSpecies(All) = ', pokeSpeciesActive);
 
         // Sort collected species tokens to keep things together
-        var sortedSpeciesTokens = sortSpeciesTokensByOrder(Object.keys(pokeSpecies), true);
+        var sortedSpeciesTokens = sortSpeciesTokensByOrder(Object.keys(pokeSpecies));
         //if (simulationStarted){ var sortedSpeciesTokens = sortSpeciesTokensByOrder(Object.keys(pokeSpecies), true); }
         //else { var sortedSpeciesTokens = Object.keys(pokeSpecies); }
 
@@ -851,6 +879,7 @@
         for (var key = 0; key < sortedSpeciesTokens.length; key++){
             var token = sortedSpeciesTokens[key];
             var pokeList = getZonePokemonByToken(token);
+            //console.log('pokeList = ', pokeList);
             for (var key2 = 0; key2 < pokeList.length; key2++){
                 var pokeInfo = pokeList[key2];
 
@@ -2176,29 +2205,12 @@
     // Define a function for sorting species token by index order
     function sortSpeciesTokensByOrder(speciesTokens, reverseOrder){
         speciesTokens.sort(function(tokenA, tokenB){
-            var indexA = PokemonSpeciesIndex[tokenA];
-            var indexB = PokemonSpeciesIndex[tokenB];
-            var indexOrderA = indexA['order'];
-            var indexOrderB = indexB['order'];
+            var orderA = PokemonSpeciesDisplayOrder.indexOf(tokenA);
+            var orderB = PokemonSpeciesDisplayOrder.indexOf(tokenB);
             var reverse = reverseOrder ? -1 : 1;
-
-            if (tokenA !== 'ditto' && tokenB === 'ditto'){ return -1 * reverse; }
-            else if (tokenA === 'ditto' && tokenB !== 'ditto'){ return 1 * reverse; }
-
-            else if (tokenA !== 'shiny-ditto' && tokenB === 'shiny-ditto'){ return -1 * reverse; }
-            else if (tokenA === 'shiny-ditto' && tokenB !== 'shiny-ditto'){ return 1 * reverse; }
-
-            else if (indexA.class === 'mythical' && indexB.class !== 'mythical'){ return -1 * reverse; }
-            else if (indexA.class !== 'mythical' && indexB.class === 'mythical'){ return 1 * reverse; }
-
-            else if (indexA.class === 'legendary' && indexB.class !== 'legendary'){ return -1 * reverse; }
-            else if (indexA.class !== 'legendary' && indexB.class === 'legendary'){ return 1 * reverse; }
-
-            else if (indexOrderA < indexOrderB){ return -1 * reverse; }
-            else if (indexOrderA > indexOrderB){ return 1 * reverse; }
-
+            if (orderA < orderB){ return -1 * reverse; }
+            else if (orderA > orderB){ return 1 * reverse; }
             else { return 0; }
-
             });
         return speciesTokens;
     }
@@ -2208,15 +2220,10 @@
         speciesTokens.sort(function(tokenA, tokenB){
             var indexNumA = PokemonSpeciesIndex[tokenA]['number'];
             var indexNumB = PokemonSpeciesIndex[tokenB]['number'];
-            if (!reverseOrder){
-                if (indexNumA < indexNumB){ return -1; }
-                else if (indexNumA > indexNumB){ return 1; }
-                else { return 0; }
-                } else {
-                if (indexNumA > indexNumB){ return -1; }
-                else if (indexNumA < indexNumB){ return 1; }
-                else { return 0; }
-                }
+            var reverse = reverseOrder ? -1 : 1;
+            if (indexNumA < indexNumB){ return -1 * reverse; }
+            else if (indexNumA > indexNumB){ return 1 * reverse; }
+            else { return 0; }
             });
         return speciesTokens;
     }
@@ -2226,15 +2233,10 @@
         speciesTokens.sort(function(tokenA, tokenB){
             var indexSpeedA = PokemonSpeciesIndex[tokenA]['baseStats']['speed'];
             var indexSpeedB = PokemonSpeciesIndex[tokenB]['baseStats']['speed'];
-            if (!reverseOrder){
-                if (indexSpeedA > indexSpeedB){ return -1; }
-                else if (indexSpeedA < indexSpeedB){ return 1; }
-                else { return 0; }
-                } else {
-                if (indexSpeedA < indexSpeedB){ return -1; }
-                else if (indexSpeedA > indexSpeedB){ return 1; }
-                else { return 0; }
-                }
+            var reverse = reverseOrder ? -1 : 1;
+            if (indexSpeedA > indexSpeedB){ return -1 * reverse; }
+            else if (indexSpeedA < indexSpeedB){ return 1 * reverse; }
+            else { return 0; }
             });
         return speciesTokens;
     }
@@ -2249,7 +2251,7 @@
             else if (pokeInfoA.lifePoints > pokeInfoB.lifePoints){ return 1 * reverseOrder; }
             else { return 0; }
             });
-       //console.log('sortSpeciesTokensByLifePoints() = ', speciesTokens);
+        //console.log('sortSpeciesTokensByLifePoints() = ', speciesTokens);
         return speciesTokens;
     }
 
@@ -2263,7 +2265,7 @@
             else if (pokeInfoA.breedPoints > pokeInfoB.breedPoints){ return 1 * reverseOrder; }
             else { return 0; }
             });
-       //console.log('sortSpeciesTokensByBreedPoints() = ', speciesTokens);
+        //console.log('sortSpeciesTokensByBreedPoints() = ', speciesTokens);
         return speciesTokens;
     }
 
