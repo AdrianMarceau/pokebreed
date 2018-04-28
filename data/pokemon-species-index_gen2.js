@@ -1061,6 +1061,21 @@
             prevEvolution: 'snubbull'
             },
 
+        'qwilfish': {
+            order: indexOrder++,
+            token: 'qwilfish',
+            name: 'Qwilfish',
+            number: 211,
+            types: ['water', 'poison'],
+            baseStats: {hp: 65, phAttack: 95, phDefense: 85, spAttack: 55, spDefense: 55, speed: 85},
+            abilities: {0: 'poison-point', 1: 'swift-swim', hidden: 'intimidate'},
+            height: 0.5,
+            weight: 3.9,
+            colors: ['green', 'yellow', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['water-2'],
+            },
+
         'scizor': {
             order: thisIndex.afterOrder('scyther'),
             token: 'scizor',
