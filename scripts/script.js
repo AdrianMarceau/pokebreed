@@ -245,7 +245,8 @@
                     }
 
                 // Add a reference to this pokemon's base evolution
-                indexInfo.baseEvolution = pokemonGetBaseEvolution(indexInfo.token, false, false);
+                indexInfo.baseEvolution = pokemonGetBaseEvolution(indexInfo.token, true, false);
+                indexInfo.basicEvolution = pokemonGetBasicEvolution(indexInfo.token, false, false);
 
                 }
 
@@ -259,8 +260,8 @@
                 var infoA = PokemonSpeciesIndex[tokenA];
                 var infoB = PokemonSpeciesIndex[tokenB];
 
-                var baseInfoA = PokemonSpeciesIndex[infoA.baseEvolution];
-                var baseInfoB = PokemonSpeciesIndex[infoB.baseEvolution];
+                var baseInfoA = PokemonSpeciesIndex[infoA.basicEvolution];
+                var baseInfoB = PokemonSpeciesIndex[infoB.basicEvolution];
 
                 var dittoA = false;
                 var dittoB = false;
@@ -313,6 +314,7 @@
                 else { return 0; }
 
                 });
+
             //console.log('PokemonSpeciesDisplayOrder = ', PokemonSpeciesDisplayOrder);
 
             }
@@ -2084,6 +2086,23 @@
             return nextEvolutions;
             } else {
             return [];
+            }
+    }
+
+    // Define a function for getting the base evolution of a pokemon
+    function pokemonGetBasicEvolution(pokeToken, includeBaby, includeAlts){
+        //console.log('pokemonGetBasicEvolution(pokeToken('+pokeToken+'), includeBaby('+includeBaby+'))');
+        if (typeof pokeToken === 'undefined'){ return false; }
+        if (typeof includeBaby !== 'boolean'){ includeBaby = true; }
+        if (typeof includeAlts !== 'boolean'){ includeAlts = true; }
+        var baseToken = pokeToken;
+        var indexInfo = PokemonSpeciesIndex[baseToken];
+        if (!includeBaby
+            && indexInfo.class === 'baby'
+            && typeof indexInfo.nextEvolutions[0] !== 'undefined'){
+            return indexInfo.nextEvolutions[0].species;
+            } else {
+            return pokemonGetBaseEvolution(pokeToken, includeBaby, includeAlts);
             }
     }
 
