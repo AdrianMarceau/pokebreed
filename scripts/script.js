@@ -218,6 +218,10 @@
                 indexInfo.breedPoints = calculateBreedPoints(indexInfo['baseStats']);
                 indexInfo.influencePoints = calculateInfluencePoints(indexInfo);
 
+                // If class or formClass are not set, create them as empty strings
+                if (typeof indexInfo.class === 'undefined'){ indexInfo.class = ''; }
+                if (typeof indexInfo.formClass === 'undefined'){ indexInfo.formClass = ''; }
+
                 // Generate this pokemon's full gender ratio index
                 indexInfo.hasOneGender = false;
                 indexInfo.hasNoGender = false;
@@ -241,7 +245,7 @@
                     }
 
                 // Add a reference to this pokemon's base evolution
-                indexInfo.baseEvolution = pokemonGetBaseEvolution(indexInfo.token, true, false);
+                indexInfo.baseEvolution = pokemonGetBaseEvolution(indexInfo.token, false, false);
 
                 }
 
@@ -278,6 +282,11 @@
                 if (infoA['class'] === 'legendary' || infoA['class'] === 'mythical' || infoA['class'] === 'ultra-beast'){ specialA = true; }
                 if (infoB['class'] === 'legendary' || infoB['class'] === 'mythical' || infoB['class'] === 'ultra-beast'){ specialB = true; }
 
+                var variantA = false;
+                var variantB = false;
+                if (infoA['formClass'].match(/-variant$/)){ variantA = true; }
+                if (infoB['formClass'].match(/-variant$/)){ variantB = true; }
+
                 if (false){ return 0; }
 
                 else if (dittoA && !dittoB){ return -1; }
@@ -295,8 +304,11 @@
                 else if (baseInfoA['number'] < baseInfoB['number']){ return -1; }
                 else if (baseInfoA['number'] > baseInfoB['number']){ return 1; }
 
-                else if (infoA['order'] > infoB['order']){ return -1; }
-                else if (infoA['order'] < infoB['order']){ return 1; }
+                else if (variantA && !variantB){ return 1; }
+                else if (!variantA && variantB){ return -1; }
+
+                else if (infoA['order'] > infoB['order']){ return -1 * (variantA && variantB ? -1 : 1); }
+                else if (infoA['order'] < infoB['order']){ return 1 * (variantA && variantB ? -1 : 1); }
 
                 else { return 0; }
 
@@ -2085,8 +2097,14 @@
         var indexInfo = PokemonSpeciesIndex[baseToken];
         //console.log('indexInfo = ', indexInfo);
         if (typeof indexInfo.prevEvolution !== 'undefined'){
-            //console.log('return indexInfo.prevEvolution', indexInfo.prevEvolution);
-            return pokemonGetBaseEvolution(indexInfo.prevEvolution, includeBaby, includeAlts);
+            var prevInfo = PokemonSpeciesIndex[indexInfo.prevEvolution];
+            if (!includeBaby && prevInfo.class === 'baby'){
+                //console.log('!includeBaby && prevInfo.class === \'baby\' | return baseToken', baseToken);
+                return baseToken;
+                } else {
+                //console.log('return indexInfo.prevEvolution', indexInfo.prevEvolution);
+                return pokemonGetBaseEvolution(indexInfo.prevEvolution, includeBaby, includeAlts);
+                }
             } else {
             //console.log('return indexInfo.altBaseEvolutions', indexInfo.altBaseEvolutions);
             if (includeAlts && typeof indexInfo.altBaseEvolutions !== 'undefined'){
