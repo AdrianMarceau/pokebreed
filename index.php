@@ -52,7 +52,7 @@ if (isset($_GET['gen'])
         <div class="panel">
 
             <h1>
-                <a class="logo" href="/">PokéBox</a>
+                <a class="logo" href="/"><img src="images/pokebox-logo.png" alt="PokéBox" /></a>
                 <span class="subtext">Breeding Simulator <img class="icon" src="images/favicon.png" /></span>
                 <span class="version">v<?= $version_number ?></span>
             </h1>
