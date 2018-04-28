@@ -30,7 +30,7 @@ p {
 p:last-child {
     margin-bottom: 0;
 }
-img {
+body.pixel-perfect img {
     image-rendering: optimizeSpeed;             /*                     */
     image-rendering: -moz-crisp-edges;          /* Firefox             */
     image-rendering: -o-crisp-edges;            /* Opera               */
