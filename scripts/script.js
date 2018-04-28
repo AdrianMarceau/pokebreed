@@ -410,51 +410,44 @@
 
         // Sort allowed pokemon by a few criteria
         allBasicPokemon.sort(function(tokenA, tokenB){
+
             var infoA = PokemonSpeciesIndex[tokenA];
             var infoB = PokemonSpeciesIndex[tokenB];
+
+            var dittoA = false;
+            var dittoB = false;
+            if (tokenA === 'ditto' || tokenA === 'shiny-ditto'){ dittoA = true; }
+            if (tokenB === 'ditto' || tokenB === 'shiny-ditto'){ dittoB = true; }
+
+            var unownA = false;
+            var unownB = false;
+            if (tokenA === 'unown'){ unownA = true; }
+            if (tokenB === 'unown'){ unownB = true; }
+
             var specialA = false;
             var specialB = false;
             if (infoA['class'] === 'legendary' || infoA['class'] === 'mythical' || infoA['class'] === 'ultra-beast'){ specialA = true; }
             if (infoB['class'] === 'legendary' || infoB['class'] === 'mythical' || infoB['class'] === 'ultra-beast'){ specialB = true; }
-            if (!specialA && specialB){ return -1; }
+
+            if (false){ return 0; }
+
+            else if (dittoA && !dittoB){ return -1; }
+            else if (!dittoA && dittoB){ return 1; }
+
             else if (specialA && !specialB){ return 1; }
-            else {
-                if (tokenA === 'ditto' && tokenB !== 'ditto'){ return -1; }
-                else if (tokenA !== 'ditto' && tokenB === 'ditto'){ return 1; }
-                else if (tokenA === 'shiny-ditto' && tokenB !== 'shiny-ditto'){ return -1; }
-                else if (tokenA !== 'shiny-ditto' && tokenB === 'shiny-ditto'){ return 1; }
-                else {
+            else if (!specialA && specialB){ return -1; }
 
-                    if (infoA['number'] < infoB['number']){ return -1; }
-                    else if (infoA['number'] > infoB['number']){ return 1; }
-                    else {
+            else if (unownA && !unownB){ return 1; }
+            else if (!unownA && unownB){ return -1; }
 
-                        if (infoA['order'] < infoB['order']){ return -1; }
-                        else if (infoA['order'] > infoB['order']){ return 1; }
-                        else { return 0; }
+            else if (infoA['number'] < infoB['number']){ return -1; }
+            else if (infoA['number'] > infoB['number']){ return 1; }
 
-                        }
+            else if (infoA['order'] < infoB['order']){ return -1; }
+            else if (infoA['order'] > infoB['order']){ return 1; }
 
-                    /*
-                    var typeA1 = PokemonTypesIndex[infoA['types'][0]]['order'];
-                    var typeB1 = PokemonTypesIndex[infoB['types'][0]]['order'];
-                    if (typeA1 < typeB1){ return -1; }
-                    else if (typeA1 > typeB1){ return 1; }
-                    else {
-                        var typeA2 = infoA['types'].length > 1 ? PokemonTypesIndex[infoA['types'][1]]['order'] : -1;
-                        var typeB2 = infoB['types'].length > 1 ? PokemonTypesIndex[infoB['types'][1]]['order'] : -1;
-                        if (typeA2 < typeB2){ return -1; }
-                        else if (typeA2 > typeB2){ return 1; }
-                        else {
-                            if (infoA['order'] < infoB['order']){ return -1; }
-                            else if (infoA['order'] > infoB['order']){ return 1; }
-                            else { return 0; }
-                            }
-                        }
-                        */
+            else { return 0; }
 
-                    }
-                }
             });
 
         // Loop through and generate buttons for each Pokemon
@@ -475,7 +468,8 @@
                 } else if (specialBreaker === false
                 && (pokemonData['class'] === 'legendary'
                 || pokemonData['class'] === 'mythical'
-                || pokemonData['class'] === 'ultra-beast')){
+                || pokemonData['class'] === 'ultra-beast'
+                || pokemonData['eggGroups'][0] === 'undiscovered')){
                 specialBreaker = true;
                 pokePanelMarkup += '<hr class="breaker" />';
                 }
