@@ -2621,7 +2621,7 @@
 
         'snorlax': {
             order: indexOrder++,
-            token: 'Snorlax',
+            token: 'snorlax',
             name: 'Snorlax',
             number: 143,
             types: ['normal'],
@@ -2653,7 +2653,7 @@
             },
         'zapdos': {
             order: indexOrder++,
-            token: 'Zapdos',
+            token: 'zapdos',
             name: 'Zapdos',
             class: 'legendary',
             number: 145,

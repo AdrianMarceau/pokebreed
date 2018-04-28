@@ -448,7 +448,7 @@
 
         'togepi': {
             order: indexOrder++,
-            token: 'Togepi',
+            token: 'togepi',
             name: 'Togepi',
             class: 'baby',
             number: 175,
@@ -1201,7 +1201,7 @@
 
         'elekid': {
             order: thisIndex.beforeOrder('electabuzz'),
-            token: 'Elekid',
+            token: 'elekid',
             name: 'Elekid',
             class: 'baby',
             number: 239,
@@ -1223,7 +1223,7 @@
 
         'magby': {
             order: thisIndex.beforeOrder('magmar'),
-            token: 'Magby',
+            token: 'magby',
             name: 'Magby',
             class: 'baby',
             number: 240,

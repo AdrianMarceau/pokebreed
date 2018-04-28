@@ -284,7 +284,7 @@
             },
         'spewpa': {
             order: indexOrder++,
-            token: 'Spewpa',
+            token: 'spewpa',
             name: 'Spewpa',
             number: 665,
             types: ['bug'],
@@ -514,7 +514,7 @@
             prevEvolution: 'venusaur'
             },
         'mega-charizard-x': {
-            order: thisIndex.afterOrder('charizard', 1),
+            order: thisIndex.afterOrder('charizard', 2),
             token: 'mega-charizard-x',
             name: 'Mega Charizard X',
             formClass: 'mega-evolution',
@@ -532,7 +532,7 @@
             prevEvolution: 'charizard'
             },
         'mega-charizard-y': {
-            order: thisIndex.afterOrder('charizard', 2),
+            order: thisIndex.afterOrder('charizard', 1),
             token: 'mega-charizard-y',
             name: 'Mega Charizard Y',
             formClass: 'mega-evolution',
@@ -799,7 +799,7 @@
             },
 
         'mega-mewtwo-x': {
-            order: thisIndex.afterOrder('mewtwo', 1),
+            order: thisIndex.afterOrder('mewtwo', 2),
             token: 'mega-mewtwo-x',
             name: 'Mega Mewtwo X',
             class: 'legendary',
@@ -818,7 +818,7 @@
             prevEvolution: 'mewtwo'
             },
         'mega-mewtwo-y': {
-            order: thisIndex.afterOrder('mewtwo', 2),
+            order: thisIndex.afterOrder('mewtwo', 1),
             token: 'mega-mewtwo-y',
             name: 'Mega Mewtwo Y',
             class: 'legendary',

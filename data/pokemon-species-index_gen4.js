@@ -38,7 +38,7 @@
             },
         'grotle': {
             order: indexOrder++,
-            token: 'Grotle',
+            token: 'grotle',
             name: 'Grotle',
             number: 388,
             types: ['grass'],
