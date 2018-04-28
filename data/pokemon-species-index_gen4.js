@@ -556,7 +556,6 @@
                 'method': 'always',
                 'value': true
                 }]
-
             },
 
         });
