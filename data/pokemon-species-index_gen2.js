@@ -993,6 +993,21 @@
             eggGroups: ['field']
             },
 
+        'gligar': {
+            order: indexOrder++,
+            token: 'gligar',
+            name: 'Gligar',
+            number: 207,
+            types: ['ground', 'flying'],
+            baseStats: {hp: 65, phAttack: 75, phDefense: 105, spAttack: 35, spDefense: 65, speed: 85},
+            abilities: {0: 'hyper-cutter', 1: 'sand-veil', hidden: 'immunity'},
+            height: 1.1,
+            weight: 64.8,
+            colors: ['purple', 'blue', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['bug'],
+            },
+
         'steelix': {
             order: thisIndex.afterOrder('onix'),
             token: 'steelix',

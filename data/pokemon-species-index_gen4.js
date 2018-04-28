@@ -501,6 +501,22 @@
             prevEvolution: 'eevee'
             },
 
+        'gliscor': {
+            order: thisIndex.afterOrder('gligar'),
+            token: 'gliscor',
+            name: 'Gliscor',
+            number: 472,
+            types: ['ground', 'flying'],
+            baseStats: {hp: 75, phAttack: 95, phDefense: 125, spAttack: 45, spDefense: 75, speed: 95},
+            abilities: {0: 'hyper-cutter', 1: 'sand-veil', hidden: 'poison-heal'},
+            height: 2,
+            weight: 42.5,
+            colors: ['purple', 'black', 'red', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['bug'],
+            prevEvolution: 'gligar'
+            },
+
         'porygon-z': {
             order: thisIndex.afterOrder('porygon2'),
             token: 'porygon-z',
@@ -584,6 +600,7 @@
         {base: 'yanma', species: 'yanmega', method: 'evolution-move', value: 'ancient-power', method2: 'type-surge', value2: ['bug', 'rock']},
         {base: 'eevee', species: 'leafeon', method: 'evolution-location', value: 'moss-rock', method2: 'type-appeal', value2: 'grass'},
         {base: 'eevee', species: 'glaceon', method: 'evolution-location', value: 'icy-rock', method2: 'type-appeal', value2: 'ice'},
+        {base: 'gligar', species: 'gliscor', method: 'evolution-item', value: 'razor-fang', method2: 'type-surge', value2: ['ground', 'flying']},
         {base: 'porygon2', species: 'porygon-z', method: 'evolution-item', value: 'dubious-disc', method2: 'type-appeal', value2: ['fire', 'ice', 'electric']},
         ]);
 
