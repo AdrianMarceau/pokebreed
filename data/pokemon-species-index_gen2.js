@@ -1341,6 +1341,43 @@
             eggGroups: ['flying']
             },
 
+        'houndour': {
+            order: indexOrder++,
+            token: 'houndour',
+            name: 'Houndour',
+            number: 228,
+            types: ['dark', 'fire'],
+            baseStats: {hp: 45, phAttack: 60, phDefense: 30, spAttack: 80, spDefense: 50, speed: 65},
+            abilities: {0: 'early-bird', 1: 'flash-fire', hidden: 'unnerve'},
+            height: 0.6,
+            weight: 10.8,
+            colors: ['black', 'white', 'orange'],
+            evos: ['houndoom'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'houndoom',
+                method: 'level-up',
+                value: 24
+                }]
+            },
+        'houndoom': {
+            order: indexOrder++,
+            token: 'houndoom',
+            name: 'Houndoom',
+            number: 229,
+            types: ['dark', 'fire'],
+            baseStats: {hp: 75, phAttack: 90, phDefense: 50, spAttack: 110, spDefense: 80, speed: 95},
+            abilities: {0: 'early-bird', 1: 'flash-fire', hidden: 'unnerve'},
+            height: 1.4,
+            weight: 35,
+            colors: ['black', 'white', 'orange'],
+            evoLevel: 24,
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'houndour'
+            },
+
         'kingdra': {
             order: thisIndex.afterOrder('seadra'),
             token: 'kingdra',

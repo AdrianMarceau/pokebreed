@@ -856,6 +856,25 @@
             prevEvolution: 'heracross'
             },
 
+        'mega-houndoom': {
+            order: thisIndex.afterOrder('houndoom'),
+            token: 'mega-houndoom',
+            name: 'Mega Houndoom',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'houndoom',
+            number: 229,
+            types: ['dark', 'fire'],
+            baseStats: {hp: 75, phAttack: 90, phDefense: 90, spAttack: 140, spDefense: 90, speed: 115},
+            abilities: {0: 'solar-power'},
+            height: 1.9,
+            weight: 49.5,
+            colors: ['white', 'black', 'orange'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'houndoom'
+            },
+
         'mega-sceptile': {
             order: thisIndex.afterOrder('sceptile'),
             token: 'mega-sceptile',
@@ -945,6 +964,7 @@
         {base: 'mewtwo', species: 'mega-mewtwo-y', method: 'mega-evolution', value: 'mewtwonite-y', method2: 'type-appeal', value2: 'psychic'},
 
         {base: 'heracross', species: 'mega-heracross', method: 'mega-evolution', value: 'heracronite'},
+        {base: 'houndoom', species: 'mega-houndoom', method: 'mega-evolution', value: 'houndoominite'},
 
         {base: 'sceptile', species: 'mega-sceptile', method: 'mega-evolution', value: 'sceptilite'},
         {base: 'blaziken', species: 'mega-blaziken', method: 'mega-evolution', value: 'blazikenite'},
