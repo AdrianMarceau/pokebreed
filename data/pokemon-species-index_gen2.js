@@ -1448,13 +1448,27 @@
             prevEvolution: 'porygon',
             },
 
+        'stantler': {
+            order: indexOrder++,
+            token: 'stantler',
+            name: 'Stantler',
+            number: 234,
+            types: ['normal'],
+            baseStats: {hp: 73, phAttack: 95, phDefense: 62, spAttack: 85, spDefense: 65, speed: 85},
+            abilities: {0: 'intimidate', 1: 'frisk', hidden: 'sap-sipper'},
+            height: 1.4,
+            weight: 71.2,
+            colors: ['brown', 'yellow', 'black'],
+            eggCycles: 20,
+            eggGroups: ['field']
+            },
+
         'tyrogue': {
             order: thisIndex.beforeOrder('hitmonlee'),
             token: 'tyrogue',
             name: 'Tyrogue',
             class: 'baby',
             number: 236,
-            //sortNumber: 106,
             types: ['fighting'],
             genderRatio: {male: 1.0000},
             baseStats: {hp: 35, phAttack: 35, phDefense: 35, spAttack: 35, spDefense: 35, speed: 35},
@@ -1489,7 +1503,6 @@
             token: 'hitmontop',
             name: 'Hitmontop',
             number: 237,
-            //sortNumber: 107,
             types: ['fighting'],
             genderRatio: {male: 1.0000},
             baseStats: {hp: 50, phAttack: 95, phDefense: 95, spAttack: 35, spDefense: 110, speed: 70},
