@@ -1684,6 +1684,62 @@
             eggGroups: ['undiscovered']
             },
 
+        'larvitar': {
+            order: indexOrder++,
+            token: 'larvitar',
+            name: 'Larvitar',
+            number: 246,
+            types: ['rock', 'ground'],
+            baseStats: {hp: 50, phAttack: 64, phDefense: 50, spAttack: 45, spDefense: 50, speed: 41},
+            abilities: {0: 'guts', hidden: 'sand-veil'},
+            height: 0.6,
+            weight: 72,
+            colors: ['green', 'red', 'black'],
+            eggCycles: 40,
+            eggGroups: ['monster'],
+            nextEvolutions: [{
+                species: 'pupitar',
+                method: 'level-up',
+                value: 30
+                }]
+            },
+        'pupitar': {
+            order: indexOrder++,
+            token: 'pupitar',
+            name: 'Pupitar',
+            number: 247,
+            types: ['rock', 'ground'],
+            baseStats: {hp: 70, phAttack: 84, phDefense: 70, spAttack: 65, spDefense: 70, speed: 51},
+            abilities: {0: 'shed-skin'},
+            height: 1.2,
+            weight: 152,
+            colors: ['gray', 'black'],
+            eggCycles: 40,
+            eggGroups: ['monster'],
+            prevEvolution: 'larvitar',
+            nextEvolutions: [{
+                species: 'tyranitar',
+                method: 'level-up',
+                value: 55
+                }]
+            },
+        'tyranitar': {
+            order: indexOrder++,
+            token: 'tyranitar',
+            name: 'Tyranitar',
+            number: 248,
+            types: ['rock', 'dark'],
+            baseStats: {hp: 100, phAttack: 134, phDefense: 110, spAttack: 95, spDefense: 100, speed: 61},
+            abilities: {0: 'sand-stream', hidden: 'unnerve'},
+            height: 2,
+            weight: 202,
+            colors: ['green', 'gray', 'black'],
+            eggCycles: 40,
+            eggGroups: ['monster'],
+            otherFormes: ['tyranitarmega'],
+            prevEvolution: 'pupitar'
+            },
+
         'lugia': {
             order: indexOrder++,
             token: 'lugia',

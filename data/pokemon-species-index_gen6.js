@@ -875,6 +875,25 @@
             prevEvolution: 'houndoom'
             },
 
+        'mega-tyranitar': {
+            order: thisIndex.afterOrder('tyranitar'),
+            token: 'mega-tyranitar',
+            name: 'Mega Tyranitar',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'tyranitar',
+            number: 248,
+            types: ['rock', 'dark'],
+            baseStats: {hp: 100, phAttack: 164, phDefense: 150, spAttack: 95, spDefense: 120, speed: 71},
+            abilities: {0: 'sand-stream'},
+            height: 2.5,
+            weight: 255,
+            colors: ['green', 'red', 'black'],
+            eggCycles: 40,
+            eggGroups: ['monster'],
+            prevEvolution: 'tyranitar'
+            },
+
         'mega-sceptile': {
             order: thisIndex.afterOrder('sceptile'),
             token: 'mega-sceptile',
@@ -965,6 +984,7 @@
 
         {base: 'heracross', species: 'mega-heracross', method: 'mega-evolution', value: 'heracronite'},
         {base: 'houndoom', species: 'mega-houndoom', method: 'mega-evolution', value: 'houndoominite'},
+        {base: 'tyranitar', species: 'mega-tyranitar', method: 'mega-evolution', value: 'tyranitarite'},
 
         {base: 'sceptile', species: 'mega-sceptile', method: 'mega-evolution', value: 'sceptilite'},
         {base: 'blaziken', species: 'mega-blaziken', method: 'mega-evolution', value: 'blazikenite'},
