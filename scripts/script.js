@@ -66,7 +66,7 @@
             var zoom = detectZoom.zoom();
             var device = detectZoom.device();
             //console.log('zoom = '+zoom+' | device = '+device);
-            if (device === 1 || device % 2 === 0){
+            if (device > 1 && device % 2 === 0){
                 //console.log('pixel perfect!');
                 $('body').addClass('pixel-perfect');
                 } else {
