@@ -1554,6 +1554,14 @@
                             if (returnValue > 0){ return returnValue; }
                             }
 
+                        // Species-based evolutions trigger if the other species is active on the field
+                        if (methodToken === 'evolution-species'
+                            && pokemonInfo.growthCycles >= 20
+                            && typeof thisZoneData.currentStats['species'][methodValue] !== 'undefined'
+                            && thisZoneData.currentStats['species'][methodValue] > 0){
+                            return 1 + thisZoneData.currentStats['species'][methodValue];
+                            }
+
                         // Item, stone, and location-based evolutions trigger based on growth cycles (plus method2)
                         if ((methodToken === 'evolution-item'
                                 || methodToken === 'evolution-stone'
