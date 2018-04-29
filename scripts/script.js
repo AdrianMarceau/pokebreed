@@ -1312,7 +1312,7 @@
             if (thisZoneData.day === 1){ triggerZoneVisitor('ditto'); }
 
             // Else if population numbers are low after a year, summon a shiny ditto
-            else if (thisZoneData.day > 360 && remainingPercent < 50){ triggerZoneVisitor('shiny-ditto'); }
+            else if (thisZoneData.day > 360 && remainingPercent >= 90){ triggerZoneVisitor('shiny-ditto'); }
 
             // Otherwise, summon a legendary, mythical, or basic pokemon based on number of days passed
             else if (thisZoneData.day % 1780 === 0){ triggerZoneVisitor('mythical'); }
