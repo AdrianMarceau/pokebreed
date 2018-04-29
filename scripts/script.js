@@ -684,18 +684,23 @@
             var randNum = Math.random();
             var minOffset = 0;
             var maxOffset = 30;
-            //console.log('|-- randNum = '+ randNum +' | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
-            if (randNum >= 0.75){
-                maxOffset += 20;
-                //console.log('|-- randNum >= 0.75 | maxOffset += 20 | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
-                }
-            if (randNum >= 0.85){
-                maxOffset += 20;
-                //console.log('|-- randNum >= 0.85 | maxOffset += 20 | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
-                }
-            if (randNum >= 0.95){
-                maxOffset += 20;
-                //console.log('|-- randNum >= 0.95 | maxOffset += 20 | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
+            if (pokemonToken === 'smeargle'){
+                maxOffset = 360;
+                //console.log('|-- pokemonToken === \'smeargle\' | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
+                } else {
+                //console.log('|-- randNum = '+ randNum +' | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
+                if (randNum >= 0.75){
+                    maxOffset += 20;
+                    //console.log('|-- randNum >= 0.75 | maxOffset += 20 | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
+                    }
+                if (randNum >= 0.85){
+                    maxOffset += 20;
+                    //console.log('|-- randNum >= 0.85 | maxOffset += 20 | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
+                    }
+                if (randNum >= 0.95){
+                    maxOffset += 20;
+                    //console.log('|-- randNum >= 0.95 | maxOffset += 20 | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
+                    }
                 }
             var variantHueOffset = Math.ceil((Math.random() * (maxOffset - minOffset)) + minOffset);
             newPokemon.variantHueOffset = variantHueOffset * -1;

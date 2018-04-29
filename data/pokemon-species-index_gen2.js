@@ -1463,6 +1463,21 @@
             eggGroups: ['field']
             },
 
+        'smeargle': {
+            order: indexOrder++,
+            token: 'smeargle',
+            name: 'Smeargle',
+            number: 235,
+            types: ['normal'],
+            baseStats: {hp: 55, phAttack: 20, phDefense: 35, spAttack: 20, spDefense: 45, speed: 75},
+            abilities: {0: 'own-tempo', 1: 'technician', hidden: 'moody'},
+            height: 1.2,
+            weight: 58,
+            colors: ['white', 'brown', 'green'],
+            eggCycles: 20,
+            eggGroups: ['field']
+            },
+
         'tyrogue': {
             order: thisIndex.beforeOrder('hitmonlee'),
             token: 'tyrogue',
