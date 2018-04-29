@@ -1311,6 +1311,21 @@
             eggGroups: ['water-1', 'field']
             },
 
+        'mantine': {
+            order: indexOrder++,
+            token: 'mantine',
+            name: 'Mantine',
+            number: 226,
+            types: ['water', 'flying'],
+            baseStats: {hp: 85, phAttack: 40, phDefense: 70, spAttack: 80, spDefense: 140, speed: 70},
+            abilities: {0: 'swift-swim', 1: 'water-absorb', hidden: 'water-veil'},
+            height: 2.1,
+            weight: 220,
+            colors: ['blue', 'gray', 'white'],
+            eggCycles: 25,
+            eggGroups: ['water-1'],
+            },
+
         'skarmory': {
             order: indexOrder++,
             token: 'skarmory',

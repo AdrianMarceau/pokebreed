@@ -333,6 +333,27 @@
                 }]
             },
 
+        'mantyke': {
+            order: thisIndex.beforeOrder('mantine'),
+            token: 'mantyke',
+            name: 'Mantyke',
+            class: 'baby',
+            number: 458,
+            types: ['water', 'flying'],
+            baseStats: {hp: 45, phAttack: 20, phDefense: 50, spAttack: 60, spDefense: 120, speed: 50},
+            abilities: {0: 'swift-swim', 1: 'water-absorb', hidden: 'water-veil'},
+            height: 1,
+            weight: 65,
+            colors: ['blue', 'white', 'red'],
+            eggCycles: 25,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'mantine',
+                method: 'evolution-species',
+                value: 'remoraid'
+                }]
+            },
+
         'weavile': {
             order: thisIndex.afterOrder('sneasel'),
             token: 'weavile',
@@ -615,6 +636,7 @@
         {base: 'mr-mime', species: 'mime-jr'},
         {base: 'chansey', species: 'happiny'},
         {base: 'snorlax', species: 'munchlax'},
+        {base: 'mantine', species: 'mantyke'},
         ]);
 
     // Update previous gen pokemon with new next evolution data
