@@ -533,6 +533,22 @@
             prevEvolution: 'gligar'
             },
 
+        'mamoswine': {
+            order: thisIndex.afterOrder('piloswine'),
+            token: 'mamoswine',
+            name: 'Mamoswine',
+            number: 473,
+            types: ['ice', 'ground'],
+            baseStats: {hp: 110, phAttack: 130, phDefense: 80, spAttack: 70, spDefense: 60, speed: 80},
+            abilities: {0: 'oblivious', 1: 'snow-cloak', hidden: 'thick-fat'},
+            height: 2.5,
+            weight: 291,
+            colors: ['brown', 'white', 'blue', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'piloswine'
+            },
+
         'porygon-z': {
             order: thisIndex.afterOrder('porygon2'),
             token: 'porygon-z',
@@ -618,6 +634,7 @@
         {base: 'eevee', species: 'leafeon', method: 'evolution-location', value: 'moss-rock', method2: 'type-appeal', value2: 'grass'},
         {base: 'eevee', species: 'glaceon', method: 'evolution-location', value: 'icy-rock', method2: 'type-appeal', value2: 'ice'},
         {base: 'gligar', species: 'gliscor', method: 'evolution-item', value: 'razor-fang', method2: 'type-surge', value2: ['ground', 'flying']},
+        {base: 'piloswine', species: 'mamoswine', method: 'evolution-move', value: 'ancient-power', method2: 'type-surge', value2: ['ice', 'ground', 'rock']},
         {base: 'porygon2', species: 'porygon-z', method: 'evolution-item', value: 'dubious-disc', method2: 'type-appeal', value2: ['fire', 'ice', 'electric']},
         ]);
 

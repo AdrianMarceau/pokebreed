@@ -1207,6 +1207,44 @@
             prevEvolution: 'slugma'
             },
 
+        'swinub': {
+            order: indexOrder++,
+            token: 'swinub',
+            name: 'Swinub',
+            number: 220,
+            types: ['ice', 'ground'],
+            baseStats: {hp: 50, phAttack: 50, phDefense: 40, spAttack: 30, spDefense: 30, speed: 50},
+            abilities: {0: 'oblivious', 1: 'snow-cloak', hidden: 'thick-fat'},
+            height: 0.4,
+            weight: 6.5,
+            colors: ['brown', 'pink'],
+            evos: ['piloswine'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'piloswine',
+                method: 'level-up',
+                value: 33
+                }]
+            },
+        'piloswine': {
+            order: indexOrder++,
+            token: 'piloswine',
+            name: 'Piloswine',
+            number: 221,
+            types: ['ice', 'ground'],
+            baseStats: {hp: 100, phAttack: 100, phDefense: 80, spAttack: 60, spDefense: 60, speed: 50},
+            abilities: {0: 'oblivious', 1: 'snow-cloak', hidden: 'thick-fat'},
+            height: 1.1,
+            weight: 55.8,
+            colors: ['brown', 'white', 'pink'],
+            prevo: 'swinub',
+            evos: ['mamoswine'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'swinub'
+            },
+
         'skarmory': {
             order: indexOrder++,
             token: 'skarmory',
