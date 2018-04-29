@@ -480,6 +480,55 @@
                 }]
             },
 
+        'regirock': {
+            order: indexOrder++,
+            token: 'regirock',
+            name: 'Regirock',
+            class: 'legendary',
+            number: 377,
+            types: ['rock'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 80, phAttack: 100, phDefense: 200, spAttack: 50, spDefense: 100, speed: 50},
+            abilities: {0: 'clear-body', hidden: 'sturdy'},
+            height: 1.7,
+            weight: 230,
+            colors: ['brown', 'gray', 'orange'],
+            eggCycles: 80,
+            eggGroups: ['undiscovered']
+            },
+        'regice': {
+            order: indexOrder++,
+            token: 'regice',
+            name: 'Regice',
+            class: 'legendary',
+            number: 378,
+            types: ['ice'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 80, phAttack: 50, phDefense: 100, spAttack: 100, spDefense: 200, speed: 50},
+            abilities: {0: 'clear-body', hidden: 'ice-body'},
+            height: 1.8,
+            weight: 175,
+            colors: ['blue', 'yelow'],
+            eggCycles: 80,
+            eggGroups: ['undiscovered']
+            },
+        'registeel': {
+            order: indexOrder++,
+            token: 'registeel',
+            name: 'Registeel',
+            class: 'legendary',
+            number: 379,
+            types: ['steel'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 80, phAttack: 75, phDefense: 150, spAttack: 75, spDefense: 150, speed: 50},
+            abilities: {0: 'clear-body', hidden: 'light-metal'},
+            height: 1.9,
+            weight: 205,
+            colors: ['gray', 'black', 'red'],
+            eggCycles: 80,
+            eggGroups: ['undiscovered']
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
