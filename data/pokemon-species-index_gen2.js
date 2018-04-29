@@ -1568,6 +1568,55 @@
             prevEvolution: 'chansey'
             },
 
+        'raikou': {
+            order: indexOrder++,
+            token: 'raikou',
+            name: 'Raikou',
+            class: 'legendary',
+            number: 243,
+            types: ['electric'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 90, phAttack: 85, phDefense: 75, spAttack: 115, spDefense: 100, speed: 115},
+            abilities: {0: 'pressure', hidden: 'inner-focus'},
+            height: 1.9,
+            weight: 178,
+            colors: ['yellow', 'purple', 'white', 'black', 'gray'],
+            eggCycles: 80,
+            eggGroups: ['undiscovered']
+            },
+        'entei': {
+            order: indexOrder++,
+            token: 'entei',
+            name: 'Entei',
+            class: 'legendary',
+            number: 244,
+            types: ['fire'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 115, phAttack: 115, phDefense: 85, spAttack: 90, spDefense: 75, speed: 100},
+            abilities: {0: 'pressure', hidden: 'inner-focus'},
+            height: 2.1,
+            weight: 198,
+            colors: ['brown', 'gray', 'red', 'yellow', 'black'],
+            eggCycles: 80,
+            eggGroups: ['undiscovered']
+            },
+        'suicune': {
+            order: indexOrder++,
+            token: 'suicune',
+            name: 'Suicune',
+            class: 'legendary',
+            number: 245,
+            types: ['water'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 75, phDefense: 115, spAttack: 90, spDefense: 115, speed: 85},
+            abilities: {0: 'pressure', hidden: 'inner-focus'},
+            height: 2,
+            weight: 187,
+            colors: ['blue', 'purple', 'white'],
+            eggCycles: 80,
+            eggGroups: ['undiscovered']
+            },
+
         'lugia': {
             order: indexOrder++,
             token: 'lugia',
