@@ -1454,6 +1454,7 @@
             name: 'Tyrogue',
             class: 'baby',
             number: 236,
+            //sortNumber: 106,
             types: ['fighting'],
             genderRatio: {male: 1.0000},
             baseStats: {hp: 35, phAttack: 35, phDefense: 35, spAttack: 35, spDefense: 35, speed: 35},
@@ -1464,6 +1465,12 @@
             eggCycles: 25,
             eggGroups: ['undiscovered'],
             nextEvolutions: [{
+                species: 'hitmontop',
+                method: 'level-up',
+                value: 20,
+                method2: 'chance',
+                value2: 33
+                }, {
                 species: 'hitmonlee',
                 method: 'level-up',
                 value: 20,
@@ -1475,12 +1482,6 @@
                 value: 20,
                 method2: 'chance',
                 value2: 33
-                }, {
-                species: 'hitmontop',
-                method: 'level-up',
-                value: 20,
-                method2: 'chance',
-                value2: 33
                 }]
             },
         'hitmontop': {
@@ -1488,6 +1489,7 @@
             token: 'hitmontop',
             name: 'Hitmontop',
             number: 237,
+            //sortNumber: 107,
             types: ['fighting'],
             genderRatio: {male: 1.0000},
             baseStats: {hp: 50, phAttack: 95, phDefense: 95, spAttack: 35, spDefense: 110, speed: 70},
