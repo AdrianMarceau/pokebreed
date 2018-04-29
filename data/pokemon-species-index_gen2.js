@@ -1296,6 +1296,21 @@
             prevEvolution: 'remoraid'
             },
 
+        'delibird': {
+            order: indexOrder++,
+            token: 'delibird',
+            name: 'Delibird',
+            number: 225,
+            types: ['ice', 'flying'],
+            baseStats: {hp: 45, phAttack: 55, phDefense: 45, spAttack: 65, spDefense: 45, speed: 75},
+            abilities: {0: 'vital-spirit', 1: 'hustle', hidden: 'insomnia'},
+            height: 0.9,
+            weight: 16,
+            colors: ['red', 'white', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'field']
+            },
+
         'skarmory': {
             order: indexOrder++,
             token: 'skarmory',
