@@ -401,18 +401,19 @@ body.pixel-perfect img {
     width: 40px;
     height: 40px
 }
-.panel .overview.main .details.pokemon .list.pokemon li.watched:before {
+.panel .overview.main .details.pokemon .list.pokemon li.watched:before,
+.panel .overview.main .details.pokemon .list.pokemon li.visitor:before {
     content: "";
     display: block;
     position: absolute;
     top: 2px;
     left: 2px;
-    width: 6px;
-    height: 6px;
+    width: 2px;
+    height: 2px;
     font-size: 6px;
     line-height: 1;
     overflow: hidden;
-    background-color: #dc0000;
+    background-color: #dedede;
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
     border-radius: 50%;
@@ -420,6 +421,16 @@ body.pixel-perfect img {
     -moz-box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
     box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
+}
+.panel .overview.main .details.pokemon .list.pokemon li.watched:before {
+    background-color: #e43333;
+    width: 6px;
+    height: 6px;
+}
+.panel .overview.main .details.pokemon .list.pokemon li.visitor:before {
+    background-color: #ffffff;
+    width: 3px;
+    height: 3px;
 }
 @keyframes popIn {
     from { opacity: 0; transform: scale(0, 0); margin-left: -45px; }

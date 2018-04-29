@@ -11,6 +11,7 @@
 
     var PokemonSpeciesIndex = {};
     var PokemonSpeciesIndexTokens = [];
+    var BasicPokemonSpeciesIndexTokens = [];
     var PokemonSpeciesDisplayOrder = [];
     var PokemonTypesIndex = {};
     var PokemonTypesIndexTokens = [];
@@ -290,11 +291,11 @@
 
                 if (false){ return 0; }
 
-                else if (dittoA && !dittoB){ return -1; }
-                else if (!dittoA && dittoB){ return 1; }
+                else if (dittoA && !dittoB){ return 1; }
+                else if (!dittoA && dittoB){ return -1; }
 
-                else if (shinyDittoA && !shinyDittoB){ return -1; }
-                else if (!shinyDittoA && shinyDittoB){ return 1; }
+                else if (shinyDittoA && !shinyDittoB){ return 1; }
+                else if (!shinyDittoA && shinyDittoB){ return -1; }
 
                 else if (specialA && !specialB){ return 1; }
                 else if (!specialA && specialB){ return -1; }
@@ -316,6 +317,53 @@
                 });
 
             //console.log('PokemonSpeciesDisplayOrder = ', PokemonSpeciesDisplayOrder);
+
+            // Loop through the index searching for basic pokemon
+            for (var key = 0; key < PokemonSpeciesIndexTokens.length; key++){
+                var pokeToken = PokemonSpeciesIndexTokens[key];
+
+                var pokeInfo = PokemonSpeciesIndex[pokeToken];
+                var isBasicPokemon = true;
+
+                // If this is a baby pokemon, it is not basic
+                if (typeof pokeInfo.class !== 'undefined'
+                    && pokeInfo.class === 'baby'){
+                    isBasicPokemon = false;
+                    }
+
+                // If this pokemon has an egg parent, it's not basic
+                if (typeof pokeInfo.eggParent !== 'undefined'
+                    && pokeInfo.eggParent.length){
+                    isBasicPokemon = false;
+                    }
+
+                // If this pokemon has a pre-evolution, it is not basic
+                if (typeof pokeInfo.prevEvolution !== 'undefined'){
+                    var prevInfo = PokemonSpeciesIndex[pokeInfo.prevEvolution];
+                    // If the prevo was a baby, we're still safe, otherwise not basic
+                    if (typeof prevInfo.class !== 'undefined'
+                        && prevInfo.class === 'baby'){
+                        //isBasicPokemon = true;
+                        } else {
+                        isBasicPokemon = false;
+                        }
+                    }
+
+                // If this was found to be basic, push to main array
+                if (isBasicPokemon){
+                    BasicPokemonSpeciesIndexTokens.push(pokeToken);
+                    }
+
+                }
+
+            // Sort allowed pokemon by a few criteria
+            BasicPokemonSpeciesIndexTokens.sort(function(tokenA, tokenB){
+                var orderA = PokemonSpeciesDisplayOrder.indexOf(tokenA);
+                var orderB = PokemonSpeciesDisplayOrder.indexOf(tokenB);
+                if (orderA < orderB){ return -1; }
+                else if (orderA > orderB){ return 1; }
+                else { return 0; }
+                });
 
             }
     }
@@ -463,76 +511,27 @@
         // Update the first step of the sim with the amount of required pokemon to start
         $('.new-pokemon > strong', $panelButtons).html('Select '+ pokemonRequiredToStart +' Starter Pokémon');
 
-        // Loop through the index searching for basic pokemon
-        var allBasicPokemon = [];
-        for (var key = 0; key < PokemonSpeciesIndexTokens.length; key++){
-            var pokeToken = PokemonSpeciesIndexTokens[key];
-
-            var pokeInfo = PokemonSpeciesIndex[pokeToken];
-            var isBasicPokemon = true;
-
-            // If this is a baby pokemon, it is not basic
-            if (typeof pokeInfo.class !== 'undefined'
-                && pokeInfo.class === 'baby'){
-                isBasicPokemon = false;
-                }
-
-            // If this pokemon has an egg parent, it's not basic
-            if (typeof pokeInfo.eggParent !== 'undefined'
-                && pokeInfo.eggParent.length){
-                isBasicPokemon = false;
-                }
-
-            // If this pokemon has a pre-evolution, it is not basic
-            if (typeof pokeInfo.prevEvolution !== 'undefined'){
-                var prevInfo = PokemonSpeciesIndex[pokeInfo.prevEvolution];
-                // If the prevo was a baby, we're still safe, otherwise not basic
-                if (typeof prevInfo.class !== 'undefined'
-                    && prevInfo.class === 'baby'){
-                    //isBasicPokemon = true;
-                    } else {
-                    isBasicPokemon = false;
-                    }
-                }
-
-            // If this was found to be basic, push to main array
-            if (isBasicPokemon){
-                allBasicPokemon.push(pokeToken);
-                }
-
-            }
-
-        // Sort allowed pokemon by a few criteria
-        allBasicPokemon.sort(function(tokenA, tokenB){
-            var orderA = PokemonSpeciesDisplayOrder.indexOf(tokenA);
-            var orderB = PokemonSpeciesDisplayOrder.indexOf(tokenB);
-            if (orderA < orderB){ return -1; }
-            else if (orderA > orderB){ return 1; }
-            else { return 0; }
-            });
-
         // Loop through and generate buttons for each Pokemon
         var dittoBreaker = false;
         var specialBreaker = false;
         var pokePanelMarkup = '';
-        for (var key = 0; key < allBasicPokemon.length; key++){
-            var pokemonToken = allBasicPokemon[key];
+        for (var key = 0; key < BasicPokemonSpeciesIndexTokens.length; key++){
+
+            // Collect the pokemon's token, data, and types
+            var pokemonToken = BasicPokemonSpeciesIndexTokens[key];
             //console.log('pokemonToken = ', pokemonToken);
             var pokemonData = PokemonSpeciesIndex[pokemonToken];
             var pokemonTypes = pokemonData.types;
             //console.log('pokemonTypes = ', pokemonTypes);
-            if (dittoBreaker === false
-                && (pokemonToken !== 'ditto'
-                && pokemonToken !== 'shiny-ditto')){
-                dittoBreaker = true;
-                pokePanelMarkup += '<hr class="breaker" />';
-                } else if (specialBreaker === false
-                && (pokemonData['class'] === 'legendary'
+
+            // Continue if this is not an appropriate starter pokemon
+            if (pokemonToken === 'ditto'
+                || pokemonToken === 'shiny-ditto'
+                || pokemonData['class'] === 'legendary'
                 || pokemonData['class'] === 'mythical'
                 || pokemonData['class'] === 'ultra-beast'
-                || pokemonData['eggGroups'][0] === 'undiscovered')){
-                specialBreaker = true;
-                pokePanelMarkup += '<hr class="breaker" />';
+                || pokemonData['eggGroups'][0] === 'undiscovered'){
+                continue;
                 }
 
             // Collect the pokemon's image icon
@@ -601,11 +600,12 @@
     }
 
     // Define a function for adding a new pokemon to a zone
-    function addPokemonToZone(pokemonToken, isEgg, reduceCycles){
+    function addPokemonToZone(pokemonToken, isEgg, reduceCycles, isVisitor){
         //console.log('Adding '+token+' to zone.');
         if (typeof PokemonSpeciesIndex[pokemonToken] === 'undefined'){ return false; }
         if (typeof isEgg !== 'boolean'){ isEgg = true; }
         if (typeof reduceCycles !== 'number'){ reduceCycles = 0; }
+        if (typeof isVisitor !== 'boolean'){ isVisitor = false; }
 
         // Create an entry for this species in the global count if not exists
         var addedPokemonSpecies = thisZoneData.addedPokemonSpecies;
@@ -633,6 +633,9 @@
             growthCycles: 0,
             reachedAdulthood: false
             };
+
+        // If this is a visitor, create the appropriate flag
+        if (isVisitor){ newPokemon.isVisitor = true; }
 
         // Check to see if this pokemon should be a variant
         var allowVariant = true;
@@ -720,6 +723,13 @@
                     eventCategory: 'pokemon',
                     eventAction:  'added',
                     eventLabel: pokemonToken + ' added as starter'
+                    });
+                } else if (isVisitor) {
+                ga('send', {
+                    hitType: 'event',
+                    eventCategory: 'pokemon',
+                    eventAction:  'joined',
+                    eventLabel: pokemonToken + ' joined as visitor'
                     });
                 } else {
                 ga('send', {
@@ -907,6 +917,8 @@
                     if (pokeInfo.reachedAdulthood === true){ itemClass += 'adult '; }
                     if (pokeInfo.reachedAdulthood === true && pokeInfo.growthCycles <= 0){ itemClass += 'fainted '; }
                     if (pokeInfo.watchFlag === true){ itemClass += 'watched '; }
+                    if (pokeInfo.isVisitor === true){ itemClass += 'visitor '; }
+                    if (pokeInfo.isVisitor === true && pokeInfo.daysOld == 0){ itemClass += 'new '; }
                     pokeListMarkup += '<li class="'+ itemClass +'" data-id="'+ pokeInfo.id +'">'+ pokeIcon + pokeCount + '</li>';
 
                     } else if (pokeInfo.eggCycles > 0){
@@ -916,6 +928,7 @@
                     var pokeCount = '<span class="count egg">-'+pokeInfo.eggCycles+'</span>';
                     var itemClass = 'egg ';
                     if (pokeInfo.watchFlag === true){ itemClass += 'watched '; }
+                    if (pokeInfo.isVisitor === true){ itemClass += 'visitor '; }
                     if (pokeInfo.daysOld == 0){ itemClass += 'new '; }
                     pokeListMarkup += '<li class="'+ itemClass +'" data-id="'+ pokeInfo.id +'">'+ pokeIcon + pokeCount + '</li>';
 
@@ -1289,9 +1302,23 @@
             updateBattleCycles();
             }
 
-        // Trigger a visitor chance if allowed
-        if (allowVisitors){
-            // allow visitor code
+        // Trigger a visitor chance if allowed or it's the first day and there's room
+        var remainingSlots = thisZoneData.capacity - thisZoneData.currentPokemon.length;
+        var remainingPercent = (remainingSlots / thisZoneData.capacity) * 100;
+        if ((allowVisitors || thisZoneData.day === 1)
+            && remainingSlots >= 1){
+
+            // Always summon a ditto on the first day of the sim
+            if (thisZoneData.day === 1){ triggerZoneVisitor('ditto'); }
+
+            // Else if population numbers are low after a year, summon a shiny ditto
+            else if (thisZoneData.day > 360 && remainingPercent < 50){ triggerZoneVisitor('shiny-ditto'); }
+
+            // Otherwise, summon a legendary, mythical, or basic pokemon based on number of days passed
+            else if (thisZoneData.day % 1780 === 0){ triggerZoneVisitor('mythical'); }
+            else if (thisZoneData.day % 360 === 0){ triggerZoneVisitor('legendary'); }
+            else if (thisZoneData.day % 30 === 0){ triggerZoneVisitor('basic'); }
+
             }
 
         //var $timer = $('.details.zone .timer .complete', $panelMainOverview);
@@ -1767,7 +1794,7 @@
 
         // Check to see if we're at high (90%) zone capacity already
         var zoneCapacityPercent = ((thisZoneData.currentPokemon.length / thisZoneData.capacity) * 100);
-        var zoneIsOvercrowded = zoneCapacityPercent >= 99 ? true : false;
+        var zoneIsOvercrowded = zoneCapacityPercent >= 95 ? true : false;
         //console.log('zoneCapacityPercent = ', zoneCapacityPercent);
         //console.log('zoneIsOvercrowded = ', zoneIsOvercrowded);
 
@@ -2019,6 +2046,78 @@
         if (thisZoneData.currentPokemon.length <= 1){ return false; }
 
         // ...
+
+    }
+
+    // Define a function for triggering a zone visitor
+    function triggerZoneVisitor(visitorKind){
+        //console.log('triggerZoneVisitor(visitorKind)', visitorKind);
+        if (typeof visitorKind !== 'string'){ visitorKind = 'basic'; }
+
+        // Collect or calculate the visitor token, if possible
+        var visitorToken = false;
+        if (visitorKind === 'basic'
+            || visitorKind === 'legendary'
+            || visitorKind === 'mythical'){
+
+            // Loop through basic pokemon and calculate chances of each
+            var basicPokemonChances = [];
+            for (var key = 0; key < BasicPokemonSpeciesIndexTokens.length; key++){
+                var pokeToken = BasicPokemonSpeciesIndexTokens[key];
+                var pokeInfo = PokemonSpeciesIndex[pokeToken];
+                var pokeChance = 0;
+
+                // If this isn't the right class of pokemon, continue to next
+                if (visitorKind === 'basic' && pokeInfo.class !== ''){ continue; }
+                else if (visitorKind !== 'basic' && pokeInfo.class !== visitorKind){ continue; }
+
+                // Increase the chance of this pokemon appearing based on type appeal
+                for (var key2 = 0; key2 < pokeInfo.types.length; key2++){
+                    var typeToken = pokeInfo.types[key2];
+                    if (thisZoneData.currentStats['types'][typeToken] > 0){
+                        pokeChance += thisZoneData.currentStats['types'][typeToken];
+                        }
+                    }
+
+                // Decrease the chance if there is already a colony of this species
+                if (typeof thisZoneData.addedPokemonSpecies[pokeToken] !== 'undefined'){
+                    pokeChance -= thisZoneData.addedPokemonSpecies[pokeToken];
+                    }
+
+                // If the chance was more than zero, push into the queue
+                if (pokeChance > 0){
+                    basicPokemonChances.push({
+                        token: pokeToken,
+                        chance: pokeChance
+                        });
+                    }
+
+                }
+
+            // If basic pokemon were queued, sort them by chance and pick most likely
+            if (basicPokemonChances.length){
+                basicPokemonChances.sort(function (pokeA, pokeB){
+                    if (pokeA.chance > pokeB.chance){ return -1; }
+                    else if (pokeA.chance < pokeB.chance){ return 1; }
+                    else { return 0; }
+                    });
+                visitorToken = basicPokemonChances[0].token;
+                }
+            //console.log('basicPokemonChances = ', basicPokemonChances);
+
+            } else if (typeof PokemonSpeciesIndex[visitorKind] !== 'undefined'){
+
+            visitorToken = visitorKind;
+
+            }
+
+        // If visitor token was not set, we should return early
+        //console.log('visitorToken = ', visitorToken);
+        if (visitorToken === false){ return false; }
+
+        // Collect the visitor's info and then add it to the zone
+        //var visitorInfo = PokemonSpeciesIndex[visitorToken];
+        addPokemonToZone(visitorToken, false, 0, true);
 
     }
 
