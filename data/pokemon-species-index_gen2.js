@@ -1394,6 +1394,43 @@
             prevEvolution: 'seadra'
             },
 
+        'phanpy': {
+            order: indexOrder++,
+            token: 'phanpy',
+            name: 'Phanpy',
+            number: 231,
+            types: ['ground'],
+            baseStats: {hp: 90, phAttack: 60, phDefense: 60, spAttack: 40, spDefense: 40, speed: 40},
+            abilities: {0: 'pickup', hidden: 'sand-veil'},
+            height: 0.5,
+            weight: 33.5,
+            colors: ['blue', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'donphan',
+                method: 'level-up',
+                value: 25
+                }]
+            },
+        'donphan': {
+            order: indexOrder++,
+            token: 'donphan',
+            name: 'Donphan',
+            number: 232,
+            types: ['ground'],
+            baseStats: {hp: 90, phAttack: 120, phDefense: 120, spAttack: 60, spDefense: 60, speed: 50},
+            abilities: {0: 'sturdy', hidden: 'sand-veil'},
+            height: 1.1,
+            weight: 120,
+            colors: ['black', 'gray', 'white'],
+            prevo: 'phanpy',
+            evoLevel: 25,
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'phanpy'
+            },
+
         'porygon2': {
             order: thisIndex.afterOrder('porygon'),
             token: 'porygon2',
