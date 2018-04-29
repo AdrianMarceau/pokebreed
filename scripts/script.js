@@ -1262,14 +1262,13 @@
 
     }
 
-    //
-
     // Define a timeout function for incrementing the day counter
     var dayTimeout = false;
     var dayTimeoutStarted = false;
     var dayTimeoutDuration = 1000;
-    function updateDay(updateCycles){
+    function updateDay(updateCycles, allowVisitors){
         if (typeof updateCycles !== 'boolean'){ updateCycles = true; }
+        if (typeof allowVisitors !== 'boolean'){ allowVisitors = updateCycles; }
 
         // Generate a snapshot of the zone stats and add to history
         var currentZoneStats = getCurrentZoneStats();
@@ -1280,68 +1279,19 @@
         //console.log('Day #'+thisZoneData.day);
 
         // Send an analytics event for the amount of time that has passed
-        if (typeof ga !== 'undefined'){
-            // Send an event for the first day, month, and year
-            if (thisZoneData.day === 1){
-                ga('send', {
-                    hitType: 'event',
-                    eventCategory: 'session',
-                    eventAction: 'checkpoint',
-                    eventLabel: '1st Day'
-                    });
-                } else if (thisZoneData.day === 30){
-                ga('send', {
-                    hitType: 'event',
-                    eventCategory: 'session',
-                    eventAction: 'checkpoint',
-                    eventLabel: '1st Month'
-                    });
-                } else if (thisZoneData.day === 365){
-                ga('send', {
-                    hitType: 'event',
-                    eventCategory: 'session',
-                    eventAction: 'checkpoint',
-                    eventLabel: '1st Year'
-                    });
-                }
-            // Send an event for each year that passes
-            if (thisZoneData.day > 30 && thisZoneData.day % 30 === 0){
-                ga('send', {
-                    hitType: 'event',
-                    eventCategory: 'session',
-                    eventAction: 'checkpoint',
-                    eventLabel: Math.floor(thisZoneData.day / 30) + ' Months'
-                    });
-                }
-            // Send an event for each year that passes
-            if (thisZoneData.day > 365 && thisZoneData.day % 365 === 0){
-                ga('send', {
-                    hitType: 'event',
-                    eventCategory: 'session',
-                    eventAction: 'checkpoint',
-                    eventLabel: Math.floor(thisZoneData.day / 365)+ ' Years'
-                    });
-                }
+        if (typeof ga !== 'undefined'){ sendSessionAnalytics(thisZoneData.day); }
 
-
-            if (thisZoneData.day === 1 || thisZoneData.day % 10 == 0){
-                if (thisZoneData.day % 10 == 0){
-                    ga('send', {
-                        hitType: 'event',
-                        eventCategory: 'session',
-                        eventAction: 'checkpoint',
-                        eventLabel: 'days-passed',
-                        eventValue: thisZoneData.day
-                        });
-                    }
-                }
-            }
-
+        // Update growth, egg, etc, cycles if allowed
         if (updateCycles){
             updateGrowthCycles();
             updateEggCycles();
             updateBreedingCycles();
             updateBattleCycles();
+            }
+
+        // Trigger a visitor chance if allowed
+        if (allowVisitors){
+            // allow visitor code
             }
 
         //var $timer = $('.details.zone .timer .complete', $panelMainOverview);
@@ -2435,6 +2385,65 @@
 
         // Return calculated influence points
         return influencePoints;
+
+    }
+
+    // Define a function for sending session analytics to google
+    function sendSessionAnalytics(currentDay){
+
+        // Send an event for the first day, month, and year
+        if (currentDay === 1){
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'session',
+                eventAction: 'checkpoint',
+                eventLabel: '1st Day'
+                });
+            } else if (currentDay === 30){
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'session',
+                eventAction: 'checkpoint',
+                eventLabel: '1st Month'
+                });
+            } else if (currentDay === 365){
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'session',
+                eventAction: 'checkpoint',
+                eventLabel: '1st Year'
+                });
+            }
+        // Send an event for each year that passes
+        if (currentDay > 30 && currentDay % 30 === 0){
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'session',
+                eventAction: 'checkpoint',
+                eventLabel: Math.floor(currentDay / 30) + ' Months'
+                });
+            }
+        // Send an event for each year that passes
+        if (currentDay > 365 && currentDay % 365 === 0){
+            ga('send', {
+                hitType: 'event',
+                eventCategory: 'session',
+                eventAction: 'checkpoint',
+                eventLabel: Math.floor(currentDay / 365)+ ' Years'
+                });
+            }
+        // Send an event every 10 days with the total days that have passed
+        if (currentDay === 1 || currentDay % 10 == 0){
+            if (currentDay % 10 == 0){
+                ga('send', {
+                    hitType: 'event',
+                    eventCategory: 'session',
+                    eventAction: 'checkpoint',
+                    eventLabel: 'days-passed',
+                    eventValue: currentDay
+                    });
+                }
+            }
 
     }
 
