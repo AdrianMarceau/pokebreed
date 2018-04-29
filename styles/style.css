@@ -40,22 +40,6 @@ body.pixel-perfect img {
     -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
 }
 
-@keyframes MoveUpDown {
-  0%, 100% { top: 0; }
-  50% { top: -1px; }
-}
-@keyframes MoveUpDown2 {
-  0%, 100% { top: -1px; }
-  50% { top: 0; }
-}
-@keyframes MoveUpDown3 {
-  0%, 100% { top: -4; }
-  50% { top: -5px; }
-}
-@keyframes MoveUpDown4 {
-  0%, 100% { top: -2; }
-  50% { top: -3px; }
-}
 
 .panel {
     min-width: 500px;
@@ -145,11 +129,15 @@ body.pixel-perfect img {
     padding-right: 12px;
     display: inline-block;
 }
+@keyframes MoveUpDownD {
+  0%, 100% { top: -2; }
+  50% { top: -3px; }
+}
 .panel h1 .subtext .icon {
     position: absolute;
     right: -6px;
     top: -2px;
-    animation: MoveUpDown4 2s linear infinite;
+    animation: MoveUpDownD 2s linear infinite;
 }
 .panel h1 .version {
     position: absolute;
@@ -468,17 +456,24 @@ body.pixel-perfect img {
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }
+@keyframes MoveUpDownA {
+  0%, 100% { top: 0; }
+  50% { top: -1px; }
+}
+@keyframes MoveUpDownB {
+  0%, 100% { top: -1px; }
+  50% { top: 0; }
+}
 .panel .overview.main .details.pokemon .list .sprite {
     position: relative;
     z-index: 2;
     top: 0;
-    animation: MoveUpDown 1s linear infinite;
 }
 .panel .overview.main .details.pokemon .list li:nth-child(even) .sprite {
-    animation: MoveUpDown 1s linear infinite;
+    animation: MoveUpDownA 1s linear infinite;
 }
 .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
-    animation: MoveUpDown2 1s linear infinite;
+    animation: MoveUpDownB 1s linear infinite;
 }
 .panel .overview.main .details.pokemon .list .sprite.overlay {
     position: absolute;
@@ -865,9 +860,13 @@ body.pixel-perfect img {
     z-index: 10;
     bottom: 0;
 }
+@keyframes MoveUpDownC {
+  0%, 100% { top: -4; }
+  50% { top: -5px; }
+}
 .panel .buttons button:hover img,
 .panel .buttons button[data-token="ditto"] img {
-    animation: MoveUpDown3 1s linear infinite;
+    animation: MoveUpDownC 1s linear infinite;
 }
 .panel .buttons button strong {
     margin: 0 auto;
