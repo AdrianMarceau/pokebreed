@@ -2070,6 +2070,7 @@
                 // If this isn't the right class of pokemon, continue to next
                 if (visitorKind === 'basic' && pokeInfo.class !== ''){ continue; }
                 else if (visitorKind !== 'basic' && pokeInfo.class !== visitorKind){ continue; }
+                else if (pokeToken === 'ditto' || pokeToken === 'shiny-ditto'){ continue; }
 
                 // Increase the chance of this pokemon appearing based on type appeal
                 for (var key2 = 0; key2 < pokeInfo.types.length; key2++){
@@ -2082,6 +2083,7 @@
                 // Decrease the chance if there is already a colony of this species
                 if (typeof thisZoneData.addedPokemonSpecies[pokeToken] !== 'undefined'){
                     pokeChance -= thisZoneData.addedPokemonSpecies[pokeToken];
+                    if (visitorKind !== 'basic'){ pokeChance = 0; }
                     }
 
                 // If the chance was more than zero, push into the queue
