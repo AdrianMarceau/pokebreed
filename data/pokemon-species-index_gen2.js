@@ -1137,6 +1137,41 @@
             eggGroups: ['field']
             },
 
+        'teddiursa': {
+            order: indexOrder++,
+            token: 'teddiursa',
+            name: 'Teddiursa',
+            number: 216,
+            types: ['normal'],
+            baseStats: {hp: 60, phAttack: 80, phDefense: 50, spAttack: 50, spDefense: 50, speed: 40},
+            abilities: {0: 'pickup', 1: 'quick-feet', hidden: 'honey-gather'},
+            height: 0.6,
+            weight: 8.8,
+            colors: ['brown', 'white', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'ursaring',
+                method: 'level-up',
+                value: 30
+                }]
+            },
+        'ursaring': {
+            order: indexOrder++,
+            token: 'ursaring',
+            name: 'Ursaring',
+            number: 217,
+            types: ['normal'],
+            baseStats: {hp: 90, phAttack: 130, phDefense: 75, spAttack: 75, spDefense: 75, speed: 55},
+            abilities: {0: 'guts', 1: 'quick-feet', hidden: 'unnerve'},
+            height: 1.8,
+            weight: 125.8,
+            colors: ['brown', 'yellow', 'white'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'teddiursa'
+            },
+
         'skarmory': {
             order: indexOrder++,
             token: 'skarmory',
