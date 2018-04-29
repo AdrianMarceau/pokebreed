@@ -1261,6 +1261,41 @@
             eggGroups: ['water-1', 'water-3']
             },
 
+        'remoraid': {
+            order: indexOrder++,
+            token: 'remoraid',
+            name: 'Remoraid',
+            number: 223,
+            types: ['water'],
+            baseStats: {hp: 35, phAttack: 65, phDefense: 35, spAttack: 65, spDefense: 35, speed: 65},
+            abilities: {0: 'hustle', 1: 'sniper', hidden: 'moody'},
+            height: 0.6,
+            weight: 12,
+            colors: ['gray', 'white'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'water-2'],
+            nextEvolutions: [{
+                species: 'octillery',
+                method: 'level-up',
+                value: 25
+                }]
+            },
+        'octillery': {
+            order: indexOrder++,
+            token: 'octillery',
+            name: 'Octillery',
+            number: 224,
+            types: ['water'],
+            baseStats: {hp: 75, phAttack: 105, phDefense: 75, spAttack: 105, spDefense: 75, speed: 45},
+            abilities: {0: 'suction-cups', 1: 'sniper', hidden: 'moody'},
+            height: 0.9,
+            weight: 28.5,
+            colors: ['red', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'water-2'],
+            prevEvolution: 'remoraid'
+            },
+
         'skarmory': {
             order: indexOrder++,
             token: 'skarmory',
