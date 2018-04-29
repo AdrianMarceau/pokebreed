@@ -1073,7 +1073,7 @@
             weight: 3.9,
             colors: ['green', 'yellow', 'pink'],
             eggCycles: 20,
-            eggGroups: ['water-2'],
+            eggGroups: ['water-2']
             },
 
         'scizor': {
@@ -1104,7 +1104,7 @@
             weight: 20.5,
             colors: ['yellow', 'red', 'white'],
             eggCycles: 20,
-            eggGroups: ['bug'],
+            eggGroups: ['bug']
             },
 
         'heracross': {
@@ -1170,6 +1170,41 @@
             eggCycles: 20,
             eggGroups: ['field'],
             prevEvolution: 'teddiursa'
+            },
+
+        'slugma': {
+            order: indexOrder++,
+            token: 'slugma',
+            name: 'Slugma',
+            number: 218,
+            types: ['fire'],
+            baseStats: {hp: 40, phAttack: 40, phDefense: 40, spAttack: 70, spDefense: 40, speed: 20},
+            abilities: {0: 'magma-armor', 1: 'flame-body', hidden: 'weak-armor'},
+            height: 0.7,
+            weight: 35,
+            colors: ['red', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            nextEvolutions: [{
+                species: 'magcargo',
+                method: 'level-up',
+                value: 38
+                }]
+            },
+        'magcargo': {
+            order: indexOrder++,
+            token: 'magcargo',
+            name: 'Magcargo',
+            number: 219,
+            types: ['fire', 'rock'],
+            baseStats: {hp: 60, phAttack: 50, phDefense: 120, spAttack: 90, spDefense: 80, speed: 30},
+            abilities: {0: 'magma-armor', 1: 'flame-body', hidden: 'weak-armor'},
+            height: 0.8,
+            weight: 55,
+            colors: ['red', 'gray', 'yellow', 'orange'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'slugma'
             },
 
         'skarmory': {
