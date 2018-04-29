@@ -2083,7 +2083,7 @@
                 // Increase the chance of this pokemon appearing based on type appeal
                 for (var key2 = 0; key2 < pokeInfo.types.length; key2++){
                     var typeToken = pokeInfo.types[key2];
-                    if (thisZoneData.currentStats['types'][typeToken] > 0){
+                    if (thisZoneData.currentStats['types'][typeToken] !== 0){
                         pokeChance += thisZoneData.currentStats['types'][typeToken];
                         }
                     }
@@ -2111,7 +2111,9 @@
                     else if (pokeA.chance < pokeB.chance){ return 1; }
                     else { return 0; }
                     });
-                visitorToken = basicPokemonChances[0].token;
+                if (basicPokemonChances[0].chance > 0){
+                    visitorToken = basicPokemonChances[0].token;
+                    }
                 }
             //console.log('basicPokemonChances = ', basicPokemonChances);
 
