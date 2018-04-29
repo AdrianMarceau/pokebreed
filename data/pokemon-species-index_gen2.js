@@ -1245,6 +1245,22 @@
             prevEvolution: 'swinub'
             },
 
+        'corsola': {
+            order: indexOrder++,
+            token: 'corsola',
+            name: 'Corsola',
+            number: 222,
+            types: ['water', 'rock'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 65, phAttack: 55, phDefense: 95, spAttack: 65, spDefense: 95, speed: 35},
+            abilities: {0: 'hustle', 1: 'natural-cure', hidden: 'regenerator'},
+            height: 0.6,
+            weight: 5,
+            colors: ['pink', 'white'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'water-3']
+            },
+
         'skarmory': {
             order: indexOrder++,
             token: 'skarmory',
