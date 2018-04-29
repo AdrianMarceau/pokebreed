@@ -264,6 +264,14 @@
                 var baseInfoA = PokemonSpeciesIndex[infoA.basicEvolution];
                 var baseInfoB = PokemonSpeciesIndex[infoB.basicEvolution];
 
+                var basicA = tokenA === infoA.basicEvolution ? true : false;
+                var basicB = tokenB === infoB.basicEvolution ? true : false;
+
+                var baseNumA = baseInfoA['number'];
+                var baseNumB = baseInfoB['number'];
+                if (typeof baseInfoA['subNumber'] !== 'undefined'){ baseNumA += (baseInfoA['subNumber'] / 10); }
+                if (typeof baseInfoB['subNumber'] !== 'undefined'){ baseNumB += (baseInfoB['subNumber'] / 10); }
+
                 var dittoA = false;
                 var dittoB = false;
                 if (tokenA === 'ditto'){ dittoA = true; }
@@ -284,10 +292,15 @@
                 if (infoA['class'] === 'legendary' || infoA['class'] === 'mythical' || infoA['class'] === 'ultra-beast'){ specialA = true; }
                 if (infoB['class'] === 'legendary' || infoB['class'] === 'mythical' || infoB['class'] === 'ultra-beast'){ specialB = true; }
 
-                var variantA = false;
-                var variantB = false;
-                if (infoA['formClass'].match(/-variant$/)){ variantA = true; }
-                if (infoB['formClass'].match(/-variant$/)){ variantB = true; }
+                var regVariantA = false;
+                var regVariantB = false;
+                if (infoA['formClass'] === 'regional-variant'){ regVariantA = true; }
+                if (infoB['formClass'] === 'regional-variant'){ regVariantB = true; }
+
+                var genderVariantA = false;
+                var genderVariantB = false;
+                if (infoA['formClass'] === 'gender-variant'){ genderVariantA = true; }
+                if (infoB['formClass'] === 'gender-variant'){ genderVariantB = true; }
 
                 if (false){ return 0; }
 
@@ -303,16 +316,33 @@
                 else if (unownA && !unownB){ return 1; }
                 else if (!unownA && unownB){ return -1; }
 
-                else if (baseInfoA['number'] < baseInfoB['number']){ return -1; }
-                else if (baseInfoA['number'] > baseInfoB['number']){ return 1; }
+                else if (baseNumA < baseNumB){ return -1; }
+                else if (baseNumA > baseNumB){ return 1; }
 
-                else if (variantA && !variantB){ return 1; }
-                else if (!variantA && variantB){ return -1; }
+                else if (regVariantA && !regVariantB){ return 1; }
+                else if (!regVariantA && regVariantB){ return -1; }
 
-                else if (infoA['order'] > infoB['order']){ return -1 * (variantA && variantB ? -1 : 1); }
-                else if (infoA['order'] < infoB['order']){ return 1 * (variantA && variantB ? -1 : 1); }
+                else if (genderVariantA && !genderVariantB){ return 1; }
+                else if (!genderVariantA && genderVariantB){ return -1; }
 
-                else { return 0; }
+                else if (genderVariantA && genderVariantB){
+
+                    if (infoA['order'] > infoB['order']){ return -1; }
+                    else if (infoA['order'] < infoB['order']){ return 1; }
+                    else { return 0; }
+
+                } else {
+
+                    var invertVariant = false;
+                    if (regVariantA && regVariantB && basicA && basicB){ invertVariant = true; }
+
+                    if (infoA['order'] > infoB['order']){ return -1 * (invertVariant ? -1 : 1); }
+                    else if (infoA['order'] < infoB['order']){ return 1 * (invertVariant ? -1 : 1); }
+                    else { return 0; }
+
+                }
+
+                return 0;
 
                 });
 
