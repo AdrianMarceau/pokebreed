@@ -1626,14 +1626,15 @@
                             return 1 + ((thisZoneData.currentPokemon.length - 1) * 10);
                             }
 
-                        // Burst evolutions may trigger automatically when this pokemon reaches adulthood
-                        if (methodToken === 'burst-evolution'
+                        // Burst and mega evolutions trigger automatically when this pokemon reaches adulthood
+                        if ((methodToken === 'burst-evolution'
+                            || methodToken === 'mega-evolution')
                             && pokemonInfo.reachedAdulthood === true){
                             return 100;
                             }
 
-                        // Mega evolutions always trigger automatically when this pokemon reaches adulthood
-                        if (methodToken === 'mega-evolution'
+                        // Primary reversions trigger automatically when this pokemon reaches adulthood
+                        if (methodToken === 'primal-reversion'
                             && pokemonInfo.reachedAdulthood === true){
                             return 100;
                             }
@@ -1667,7 +1668,9 @@
                             if (chanceValue1 > 0){
                                 triggeredMethod1 = true;
                                 triggeredChance += chanceValue1;
-                                if (nextEvolution.method === 'mega-evolution'){
+                                if (nextEvolution.method === 'mega-evolution'
+                                    || nextEvolution.method === 'burst-evolution'
+                                    || nextEvolution.method === 'primal-reversion'){
                                     triggeredMethod2 = true;
                                     }
                                 }
@@ -2519,14 +2522,16 @@
 
         // Multiply influence points if this pokemon is a mega or burst evolution
         if (typeof indexInfo.formClass !== 'undefined'){
-            if (indexInfo.formClass === 'burst-evolution'){ influencePoints = influencePoints * 5;  }
-            if (indexInfo.formClass === 'mega-evolution'){ influencePoints = influencePoints * 5;  }
+            if (indexInfo.formClass === 'burst-evolution'){ influencePoints = influencePoints * 4;  }
+            else if (indexInfo.formClass === 'mega-evolution'){ influencePoints = influencePoints * 6;  }
+            else if (indexInfo.formClass === 'primal-reversion'){ influencePoints = influencePoints * 8;  }
             }
 
-        // Multiply influence points if this pokemon is a legendary of a mythical
+        // Multiply influence points if this pokemon is a legendary, mythical, or ultra-beast
         if (typeof indexInfo.class !== 'undefined'){
-            if (indexInfo.class === 'legendary'){ influencePoints = influencePoints * 10;  }
-            else if (indexInfo.class === 'mythical'){ influencePoints = influencePoints * 10;  }
+            if (indexInfo.class === 'ultra-beast'){ influencePoints = influencePoints * 8;  }
+            else if (indexInfo.class === 'legendary'){ influencePoints = influencePoints * 10;  }
+            else if (indexInfo.class === 'mythical'){ influencePoints = influencePoints * 12;  }
             }
 
         // Return calculated influence points
