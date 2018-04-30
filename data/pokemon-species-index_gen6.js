@@ -993,6 +993,67 @@
             prevEvolution: 'latios'
             },
 
+        'primal-kyogre': {
+            order: thisIndex.afterOrder('kyogre'),
+            token: 'primal-kyogre',
+            name: 'Primal Kyogre',
+            class: 'legendary',
+            formClass: 'primal-reversion',
+            formToken: 'primal',
+            baseSpecies: 'kyogre',
+            number: 382,
+            types: ['water'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 150, phDefense: 90, spAttack: 180, spDefense: 160, speed: 90},
+            abilities: {0: 'primordial-sea'},
+            height: 9.8,
+            weight: 430,
+            colors: ['blue', 'white', 'yellow', 'red'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'kyogre'
+            },
+        'primal-groudon': {
+            order: thisIndex.afterOrder('groudon'),
+            token: 'primal-groudon',
+            name: 'Primal Groudon',
+            class: 'legendary',
+            formClass: 'primal-reversion',
+            formToken: 'primal',
+            baseSpecies: 'groudon',
+            number: 383,
+            types: ['ground', 'fire'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 180, phDefense: 160, spAttack: 150, spDefense: 90, speed: 90},
+            abilities: {0: 'desolate-land'},
+            height: 5,
+            weight: 999.7,
+            colors: ['red', 'yellow', 'gray', 'white'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'groudon'
+            },
+        'mega-rayquaza': {
+            order: thisIndex.afterOrder('rayquaza'),
+            token: 'mega-rayquaza',
+            name: 'Mega Rayquaza',
+            class: 'legendary',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'rayquaza',
+            number: 384,
+            types: ['dragon', 'flying'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 105, phAttack: 180, phDefense: 100, spAttack: 180, spDefense: 100, speed: 115},
+            abilities: {0: 'delta-stream'},
+            height: 10.8,
+            weight: 392,
+            colors: ['green', 'yellow', 'black'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'rayquaza'
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
@@ -1033,6 +1094,11 @@
 
         {base: 'latias', species: 'mega-latias', method: 'mega-evolution', value: 'latiasite'},
         {base: 'latios', species: 'mega-latios', method: 'mega-evolution', value: 'latiosite'},
+
+        {base: 'kyogre', species: 'primal-kyogre', method: 'primal-reversion', value: 'blue-orb'},
+        {base: 'groudon', species: 'primal-groudon', method: 'primal-reversion', value: 'red-orb'},
+
+        {base: 'rayquaza', species: 'mega-rayquaza', method: 'mega-evolution', value: 'meteorite'},
 
         ]);
 

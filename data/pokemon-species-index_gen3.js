@@ -562,6 +562,55 @@
             eggGroups: ['undiscovered']
             },
 
+        'kyogre': {
+            order: indexOrder++,
+            token: 'kyogre',
+            name: 'Kyogre',
+            class: 'legendary',
+            number: 382,
+            types: ['water'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 100, phDefense: 90, spAttack: 150, spDefense: 140, speed: 90},
+            abilities: {0: 'drizzle'},
+            height: 4.5,
+            weight: 352,
+            colors: ['blue', 'white', 'red', 'black'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+        'groudon': {
+            order: indexOrder++,
+            token: 'groudon',
+            name: 'Groudon',
+            class: 'legendary',
+            number: 383,
+            types: ['ground'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 150, phDefense: 140, spAttack: 100, spDefense: 90, speed: 90},
+            abilities: {0: 'drought'},
+            height: 3.5,
+            weight: 950,
+            colors: ['red', 'white', 'black', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+        'rayquaza': {
+            order: indexOrder++,
+            token: 'rayquaza',
+            name: 'Rayquaza',
+            class: 'legendary',
+            number: 384,
+            types: ['dragon', 'flying'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 105, phAttack: 150, phDefense: 90, spAttack: 150, spDefense: 90, speed: 95},
+            abilities: {0: 'air-lock'},
+            height: 7,
+            weight: 206.5,
+            colors: ['green', 'yellow', 'red', 'black'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
