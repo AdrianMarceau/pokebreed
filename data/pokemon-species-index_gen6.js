@@ -813,7 +813,7 @@
             abilities: {0: 'Steadfast'},
             height: 2.3,
             weight: 127,
-            color: 'Purple',
+            colors: ['white', 'purple'],
             eggGroups: ['undiscovered'],
             prevEvolution: 'mewtwo'
             },
@@ -952,6 +952,47 @@
             prevEvolution: 'swampert'
             },
 
+        'mega-latias': {
+            order: thisIndex.afterOrder('latias'),
+            token: 'mega-latias',
+            name: 'Mega Latias',
+            class: 'legendary',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'latias',
+            number: 380,
+            types: ['dragon', 'psychic'],
+            genderRatio: {female: 1.0000},
+            baseStats: {hp: 80, phAttack: 100, phDefense: 120, spAttack: 140, spDefense: 150, speed: 110},
+            abilities: {0: 'levitate'},
+            height: 1.8,
+            weight: 52,
+            colors: ['purple', 'white', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'latias'
+            },
+        'mega-latios': {
+            order: thisIndex.afterOrder('latios'),
+            token: 'mega-latios',
+            name: 'Mega Latios',
+            class: 'legendary',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'latios',
+            number: 381,
+            types: ['dragon', 'psychic'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 80, phAttack: 130, phDefense: 100, spAttack: 160, spDefense: 120, speed: 110},
+            abilities: {0: 'levitate'},
+            height: 2.3,
+            weight: 70,
+            colors: ['purple', 'white', 'red'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'latios'
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
@@ -989,6 +1030,9 @@
         {base: 'sceptile', species: 'mega-sceptile', method: 'mega-evolution', value: 'sceptilite'},
         {base: 'blaziken', species: 'mega-blaziken', method: 'mega-evolution', value: 'blazikenite'},
         {base: 'swampert', species: 'mega-swampert', method: 'mega-evolution', value: 'swampertite'},
+
+        {base: 'latias', species: 'mega-latias', method: 'mega-evolution', value: 'latiasite'},
+        {base: 'latios', species: 'mega-latios', method: 'mega-evolution', value: 'latiosite'},
 
         ]);
 

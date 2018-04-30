@@ -529,6 +529,39 @@
             eggGroups: ['undiscovered']
             },
 
+        'latias': {
+            order: indexOrder++,
+            token: 'latias',
+            name: 'Latias',
+            class: 'legendary',
+            number: 380,
+            types: ['dragon', 'psychic'],
+            genderRatio: {female: 1.0000},
+            baseStats: {hp: 80, phAttack: 80, phDefense: 90, spAttack: 110, spDefense: 130, speed: 110},
+            abilities: {0: 'levitate'},
+            height: 1.4,
+            weight: 40,
+            colors: ['red', 'white', 'blue', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+        'latios': {
+            order: indexOrder++,
+            token: 'latios',
+            name: 'Latios',
+            class: 'legendary',
+            number: 381,
+            types: ['dragon', 'psychic'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 80, phAttack: 90, phDefense: 80, spAttack: 130, spDefense: 110, speed: 110},
+            abilities: {0: 'levitate'},
+            height: 2,
+            weight: 60,
+            colors: ['blue', 'white', 'red'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
