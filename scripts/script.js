@@ -2129,11 +2129,15 @@
                 // Decrease the chance if there is already a colony of this species
                 if (typeof thisZoneData.addedPokemonSpecies[pokeToken] !== 'undefined'){
                     pokeChance -= thisZoneData.addedPokemonSpecies[pokeToken];
-                    if (visitorKind !== 'basic'){ pokeChance = 0; }
+                    if (visitorKind !== 'basic'){
+                        pokeChance *= -1;
+                        pokeChance -= thisZoneData.addedPokemonSpecies[pokeToken];
+                        }
                     }
 
                 // If the chance was more than zero, push into the queue
-                if (pokeChance > 0){
+                if (pokeChance > 0
+                    || visitorKind !== 'basic'){
                     basicPokemonChances.push({
                         token: pokeToken,
                         chance: pokeChance
@@ -2149,7 +2153,8 @@
                     else if (pokeA.chance < pokeB.chance){ return 1; }
                     else { return 0; }
                     });
-                if (basicPokemonChances[0].chance > 0){
+                if (basicPokemonChances[0].chance > 0
+                    || visitorKind !== 'basic'){
                     visitorToken = basicPokemonChances[0].token;
                     }
                 }
