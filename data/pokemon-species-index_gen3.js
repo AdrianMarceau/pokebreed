@@ -628,6 +628,23 @@
             eggGroups: ['undiscovered'],
             },
 
+        'deoxys': {
+            order: indexOrder++,
+            token: 'deoxys',
+            name: 'Deoxys',
+            class: 'mythical',
+            number: 386,
+            types: ['psychic'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 50, phAttack: 150, phDefense: 50, spAttack: 150, spDefense: 50, speed: 150},
+            abilities: {0: 'pressure'},
+            height: 1.7,
+            weight: 60.8,
+            colors: ['red', 'green', 'brown', 'purple'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 

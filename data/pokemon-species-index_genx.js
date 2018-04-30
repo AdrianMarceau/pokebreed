@@ -126,6 +126,67 @@
             eggGroups: ['ditto']
             },
 
+        'attack-deoxys': {
+            order: thisIndex.afterOrder('deoxys', 1),
+            token: 'attack-deoxys',
+            name: 'Attack Deoxys',
+            class: 'mythical',
+            formClass: 'burst-evolution',
+            formToken: 'attack',
+            baseSpecies: 'deoxys',
+            number: 386,
+            types: ['psychic'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 50, phAttack: 180, phDefense: 20, spAttack: 180, spDefense: 20, speed: 150},
+            abilities: {0: 'pressure'},
+            height: 1.7,
+            weight: 60.8,
+            colors: ['red', 'green', 'brown', 'purple'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'deoxys'
+            },
+        'defense-deoxys': {
+            order: thisIndex.afterOrder('deoxys', 2),
+            token: 'defense-deoxys',
+            name: 'Defense Deoxys',
+            class: 'mythical',
+            formClass: 'burst-evolution',
+            formToken: 'defense',
+            baseSpecies: 'deoxys',
+            number: 386,
+            types: ['psychic'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 50, phAttack: 70, phDefense: 160, spAttack: 70, spDefense: 160, speed: 90},
+            abilities: {0: 'pressure'},
+            height: 1.7,
+            weight: 60.8,
+            colors: ['red', 'green', 'brown', 'purple'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'deoxys'
+            },
+        'speed-deoxys': {
+            order: thisIndex.afterOrder('deoxys', 3),
+            token: 'speed-deoxys',
+            name: 'Speed Deoxys',
+            class: 'mythical',
+            formClass: 'burst-evolution',
+            formToken: 'speed',
+            baseSpecies: 'deoxys',
+            number: 386,
+            types: ['psychic'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 50, phAttack: 95, phDefense: 90, spAttack: 95, spDefense: 90, speed: 180},
+            abilities: {0: 'pressure'},
+            height: 1.7,
+            weight: 60.8,
+            colors: ['red', 'green', 'brown', 'purple'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'deoxys'
+            },
+
         'ash-greninja': {
             order: thisIndex.afterOrder('greninja'),
             token: 'ash-greninja',
@@ -186,12 +247,21 @@
 
     // Update previous gen pokemon with new next evolution data
     thisIndex.addNextEvolutions([
+
         {base: 'mime-jr', species: 'mr-mime', method: 'affection', value: 'high', method2: 'chance', value2: 50},
         {base: 'mime-jr', species: 'ms-mime', method: 'affection', value: 'high', method2: 'chance', value2: 50},
+
         {base: 'machamp', species: 'burst-machamp', method: 'burst-evolution', value: 'fighting-spirit', method2: 'type-surge', value2: 'fighting'},
         {base: 'nidoqueen', species: 'estrus-nidoqueen', method: 'burst-evolution', value: 'burning-passion', method2: 'type-surge', value2: 'poison'},
+
+        {base: 'deoxys', species: 'attack-deoxys', method: 'burst-evolution', value: 'attack-surge', method2: 'chance', value2: 33},
+        {base: 'deoxys', species: 'defense-deoxys', method: 'burst-evolution', value: 'defense-surge', method2: 'chance', value2: 33},
+        {base: 'deoxys', species: 'speed-deoxys', method: 'burst-evolution', value: 'speed-surge', method2: 'chance', value2: 33},
+
         {base: 'floette', species: 'eternal-floette', method: 'burst-evolution', value: 'ultimate-weapon', method2: 'extinction', value2: true},
+
         {base: 'greninja', species: 'ash-greninja', method: 'burst-evolution', value: 'battle-bond', method2: 'extinction', value2: true},
+
         ]);
 
 })();
