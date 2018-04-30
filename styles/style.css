@@ -445,7 +445,7 @@ body.pixel-perfect img {
 }
 @keyframes fadeOut {
     from { opacity: 1; transform: scale(1, 1); bottom: 0; margin-right: 5px; }
-    to { opacity: 0; transform: scale(0, 0); bottom: -45px; margin-right: -45px;}
+    to { opacity: 0; transform: scale(0, 0); bottom: -45px; margin-right: -45px; pointer-events: none; }
 }
 .panel .overview.main .details.pokemon .list.pokemon li.fainted {
     position: relative;
