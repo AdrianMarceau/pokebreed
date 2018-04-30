@@ -611,6 +611,23 @@
             eggGroups: ['undiscovered']
             },
 
+        'jirachi': {
+            order: indexOrder++,
+            token: 'jirachi',
+            name: 'Jirachi',
+            class: 'mythical',
+            number: 385,
+            types: ['steel', 'psychic'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 100, phDefense: 100, spAttack: 100, spDefense: 100, speed: 100},
+            abilities: {0: 'serene-grace'},
+            height: 0.3,
+            weight: 1.1,
+            colors: ['yellow', 'white', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
