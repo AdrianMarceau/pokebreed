@@ -35,6 +35,7 @@ if (isset($_GET['gen'])
         <meta id="myViewport" name="viewport" content="width=device-width, initial-scale=1">
         <base href="<?= POKEBS_ROOT_URL ?>" />
         <link type="text/css" rel="stylesheet" href="styles/style.css?v<?= $version_number ?>" />
+        <link type="text/css" rel="stylesheet" href="styles/style-responsive.css?v<?= $version_number ?>" />
         <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
         <? if (!$is_local && GA_ACCOUNT_ID){ ?>
         <!-- Google Analytics -->
