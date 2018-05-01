@@ -1,0 +1,44 @@
+
+/* -- BASE STYLES -- */
+
+body, html {
+   margin: 0;
+   padding: 0;
+   text-align: center;
+   background-color: #1c1c1c;
+   color: #FFFFFF;
+   font-family: Arial, sans-serif;
+   font-size: 16px;
+   line-height: 1.4;
+}
+html {
+    background-image: url(../images/icons/pokemon/0.png);
+    background-repeat: repeat;
+    background-position: center center;
+}
+body {
+    padding: 20px;
+    background-color: transparent;
+    box-sizing: border-box;
+    min-width: 534px;
+}
+h1 {
+    font-size: 140%;
+    margin: 0 auto 20px;
+}
+p {
+    font-size: 100%;
+    margin: 0 auto 10px;
+}
+p:last-child {
+    margin-bottom: 0;
+}
+body.pixel-perfect img {
+    image-rendering: optimizeSpeed;             /*                     */
+    image-rendering: -moz-crisp-edges;          /* Firefox             */
+    image-rendering: -o-crisp-edges;            /* Opera               */
+    image-rendering: -webkit-optimize-contrast; /* Chrome (and Safari) */
+    image-rendering: optimize-contrast;         /* CSS3 Proposed       */
+    image-rendering: pixelated;                 /* CSS3 Proposed?       */
+    -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
+}
