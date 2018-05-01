@@ -194,6 +194,61 @@
             prevEvolution: 'prinplup'
             },
 
+        'starly': {
+            order: indexOrder++,
+            token: 'starly',
+            name: 'Starly',
+            number: 396,
+            types: ['normal', 'flying'],
+            baseStats: {hp: 40, phAttack: 55, phDefense: 30, spAttack: 30, spDefense: 30, speed: 60},
+            abilities: {0: 'keen-eye', hidden: 'reckless'},
+            height: 0.3,
+            weight: 2,
+            colors: ['black', 'gray', 'white', 'orange'],
+            eggCycles: 15,
+            eggGroups: ['flying'],
+            nextEvolutions: [{
+                species: 'staravia',
+                method: 'level-up',
+                value: 14
+                }]
+            },
+        'staravia': {
+            order: indexOrder++,
+            token: 'staravia',
+            name: 'Staravia',
+            number: 397,
+            types: ['normal', 'flying'],
+            baseStats: {hp: 55, phAttack: 75, phDefense: 50, spAttack: 40, spDefense: 40, speed: 80},
+            abilities: {0: 'intimidate', hidden: 'reckless'},
+            height: 0.6,
+            weight: 15.5,
+            colors: ['black', 'gray', 'white', 'orange'],
+            eggCycles: 15,
+            eggGroups: ['flying'],
+            prevEvolution: 'starly',
+            nextEvolutions: [{
+                species: 'staraptor',
+                method: 'level-up',
+                value: 34
+                }]
+            },
+        'staraptor': {
+            order: indexOrder++,
+            token: 'staraptor',
+            name: 'Staraptor',
+            number: 398,
+            types: ['normal', 'flying'],
+            baseStats: {hp: 85, phAttack: 120, phDefense: 70, spAttack: 50, spDefense: 60, speed: 100},
+            abilities: {0: 'intimidate', hidden: 'reckless'},
+            height: 1.2,
+            weight: 24.9,
+            colors: ['black', 'gray', 'white', 'red', 'orange'],
+            eggCycles: 15,
+            eggGroups: ['flying'],
+            prevEvolution: 'staravia'
+            },
+
         'ambipom': {
             order: thisIndex.afterOrder('aipom'),
             token: 'ambipom',
