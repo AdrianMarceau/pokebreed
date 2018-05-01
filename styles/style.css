@@ -592,12 +592,6 @@ body.pixel-perfect img {
     -webkit-border-radius: 3px;
     border-radius: 3px;
 }
-.panel .overview.types .title .main,
-.panel .overview.species .title .main {
-    display: block;
-    margin: 0 auto 2px;
-    padding-left: 15%;
-}
 .panel .overview.types .title .subs,
 .panel .overview.species .title .subs {
     display: block;
@@ -610,16 +604,19 @@ body.pixel-perfect img {
     display: block;
     box-sizing: border-box;
     float: left;
-    width: 60%;
+    width: 50%;
     text-align: center;
-}
-.panel .overview.types .title .subs .sub + .sub,
-.panel .overview.species .title .subs .sub + .sub {
-    width: 40%;
 }
 .panel .overview.types .wrap,
 .panel .overview.species .wrap {
     padding: 0 0 10px;
+    max-height: 400px;
+    overflow: hidden;
+    position: relative;
+}
+.panel .overview.types .wrap.ps-active-y,
+.panel .overview.species .wrap.ps-active-y {
+    padding-right: 8px;
 }
 .panel .overview.types .wrap:after,
 .panel .overview.species .wrap:after,
@@ -651,11 +648,11 @@ body.pixel-perfect img {
 }
 .panel .overview.types .list.positive,
 .panel .overview.species .list.active {
-    width: 60%;
+    width: 50%;
 }
 .panel .overview.types .list.negative,
 .panel .overview.species .list.fainted {
-    width: 40%;
+    width: 50%;
 }
 .panel .overview.types .list.positive {
 
@@ -751,6 +748,31 @@ body.pixel-perfect img {
 .panel .overview.types .list.negative li.type .val,
 .panel .overview.species .list.fainted li.species .val {
     color: #db9494;
+}
+
+.panel .overview .ps-container {
+    position: relative;
+    overflow: hidden;
+    margin-right: 0;
+    padding-right: 12px;
+}
+.panel .overview .ps-container > .ps-scrollbar-y-rail {
+    width: 6px;
+    top: 3px;
+    bottom: auto;
+    background-color: rgba(0, 0, 0, 0.3);
+    opacity: 0.6;
+}
+.panel .overview .ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+    background-color: #373739;
+    width: 6px;
+}
+.panel .overview .ps-container:hover > .ps-scrollbar-x-rail,
+.panel .overview .ps-container:hover > .ps-scrollbar-y-rail {
+    opacity: 0.9;
+}
+.panel .overview .ps-container:not(.ps-active-y) > .ps-scrollbar-y-rail {
+    opacity: 0;
 }
 
 .panel .buttons {

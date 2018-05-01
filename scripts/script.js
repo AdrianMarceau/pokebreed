@@ -46,6 +46,7 @@
     var $panelMainOverview = false;
     var $panelTypesOverview = false;
     var $panelSpeciesOverview = false;
+    var $panelOverviewFloatLists = false;
     var $panelButtons = false;
 
     var $pokePanelButtons = false;
@@ -97,13 +98,17 @@
         if (typeof window.PokemonAllowedGenerationsMax !== 'undefined'){ maxIndexKeyToLoad = window.PokemonAllowedGenerationsMax; }
         //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
 
+        // Collect references to key elements
         $panelMainOverview = $('.panel .overview.main');
         $panelTypesOverview = $('.panel .overview.types');
         $panelSpeciesOverview = $('.panel .overview.species');
+        $panelOverviewFloatLists = $('.panel .overview.floatlist');
         $panelButtons = $('.panel > .buttons');
-
         $pokePanelButtons = $panelButtons.find('.new-pokemon');
         $pokePanelLoading = $pokePanelButtons.find('.loading');
+
+        // Add the scrollbar to any wrapper that need it
+        $('.wrap', $panelOverviewFloatLists).perfectScrollbar({suppressScrollX: true});
 
         // Preload the type and pokemon indexes
         preloadTypeIndex(function(){
@@ -1121,14 +1126,9 @@
             }
         $('.list.fainted', $panelSpeciesOverview).append(speciesListMarkup);
 
-        // If the simulation has started, make sure there's room to show the lists
-        if (simulationStarted && thisDeviceWidth >= 1024){
-            var newMinHeight = 135;
-            newMinHeight += (25 * Math.max(numActiveShown, numFaintedShown, numPositivesShown, numNegativesShown));
-            //console.log('newMinHeight = ', newMinHeight);
-            $pokeDetails.css({minHeight:newMinHeight+'px'});
-            } else {
-            $pokeDetails.css({minHeight:''});
+        // If the simulation has started, make sure we update the scroll wrappers
+        if (simulationStarted){
+            $('.wrap', $panelOverviewFloatLists).perfectScrollbar('update');
             }
 
         // If at least one pokemon has been added, we can start the day timer

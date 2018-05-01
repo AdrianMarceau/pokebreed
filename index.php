@@ -34,8 +34,9 @@ if (isset($_GET['gen'])
         <meta name="robots" content="index,follow" />
         <meta id="myViewport" name="viewport" content="width=device-width, initial-scale=1">
         <base href="<?= POKEBS_ROOT_URL ?>" />
-        <link type="text/css" rel="stylesheet" href="styles/style.css?v<?= $version_number ?>" />
-        <link type="text/css" rel="stylesheet" href="styles/style-responsive.css?v<?= $version_number ?>" />
+        <link type="text/css" rel="stylesheet" href="styles/jquery.scrollbar.min.css?v<?= $version_number ?>" />
+        <link type="text/css" rel="stylesheet" href="styles/style.min.css?v<?= $version_number ?>" />
+        <link type="text/css" rel="stylesheet" href="styles/style-responsive.min.css?v<?= $version_number ?>" />
         <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
         <? if (!$is_local && GA_ACCOUNT_ID){ ?>
         <!-- Google Analytics -->
@@ -88,7 +89,7 @@ if (isset($_GET['gen'])
 
             <div class="midwrap">
 
-                <div class="overview types hidden">
+                <div class="overview floatlist types hidden">
                     <div class="details stats">
                         <div class="title">
                             <strong class="main">Type Appeal</strong>
@@ -104,7 +105,7 @@ if (isset($_GET['gen'])
                     </div>
                 </div>
 
-                <div class="overview species hidden">
+                <div class="overview floatlist species hidden">
                     <div class="title">
                         <strong class="main">Species List</strong>
                         <div class="subs">
@@ -165,6 +166,7 @@ if (isset($_GET['gen'])
         </div>
         <script type="text/javascript" src="scripts/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="scripts/detect-zoom.min.js"></script>
+        <script type="text/javascript" src="scripts/jquery.scrollbar.min.js"></script>
         <script type="text/javascript" src="scripts/script.js?v<?= $version_number ?>"></script>
         <script type="text/javascript">
 
