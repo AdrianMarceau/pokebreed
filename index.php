@@ -36,7 +36,7 @@ if (isset($_GET['gen'])
         <base href="<?= POKEBS_ROOT_URL ?>" />
         <link type="text/css" rel="stylesheet" href="styles/style-base.min.css?v<?= $version_number ?>" />
         <link type="text/css" rel="stylesheet" href="styles/jquery.scrollbar.min.css?v<?= $version_number ?>" />
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+        <!--  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous"> -->
         <link type="text/css" rel="stylesheet" href="styles/style-master.min.css?v<?= $version_number ?>" />
         <link type="text/css" rel="stylesheet" href="styles/style-responsive.min.css?v<?= $version_number ?>" />
         <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">

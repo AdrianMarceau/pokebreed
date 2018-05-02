@@ -211,3 +211,44 @@
     .panel .buttons button { margin: 0 2px 2px; }
     .panel .overview.main { padding: 6px 6px 3px; }
 }
+
+
+
+/* -- SUPER ZOOM STYLES -- */
+
+@media (min-width: 1350px) and (min-height: 900px){
+
+    .panel .overview.main .details.pokemon .wrap {
+        width: 848px;
+        max-height: 848px;
+    }
+    .panel .overview.main .details.pokemon .list.slots li,
+    .panel .overview.main .details.pokemon .list.pokemon li,
+    .panel .overview.main .details.pokemon .list.slots li.slot:before {
+        width: 80px;
+        height: 80px;
+    }
+    .panel .overview.main .details.pokemon .list .sprite {
+        width: 80px;
+        height: 60px;
+        image-rendering: optimizeSpeed;             /*                     */
+        image-rendering: -moz-crisp-edges;          /* Firefox             */
+        image-rendering: -o-crisp-edges;            /* Opera               */
+        image-rendering: -webkit-optimize-contrast; /* Chrome (and Safari) */
+        image-rendering: optimize-contrast;         /* CSS3 Proposed       */
+        image-rendering: pixelated;                 /* CSS3 Proposed?       */
+        -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
+    }
+    .panel .overview.types,
+    .panel .overview.species {
+        top: 220px;
+        width: 230px;
+        width: calc((100% - 900px) / 2);
+    }
+    .panel .overview.types .wrap,
+    .panel .overview.species .wrap {
+        max-height: 795px;
+    }
+
+}
+
