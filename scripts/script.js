@@ -1597,7 +1597,7 @@
                             return 1 + thisZoneData.currentStats['species'][methodValue];
                             }
 
-                        // Item, stone, and location-based evolutions trigger based on growth cycles (plus method2)
+                        // Item, stone, and location-based evolutions trigger based on growth cycles alone
                         if ((methodToken === 'evolution-item'
                                 || methodToken === 'evolution-stone'
                                 || methodToken === 'evolution-move'
@@ -1653,50 +1653,57 @@
                         var nextEvolutionInfo = PokemonSpeciesIndex[nextEvolution.species];
                         //console.log('|- Checking indexInfo.nextEvolutions['+i+'] = ', nextEvolution, nextEvolutionInfo);
 
-                        // Preset both method flags to false, we can change later
-                        var triggeredMethod1 = false;
-                        var triggeredMethod2 = false;
+                        // Define vars to count the number of trigged evos and switch type
+                        var switchKind = typeof nextEvolution.switch !== 'undefined' ? nextEvolution.switch : 'and';
+                        var totalMethods = 0;
+                        var triggeredMethods = 0;
+                        var forceEvo = false;
 
                         // Define a variable to hold the trigger chance value
                         var triggeredChance = 0;
 
-                        // Check to see if this pokemon's method-1 criteria have been met
-                        if (typeof nextEvolution.method !== 'undefined'
-                            && typeof nextEvolution.value !== 'undefined'){
-                            var chanceValue1 = calculateEvolutionChance(pokemonInfo, nextEvolution.method, nextEvolution.value);
-                            //console.log('|-- chanceValue1 = ', chanceValue1);
-                            if (chanceValue1 > 0){
-                                triggeredMethod1 = true;
-                                triggeredChance += chanceValue1;
-                                if (nextEvolution.method === 'mega-evolution'
-                                    || nextEvolution.method === 'burst-evolution'
-                                    || nextEvolution.method === 'primal-reversion'){
-                                    triggeredMethod2 = true;
-                                    }
-                                }
-                        }
-                        //console.log('|-- triggeredMethod1 = ', triggeredMethod1);
-                        //console.log('|-- triggeredChance = ', triggeredChance);
+                        // Loop through looking for methods
+                        for (var m = 1; m < 10; m++){
+                            var mt = m > 1 ? m : '';
+                            if (typeof nextEvolution['method'+mt] !== 'undefined'
+                                && typeof nextEvolution['value'+mt] !== 'undefined'){
 
-                        // Check to see if this pokemon's method-2 criteria have been met
-                        if (triggeredMethod1
-                            && typeof nextEvolution.method2 !== 'undefined'
-                            && typeof nextEvolution.value2 !== 'undefined'){
-                            var chanceValue2 = calculateEvolutionChance(pokemonInfo, nextEvolution.method2, nextEvolution.value2);
-                            //console.log('|-- chanceValue2 = ', chanceValue2);
-                            if (chanceValue2 > 0){
-                                triggeredMethod2 = true;
-                                triggeredChance += chanceValue2;
+                                totalMethods++;
+                                //console.log('Checking method #'+m+' for '+indexInfo.token+'... | totalMethods = ', totalMethods);
+
+                                var methodToken = nextEvolution['method'+mt];
+                                var methodValue = nextEvolution['value'+mt];
+                                //console.log('|-- methodToken = ', methodToken);
+                                //console.log('|-- methodValue = ', methodValue);
+
+                                var chanceValue = calculateEvolutionChance(pokemonInfo, methodToken, methodValue);
+                                //console.log('|-- chanceValue = ', chanceValue);
+
+                                if (chanceValue > 0){
+
+                                    triggeredMethods++;
+                                    triggeredChance += chanceValue;
+                                    //console.log('|-- totalMethods++; | totalMethods = ', totalMethods);
+                                    //console.log('|-- triggeredChance += '+chanceValue+'; | triggeredChance = ', triggeredChance);
+
+                                    // Force this evolution if it's a mega/burst/primal
+                                    if (methodToken === 'mega-evolution'
+                                        || methodToken === 'burst-evolution'
+                                        || methodToken === 'primal-reversion'){
+                                        forceEvo = true;
+                                        }
+
+                                    }
+
+                                } else {
+                                break;
                                 }
-                            } else {
-                            triggeredMethod2 = true;
                             }
-                        //console.log('|-- triggeredMethod2 = ', triggeredMethod2);
-                        //console.log('|-- triggeredChance = ', triggeredChance);
 
                         // If both methods were triggered, we can queue this evolution
-                        if (triggeredMethod1 === true
-                            && triggeredMethod2 === true){
+                        if ((switchKind === 'and' && triggeredMethods === totalMethods)
+                            || (switchKind === 'or' && triggeredMethods > 0)
+                            || (forceEvo === true)){
                             queuedEvolutions.push({
                                 token: nextEvolution.species,
                                 types: nextEvolutionInfo.types,
