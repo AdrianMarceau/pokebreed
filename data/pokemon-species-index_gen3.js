@@ -225,6 +225,41 @@
             prevEvolution: 'poochyena'
             },
 
+        'zigzagoon': {
+            order: indexOrder++,
+            token: 'zigzagoon',
+            name: 'Zigzagoon',
+            number: 263,
+            types: ['normal'],
+            baseStats: {hp: 38, phAttack: 30, phDefense: 41, spAttack: 30, spDefense: 41, speed: 60},
+            abilities: {0: 'pickup', 1: 'gluttony', hidden: 'quick-feet'},
+            height: 0.4,
+            weight: 17.5,
+            colors: ['brown', 'white', 'black'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'linoone',
+                method: 'level-up',
+                value: 20
+                }]
+            },
+        'linoone': {
+            order: indexOrder++,
+            token: 'linoone',
+            name: 'Linoone',
+            number: 264,
+            types: ['normal'],
+            baseStats: {hp: 78, phAttack: 70, phDefense: 61, spAttack: 50, spDefense: 61, speed: 100},
+            abilities: {0: 'pickup', 1: 'gluttony', hidden: 'quick-feet'},
+            height: 0.5,
+            weight: 32.5,
+            colors: ['white', 'brown'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            prevEvolution: 'zigzagoon'
+            },
+
         'wurmple': {
             order: indexOrder++,
             token: 'wurmple',
