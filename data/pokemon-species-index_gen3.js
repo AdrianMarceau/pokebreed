@@ -472,6 +472,41 @@
             prevEvolution: 'nuzleaf'
             },
 
+        'taillow': {
+            order: indexOrder++,
+            token: 'taillow',
+            name: 'Taillow',
+            number: 276,
+            types: ['normal', 'flying'],
+            baseStats: {hp: 40, phAttack: 55, phDefense: 30, spAttack: 30, spDefense: 30, speed: 85},
+            abilities: {0: 'guts', hidden: 'scrappy'},
+            height: 0.3,
+            weight: 2.3,
+            colors: ['blue', 'red', 'white'],
+            eggCycles: 15,
+            eggGroups: ['flying'],
+            nextEvolutions: [{
+                species: 'swellow',
+                method: 'level-up',
+                value: 22
+                }]
+            },
+        'swellow': {
+            order: indexOrder++,
+            token: 'swellow',
+            name: 'Swellow',
+            number: 277,
+            types: ['normal', 'flying'],
+            baseStats: {hp: 60, phAttack: 85, phDefense: 60, spAttack: 75, spDefense: 50, speed: 125},
+            abilities: {0: 'guts', hidden: 'scrappy'},
+            height: 0.7,
+            weight: 19.8,
+            colors: ['blue', 'red', 'white'],
+            eggCycles: 15,
+            eggGroups: ['flying'],
+            prevEvolution: 'taillow'
+            },
+
         'azurill': {
             order: thisIndex.beforeOrder('marill'),
             token: 'azurill',
