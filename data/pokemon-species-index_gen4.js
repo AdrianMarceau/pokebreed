@@ -642,6 +642,25 @@
             prevEvolution: 'porygon2',
             },
 
+        'gallade': {
+            order: thisIndex.afterOrder('gardevoir'),
+            token: 'gallade',
+            name: 'Gallade',
+            number: 475,
+            types: ['psychic', 'fighting'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 68, phAttack: 125, phDefense: 65, spAttack: 65, spDefense: 115, speed: 80},
+            abilities: {0: 'steadfast', hidden: 'justified'},
+            height: 1.6,
+            weight: 52,
+            colors: ['white', 'green', 'blue', 'red'],
+            prevo: 'kirlia',
+            eggCycles: 20,
+            eggPartner: 'gardevoir',
+            eggGroups: ['amorphous'],
+            prevEvolution: 'kirlia'
+            },
+
         'phione': {
             order: indexOrder++,
             token: 'phione',
@@ -713,6 +732,7 @@
         {base: 'gligar', species: 'gliscor', method: 'evolution-item', value: 'razor-fang', method2: 'type-surge', value2: ['ground', 'flying']},
         {base: 'piloswine', species: 'mamoswine', method: 'evolution-move', value: 'ancient-power', method2: 'type-surge', value2: ['ice', 'ground', 'rock']},
         {base: 'porygon2', species: 'porygon-z', method: 'evolution-item', value: 'dubious-disc', method2: 'type-appeal', value2: ['fire', 'ice', 'electric']},
+        {base: 'kirlia', species: 'gallade', method: 'evolution-stone', value: 'dawn-stone', method2: 'level-up', value2: 30, method3: 'type-appeal', value3: 'fighting', method4: 'chance', value4: 50},
         ]);
 
 })();

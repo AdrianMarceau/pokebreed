@@ -542,6 +542,64 @@
             prevEvolution: 'wingull'
             },
 
+        'ralts': {
+            order: indexOrder++,
+            token: 'ralts',
+            name: 'Ralts',
+            number: 280,
+            types: ['psychic', 'fairy'],
+            baseStats: {hp: 28, phAttack: 25, phDefense: 25, spAttack: 45, spDefense: 35, speed: 40},
+            abilities: {0: 'synchronize', 1: 'trace', hidden: 'telepathy'},
+            height: 0.4,
+            weight: 6.6,
+            colors: ['red', 'green', 'white'],
+            evos: ['kirlia'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            nextEvolutions: [{
+                species: 'kirlia',
+                method: 'level-up',
+                value: 20
+                }]
+            },
+        'kirlia': {
+            order: indexOrder++,
+            token: 'kirlia',
+            name: 'Kirlia',
+            number: 281,
+            types: ['psychic', 'fairy'],
+            baseStats: {hp: 38, phAttack: 35, phDefense: 35, spAttack: 65, spDefense: 55, speed: 50},
+            abilities: {0: 'synchronize', 1: 'trace', hidden: 'telepathy'},
+            height: 0.8,
+            weight: 20.2,
+            colors: ['green', 'white', 'red'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'ralts',
+            nextEvolutions: [{
+                species: 'gardevoir',
+                method: 'level-up',
+                value: 30
+                }]
+            },
+        'gardevoir': {
+            order: indexOrder++,
+            token: 'gardevoir',
+            name: 'Gardevoir',
+            number: 282,
+            types: ['psychic', 'fairy'],
+            baseStats: {hp: 68, phAttack: 65, phDefense: 65, spAttack: 125, spDefense: 115, speed: 80},
+            abilities: {0: 'synchronize', 1: 'trace', hidden: 'telepathy'},
+            height: 1.6,
+            weight: 48.4,
+            colors: ['white', 'green', 'red'],
+            prevo: 'kirlia',
+            evoLevel: 30,
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'kirlia'
+            },
+
         'azurill': {
             order: thisIndex.beforeOrder('marill'),
             token: 'azurill',

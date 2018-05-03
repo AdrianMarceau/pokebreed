@@ -993,6 +993,45 @@
             prevEvolution: 'latios'
             },
 
+        'mega-gardevoir': {
+            order: thisIndex.beforeOrder('gallade'),
+            token: 'mega-gardevoir',
+            name: 'Mega Gardevoir',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'gardevoir',
+            number: 282,
+            types: ['psychic', 'fairy'],
+            baseStats: {hp: 68, phAttack: 85, phDefense: 65, spAttack: 165, spDefense: 135, speed: 100},
+            abilities: {0: 'pixilate'},
+            height: 1.6,
+            weight: 48.4,
+            colors: ['white', 'green', 'red'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'gardevoir'
+            },
+        'mega-gallade': {
+            order: thisIndex.afterOrder('gallade'),
+            token: 'mega-gallade',
+            name: 'Mega Gallade',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'gallade',
+            number: 475,
+            types: ['psychic', 'fighting'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 68, phAttack: 165, phDefense: 95, spAttack: 65, spDefense: 115, speed: 110},
+            abilities: {0: 'inner-focus'},
+            height: 1.6,
+            weight: 56.4,
+            colors: ['white', 'blue', 'red', 'green'],
+            eggCycles: 20,
+            eggPartner: 'mega-gardevoir',
+            eggGroups: ['amorphous'],
+            prevEvolution: 'gallade'
+            },
+
         'primal-kyogre': {
             order: thisIndex.afterOrder('kyogre'),
             token: 'primal-kyogre',
@@ -1094,6 +1133,9 @@
 
         {base: 'latias', species: 'mega-latias', method: 'mega-evolution', value: 'latiasite'},
         {base: 'latios', species: 'mega-latios', method: 'mega-evolution', value: 'latiosite'},
+
+        {base: 'gardevoir', species: 'mega-gardevoir', method: 'mega-evolution', value: 'gardevoirite'},
+        {base: 'gallade', species: 'mega-gallade', method: 'mega-evolution', value: 'galladite'},
 
         {base: 'kyogre', species: 'primal-kyogre', method: 'primal-reversion', value: 'blue-orb'},
         {base: 'groudon', species: 'primal-groudon', method: 'primal-reversion', value: 'red-orb'},
