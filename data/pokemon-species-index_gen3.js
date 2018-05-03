@@ -507,6 +507,41 @@
             prevEvolution: 'taillow'
             },
 
+        'wingull': {
+            order: indexOrder++,
+            token: 'wingull',
+            name: 'Wingull',
+            number: 278,
+            types: ['water', 'flying'],
+            baseStats: {hp: 40, phAttack: 30, phDefense: 30, spAttack: 55, spDefense: 30, speed: 85},
+            abilities: {0: 'keen-eye', 1: 'hydration', hidden: 'rain-dish'},
+            height: 0.6,
+            weight: 9.5,
+            colors: ['white', 'blue', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'flying'],
+            nextEvolutions: [{
+                species: 'pelipper',
+                method: 'level-up',
+                value: 25
+                }]
+            },
+        'pelipper': {
+            order: indexOrder++,
+            token: 'pelipper',
+            name: 'Pelipper',
+            number: 279,
+            types: ['water', 'flying'],
+            baseStats: {hp: 60, phAttack: 50, phDefense: 100, spAttack: 95, spDefense: 70, speed: 65},
+            abilities: {0: 'keen-eye', 1: 'drizzle', hidden: 'rain-dish'},
+            height: 1.2,
+            weight: 28,
+            colors: ['yellow', 'white', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'flying'],
+            prevEvolution: 'wingull'
+            },
+
         'azurill': {
             order: thisIndex.beforeOrder('marill'),
             token: 'azurill',
