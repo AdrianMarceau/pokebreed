@@ -208,7 +208,7 @@
             abilities: {0: 'flower-veil', hidden: 'symbiosis'},
             height: 0.1,
             weight: 0.1,
-            color: 'white',
+            colors: ['white', 'green'],
             eggCycles: 20,
             eggGroups: ['fairy'],
             nextEvolutions: [{
@@ -232,7 +232,7 @@
             abilities: {0: 'flower-veil', hidden: 'symbiosis'},
             height: 0.2,
             weight: 0.9,
-            color: 'white',
+            colors: ['white', 'green'],
             eggCycles: 20,
             eggGroups: ['fairy'],
             prevEvolution: 'flabebe',
@@ -259,10 +259,65 @@
             abilities: {0: 'flower-veil', hidden: 'symbiosis'},
             height: 1.1,
             weight: 10,
-            color: 'white',
+            colors: ['white', 'green'],
             eggCycles: 20,
             eggGroups: ['fairy'],
             prevEvolution: 'floette'
+            },
+
+        'fletchling': {
+            order: indexOrder++,
+            token: 'fletchling',
+            name: 'Fletchling',
+            number: 661,
+            types: ['normal', 'flying'],
+            baseStats: {hp: 45, phAttack: 50, phDefense: 43, spAttack: 40, spDefense: 38, speed: 62},
+            abilities: {0: 'big-pecks', hidden: 'gale-wings'},
+            height: 0.3,
+            weight: 1.7,
+            colors: ['red', 'gray', 'black', 'white', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['flying'],
+            nextEvolutions: [{
+                species: 'fletchinder',
+                method: 'level-up',
+                value: 17
+                }]
+            },
+        'fletchinder': {
+            order: indexOrder++,
+            token: 'fletchinder',
+            name: 'Fletchinder',
+            number: 662,
+            types: ['fire', 'flying'],
+            baseStats: {hp: 62, phAttack: 73, phDefense: 55, spAttack: 56, spDefense: 52, speed: 84},
+            abilities: {0: 'flame-body', hidden: 'gale-wings'},
+            height: 0.7,
+            weight: 16,
+            colors: ['red', 'black', 'gray', 'yellow', 'white'],
+            eggCycles: 15,
+            eggGroups: ['flying'],
+            prevEvolution: 'fletchling',
+            nextEvolutions: [{
+                species: 'talonflame',
+                method: 'level-up',
+                value: 35
+                }]
+            },
+        'talonflame': {
+            order: indexOrder++,
+            token: 'talonflame',
+            name: 'Talonflame',
+            number: 663,
+            types: ['fire', 'flying'],
+            baseStats: {hp: 78, phAttack: 81, phDefense: 71, spAttack: 74, spDefense: 69, speed: 126},
+            abilities: {0: 'flame-body', hidden: 'gale-wings'},
+            height: 1.2,
+            weight: 24.5,
+            colors: ['red', 'gray', 'black', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['flying'],
+            prevEvolution: 'fletchinder'
             },
 
         'scatterbug': {
