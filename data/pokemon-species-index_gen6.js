@@ -624,6 +624,40 @@
             prevEvolution: 'noibat'
             },
 
+        'xerneas': {
+            order: indexOrder++,
+            token: 'xerneas',
+            name: 'Xerneas',
+            class: 'legendary',
+            number: 716,
+            types: ['fairy'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 126, phAttack: 131, phDefense: 95, spAttack: 131, spDefense: 98, speed: 99},
+            abilities: {0: 'fairy-aura'},
+            height: 3,
+            weight: 215,
+            colors: ['blue', 'black', 'white', 'red', 'orange', 'yellow', 'pink', 'purple'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
+        'yveltal': {
+            order: indexOrder++,
+            token: 'yveltal',
+            name: 'Yveltal',
+            class: 'legendary',
+            number: 717,
+            types: ['dark', 'flying'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 126, phAttack: 131, phDefense: 95, spAttack: 131, spDefense: 98, speed: 99},
+            abilities: {0: 'dark-aura'},
+            height: 5.8,
+            weight: 203,
+            colors: ['red', 'black', 'gray', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
         // Mega Evolutions
 
         'mega-venusaur': {
