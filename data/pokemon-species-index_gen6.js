@@ -367,6 +367,80 @@
             prevEvolution: 'eevee',
             },
 
+        'tyrunt': {
+            order: indexOrder++,
+            token: 'tyrunt',
+            name: 'Tyrunt',
+            number: 696,
+            types: ['rock', 'dragon'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 58, phAttack: 89, phDefense: 77, spAttack: 45, spDefense: 45, speed: 48},
+            abilities: {0: 'strong-jaw', hidden: 'sturdy'},
+            height: 0.8,
+            weight: 26,
+            colors: ['brown', 'white', 'orange'],
+            eggCycles: 30,
+            eggGroups: ['monster', 'dragon'],
+            nextEvolutions: [{
+                species: 'tyrantrum',
+                method: 'level-up',
+                value: 39
+                }]
+            },
+        'tyrantrum': {
+            order: indexOrder++,
+            token: 'tyrantrum',
+            name: 'Tyrantrum',
+            number: 697,
+            types: ['rock', 'dragon'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 82, phAttack: 121, phDefense: 119, spAttack: 69, spDefense: 59, speed: 71},
+            abilities: {0: 'strong-jaw', hidden: 'rock-head'},
+            height: 2.5,
+            weight: 270,
+            colors: ['red', 'white', 'orange', 'black'],
+            eggCycles: 30,
+            eggGroups: ['monster', 'dragon'],
+            prevEvolution: 'tyrunt'
+            },
+
+        'amaura': {
+            order: indexOrder++,
+            token: 'amaura',
+            name: 'Amaura',
+            number: 698,
+            types: ['rock', 'ice'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 77, phAttack: 59, phDefense: 50, spAttack: 67, spDefense: 63, speed: 46},
+            abilities: {0: 'refrigerate', hidden: 'snow-warning'},
+            height: 1.3,
+            weight: 25.2,
+            colors: ['blue', 'white', 'pink', 'yellow'],
+            eggCycles: 30,
+            eggGroups: ['monster'],
+            nextEvolutions: [{
+                species: 'aurorus',
+                method: 'level-up',
+                value: 39
+                }]
+            },
+        'aurorus': {
+            order: indexOrder++,
+            token: 'aurorus',
+            name: 'Aurorus',
+            number: 699,
+            types: ['rock', 'ice'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 123, phAttack: 77, phDefense: 72, spAttack: 99, spDefense: 92, speed: 58},
+            abilities: {0: 'refrigerate', hidden: 'snow-warning'},
+            height: 2.7,
+            weight: 225,
+            colors: ['blue', 'yellow', 'purple', 'white'],
+            eggCycles: 30,
+            eggGroups: ['monster'],
+            prevEvolution: 'amaura'
+            },
+
         'goomy': {
             order: indexOrder++,
             token: 'goomy',
