@@ -365,6 +365,21 @@
             prevEvolution: 'klang'
             },
 
+        'stunfisk': {
+            order: indexOrder++,
+            token: 'stunfisk',
+            name: 'Stunfisk',
+            number: 618,
+            types: ['ground', 'electric'],
+            baseStats: {hp: 109, phAttack: 66, phDefense: 84, spAttack: 81, spDefense: 99, speed: 32},
+            abilities: {0: 'static', 1: 'limber', hidden: 'sand-veil'},
+            height: 0.7,
+            weight: 11,
+            colors: ['brown', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'amorphous']
+            },
+
         'deino': {
             order: indexOrder++,
             token: 'deino',
