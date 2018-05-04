@@ -57,6 +57,9 @@
 
     $(document).ready(function(){
 
+        // Expose the zone zata as a public variable
+        window.PokeboxZoneData = thisZoneData;
+
         // Collect devide width and make sure it auto-updates
         var updateDeviceWidth = function(){
             thisDeviceWidth = $(window).width();
@@ -863,9 +866,11 @@
 
         // Define a function for generating current zone type stats
         var currentZoneStats = getCurrentZoneStats();
-        thisZoneData.currentStats['types'] = currentZoneStats['types'];
-        thisZoneData.currentStats['species'] = currentZoneStats['species'];
-        thisZoneData.currentStats['eggs'] = currentZoneStats['eggs'];
+        var zoneStatTokens = Object.keys(currentZoneStats);
+        for (var key = 0; key < zoneStatTokens.length; key++){
+            var statToken = zoneStatTokens[key];
+            thisZoneData.currentStats[statToken] = currentZoneStats[statToken];
+            }
 
         // Loop though and count population by types & species
         var pokeSpeciesActive = {};
@@ -1231,9 +1236,12 @@
             }
 
         // Reset current stats so we can recalculate
-        currentZoneStats['species'] = {};
         currentZoneStats['types'] = {};
+        currentZoneStats['species'] = {};
         currentZoneStats['eggs'] = {};
+
+        // Define the sub-stats to calculate
+        var subZoneStats = ['eggGroups', 'gameGeneration', 'gameRegion'];
 
         // Predefine all the types with zero points
         if (typeof PokemonTypesIndex !== 'undefined'){
@@ -1243,16 +1251,55 @@
                 }
             }
 
-        // Loop through and count pokemon by species
+        // Loop through and count pokemon by species, groups, generations, and regions
         for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
             var currentPoke = thisZoneData.currentPokemon[key];
             var pokeToken = currentPoke.token;
+            var pokeInfo = PokemonSpeciesIndex[pokeToken];
             if (currentPoke.eggCycles === 0){
+
+                // Growing pokemon count toward stats species stats
                 if (typeof currentZoneStats['species'][pokeToken] === 'undefined'){ currentZoneStats['species'][pokeToken] = 0; }
                 currentZoneStats['species'][pokeToken] += 1;
+
+                // Loop through sub-stats for and increment relevant values
+                for (var subKey = 0; subKey < subZoneStats.length; subKey++){
+                    var subStat = subZoneStats[subKey];
+                    if (typeof currentZoneStats[subStat] === 'undefined'){ currentZoneStats[subStat] = {}; }
+
+                    if (typeof pokeInfo[subStat] !== 'undefined'){
+
+                        // Treat arrays differently than other values
+                        if (typeof pokeInfo[subStat] === 'object'){
+
+                            // Loop through and increment for each sub token
+                            if (pokeInfo[subStat].length > 0){
+                                for (key2 = 0; key2 < pokeInfo[subStat].length; key2++){
+                                    var subToken = pokeInfo[subStat][key2];
+                                    if (typeof currentZoneStats[subStat][subToken] === 'undefined'){ currentZoneStats[subStat][subToken] = 0; }
+                                    currentZoneStats[subStat][subToken] += 1;
+                                    }
+                                }
+
+                            } else {
+
+                            // Collect the sub token or value and increment
+                            var subToken = pokeInfo[subStat];
+                            if (typeof currentZoneStats[subStat][subToken] === 'undefined'){ currentZoneStats[subStat][subToken] = 0; }
+                            currentZoneStats[subStat][subToken] += 1;
+
+                            }
+
+                        }
+
+                    }
+
                 } else {
+
+                // Egg pokemon do not count toward egg stats
                 if (typeof currentZoneStats['eggs'][pokeToken] === 'undefined'){ currentZoneStats['eggs'][pokeToken] = 0; }
                 currentZoneStats['eggs'][pokeToken] += 1;
+
                 }
             }
 
@@ -1267,7 +1314,7 @@
                 }
             }
 
-        // Loop through species and add/subtract appeal points based on type and class
+        // Loop through species and add/subtract type appeal points based on type and class
         if (!jQuery.isEmptyObject(currentZoneStats['species'])){
             var currentZoneSpecies = Object.keys(currentZoneStats['species']);
             for (var key = 0; key < currentZoneSpecies.length; key++){
