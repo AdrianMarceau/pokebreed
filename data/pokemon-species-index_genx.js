@@ -229,6 +229,27 @@
             prevEvolution: 'floette',
             },
 
+        'meteor-minior': {
+            order: thisIndex.afterOrder('minior'),
+            token: 'meteor-minior',
+            name: 'Meteor Minior',
+            number: 774,
+            formClass: 'burst-evolution',
+            formClass2: 'random-variant',
+            possibleForms: ['orange', 'yellow', 'green', 'blue', 'indigo', 'violet'],
+            randomizeForms: true,
+            baseForme: 'orange',
+            types: ['rock', 'flying'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 60, phAttack: 60, phDefense: 100, spAttack: 60, spDefense: 100, speed: 60},
+            abilities: {0: 'shields-down'},
+            height: 0.3,
+            weight: 40,
+            colors: ['white'],
+            eggGroups: ['mineral'],
+            prevEvolution: 'minior'
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
@@ -263,6 +284,8 @@
         {base: 'floette', species: 'eternal-floette', method: 'burst-evolution', value: 'ultimate-weapon', method2: 'extinction', value2: true},
 
         {base: 'greninja', species: 'ash-greninja', method: 'burst-evolution', value: 'battle-bond', method2: 'extinction', value2: true},
+
+        {base: 'minior', species: 'meteor-minior', method: 'burst-evolution', value: 'shields-down'},
 
         ]);
 
