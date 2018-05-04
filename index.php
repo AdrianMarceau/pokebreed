@@ -167,7 +167,6 @@ if (isset($_GET['gen'])
 
         </div>
         <script type="text/javascript" src="scripts/jquery-3.3.1.min.js"></script>
-        <script type="text/javascript" src="scripts/detect-zoom.min.js"></script>
         <script type="text/javascript" src="scripts/jquery.scrollbar.min.js"></script>
         <script type="text/javascript" src="scripts/script.js?v<?= $version_number ?>"></script>
         <script type="text/javascript">

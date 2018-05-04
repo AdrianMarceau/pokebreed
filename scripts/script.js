@@ -67,16 +67,6 @@
             //console.log('$mvp = ', $mvp);
             if ($mvp.length && thisDeviceWidth <= 534) { $mvp.attr('content','width=534'); }
             else if ($mvp.length){ $mvp.attr('content','width=device-width, initial-scale=1'); }
-            var zoom = detectZoom.zoom();
-            var device = detectZoom.device();
-            //console.log('zoom = '+zoom+' | device = '+device);
-            if (device > 1 && device % 2 === 0){
-                //console.log('pixel perfect!');
-                $('body').addClass('pixel-perfect');
-                } else {
-                //console.log('NOT pixel perfect');
-                $('body').removeClass('pixel-perfect');
-                }
             };
         $(window).resize(updateDeviceWidth);
         updateDeviceWidth();
