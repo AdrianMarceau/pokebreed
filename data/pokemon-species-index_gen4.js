@@ -663,6 +663,39 @@
             prevEvolution: 'kirlia'
             },
 
+        'dialga': {
+            order: indexOrder++,
+            token: 'dialga',
+            name: 'Dialga',
+            class: 'legendary',
+            number: 483,
+            types: ['steel', 'dragon'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 120, phDefense: 120, spAttack: 150, spDefense: 100, speed: 90},
+            abilities: {0: 'pressure', hidden: 'telepathy'},
+            height: 5.4,
+            weight: 683,
+            colors: ['white', 'blue', 'gray'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+        'palkia': {
+            order: indexOrder++,
+            token: 'palkia',
+            name: 'Palkia',
+            class: 'legendary',
+            number: 484,
+            types: ['water', 'dragon'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 90, phAttack: 120, phDefense: 100, spAttack: 150, spDefense: 120, speed: 100},
+            abilities: {0: 'pressure', hidden: 'telepathy'},
+            height: 4.2,
+            weight: 336,
+            colors: ['purple', 'white', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
         'phione': {
             order: indexOrder++,
             token: 'phione',
