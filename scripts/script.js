@@ -66,6 +66,7 @@
             var $mvp = $('#myViewport');
             //console.log('$mvp = ', $mvp);
             if ($mvp.length && thisDeviceWidth <= 534) { $mvp.attr('content','width=534'); }
+            else if ($mvp.length && thisDeviceWidth <= 768) { $mvp.attr('content','width=768'); }
             else if ($mvp.length){ $mvp.attr('content','width=device-width, initial-scale=1'); }
             };
         $(window).resize(updateDeviceWidth);
