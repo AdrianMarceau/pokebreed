@@ -9,6 +9,8 @@
 
     // Collect a reference to the global species index
     var thisIndex = window.PokemonSpeciesIndex;
+    thisIndex.setGeneration(2);
+    thisIndex.setRegion('johto');
 
     // Add the generation's list of base species to the index
     var indexOrder = thisIndex.indexOrder;

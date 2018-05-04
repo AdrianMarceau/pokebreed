@@ -14,6 +14,8 @@
 
     // Define a global variables for the species index
     PokemonSpeciesIndex.indexOrder = 0;
+    PokemonSpeciesIndex.currentGeneration = 0;
+    PokemonSpeciesIndex.currentRegion = 'unknown';
     PokemonSpeciesIndex.indexList = {};
 
 
@@ -24,7 +26,24 @@
 
     // Define a function for adding an entire list of species to the index
     function addSpeciesIndex(newIndex){
+        newTokens = Object.keys(newIndex);
+        for (var key = 0; key < newTokens.length; key++){
+            var newToken = newTokens[key];
+            var newInfo = newIndex[newToken];
+            if (typeof newInfo.gameGeneration === 'undefined'){ newInfo.gameGeneration = PokemonSpeciesIndex.currentGeneration; }
+            if (typeof newInfo.gameRegion === 'undefined'){ newInfo.gameRegion = PokemonSpeciesIndex.currentRegion; }
+            }
         Object.assign(PokemonSpeciesIndex.indexList, newIndex);
+    }
+
+    // Define a function for setting the current generation number
+    function setGeneration(gameGeneration){
+        PokemonSpeciesIndex.currentGeneration = gameGeneration;
+    }
+
+    // Define a function for setting the current region token
+    function setRegion(gameRegion){
+        PokemonSpeciesIndex.currentRegion = gameRegion;
     }
 
 
@@ -188,6 +207,9 @@
 
     PokemonSpeciesIndex.addSpecies = addSpecies;
     PokemonSpeciesIndex.addSpeciesIndex = addSpeciesIndex;
+
+    PokemonSpeciesIndex.setGeneration = setGeneration;
+    PokemonSpeciesIndex.setRegion = setRegion;
 
     PokemonSpeciesIndex.addGenderRatio = addGenderRatio;
     PokemonSpeciesIndex.addPrevEvolution = addPrevEvolution;
