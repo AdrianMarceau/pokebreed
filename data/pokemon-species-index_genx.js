@@ -9,7 +9,7 @@
 
     // Collect a reference to the global species index
     var thisIndex = window.PokemonSpeciesIndex;
-    thisIndex.setGeneration('x');
+    thisIndex.setGeneration(8);
     thisIndex.setRegion('custom');
 
     // Add the generation's list of base species to the index
