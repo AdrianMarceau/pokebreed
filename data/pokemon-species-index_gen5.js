@@ -192,6 +192,21 @@
             prevEvolution: 'dewott'
             },
 
+        'emolga': {
+            order: indexOrder++,
+            token: 'emolga',
+            name: 'Emolga',
+            number: 587,
+            types: ['electric', 'flying'],
+            baseStats: {hp: 55, phAttack: 75, phDefense: 60, spAttack: 75, spDefense: 60, speed: 103},
+            abilities: {0: 'static', hidden: 'motor-drive'},
+            height: 0.4,
+            weight: 5,
+            colors: ['white', 'black', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field']
+            },
+
         'frillish-m': {
             order: indexOrder++,
             token: 'frillish-m',
