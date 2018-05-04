@@ -193,6 +193,41 @@
             prevEvolution: 'brionne'
             },
 
+        'stufful': {
+            order: indexOrder++,
+            token: 'stufful',
+            name: 'Stufful',
+            number: 759,
+            types: ['normal', 'fighting'],
+            baseStats: {hp: 70, phAttack: 75, phDefense: 50, spAttack: 45, spDefense: 50, speed: 50},
+            abilities: {0: 'fluffy', 1: 'klutz', hidden: 'cute-charm'},
+            height: 0.5,
+            weight: 6.8,
+            colors: ['pink', 'brown', 'white'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'bewear',
+                method: 'level-up',
+                value: 27
+                }]
+            },
+        'bewear': {
+            order: indexOrder++,
+            token: 'bewear',
+            name: 'Bewear',
+            number: 760,
+            types: ['normal', 'fighting'],
+            baseStats: {hp: 120, phAttack: 125, phDefense: 80, spAttack: 55, spDefense: 60, speed: 60},
+            abilities: {0: 'fluffy', 1: 'klutz', hidden: 'unnerve'},
+            height: 2.1,
+            weight: 135,
+            colors: ['pink', 'black', 'white'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            prevEvolution: 'stufful'
+            },
+
 
         // Alolan Variants
 
