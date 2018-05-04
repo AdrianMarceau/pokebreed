@@ -279,6 +279,50 @@
             eggGroups: ['mineral']
             },
 
+        'komala': {
+            order: indexOrder++,
+            token: 'komala',
+            name: 'Komala',
+            number: 775,
+            types: ['normal'],
+            baseStats: {hp: 65, phAttack: 115, phDefense: 65, spAttack: 75, spDefense: 95, speed: 65},
+            abilities: {0: 'comatose'},
+            height: 0.4,
+            weight: 19.9,
+            colors: ['blue', 'gray', 'brown', 'black', 'white'],
+            eggCycles: 20,
+            eggGroups: ['field']
+            },
+
+        'turtonator': {
+            order: indexOrder++,
+            token: 'turtonator',
+            name: 'Turtonator',
+            number: 776,
+            types: ['fire', 'dragon'],
+            baseStats: {hp: 60, phAttack: 78, phDefense: 135, spAttack: 91, spDefense: 85, speed: 36},
+            abilities: {0: 'shell-armor'},
+            height: 2,
+            weight: 212,
+            colors: ['red', 'yellow', 'gray'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'dragon']
+            },
+
+        'togedemaru': {
+            order: indexOrder++,
+            token: 'togedemaru',
+            name: 'Togedemaru',
+            number: 777,
+            types: ['electric', 'steel'],
+            baseStats: {hp: 65, phAttack: 98, phDefense: 63, spAttack: 40, spDefense: 73, speed: 96},
+            abilities: {0: 'iron-barbs', 1: 'lightning-rod', hidden: 'sturdy'},
+            height: 0.3,
+            weight: 3.3,
+            colors: ['gray', 'white', 'yellow'],
+            eggCycles: 10,
+            eggGroups: ['field', 'fairy']
+            },
 
         // Alolan Variants
 
