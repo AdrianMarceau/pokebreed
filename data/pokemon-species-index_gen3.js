@@ -602,6 +602,41 @@
             prevEvolution: 'kirlia'
             },
 
+        'surskit': {
+            order: indexOrder++,
+            token: 'surskit',
+            name: 'Surskit',
+            number: 283,
+            types: ['bug', 'water'],
+            baseStats: {hp: 40, phAttack: 30, phDefense: 32, spAttack: 50, spDefense: 52, speed: 65},
+            abilities: {0: 'swift-swim', hidden: 'rain-dish'},
+            height: 0.5,
+            weight: 1.7,
+            colors: ['blue', 'yellow', 'pink'],
+            eggCycles: 15,
+            eggGroups: ['water-1', 'bug'],
+            nextEvolutions: [{
+                species: 'masquerain',
+                method: 'level-up',
+                value: 22
+                }]
+            },
+        'masquerain': {
+            order: indexOrder++,
+            token: 'masquerain',
+            name: 'Masquerain',
+            number: 284,
+            types: ['bug', 'flying'],
+            baseStats: {hp: 70, phAttack: 60, phDefense: 62, spAttack: 100, spDefense: 82, speed: 80},
+            abilities: {0: 'intimidate', hidden: 'unnerve'},
+            height: 0.8,
+            weight: 3.6,
+            colors: ['blue', 'pink', 'white', 'purple'],
+            eggCycles: 15,
+            eggGroups: ['water-1', 'bug'],
+            prevEvolution: 'surskit'
+            },
+
         'azurill': {
             order: thisIndex.beforeOrder('marill'),
             token: 'azurill',
