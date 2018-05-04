@@ -228,6 +228,41 @@
             prevEvolution: 'stufful'
             },
 
+        'sandygast': {
+            order: indexOrder++,
+            token: 'sandygast',
+            name: 'Sandygast',
+            number: 769,
+            types: ['ghost', 'ground'],
+            baseStats: {hp: 55, phAttack: 55, phDefense: 80, spAttack: 70, spDefense: 45, speed: 15},
+            abilities: {0: 'water-compaction', hidden: 'sand-veil'},
+            height: 0.5,
+            weight: 70,
+            colors: ['brown', 'red', 'white'],
+            eggCycles: 15,
+            eggGroups: ['amorphous'],
+            nextEvolutions: [{
+                species: 'palossand',
+                method: 'level-up',
+                value: 42
+                }]
+            },
+        'palossand': {
+            order: indexOrder++,
+            token: 'palossand',
+            name: 'Palossand',
+            number: 770,
+            types: ['ghost', 'ground'],
+            baseStats: {hp: 85, phAttack: 75, phDefense: 110, spAttack: 100, spDefense: 75, speed: 35},
+            abilities: {0: 'water-compaction', hidden: 'sand-veil'},
+            height: 1.3,
+            weight: 250,
+            colors: ['brown', 'red', 'pink', 'blue'],
+            eggCycles: 15,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'sandygast'
+            },
+
 
         // Alolan Variants
 
