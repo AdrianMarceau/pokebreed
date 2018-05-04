@@ -2173,8 +2173,9 @@
                 else if (pokeToken === 'ditto' || pokeToken === 'shiny-ditto'){ continue; }
 
                 // Increase the chance of this pokemon appearing based on type appeal
-                var typeVal = 1 / pokeInfo.types.length;
+                var typeVal = 1; // / pokeInfo.types.length;
                 for (var key2 = 0; key2 < pokeInfo.types.length; key2++){
+                    typeVal -= key2 * 0.1;
                     var typeToken = pokeInfo.types[key2];
                     if (thisZoneData.currentStats['types'][typeToken] !== 0){
                         pokeChance += thisZoneData.currentStats['types'][typeToken] * typeVal;
@@ -2182,7 +2183,7 @@
                     }
 
                 // Increase the chance of this pokemon appearing based on group appeal
-                var groupVal = 0.1 / pokeInfo.eggGroups.length;
+                var groupVal = 0.9 / pokeInfo.eggGroups.length;
                 for (var key2 = 0; key2 < pokeInfo.eggGroups.length; key2++){
                     var groupToken = pokeInfo.eggGroups[key2];
                     if (typeof thisZoneData.currentStats['eggGroups'][groupToken] !== 'undefined'
