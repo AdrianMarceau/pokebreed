@@ -405,6 +405,41 @@
             prevEvolution: 'spewpa'
             },
 
+        'pancham': {
+            order: indexOrder++,
+            token: 'pancham',
+            name: 'Pancham',
+            number: 674,
+            types: ['fighting'],
+            baseStats: {hp: 67, phAttack: 82, phDefense: 62, spAttack: 46, spDefense: 48, speed: 43},
+            abilities: {0: 'iron-fist', 1: 'mold-Breaker', hidden: 'Scrappy'},
+            height: 0.6,
+            weight: 8,
+            colors: ['white', 'gray', 'black', 'green'],
+            eggCycles: 25,
+            eggGroups: ['field', 'human-like'],
+            nextEvolutions: [{
+                species: 'pangoro',
+                method: 'level-up',
+                value: 32
+                }]
+            },
+        'pangoro': {
+            order: indexOrder++,
+            token: 'pangoro',
+            name: 'Pangoro',
+            number: 675,
+            types: ['fighting', 'dark'],
+            baseStats: {hp: 95, phAttack: 124, phDefense: 78, spAttack: 69, spDefense: 71, speed: 58},
+            abilities: {0: 'iron-fist', 1: 'mold-Breaker', hidden: 'Scrappy'},
+            height: 2.1,
+            weight: 136,
+            colors: ['white', 'black', 'gray', 'green'],
+            eggCycles: 25,
+            eggGroups: ['field', 'human-like'],
+            prevEvolution: 'pancham'
+            },
+
         'skrelp': {
             order: indexOrder++,
             token: 'skrelp',
