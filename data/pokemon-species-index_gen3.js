@@ -672,6 +672,61 @@
             prevEvolution: 'shroomish'
             },
 
+        'slakoth': {
+            order: indexOrder++,
+            token: 'slakoth',
+            name: 'Slakoth',
+            number: 287,
+            types: ['normal'],
+            baseStats: {hp: 60, phAttack: 60, phDefense: 60, spAttack: 35, spDefense: 35, speed: 30},
+            abilities: {0: 'truant'},
+            height: 0.8,
+            weight: 24,
+            colors: ['brown', 'pink', 'white'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'vigoroth',
+                method: 'level-up',
+                value: 18
+                }]
+            },
+        'vigoroth': {
+            order: indexOrder++,
+            token: 'vigoroth',
+            name: 'Vigoroth',
+            number: 288,
+            types: ['normal'],
+            baseStats: {hp: 80, phAttack: 80, phDefense: 80, spAttack: 55, spDefense: 55, speed: 90},
+            abilities: {0: 'vital-spirit'},
+            height: 1.4,
+            weight: 46.5,
+            colors: ['white', 'brown', 'red'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            prevEvolution: 'slakoth',
+            nextEvolutions: [{
+                species: 'slaking',
+                method: 'level-up',
+                value: 36
+                }]
+            },
+        'slaking': {
+            order: indexOrder++,
+            token: 'slaking',
+            name: 'Slaking',
+            number: 289,
+            types: ['normal'],
+            baseStats: {hp: 150, phAttack: 160, phDefense: 100, spAttack: 95, spDefense: 65, speed: 100},
+            abilities: {0: 'truant'},
+            height: 2,
+            weight: 130.5,
+            colors: ['brown', 'white', 'pink'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            prevEvolution: 'vigoroth'
+            },
+
         'azurill': {
             order: thisIndex.beforeOrder('marill'),
             token: 'azurill',
