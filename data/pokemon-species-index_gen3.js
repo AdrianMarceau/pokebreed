@@ -637,6 +637,41 @@
             prevEvolution: 'surskit'
             },
 
+        'shroomish': {
+            order: indexOrder++,
+            token: 'shroomish',
+            name: 'Shroomish',
+            number: 285,
+            types: ['grass'],
+            baseStats: {hp: 60, phAttack: 40, phDefense: 60, spAttack: 40, spDefense: 60, speed: 35},
+            abilities: {0: 'effect-spore', 1: 'poison-heal', hidden: 'quick-feet'},
+            height: 0.4,
+            weight: 4.5,
+            colors: ['brown', 'green'],
+            eggCycles: 15,
+            eggGroups: ['fairy', 'grass'],
+            nextEvolutions: [{
+                species: 'breloom',
+                method: 'level-up',
+                value: 23
+                }]
+            },
+        'breloom': {
+            order: indexOrder++,
+            token: 'breloom',
+            name: 'Breloom',
+            number: 286,
+            types: ['grass', 'fighting'],
+            baseStats: {hp: 60, phAttack: 130, phDefense: 80, spAttack: 60, spDefense: 60, speed: 70},
+            abilities: {0: 'effect-spore', 1: 'poison-heal', hidden: 'quick-feet'},
+            height: 1.2,
+            weight: 39.2,
+            colors: ['brown', 'green', 'red'],
+            eggCycles: 15,
+            eggGroups: ['fairy', 'grass'],
+            prevEvolution: 'shroomish'
+            },
+
         'azurill': {
             order: thisIndex.beforeOrder('marill'),
             token: 'azurill',
