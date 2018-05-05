@@ -405,6 +405,41 @@
             prevEvolution: 'spewpa'
             },
 
+        'skrelp': {
+            order: indexOrder++,
+            token: 'skrelp',
+            name: 'Skrelp',
+            number: 690,
+            types: ['poison', 'water'],
+            baseStats: {hp: 50, phAttack: 60, phDefense: 60, spAttack: 60, spDefense: 60, speed: 30},
+            abilities: {0: 'poison-point', 1: 'poison-touch', hidden: 'adaptability'},
+            height: 0.5,
+            weight: 7.3,
+            colors: ['brown', 'purple', 'red'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'dragon'],
+            nextEvolutions: [{
+                species: 'dragalge',
+                method: 'level-up',
+                value: 48
+                }]
+            },
+        'dragalge': {
+            order: indexOrder++,
+            token: 'dragalge',
+            name: 'Dragalge',
+            number: 691,
+            types: ['poison', 'dragon'],
+            baseStats: {hp: 65, phAttack: 75, phDefense: 90, spAttack: 97, spDefense: 123, speed: 44},
+            abilities: {0: 'poison-point', 1: 'poison-touch', hidden: 'adaptability'},
+            height: 1.8,
+            weight: 81.5,
+            colors: ['brown', 'purple', 'red'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'dragon'],
+            prevEvolution: 'skrelp'
+            },
+
         'sylveon': {
             order: thisIndex.afterOrder('glaceon'),
             token: 'sylveon',
