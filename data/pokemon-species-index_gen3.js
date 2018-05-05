@@ -727,6 +727,59 @@
             prevEvolution: 'vigoroth'
             },
 
+        'nincada': {
+            order: indexOrder++,
+            token: 'nincada',
+            name: 'Nincada',
+            number: 290,
+            types: ['bug', 'ground'],
+            baseStats: {hp: 31, phAttack: 45, phDefense: 90, spAttack: 30, spDefense: 30, speed: 40},
+            abilities: {0: 'compound-eyes', hidden: 'run-away'},
+            height: 0.5,
+            weight: 5.5,
+            colors: ['gray', 'brown', 'green'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            nextEvolutions: [{
+                species: 'ninjask',
+                method: 'level-up',
+                value: 20,
+                castoff: 'shedinja'
+                }]
+            },
+        'ninjask': {
+            order: indexOrder++,
+            token: 'ninjask',
+            name: 'Ninjask',
+            number: 291,
+            types: ['bug', 'flying'],
+            baseStats: {hp: 61, phAttack: 90, phDefense: 45, spAttack: 50, spDefense: 50, speed: 160},
+            abilities: {0: 'speed-boost', hidden: 'infiltrator'},
+            height: 0.8,
+            weight: 12,
+            colors: ['yellow', 'white', 'black', 'red', 'gray'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            prevEvolution: 'nincada'
+            },
+        'shedinja': {
+            order: indexOrder++,
+            token: 'shedinja',
+            name: 'Shedinja',
+            number: 292,
+            types: ['bug', 'ghost'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 1, phAttack: 90, phDefense: 45, spAttack: 30, spDefense: 30, speed: 40},
+            maxHP: 1,
+            abilities: {0: 'wonder-guard'},
+            height: 0.8,
+            weight: 1.2,
+            colors: ['brown', 'gray', 'white'],
+            eggCycles: 15,
+            eggGroups: ['mineral'],
+            prevEvolution: 'nincada'
+            },
+
         'azurill': {
             order: thisIndex.beforeOrder('marill'),
             token: 'azurill',
