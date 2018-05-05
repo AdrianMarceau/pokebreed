@@ -628,12 +628,13 @@
     }
 
     // Define a function for adding a new pokemon to a zone
-    function addPokemonToZone(pokemonToken, isEgg, reduceCycles, isVisitor){
+    function addPokemonToZone(pokemonToken, isEgg, reduceCycles, isVisitor, customData){
         //console.log('Adding '+token+' to zone.');
         if (typeof PokemonSpeciesIndex[pokemonToken] === 'undefined'){ return false; }
         if (typeof isEgg !== 'boolean'){ isEgg = true; }
         if (typeof reduceCycles !== 'number'){ reduceCycles = 0; }
         if (typeof isVisitor !== 'boolean'){ isVisitor = false; }
+        if (typeof customData !== 'object'){ customData = {}; }
 
         // Create an entry for this species in the global count if not exists
         var addedPokemonSpecies = thisZoneData.addedPokemonSpecies;
@@ -661,6 +662,16 @@
             growthCycles: 0,
             reachedAdulthood: false
             };
+
+        // If custom data was provdied, use it to overwrite above
+        if (!jQuery.isEmptyObject(customData)){
+            var customKeys = Object.keys(customData);
+            for (var i = 0; i < customKeys.length; customKeys++){
+                var customKey = customKeys[i];
+                var customValue = customData[customKey];
+                newPokemon[customKey] = customValue;
+                }
+            }
 
         // If this is a visitor, create the appropriate flag
         if (isVisitor){ newPokemon.isVisitor = true; }
@@ -1741,11 +1752,9 @@
                         if ((switchKind === 'and' && triggeredMethods === totalMethods)
                             || (switchKind === 'or' && triggeredMethods > 0)
                             || (forceEvo === true)){
-                            queuedEvolutions.push({
-                                token: nextEvolution.species,
-                                types: nextEvolutionInfo.types,
-                                chance: triggeredChance
-                                });
+                            var queuedEvolution = {token: nextEvolution.species, types: nextEvolutionInfo.types, chance: triggeredChance};
+                            if (typeof nextEvolution.castoff !== 'undefined'){ queuedEvolution.castoff = nextEvolution.castoff; }
+                            queuedEvolutions.push(queuedEvolution);
                             }
 
                         }
@@ -1803,6 +1812,27 @@
                                 eventAction: 'evolved',
                                 eventLabel: backupToken+' evolved into '+selectedEvolution.token
                                 });
+                            }
+
+                        // If this pokemon has a castoff evolution, add it to the zone now
+                        if (typeof selectedEvolution.castoff !== 'undefined'
+                            && thisZoneData.currentPokemon.length < thisZoneData.capacity){
+
+                            // Add the castoff pokemon to the zone
+                            addPokemonToZone(selectedEvolution.castoff, false, false, false, {
+                                growthCycles: pokemonInfo.growthCycles
+                                });
+
+                            // Push an event to the analytics
+                            if (typeof ga !== 'undefined'){
+                                ga('send', {
+                                    hitType: 'event',
+                                    eventCategory: 'pokemon',
+                                    eventAction: 'castoff',
+                                    eventLabel: backupToken+' cast off '+selectedEvolution.token
+                                    });
+                                }
+
                             }
 
                         }
