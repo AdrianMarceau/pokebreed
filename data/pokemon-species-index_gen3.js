@@ -894,6 +894,21 @@
                 }]
             },
 
+        'nosepass': {
+            order: indexOrder++,
+            token: 'nosepass',
+            name: 'Nosepass',
+            number: 299,
+            types: ['rock'],
+            baseStats: {hp: 30, phAttack: 45, phDefense: 135, spAttack: 45, spDefense: 90, speed: 30},
+            abilities: {0: 'sturdy', 1: 'magnet-pull', hidden: 'sand-force'},
+            height: 1,
+            weight: 97,
+            colors: ['gray', 'red', 'black'],
+            eggCycles: 20,
+            eggGroups: ['mineral']
+            },
+
         'wynaut': {
             order: thisIndex.beforeOrder('wobbuffet'),
             token: 'wynaut',

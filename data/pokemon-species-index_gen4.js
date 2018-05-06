@@ -663,6 +663,22 @@
             prevEvolution: 'kirlia'
             },
 
+        'probopass': {
+            order: thisIndex.afterOrder('nosepass'),
+            token: 'probopass',
+            name: 'Probopass',
+            number: 476,
+            types: ['rock', 'steel'],
+            baseStats: {hp: 60, phAttack: 55, phDefense: 145, spAttack: 75, spDefense: 150, speed: 40},
+            abilities: {0: 'sturdy', 1: 'magnet-pull', hidden: 'sand-force'},
+            height: 1.4,
+            weight: 340,
+            colors: ['red', 'gray', 'black'],
+            eggCycles: 20,
+            eggGroups: ['mineral'],
+            prevEvolution: 'nosepass'
+            },
+
         'dialga': {
             order: indexOrder++,
             token: 'dialga',
@@ -754,7 +770,7 @@
         {base: 'misdreavus', species: 'mismagius', method: 'evolution-stone', value: 'dusk-stone', method2: 'type-appeal', value2: ['ghost']},
         {base: 'murkrow', species: 'honchkrow', method: 'evolution-stone', value: 'dusk-stone', method2: 'type-appeal', value2: ['dark', 'flying']},
         {base: 'sneasel', species: 'weavile', method: 'evolution-item', value: 'razor-claw', method2: 'type-surge', value2: ['dark', 'ice']},
-        {base: 'magneton', species: 'magnezone', method: 'evolution-location', value: 'magnetic-field', method2: 'type-surge', value2: ['electric', 'steel']},
+        {base: 'magneton', species: 'magnezone', method: 'evolution-location', value: 'magnetic-field', method2: 'type-surge', value2: 'electric'},
         {base: 'lickitung', species: 'lickilicky', method: 'evolution-move', value: 'rollout', method2: 'type-surge', value2: ['normal', 'rock']},
         {base: 'rhydon', species: 'rhyperior', method: 'evolution-item', value: 'protector', method2: 'type-surge', value2: ['rock', 'ground']},
         {base: 'tangela', species: 'tangrowth', method: 'evolution-move', value: 'ancient-power', method2: 'type-surge', value2: ['grass', 'rock']},
@@ -768,6 +784,7 @@
         {base: 'piloswine', species: 'mamoswine', method: 'evolution-move', value: 'ancient-power', method2: 'type-surge', value2: ['ice', 'ground', 'rock']},
         {base: 'porygon2', species: 'porygon-z', method: 'evolution-item', value: 'dubious-disc', method2: 'type-appeal', value2: ['fire', 'ice', 'electric']},
         {base: 'kirlia', species: 'gallade', method: 'evolution-stone', value: 'dawn-stone', method2: 'level-up', value2: 30, method3: 'type-appeal', value3: 'fighting', method4: 'chance', value4: 50},
+        {base: 'nosepass', species: 'probopass', method: 'evolution-location', value: 'magnetic-field', method2: 'type-surge', value2: 'electric'},
         ]);
 
 })();
