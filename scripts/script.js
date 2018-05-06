@@ -76,6 +76,7 @@
         // Populate the app details with global values if set
         if (typeof window.PokemonAppLastUpdated !== 'undefined'){ appLastUpdated = window.PokemonAppLastUpdated; }
         if (typeof window.PokemonAppVersionNumber !== 'undefined'){ appVersionNumber = window.PokemonAppVersionNumber; }
+        if (typeof window.PokemonAppDebugMode !== 'undefined'){ appDebugMode = window.PokemonAppDebugMode; }
 
         // Request the live version number from the server and wait to compare (refresh if out of date)
         $.get({

@@ -174,6 +174,7 @@ if (isset($_GET['gen'])
             // Define the global date and version number vars
             window.PokemonAppLastUpdated = '<?= $last_updated ?>';
             window.PokemonAppVersionNumber = '<?= $version_number ?>';
+            window.PokemonAppDebugMode = <?= POKEBS_DEBUG_MODE === true ? 'true' : 'false' ?>;
             window.PokemonAllowedGenerationsMax = <?= $allowed_generations ?>;
 
         </script>
