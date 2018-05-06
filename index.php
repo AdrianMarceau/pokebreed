@@ -30,7 +30,7 @@ if (isset($_GET['gen'])
 <html>
     <head>
         <meta charset="utf8">
-        <title>PokéBox Breeding Simulator v<?= $version_number ?></title>
+        <title>PokéBox | Pokémon Box Simulator | v<?= $version_number ?></title>
         <meta name="robots" content="index,follow" />
         <meta id="myViewport" name="viewport" content="width=device-width, initial-scale=1">
         <base href="<?= POKEBS_ROOT_URL ?>" />
@@ -57,7 +57,7 @@ if (isset($_GET['gen'])
 
             <h1>
                 <a class="logo" href="/"><img src="images/pokebox-logo.png" alt="PokéBox" /></a>
-                <span class="subtext">Breeding Simulator <img class="icon" src="images/favicon.png" /></span>
+                <span class="subtext">Pokémon Box Simulator <img class="icon" src="images/favicon.png" /></span>
                 <span class="version">v<?= $version_number ?></span>
             </h1>
 
