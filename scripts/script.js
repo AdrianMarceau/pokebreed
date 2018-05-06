@@ -723,25 +723,16 @@
             // Use the max and min to define the hue offset
             //console.log('|- Randomize the hue offset...');
             var randNum = Math.random();
+            var randNum2 = Math.random();
             var minOffset = 0;
             var maxOffset = 30;
             if (pokemonToken === 'smeargle'){
                 maxOffset = 360;
-                //console.log('|-- pokemonToken === \'smeargle\' | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
                 } else {
-                //console.log('|-- randNum = '+ randNum +' | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
-                if (randNum >= 0.75){
-                    maxOffset += 20;
-                    //console.log('|-- randNum >= 0.75 | maxOffset += 20 | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
-                    }
-                if (randNum >= 0.85){
-                    maxOffset += 20;
-                    //console.log('|-- randNum >= 0.85 | maxOffset += 20 | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
-                    }
-                if (randNum >= 0.95){
-                    maxOffset += 20;
-                    //console.log('|-- randNum >= 0.95 | maxOffset += 20 | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
-                    }
+                if (randNum >= 0.75){ maxOffset += 20; }
+                if (randNum >= 0.85){ maxOffset += 20; }
+                if (randNum >= 0.95){ maxOffset += 20; }
+                if (randNum2 >= 0.95){ minOffset += 180; maxOffset += 180; }
                 }
             var variantHueOffset = Math.ceil((Math.random() * (maxOffset - minOffset)) + minOffset);
             newPokemon.variantHueOffset = variantHueOffset * -1;
