@@ -147,6 +147,23 @@
     .panel .buttons .new-pokemon .buttonwrap {
         max-height: calc(100vh - 405px);
     }
+    .panel .buttons button {
+        width: 70px;
+        height: 54px;
+    }
+    .panel .buttons button img {
+        width: 80px;
+        height: 60px;
+        top: -16px;
+        left: -12px;
+        image-rendering: optimizeSpeed;             /*                     */
+        image-rendering: -moz-crisp-edges;          /* Firefox             */
+        image-rendering: -o-crisp-edges;            /* Opera               */
+        image-rendering: -webkit-optimize-contrast; /* Chrome (and Safari) */
+        image-rendering: optimize-contrast;         /* CSS3 Proposed       */
+        image-rendering: pixelated;                 /* CSS3 Proposed?       */
+        -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
+    }
 }
 
 /* -- Overview Panels -- */

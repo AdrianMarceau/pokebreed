@@ -3,8 +3,62 @@
 /* -- iPad Pro -- */
 @media (width: 1024px) and (height: 1366px) and (orientation: portrait){
 
+    @keyframes popIn {
+        from { opacity: 0; transform: scale(0, 0); margin-left: -64px; }
+        to { opacity: 1; transform: scale(1, 1); margin-left: 0; }
+    }
+    @keyframes fadeOut {
+        from { opacity: 1; transform: scale(1, 1); bottom: 0; margin-right: 5px; }
+        to { opacity: 0; transform: scale(0, 0); bottom: -64px; margin-right: -64px; pointer-events: none; }
+    }
+    .panel .overview.main .details.pokemon .wrap {
+        width: 736px;
+        max-height: 736px;
+    }
+    .panel .overview.main .details.pokemon .list.slots li,
+    .panel .overview.main .details.pokemon .list.pokemon li,
+    .panel .overview.main .details.pokemon .list.slots li.slot:before {
+        width: 70px;
+        height: 70px;
+        margin-right: 4px;
+        margin-bottom: 4px;
+    }
+    .panel .overview.main .details.slots .list li:nth-child(10n),
+    .panel .overview.main .details.pokemon .list li:nth-child(10n) {
+        margin-right: 0;
+    }
+    .panel .overview.main .details.pokemon .list.pokemon li .swrap {
+        position: relative;
+        display: inline-block;
+        top: -8px;
+        left: -8px;
+    }
+    .panel .overview.main .details.pokemon .list .sprite {
+        width: 80px;
+        height: 60px;
+        image-rendering: optimizeSpeed;             /*                     */
+        image-rendering: -moz-crisp-edges;          /* Firefox             */
+        image-rendering: -o-crisp-edges;            /* Opera               */
+        image-rendering: -webkit-optimize-contrast; /* Chrome (and Safari) */
+        image-rendering: optimize-contrast;         /* CSS3 Proposed       */
+        image-rendering: pixelated;                 /* CSS3 Proposed?       */
+        -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
+    }
+    .panel .overview.types .wrap,
+    .panel .overview.species .wrap {
+        height: 230px;
+        max-height: 230px;
+    }
+    .panel .buttons button {
+        width: 70px;
+    }
+
 }
 @media (width: 1366px) and (height: 1024px) and (orientation: landscape){
+
+    .panel .buttons button {
+        width: 71px;
+    }
 
 }
 
@@ -57,6 +111,23 @@
         height: 156px;
         max-height: 156px;
     }
+    .panel .buttons button {
+        width: 68px;
+        height: 52px;
+    }
+    .panel .buttons button img {
+        width: 80px;
+        height: 60px;
+        top: -16px;
+        left: -12px;
+        image-rendering: optimizeSpeed;             /*                     */
+        image-rendering: -moz-crisp-edges;          /* Firefox             */
+        image-rendering: -o-crisp-edges;            /* Opera               */
+        image-rendering: -webkit-optimize-contrast; /* Chrome (and Safari) */
+        image-rendering: optimize-contrast;         /* CSS3 Proposed       */
+        image-rendering: pixelated;                 /* CSS3 Proposed?       */
+        -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
+    }
 
 }
 @media (width: 1024px) and (height: 768px) and (orientation: landscape){
@@ -85,7 +156,7 @@
         width: 80px;
         height: 60px;
         top: -14px;
-        right: 10px;
+        left: -10px;
         image-rendering: optimizeSpeed;             /*                     */
         image-rendering: -moz-crisp-edges;          /* Firefox             */
         image-rendering: -o-crisp-edges;            /* Opera               */
