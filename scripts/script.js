@@ -732,7 +732,7 @@
                 if (randNum >= 0.75){ maxOffset += 20; }
                 if (randNum >= 0.85){ maxOffset += 20; }
                 if (randNum >= 0.95){ maxOffset += 20; }
-                if (randNum2 >= 0.95){ minOffset += 180; maxOffset += 180; }
+                if (randNum2 >= 0.90){ minOffset += 180; maxOffset += 180; }
                 }
             var variantHueOffset = Math.ceil((Math.random() * (maxOffset - minOffset)) + minOffset);
             newPokemon.variantHueOffset = variantHueOffset * -1;
