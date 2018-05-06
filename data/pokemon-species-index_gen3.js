@@ -780,6 +780,61 @@
             prevEvolution: 'nincada'
             },
 
+        'whismur': {
+            order: indexOrder++,
+            token: 'whismur',
+            name: 'Whismur',
+            number: 293,
+            types: ['normal'],
+            baseStats: {hp: 64, phAttack: 51, phDefense: 23, spAttack: 51, spDefense: 23, speed: 28},
+            abilities: {0: 'soundproof', hidden: 'rattled'},
+            height: 0.6,
+            weight: 16.3,
+            colors: ['pink', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'field'],
+            nextEvolutions: [{
+                species: 'loudred',
+                method: 'level-up',
+                value: 20
+                }]
+            },
+        'loudred': {
+            order: indexOrder++,
+            token: 'loudred',
+            name: 'Loudred',
+            number: 294,
+            types: ['normal'],
+            baseStats: {hp: 84, phAttack: 71, phDefense: 43, spAttack: 71, spDefense: 43, speed: 48},
+            abilities: {0: 'soundproof', hidden: 'scrappy'},
+            height: 1,
+            weight: 40.5,
+            colors: ['purple', 'yellow', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'field'],
+            prevEvolution: 'whismur',
+            nextEvolutions: [{
+                species: 'exploud',
+                method: 'level-up',
+                value: 40
+                }]
+            },
+        'exploud': {
+            order: indexOrder++,
+            token: 'exploud',
+            name: 'Exploud',
+            number: 295,
+            types: ['normal'],
+            baseStats: {hp: 104, phAttack: 91, phDefense: 63, spAttack: 91, spDefense: 73, speed: 68},
+            abilities: {0: 'soundproof', hidden: 'scrappy'},
+            height: 1.5,
+            weight: 84,
+            colors: ['purple', 'yellow', 'red', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'field'],
+            prevEvolution: 'loudred'
+            },
+
         'azurill': {
             order: thisIndex.beforeOrder('marill'),
             token: 'azurill',
