@@ -251,6 +251,41 @@
             prevEvolution: 'staravia'
             },
 
+        'bidoof': {
+            order: indexOrder++,
+            token: 'bidoof',
+            name: 'Bidoof',
+            number: 399,
+            types: ['normal'],
+            baseStats: {hp: 59, phAttack: 45, phDefense: 40, spAttack: 35, spDefense: 40, speed: 31},
+            abilities: {0: 'simple', 1: 'unaware', hidden: 'moody'},
+            height: 0.5,
+            weight: 20,
+            colors: ['brown', 'white'],
+            eggCycles: 15,
+            eggGroups: ['water-1', 'field'],
+            nextEvolutions: [{
+                species: 'bibarel',
+                method: 'level-up',
+                value: 15
+                }]
+            },
+        'bibarel': {
+            order: indexOrder++,
+            token: 'bibarel',
+            name: 'Bibarel',
+            number: 400,
+            types: ['normal', 'water'],
+            baseStats: {hp: 79, phAttack: 85, phDefense: 60, spAttack: 55, spDefense: 60, speed: 71},
+            abilities: {0: 'simple', 1: 'unaware', hidden: 'moody'},
+            height: 1,
+            weight: 31.5,
+            colors: ['brown', 'white'],
+            eggCycles: 15,
+            eggGroups: ['water-1', 'field'],
+            prevEvolution: 'bidoof'
+            },
+
         'ambipom': {
             order: thisIndex.afterOrder('aipom'),
             token: 'ambipom',
