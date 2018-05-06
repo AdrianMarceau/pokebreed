@@ -286,6 +286,41 @@
             prevEvolution: 'bidoof'
             },
 
+        'kricketot': {
+            order: indexOrder++,
+            token: 'kricketot',
+            name: 'Kricketot',
+            number: 401,
+            types: ['bug'],
+            baseStats: {hp: 37, phAttack: 25, phDefense: 41, spAttack: 25, spDefense: 41, speed: 25},
+            abilities: {0: 'Shed Skin', hidden: 'Run Away'},
+            height: 0.3,
+            weight: 2.2,
+            colors: ['red', 'yellow', 'black'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            nextEvolutions: [{
+                species: 'kricketune',
+                method: 'level-up',
+                value: 10
+                }]
+            },
+        'kricketune': {
+            order: indexOrder++,
+            token: 'kricketune',
+            name: 'Kricketune',
+            number: 402,
+            types: ['bug'],
+            baseStats: {hp: 77, phAttack: 85, phDefense: 51, spAttack: 55, spDefense: 51, speed: 65},
+            abilities: {0: 'Swarm', hidden: 'Technician'},
+            height: 1,
+            weight: 25.5,
+            colors: ['red', 'black', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            prevEvolution: 'kricketot'
+            },
+
         'ambipom': {
             order: thisIndex.afterOrder('aipom'),
             token: 'ambipom',
