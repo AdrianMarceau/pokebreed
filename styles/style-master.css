@@ -907,7 +907,11 @@
     height: 0;
 }
 .panel .buttons .new-pokemon {
-
+    max-width: 848px;
+    margin: 0 auto;
+}
+.panel .buttons .new-pokemon.loaded {
+    text-align: left;
 }
 .panel .buttons .new-pokemon > strong {
     font-size: 12px;
@@ -965,7 +969,7 @@
 .panel .buttons hr.breaker {
     display: block;
     clear: both;
-    margin: 0 25% 10px;
+    margin: 6px 10% 18px;
     padding: 0;
     border: 0 none transparent;
     border-top: 1px solid #262626;

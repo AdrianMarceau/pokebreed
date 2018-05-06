@@ -564,8 +564,7 @@
                 }
 
             // Insert a break after each new generation
-            if (appDebugMode
-                && pokemonData.gameGeneration !== lastGeneration
+            if (pokemonData.gameGeneration !== lastGeneration
                 && pokemonData.formClass !== 'gender-variant'
                 && pokemonData.formClass !== 'regional-variant'){
                 if (lastGeneration !== false){ pokePanelMarkup += '<hr class="breaker" />'; }
@@ -608,6 +607,7 @@
         $pokePanelButtons.append(pokePanelMarkup);
 
         // Remove the loading dotts
+        $pokePanelLoading.parent().addClass('loaded');
         $pokePanelLoading.remove();
 
         // Attach a click event to the generated buttons
