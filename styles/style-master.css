@@ -210,19 +210,21 @@
     padding-bottom: 0;
     border-bottom: 0 none transparent;
 }
+.panel .overview.main .details.zone {
+    margin-bottom: 0;
+}
 .panel .overview.main .details.zone .title {
     margin-bottom: 0;
     -moz-border-radius: 3px 3px 0 0;
     -webkit-border-radius: 3px 3px 0 0;
     border-radius: 3px 3px 0 0;
+    cursor: pointer;
 }
 .panel .overview.main .details.zone .list {
-    margin-bottom: 5px;
+    margin: 0 auto;
     padding: 0;
-    background-color: #FFFFFF;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
+    background-color: #3c3c3e;
+    color: #FFFFFF;
 }
 .panel .overview.main .details.zone .list li {
     border: 0 none transparent;
@@ -233,19 +235,13 @@
     line-height: 1.3;
 }
 .panel .overview.main .details.zone .list li.name {
-    width: 20%;
-}
-.panel .overview.main .details.zone .list li.size {
-    width: 10%;
-}
-.panel .overview.main .details.zone .list li.capacity {
-    width: 20%;
-}
-.panel .overview.main .details.zone .list li.diversity {
-    width: 35%;
+    width: 33%;
 }
 .panel .overview.main .details.zone .list li.day {
-    width: 15%;
+    width: 33%;
+}
+.panel .overview.main .details.zone .list li.capacity {
+    width: 33%;
 }
 .panel .overview.main .details.zone .list li strong,
 .panel .overview.main .details.zone .list li span {
@@ -254,23 +250,22 @@
 }
 .panel .overview.main .details.zone .list li .data {
     font-size: 11px;
-    color: #424242;
+    color: #e0e0e0;
 }
 .panel .overview.main .details.zone .timer {
     display: none;
 }
+
 .panel .overview.main .details.pokemon {
+    margin-top: 0;
     background-image: none;
     background-position: center center;
     background-repeat: repeat;
     background-size: 100%;
     background-size: cover;
-    -moz-border-radius: 3px;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
     margin-bottom: 0;
     position: relative;
-    padding-bottom: 5px;
+    padding: 3px 0 5px;
 }
 .panel .overview.main .details.pokemon:after {
     content: "";
@@ -278,7 +273,7 @@
     position: absolute;
     height: auto;
     width: auto;
-    top: 24px;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
@@ -296,7 +291,7 @@
     position: absolute;
     height: auto;
     width: auto;
-    top: 23px;
+    top: 0;
     left: 0;
     right: 0;
     bottom: 0;
@@ -352,9 +347,7 @@
     max-height: 445px;
 }
 .panel .overview.main .details.pokemon .title {
-    -moz-border-radius: 3px 3px 0 0;
-    -webkit-border-radius: 3px 3px 0 0;
-    border-radius: 3px 3px 0 0;
+    display: none;
 }
 .panel .overview.main .details.pokemon .list {
     padding: 0;
@@ -447,6 +440,7 @@
     position: relative;
     z-index: 2;
     top: 0;
+    display: block;
 }
 .panel .overview.main .details.pokemon .list li:nth-child(even) .sprite {
     animation: MoveUpDownA 1s linear infinite;
@@ -460,6 +454,7 @@
     left: 0;
     z-index: 20;
 }
+.panel .overview.main .details.pokemon .list .swrap + .count,
 .panel .overview.main .details.pokemon .list .sprite + .count {
     position: absolute;
     display: block;
@@ -862,9 +857,15 @@
     z-index: 10;
     bottom: 0;
 }
+/*
 @keyframes MoveUpDownC {
   0%, 100% { top: -4; }
   50% { top: -5px; }
+}
+*/
+@keyframes MoveUpDownC {
+  0%, 100% { transform: translate(0, -4px); }
+  50% { transform: translate(0, -5px); }
 }
 .panel .buttons button:hover img,
 .panel .buttons button[data-token="ditto"] img {
@@ -927,7 +928,6 @@
     height: 0;
 }
 .panel .buttons .new-pokemon {
-    max-width: 848px;
     overflow: hidden;
     margin: 0 auto;
 }

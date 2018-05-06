@@ -64,8 +64,10 @@
         // Collect devide width and make sure it auto-updates
         var updateDeviceWidth = function(){
             thisDeviceWidth = $(window).width();
+            thisDeviceHeight = $(window).height();
             var $mvp = $('#myViewport');
             //console.log('$mvp = ', $mvp);
+            //alert('thisDeviceWidth = ' + thisDeviceWidth + '\n ' + 'thisDeviceHeight = ' + thisDeviceHeight);
             if ($mvp.length && thisDeviceWidth <= 534) { $mvp.attr('content','width=534'); }
             else if ($mvp.length){ $mvp.attr('content','width=device-width, initial-scale=1'); }
             };
@@ -101,6 +103,13 @@
         $panelButtons = $('.panel > .buttons');
         $pokePanelButtons = $panelButtons.find('.new-pokemon');
         $pokePanelLoading = $pokePanelButtons.find('.loading');
+
+        // Add a click event for the box details title
+        $panelMainOverview.find('.details.zone .title').bind('click', function(e){
+            e.preventDefault();
+            var $title = $(this);
+            $('html, body').animate({scrollTop: $title.offset().top}, 300);
+            });
 
         // Update any scroll wrappers when the window resizes
         var updateScrollWrappers = function(){
@@ -426,6 +435,9 @@
         $('.day-speed', $panelButtons).removeClass('hidden');
         $('.new-pokemon', $panelButtons).addClass('hidden');
 
+        // Autoscroll to the box details header
+        $panelMainOverview.find('.details.zone .title').trigger('click');
+
     }
 
 
@@ -628,6 +640,7 @@
             $(this).on('load', function(){
                 loadedImages++;
                 if (loadedImages === $buttonImages.length){
+                    //console.log('update scrollbar');
                     $pokePanelButtons.find('.buttonwrap').perfectScrollbar('update');
                     }
                 });
@@ -938,7 +951,6 @@
 
         // Update the zone details
         $('.zone .name .data', $panelMainOverview).text(thisZoneData.name);
-        $('.zone .size .data', $panelMainOverview).text(thisZoneData.size);
         $('.zone .capacity .data', $panelMainOverview).text(thisZoneData.currentPokemon.length + ' / ' + thisZoneData.capacity);
         $('.zone .day .data', $panelMainOverview).text(thisZoneData.day);
         $('.zone .diversity .data', $panelMainOverview).text(' Active: '+totalSpeciesCurrent+' | Overall: '+totalSpeciesSeen+'');
@@ -981,7 +993,7 @@
                 if (pokeInfo.eggCycles === 0){
 
                     //console.log('this '+pokeInfo.token+' has hatched, show it (cycles:'+pokeInfo.eggCycles+')');
-                    var pokeIcon =  getPokemonIcon(pokeInfo.token, false, pokeInfo);
+                    var pokeIcon =  '<span class="swrap">' + getPokemonIcon(pokeInfo.token, false, pokeInfo) + '</span>';
                     var pokeCount = '<span class="count growth">+'+pokeInfo.growthCycles+'</span>';
                     var itemClass = 'pokemon ';
                     if (pokeInfo.reachedAdulthood === true){ itemClass += 'adult '; }
@@ -994,7 +1006,7 @@
                     } else if (pokeInfo.eggCycles > 0){
 
                     //console.log('this '+pokeInfo.token+' has not hatched, show it (cycles:'+pokeInfo.eggCycles+')');
-                    var pokeIcon =  getPokemonIcon(pokeInfo.token, true, pokeInfo);
+                    var pokeIcon =  '<span class="swrap">' + getPokemonIcon(pokeInfo.token, true, pokeInfo) + '</span>';
                     var pokeCount = '<span class="count egg">-'+pokeInfo.eggCycles+'</span>';
                     var itemClass = 'egg ';
                     if (pokeInfo.watchFlag === true){ itemClass += 'watched '; }

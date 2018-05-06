@@ -39,6 +39,7 @@ if (isset($_GET['gen'])
         <!--  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous"> -->
         <link type="text/css" rel="stylesheet" href="styles/style-master.min.css?v<?= $version_number ?>" />
         <link type="text/css" rel="stylesheet" href="styles/style-responsive.min.css?v<?= $version_number ?>" />
+        <link type="text/css" rel="stylesheet" href="styles/style-devices.min.css?v<?= $version_number ?>" />
         <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
         <? if (!$is_local && GA_ACCOUNT_ID){ ?>
         <!-- Google Analytics -->
@@ -72,10 +73,8 @@ if (isset($_GET['gen'])
                     </div>
                     <ul class="list">
                         <li class="name"><strong>Name</strong> <span class="data"></span></li>
-                        <li class="size"><strong>Size</strong> <span class="data"></span></li>
-                        <li class="capacity"><strong>Capacity</strong> <span class="data"></span></li>
-                        <li class="diversity"><strong>Diversity</strong> <span class="data"></span></li>
                         <li class="day"><strong>Day</strong> <span class="data"></span></li>
+                        <li class="capacity"><strong>Capacity</strong> <span class="data"></span></li>
                     </ul>
                 </div>
 
@@ -133,6 +132,7 @@ if (isset($_GET['gen'])
                     <a class="option" data-speed="5000">Slow</a>
                     <a class="option" data-speed="1000">Medium</a>
                     <a class="option" data-speed="500">Fast</a>
+                    <a class="option" data-speed="99999999">Pause</a>
                 </div>
                 <div class="new-pokemon">
                     <strong></strong>
