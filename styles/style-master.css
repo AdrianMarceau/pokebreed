@@ -259,52 +259,18 @@
 .panel .overview.main .details.zone .timer {
     display: none;
 }
-/*
-.panel .overview.main .details.zone .timer {
-    display: block;
-    margin: 0 auto 4px;
-    border: 1px solid #737378;
-    border-top: 0 none transparent;
-    -moz-border-radius: 0 0 3px 3px;
-    -webkit-border-radius: 0 0 3px 3px;
-    border-radius: 0 0 3px 3px;
-    position: relative;
-    overflow: hidden;
-}
-.panel .overview.main .details.zone .timer .total,
-.panel .overview.main .details.zone .timer .complete {
-    display: block;
-    margin: 0 auto 0 0;
-    box-sizing: border-box;
-    width: 100%;
-    height: 10px;
-}
-.panel .overview.main .details.zone .timer .total {
-    background-color: #8f8f8f;
-    box-shadow: inset 1px 1px 4px rgba(0, 0, 0, 0.2);
-}
-.panel .overview.main .details.zone .timer .complete {
-    background-color: #a3a3ff;
-    border-right: 1px solid #69696d;
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7bb1fc+0,3367b0+100 * /
-    background: rgb(123,177,252); /* Old browsers * /
-    background: -moz-linear-gradient(top, rgba(123,177,252,1) 0%, rgba(51,103,176,1) 100%); /* FF3.6-15 * /
-    background: -webkit-linear-gradient(top, rgba(123,177,252,1) 0%,rgba(51,103,176,1) 100%); /* Chrome10-25,Safari5.1-6 * /
-    background: linear-gradient(to bottom, rgba(123,177,252,1) 0%,rgba(51,103,176,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ * /
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7bb1fc', endColorstr='#3367b0',GradientType=0 ); /* IE6-9 * /
-}
-*/
 .panel .overview.main .details.pokemon {
-    background-image: url(../images/fields/forest.png);
+    background-image: none;
     background-position: center center;
     background-repeat: repeat;
+    background-size: 100%;
+    background-size: cover;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
     margin-bottom: 0;
     position: relative;
     padding-bottom: 5px;
-    transition: background-image 0.6s;
 }
 .panel .overview.main .details.pokemon:after {
     content: "";
@@ -322,12 +288,65 @@
     -webkit-border-radius: 0 0 3px 3px;
     border-radius: 0 0 3px 3px;
     pointer-events: none;
+    z-index: 2;
+}
+
+.panel .overview.main .details.pokemon .field {
+    display: block;
+    position: absolute;
+    height: auto;
+    width: auto;
+    top: 23px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-top: 0 none transparent;
+    -moz-border-radius: 0 0 3px 3px;
+    -webkit-border-radius: 0 0 3px 3px;
+    border-radius: 0 0 3px 3px;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+.panel .overview.main .details.pokemon .field .bg,
+.panel .overview.main .details.pokemon .field .tx {
+    display: block;
+    position: absolute;
+    height: auto;
+    width: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: none;
+    background-repeat: repeat;
+    overflow: hidden;
+}
+.panel .overview.main .details.pokemon .field .bg {
+    background-image: url(../images/fields/forest-fullsize.png);
+    background-position: center bottom;
+    background-size: 100%;
+    background-size: cover;
+    transition: background-image 0.6s;
+    -webkit-filter: blur(2px);
+    -moz-filter: blur(2px);
+    -o-filter: blur(2px);
+    -ms-filter: blur(2px);
+    filter: blur(2px);
     z-index: 1;
 }
+.panel .overview.main .details.pokemon .field .tx {
+    background-image: url(../images/field-texture.png);
+    background-position: center center;
+    background-size: auto;
+    z-index: 2;
+    top: 1px;
+}
+
 .panel .overview.main .details.pokemon .wrap {
     box-sizing: border-box;
     position: relative;
-    z-index: 2;
+    z-index: 3;
     padding: 0;
     width: 445px;
     max-height: 445px;
@@ -534,6 +553,7 @@
     position: relative;
     border: 0 none transparent;
     background-color: transparent;
+    z-index: 4;
 }
 .panel .overview.types {
     float: left;

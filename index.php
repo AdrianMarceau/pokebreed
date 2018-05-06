@@ -85,6 +85,10 @@ if (isset($_GET['gen'])
                         <ul class="list slots"></ul>
                         <ul class="list pokemon"></ul>
                     </div>
+                    <div class="field">
+                        <span class="bg"></span>
+                        <span class="tx"></span>
+                    </div>
                 </div>
 
             </div>
@@ -136,18 +140,18 @@ if (isset($_GET['gen'])
                 </div>
                 <div class="fields">
                     <a class="field active"><img src="images/fields/forest.png" /></a>
-                    <a class="field"><img src="images/fields/beach.png" /></a>
-                    <a class="field"><img src="images/fields/cave.png" /></a>
-                    <a class="field"><img src="images/fields/city.png" /></a>
-                    <a class="field"><img src="images/fields/crag.png" /></a>
-                    <a class="field"><img src="images/fields/desert.png" /></a>
-                    <a class="field"><img src="images/fields/river.png" /></a>
                     <a class="field"><img src="images/fields/savanna.png" /></a>
+                    <a class="field"><img src="images/fields/desert.png" /></a>
+                    <a class="field"><img src="images/fields/beach.png" /></a>
+                    <a class="field"><img src="images/fields/river.png" /></a>
                     <a class="field"><img src="images/fields/seafloor.png" /></a>
-                    <!-- <a class="field"><img src="images/fields/sky.png" /></a> -->
-                    <a class="field"><img src="images/fields/snow.png" /></a>
-                    <!-- <a class="field"><img src="images/fields/space.png" /></a> -->
+                    <a class="field"><img src="images/fields/cave.png" /></a>
+                    <a class="field"><img src="images/fields/crag.png" /></a>
                     <a class="field"><img src="images/fields/volcano.png" /></a>
+                    <a class="field"><img src="images/fields/snow.png" /></a>
+                    <a class="field"><img src="images/fields/city.png" /></a>
+                    <a class="field"><img src="images/fields/sky.png" /></a>
+                    <a class="field"><img src="images/fields/space.png" /></a>
                 </div>
                 <div class="info links">
                     <a class="link" data-tab="about">about</a>

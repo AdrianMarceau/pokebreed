@@ -177,7 +177,8 @@
             e.preventDefault();
             var $link = $(this);
             var image = $link.find('img').attr('src');
-            $('.details.pokemon', $panelMainOverview).css({backgroundImage:'url('+ image +')'});
+            var newImage = image.replace('.png', '-fullsize.png');
+            $('.details.pokemon .field .bg', $panelMainOverview).css({backgroundImage:'url('+ newImage +')'});
             //console.log('changing background to ', image);
             //'.panel .overview.main .details.pokemon';
             $fieldButtons.removeClass('active');
