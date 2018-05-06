@@ -5,6 +5,7 @@
 
     var appLastUpdated = '2018-03-29'; // first date
     var appVersionNumber = '0.1.0'; // first version
+    var appDebugMode = false; // debug mode
 
     var requiredPokemonIndexes = ['', 1, 2, 3, 4, 5, 6, 7, 'x'];
     var maxIndexKeyToLoad = 8;
@@ -540,8 +541,7 @@
         $('.new-pokemon > strong', $panelButtons).html('Select '+ pokemonRequiredToStart +' Starter Pokémon');
 
         // Loop through and generate buttons for each Pokemon
-        var dittoBreaker = false;
-        var specialBreaker = false;
+        var lastGeneration = false;
         var pokePanelMarkup = '';
         for (var key = 0; key < BasicPokemonSpeciesIndexTokens.length; key++){
 
@@ -553,14 +553,23 @@
             //console.log('pokemonTypes = ', pokemonTypes);
 
             // Continue if this is not an appropriate starter pokemon
-            if (pokemonToken === 'ditto'
+            if (!appDebugMode && (pokemonToken === 'ditto'
                 || pokemonToken === 'shiny-ditto'
                 || pokemonData['class'] === 'legendary'
                 || pokemonData['class'] === 'mythical'
                 || pokemonData['class'] === 'ultra-beast'
-                || pokemonData['eggGroups'][0] === 'undiscovered'){
+                || pokemonData['eggGroups'][0] === 'undiscovered')){
                 continue;
                 }
+
+            // Insert a break after each new generation
+            if (appDebugMode
+                && pokemonData.gameGeneration !== lastGeneration
+                && pokemonData.formClass !== 'gender-variant'
+                && pokemonData.formClass !== 'regional-variant'){
+                if (lastGeneration !== false){ pokePanelMarkup += '<hr class="breaker" />'; }
+                lastGeneration = pokemonData.gameGeneration;
+            }
 
             // Collect the pokemon's image icon
             var pokemonIcon = getPokemonIcon(pokemonToken);
