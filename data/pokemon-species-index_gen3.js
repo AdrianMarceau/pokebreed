@@ -835,6 +835,43 @@
             prevEvolution: 'loudred'
             },
 
+        'makuhita': {
+            order: indexOrder++,
+            token: 'makuhita',
+            name: 'Makuhita',
+            number: 296,
+            types: ['fighting'],
+            genderRatio: {male: 0.75, female: 0.25},
+            baseStats: {hp: 72, phAttack: 60, phDefense: 30, spAttack: 20, spDefense: 30, speed: 25},
+            abilities: {0: 'thick-fat', 1: 'guts', hidden: 'sheer-force'},
+            height: 1,
+            weight: 86.4,
+            colors: ['yellow', 'brown', 'red'],
+            eggCycles: 20,
+            eggGroups: ['human-like'],
+            nextEvolutions: [{
+                species: 'hariyama',
+                method: 'level-up',
+                value: 24
+                }]
+            },
+        'hariyama': {
+            order: indexOrder++,
+            token: 'hariyama',
+            name: 'Hariyama',
+            number: 297,
+            types: ['fighting'],
+            genderRatio: {male: 0.75, female: 0.25},
+            baseStats: {hp: 144, phAttack: 120, phDefense: 60, spAttack: 40, spDefense: 60, speed: 50},
+            abilities: {0: 'thick-fat', 1: 'guts', hidden: 'sheer-force'},
+            height: 2.3,
+            weight: 253.8,
+            colors: ['orange', 'black', 'yellow', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['human-like'],
+            prevEvolution: 'makuhita'
+            },
+
         'azurill': {
             order: thisIndex.beforeOrder('marill'),
             token: 'azurill',
