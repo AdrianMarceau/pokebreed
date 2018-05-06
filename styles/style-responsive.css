@@ -257,40 +257,8 @@
     .panel .overview.species .wrap {
         max-height: 795px;
     }
-
-}
-
-/* -- iPad -- */
-@media (width: 768px) and (height: 1024px) and (orientation: portrait){
-
-    @keyframes popIn {
-        from { opacity: 0; transform: scale(0, 0); margin-left: -85px; }
-        to { opacity: 1; transform: scale(1, 1); margin-left: 0; }
-    }
-    @keyframes fadeOut {
-        from { opacity: 1; transform: scale(1, 1); bottom: 0; margin-right: 5px; }
-        to { opacity: 0; transform: scale(0, 0); bottom: -85px; margin-right: -85px; pointer-events: none; }
-    }
-    .panel .overview.main .details.pokemon .wrap {
-        width: 705px;
-        max-height: 705px;
-    }
-    .panel .overview.main .details.pokemon .list.slots li,
-    .panel .overview.main .details.pokemon .list.pokemon li,
-    .panel .overview.main .details.pokemon .list.slots li.slot:before {
-        width: 66px;
-        height: 66px;
-    }
-    .panel .overview.main .details.pokemon .list .sprite {
-        width: 80px;
-        height: 60px;
-        image-rendering: optimizeSpeed;             /*                     */
-        image-rendering: -moz-crisp-edges;          /* Firefox             */
-        image-rendering: -o-crisp-edges;            /* Opera               */
-        image-rendering: -webkit-optimize-contrast; /* Chrome (and Safari) */
-        image-rendering: optimize-contrast;         /* CSS3 Proposed       */
-        image-rendering: pixelated;                 /* CSS3 Proposed?       */
-        -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
+    .panel .buttons .new-pokemon .buttonwrap {
+        max-height: calc(100vh - 490px);
     }
 
 }

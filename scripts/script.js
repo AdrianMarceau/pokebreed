@@ -102,7 +102,14 @@
         $pokePanelButtons = $panelButtons.find('.new-pokemon');
         $pokePanelLoading = $pokePanelButtons.find('.loading');
 
-        // Add the scrollbar to any wrapper that need it
+        // Update any scroll wrappers when the window resizes
+        var updateScrollWrappers = function(){
+            $pokePanelButtons.find('.buttonwrap').perfectScrollbar('update');
+            };
+        $(window).resize(updateScrollWrappers);
+        updateScrollWrappers();
+
+        // Add the scrollbar to any wrapper that need
         $('.wrap', $panelOverviewFloatLists).perfectScrollbar({suppressScrollX: true});
 
         // Preload the type and pokemon indexes
@@ -604,11 +611,26 @@
             }
 
         // Append generated markup to the panel at once
-        $pokePanelButtons.append(pokePanelMarkup);
+        $pokePanelButtons.append('<div class="buttonwrap">'+pokePanelMarkup+'</div>');
 
         // Remove the loading dotts
         $pokePanelLoading.parent().addClass('loaded');
         $pokePanelLoading.remove();
+
+        // Atach a scrollbar to the markup panel
+        $pokePanelButtons.find('.buttonwrap').perfectScrollbar({suppressScrollX: true});
+
+        // Update scrollbar once images have loaded
+        var $buttonImages = $('img', $pokePanelButtons);
+        var loadedImages = 0;
+        $buttonImages.each(function(){
+            $(this).on('load', function(){
+                loadedImages++;
+                if (loadedImages === $buttonImages.length){
+                    $pokePanelButtons.find('.buttonwrap').perfectScrollbar('update');
+                    }
+                });
+            });
 
         // Attach a click event to the generated buttons
         $('button[data-action]', $pokePanelButtons).bind('click', function(e){
