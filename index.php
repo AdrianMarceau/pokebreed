@@ -59,7 +59,13 @@ if (isset($_GET['gen'])
             <h1>
                 <a class="logo" href="/"><img src="images/pokebox-logo.png" alt="PokéBox" /></a>
                 <span class="subtext">Pokémon Box Simulator <img class="icon" src="images/favicon.png" /></span>
-                <span class="version">v<?= $version_number ?></span>
+                <span class="version" onclick="javascript:if(confirm('Reset Simulator?')){window.top.location = window.top.location;}">
+                    v<?= $version_number ?>
+                    <span class="bp bp1"></span>
+                    <span class="bp bp2"></span>
+                    <span class="bp bp3"></span>
+                    <span class="bp bp4"></span>
+                </span>
             </h1>
 
             <div class="overview main">
