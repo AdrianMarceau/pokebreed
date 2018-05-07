@@ -85,7 +85,10 @@
         top: 0;
         left: 0;
     }
-
+    .panel .overview.main .details.pokemon .list .sprite {
+        width: 40px;
+        height: 30px;
+    }
 
     .panel .overview.types,
     .panel .overview.species {
