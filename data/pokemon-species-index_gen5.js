@@ -514,6 +514,61 @@
             prevEvolution: 'lampent'
             },
 
+        'axew': {
+            order: indexOrder++,
+            token: 'axew',
+            name: 'Axew',
+            number: 610,
+            types: ['dragon'],
+            baseStats: {hp: 46, phAttack: 87, phDefense: 60, spAttack: 30, spDefense: 40, speed: 57},
+            abilities: {0: 'rivalry', 1: 'mold-breaker', hidden: 'unnerve'},
+            height: 0.6,
+            weight: 18,
+            colors: ['green', 'red'],
+            eggCycles: 40,
+            eggGroups: ['monster', 'dragon'],
+            nextEvolutions: [{
+                species: 'fraxure',
+                method: 'level-up',
+                value: 38
+                }]
+            },
+        'fraxure': {
+            order: indexOrder++,
+            token: 'fraxure',
+            name: 'Fraxure',
+            number: 611,
+            types: ['dragon'],
+            baseStats: {hp: 66, phAttack: 117, phDefense: 70, spAttack: 40, spDefense: 50, speed: 67},
+            abilities: {0: 'rivalry', 1: 'mold-breaker', hidden: 'unnerve'},
+            height: 1,
+            weight: 36,
+            colors: ['green', 'gray', 'red'],
+            eggCycles: 40,
+            eggGroups: ['monster', 'dragon'],
+            prevEvolution: 'axew',
+            nextEvolutions: [{
+                species: 'haxorus',
+                method: 'level-up',
+                value: 48
+                }]
+            },
+        'haxorus': {
+            order: indexOrder++,
+            token: 'haxorus',
+            name: 'Haxorus',
+            number: 612,
+            types: ['dragon'],
+            baseStats: {hp: 76, phAttack: 147, phDefense: 90, spAttack: 60, spDefense: 70, speed: 97},
+            abilities: {0: 'rivalry', 1: 'mold-breaker', hidden: 'unnerve'},
+            height: 1.8,
+            weight: 105.5,
+            colors: ['yellow', 'gray', 'red'],
+            eggCycles: 40,
+            eggGroups: ['monster', 'dragon'],
+            prevEvolution: 'fraxure'
+            },
+
         'stunfisk': {
             order: indexOrder++,
             token: 'stunfisk',
