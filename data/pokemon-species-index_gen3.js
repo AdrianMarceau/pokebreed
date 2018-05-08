@@ -909,6 +909,45 @@
             eggGroups: ['mineral']
             },
 
+        'skitty': {
+            order: indexOrder++,
+            token: 'skitty',
+            name: 'Skitty',
+            number: 300,
+            types: ['normal'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 50, phAttack: 45, phDefense: 45, spAttack: 35, spDefense: 35, speed: 50},
+            abilities: {0: 'cute-charm', 1: 'normalize', hidden: 'wonder-skin'},
+            height: 0.6,
+            weight: 11,
+            colors: ['pink', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['field', 'fairy'],
+            nextEvolutions: [{
+                species: 'delcatty',
+                method: 'evolution-stone',
+                value: 'moon-stone',
+                method2: 'type-appeal',
+                value2: 'normal'
+                }]
+            },
+        'delcatty': {
+            order: indexOrder++,
+            token: 'delcatty',
+            name: 'Delcatty',
+            number: 301,
+            types: ['normal'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 70, phAttack: 65, phDefense: 65, spAttack: 55, spDefense: 55, speed: 90},
+            abilities: {0: 'cute-charm', 1: 'normalize', hidden: 'wonder-skin'},
+            height: 1.1,
+            weight: 32.6,
+            colors: ['purple', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['field', 'fairy'],
+            prevEvolution: 'skitty'
+            },
+
         'wynaut': {
             order: thisIndex.beforeOrder('wobbuffet'),
             token: 'wynaut',
