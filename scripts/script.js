@@ -185,7 +185,7 @@
             dayTimeoutDuration = speedValue;
             if (dayTimeoutStarted){ updateDay(false); }
             });
-        $speedButtons.filter('[data-speed="'+dayTimeoutDuration+'"]').click();
+        $speedButtons.filter('[data-speed="normal"]').click();
 
         // Define the click-event for the field links
         var $fieldButtons = $('.fields .field', $panelButtons);
