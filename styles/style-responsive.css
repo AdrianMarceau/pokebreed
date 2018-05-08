@@ -313,9 +313,10 @@
 @media (min-width: 768px) and (min-height: 648px){
     .bp3:before { content: "b";  }
 
-    @keyframes MoveUpDownC {
-      0%, 100% { transform: translate(-50%, -54%); }
+    @keyframes ButtonSpriteBounce {
+      0% { transform: translate(-50%, -54%); }
       50% { transform: translate(-50%, -58%); }
+      100% { transform: translate(-50%, -54%); }
     }
 
     .panel .buttons .new-pokemon .buttonwrap {
@@ -342,7 +343,7 @@
     }
     .panel .buttons button img:hover {
         transform: translate(-50%, -54%);
-        animation: MoveUpDownC 1.2s linear infinite;
+        animation: ButtonSpriteBounce 1.2s linear infinite;
     }
 
 }

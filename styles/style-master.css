@@ -435,25 +435,23 @@
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }
-@keyframes MoveUpDownA {
-  0%, 100% { transform: translate(0, 0); }
+@keyframes SpriteBounce {
+  0% { transform: translate(0, 0); }
   50% { transform: translate(0, -2px); }
-}
-@keyframes MoveUpDownB {
-  0%, 100% { transform: translate(0, -2px); }
-  50% { transform: translate(0, 0); }
+  100% { transform: translate(0, 0); }
 }
 .panel .overview.main .details.pokemon .list .sprite {
     position: relative;
     z-index: 2;
     top: 0;
     display: block;
+    animation: SpriteBounce 0.5s steps(2) infinite;
 }
 .panel .overview.main .details.pokemon .list li:nth-child(even) .sprite {
-    animation: MoveUpDownA 1s steps(2) infinite;
+    animation-delay: 0.0s;
 }
 .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
-    animation: MoveUpDownB 1s steps(2) infinite;
+    animation-delay: 0.25s;
 }
 .panel .overview.main .details.pokemon .list .sprite.overlay {
     position: absolute;
@@ -874,12 +872,13 @@
     transform: translate(0, 0);
     outline: none;
 }
-@keyframes MoveUpDownC {
-  0%, 100% { transform: translate(0, -4px); }
+@keyframes ButtonSpriteBounce {
+  0% { transform: translate(0, -4px); }
   50% { transform: translate(0, -5px); }
+  100% { transform: translate(0, -4px); }
 }
 .panel .buttons button:hover img {
-    animation: MoveUpDownC 0.6s linear infinite;
+    animation: ButtonSpriteBounce 0.6s linear infinite;
 }
 .panel .buttons button strong {
     margin: 0 auto;

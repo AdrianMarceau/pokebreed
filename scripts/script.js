@@ -171,7 +171,15 @@
         $speedButtons.bind('click', function(e){
             e.preventDefault();
             var $option = $(this);
-            var speedValue = parseInt($option.attr('data-speed'));
+            //var speedValue = parseInt($option.attr('data-speed'));
+            var speedValue = 0;
+            var speedToken = $option.attr('data-speed');
+            if (speedToken === 'slow'){ speedValue = 2400; }
+            else if (speedToken === 'normal'){ speedValue = 1200; }
+            else if (speedToken === 'fast'){ speedValue = 600; }
+            else if (speedToken === 'pause'){ speedValue = 99999999; }
+            if (speedValue === 0){ return false; }
+            else { $('body').attr('data-speed', speedToken); }
             $speedButtons.removeClass('active');
             $option.addClass('active');
             dayTimeoutDuration = speedValue;
@@ -1459,15 +1467,17 @@
         if (dayTimeout !== false){ clearTimeout(dayTimeout); }
         //$timer.css({width:'0%'});
         updateOverview(function(){
-            //console.log('updateOverview(function(){...})');
-            //console.log('|- thisZoneData.currentPokemon.length = ', thisZoneData.currentPokemon.length);
-            //console.log('|- thisZoneData.all = ', thisZoneData);
-            if (thisZoneData.currentPokemon.length > 0){
-                dayTimeout = setTimeout(function(){ updateDay(); }, dayTimeoutDuration);
-                //$timer.animate({width:'100%'},dayTimeoutDuration,'linear',function(){ $(this).css({width:'0%'}); });
-                } else {
-                updateOverview();
-                }
+            requestAnimationFrame(function(){
+                //console.log('updateOverview(function(){...})');
+                //console.log('|- thisZoneData.currentPokemon.length = ', thisZoneData.currentPokemon.length);
+                //console.log('|- thisZoneData.all = ', thisZoneData);
+                if (thisZoneData.currentPokemon.length > 0){
+                    dayTimeout = setTimeout(function(){ updateDay(); }, dayTimeoutDuration);
+                    //$timer.animate({width:'100%'},dayTimeoutDuration,'linear',function(){ $(this).css({width:'0%'}); });
+                    } else {
+                    updateOverview();
+                    }
+                });
             });
 
     }
@@ -2769,5 +2779,15 @@
             return new Array(7-h.length).join("0")+h
         })(bin.toString(16).toUpperCase())
     }
+
+    // Polyfill for requestAnimationFrame if not exists
+    window.requestAnimationFrame = window.requestAnimationFrame
+    || window.mozRequestAnimationFrame
+    || window.webkitRequestAnimationFrame
+    || window.msRequestAnimationFrame
+    || function(f){return setTimeout(f, 1000/60)};
+    window.cancelAnimationFrame = window.cancelAnimationFrame
+        || window.mozCancelAnimationFrame
+        || function(requestID){clearTimeout(requestID)};
 
 })();

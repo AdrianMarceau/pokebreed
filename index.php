@@ -53,7 +53,7 @@ if (isset($_GET['gen'])
         </script>
         <? } ?>
     </head>
-    <body>
+    <body data-speed="normal">
         <div class="panel">
 
             <h1>
@@ -135,10 +135,10 @@ if (isset($_GET['gen'])
             <div class="buttons">
                 <div class="day-speed hidden">
                     <strong>Change Day Speed</strong>
-                    <a class="option" data-speed="5000">Slow</a>
-                    <a class="option" data-speed="1000">Medium</a>
-                    <a class="option" data-speed="500">Fast</a>
-                    <a class="option" data-speed="99999999">Pause</a>
+                    <a class="option" data-speed="slow">Slow</a>
+                    <a class="option" data-speed="normal">Normal</a>
+                    <a class="option" data-speed="fast">Fast</a>
+                    <a class="option" data-speed="pause">Pause</a>
                 </div>
                 <div class="new-pokemon">
                     <strong></strong>
