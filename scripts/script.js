@@ -1358,6 +1358,7 @@
                 var pokeToken = currentZoneSpecies[key];
                 var pokeCount = currentZoneStats['species'][pokeToken];
                 var pokeIndex = PokemonSpeciesIndex[pokeToken];
+                var pokeAbilities = Object.values(pokeIndex.abilities);
                 for (var key2 = 0; key2 < pokeIndex.types.length; key2++){
 
                     var typeToken = pokeIndex.types[key2];
@@ -1371,8 +1372,22 @@
                     if (typeInfo['matchups']['weaknesses'].length){
                         for (var key3 = 0; key3 < typeInfo['matchups']['weaknesses'].length; key3++){
                             var type = typeInfo['matchups']['weaknesses'][key3];
+
+                            // Skip if an ability grants immunity to this type
+                            if (type === 'water' && pokeAbilities.indexOf('dry-skin') !== -1){ continue; }
+                            if (type === 'fire' && pokeAbilities.indexOf('flash-fire') !== -1){ continue; }
+                            if (type === 'ground' && pokeAbilities.indexOf('levitate') !== -1){ continue; }
+                            if (type === 'electric' && pokeAbilities.indexOf('lightning-rod') !== -1){ continue; }
+                            if (type === 'electric' && pokeAbilities.indexOf('motor-drive') !== -1){ continue; }
+                            if (type === 'grass' && pokeAbilities.indexOf('sap-sipper') !== -1){ continue; }
+                            if (type === 'water' && pokeAbilities.indexOf('storm-drain') !== -1){ continue; }
+                            if (type === 'electric' && pokeAbilities.indexOf('volt-absorb') !== -1){ continue; }
+                            if (type === 'water' && pokeAbilities.indexOf('water-absorb') !== -1){ continue; }
+
+                            // Otherwise we can add the weakness type stats
                             if (typeof currentZoneStats['types'][type] === 'undefined'){ currentZoneStats['types'][type] = 0; }
                             currentZoneStats['types'][type] += pokeCount * pokeIndex.influencePoints * 0.5;
+
                             }
                         }
 
