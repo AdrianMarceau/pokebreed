@@ -422,6 +422,41 @@
             prevEvolution: 'eelektrik'
             },
 
+        'elgyem': {
+            order: indexOrder++,
+            token: 'elgyem',
+            name: 'Elgyem',
+            number: 605,
+            types: ['psychic'],
+            baseStats: {hp: 55, phAttack: 55, phDefense: 55, spAttack: 85, spDefense: 55, speed: 30},
+            abilities: {0: 'Telepathy', 1: 'Synchronize', hidden: 'Analytic'},
+            height: 0.5,
+            weight: 9,
+            colors: ['blue', 'black', 'green', 'red', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['human-like'],
+            nextEvolutions: [{
+                species: 'beheeyem',
+                method: 'level-up',
+                value: 42
+                }]
+            },
+        'beheeyem': {
+            order: indexOrder++,
+            token: 'beheeyem',
+            name: 'Beheeyem',
+            number: 606,
+            types: ['psychic'],
+            baseStats: {hp: 75, phAttack: 75, phDefense: 75, spAttack: 125, spDefense: 95, speed: 40},
+            abilities: {0: 'Telepathy', 1: 'Synchronize', hidden: 'Analytic'},
+            height: 1,
+            weight: 34.5,
+            colors: ['brown', 'black', 'green', 'red', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['human-like'],
+            prevEvolution: 'elgyem'
+            },
+
         'stunfisk': {
             order: indexOrder++,
             token: 'stunfisk',
