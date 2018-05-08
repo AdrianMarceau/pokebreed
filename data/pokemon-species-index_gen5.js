@@ -365,6 +365,63 @@
             prevEvolution: 'klang'
             },
 
+        'tynamo': {
+            order: indexOrder++,
+            token: 'tynamo',
+            name: 'Tynamo',
+            number: 602,
+            types: ['electric'],
+            baseStats: {hp: 35, phAttack: 55, phDefense: 40, spAttack: 45, spDefense: 40, speed: 60},
+            abilities: {0: 'levitate'},
+            height: 0.2,
+            weight: 0.3,
+            colors: ['white', 'red', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            nextEvolutions: [{
+                species: 'eelektrik',
+                method: 'level-up',
+                value: 39
+                }]
+            },
+        'eelektrik': {
+            order: indexOrder++,
+            token: 'eelektrik',
+            name: 'Eelektrik',
+            number: 603,
+            types: ['electric'],
+            baseStats: {hp: 65, phAttack: 85, phDefense: 70, spAttack: 75, spDefense: 70, speed: 40},
+            abilities: {0: 'levitate'},
+            height: 1.2,
+            weight: 22,
+            colors: ['blue', 'red', 'yellow', 'white'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'tynamo',
+            nextEvolutions: [{
+                species: 'eelektross',
+                method: 'evolution-stone',
+                value: 'thunder-stone',
+                method2: 'type-surge',
+                value2: 'electric'
+                }]
+            },
+        'eelektross': {
+            order: indexOrder++,
+            token: 'eelektross',
+            name: 'Eelektross',
+            number: 604,
+            types: ['electric'],
+            baseStats: {hp: 85, phAttack: 115, phDefense: 80, spAttack: 105, spDefense: 80, speed: 50},
+            abilities: {0: 'levitate'},
+            height: 2.1,
+            weight: 80.5,
+            colors: ['blue', 'red', 'yellow', 'white'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'eelektrik'
+            },
+
         'stunfisk': {
             order: indexOrder++,
             token: 'stunfisk',
