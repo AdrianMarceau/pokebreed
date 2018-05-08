@@ -457,6 +457,63 @@
             prevEvolution: 'elgyem'
             },
 
+        'litwick': {
+            order: indexOrder++,
+            token: 'litwick',
+            name: 'Litwick',
+            number: 607,
+            types: ['ghost', 'fire'],
+            baseStats: {hp: 50, phAttack: 30, phDefense: 55, spAttack: 65, spDefense: 55, speed: 20},
+            abilities: {0: 'flash-fire', 1: 'flame-body', hidden: 'infiltrator'},
+            height: 0.3,
+            weight: 3.1,
+            colors: ['white', 'purple', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            nextEvolutions: [{
+                species: 'lampent',
+                method: 'level-up',
+                value: 41
+                }]
+            },
+        'lampent': {
+            order: indexOrder++,
+            token: 'lampent',
+            name: 'Lampent',
+            number: 608,
+            types: ['ghost', 'fire'],
+            baseStats: {hp: 60, phAttack: 40, phDefense: 60, spAttack: 95, spDefense: 60, speed: 55},
+            abilities: {0: 'flash-fire', 1: 'flame-body', hidden: 'infiltrator'},
+            height: 0.6,
+            weight: 13,
+            colors: ['black', 'purple', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'tynamo',
+            nextEvolutions: [{
+                species: 'chandelure',
+                method: 'evolution-stone',
+                value: 'dusk-stone',
+                method2: 'type-surge',
+                value2: ['ghost', 'fire']
+                }]
+            },
+        'chandelure': {
+            order: indexOrder++,
+            token: 'chandelure',
+            name: 'Chandelure',
+            number: 609,
+            types: ['ghost', 'fire'],
+            baseStats: {hp: 60, phAttack: 55, phDefense: 90, spAttack: 145, spDefense: 90, speed: 80},
+            abilities: {0: 'flash-fire', 1: 'flame-body', hidden: 'infiltrator'},
+            height: 1,
+            weight: 34.3,
+            colors: ['purple', 'black', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'lampent'
+            },
+
         'stunfisk': {
             order: indexOrder++,
             token: 'stunfisk',
