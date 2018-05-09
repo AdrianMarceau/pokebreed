@@ -2246,6 +2246,24 @@
             || visitorKind === 'legendary'
             || visitorKind === 'mythical'){
 
+            // Pre-loop before and define current species-specific appeal values
+            var speciesAppealIndex = {};
+            for (var key = 0; key < BasicPokemonSpeciesIndexTokens.length; key++){
+                var pokeToken = BasicPokemonSpeciesIndexTokens[key];
+                var pokeInfo = PokemonSpeciesIndex[pokeToken];
+                if (typeof pokeInfo.speciesAppeal !== 'undefined'){
+                    for (var key2 = 0; key2 < pokeInfo.speciesAppeal.length; key2++){
+                        var speciesToken = pokeInfo.speciesAppeal[key2];
+                        if (typeof thisZoneData.currentStats['species'][speciesToken] !== 'undefined'
+                            && thisZoneData.currentStats['species'][speciesToken] > 0){
+                            speciesAppealIndex[pokeToken] = thisZoneData.currentStats['species'][speciesToken];
+                            }
+                        }
+                    }
+
+            }
+            //console.log('speciesAppealIndex = ', speciesAppealIndex);
+
             // Loop through basic pokemon and calculate chances of each
             var basicPokemonChances = [];
             for (var key = 0; key < BasicPokemonSpeciesIndexTokens.length; key++){
@@ -2285,12 +2303,25 @@
                     pokeChance += thisZoneData.currentStats['gameRegion'][pokeInfo.gameRegion] * regionVal;
                     }
 
+                // Increase the chance of this pokemon appearing based on species appeal
+                if (typeof speciesAppealIndex[pokeToken] !== 'undefined'){
+                    //console.log('speciesAppealIndex['+pokeToken+'] = ', speciesAppealIndex[pokeToken]);
+                    pokeChance *= speciesAppealIndex[pokeToken];
+                    //console.log('pokeChance = ', pokeChance);
+                }
+
                 // Decrease the chance if there is already a colony of this species
                 if (typeof thisZoneData.addedPokemonSpecies[pokeToken] !== 'undefined'){
-                    pokeChance -= thisZoneData.addedPokemonSpecies[pokeToken];
-                    if (visitorKind !== 'basic'){
+                    var numAddedAlready = thisZoneData.addedPokemonSpecies[pokeToken];
+                    //console.log('numAddedAlready ', pokeToken, numAddedAlready);
+                    if (numAddedAlready === 1){ pokeChance += 2; }
+                    else { pokeChance -= numAddedAlready; }
+                    //console.log('pokeChance ', pokeToken, pokeChance);
+                    if (visitorKind !== 'basic'
+                        || numAddedAlready >= 5){
                         pokeChance *= -1;
-                        pokeChance -= thisZoneData.addedPokemonSpecies[pokeToken];
+                        pokeChance -= numAddedAlready;
+                        //console.log('pokeChance ', pokeToken, pokeChance);
                         }
                     }
 
@@ -2318,6 +2349,7 @@
                     }
                 }
             //console.log('basicPokemonChances = ', basicPokemonChances);
+            //console.log('basicPokemonChances(top20) = ', basicPokemonChances[0], basicPokemonChances[1], basicPokemonChances[2], basicPokemonChances.slice(0, 20));
 
             } else if (typeof PokemonSpeciesIndex[visitorKind] !== 'undefined'){
 
