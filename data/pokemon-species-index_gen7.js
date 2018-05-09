@@ -210,8 +210,7 @@
                 species: 'toxapex',
                 method: 'level-up',
                 value: 38
-                }],
-            speciesAppeal: ['corsola']
+                }]
             },
         'toxapex': {
             order: indexOrder++,

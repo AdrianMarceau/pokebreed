@@ -309,7 +309,7 @@
             number: 16,
             types: ['normal', 'flying'],
             baseStats: {hp: 40, phAttack: 45, phDefense: 40, spAttack: 35, spDefense: 35, speed: 56},
-            abilities: {0: 'Keen Eye', 1: 'Tangled Feet', hidden: 'Big Pecks'},
+            abilities: {0: 'keen-eye', 1: 'tangled-feet', hidden: 'big-pecks'},
             height: 0.3,
             weight: 1.8,
             colors: ['brown', 'white'],
@@ -1709,8 +1709,7 @@
                 value: 'water-stone',
                 method2: 'type-appeal',
                 value2: ['water', 'ice']
-                }],
-            speciesAppeal: ['slowpoke']
+                }]
             },
         'cloyster': {
             order: indexOrder++,

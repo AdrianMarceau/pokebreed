@@ -857,9 +857,4 @@
         {base: 'nosepass', species: 'probopass', method: 'evolution-location', value: 'magnetic-field', method2: 'type-surge', value2: 'electric'},
         ]);
 
-    // Update previous gen pokemon with new species appeal data
-    thisIndex.addSpeciesAppeals([
-        {base: 'remoraid', species: 'mantyke'},
-        ]);
-
 })();

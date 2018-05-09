@@ -283,9 +283,56 @@
 
         {base: 'floette', species: 'eternal-floette', method: 'burst-evolution', value: 'ultimate-weapon', method2: 'extinction', value2: true},
 
-        {base: 'greninja', species: 'ash-greninja', method: 'burst-evolution', value: 'battle-bond', method2: 'extinction', value2: true},
+        {base: 'greninja', species: 'ash-greninja', method: 'burst-evolution', value: 'battle-bond', method2: 'type-surge', value2: 'water'},
 
         {base: 'minior', species: 'meteor-minior', method: 'burst-evolution', value: 'shields-down'},
+
+        ]);
+
+    // Update previous gen pokemon with known species appeal data
+    thisIndex.addSpeciesAppealValues([
+
+        // Confirmed predator/prey relationships
+        {base: 'pidgeotto', species: 'exeggcute'},
+        {base: 'crabrawler', species: 'exeggcute'},
+        {base: 'pidgeot', species: 'magikarp'},
+        {base: 'ekans', species: 'pidgey'},
+        {base: 'ekans', species: 'spearow'},
+        {base: 'alolan-grimer', species: 'trubbish'},
+        {base: 'alolan-muk', species: 'garbodor'},
+        {base: 'kingler', species: 'shellder'},
+        {base: 'kingler', species: 'cloyster'},
+        {base: 'omastar', species: 'shellder'},
+        {base: 'taillow', species: 'wurmple'},
+        {base: 'swellow', species: 'wurmple'},
+        {base: 'starly', species: 'wurmple'},
+        {base: 'wingull', species: 'wishiwashi'},
+        {base: 'pelipper', species: 'wishiwashi'},
+        {base: 'wailmer', species: 'wishiwashi'},
+        {base: 'wailord', species: 'wishiwashi'},
+        {base: 'starly', species: 'cherubi'},
+        {base: 'archeops', species: 'omanyte'},
+        {base: 'mandibuzz', species: 'cubone'},
+        {base: 'heatmor', species: 'durant'},
+        {base: 'toucannon', species: 'bounsweet'},
+        {base: 'mareanie', species: 'corsola'},
+        {base: 'toxapex', species: 'corsola'},
+
+        // Confirmed simbiotic relationships
+        {base: 'shellder', species: 'slopoke'},
+        {base: 'remoraid', species: 'mantyke'},
+
+        // Confirmed rival relationships
+        {base: 'zangoose', species: 'seviper'},
+        {base: 'seviper', species: 'zangoose'},
+
+        // Hinted-at predator/prey relationships
+        {base: 'fletchling', species: 'scatterbug'},
+        {base: 'fletchinder', species: 'spewpa'},
+        {base: 'fearow', species: 'bounsweet'},
+
+        // Hinted-at simbiotic relationships
+        {base: 'luvdisc', species: 'alomomola'},
 
         ]);
 
