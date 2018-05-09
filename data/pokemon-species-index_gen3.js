@@ -978,6 +978,61 @@
             eggGroups: ['field', 'fairy']
             },
 
+        'aron': {
+            order: indexOrder++,
+            token: 'aron',
+            name: 'Aron',
+            number: 304,
+            types: ['steel', 'rock'],
+            baseStats: {hp: 50, phAttack: 70, phDefense: 100, spAttack: 40, spDefense: 40, speed: 30},
+            abilities: {0: 'sturdy', 1: 'rock-head', hidden: 'heavy-metal'},
+            height: 0.4,
+            weight: 60,
+            colors: ['gray', 'black', 'blue'],
+            eggCycles: 35,
+            eggGroups: ['monster'],
+            nextEvolutions: [{
+                species: 'lairon',
+                method: 'level-up',
+                value: 32
+                }]
+            },
+        'lairon': {
+            order: indexOrder++,
+            token: 'lairon',
+            name: 'Lairon',
+            number: 305,
+            types: ['steel', 'rock'],
+            baseStats: {hp: 60, phAttack: 90, phDefense: 140, spAttack: 50, spDefense: 50, speed: 40},
+            abilities: {0: 'sturdy', 1: 'rock-head', hidden: 'heavy-metal'},
+            height: 0.9,
+            weight: 120,
+            colors: ['gray', 'black', 'blue'],
+            eggCycles: 35,
+            eggGroups: ['monster'],
+            prevEvolution: 'aron',
+            nextEvolutions: [{
+                species: 'aggron',
+                method: 'level-up',
+                value: 42
+                }]
+            },
+        'aggron': {
+            order: indexOrder++,
+            token: 'aggron',
+            name: 'Aggron',
+            number: 306,
+            types: ['steel', 'rock'],
+            baseStats: {hp: 70, phAttack: 110, phDefense: 180, spAttack: 60, spDefense: 60, speed: 50},
+            abilities: {0: 'sturdy', 1: 'rock-head', hidden: 'heavy-metal'},
+            height: 2.1,
+            weight: 360,
+            colors: ['gray', 'black', 'blue'],
+            eggCycles: 35,
+            eggGroups: ['monster'],
+            prevEvolution: 'lairon'
+            },
+
         'wynaut': {
             order: thisIndex.beforeOrder('wobbuffet'),
             token: 'wynaut',

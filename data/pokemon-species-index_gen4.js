@@ -715,7 +715,7 @@
             },
 
         'gallade': {
-            order: thisIndex.afterOrder('gardevoir'),
+            order: thisIndex.afterOrder('gardevoir', 2),
             token: 'gallade',
             name: 'Gallade',
             number: 475,

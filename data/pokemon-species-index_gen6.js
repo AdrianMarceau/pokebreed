@@ -908,7 +908,7 @@
             },
 
         'mega-slowbro': {
-            order: thisIndex.beforeOrder('slowking'),
+            order: thisIndex.afterOrder('slowbro', 1),
             token: 'mega-slowbro',
             name: 'Mega Slowbro',
             formClass: 'mega-evolution',
@@ -1233,6 +1233,45 @@
             prevEvolution: 'swampert'
             },
 
+        'mega-gardevoir': {
+            order: thisIndex.afterOrder('gardevoir', 1),
+            token: 'mega-gardevoir',
+            name: 'Mega Gardevoir',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'gardevoir',
+            number: 282,
+            types: ['psychic', 'fairy'],
+            baseStats: {hp: 68, phAttack: 85, phDefense: 65, spAttack: 165, spDefense: 135, speed: 100},
+            abilities: {0: 'pixilate'},
+            height: 1.6,
+            weight: 48.4,
+            colors: ['white', 'green', 'red'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'gardevoir'
+            },
+        'mega-gallade': {
+            order: thisIndex.afterOrder('gardevoir', 3),
+            token: 'mega-gallade',
+            name: 'Mega Gallade',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'gallade',
+            number: 475,
+            types: ['psychic', 'fighting'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 68, phAttack: 165, phDefense: 95, spAttack: 65, spDefense: 115, speed: 110},
+            abilities: {0: 'inner-focus'},
+            height: 1.6,
+            weight: 56.4,
+            colors: ['white', 'blue', 'red', 'green'],
+            eggCycles: 20,
+            eggPartner: 'mega-gardevoir',
+            eggGroups: ['amorphous'],
+            prevEvolution: 'gallade'
+            },
+
         'mega-sableye': {
             order: thisIndex.afterOrder('sableye'),
             token: 'mega-sableye',
@@ -1269,6 +1308,25 @@
             eggCycles: 20,
             eggGroups: ['field', 'fairy'],
             prevEvolution: 'mawile'
+            },
+
+        'mega-aggron': {
+            order: thisIndex.afterOrder('aggron'),
+            token: 'mega-aggron',
+            name: 'Mega Aggron',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'aggron',
+            number: 306,
+            types: ['steel'],
+            baseStats: {hp: 70, phAttack: 140, phDefense: 230, spAttack: 60, spDefense: 80, speed: 50},
+            abilities: {0: 'filter'},
+            height: 2.2,
+            weight: 395,
+            colors: ['gray', 'black', 'blue'],
+            eggCycles: 35,
+            eggGroups: ['monster'],
+            prevEvolution: 'aggron'
             },
 
         'mega-latias': {
@@ -1310,45 +1368,6 @@
             eggCycles: 120,
             eggGroups: ['undiscovered'],
             prevEvolution: 'latios'
-            },
-
-        'mega-gardevoir': {
-            order: thisIndex.beforeOrder('gallade'),
-            token: 'mega-gardevoir',
-            name: 'Mega Gardevoir',
-            formClass: 'mega-evolution',
-            formToken: 'mega',
-            baseSpecies: 'gardevoir',
-            number: 282,
-            types: ['psychic', 'fairy'],
-            baseStats: {hp: 68, phAttack: 85, phDefense: 65, spAttack: 165, spDefense: 135, speed: 100},
-            abilities: {0: 'pixilate'},
-            height: 1.6,
-            weight: 48.4,
-            colors: ['white', 'green', 'red'],
-            eggCycles: 20,
-            eggGroups: ['amorphous'],
-            prevEvolution: 'gardevoir'
-            },
-        'mega-gallade': {
-            order: thisIndex.afterOrder('gallade'),
-            token: 'mega-gallade',
-            name: 'Mega Gallade',
-            formClass: 'mega-evolution',
-            formToken: 'mega',
-            baseSpecies: 'gallade',
-            number: 475,
-            types: ['psychic', 'fighting'],
-            genderRatio: {male: 1.0000},
-            baseStats: {hp: 68, phAttack: 165, phDefense: 95, spAttack: 65, spDefense: 115, speed: 110},
-            abilities: {0: 'inner-focus'},
-            height: 1.6,
-            weight: 56.4,
-            colors: ['white', 'blue', 'red', 'green'],
-            eggCycles: 20,
-            eggPartner: 'mega-gardevoir',
-            eggGroups: ['amorphous'],
-            prevEvolution: 'gallade'
             },
 
         'primal-kyogre': {
@@ -1452,6 +1471,8 @@
 
         {base: 'sableye', species: 'mega-sableye', method: 'mega-evolution', value: 'sablinite'},
         {base: 'mawile', species: 'mega-mawile', method: 'mega-evolution', value: 'mawilite'},
+
+        {base: 'aggron', species: 'mega-aggron', method: 'mega-evolution', value: 'aggronite'},
 
         {base: 'latias', species: 'mega-latias', method: 'mega-evolution', value: 'latiasite'},
         {base: 'latios', species: 'mega-latios', method: 'mega-evolution', value: 'latiosite'},
