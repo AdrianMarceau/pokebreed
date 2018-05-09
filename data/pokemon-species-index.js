@@ -140,7 +140,7 @@
             && typeof PokemonSpeciesIndex.indexList[speciesAppeal.base] !== 'undefined'){
             var basePokemon = PokemonSpeciesIndex.indexList[speciesAppeal.base];
             if (typeof basePokemon.speciesAppeal === 'undefined'){ basePokemon.speciesAppeal = []; }
-            basePokemon.speciesAppeal.push(speciesAppeal.form);
+            basePokemon.speciesAppeal.push(speciesAppeal.species);
             //console.log('|- basePokemon = ', basePokemon);
             }
     }
