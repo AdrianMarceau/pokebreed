@@ -133,6 +133,18 @@
             }
     }
 
+    // Define a function for adding species appeal data to a given species
+    function addSpeciesAppeal(speciesAppeal){
+        //console.log('addSpeciesAppeal(speciesAppeal)', speciesAppeal);
+        if (typeof speciesAppeal.base !== 'undefined'
+            && typeof PokemonSpeciesIndex.indexList[speciesAppeal.base] !== 'undefined'){
+            var basePokemon = PokemonSpeciesIndex.indexList[speciesAppeal.base];
+            if (typeof basePokemon.speciesAppeal === 'undefined'){ basePokemon.speciesAppeal = []; }
+            basePokemon.speciesAppeal.push(speciesAppeal.form);
+            //console.log('|- basePokemon = ', basePokemon);
+            }
+    }
+
 
     // Define a function for adding gender ratio data to a list of given species
     function addGenderRatios(genderRatios){
@@ -183,6 +195,13 @@
             }
     }
 
+    // Define a function for adding species appeal data to a list of given species
+    function addSpeciesAppeals(speciesAppeals){
+        //console.log('addSpeciesAppeals(speciesAppeals)', speciesAppeals);
+        for (var key = 0; key < speciesAppeals.length; key++){
+            addSpeciesAppeal(speciesAppeals[key]);
+            }
+    }
 
     // Define a function for getting the prev order value before an existing species
     function beforeOrder(baseSpecies, orderIncrement){
@@ -217,6 +236,7 @@
     PokemonSpeciesIndex.addEggPartner = addEggPartner;
     PokemonSpeciesIndex.addAltBaseEvolution = addAltBaseEvolution;
     PokemonSpeciesIndex.addPossibleForm = addPossibleForm;
+    PokemonSpeciesIndex.addSpeciesAppeal = addSpeciesAppeal;
 
     PokemonSpeciesIndex.addGenderRatios = addGenderRatios;
     PokemonSpeciesIndex.addPrevEvolutions = addPrevEvolutions;
@@ -224,6 +244,7 @@
     PokemonSpeciesIndex.addEggPartners = addEggPartners;
     PokemonSpeciesIndex.addAltBaseEvolutions = addAltBaseEvolutions;
     PokemonSpeciesIndex.addPossibleForms = addPossibleForms;
+    PokemonSpeciesIndex.addSpeciesAppeals = addSpeciesAppeals;
 
     PokemonSpeciesIndex.beforeOrder = beforeOrder;
     PokemonSpeciesIndex.afterOrder = afterOrder;
