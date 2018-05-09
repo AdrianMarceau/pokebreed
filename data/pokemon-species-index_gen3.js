@@ -1054,6 +1054,22 @@
                 }]
             },
 
+        'luvdisc': {
+            order: indexOrder++,
+            token: 'luvdisc',
+            name: 'Luvdisc',
+            number: 370,
+            types: ['water'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 43, phAttack: 30, phDefense: 55, spAttack: 40, spDefense: 65, speed: 97},
+            abilities: {0: 'swift-swim', hidden: 'hydration'},
+            height: 0.6,
+            weight: 8.7,
+            colors: ['pink', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['water-2']
+            },
+
         'regirock': {
             order: indexOrder++,
             token: 'regirock',
