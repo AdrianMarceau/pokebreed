@@ -2306,7 +2306,7 @@
                 // Increase the chance of this pokemon appearing based on species appeal
                 if (typeof speciesAppealIndex[pokeToken] !== 'undefined'){
                     //console.log('speciesAppealIndex['+pokeToken+'] = ', speciesAppealIndex[pokeToken]);
-                    pokeChance *= speciesAppealIndex[pokeToken];
+                    pokeChance *= (1 + Math.ceil(speciesAppealIndex[pokeToken] / 10));
                     //console.log('pokeChance = ', pokeChance);
                 }
 
