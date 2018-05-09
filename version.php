@@ -1,8 +1,8 @@
 <?
 
 // Define the global cache time and version number
-$last_updated = '2018-05-08';
-$version_number = '0.7.4';
+$last_updated = '2018-05-09';
+$version_number = '0.7.5';
 
 // If requested, print out the version number and exit
 if (!empty($_GET['return'])){
