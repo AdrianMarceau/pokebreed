@@ -137,7 +137,8 @@
     function addSpeciesAppeal(speciesAppeal){
         //console.log('addSpeciesAppeal(speciesAppeal)', speciesAppeal);
         if (typeof speciesAppeal.base !== 'undefined'
-            && typeof PokemonSpeciesIndex.indexList[speciesAppeal.base] !== 'undefined'){
+            && typeof PokemonSpeciesIndex.indexList[speciesAppeal.base] !== 'undefined'
+            && typeof PokemonSpeciesIndex.indexList[speciesAppeal.species] !== 'undefined'){
             var basePokemon = PokemonSpeciesIndex.indexList[speciesAppeal.base];
             if (typeof basePokemon.speciesAppeal === 'undefined'){ basePokemon.speciesAppeal = []; }
             basePokemon.speciesAppeal.push(speciesAppeal.species);
@@ -196,10 +197,10 @@
     }
 
     // Define a function for adding species appeal data to a list of given species
-    function addSpeciesAppeals(speciesAppeals){
-        //console.log('addSpeciesAppeals(speciesAppeals)', speciesAppeals);
-        for (var key = 0; key < speciesAppeals.length; key++){
-            addSpeciesAppeal(speciesAppeals[key]);
+    function addSpeciesAppealValues(speciesAppealValues){
+        //console.log('addSpeciesAppealValues(speciesAppealValues)', speciesAppealValues);
+        for (var key = 0; key < speciesAppealValues.length; key++){
+            addSpeciesAppeal(speciesAppealValues[key]);
             }
     }
 
@@ -244,7 +245,7 @@
     PokemonSpeciesIndex.addEggPartners = addEggPartners;
     PokemonSpeciesIndex.addAltBaseEvolutions = addAltBaseEvolutions;
     PokemonSpeciesIndex.addPossibleForms = addPossibleForms;
-    PokemonSpeciesIndex.addSpeciesAppeals = addSpeciesAppeals;
+    PokemonSpeciesIndex.addSpeciesAppealValues = addSpeciesAppealValues;
 
     PokemonSpeciesIndex.beforeOrder = beforeOrder;
     PokemonSpeciesIndex.afterOrder = afterOrder;
