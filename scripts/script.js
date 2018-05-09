@@ -1392,9 +1392,14 @@
                             if (type === 'electric' && pokeAbilities.indexOf('volt-absorb') !== -1){ continue; }
                             if (type === 'water' && pokeAbilities.indexOf('water-absorb') !== -1){ continue; }
 
+                            // Tweak the influence value if an ability requires it
+                            var modInfluencePoints = pokeIndex.influencePoints;
+                            if (pokeAbilities.indexOf('filter') !== -1){ modInfluencePoints -= modInfluencePoints * 0.25; }
+                            if ((type === 'ice' || type === 'fire') && pokeAbilities.indexOf('thick-fat') !== -1){ modInfluencePoints -= modInfluencePoints * 0.50; }
+
                             // Otherwise we can add the weakness type stats
                             if (typeof currentZoneStats['types'][type] === 'undefined'){ currentZoneStats['types'][type] = 0; }
-                            currentZoneStats['types'][type] += pokeCount * pokeIndex.influencePoints * 0.5;
+                            currentZoneStats['types'][type] += pokeCount * modInfluencePoints * 0.5;
 
                             }
                         }
