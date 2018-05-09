@@ -1325,7 +1325,7 @@
             weight: 220,
             colors: ['blue', 'gray', 'white'],
             eggCycles: 25,
-            eggGroups: ['water-1'],
+            eggGroups: ['water-1']
             },
 
         'skarmory': {

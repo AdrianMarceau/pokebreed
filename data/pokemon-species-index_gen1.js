@@ -1709,7 +1709,8 @@
                 value: 'water-stone',
                 method2: 'type-appeal',
                 value2: ['water', 'ice']
-                }]
+                }],
+            speciesAppeal: ['slowpoke']
             },
         'cloyster': {
             order: indexOrder++,

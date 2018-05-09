@@ -692,4 +692,9 @@
         });
     thisIndex.indexOrder = indexOrder;
 
+    // Update previous gen pokemon with new species appeal data
+    thisIndex.addSpeciesAppeals([
+        {base: 'luvdisc', species: 'alomomola'},
+        ]);
+
 })();
