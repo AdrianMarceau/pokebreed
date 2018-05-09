@@ -307,6 +307,21 @@
             prevEvolution: 'frillish-f'
             },
 
+        'alomomola': {
+            order: indexOrder++,
+            token: 'alomomola',
+            name: 'Alomomola',
+            number: 594,
+            types: ['water'],
+            baseStats: {hp: 165, phAttack: 75, phDefense: 80, spAttack: 40, spDefense: 45, speed: 65},
+            abilities: {0: 'healer', 1: 'hydration', hidden: 'regenerator'},
+            height: 1.2,
+            weight: 31.6,
+            colors: ['pink', 'yellow'],
+            eggCycles: 40,
+            eggGroups: ['water-1', 'water-2']
+            },
+
         'klink': {
             order: indexOrder++,
             token: 'klink',
