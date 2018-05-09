@@ -948,6 +948,36 @@
             prevEvolution: 'skitty'
             },
 
+        'sableye': {
+            order: indexOrder++,
+            token: 'sableye',
+            name: 'Sableye',
+            number: 302,
+            types: ['dark', 'ghost'],
+            baseStats: {hp: 50, phAttack: 75, phDefense: 75, spAttack: 65, spDefense: 65, speed: 50},
+            abilities: {0: 'keen-eye', 1: 'stall', hidden: 'prankster'},
+            height: 0.5,
+            weight: 11,
+            colors: ['purple', 'blue', 'red'],
+            eggCycles: 25,
+            eggGroups: ['human-like']
+            },
+
+        'mawile': {
+            order: indexOrder++,
+            token: 'mawile',
+            name: 'Mawile',
+            number: 303,
+            types: ['steel', 'fairy'],
+            baseStats: {hp: 50, phAttack: 85, phDefense: 85, spAttack: 55, spDefense: 55, speed: 50},
+            abilities: {0: 'hyper-cutter', 1: 'intimidate', hidden: 'sheer-force'},
+            height: 0.6,
+            weight: 11.5,
+            colors: ['black', 'yellow', 'pink', 'white', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field', 'fairy']
+            },
+
         'wynaut': {
             order: thisIndex.beforeOrder('wobbuffet'),
             token: 'wynaut',

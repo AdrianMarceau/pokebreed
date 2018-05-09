@@ -1233,6 +1233,44 @@
             prevEvolution: 'swampert'
             },
 
+        'mega-sableye': {
+            order: thisIndex.afterOrder('sableye'),
+            token: 'mega-sableye',
+            name: 'Mega Sableye',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'sableye',
+            number: 302,
+            types: ['dark', 'ghost'],
+            baseStats: {hp: 50, phAttack: 85, phDefense: 125, spAttack: 85, spDefense: 115, speed: 20},
+            abilities: {0: 'magic-bounce'},
+            height: 0.5,
+            weight: 161,
+            colors: ['red', 'purple'],
+            eggCycles: 25,
+            eggGroups: ['human-like'],
+            prevEvolution: 'sableye'
+            },
+
+        'mega-mawile': {
+            order: thisIndex.afterOrder('mawile'),
+            token: 'mega-mawile',
+            name: 'Mega Mawile',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'mawile',
+            number: 303,
+            types: ['steel', 'fairy'],
+            baseStats: {hp: 50, phAttack: 105, phDefense: 125, spAttack: 55, spDefense: 95, speed: 50},
+            abilities: {0: 'huge-power'},
+            height: 1,
+            weight: 23.5,
+            colors: ['black', 'pink', 'yellow', 'white', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field', 'fairy'],
+            prevEvolution: 'mawile'
+            },
+
         'mega-latias': {
             order: thisIndex.afterOrder('latias'),
             token: 'mega-latias',
@@ -1411,6 +1449,9 @@
         {base: 'sceptile', species: 'mega-sceptile', method: 'mega-evolution', value: 'sceptilite'},
         {base: 'blaziken', species: 'mega-blaziken', method: 'mega-evolution', value: 'blazikenite'},
         {base: 'swampert', species: 'mega-swampert', method: 'mega-evolution', value: 'swampertite'},
+
+        {base: 'sableye', species: 'mega-sableye', method: 'mega-evolution', value: 'sablinite'},
+        {base: 'mawile', species: 'mega-mawile', method: 'mega-evolution', value: 'mawilite'},
 
         {base: 'latias', species: 'mega-latias', method: 'mega-evolution', value: 'latiasite'},
         {base: 'latios', species: 'mega-latios', method: 'mega-evolution', value: 'latiosite'},
