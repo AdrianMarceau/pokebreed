@@ -193,6 +193,41 @@
             prevEvolution: 'brionne'
             },
 
+        'mareanie': {
+            order: indexOrder++,
+            token: 'mareanie',
+            name: 'Mareanie',
+            number: 747,
+            types: ['poison', 'water'],
+            baseStats: {hp: 50, phAttack: 53, phDefense: 62, spAttack: 43, spDefense: 52, speed: 45},
+            abilities: {0: 'merciless', 1: 'limber', hidden: 'regenerator'},
+            height: 0.4,
+            weight: 8,
+            colors: ['blue', 'purple', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['water-1'],
+            nextEvolutions: [{
+                species: 'toxapex',
+                method: 'level-up',
+                value: 38
+                }]
+            },
+        'toxapex': {
+            order: indexOrder++,
+            token: 'toxapex',
+            name: 'Toxapex',
+            number: 748,
+            types: ['poison', 'water'],
+            baseStats: {hp: 50, phAttack: 63, phDefense: 152, spAttack: 53, spDefense: 142, speed: 35},
+            abilities: {0: 'merciless', 1: 'limber', hidden: 'regenerator'},
+            height: 0.7,
+            weight: 14.5,
+            colors: ['blue', 'purple', 'pink', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['water-1'],
+            prevEvolution: 'mareanie'
+            },
+
         'stufful': {
             order: indexOrder++,
             token: 'stufful',
