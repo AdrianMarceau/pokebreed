@@ -90,9 +90,9 @@
     display: inline-block;
 }
 @keyframes MoveUpDownD {
-  0%, 100% { transform: translate(0, 1px); }
-  50% { transform: translate(0, -3px); }
-}
+    0%, 100% { transform: translate(0, 1px); }
+    50% { transform: translate(0, -3px); }
+    }
 .panel h1 .subtext .icon {
     position: absolute;
     right: -6px;
@@ -406,9 +406,17 @@
     top: 8px;
 }
 @keyframes popIn {
-    from { opacity: 0; transform: scale(0, 0); margin-left: -45px; }
-    to { opacity: 1; transform: scale(1, 1); margin-left: 0; }
-}
+    from {
+        opacity: 0;
+        transform: scale(0, 0);
+        margin-left: -45px;
+        }
+    to {
+        opacity: 1;
+        transform: scale(1, 1);
+        margin-left: 0;
+        }
+    }
 .panel .overview.main .details.pokemon .list.pokemon li.new {
     -webkit-animation: popIn 0.3s linear;
     -webkit-animation-iteration-count: 1;
@@ -429,9 +437,20 @@
     border-radius: 6px;
 }
 @keyframes fadeOut {
-    from { opacity: 1; transform: scale(1, 1); bottom: 0; margin-right: 5px; }
-    to { opacity: 0; transform: scale(0, 0); bottom: -45px; margin-right: -45px; pointer-events: none; }
-}
+    from {
+        opacity: 1;
+        transform: scale(1, 1);
+        bottom: 0;
+        margin-right: 5px;
+        }
+    to {
+        opacity: 0;
+        transform: scale(0, 0);
+        bottom: -45px;
+        margin-right: -45px;
+        pointer-events: none;
+        }
+    }
 .panel .overview.main .details.pokemon .list.pokemon li.fainted {
     position: relative;
     -webkit-animation: fadeOut 0.6s linear;
@@ -442,10 +461,10 @@
     animation-fill-mode: forwards;
 }
 @keyframes SpriteBounce {
-  0% { transform: translate(0, 0); }
-  50% { transform: translate(0, -2px); }
-  100% { transform: translate(0, 0); }
-}
+    0% { transform: translate(0, 0); }
+    50% { transform: translate(0, -2px); }
+    100% { transform: translate(0, 0); }
+    }
 .panel .overview.main .details.pokemon .list .sprite {
     position: relative;
     z-index: 2;
@@ -526,13 +545,9 @@
 }
 
 @keyframes PulseWhite {
-  0%, 100% {
-    background-color: rgba(0, 0, 0, 0.1);
+    0%, 100% { background-color: rgba(0, 0, 0, 0.1); }
+    50% { background-color: rgba(255, 255, 255, 0.1); }
     }
-  50% {
-    background-color: rgba(255, 255, 255, 0.1);
-    }
-}
 
 .panel .midwrap {
     float: none;
@@ -879,10 +894,10 @@
     outline: none;
 }
 @keyframes ButtonSpriteBounce {
-  0% { transform: translate(0, -4px); }
-  50% { transform: translate(0, -5px); }
-  100% { transform: translate(0, -4px); }
-}
+    0% { transform: translate(0, -4px); }
+    50% { transform: translate(0, -5px); }
+    100% { transform: translate(0, -4px); }
+    }
 .panel .buttons button:hover img {
     animation: ButtonSpriteBounce 0.6s linear infinite;
 }

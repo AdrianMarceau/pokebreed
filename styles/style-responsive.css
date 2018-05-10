@@ -73,13 +73,32 @@
     .bp2:before { content: "1";  }
 
     @keyframes popIn {
-        from { opacity: 0; transform: scale(0, 0); margin-left: -64px; }
-        to { opacity: 1; transform: scale(1, 1); margin-left: 0; }
-    }
+        from {
+            opacity: 0;
+            transform: scale(0, 0);
+            margin-left: -64px;
+            }
+        to {
+            opacity: 1;
+            transform: scale(1, 1);
+            margin-left: 0;
+            }
+        }
     @keyframes fadeOut {
-        from { opacity: 1; transform: scale(1, 1); bottom: 0; margin-right: 5px; }
-        to { opacity: 0; transform: scale(0, 0); bottom: -64px; margin-right: -64px; pointer-events: none; }
-    }
+        from {
+            opacity: 1;
+            transform: scale(1, 1);
+            bottom: 0;
+            margin-right: 5px;
+            }
+        to {
+            opacity: 0;
+            transform: scale(0, 0);
+            bottom: -64px;
+            margin-right: -64px;
+            pointer-events: none;
+            }
+        }
     .panel .overview.main .details.pokemon .wrap {
         width: 576px;
         max-height: 576px;
@@ -120,13 +139,32 @@
     .bp2:before { content: "2";  }
 
     @keyframes popIn {
-        from { opacity: 0; transform: scale(0, 0); margin-left: -54px; }
-        to { opacity: 1; transform: scale(1, 1); margin-left: 0; }
-    }
+        from {
+            opacity: 0;
+            transform: scale(0, 0);
+            margin-left: -54px;
+            }
+        to {
+            opacity: 1;
+            transform: scale(1, 1);
+            margin-left: 0;
+            }
+        }
     @keyframes fadeOut {
-        from { opacity: 1; transform: scale(1, 1); bottom: 0; margin-right: 4px; }
-        to { opacity: 0; transform: scale(0, 0); bottom: -54px; margin-right: -54px; pointer-events: none; }
-    }
+        from {
+            opacity: 1;
+            transform: scale(1, 1);
+            bottom: 0;
+            margin-right: 4px;
+            }
+        to {
+            opacity: 0;
+            transform: scale(0, 0);
+            bottom: -54px;
+            margin-right: -54px;
+            pointer-events: none;
+            }
+        }
 
     .panel .overview.main .details.pokemon .list.pokemon li .watched {
         width: 6px;
@@ -181,13 +219,32 @@
     .bp2:before { content: "3";  }
 
     @keyframes popIn {
-        from { opacity: 0; transform: scale(0, 0); margin-left: -64px; }
-        to { opacity: 1; transform: scale(1, 1); margin-left: 0; }
-    }
+        from {
+            opacity: 0;
+            transform: scale(0, 0);
+            margin-left: -64px;
+            }
+        to {
+            opacity: 1;
+            transform: scale(1, 1);
+            margin-left: 0;
+            }
+        }
     @keyframes fadeOut {
-        from { opacity: 1; transform: scale(1, 1); bottom: 0; margin-right: 4px; }
-        to { opacity: 0; transform: scale(0, 0); bottom: -64px; margin-right: -64px; pointer-events: none; }
-    }
+        from {
+            opacity: 1;
+            transform: scale(1, 1);
+            bottom: 0;
+            margin-right: 4px;
+            }
+        to {
+            opacity: 0;
+            transform: scale(0, 0);
+            bottom: -64px;
+            margin-right: -64px;
+            pointer-events: none;
+            }
+        }
 
     .panel .overview.main .details.pokemon .list.pokemon li .watched {
         width: 6px;
@@ -245,13 +302,32 @@
     .bp2:before { content: "4";  }
 
     @keyframes popIn {
-        from { opacity: 0; transform: scale(0, 0); margin-left: -66px; }
-        to { opacity: 1; transform: scale(1, 1); margin-left: 0; }
-    }
+        from {
+            opacity: 0;
+            transform: scale(0, 0);
+            margin-left: -66px;
+            }
+        to {
+            opacity: 1;
+            transform: scale(1, 1);
+            margin-left: 0;
+            }
+        }
     @keyframes fadeOut {
-        from { opacity: 1; transform: scale(1, 1); bottom: 0; margin-right: 4px; }
-        to { opacity: 0; transform: scale(0, 0); bottom: -66px; margin-right: -66px; pointer-events: none; }
-    }
+        from {
+            opacity: 1;
+            transform: scale(1, 1);
+            bottom: 0;
+            margin-right: 4px;
+            }
+        to {
+            opacity: 0;
+            transform: scale(0, 0);
+            bottom: -66px;
+            margin-right: -66px;
+            pointer-events: none;
+            }
+        }
     .panel .overview.main .details.pokemon .wrap {
         width: 676px;
         max-height: 706px;
@@ -276,8 +352,16 @@
     .bp2:before { content: "5";  }
 
     @keyframes popIn {
-        from { opacity: 0; transform: scale(0, 0); margin-left: -66px; }
-        to { opacity: 1; transform: scale(1, 1); margin-left: 0; }
+        from {
+            opacity: 0;
+            transform: scale(0, 0);
+            margin-left: -66px;
+            }
+        to {
+            opacity: 1;
+            transform: scale(1, 1);
+            margin-left: 0;
+            }
     }
     @keyframes fadeOut {
         from { opacity: 1; transform: scale(1, 1); bottom: 0; margin-right: 4px; }
