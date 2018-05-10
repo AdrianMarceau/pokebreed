@@ -274,6 +274,25 @@
                 indexInfo.baseEvolution = pokemonGetBaseEvolution(indexInfo.token, true, false);
                 indexInfo.basicEvolution = pokemonGetBasicEvolution(indexInfo.token, false, false);
 
+                /*
+                // If this pokemon has species appeal, cascade to the base form
+                if (typeof indexInfo.speciesAppeal !== 'undefined'
+                    && indexInfo.basicEvolution !== indexInfo.token){
+                    //console.log(indexInfo.token + ' has species appeal!', indexInfo.speciesAppeal);
+                    var basicEvolutionInfo = PokemonSpeciesIndex[indexInfo.basicEvolution];
+                    if (typeof basicEvolutionInfo.speciesAppeal === 'undefined'){ basicEvolutionInfo.speciesAppeal = []; }
+                    //console.log('applying species appeal to '+indexInfo.basicEvolution+'...', basicEvolutionInfo);
+                    for (var key2 = 0; key2 < indexInfo.speciesAppeal.length; key2++){
+                        var appealSpecies = indexInfo.speciesAppeal[key2];
+                        //console.log('Check if species appeal already added for (X is attracted to Y)', basicEvolutionInfo.token, appealSpecies);
+                        if (basicEvolutionInfo.speciesAppeal.indexOf(appealSpecies) === -1){
+                            basicEvolutionInfo.speciesAppeal.push(appealSpecies);
+                            //console.log('Add species appeal to pokemon (X is attracted to Y)', basicEvolutionInfo.token, basicEvolutionInfo.speciesAppeal);
+                            }
+                        }
+                    }
+                    */
+
                 }
 
             // Create a sorted list of pokemon species tokens so we don't have to later
@@ -2246,16 +2265,21 @@
             || visitorKind === 'legendary'
             || visitorKind === 'mythical'){
 
-            // Pre-loop before and define current species-specific appeal values
+            // Loop through every pokemon and see what they like to eat, then check if that species is currently active
             var speciesAppealIndex = {};
-            for (var key = 0; key < BasicPokemonSpeciesIndexTokens.length; key++){
-                var pokeToken = BasicPokemonSpeciesIndexTokens[key];
+            for (var key = 0; key < PokemonSpeciesIndexTokens.length; key++){
+                var pokeToken = PokemonSpeciesIndexTokens[key];
                 var pokeInfo = PokemonSpeciesIndex[pokeToken];
                 if (typeof pokeInfo.speciesAppeal !== 'undefined'){
                     for (var key2 = 0; key2 < pokeInfo.speciesAppeal.length; key2++){
                         var speciesToken = pokeInfo.speciesAppeal[key2];
-                        if (typeof thisZoneData.currentStats['species'][speciesToken] !== 'undefined'
-                            && thisZoneData.currentStats['species'][speciesToken] > 0){
+                        if ((typeof thisZoneData.currentStats['species'][speciesToken] !== 'undefined'
+                            && thisZoneData.currentStats['species'][speciesToken] > 0)
+                            && (typeof thisZoneData.currentStats['species'][pokeToken] === 'undefined'
+                            || thisZoneData.currentStats['species'][pokeToken] < 3)){
+                            //console.log('pokeToken = '+pokeToken+' | speciesToken = '+speciesToken+'');
+                            //console.log('thisZoneData.currentStats[\'species\']['+speciesToken+'] = ', thisZoneData.currentStats['species'][speciesToken]);
+                            //console.log('thisZoneData.currentStats[\'species\']['+pokeToken+'] = ', thisZoneData.currentStats['species'][pokeToken]);
                             speciesAppealIndex[pokeToken] = thisZoneData.currentStats['species'][speciesToken];
                             }
                         }
@@ -2264,10 +2288,16 @@
             }
             //console.log('speciesAppealIndex = ', speciesAppealIndex);
 
+            // Create an array of Pokemon that can appear as visitors
+            var allowedVisitorTokens = [];
+            allowedVisitorTokens = allowedVisitorTokens.concat(BasicPokemonSpeciesIndexTokens);
+            if (!jQuery.isEmptyObject(speciesAppealIndex)){ allowedVisitorTokens = allowedVisitorTokens.concat(Object.keys(speciesAppealIndex)); }
+            //console.log('allowedVisitorTokens = ', allowedVisitorTokens);
+
             // Loop through basic pokemon and calculate chances of each
             var basicPokemonChances = [];
-            for (var key = 0; key < BasicPokemonSpeciesIndexTokens.length; key++){
-                var pokeToken = BasicPokemonSpeciesIndexTokens[key];
+            for (var key = 0; key < allowedVisitorTokens.length; key++){
+                var pokeToken = allowedVisitorTokens[key];
                 var pokeInfo = PokemonSpeciesIndex[pokeToken];
                 var pokeChance = 0;
 
@@ -2306,19 +2336,20 @@
                 // Increase the chance of this pokemon appearing based on species appeal
                 if (typeof speciesAppealIndex[pokeToken] !== 'undefined'){
                     //console.log('speciesAppealIndex['+pokeToken+'] = ', speciesAppealIndex[pokeToken]);
-                    pokeChance *= (1 + Math.ceil(speciesAppealIndex[pokeToken] / 10));
+                    pokeChance *= (1 + Math.ceil(speciesAppealIndex[pokeToken] / 5));
                     //console.log('pokeChance = ', pokeChance);
                 }
 
                 // Decrease the chance if there is already a colony of this species
                 if (typeof thisZoneData.addedPokemonSpecies[pokeToken] !== 'undefined'){
                     var numAddedAlready = thisZoneData.addedPokemonSpecies[pokeToken];
+                    var numAddedCurrently = thisZoneData.currentStats['species'][pokeToken];
                     //console.log('numAddedAlready ', pokeToken, numAddedAlready);
-                    if (numAddedAlready === 1){ pokeChance += 2; }
+                    if (numAddedAlready === 1){ pokeChance *= 2; }
                     else { pokeChance -= numAddedAlready; }
                     //console.log('pokeChance ', pokeToken, pokeChance);
                     if (visitorKind !== 'basic'
-                        || numAddedAlready >= 5){
+                        || numAddedCurrently >= 3){
                         pokeChance *= -1;
                         pokeChance -= numAddedAlready;
                         //console.log('pokeChance ', pokeToken, pokeChance);
