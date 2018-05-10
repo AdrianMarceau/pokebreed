@@ -72,33 +72,6 @@
 @media (min-width: 647px) and (max-width: 768px) and (min-height: 647px){
     .bp2:before { content: "1";  }
 
-    @keyframes popIn {
-        from {
-            opacity: 0;
-            transform: scale(0, 0);
-            margin-left: -64px;
-            }
-        to {
-            opacity: 1;
-            transform: scale(1, 1);
-            margin-left: 0;
-            }
-        }
-    @keyframes fadeOut {
-        from {
-            opacity: 1;
-            transform: scale(1, 1);
-            bottom: 0;
-            margin-right: 5px;
-            }
-        to {
-            opacity: 0;
-            transform: scale(0, 0);
-            bottom: -64px;
-            margin-right: -64px;
-            pointer-events: none;
-            }
-        }
     .panel .overview.main .details.pokemon .wrap {
         width: 576px;
         max-height: 576px;
@@ -131,40 +104,19 @@
         image-rendering: optimize-contrast;         /* CSS3 Proposed       */
         image-rendering: pixelated;                 /* CSS3 Proposed?       */
         -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
+        -webkit-animation-name: SpriteBounceZoom;
+        animation-name: SpriteBounceZoom;
+    }
+    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
+        transform: translate3d(0, -2px, 0);
+        -webkit-animation-name: SpriteBounceZoomAlt;
+        animation-name: SpriteBounceZoomAlt;
     }
 
 }
 
 @media (min-width: 768px) and (max-width: 1365px) and (min-height: 647px){
     .bp2:before { content: "2";  }
-
-    @keyframes popIn {
-        from {
-            opacity: 0;
-            transform: scale(0, 0);
-            margin-left: -54px;
-            }
-        to {
-            opacity: 1;
-            transform: scale(1, 1);
-            margin-left: 0;
-            }
-        }
-    @keyframes fadeOut {
-        from {
-            opacity: 1;
-            transform: scale(1, 1);
-            bottom: 0;
-            margin-right: 4px;
-            }
-        to {
-            opacity: 0;
-            transform: scale(0, 0);
-            bottom: -54px;
-            margin-right: -54px;
-            pointer-events: none;
-            }
-        }
 
     .panel .overview.main .details.pokemon .list.pokemon li .watched {
         width: 6px;
@@ -211,40 +163,19 @@
         image-rendering: optimize-contrast;         /* CSS3 Proposed       */
         image-rendering: pixelated;                 /* CSS3 Proposed?       */
         -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
+        -webkit-animation-name: SpriteBounceZoom;
+        animation-name: SpriteBounceZoom;
+    }
+    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
+        transform: translate3d(0, -2px, 0);
+        -webkit-animation-name: SpriteBounceZoomAlt;
+        animation-name: SpriteBounceZoomAlt;
     }
 
 }
 
 @media (min-width: 1366px) and (min-height: 647px){
     .bp2:before { content: "3";  }
-
-    @keyframes popIn {
-        from {
-            opacity: 0;
-            transform: scale(0, 0);
-            margin-left: -64px;
-            }
-        to {
-            opacity: 1;
-            transform: scale(1, 1);
-            margin-left: 0;
-            }
-        }
-    @keyframes fadeOut {
-        from {
-            opacity: 1;
-            transform: scale(1, 1);
-            bottom: 0;
-            margin-right: 4px;
-            }
-        to {
-            opacity: 0;
-            transform: scale(0, 0);
-            bottom: -64px;
-            margin-right: -64px;
-            pointer-events: none;
-            }
-        }
 
     .panel .overview.main .details.pokemon .list.pokemon li .watched {
         width: 6px;
@@ -291,6 +222,13 @@
         image-rendering: optimize-contrast;         /* CSS3 Proposed       */
         image-rendering: pixelated;                 /* CSS3 Proposed?       */
         -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
+        -webkit-animation-name: SpriteBounceZoom;
+        animation-name: SpriteBounceZoom;
+    }
+    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
+        transform: translate3d(0, -2px, 0);
+        -webkit-animation-name: SpriteBounceZoomAlt;
+        animation-name: SpriteBounceZoomAlt;
     }
     .panel .overview.types .wrap,
     .panel .overview.species .wrap {
@@ -301,33 +239,6 @@
 @media (min-width: 1366px) and (min-height: 768px){
     .bp2:before { content: "4";  }
 
-    @keyframes popIn {
-        from {
-            opacity: 0;
-            transform: scale(0, 0);
-            margin-left: -66px;
-            }
-        to {
-            opacity: 1;
-            transform: scale(1, 1);
-            margin-left: 0;
-            }
-        }
-    @keyframes fadeOut {
-        from {
-            opacity: 1;
-            transform: scale(1, 1);
-            bottom: 0;
-            margin-right: 4px;
-            }
-        to {
-            opacity: 0;
-            transform: scale(0, 0);
-            bottom: -66px;
-            margin-right: -66px;
-            pointer-events: none;
-            }
-        }
     .panel .overview.main .details.pokemon .wrap {
         width: 676px;
         max-height: 706px;
@@ -351,22 +262,6 @@
 @media (min-width: 1366px) and (min-height: 769px){
     .bp2:before { content: "5";  }
 
-    @keyframes popIn {
-        from {
-            opacity: 0;
-            transform: scale(0, 0);
-            margin-left: -66px;
-            }
-        to {
-            opacity: 1;
-            transform: scale(1, 1);
-            margin-left: 0;
-            }
-    }
-    @keyframes fadeOut {
-        from { opacity: 1; transform: scale(1, 1); bottom: 0; margin-right: 4px; }
-        to { opacity: 0; transform: scale(0, 0); bottom: -66px; margin-right: -66px; pointer-events: none; }
-    }
     .panel .overview.main .details.pokemon .wrap {
         width: 696px;
         max-height: 696px;
@@ -400,12 +295,6 @@
 @media (min-width: 768px) and (min-height: 648px){
     .bp3:before { content: "b";  }
 
-    @keyframes ButtonSpriteBounce {
-      0% { transform: translate(-50%, -54%); }
-      50% { transform: translate(-50%, -58%); }
-      100% { transform: translate(-50%, -54%); }
-    }
-
     .panel .buttons .new-pokemon .buttonwrap {
         max-height: calc(100vh - 400px);
     }
@@ -417,9 +306,8 @@
         width: 80px;
         height: 60px;
         position: absolute;
-        top: 42%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        top: -8%;
+        left: -8%;
         image-rendering: optimizeSpeed;             /*                     */
         image-rendering: -moz-crisp-edges;          /* Firefox             */
         image-rendering: -o-crisp-edges;            /* Opera               */
@@ -428,9 +316,9 @@
         image-rendering: pixelated;                 /* CSS3 Proposed?       */
         -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
     }
-    .panel .buttons button img:hover {
-        transform: translate(-50%, -54%);
-        animation: ButtonSpriteBounce 1.2s linear infinite;
+    .panel .buttons button:hover img {
+        -webkit-animation-name: SpriteBounceZoom;
+        animation-name: SpriteBounceZoom;
     }
 
 }

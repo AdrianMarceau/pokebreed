@@ -1,6 +1,27 @@
 
 /* -- MASTER STYLES -- */
 
+@keyframes SpriteBounce {
+    50% { transform: translate3d(0, -1px, 0); }
+    }
+@keyframes SpriteBounceAlt {
+    50% { transform: translate3d(0, 0, 0); }
+    }
+@keyframes SpriteBounceZoom {
+    50% { transform: translate3d(0, -2px, 0); }
+    }
+@keyframes SpriteBounceZoomAlt {
+    50% { transform: translate3d(0, 0, 0); }
+    }
+@keyframes SpritePopIn {
+    from { opacity: 0; transform: scale(0, 0) translate3d(-100%, 0, 0); }
+    to { opacity: 1; transform: scale(1, 1) translate3d(0, 0, 0); }
+    }
+@keyframes SpriteFadeOut {
+    from { opacity: 1; transform: scale(1, 1) translate3d(0, 0, 0); }
+    to { opacity: 0; transform: scale(0, 0) translate3d(0, 100%, 0); pointer-events: none; }
+}
+
 .panel {
     min-width: 500px;
     margin: 0 20px 20px;
@@ -89,16 +110,15 @@
     padding-right: 12px;
     display: inline-block;
 }
-@keyframes MoveUpDownD {
-    0%, 100% { transform: translate(0, 1px); }
-    50% { transform: translate(0, -3px); }
-    }
 .panel h1 .subtext .icon {
     position: absolute;
     right: -6px;
     top: -2px;
-    transform: translate(0, 1px);
-    animation: MoveUpDownD 2s linear infinite;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translate3d(0, 1px, 0);
+    transform: translate3d(0, 1px, 0);
+    animation: SpriteBounce 0.9s steps(1) infinite;
 }
 .panel h1 .version {
     position: absolute;
@@ -405,23 +425,11 @@
 .panel .overview.main .details.pokemon .list.pokemon li .visitor + .watched {
     top: 8px;
 }
-@keyframes popIn {
-    from {
-        opacity: 0;
-        transform: scale(0, 0);
-        margin-left: -45px;
-        }
-    to {
-        opacity: 1;
-        transform: scale(1, 1);
-        margin-left: 0;
-        }
-    }
 .panel .overview.main .details.pokemon .list.pokemon li.new {
-    -webkit-animation: popIn 0.3s linear;
+    -webkit-animation: SpritePopIn 0.3s linear;
     -webkit-animation-iteration-count: 1;
     -webkit-animation-fill-mode: forwards;
-    animation: popIn 0.3s linear;
+    animation: SpritePopIn 0.3s linear;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }
@@ -436,47 +444,34 @@
     background-color: rgba(200, 0, 10, 0.2);
     border-radius: 6px;
 }
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-        transform: scale(1, 1);
-        bottom: 0;
-        margin-right: 5px;
-        }
-    to {
-        opacity: 0;
-        transform: scale(0, 0);
-        bottom: -45px;
-        margin-right: -45px;
-        pointer-events: none;
-        }
-    }
 .panel .overview.main .details.pokemon .list.pokemon li.fainted {
     position: relative;
-    -webkit-animation: fadeOut 0.6s linear;
+    -webkit-animation: SpriteFadeOut 0.6s linear;
     -webkit-animation-iteration-count: 1;
     -webkit-animation-fill-mode: forwards;
-    animation: fadeOut 0.6s linear;
+    animation: SpriteFadeOut 0.6s linear;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }
-@keyframes SpriteBounce {
-    0% { transform: translate(0, 0); }
-    50% { transform: translate(0, -2px); }
-    100% { transform: translate(0, 0); }
-    }
 .panel .overview.main .details.pokemon .list .sprite {
     position: relative;
     z-index: 2;
     top: 0;
     display: block;
-    animation: SpriteBounce 0.5s steps(2) infinite;
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-animation: SpriteBounce 0.6s steps(1) infinite;
+    animation: SpriteBounce 0.6s steps(1) infinite;
 }
-.panel .overview.main .details.pokemon .list li:nth-child(even) .sprite {
-    animation-delay: 0.0s;
+body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
 }
 .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
-    animation-delay: 0.25s;
+    transform: translate3d(0, -1px, 0);
+    -webkit-animation-name: SpriteBounceAlt;
+    animation-name: SpriteBounceAlt;
 }
 .panel .overview.main .details.pokemon .list .sprite.overlay {
     position: absolute;
@@ -528,14 +523,6 @@
     top: 0;
     z-index: 10;
 }
-
-/*
-.panel .overview.main .details.pokemon .list.slots li.slot.waiting:before {
-    -webkit-animation: PulseWhite 3s linear infinite;
-    -o-animation: PulseWhite 3s linear infinite;
-    animation: PulseWhite 3s linear infinite;
-}
-*/
 .panel .overview.main .details.pokemon .list.slots li.slot.waiting:before {
     background-color: rgba(255, 255, 255, 0.1);
 }
@@ -543,11 +530,6 @@
 .panel .overview.main:not(.started) .details.pokemon .list.slots li:nth-child(n+11) {
     display: none;
 }
-
-@keyframes PulseWhite {
-    0%, 100% { background-color: rgba(0, 0, 0, 0.1); }
-    50% { background-color: rgba(255, 255, 255, 0.1); }
-    }
 
 .panel .midwrap {
     float: none;
@@ -893,13 +875,11 @@
     transform: translate(0, 0);
     outline: none;
 }
-@keyframes ButtonSpriteBounce {
-    0% { transform: translate(0, -4px); }
-    50% { transform: translate(0, -5px); }
-    100% { transform: translate(0, -4px); }
-    }
 .panel .buttons button:hover img {
-    animation: ButtonSpriteBounce 0.6s linear infinite;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-animation: SpriteBounce 0.3s steps(1) infinite;
+    animation: SpriteBounce 0.3s steps(1) infinite;
 }
 .panel .buttons button strong {
     margin: 0 auto;
