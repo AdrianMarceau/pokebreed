@@ -1025,10 +1025,17 @@
                     var itemClass = 'pokemon ';
                     if (pokeInfo.reachedAdulthood === true){ itemClass += 'adult '; }
                     if (pokeInfo.reachedAdulthood === true && pokeInfo.growthCycles <= 0){ itemClass += 'fainted '; }
-                    if (pokeInfo.watchFlag === true){ itemClass += 'watched '; }
-                    if (pokeInfo.isVisitor === true){ itemClass += 'visitor '; }
+                    //if (pokeInfo.watchFlag === true){ itemClass += 'watched '; }
+                    //if (pokeInfo.isVisitor === true){ itemClass += 'visitor '; }
+                    var extraMarkup = '';
+                    if (pokeInfo.watchFlag === true){ extraMarkup += '<span class="watched"></span> '; }
+                    if (pokeInfo.isVisitor === true){ extraMarkup += '<span class="visitor"></span> '; }
                     if (pokeInfo.isVisitor === true && pokeInfo.daysOld == 0){ itemClass += 'new '; }
-                    pokeListMarkup += '<li class="'+ itemClass +'" data-id="'+ pokeInfo.id +'">'+ pokeIcon + pokeCount + '</li>';
+                    pokeListMarkup += '<li class="'+ itemClass +'" data-id="'+ pokeInfo.id +'">'+
+                            pokeIcon +
+                            pokeCount +
+                            extraMarkup +
+                        '</li>';
 
                     } else if (pokeInfo.eggCycles > 0){
 
@@ -1036,10 +1043,17 @@
                     var pokeIcon =  '<span class="swrap">' + getPokemonIcon(pokeInfo.token, true, pokeInfo) + '</span>';
                     var pokeCount = '<span class="count egg">-'+pokeInfo.eggCycles+'</span>';
                     var itemClass = 'egg ';
-                    if (pokeInfo.watchFlag === true){ itemClass += 'watched '; }
-                    if (pokeInfo.isVisitor === true){ itemClass += 'visitor '; }
+                    //if (pokeInfo.watchFlag === true){ itemClass += 'watched '; }
+                    //if (pokeInfo.isVisitor === true){ itemClass += 'visitor '; }
+                    var extraMarkup = '';
+                    if (pokeInfo.watchFlag === true){ extraMarkup += '<span class="watched"></span> '; }
+                    if (pokeInfo.isVisitor === true){ extraMarkup += '<span class="visitor"></span> '; }
                     if (pokeInfo.daysOld == 0){ itemClass += 'new '; }
-                    pokeListMarkup += '<li class="'+ itemClass +'" data-id="'+ pokeInfo.id +'">'+ pokeIcon + pokeCount + '</li>';
+                    pokeListMarkup += '<li class="'+ itemClass +'" data-id="'+ pokeInfo.id +'">'+
+                            pokeIcon +
+                            pokeCount +
+                            extraMarkup +
+                        '</li>';
 
                     }
 

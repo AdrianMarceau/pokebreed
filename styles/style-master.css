@@ -366,8 +366,8 @@
     width: 40px;
     height: 40px
 }
-.panel .overview.main .details.pokemon .list.pokemon li.watched:before,
-.panel .overview.main .details.pokemon .list.pokemon li.visitor:after {
+.panel .overview.main .details.pokemon .list.pokemon li .watched,
+.panel .overview.main .details.pokemon .list.pokemon li .visitor {
     content: "";
     display: block;
     position: absolute;
@@ -385,19 +385,25 @@
     -webkit-box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
     box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
 }
-.panel .overview.main .details.pokemon .list.pokemon li.watched:before {
-    background-color: #ff7ba8;
-    width: 3px;
-    height: 3px;
-    bottom: 2px;
-    left: 2px;
-}
-.panel .overview.main .details.pokemon .list.pokemon li.visitor:after {
-    background-color: #ffffff;
+.panel .overview.main .details.pokemon .list.pokemon li .watched {
+    background-color: #ceff94;
+    border: 1px solid #4caf50;
     width: 3px;
     height: 3px;
     top: 2px;
     right: 2px;
+}
+.panel .overview.main .details.pokemon .list.pokemon li .visitor {
+    background-color: #ffffff;
+    border: 1px solid #929292;
+    width: 3px;
+    height: 3px;
+    top: 2px;
+    right: 2px;
+}
+.panel .overview.main .details.pokemon .list.pokemon li .watched + .visitor,
+.panel .overview.main .details.pokemon .list.pokemon li .visitor + .watched {
+    top: 8px;
 }
 @keyframes popIn {
     from { opacity: 0; transform: scale(0, 0); margin-left: -45px; }
