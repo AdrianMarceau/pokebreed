@@ -105,8 +105,8 @@ if (isset($_GET['gen'])
                         <div class="title">
                             <strong class="main">Type Appeal</strong>
                         <div class="subs">
-                            <strong class="sub">Positive</strong>
-                            <strong class="sub">Negative</strong>
+                            <strong class="sub positive">Positive</strong>
+                            <strong class="sub negative">Negative</strong>
                         </div>
                         </div>
                         <div class="wrap">
@@ -120,8 +120,8 @@ if (isset($_GET['gen'])
                     <div class="title">
                         <strong class="main">Species List</strong>
                         <div class="subs">
-                            <strong class="sub">Active</strong>
-                            <strong class="sub">Fainted</strong>
+                            <strong class="sub active">Active <span class="count">0</span></strong>
+                            <strong class="sub fainted">Fainted <span class="count">0</span></strong>
                         </div>
                     </div>
                     <div class="wrap">

@@ -592,6 +592,21 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     width: 50%;
     text-align: center;
 }
+.panel .overview .title .subs .sub .count {
+    display: inline-block;
+    box-sizing: border-box;
+    padding-left: 6px;
+    color: #CACACA;
+    font-weight: normal;
+}
+.panel .overview .title .subs .sub .count:before {
+    content: "(";
+    padding-right: 1px;
+}
+.panel .overview .title .subs .sub .count:after {
+    content: ")";
+    padding-left: 1px;
+}
 .panel .overview.types .wrap,
 .panel .overview.species .wrap {
     padding: 0 0 10px;

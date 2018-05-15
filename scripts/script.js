@@ -1153,7 +1153,9 @@
             }
 
         // Update the active species list with current numbers
-        $('.list.active', $panelSpeciesOverview).empty();
+        var $activeSpeciesCounter = $('.sub.active .count', $panelSpeciesOverview);
+        var $activeSpeciesList = $('.list.active', $panelSpeciesOverview);
+        $activeSpeciesList.empty();
         var speciesListMarkup = '';
         if (!jQuery.isEmptyObject(activePokemonSpecies)){
             var sortedTokens = getSortedKeys(activePokemonSpecies);
@@ -1177,10 +1179,13 @@
                     '<div class="bubble"><span class="name">&nbsp;</span></div>'+
                 '</li>';
             }
-        $('.list.active', $panelSpeciesOverview).append(speciesListMarkup);
+        $activeSpeciesCounter.html(numActiveShown);
+        $activeSpeciesList.append(speciesListMarkup);
 
         // Update the fainted species list with past numbers
-        $('.list.fainted', $panelSpeciesOverview).empty();
+        var $faintedSpeciesCounter = $('.sub.fainted .count', $panelSpeciesOverview);
+        var $faintedSpeciesList = $('.list.fainted', $panelSpeciesOverview);
+        $faintedSpeciesList.empty();
         var speciesListMarkup = '';
         if (!jQuery.isEmptyObject(faintedPokemonSpecies)){
             var sortedTokens = getSortedKeys(faintedPokemonSpecies);
@@ -1207,7 +1212,8 @@
                     '<div class="bubble"><span class="name">&nbsp;</span></div>'+
                 '</li>';
             }
-        $('.list.fainted', $panelSpeciesOverview).append(speciesListMarkup);
+        $faintedSpeciesCounter.html(numFaintedShown);
+        $faintedSpeciesList.append(speciesListMarkup);
 
         // If the simulation has started, make sure we update the scroll wrappers
         if (simulationStarted){
