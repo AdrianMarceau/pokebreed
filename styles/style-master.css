@@ -646,18 +646,18 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
 .panel .overview.species .list:empty {
     min-height: 1px;
 }
-.panel .overview.types .list.positive,
+.panel .overview.types .list.attract,
 .panel .overview.species .list.active {
     width: 50%;
 }
-.panel .overview.types .list.negative,
+.panel .overview.types .list.repel,
 .panel .overview.species .list.fainted {
     width: 50%;
 }
-.panel .overview.types .list.positive {
+.panel .overview.types .list.attract {
 
 }
-.panel .overview.types .list.negative {
+.panel .overview.types .list.repel {
 
 }
 .panel .overview.species .list.active {
@@ -711,19 +711,19 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     position: relative;
     z-index: 2;
 }
-.panel .overview.types .list.positive li.type,
+.panel .overview.types .list.attract li.type,
 .panel .overview.species .list.active li.species {
 
 }
-.panel .overview.types .list.negative li.type,
+.panel .overview.types .list.repel li.type,
 .panel .overview.species .list.fainted li.species {
 
 }
-.panel .overview.types .list.positive li.type .bubble,
+.panel .overview.types .list.attract li.type .bubble,
 .panel .overview.species .list.active li.species .bubble {
 
 }
-.panel .overview.types .list.negative li.type .bubble,
+.panel .overview.types .list.repel li.type .bubble,
 .panel .overview.species .list.fainted li.species .bubble {
 
 }
@@ -732,11 +732,11 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     float: right;
 }
 
-.panel .overview.types .list.positive li.type .val,
+.panel .overview.types .list.attract li.type .val,
 .panel .overview.species .list.active li.species .val {
     color: #66cc66;
 }
-.panel .overview.types .list.negative li.type .name,
+.panel .overview.types .list.repel li.type .name,
 .panel .overview.species .list.fainted li.species .name {
     display: inline-block;
     color: #b3b3b3;
@@ -745,7 +745,7 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.panel .overview.types .list.negative li.type .val,
+.panel .overview.types .list.repel li.type .val,
 .panel .overview.species .list.fainted li.species .val {
     color: #db9494;
 }

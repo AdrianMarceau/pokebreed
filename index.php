@@ -105,13 +105,13 @@ if (isset($_GET['gen'])
                         <div class="title">
                             <strong class="main">Type Appeal</strong>
                         <div class="subs">
-                            <strong class="sub positive">Positive</strong>
-                            <strong class="sub negative">Negative</strong>
+                            <strong class="sub attract">Attract</strong>
+                            <strong class="sub repel">Repel</strong>
                         </div>
                         </div>
                         <div class="wrap">
-                            <ul class="list positive"></ul>
-                            <ul class="list negative"></ul>
+                            <ul class="list attract"></ul>
+                            <ul class="list repel"></ul>
                         </div>
                     </div>
                 </div>

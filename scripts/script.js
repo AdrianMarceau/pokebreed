@@ -1066,30 +1066,30 @@
 
 
         // Define vars to hold the number of stat slots shown
-        var numPositivesShown = 0;
-        var numNegativesShown = 0;
+        var numAttractsShown = 0;
+        var numRepelsShown = 0;
         var numActiveShown = 0;
         var numFaintedShown = 0;
 
         // Update the stats list for the elemental type appeals
         $('.stats .list', $panelTypesOverview).empty();
         if (!jQuery.isEmptyObject(thisZoneData.currentStats['types'])){
-            var positiveTypes = {};
-            var negativeTypes = {};
+            var attractTypes = {};
+            var repelTypes = {};
             var currentTypeTokens = Object.keys(thisZoneData.currentStats['types']);
             for (var key = 0; key < currentTypeTokens.length; key++){
                 var typeToken = currentTypeTokens[key];
                 var typeValue = thisZoneData.currentStats['types'][typeToken];
-                if (typeValue > 0){ positiveTypes[typeToken] = typeValue; }
-                else if (typeValue < 0){ negativeTypes[typeToken] = typeValue; }
+                if (typeValue > 0){ attractTypes[typeToken] = typeValue; }
+                else if (typeValue < 0){ repelTypes[typeToken] = typeValue; }
                 }
-            if (!jQuery.isEmptyObject(positiveTypes)){
-                var sortedKeys = getSortedKeys(positiveTypes);
+            if (!jQuery.isEmptyObject(attractTypes)){
+                var sortedKeys = getSortedKeys(attractTypes);
                 var statListMarkup = '';
                 for (var key = 0; key < sortedKeys.length; key++){
                     var type = sortedKeys[key];
                     var typeInfo = PokemonTypesIndex[type];
-                    var val = Math.floor(positiveTypes[type]);
+                    var val = Math.floor(attractTypes[type]);
                     if (val === 0){ continue; }
                     var liClass = 'type '+type+' ';
                     statListMarkup += '<li class="'+liClass+'">'+
@@ -1098,18 +1098,18 @@
                                 '<span class="val">+'+ val +'</span>'+
                             '</div>'+
                         '</li>';
-                    numPositivesShown++;
+                    numAttractsShown++;
                     }
-                $('.stats .list.positive', $panelTypesOverview).append(statListMarkup);
+                $('.stats .list.attract', $panelTypesOverview).append(statListMarkup);
                 }
-            if (!jQuery.isEmptyObject(negativeTypes)){
-                var sortedKeys = getSortedKeys(negativeTypes);
+            if (!jQuery.isEmptyObject(repelTypes)){
+                var sortedKeys = getSortedKeys(repelTypes);
                 var statListMarkup = '';
                 sortedKeys.reverse();
                 for (var key = 0; key < sortedKeys.length; key++){
                     var type = sortedKeys[key];
                     var typeInfo = PokemonTypesIndex[type];
-                    var val = Math.floor(negativeTypes[type]);
+                    var val = Math.floor(repelTypes[type]);
                     if (val === 0){ continue; }
                     var liClass = 'type '+type+' ';
                     statListMarkup += '<li class="'+liClass+'">'+
@@ -1118,9 +1118,9 @@
                                 '<span class="val">'+ val +'</span>'+
                             '</div>'+
                         '</li>';
-                    numNegativesShown++;
+                    numRepelsShown++;
                     }
-                $('.stats .list.negative', $panelTypesOverview).append(statListMarkup);
+                $('.stats .list.repel', $panelTypesOverview).append(statListMarkup);
                 }
             }
 
@@ -1666,7 +1666,7 @@
                             return 1;
                             }
 
-                        // Happiness-based evolutions are triggered by positive type appeal values
+                        // Happiness-based evolutions are triggered by attract type appeal values
                         if (methodToken === 'happiness'){
 
                             if (methodValue === 'high'
