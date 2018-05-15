@@ -118,14 +118,14 @@ if (isset($_GET['gen'])
 
                 <div class="overview floatlist species hidden">
                     <div class="title">
-                        <strong class="main">Species List</strong>
+                        <strong class="main">Pokémon List</strong>
                         <div class="subs">
-                            <strong class="sub active">Active <span class="count">0</span></strong>
+                            <strong class="sub current">Current <span class="count">0</span></strong>
                             <strong class="sub fainted">Fainted <span class="count">0</span></strong>
                         </div>
                     </div>
                     <div class="wrap">
-                        <ul class="list active"></ul>
+                        <ul class="list current"></ul>
                         <ul class="list fainted"></ul>
                     </div>
                 </div>

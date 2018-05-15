@@ -712,7 +712,7 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     z-index: 2;
 }
 .panel .overview.types .list.attract li.type,
-.panel .overview.species .list.active li.species {
+.panel .overview.species .list.current li.species {
 
 }
 .panel .overview.types .list.repel li.type,
@@ -720,7 +720,7 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
 
 }
 .panel .overview.types .list.attract li.type .bubble,
-.panel .overview.species .list.active li.species .bubble {
+.panel .overview.species .list.current li.species .bubble {
 
 }
 .panel .overview.types .list.repel li.type .bubble,
@@ -733,7 +733,7 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
 }
 
 .panel .overview.types .list.attract li.type .val,
-.panel .overview.species .list.active li.species .val {
+.panel .overview.species .list.current li.species .val {
     color: #66cc66;
 }
 .panel .overview.types .list.repel li.type .name,

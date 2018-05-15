@@ -1134,8 +1134,8 @@
         var faintedPokemonSpecies = thisZoneData.faintedPokemonSpecies;
         var currentEggStats = thisZoneData.currentStats['eggs'];
 
-        // Pre-filter a list of pokemon that are specifically active
-        var activePokemonSpecies = {};
+        // Pre-filter a list of pokemon that are specifically current
+        var currentPokemonSpecies = {};
         if (!jQuery.isEmptyObject(addedPokemonSpecies)){
             var speciesTokens = Object.keys(addedPokemonSpecies);
             for (var key = 0; key < speciesTokens.length; key++){
@@ -1148,21 +1148,21 @@
                 if (typeof faintedPokemonSpecies[poke] !== 'undefined'){ pokeCount -= faintedPokemonSpecies[poke]; }
                 if (typeof currentEggStats[poke] !== 'undefined'){ pokeCount -= currentEggStats[poke]; }
                 if (pokeCount < 1){ continue; }
-                activePokemonSpecies[poke] = pokeCount;
+                currentPokemonSpecies[poke] = pokeCount;
                 }
             }
 
-        // Update the active species list with current numbers
-        var $activeSpeciesCounter = $('.sub.active .count', $panelSpeciesOverview);
-        var $activeSpeciesList = $('.list.active', $panelSpeciesOverview);
-        $activeSpeciesList.empty();
+        // Update the current species list with current numbers
+        var $currentSpeciesCounter = $('.sub.current .count', $panelSpeciesOverview);
+        var $currentSpeciesList = $('.list.current', $panelSpeciesOverview);
+        $currentSpeciesList.empty();
         var speciesListMarkup = '';
-        if (!jQuery.isEmptyObject(activePokemonSpecies)){
-            var sortedTokens = getSortedKeys(activePokemonSpecies);
+        if (!jQuery.isEmptyObject(currentPokemonSpecies)){
+            var sortedTokens = getSortedKeys(currentPokemonSpecies);
             for (var key = 0; key < sortedTokens.length; key++){
                 var poke = sortedTokens[key];
                 var pokeInfo = PokemonSpeciesIndex[poke];
-                var pokeCount = activePokemonSpecies[poke];
+                var pokeCount = currentPokemonSpecies[poke];
                 var liClass = 'species ';
                 liClass += 'type '+pokeInfo['types'][0]+' ';
                 if (typeof pokeInfo['types'][1] !== 'undefined'){ liClass += pokeInfo['types'][1]+'2 '; }
@@ -1179,8 +1179,8 @@
                     '<div class="bubble"><span class="name">&nbsp;</span></div>'+
                 '</li>';
             }
-        $activeSpeciesCounter.html(numActiveShown);
-        $activeSpeciesList.append(speciesListMarkup);
+        $currentSpeciesCounter.html(numActiveShown);
+        $currentSpeciesList.append(speciesListMarkup);
 
         // Update the fainted species list with past numbers
         var $faintedSpeciesCounter = $('.sub.fainted .count', $panelSpeciesOverview);
