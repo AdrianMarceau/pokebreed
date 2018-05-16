@@ -24,15 +24,49 @@
 
 }
 
+@media (max-width: 1950px){
+    .bp1:before { content: "b";  }
+
+    body { padding: 10px 10px 10px; }
+    .panel { margin: 0 auto; }
+
+    .panel .buttons button {
+        width: calc((100% / 25) - 10px);
+    }
+
+}
+@media (max-width: 1650px){
+    .bp1:before { content: "b";  }
+
+    body { padding: 10px 10px 10px; }
+    .panel { margin: 0 auto; }
+
+    .panel .buttons button {
+        width: calc((100% / 18) - 10px);
+    }
+
+}
 @media (max-width: 1366px){
     .bp1:before { content: "b";  }
 
     body { padding: 10px 10px 10px; }
     .panel { margin: 0 auto; }
 
+    .panel .buttons button {
+        width: calc((100% / 12) - 10px);
+    }
+
+}
+@media (max-width: 1024px){
+    .bp1:before { content: "c";  }
+
+    .panel .buttons button {
+        width: calc((100% / 10) - 10px);
+    }
+
 }
 @media (max-width: 800px){
-    .bp1:before { content: "c";  }
+    .bp1:before { content: "d";  }
 
     .panel .buttons .info > div {
         padding-left: 0;
@@ -41,16 +75,20 @@
 
 }
 @media (max-width: 768px){
-    .bp1:before { content: "d";  }
+    .bp1:before { content: "e";  }
 
     .panel .overview.main {
         padding-left: 6px;
         padding-right: 6px;
     }
 
+    .panel .buttons button {
+        width: calc((100% / 8) - 10px);
+    }
+
 }
 @media (max-width: 650px){
-    .bp1:before { content: "e";  }
+    .bp1:before { content: "f";  }
 
     .panel .buttons .info:not(.links) {
         position: relative;
@@ -62,6 +100,10 @@
     }
     .panel .buttons .info.links {
         padding-bottom: 35px;
+    }
+
+    .panel .buttons button {
+        width: calc((100% / 6) - 10px);
     }
 
 }
