@@ -59,7 +59,7 @@ if (isset($_GET['gen'])
             <h1>
                 <a class="logo" href="/"><img src="images/pokebox-logo.png" alt="PokéBox" /></a>
                 <span class="subtext">Pokémon Box Simulator <img class="icon" src="images/favicon.png" /></span>
-                <span class="version" onclick="javascript:if(confirm('Reset Simulator?')){window.top.location = window.top.location;}">
+                <span class="version">
                     v<?= $version_number ?>
                     <span class="bp bp1"></span>
                     <span class="bp bp2"></span>
@@ -163,6 +163,7 @@ if (isset($_GET['gen'])
                     <a class="link" data-tab="about">about</a>
                     <a class="link" data-tab="help">help</a>
                     <a class="link" data-tab="credits">credits</a>
+                    <a class="link reset hidden" onclick="javascript:PokeboxZoneFunctions.resetSimulation();">reset</a>
                 </div>
                 <div class="info hidden" data-tab="about">
                     <? require('pages/about.php'); ?>

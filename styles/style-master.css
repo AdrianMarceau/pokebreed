@@ -1109,6 +1109,14 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     color: #b0b0b0;
     background-color: rgba(0, 0, 0, 0.2);
 }
+.panel .buttons .info.links .link.reset {
+    color: #b0b0b0;
+    background-color: rgba(255, 0, 0, 0.2);
+}
+.panel .buttons .info.links .link.reset:hover {
+    color: #cacaca;
+    background-color: rgba(255, 0, 0, 0.4);
+}
 
 .panel .buttons .info[data-tab="help"] {
 

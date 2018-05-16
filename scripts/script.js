@@ -20,7 +20,7 @@
 
     // GLOBAL ZONE DATA
 
-    var thisZoneData = {
+    var defaultZoneData = {
         name: 'Default Box',
         width: 20,
         height: 5,
@@ -36,6 +36,8 @@
         faintedPokemonSpecies: {},
         day: 0
         };
+
+    var thisZoneData = {};
 
     var thisZoneHistory = [];
 
@@ -58,9 +60,6 @@
 
     $(document).ready(function(){
 
-        // Expose the zone zata as a public variable
-        window.PokeboxZoneData = thisZoneData;
-
         // Collect devide width and make sure it auto-updates
         var updateDeviceWidth = function(){
             thisDeviceWidth = $(window).width();
@@ -74,6 +73,12 @@
         $(window).resize(updateDeviceWidth);
         updateDeviceWidth();
         //console.log('thisDeviceWidth = ', thisDeviceWidth);
+
+        // Expose the zone zata as a public variable
+        window.PokeboxZoneData = thisZoneData;
+        window.PokeboxZoneFunctions = {
+            resetSimulation: resetSimulation
+            };
 
         // Populate the app details with global values if set
         if (typeof window.PokemonAppLastUpdated !== 'undefined'){ appLastUpdated = window.PokemonAppLastUpdated; }
@@ -141,6 +146,8 @@
         PokemonTypesIndex = window.PokemonTypesIndex;
         PokemonTypesIndexTokens = Object.keys(PokemonTypesIndex);
 
+        // Reset zone data to default parameters
+        resetZoneData();
 
         // Optimize the pokemon indexes for faster calculation speeds
         optimizeIndexes();
@@ -224,6 +231,14 @@
         var $pokeList = $('.details.pokemon .wrap .list.pokemon', $panelMainOverview);
         $pokeList.on('click', 'li[data-id]', zonePokemonClickEvent);
 
+    }
+
+    // Define a function for resetting zone data to default values
+    function resetZoneData(){
+        thisZoneData = {};
+        thisZoneHistory = [];
+        var defaultZoneJSON = JSON.stringify(defaultZoneData);
+        thisZoneData = JSON.parse(defaultZoneJSON);
     }
 
     // Define a function for looping through indexes and generating helpful values
@@ -449,6 +464,7 @@
         // Set the start flag to true
         simulationStarted = true;
 
+        // Add the started class to the main overview
         $panelMainOverview.addClass('started');
 
         // Remove any "waiting" classes from pokemon slots
@@ -461,10 +477,55 @@
         // Unhide the day speed controller, hide the pokemon buttons
         $('.day-speed', $panelButtons).removeClass('hidden');
         $('.new-pokemon', $panelButtons).addClass('hidden');
+        $('.info.links .link.reset', $panelButtons).removeClass('hidden');
 
         // Autoscroll to the box details header
         $panelMainOverview.find('.details.zone .title').trigger('click');
 
+    }
+
+    // Define a function for resetting the simulation
+    function resetSimulation(){
+        if (confirm('Are you sure you want to reset? \n'
+            + 'All progress will be lost! \n'
+            + 'Continue anyway?')){
+
+            // Set the start flag to false
+            simulationStarted = false;
+
+            // Remove the started class from the main overview
+            $panelMainOverview.removeClass('started');
+
+            // Add "waiting" classes to pokemon slots
+            $('.details.pokemon .list.slots li:lt(11)', $panelMainOverview).addClass('waiting');
+
+            // Hide the type and species overview panels
+            $panelTypesOverview.addClass('hidden');
+            $panelSpeciesOverview.addClass('hidden');
+
+            // Hide the day speed controller
+            $('.day-speed', $panelButtons).addClass('hidden');
+            $('.info.links .link.reset', $panelButtons).addClass('hidden');
+
+            // Clear and reset all the zone variables and history
+            resetZoneData();
+
+            // Reset the day timeout so we can start fresh
+            if (dayTimeout !== false){ clearTimeout(dayTimeout); }
+            dayTimeout = false;
+            dayTimeoutStarted = false;
+            dayTimeoutDuration = 1000;
+
+            // Show the pokemon buttons
+            $('.new-pokemon', $panelButtons).removeClass('hidden');
+
+            // Autoscroll to the box details header
+            $panelMainOverview.find('.details.zone .title').trigger('click');updateOverview();
+
+            // Update the overiew with cleared data
+            updateOverview();
+
+            }
     }
 
 
