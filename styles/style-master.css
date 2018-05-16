@@ -583,6 +583,7 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     margin: 0 auto;
     font-size: 11px;
     line-height: 1;
+    padding-top: 4px;
 }
 .panel .overview.types .title .subs .sub,
 .panel .overview.species .title .subs .sub {
@@ -610,9 +611,11 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
 .panel .overview.types .wrap,
 .panel .overview.species .wrap {
     padding: 0 0 10px;
+    height: auto;
     max-height: 400px;
     overflow: hidden;
     position: relative;
+    /* background-color: rgba(255, 50, 0, 0.3); */
 }
 .panel .overview.types .wrap.ps-active-y,
 .panel .overview.species .wrap.ps-active-y {
@@ -641,6 +644,7 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     font-family: Arial, sans-serif;
     font-size: 11px;
     line-height: 1;
+    width: 50%;
 }
 .panel .overview.types .list:empty,
 .panel .overview.species .list:empty {
@@ -648,11 +652,11 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
 }
 .panel .overview.types .list.attract,
 .panel .overview.species .list.active {
-    width: 50%;
+
 }
 .panel .overview.types .list.repel,
-.panel .overview.species .list.fainted {
-    width: 50%;
+.panel .overview.species .list.alltime {
+
 }
 .panel .overview.types .list.attract {
 
@@ -663,7 +667,7 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
 .panel .overview.species .list.active {
 
 }
-.panel .overview.species .list.fainted {
+.panel .overview.species .list.alltime {
 
 }
 .panel .overview.types .list li.type,
@@ -711,43 +715,33 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     position: relative;
     z-index: 2;
 }
-.panel .overview.types .list.attract li.type,
-.panel .overview.species .list.current li.species {
 
-}
-.panel .overview.types .list.repel li.type,
-.panel .overview.species .list.fainted li.species {
-
-}
-.panel .overview.types .list.attract li.type .bubble,
-.panel .overview.species .list.current li.species .bubble {
-
-}
-.panel .overview.types .list.repel li.type .bubble,
-.panel .overview.species .list.fainted li.species .bubble {
-
-}
 .panel .overview.types .list li.type .val,
 .panel .overview.species .list li.species .val {
     float: right;
 }
 
-.panel .overview.types .list.attract li.type .val,
-.panel .overview.species .list.current li.species .val {
+.panel .overview.types .list.attract li.type .val {
     color: #66cc66;
 }
-.panel .overview.types .list.repel li.type .name,
-.panel .overview.species .list.fainted li.species .name {
+.panel .overview.types .list.repel li.type .val {
+    color: #db9494;
+}
+
+.panel .overview.species .list li.species .name {
     display: inline-block;
-    color: #b3b3b3;
     max-width: calc(100% - 25px);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.panel .overview.types .list.repel li.type .val,
-.panel .overview.species .list.fainted li.species .val {
-    color: #db9494;
+.panel .overview.species .list.current li.species .name,
+.panel .overview.species .list.current li.species .val {
+    color: #ffffff;
+}
+.panel .overview.species .list.alltime li.species .name,
+.panel .overview.species .list.alltime li.species .val {
+    color: #b3b3b3;
 }
 
 .panel .overview .ps-container {

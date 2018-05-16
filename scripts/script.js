@@ -1068,8 +1068,8 @@
         // Define vars to hold the number of stat slots shown
         var numAttractsShown = 0;
         var numRepelsShown = 0;
-        var numActiveShown = 0;
-        var numFaintedShown = 0;
+        var numCurrentShown = 0;
+        var numAllTimeShown = 0;
 
         // Update the stats list for the elemental type appeals
         $('.stats .list', $panelTypesOverview).empty();
@@ -1136,19 +1136,11 @@
 
         // Pre-filter a list of pokemon that are specifically current
         var currentPokemonSpecies = {};
-        if (!jQuery.isEmptyObject(addedPokemonSpecies)){
-            var speciesTokens = Object.keys(addedPokemonSpecies);
-            for (var key = 0; key < speciesTokens.length; key++){
-                var poke = speciesTokens[key];
-                var pokeInfo = PokemonSpeciesIndex[poke];
-                var pokeCount = addedPokemonSpecies[poke];
-                //console.log('typeof evolvedPokemonSpecies['+poke+']', typeof evolvedPokemonSpecies[poke], evolvedPokemonSpecies[poke]);
-                //console.log('typeof faintedPokemonSpecies['+poke+']', typeof faintedPokemonSpecies[poke], faintedPokemonSpecies[poke]);
-                if (typeof evolvedPokemonSpecies[poke] !== 'undefined'){ pokeCount -= evolvedPokemonSpecies[poke]; }
-                if (typeof faintedPokemonSpecies[poke] !== 'undefined'){ pokeCount -= faintedPokemonSpecies[poke]; }
-                if (typeof currentEggStats[poke] !== 'undefined'){ pokeCount -= currentEggStats[poke]; }
-                if (pokeCount < 1){ continue; }
-                currentPokemonSpecies[poke] = pokeCount;
+        if (thisZoneData.currentPokemon.length > 0){
+            for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
+                var pokeInfo = thisZoneData.currentPokemon[key];
+                if (typeof currentPokemonSpecies[pokeInfo.token] === 'undefined'){ currentPokemonSpecies[pokeInfo.token] = 0; }
+                currentPokemonSpecies[pokeInfo.token] += 1;
                 }
             }
 
@@ -1158,7 +1150,9 @@
         $currentSpeciesList.empty();
         var speciesListMarkup = '';
         if (!jQuery.isEmptyObject(currentPokemonSpecies)){
+            //console.log('currentPokemonSpecies = ', currentPokemonSpecies);
             var sortedTokens = getSortedKeys(currentPokemonSpecies);
+            //console.log('sortedTokens = ', sortedTokens);
             for (var key = 0; key < sortedTokens.length; key++){
                 var poke = sortedTokens[key];
                 var pokeInfo = PokemonSpeciesIndex[poke];
@@ -1169,32 +1163,30 @@
                 speciesListMarkup += '<li class="'+liClass+'">'+
                         '<div class="bubble">'+
                             '<span class="name">'+ pokeInfo['name'] +'</span> '+
-                            '<span class="val">+'+ pokeCount +'</span>'+
+                            '<span class="val">&times;'+ pokeCount +'</span>'+
                         '</div>'+
                     '</li>';
-                numActiveShown++;
+                numCurrentShown++;
                 }
             } else {
             speciesListMarkup += '<li class="species spacer">'+
                     '<div class="bubble"><span class="name">&nbsp;</span></div>'+
                 '</li>';
             }
-        $currentSpeciesCounter.html(numActiveShown);
+        $currentSpeciesCounter.html(numCurrentShown);
         $currentSpeciesList.append(speciesListMarkup);
 
-        // Update the fainted species list with past numbers
-        var $faintedSpeciesCounter = $('.sub.fainted .count', $panelSpeciesOverview);
-        var $faintedSpeciesList = $('.list.fainted', $panelSpeciesOverview);
-        $faintedSpeciesList.empty();
+        // Update the alltime species list with past numbers
+        var $alltimeSpeciesCounter = $('.sub.alltime .count', $panelSpeciesOverview);
+        var $alltimeSpeciesList = $('.list.alltime', $panelSpeciesOverview);
+        $alltimeSpeciesList.empty();
         var speciesListMarkup = '';
-        if (!jQuery.isEmptyObject(faintedPokemonSpecies)){
-            var sortedTokens = getSortedKeys(faintedPokemonSpecies);
+        if (!jQuery.isEmptyObject(addedPokemonSpecies)){
+            var sortedTokens = getSortedKeys(addedPokemonSpecies);
             for (var key = 0; key < sortedTokens.length; key++){
                 var poke = sortedTokens[key];
                 var pokeInfo = PokemonSpeciesIndex[poke];
-                var pokeCount = faintedPokemonSpecies[poke];
-                //console.log('typeof evolvedPokemonSpecies['+poke+']', typeof evolvedPokemonSpecies[poke], evolvedPokemonSpecies[poke]);
-                if (typeof evolvedPokemonSpecies[poke] !== 'undefined'){ pokeCount -= evolvedPokemonSpecies[poke]; }
+                var pokeCount = addedPokemonSpecies[poke];
                 if (pokeCount < 1){ continue; }
                 var liClass = 'species ';
                 liClass += 'type '+pokeInfo['types'][0]+' ';
@@ -1202,18 +1194,18 @@
                 speciesListMarkup += '<li class="'+liClass+'">'+
                         '<div class="bubble">'+
                             '<span class="name">'+ pokeInfo['name'] +'</span> '+
-                            '<span class="val">-'+ pokeCount +'</span>'+
+                            '<span class="val">&times;'+ pokeCount +'</span>'+
                         '</div>'+
                     '</li>';
-                numFaintedShown++;
+                numAllTimeShown++;
                 }
             } else {
             speciesListMarkup += '<li class="species spacer">'+
                     '<div class="bubble"><span class="name">&nbsp;</span></div>'+
                 '</li>';
             }
-        $faintedSpeciesCounter.html(numFaintedShown);
-        $faintedSpeciesList.append(speciesListMarkup);
+        $alltimeSpeciesCounter.html(numAllTimeShown);
+        $alltimeSpeciesList.append(speciesListMarkup);
 
         // If the simulation has started, make sure we update the scroll wrappers
         if (simulationStarted){

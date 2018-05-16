@@ -29,6 +29,10 @@
         width: 676px;
         max-height: 676px;
     }
+    .panel .overview.types .wrap,
+    .panel .overview.species .wrap {
+        max-height: 582px;
+    }
     .panel .overview.main .details.pokemon .list.slots li,
     .panel .overview.main .details.pokemon .list.pokemon li,
     .panel .overview.main .details.pokemon .list.slots li.slot:before {
@@ -65,11 +69,6 @@
         -webkit-animation-name: SpriteBounceZoomAlt;
         animation-name: SpriteBounceZoomAlt;
     }
-    .panel .overview.types .wrap,
-    .panel .overview.species .wrap {
-        height: 156px;
-        max-height: 156px;
-    }
     .panel .buttons button {
         width: 68px;
         height: 52px;
@@ -89,6 +88,10 @@
     .panel .overview.main .details.pokemon .wrap {
         width: 436px;
         max-height: 436px;
+    }
+    .panel .overview.types .wrap,
+    .panel .overview.species .wrap {
+        max-height: 385px;
     }
     .panel .overview.main .details.pokemon .list.slots li,
     .panel .overview.main .details.pokemon .list.pokemon li,
@@ -119,10 +122,6 @@
     .panel .overview.species {
         right: 20px;
     }
-    .panel .overview.types .wrap,
-    .panel .overview.species .wrap {
-        max-height: 454px;
-    }
     .panel .buttons button {
         width: 70px;
         height: 52px;
@@ -146,6 +145,10 @@
     .panel .overview.main .details.pokemon .wrap {
         width: 676px;
         max-height: 676px;
+    }
+    .panel .overview.types .wrap,
+    .panel .overview.species .wrap {
+        max-height: 624px;
     }
     .panel .overview.main .details.pokemon .list.slots li,
     .panel .overview.main .details.pokemon .list.pokemon li,
@@ -183,11 +186,6 @@
         -webkit-animation-name: SpriteBounceZoomAlt;
         animation-name: SpriteBounceZoomAlt;
     }
-    .panel .overview.types .wrap,
-    .panel .overview.species .wrap {
-        height: 156px;
-        max-height: 156px;
-    }
     .panel .buttons button {
         width: 68px;
         height: 52px;
@@ -208,6 +206,10 @@
     .panel .overview.main .details.pokemon .wrap {
         width: 436px;
         max-height: 436px;
+    }
+    .panel .overview.types .wrap,
+    .panel .overview.species .wrap {
+        max-height: 384px;
     }
     .panel .overview.main .details.pokemon .list.slots li,
     .panel .overview.main .details.pokemon .list.pokemon li,
@@ -242,10 +244,6 @@
     }
     .panel .overview.species {
         right: 20px;
-    }
-    .panel .overview.types .wrap,
-    .panel .overview.species .wrap {
-        max-height: 454px;
     }
     .panel .buttons button {
         width: 70px;
