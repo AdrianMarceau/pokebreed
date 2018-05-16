@@ -306,28 +306,6 @@
     .panel .buttons .new-pokemon .buttonwrap {
         max-height: calc(100vh - 400px);
     }
-    .panel .buttons button {
-        width: 70px;
-        height: 60px;
-    }
-    .panel .buttons button img {
-        width: 80px;
-        height: 60px;
-        position: absolute;
-        top: -8%;
-        left: -8%;
-        image-rendering: optimizeSpeed;             /*                     */
-        image-rendering: -moz-crisp-edges;          /* Firefox             */
-        image-rendering: -o-crisp-edges;            /* Opera               */
-        image-rendering: -webkit-optimize-contrast; /* Chrome (and Safari) */
-        image-rendering: optimize-contrast;         /* CSS3 Proposed       */
-        image-rendering: pixelated;                 /* CSS3 Proposed?       */
-        -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
-    }
-    .panel .buttons button:hover img {
-        -webkit-animation-name: SpriteBounceZoom;
-        animation-name: SpriteBounceZoom;
-    }
 
 }
 @media screen and (min-height: 769px){

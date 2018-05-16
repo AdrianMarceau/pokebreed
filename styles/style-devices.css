@@ -69,14 +69,6 @@
         -webkit-animation-name: SpriteBounceZoomAlt;
         animation-name: SpriteBounceZoomAlt;
     }
-    .panel .buttons button {
-        width: 68px;
-        height: 52px;
-    }
-    .panel .buttons button:hover img {
-        -webkit-animation-name: SpriteBounceZoom;
-        animation-name: SpriteBounceZoom;
-    }
 
 }
 @media screen
@@ -121,14 +113,6 @@
     }
     .panel .overview.species {
         right: 20px;
-    }
-    .panel .buttons button {
-        width: 70px;
-        height: 52px;
-    }
-    .panel .buttons button:hover img {
-        -webkit-animation-name: SpriteBounceZoom;
-        animation-name: SpriteBounceZoom;
     }
 
 }
@@ -186,14 +170,6 @@
         -webkit-animation-name: SpriteBounceZoomAlt;
         animation-name: SpriteBounceZoomAlt;
     }
-    .panel .buttons button {
-        width: 68px;
-        height: 52px;
-    }
-    .panel .buttons button:hover img {
-        -webkit-animation-name: SpriteBounceZoom;
-        animation-name: SpriteBounceZoom;
-    }
 
 }
 @media only screen
@@ -244,14 +220,6 @@
     }
     .panel .overview.species {
         right: 20px;
-    }
-    .panel .buttons button {
-        width: 70px;
-        height: 52px;
-    }
-    .panel .buttons button:hover img {
-        -webkit-animation-name: SpriteBounceZoom;
-        animation-name: SpriteBounceZoom;
     }
 
 }
