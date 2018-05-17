@@ -14,12 +14,12 @@
         padding: 0;
     }
     .panel .overview.types {
-        left: 23px;
-        right: auto;
-    }
-    .panel .overview.species {
         right: 23px;
         left: auto;
+    }
+    .panel .overview.species {
+        left: 23px;
+        right: auto;
     }
 
 }
@@ -372,11 +372,11 @@
         padding: 3px 5px 6px;
     }
     .panel .overview.types {
-        float: left;
+        float: right;
         padding-right: 0;
     }
     .panel .overview.species {
-        float: right;
+        float: left;
         padding-left: 0;
     }
 }

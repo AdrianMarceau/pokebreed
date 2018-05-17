@@ -109,10 +109,10 @@
         width: calc((100% - 498px) / 2);
     }
     .panel .overview.types {
-        left: 20px;
+        right: 20px;
     }
     .panel .overview.species {
-        right: 20px;
+        left: 20px;
     }
 
 }
@@ -216,10 +216,10 @@
         width: calc((100% - 498px) / 2);
     }
     .panel .overview.types {
-        left: 20px;
+        right: 20px;
     }
     .panel .overview.species {
-        right: 20px;
+        left: 20px;
     }
 
 }

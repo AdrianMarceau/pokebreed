@@ -564,11 +564,11 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     z-index: 4;
 }
 .panel .overview.types {
-    float: left;
+    float: right;
     padding-right: 5px;
 }
 .panel .overview.species {
-    float: right;
+    float: left;
     padding-left: 5px;
 }
 .panel .overview.types .title,
