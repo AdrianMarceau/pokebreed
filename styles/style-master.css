@@ -721,6 +721,10 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     float: right;
 }
 
+.panel .overview.types .list.attract li.type .name,
+.panel .overview.types .list.repel li.type .name  {
+    color: #FFFFFF;
+}
 .panel .overview.types .list.attract li.type .val {
     color: #66cc66;
 }
@@ -736,10 +740,10 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     white-space: nowrap;
 }
 .panel .overview.species .list.current li.species .name,
-.panel .overview.species .list.current li.species .val {
+.panel .overview.species .list.alltime li.species .name {
     color: #ffffff;
 }
-.panel .overview.species .list.alltime li.species .name,
+.panel .overview.species .list.current li.species .val,
 .panel .overview.species .list.alltime li.species .val {
     color: #b3b3b3;
 }

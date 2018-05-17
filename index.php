@@ -104,13 +104,13 @@ if (isset($_GET['gen'])
                     <div class="title">
                         <strong class="main">Pokémon List</strong>
                         <div class="subs">
-                            <strong class="sub current">Current <span class="count">0</span></strong>
                             <strong class="sub alltime">All-Time <span class="count">0</span></strong>
+                            <strong class="sub current">Current <span class="count">0</span></strong>
                         </div>
                     </div>
                     <div class="wrap">
-                        <ul class="list current"></ul>
                         <ul class="list alltime"></ul>
+                        <ul class="list current"></ul>
                     </div>
                 </div>
 
