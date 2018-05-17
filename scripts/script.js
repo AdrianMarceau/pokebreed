@@ -31,6 +31,7 @@
         currentStats: {},
         currentPokemon: [],
         faintedPokemon: [],
+        addedPokemonEggs: {},
         addedPokemonSpecies: {},
         evolvedPokemonSpecies: {},
         faintedPokemonSpecies: {},
@@ -775,6 +776,13 @@
         if (typeof addedPokemonSpecies[pokemonToken] === 'undefined'){ addedPokemonSpecies[pokemonToken] = 0; }
         addedPokemonSpecies[pokemonToken]++;
 
+        // If this pokemon is in an egg, also create and entry for the species in the global egg counter
+        if (isEgg){
+            var addedPokemonEggs = thisZoneData.addedPokemonEggs;
+            if (typeof addedPokemonEggs[pokemonToken] === 'undefined'){ addedPokemonEggs[pokemonToken] = 0; }
+            addedPokemonEggs[pokemonToken]++;
+            }
+
         // Collect index data for pokemon and its egg cycles
         var indexData = PokemonSpeciesIndex[pokemonToken];
         var baseStats = indexData['baseStats'];
@@ -1068,7 +1076,9 @@
         //var zoneMaxWidth = (thisZoneData.capacity / 10) * (40 + 5);
         //$pokeWrap.css({width:zoneMaxWidth+'px'});
 
-        // Loop through and show all pokemon on the field, with eggs last
+        // -- POKEMON CANVAS SPRITES
+
+        // Loop through and show all pokemon sprites on the field, with eggs last
         var pokeListMarkup = '';
         for (var key = 0; key < sortedSpeciesTokens.length; key++){
             var token = sortedSpeciesTokens[key];
@@ -1125,12 +1135,11 @@
         $pokeList.empty();
         $pokeList.append(pokeListMarkup);
 
+        // -- TYPE APPEAL LIST
 
         // Define vars to hold the number of stat slots shown
         var numAttractsShown = 0;
         var numRepelsShown = 0;
-        var numCurrentShown = 0;
-        var numAllTimeShown = 0;
 
         // Update the stats list for the elemental type appeals
         $('.stats .list', $panelTypesOverview).empty();
@@ -1186,10 +1195,17 @@
             }
 
 
+        // -- POKEMON SPECIES LIST
+
+        // Define vars to hold the number of stat slots shown
+        var numCurrentShown = 0;
+        var numAllTimeShown = 0;
+
         //thisZoneData.addedPokemonSpecies
         //thisZoneData.faintedPokemonSpecies
 
         // Collect relevant stats arrays to show in the list
+        var addedPokemonEggs = thisZoneData.addedPokemonEggs;
         var addedPokemonSpecies = thisZoneData.addedPokemonSpecies;
         var evolvedPokemonSpecies = thisZoneData.evolvedPokemonSpecies;
         var faintedPokemonSpecies = thisZoneData.faintedPokemonSpecies;
@@ -1210,25 +1226,41 @@
         var $currentSpeciesList = $('.list.current', $panelSpeciesOverview);
         $currentSpeciesList.empty();
         var speciesListMarkup = '';
+        var totalEggCount = 0;
         if (!jQuery.isEmptyObject(currentPokemonSpecies)){
             //console.log('currentPokemonSpecies = ', currentPokemonSpecies);
             var sortedTokens = getSortedKeys(currentPokemonSpecies);
             //console.log('sortedTokens = ', sortedTokens);
+            // Print out all the pokemon that have hatched from their eggs
             for (var key = 0; key < sortedTokens.length; key++){
                 var poke = sortedTokens[key];
                 var pokeInfo = PokemonSpeciesIndex[poke];
                 var pokeCount = currentPokemonSpecies[poke];
+                var eggCount = typeof currentEggStats[poke] !== 'undefined' ? currentEggStats[poke] : 0;
+                totalEggCount += eggCount;
+                pokeCount -= eggCount;
+                if (pokeCount < 1){ continue; }
                 var liClass = 'species ';
                 liClass += 'type '+pokeInfo['types'][0]+' ';
                 if (typeof pokeInfo['types'][1] !== 'undefined'){ liClass += pokeInfo['types'][1]+'2 '; }
                 speciesListMarkup += '<li class="'+liClass+'">'+
                         '<div class="bubble">'+
                             '<span class="name">'+ pokeInfo['name'] +'</span> '+
-                            '<span class="val">&times;'+ pokeCount +'</span>'+
+                            '<span class="val">&times;'+ pokeCount + '</span>'+
                         '</div>'+
                     '</li>';
                 numCurrentShown++;
                 }
+                // Print out a slot for eggs if there are any
+                if (totalEggCount > 0){
+                    speciesListMarkup += '<li class="species type normal">'+
+                            '<div class="bubble">'+
+                                '<span class="name">Eggs</span> '+
+                                '<span class="val">&times;'+ totalEggCount +'</span>'+
+                            '</div>'+
+                        '</li>';
+                    numCurrentShown++;
+                    }
             } else {
             speciesListMarkup += '<li class="species spacer">'+
                     '<div class="bubble"><span class="name">&nbsp;</span></div>'+
@@ -1243,6 +1275,8 @@
         $alltimeSpeciesList.empty();
         var speciesListMarkup = '';
         if (!jQuery.isEmptyObject(addedPokemonSpecies)){
+
+            // Loop through and print out all the individual species stats
             var sortedTokens = getSortedKeys(addedPokemonSpecies);
             for (var key = 0; key < sortedTokens.length; key++){
                 var poke = sortedTokens[key];
@@ -1260,6 +1294,21 @@
                     '</li>';
                 numAllTimeShown++;
                 }
+
+            // Print out a block for the total eggs added
+            if (!jQuery.isEmptyObject(addedPokemonEggs)){
+                var totalEggs = 0;
+                var eggSpecies = Object.keys(addedPokemonEggs);
+                for (var i = 0; i < eggSpecies.length; i++){ totalEggs += addedPokemonEggs[eggSpecies[i]]; }
+                speciesListMarkup += '<li class="species type normal">'+
+                        '<div class="bubble">'+
+                            '<span class="name">Eggs</span> '+
+                            '<span class="val">&times;'+ totalEggs +'</span>'+
+                        '</div>'+
+                    '</li>';
+                numAllTimeShown++;
+                }
+
             } else {
             speciesListMarkup += '<li class="species spacer">'+
                     '<div class="bubble"><span class="name">&nbsp;</span></div>'+
