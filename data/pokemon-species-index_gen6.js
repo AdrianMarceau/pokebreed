@@ -1348,6 +1348,25 @@
             prevEvolution: 'medicham'
             },
 
+        'mega-manectric': {
+            order: thisIndex.afterOrder('manectric'),
+            token: 'mega-manectric',
+            name: 'Mega Manectric',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'manectric',
+            number: 310,
+            types: ['electric'],
+            baseStats: {hp: 70, phAttack: 75, phDefense: 80, spAttack: 135, spDefense: 80, speed: 135},
+            abilities: {0: 'intimidate'},
+            height: 1.8,
+            weight: 44,
+            colors: ['yellow', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'manectric'
+            },
+
         'mega-latias': {
             order: thisIndex.afterOrder('latias'),
             token: 'mega-latias',
@@ -1492,8 +1511,8 @@
         {base: 'mawile', species: 'mega-mawile', method: 'mega-evolution', value: 'mawilite'},
 
         {base: 'aggron', species: 'mega-aggron', method: 'mega-evolution', value: 'aggronite'},
-
         {base: 'medicham', species: 'mega-medicham', method: 'mega-evolution', value: 'medichamite'},
+        {base: 'manectric', species: 'mega-manectric', method: 'mega-evolution', value: 'manectricite'},
 
         {base: 'latias', species: 'mega-latias', method: 'mega-evolution', value: 'latiasite'},
         {base: 'latios', species: 'mega-latios', method: 'mega-evolution', value: 'latiosite'},

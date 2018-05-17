@@ -1068,6 +1068,41 @@
             prevEvolution: 'meditite'
             },
 
+        'electrike': {
+            order: indexOrder++,
+            token: 'electrike',
+            name: 'Electrike',
+            number: 309,
+            types: ['electric'],
+            baseStats: {hp: 40, phAttack: 45, phDefense: 40, spAttack: 65, spDefense: 40, speed: 65},
+            abilities: {0: 'static', 1: 'lightning-rod', hidden: 'minus'},
+            height: 0.6,
+            weight: 15.2,
+            colors: ['green', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'manectric',
+                method: 'level-up',
+                value: 26
+                }]
+            },
+        'manectric': {
+            order: indexOrder++,
+            token: 'manectric',
+            name: 'Manectric',
+            number: 310,
+            types: ['electric'],
+            baseStats: {hp: 70, phAttack: 75, phDefense: 60, spAttack: 105, spDefense: 60, speed: 105},
+            abilities: {0: 'static', 1: 'lightning-rod', hidden: 'minus'},
+            height: 1.5,
+            weight: 40.2,
+            colors: ['yellow', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'electrike'
+            },
+
         'wynaut': {
             order: thisIndex.beforeOrder('wobbuffet'),
             token: 'wynaut',
