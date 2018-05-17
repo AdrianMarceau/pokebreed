@@ -1033,6 +1033,41 @@
             prevEvolution: 'lairon'
             },
 
+        'meditite': {
+            order: indexOrder++,
+            token: 'meditite',
+            name: 'Meditite',
+            number: 307,
+            types: ['fighting', 'psychic'],
+            baseStats: {hp: 30, phAttack: 40, phDefense: 55, spAttack: 40, spDefense: 55, speed: 60},
+            abilities: {0: 'pure-power', hidden: 'telepathy'},
+            height: 0.6,
+            weight: 11.2,
+            colors: ['blue', 'gray'],
+            eggCycles: 20,
+            eggGroups: ['human-like'],
+            nextEvolutions: [{
+                species: 'medicham',
+                method: 'level-up',
+                value: 37
+                }]
+            },
+        'medicham': {
+            order: indexOrder++,
+            token: 'medicham',
+            name: 'Medicham',
+            number: 308,
+            types: ['fighting', 'psychic'],
+            baseStats: {hp: 60, phAttack: 60, phDefense: 75, spAttack: 60, spDefense: 75, speed: 80},
+            abilities: {0: 'pure-power', hidden: 'telepathy'},
+            height: 1.3,
+            weight: 31.5,
+            colors: ['red', 'gray', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['human-like'],
+            prevEvolution: 'meditite'
+            },
+
         'wynaut': {
             order: thisIndex.beforeOrder('wobbuffet'),
             token: 'wynaut',

@@ -1329,6 +1329,25 @@
             prevEvolution: 'aggron'
             },
 
+        'mega-medicham': {
+            order: thisIndex.afterOrder('medicham'),
+            token: 'mega-medicham',
+            name: 'Mega Medicham',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'medicham',
+            number: 308,
+            types: ['fighting', 'psychic'],
+            baseStats: {hp: 60, phAttack: 100, phDefense: 85, spAttack: 80, spDefense: 85, speed: 100},
+            abilities: {0: 'pure-power'},
+            height: 1.3,
+            weight: 31.5,
+            colors: ['red', 'gray', 'white', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['human-like'],
+            prevEvolution: 'medicham'
+            },
+
         'mega-latias': {
             order: thisIndex.afterOrder('latias'),
             token: 'mega-latias',
@@ -1473,6 +1492,8 @@
         {base: 'mawile', species: 'mega-mawile', method: 'mega-evolution', value: 'mawilite'},
 
         {base: 'aggron', species: 'mega-aggron', method: 'mega-evolution', value: 'aggronite'},
+
+        {base: 'medicham', species: 'mega-medicham', method: 'mega-evolution', value: 'medichamite'},
 
         {base: 'latias', species: 'mega-latias', method: 'mega-evolution', value: 'latiasite'},
         {base: 'latios', species: 'mega-latios', method: 'mega-evolution', value: 'latiosite'},
