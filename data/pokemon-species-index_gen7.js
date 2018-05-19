@@ -359,6 +359,61 @@
             eggGroups: ['field', 'fairy']
             },
 
+        'jangmo-o': {
+            order: indexOrder++,
+            token: 'jangmo-o',
+            name: 'Jangmo-o',
+            number: 782,
+            types: ['dragon'],
+            baseStats: {hp: 45, phAttack: 55, phDefense: 65, spAttack: 45, spDefense: 45, speed: 45},
+            abilities: {0: 'bulletproof', 1: 'soundproof', hidden: 'overcoat'},
+            height: 0.6,
+            weight: 29.7,
+            color: ['gray', 'yellow', 'black'],
+            eggCycles: 40,
+            eggGroups: ['dragon'],
+            nextEvolutions: [{
+                species: 'hakamo-o',
+                method: 'level-up',
+                value: 35
+                }]
+            },
+        'hakamo-o': {
+            order: indexOrder++,
+            token: 'hakamo-o',
+            name: 'Hakamo-o',
+            number: 783,
+            types: ['dragon', 'fighting'],
+            baseStats: {hp: 55, phAttack: 75, phDefense: 90, spAttack: 65, spDefense: 70, speed: 65},
+            abilities: {0: 'bulletproof', 1: 'soundproof', hidden: 'overcoat'},
+            height: 1.2,
+            weight: 47,
+            color: ['gray', 'yellow', 'black', 'red'],
+            eggCycles: 40,
+            eggGroups: ['dragon'],
+            prevEvolution: 'jangmo-o',
+            nextEvolutions: [{
+                species: 'kommo-o',
+                method: 'level-up',
+                value: 45
+                }]
+            },
+        'kommo-o': {
+            order: indexOrder++,
+            token: 'kommo-o',
+            species: 'Kommo-o',
+            number: 784,
+            types: ['dragon', 'fighting'],
+            baseStats: {hp: 75, phAttack: 110, phDefense: 125, spAttack: 100, spDefense: 105, speed: 85},
+            abilities: {0: 'bulletproof', 1: 'soundproof', hidden: 'overcoat'},
+            height: 1.6,
+            weight: 78.2,
+            color: ['gray', 'yellow', 'red', 'white', 'black'],
+            eggCycles: 40,
+            eggGroups: ['dragon'],
+            prevEvolution: 'hakamo-o',
+            },
+
         // Alolan Variants
 
         'alolan-rattata': {
