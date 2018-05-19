@@ -1175,6 +1175,61 @@
                 }]
             },
 
+        'trapinch': {
+            order: indexOrder++,
+            token: 'trapinch',
+            name: 'Trapinch',
+            number: 328,
+            types: ['ground'],
+            baseStats: {hp: 45, phAttack: 100, phDefense: 45, spAttack: 45, spDefense: 45, speed: 10},
+            abilities: {0: 'hyper-cutter', 1: 'arena-trap', hidden: 'sheer-force'},
+            height: 0.7,
+            weight: 15,
+            colors: ['orange', 'white'],
+            eggCycles: 20,
+            eggGroups: ['bug'],
+            nextEvolutions: [{
+                species: 'vibrava',
+                method: 'level-up',
+                value: 35
+                }]
+            },
+        'vibrava': {
+            order: indexOrder++,
+            token: 'vibrava',
+            name: 'Vibrava',
+            number: 329,
+            types: ['ground', 'dragon'],
+            baseStats: {hp: 50, phAttack: 70, phDefense: 50, spAttack: 50, spDefense: 50, speed: 70},
+            abilities: {0: 'levitate'},
+            height: 1.1,
+            weight: 15.3,
+            colors: ['green', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['bug'],
+            prevEvolution: 'trapinch',
+            nextEvolutions: [{
+                species: 'flygon',
+                method: 'level-up',
+                value: 45
+                }]
+            },
+        'flygon': {
+            order: indexOrder++,
+            token: 'flygon',
+            name: 'Flygon',
+            number: 330,
+            types: ['ground', 'dragon'],
+            baseStats: {hp: 80, phAttack: 100, phDefense: 80, spAttack: 80, spDefense: 80, speed: 100},
+            abilities: {0: 'levitate'},
+            height: 2,
+            weight: 82,
+            colors: ['green', 'red'],
+            eggCycles: 20,
+            eggGroups: ['bug'],
+            prevEvolution: 'vibrava'
+            },
+
         'wynaut': {
             order: thisIndex.beforeOrder('wobbuffet'),
             token: 'wynaut',
