@@ -2394,10 +2394,13 @@
         for (var i = 0; i < thisZoneData.currentPokemon.length; i++){
             var pokeInfo = thisZoneData.currentPokemon[i];
             var pokeIndex = PokemonSpeciesIndex[pokeInfo.token];
-            for (var j = 0; j < pokeIndex.types.length; j++){
-                var typeToken = pokeIndex.types[j];
+            var pokeTypes = pokeIndex.types;
+            if (pokeTypes[1] === 'flying'){ pokeTypes = [pokeTypes[1], pokeTypes[0]]; }
+            for (var j = 0; j < pokeTypes.length; j++){
+                var typeToken = pokeTypes[j];
                 if (typeof currentTypes[typeToken] === 'undefined'){ currentTypes[typeToken] = 0; }
                 currentTypes[typeToken] += 1 - (j * 0.1);
+                if (typeToken === 'flying'){ currentTypes[typeToken] += 0.1; }
                 }
             }
 
@@ -2424,7 +2427,7 @@
             //console.log(fieldToken+' = ', fieldInfo);
             //console.log('|-- typeVal = ', typeVal);
             //console.log('|-- fieldChance = ', fieldChance);
-            if (true || fieldChance > 0){
+            if (fieldChance > 0){
                 possibleFields.push({
                     field: fieldToken,
                     chance: fieldChance
@@ -2443,6 +2446,7 @@
             else if (fieldA.chance < fieldB.chance){ return 1; }
             else { return 0; }
             });
+        //console.log('topFields = ', possibleFields[0]['field'], possibleFields[1]['field'], possibleFields[2]['field']);
         if (possibleFields[0].chance > 0){
             var fieldToken = possibleFields[0]['field'];
             var fieldInfo = PokemonFieldsIndex[fieldToken];
