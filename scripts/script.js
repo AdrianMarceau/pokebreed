@@ -1170,8 +1170,10 @@
                     var val = Math.floor(attractTypes[type]);
                     if (val === 0){ continue; }
                     var liClass = 'type '+type+' ';
+                    var typeIcon = '<img class="sprite" src="images/icons/types/'+ type +'.webp" />';
                     statListMarkup += '<li class="'+liClass+'">'+
                             '<div class="bubble">'+
+                                '<span class="icon">'+ typeIcon +'</span> '+
                                 '<span class="name">'+ typeInfo['name'] +'</span> '+
                                 '<span class="val">+'+ val +'</span>'+
                             '</div>'+
@@ -1190,8 +1192,10 @@
                     var val = Math.floor(repelTypes[type]);
                     if (val === 0){ continue; }
                     var liClass = 'type '+type+' ';
+                    var typeIcon = '<img class="sprite" src="images/icons/types/'+ type +'.webp" />';
                     statListMarkup += '<li class="'+liClass+'">'+
                             '<div class="bubble">'+
+                                '<span class="icon">'+ typeIcon +'</span> '+
                                 '<span class="name">'+ typeInfo['name'] +'</span> '+
                                 '<span class="val">'+ val +'</span>'+
                             '</div>'+
@@ -1251,8 +1255,10 @@
                 var liClass = 'species ';
                 liClass += 'type '+pokeInfo['types'][0]+' ';
                 if (typeof pokeInfo['types'][1] !== 'undefined'){ liClass += pokeInfo['types'][1]+'2 '; }
+                pokeIcon = getPokemonIcon(pokeInfo.token);
                 speciesListMarkup += '<li class="'+liClass+'">'+
                         '<div class="bubble">'+
+                            '<span class="icon">'+ pokeIcon +'</span> '+
                             '<span class="name">'+ pokeInfo['name'] +'</span> '+
                             '<span class="val">&times;'+ pokeCount + '</span>'+
                         '</div>'+
@@ -1261,8 +1267,10 @@
                 }
                 // Print out a slot for eggs if there are any
                 if (totalEggCount > 0){
+                    pokeIcon = getPokemonIcon('ditto', true);
                     speciesListMarkup += '<li class="species type normal">'+
                             '<div class="bubble">'+
+                                '<span class="icon">'+ pokeIcon +'</span> '+
                                 '<span class="name">Eggs</span> '+
                                 '<span class="val">&times;'+ totalEggCount +'</span>'+
                             '</div>'+
@@ -1294,8 +1302,10 @@
                 var liClass = 'species ';
                 liClass += 'type '+pokeInfo['types'][0]+' ';
                 if (typeof pokeInfo['types'][1] !== 'undefined'){ liClass += pokeInfo['types'][1]+'2 '; }
+                pokeIcon = getPokemonIcon(pokeInfo.token);
                 speciesListMarkup += '<li class="'+liClass+'">'+
                         '<div class="bubble">'+
+                            '<span class="icon">'+ pokeIcon +'</span> '+
                             '<span class="name">'+ pokeInfo['name'] +'</span> '+
                             '<span class="val">&times;'+ pokeCount +'</span>'+
                         '</div>'+
@@ -1308,8 +1318,10 @@
                 var totalEggs = 0;
                 var eggSpecies = Object.keys(addedPokemonEggs);
                 for (var i = 0; i < eggSpecies.length; i++){ totalEggs += addedPokemonEggs[eggSpecies[i]]; }
+                pokeIcon = getPokemonIcon('ditto', true);
                 speciesListMarkup += '<li class="species type normal">'+
                         '<div class="bubble">'+
+                            '<span class="icon">'+ pokeIcon +'</span> '+
                             '<span class="name">Eggs</span> '+
                             '<span class="val">&times;'+ totalEggs +'</span>'+
                         '</div>'+

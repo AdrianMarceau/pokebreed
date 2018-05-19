@@ -175,6 +175,10 @@
     font-family: Arial, sans-serif;
     text-align: center;
 }
+.panel .overview > .title,
+.panel .overview .details .title {
+    margin-bottom: 1px;
+}
 .panel .overview .details .list {
     display: block;
     box-sizing: border-box;
@@ -611,7 +615,7 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
 }
 .panel .overview.types .wrap,
 .panel .overview.species .wrap {
-    padding: 0 0 10px;
+    padding: 4px 0 10px;
     height: auto;
     max-height: 400px;
     overflow: hidden;
@@ -735,7 +739,7 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
 
 .panel .overview.species .list li.species .name {
     display: inline-block;
-    max-width: calc(100% - 25px);
+    max-width: calc(100% - 50px);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -747,6 +751,38 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
 .panel .overview.species .list.current li.species .val,
 .panel .overview.species .list.alltime li.species .val {
     color: #b3b3b3;
+}
+
+
+.panel .overview.types .list.attract li.type .icon,
+.panel .overview.types .list.repel li.type .icon,
+.panel .overview.species .list.current li.species .icon,
+.panel .overview.species .list.alltime li.species .icon {
+    display: inline-block;
+    position: relative;
+    width: 11px;
+    height: 11px;
+    margin: 0 10px;
+    vertical-align: middle;
+}
+.panel .overview.types .list.attract li.type .icon .sprite,
+.panel .overview.types .list.repel li.type .icon .sprite,
+.panel .overview.species .list.current li.species .icon .sprite,
+.panel .overview.species .list.alltime li.species .icon .sprite {
+    position: absolute;
+    top: -30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.panel .overview.types .list.attract li.type .icon,
+.panel .overview.types .list.repel li.type .icon {
+    margin: 0 5px;
+}
+.panel .overview.types .list.attract li.type .icon .sprite,
+.panel .overview.types .list.repel li.type .icon .sprite {
+    top: 48%;
+    width: 16px;
+    height: 16px;
 }
 
 .panel .overview .ps-container {
