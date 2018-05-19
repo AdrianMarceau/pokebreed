@@ -21,6 +21,7 @@
     // GLOBAL ZONE DATA
 
     var defaultZoneData = {
+        field: '',
         name: 'Pending',
         width: 20,
         height: 5,
@@ -2459,9 +2460,11 @@
             else { return 0; }
             });
         //console.log('topFields = ', possibleFields[0]['field'], possibleFields[1]['field'], possibleFields[2]['field']);
-        if (possibleFields[0].chance > 0){
+        if (possibleFields[0].chance > 0
+            && possibleFields[0]['field'] !== thisZoneData.field){
             var fieldToken = possibleFields[0]['field'];
             var fieldInfo = PokemonFieldsIndex[fieldToken];
+            thisZoneData.field = fieldToken;
             thisZoneData.name = fieldInfo.name;
             //console.log('change to field '+fieldToken);
             var newImage = 'images/fields/'+fieldToken+'-fullsize.png';
