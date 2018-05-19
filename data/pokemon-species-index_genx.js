@@ -319,7 +319,7 @@
         {base: 'toxapex', species: 'corsola'},
 
         // Confirmed simbiotic relationships
-        {base: 'shellder', species: 'slopoke'},
+        {base: 'shellder', species: 'slowpoke'},
         {base: 'remoraid', species: 'mantyke'},
 
         // Confirmed rival relationships
@@ -333,6 +333,8 @@
 
         // Hinted-at simbiotic relationships
         {base: 'luvdisc', species: 'alomomola'},
+        {base: 'plusle', species: 'minun'},
+        {base: 'minun', species: 'plusle'},
 
         ]);
 

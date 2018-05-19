@@ -1103,6 +1103,36 @@
             prevEvolution: 'electrike'
             },
 
+        'plusle': {
+            order: indexOrder++,
+            token: 'plusle',
+            name: 'Plusle',
+            number: 311,
+            types: ['electric'],
+            baseStats: {hp: 60, phAttack: 50, phDefense: 40, spAttack: 85, spDefense: 75, speed: 95},
+            abilities: {0: 'plus', hidden: 'lightning-rod'},
+            height: 0.4,
+            weight: 4.2,
+            colors: ['yellow', 'red'],
+            eggCycles: 20,
+            eggGroups: ['fairy']
+            },
+
+        'minun': {
+            order: indexOrder++,
+            token: 'minun',
+            name: 'Minun',
+            number: 312,
+            types: ['electric'],
+            baseStats: {hp: 60, phAttack: 40, phDefense: 50, spAttack: 75, spDefense: 85, speed: 95},
+            abilities: {0: 'minus', hidden: 'volt-absorb'},
+            height: 0.4,
+            weight: 4.2,
+            colors: ['yellow', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['fairy']
+            },
+
         'wynaut': {
             order: thisIndex.beforeOrder('wobbuffet'),
             token: 'wynaut',
