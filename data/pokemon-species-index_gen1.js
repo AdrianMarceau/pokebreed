@@ -560,7 +560,7 @@
             altBaseEvolutions: [{
                 species: 'nidoran-m',
                 method: 'chance',
-                value: 50
+                value: 60
                 }]
             },
         'nidorina': {
@@ -626,7 +626,7 @@
             altBaseEvolutions: [{
                 species: 'nidoran-f',
                 method: 'chance',
-                value: 50
+                value: 40
                 }]
             },
         'nidorino': {

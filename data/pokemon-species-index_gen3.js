@@ -1117,7 +1117,6 @@
             eggCycles: 20,
             eggGroups: ['fairy']
             },
-
         'minun': {
             order: indexOrder++,
             token: 'minun',
@@ -1131,6 +1130,49 @@
             colors: ['yellow', 'blue'],
             eggCycles: 20,
             eggGroups: ['fairy']
+            },
+
+        'volbeat': {
+            order: indexOrder++,
+            token: 'volbeat',
+            name: 'Volbeat',
+            number: 313,
+            types: ['bug'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 65, phAttack: 73, phDefense: 75, spAttack: 47, spDefense: 85, speed: 85},
+            abilities: {0: 'illuminate', 1: 'swarm', hidden: 'prankster'},
+            height: 0.7,
+            weight: 17.7,
+            colors: ['gray', 'red', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['bug', 'human-like'],
+            eggPartner: 'illumise',
+            altBaseEvolutions: [{
+                'species': 'illumise',
+                'method': 'chance',
+                'value': 60
+                }]
+            },
+        'illumise': {
+            order: indexOrder++,
+            token: 'illumise',
+            name: 'Illumise',
+            number: 314,
+            types: ['bug'],
+            genderRatio: {female: 1.0000},
+            baseStats: {hp: 65, phAttack: 47, phDefense: 75, spAttack: 73, spDefense: 85, speed: 85},
+            abilities: {0: 'oblivious', 1: 'tinted-lens', hidden: 'prankster'},
+            height: 0.6,
+            weight: 17.7,
+            colors: ['gray', 'purple', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['bug', 'human-like'],
+            eggPartner: 'volbeat',
+            altBaseEvolutions: [{
+                'species': 'volbeat',
+                'method': 'chance',
+                'value': 40
+                }]
             },
 
         'wynaut': {

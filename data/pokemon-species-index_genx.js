@@ -326,6 +326,10 @@
         {base: 'zangoose', species: 'seviper'},
         {base: 'seviper', species: 'zangoose'},
 
+        // Confirmed romantic relationships
+        {base: 'tauros', species: 'miltank'},
+        {base: 'illumise', species: 'volbeat'},
+
         // Hinted-at predator/prey relationships
         {base: 'fletchling', species: 'scatterbug'},
         {base: 'fletchinder', species: 'spewpa'},
