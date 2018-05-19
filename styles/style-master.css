@@ -762,7 +762,7 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     position: relative;
     width: 11px;
     height: 11px;
-    margin: 0 10px;
+    margin: 0 5px;
     vertical-align: middle;
 }
 .panel .overview.types .list.attract li.type .icon .sprite,
@@ -773,10 +773,6 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     top: -30%;
     left: 50%;
     transform: translate(-50%, -50%);
-}
-.panel .overview.types .list.attract li.type .icon,
-.panel .overview.types .list.repel li.type .icon {
-    margin: 0 5px;
 }
 .panel .overview.types .list.attract li.type .icon .sprite,
 .panel .overview.types .list.repel li.type .icon .sprite {
