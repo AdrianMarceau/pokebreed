@@ -291,6 +291,7 @@
     margin-bottom: 0;
     position: relative;
     padding: 3px 0 5px;
+    min-height: 53px;
 }
 .panel .overview.main .details.pokemon:after {
     content: "";
@@ -343,7 +344,7 @@
     overflow: hidden;
 }
 .panel .overview.main .details.pokemon .field .bg {
-    background-image: url(../images/fields/forest-fullsize.png);
+    background-image: url(../images/fields/savanna-fullsize.png);
     background-position: center bottom;
     background-size: 100%;
     background-size: cover;

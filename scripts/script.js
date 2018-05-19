@@ -21,7 +21,7 @@
     // GLOBAL ZONE DATA
 
     var defaultZoneData = {
-        name: 'Default Box',
+        name: 'Pending',
         width: 20,
         height: 5,
         size: 100,
@@ -129,8 +129,10 @@
 
         // Preload the type and pokemon indexes
         preloadTypeIndex(function(){
-            preloadPokemonIndex(function(){
-                buildSimulator();
+            preloadFieldIndex(function(){
+                preloadPokemonIndex(function(){
+                    buildSimulator();
+                    });
                 });
             });
 
@@ -146,6 +148,8 @@
         PokemonSpeciesIndexTokens = Object.keys(PokemonSpeciesIndex);
         PokemonTypesIndex = window.PokemonTypesIndex;
         PokemonTypesIndexTokens = Object.keys(PokemonTypesIndex);
+        PokemonFieldsIndex = window.PokemonFieldsIndex;
+        PokemonFieldsIndexTokens = Object.keys(PokemonFieldsIndex);
 
         // Reset zone data to default parameters
         resetZoneData();
@@ -194,21 +198,6 @@
             if (dayTimeoutStarted){ updateDay(false); }
             });
         $speedButtons.filter('[data-speed="normal"]').click();
-
-        // Define the click-event for the field links
-        var $fieldButtons = $('.fields .field', $panelButtons);
-        $fieldButtons.bind('click', function(e){
-            //console.log('field clicked');
-            e.preventDefault();
-            var $link = $(this);
-            var image = $link.find('img').attr('src');
-            var newImage = image.replace('.png', '-fullsize.png');
-            $('.details.pokemon .field .bg', $panelMainOverview).css({backgroundImage:'url('+ newImage +')'});
-            //console.log('changing background to ', image);
-            //'.panel .overview.main .details.pokemon';
-            $fieldButtons.removeClass('active');
-            $link.addClass('active');
-            });
 
         // Define the click-event for the info links
         var $linkButtons = $('.info.links .link[data-tab]', $panelButtons);
@@ -480,6 +469,10 @@
         $('.new-pokemon', $panelButtons).addClass('hidden');
         $('.info.links .link.reset', $panelButtons).removeClass('hidden');
 
+        // Update the box details header, unhide the details info bar
+        $('.details.zone .title', $panelMainOverview).html('Box Details');
+        $('.details.zone .list', $panelMainOverview).removeClass('hidden');
+
         // Autoscroll to the box details header
         $panelMainOverview.find('.details.zone .title').trigger('click');
 
@@ -520,6 +513,10 @@
             // Show the pokemon buttons
             $('.new-pokemon', $panelButtons).removeClass('hidden');
 
+            // Clear the box details header, hide the details info bar
+            $('.details.zone .title', $panelMainOverview).html('&nbsp;');
+            $('.details.zone .list', $panelMainOverview).addClass('hidden');
+
             // Autoscroll to the box details header
             $panelMainOverview.find('.details.zone .title').trigger('click');updateOverview();
 
@@ -546,6 +543,17 @@
         if (typeof onReady !== 'function'){ onReady = function(){}; }
         requestedScripts++;
         $.getScript('data/pokemon-types-index.min.js?v'+appVersionNumber, function(){
+            loadedScripts++;
+            $pokePanelLoading.append('.'); // append loading dot
+            if (isReady()){ onReady(); }
+            });
+    }
+
+    // Define a function for preloading the field index from JSON
+    function preloadFieldIndex(onReady){
+        if (typeof onReady !== 'function'){ onReady = function(){}; }
+        requestedScripts++;
+        $.getScript('data/pokemon-fields-index.min.js?v'+appVersionNumber, function(){
             loadedScripts++;
             $pokePanelLoading.append('.'); // append loading dot
             if (isReady()){ onReady(); }
@@ -1588,6 +1596,7 @@
             updateEggCycles();
             updateBreedingCycles();
             updateBattleCycles();
+            updateBoxBiome();
             }
 
         // Trigger a visitor chance if allowed or it's the first day and there's room
@@ -2373,6 +2382,75 @@
         if (thisZoneData.currentPokemon.length <= 1){ return false; }
 
         // ...
+
+    }
+
+    // Define a function for updating the current box's biome, if necessary
+    function updateBoxBiome(){
+        //console.log('updateBoxBiome()');
+
+        // Count the actual Pokemon's types, not their appeal values
+        var currentTypes = {};
+        for (var i = 0; i < thisZoneData.currentPokemon.length; i++){
+            var pokeInfo = thisZoneData.currentPokemon[i];
+            var pokeIndex = PokemonSpeciesIndex[pokeInfo.token];
+            for (var j = 0; j < pokeIndex.types.length; j++){
+                var typeToken = pokeIndex.types[j];
+                if (typeof currentTypes[typeToken] === 'undefined'){ currentTypes[typeToken] = 0; }
+                currentTypes[typeToken] += 1 - (j * 0.1);
+                }
+            }
+
+        //console.log('currentTypes = ', currentTypes);
+
+        // Loop through the field index and use type-counts to determine chances
+        var selectedField = false;
+        var possibleFields = [];
+        for (var i = 0; i < PokemonFieldsIndexTokens.length; i++){
+            var fieldToken = PokemonFieldsIndexTokens[i];
+            var fieldInfo = PokemonFieldsIndex[fieldToken];
+            var typeVal = 1;
+            if (fieldInfo.baseTypes.length === 1){ typeVal += 0.1; }
+            var fieldChance = 0;
+            for (var j = 0; j < fieldInfo.baseTypes.length; j++){
+                typeVal -= (j * 0.1);
+                var baseType = fieldInfo.baseTypes[j];
+                if (baseType === ''){ continue; }
+                if (typeof currentTypes[baseType] !== 'undefined'){
+                    var appealValue = currentTypes[baseType];
+                    fieldChance += appealValue * typeVal;
+                    }
+                }
+            //console.log(fieldToken+' = ', fieldInfo);
+            //console.log('|-- typeVal = ', typeVal);
+            //console.log('|-- fieldChance = ', fieldChance);
+            if (true || fieldChance > 0){
+                possibleFields.push({
+                    field: fieldToken,
+                    chance: fieldChance
+                    });
+                }
+            }
+
+        //console.log('possibleFields = ', possibleFields);
+
+        // If there were no appropriate fields, do nothing for now
+        if (possibleFields.length === 0){ return false; }
+
+        // Otherwise, sort the fields by their chances and apply the first
+        possibleFields.sort(function (fieldA, fieldB){
+            if (fieldA.chance > fieldB.chance){ return -1; }
+            else if (fieldA.chance < fieldB.chance){ return 1; }
+            else { return 0; }
+            });
+        if (possibleFields[0].chance > 0){
+            var fieldToken = possibleFields[0]['field'];
+            var fieldInfo = PokemonFieldsIndex[fieldToken];
+            thisZoneData.name = fieldInfo.name;
+            //console.log('change to field '+fieldToken);
+            var newImage = 'images/fields/'+fieldToken+'-fullsize.png';
+            $('.details.pokemon .field .bg', $panelMainOverview).css({backgroundImage:'url('+ newImage +')'});
+            }
 
     }
 

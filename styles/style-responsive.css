@@ -120,7 +120,8 @@
     }
     .panel .overview.types .wrap,
     .panel .overview.species .wrap {
-        height: 524px;
+        height: 215px;
+        min-height: calc(100vh - 900px);
     }
     .panel .overview.main .details.pokemon .list.slots li,
     .panel .overview.main .details.pokemon .list.pokemon li,
