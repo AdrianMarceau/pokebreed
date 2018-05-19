@@ -1212,6 +1212,61 @@
             eggGroups: ['water-2']
             },
 
+        'bagon': {
+            order: indexOrder++,
+            token: 'bagon',
+            name: 'Bagon',
+            number: 371,
+            types: ['dragon'],
+            baseStats: {hp: 45, phAttack: 75, phDefense: 60, spAttack: 40, spDefense: 30, speed: 50},
+            abilities: {0: 'rock-head', hidden: 'sheer-force'},
+            height: 0.6,
+            weight: 42.1,
+            colors: ['blue', 'gray', 'yellow'],
+            eggCycles: 40,
+            eggGroups: ['dragon'],
+            nextEvolutions: [{
+                species: 'shelgon',
+                method: 'level-up',
+                value: 30
+                }]
+            },
+        'shelgon': {
+            order: indexOrder++,
+            token: 'shelgon',
+            name: 'Shelgon',
+            number: 372,
+            types: ['dragon'],
+            baseStats: {hp: 65, phAttack: 95, phDefense: 100, spAttack: 60, spDefense: 50, speed: 50},
+            abilities: {0: 'rock-head', hidden: 'overcoat'},
+            height: 1.1,
+            weight: 110.5,
+            colors: ['white', 'gray'],
+            eggCycles: 40,
+            eggGroups: ['dragon'],
+            prevEvolution: 'bagon',
+            nextEvolutions: [{
+                species: 'salamence',
+                method: 'level-up',
+                value: 50
+                }]
+            },
+        'salamence': {
+            order: indexOrder++,
+            token: 'salamence',
+            name: 'Salamence',
+            number: 373,
+            types: ['dragon', 'flying'],
+            baseStats: {hp: 95, phAttack: 135, phDefense: 80, spAttack: 110, spDefense: 80, speed: 100},
+            abilities: {0: 'intimidate', hidden: 'moxie'},
+            height: 1.5,
+            weight: 102.6,
+            colors: ['blue', 'red', 'white'],
+            eggCycles: 40,
+            eggGroups: ['dragon'],
+            prevEvolution: 'shelgon'
+            },
+
         'regirock': {
             order: indexOrder++,
             token: 'regirock',

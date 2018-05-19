@@ -1367,6 +1367,25 @@
             prevEvolution: 'manectric'
             },
 
+        'mega-salamence': {
+            order: thisIndex.afterOrder('salamence'),
+            token: 'mega-salamence',
+            name: 'Mega Salamence',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'salamence',
+            number: 373,
+            types: ['dragon', 'flying'],
+            baseStats: {hp: 95, phAttack: 145, phDefense: 130, spAttack: 120, spDefense: 90, speed: 120},
+            abilities: {0: 'aerilate'},
+            height: 1.8,
+            weight: 112.6,
+            colors: ['red', 'blue', 'gray'],
+            eggCycles: 40,
+            eggGroups: ['dragon'],
+            prevEvolution: 'salamence'
+            },
+
         'mega-latias': {
             order: thisIndex.afterOrder('latias'),
             token: 'mega-latias',
@@ -1532,6 +1551,7 @@
         {base: 'aggron', species: 'mega-aggron', method: 'mega-evolution', value: 'aggronite'},
         {base: 'medicham', species: 'mega-medicham', method: 'mega-evolution', value: 'medichamite'},
         {base: 'manectric', species: 'mega-manectric', method: 'mega-evolution', value: 'manectricite'},
+        {base: 'salamence', species: 'mega-salamence', method: 'mega-evolution', value: 'salamencite'},
 
         {base: 'latias', species: 'mega-latias', method: 'mega-evolution', value: 'latiasite'},
         {base: 'latios', species: 'mega-latios', method: 'mega-evolution', value: 'latiosite'},
