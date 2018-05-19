@@ -762,7 +762,7 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     position: relative;
     width: 11px;
     height: 11px;
-    margin: 0 5px;
+    margin: 0 10px 0 5px;
     vertical-align: middle;
 }
 .panel .overview.types .list.attract li.type .icon .sprite,

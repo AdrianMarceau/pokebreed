@@ -1170,7 +1170,7 @@
                     var val = Math.floor(attractTypes[type]);
                     if (val === 0){ continue; }
                     var liClass = 'type '+type+' ';
-                    var typeIcon = '<img class="sprite" src="images/icons/types/'+ type +'.webp" />';
+                    var typeIcon = '<img class="sprite" src="images/icons/types/'+ type +'.png" />';
                     statListMarkup += '<li class="'+liClass+'">'+
                             '<div class="bubble">'+
                                 '<span class="icon">'+ typeIcon +'</span> '+
@@ -1192,7 +1192,7 @@
                     var val = Math.floor(repelTypes[type]);
                     if (val === 0){ continue; }
                     var liClass = 'type '+type+' ';
-                    var typeIcon = '<img class="sprite" src="images/icons/types/'+ type +'.webp" />';
+                    var typeIcon = '<img class="sprite" src="images/icons/types/'+ type +'.png" />';
                     statListMarkup += '<li class="'+liClass+'">'+
                             '<div class="bubble">'+
                                 '<span class="icon">'+ typeIcon +'</span> '+
