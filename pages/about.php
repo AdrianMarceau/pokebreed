@@ -9,7 +9,6 @@
     <div class="group">
         <h2>Future Goals for the Project</h2>
         <ul>
-            <li>Allow the user to Pause and Resume the simulator at-will</li>
             <li>Allow the user to start the simulator with less than 10 Pokémon if they want to</li>
             <li>Keep track of which species the player has seen so-far and have it persistant between sessions, display somewhere</li>
             <li>Revise breeding so that gender ratios and egg groups can be respected so that Pokémon like Jynx and Hitmonlee can breed and function</li>
