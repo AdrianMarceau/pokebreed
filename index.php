@@ -164,6 +164,7 @@ if (isset($_GET['gen'])
                     <a class="link" data-tab="help">help</a>
                     <a class="link" data-tab="credits">credits</a>
                     <a class="link reset hidden" onclick="javascript:PokeboxZoneFunctions.resetSimulation();">reset</a>
+                    <a class="link chat" href="https://discord.gg/8jsSYt5" target="_blank">chat</a>
                 </div>
                 <div class="info hidden" data-tab="about">
                     <? require('pages/about.php'); ?>
