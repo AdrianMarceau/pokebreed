@@ -1469,6 +1469,25 @@
             prevEvolution: 'rayquaza'
             },
 
+        'mega-garchomp': {
+            order: thisIndex.afterOrder('garchomp'),
+            token: 'mega-garchomp',
+            name: 'Mega Garchomp',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'garchomp',
+            number: 445,
+            types: ['dragon', 'ground'],
+            baseStats: {hp: 108, phAttack: 170, phDefense: 115, spAttack: 120, spDefense: 95, speed: 92},
+            abilities: {0: 'sand-force'},
+            height: 1.9,
+            weight: 95,
+            colors: ['blue', 'red', 'yellow'],
+            eggCycles: 40,
+            eggGroups: ['monster', 'dragon'],
+            prevEvolution: 'garchomp'
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
@@ -1524,6 +1543,8 @@
         {base: 'groudon', species: 'primal-groudon', method: 'primal-reversion', value: 'red-orb'},
 
         {base: 'rayquaza', species: 'mega-rayquaza', method: 'mega-evolution', value: 'meteorite'},
+
+        {base: 'garchomp', species: 'mega-garchomp', method: 'mega-evolution', value: 'garchompite'},
 
         ]);
 

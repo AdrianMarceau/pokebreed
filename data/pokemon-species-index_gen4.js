@@ -438,6 +438,61 @@
                 }]
             },
 
+        'gible': {
+            order: indexOrder++,
+            token: 'gible',
+            name: 'Gible',
+            number: 443,
+            types: ['dragon', 'ground'],
+            baseStats: {hp: 58, phAttack: 70, phDefense: 45, spAttack: 40, spDefense: 45, speed: 42},
+            abilities: {0: 'sand-veil', hidden: 'rough-skin'},
+            height: 0.7,
+            weight: 20.5,
+            colors: ['blue', 'red'],
+            eggCycles: 40,
+            eggGroups: ['monster', 'dragon'],
+            nextEvolutions: [{
+                species: 'gabite',
+                method: 'level-up',
+                value: 24
+                }]
+            },
+        'gabite': {
+            order: indexOrder++,
+            token: 'gabite',
+            name: 'Gabite',
+            number: 444,
+            types: ['dragon', 'ground'],
+            baseStats: {hp: 68, phAttack: 90, phDefense: 65, spAttack: 50, spDefense: 55, speed: 82},
+            abilities: {0: 'sand-veil', hidden: 'rough-skin'},
+            height: 1.4,
+            weight: 56,
+            colors: ['blue', 'red'],
+            eggCycles: 40,
+            eggGroups: ['monster', 'dragon'],
+            prevEvolution: 'gible',
+            nextEvolutions: [{
+                species: 'garchomp',
+                method: 'level-up',
+                value: 48
+                }]
+            },
+        'garchomp': {
+            order: indexOrder++,
+            token: 'garchomp',
+            name: 'Garchomp',
+            number: 445,
+            types: ['dragon', 'ground'],
+            baseStats: {hp: 108, phAttack: 130, phDefense: 95, spAttack: 80, spDefense: 85, speed: 102},
+            abilities: {0: 'sand-veil', hidden: 'rough-skin'},
+            height: 1.9,
+            weight: 95,
+            colors: ['blue', 'red', 'yellow'],
+            eggCycles: 40,
+            eggGroups: ['monster', 'dragon'],
+            prevEvolution: 'gabite'
+            },
+
         'munchlax': {
             order: thisIndex.beforeOrder('snorlax'),
             token: 'munchlax',
