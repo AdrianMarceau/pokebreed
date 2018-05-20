@@ -133,12 +133,11 @@ if (isset($_GET['gen'])
 
             <div class="buttons">
                 <div class="day-speed hidden">
-                    <strong>Change Day Speed</strong>
-                    <a class="option active" data-speed="normal">Normal</a>
-                    <a class="option" data-speed="slow">Slow</a>
-                    <a class="option" data-speed="fast">Fast</a>
-                    <a class="option" data-speed="pause">Pause</a>
-                    <a class="option reset" onclick="javascript:PokeboxZoneFunctions.resetSimulation();">Reset</a>
+                    <a class="option play active" data-speed="normal" title="Play">Play</a>
+                    <a class="option slow" data-speed="slow" title="Slower">Slower</a>
+                    <a class="option fast" data-speed="fast" title="Faster">Faster</a>
+                    <a class="option pause" data-speed="pause" title="Pause">Pause</a>
+                    <a class="option reset" title="Reset" onclick="javascript:PokeboxZoneFunctions.resetSimulation();">Reset</a>
                 </div>
                 <div class="new-pokemon">
                     <span class="loading">Loading</span>

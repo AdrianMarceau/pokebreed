@@ -198,14 +198,18 @@
             //var speedValue = parseInt($option.attr('data-speed'));
             var speedValue = 0;
             var speedToken = $option.attr('data-speed');
-            if (speedToken === 'slow'){ speedValue = 2400; }
-            else if (speedToken === 'normal'){ speedValue = 1200; }
+            if (speedToken === 'normal'){ speedValue = 1200; }
+            else if (speedToken === 'slow'){ speedValue = 2400; }
             else if (speedToken === 'fast'){ speedValue = 600; }
             else if (speedToken === 'pause'){ speedValue = 99999999; }
             if (speedValue === 0){ return false; }
             else { $('body').attr('data-speed', speedToken); }
             $speedButtons.removeClass('active');
             $option.addClass('active');
+            if (speedToken === 'slow'
+                || speedToken === 'fast'){
+                $speedButtons.filter('[data-speed="normal"]').addClass('active');
+                }
             dayTimeoutDuration = speedValue;
             if (dayTimeoutStarted){ updateDay(false); }
             });
