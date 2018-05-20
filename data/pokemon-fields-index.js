@@ -47,7 +47,7 @@
         'seafloor': {
             order: indexOrder++,
             token: 'seafloor',
-            name: 'seafloor',
+            name: 'Seafloor',
             baseTypes: ['water']
             },
         'cave': {
