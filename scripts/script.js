@@ -159,6 +159,10 @@
         // Update the banner counter with the total species
         $('.pokedex .count .total', $panelBanner).html(PokemonSpeciesIndexTokens.length);
 
+        // Update the title bar to show the next action (Select Pokemon)
+        //$('.details.zone .title', $panelMainOverview).html('Select '+ pokemonRequiredToStart +' Starter Pokémon');
+        $('.details.zone .title', $panelMainOverview).html('Select Starter Pokémon');
+
         // Reset zone data to default parameters
         resetZoneData();
 
@@ -661,9 +665,6 @@
 
         //console.log('generatePokemonButtons()');
         $pokePanelLoading.append('.'); // append loading dot
-
-        // Update the first step of the sim with the amount of required pokemon to start
-        $('.new-pokemon > strong', $panelButtons).html('Select '+ pokemonRequiredToStart +' Starter Pokémon');
 
         // Loop through and generate buttons for each Pokemon
         var lastGeneration = false;

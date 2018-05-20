@@ -276,6 +276,8 @@
     -webkit-border-radius: 3px 3px 0 0;
     border-radius: 3px 3px 0 0;
     cursor: pointer;
+    font-size: 12px;
+    line-height: 18px;
 }
 .panel .overview.main .details.zone .list {
     margin: 0 auto;
@@ -1025,6 +1027,7 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
 .panel .buttons .new-pokemon > strong {
     font-size: 12px;
     line-height: 2;
+    display: none;
 }
 .panel .buttons .new-pokemon .loading {
     display: inline-block;
@@ -1070,7 +1073,7 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
 .panel .buttons .day-speed {
     text-align: left;
     margin-bottom: 8px;
-    padding: 0 10px;
+    padding: 0 5px;
 }
 .panel .buttons .day-speed > strong {
     text-align: left;
@@ -1168,6 +1171,8 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     border-top: 1px solid #37373a;
     border-color: rgba(0, 0, 0, 0.3);
     font-size: 12px;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 .panel .buttons .info.links .link {
     display: inline-block;
@@ -1176,7 +1181,7 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     color: #8f8f8f;
     cursor: pointer;
     padding: 2px 6px;
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.1);
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;

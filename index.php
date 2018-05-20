@@ -141,7 +141,6 @@ if (isset($_GET['gen'])
                     <a class="option reset" onclick="javascript:PokeboxZoneFunctions.resetSimulation();">Reset</a>
                 </div>
                 <div class="new-pokemon">
-                    <strong></strong>
                     <span class="loading">Loading</span>
                 </div>
                 <div class="info links">
