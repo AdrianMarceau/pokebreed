@@ -1386,6 +1386,26 @@
             prevEvolution: 'salamence'
             },
 
+        'mega-metagross': {
+            order: thisIndex.afterOrder('metagross'),
+            token: 'mega-metagross',
+            name: 'Mega Metagross',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'metagross',
+            number: 376,
+            types: ['steel', 'psychic'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 80, phAttack: 145, phDefense: 150, spAttack: 105, spDefense: 110, speed: 110},
+            abilities: {0: 'tough-claws'},
+            height: 2.5,
+            weight: 942.9,
+            colors: ['blue', 'yellow', 'gray', 'red'],
+            eggCycles: 40,
+            eggGroups: ['mineral'],
+            prevEvolution: 'metagross'
+            },
+
         'mega-latias': {
             order: thisIndex.afterOrder('latias'),
             token: 'mega-latias',
@@ -1552,6 +1572,7 @@
         {base: 'medicham', species: 'mega-medicham', method: 'mega-evolution', value: 'medichamite'},
         {base: 'manectric', species: 'mega-manectric', method: 'mega-evolution', value: 'manectricite'},
         {base: 'salamence', species: 'mega-salamence', method: 'mega-evolution', value: 'salamencite'},
+        {base: 'metagross', species: 'mega-metagross', method: 'mega-evolution', value: 'metagrossite'},
 
         {base: 'latias', species: 'mega-latias', method: 'mega-evolution', value: 'latiasite'},
         {base: 'latios', species: 'mega-latios', method: 'mega-evolution', value: 'latiosite'},

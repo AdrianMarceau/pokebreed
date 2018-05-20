@@ -1322,6 +1322,64 @@
             prevEvolution: 'shelgon'
             },
 
+        'beldum': {
+            order: indexOrder++,
+            token: 'beldum',
+            name: 'Beldum',
+            number: 374,
+            types: ['steel', 'psychic'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 40, phAttack: 55, phDefense: 80, spAttack: 35, spDefense: 60, speed: 30},
+            abilities: {0: 'clear-body', hidden: 'light-metal'},
+            height: 0.6,
+            weight: 95.2,
+            colors: ['blue', 'red'],
+            eggCycles: 40,
+            eggGroups: ['mineral'],
+            nextEvolutions: [{
+                species: 'metang',
+                method: 'level-up',
+                value: 20
+                }]
+            },
+        'metang': {
+            order: indexOrder++,
+            token: 'metang',
+            name: 'Metang',
+            number: 375,
+            types: ['steel', 'psychic'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 60, phAttack: 75, phDefense: 100, spAttack: 55, spDefense: 80, speed: 50},
+            abilities: {0: 'clear-body', hidden: 'light-metal'},
+            height: 1.2,
+            weight: 202.5,
+            colors: ['blue', 'gray', 'red'],
+            eggCycles: 40,
+            eggGroups: ['mineral'],
+            prevEvolution: 'beldum',
+            nextEvolutions: [{
+                species: 'metagross',
+                method: 'level-up',
+                value: 45
+                }]
+            },
+        'metagross': {
+            order: indexOrder++,
+            token: 'metagross',
+            name: 'Metagross',
+            number: 376,
+            types: ['steel', 'psychic'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 80, phAttack: 135, phDefense: 130, spAttack: 95, spDefense: 90, speed: 70},
+            abilities: {0: 'clear-body', hidden: 'light-metal'},
+            height: 1.6,
+            weight: 550,
+            colors: ['blue', 'gray', 'red'],
+            eggCycles: 40,
+            eggGroups: ['mineral'],
+            prevEvolution: 'metang'
+            },
+
         'regirock': {
             order: indexOrder++,
             token: 'regirock',
