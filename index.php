@@ -40,7 +40,7 @@ if (isset($_GET['gen'])
         <link type="text/css" rel="stylesheet" href="styles/style-master.min.css?v<?= $version_number ?>" />
         <link type="text/css" rel="stylesheet" href="styles/style-responsive.min.css?v<?= $version_number ?>" />
         <link type="text/css" rel="stylesheet" href="styles/style-devices.min.css?v<?= $version_number ?>" />
-        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
+        <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico?v<?= $version_number ?>">
         <? if (!$is_local && GA_ACCOUNT_ID){ ?>
         <!-- Google Analytics -->
         <script>
@@ -56,9 +56,9 @@ if (isset($_GET['gen'])
     <body data-speed="normal">
         <div class="panel">
 
-            <h1>
+            <div class="banner">
                 <a class="logo" href="/"><img src="images/pokebox-logo.png" alt="PokéBox" /></a>
-                <span class="subtext">Pokémon Box Simulator <img class="icon" src="images/favicon.png" /></span>
+                <span class="subtext"><h1>Pokémon Box Simulator</h1></span>
                 <span class="version">
                     v<?= $version_number ?>
                     <span class="bp bp1"></span>
@@ -66,7 +66,11 @@ if (isset($_GET['gen'])
                     <span class="bp bp3"></span>
                     <span class="bp bp4"></span>
                 </span>
-            </h1>
+                <span class="pokedex">
+                    <span class="count"><span class="current">0</span> / <span class="total">0</span></span>
+                    <img class="icon" src="images/pokeball.png" />
+                </span>
+            </div>
 
             <div class="overview main">
 

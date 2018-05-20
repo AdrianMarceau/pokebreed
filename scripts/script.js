@@ -17,6 +17,7 @@
     var PokemonTypesIndex = {};
     var PokemonTypesIndexTokens = [];
 
+    var PokemonSpeciesSeen = {};
 
     // GLOBAL ZONE DATA
 
@@ -48,6 +49,7 @@
 
     // GLOBAL ELEMENT REFERENCES
 
+    var $panelBanner = false;
     var $panelMainOverview = false;
     var $panelTypesOverview = false;
     var $panelSpeciesOverview = false;
@@ -78,6 +80,7 @@
 
         // Expose the zone zata as a public variable
         window.PokeboxZoneData = thisZoneData;
+        window.PokeboSpeciesSeen = PokemonSpeciesSeen;
         window.PokeboxZoneFunctions = {
             resetSimulation: resetSimulation
             };
@@ -103,6 +106,7 @@
         //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
 
         // Collect references to key elements
+        $panelBanner = $('.panel .banner');
         $panelMainOverview = $('.panel .overview.main');
         $panelTypesOverview = $('.panel .overview.types');
         $panelSpeciesOverview = $('.panel .overview.species');
@@ -151,6 +155,9 @@
         PokemonTypesIndexTokens = Object.keys(PokemonTypesIndex);
         PokemonFieldsIndex = window.PokemonFieldsIndex;
         PokemonFieldsIndexTokens = Object.keys(PokemonFieldsIndex);
+
+        // Update the banner counter with the total species
+        $('.pokedex .count .total', $panelBanner).html(PokemonSpeciesIndexTokens.length);
 
         // Reset zone data to default parameters
         resetZoneData();
@@ -785,6 +792,10 @@
         if (typeof addedPokemonSpecies[pokemonToken] === 'undefined'){ addedPokemonSpecies[pokemonToken] = 0; }
         addedPokemonSpecies[pokemonToken]++;
 
+        // Create an entry for this pokemon in the seen count if not exists
+        if (typeof PokemonSpeciesSeen[pokemonToken] === 'undefined'){ PokemonSpeciesSeen[pokemonToken] = 0; }
+        PokemonSpeciesSeen[pokemonToken]++;
+
         // If this pokemon is in an egg, also create and entry for the species in the global egg counter
         if (isEgg){
             var addedPokemonEggs = thisZoneData.addedPokemonEggs;
@@ -1054,6 +1065,9 @@
             }
         }
 
+        // Update the banner counter with the current species
+        $('.pokedex .count .current', $panelBanner).html(Object.keys(PokemonSpeciesSeen).length);
+
         // Update the zone details
         $('.zone .name .data', $panelMainOverview).text(thisZoneData.name);
         $('.zone .capacity .data', $panelMainOverview).text(thisZoneData.currentPokemon.length + ' / ' + thisZoneData.capacity);
@@ -1211,6 +1225,8 @@
         // -- POKEMON SPECIES LIST
 
         // Define vars to hold the number of stat slots shown
+        var numCurrentSpecies = 0;
+        var numAllTimeSpecies = 0;
         var numCurrentShown = 0;
         var numAllTimeShown = 0;
 
@@ -1264,6 +1280,7 @@
                             '<span class="val">&times;'+ pokeCount + '</span>'+
                         '</div>'+
                     '</li>';
+                numCurrentSpecies++;
                 numCurrentShown++;
                 }
                 // Print out a slot for eggs if there are any
@@ -1283,7 +1300,7 @@
                     '<div class="bubble"><span class="name">&nbsp;</span></div>'+
                 '</li>';
             }
-        $currentSpeciesCounter.html(numCurrentShown);
+        $currentSpeciesCounter.html(numCurrentSpecies);
         $currentSpeciesList.append(speciesListMarkup);
 
         // Update the alltime species list with past numbers
@@ -1311,6 +1328,7 @@
                             '<span class="val">&times;'+ pokeCount +'</span>'+
                         '</div>'+
                     '</li>';
+                numAllTimeSpecies++;
                 numAllTimeShown++;
                 }
 
@@ -1335,7 +1353,7 @@
                     '<div class="bubble"><span class="name">&nbsp;</span></div>'+
                 '</li>';
             }
-        $alltimeSpeciesCounter.html(numAllTimeShown);
+        $alltimeSpeciesCounter.html(numAllTimeSpecies);
         $alltimeSpeciesList.append(speciesListMarkup);
 
         // If the simulation has started, make sure we update the scroll wrappers
@@ -1407,6 +1425,10 @@
             $li.remove();
             thisZoneData.addedPokemonSpecies[pokeInfo.token]--;
             thisZoneData.currentPokemon.splice(pokeKey, 1);
+            PokemonSpeciesSeen[pokeInfo.token]--;
+            if (PokemonSpeciesSeen[pokeInfo.token] === 0){
+                delete PokemonSpeciesSeen[pokeInfo.token];
+                }
             }
         // Otherwise, clicking simply places a "watched" indicator on the pokemon
         else {
@@ -2032,6 +2054,10 @@
                         var addedPokemonSpecies = thisZoneData.addedPokemonSpecies;
                         if (typeof addedPokemonSpecies[selectedEvolution.token] === 'undefined'){ addedPokemonSpecies[selectedEvolution.token] = 0; }
                         addedPokemonSpecies[selectedEvolution.token]++;
+
+                        // Create an entry for this pokemon in the seen count if not exists
+                        if (typeof PokemonSpeciesSeen[selectedEvolution.token] === 'undefined'){ PokemonSpeciesSeen[selectedEvolution.token] = 0; }
+                        PokemonSpeciesSeen[selectedEvolution.token]++;
 
                         // Push an event to the analytics
                         if (typeof ga !== 'undefined'){

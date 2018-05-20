@@ -36,7 +36,7 @@
     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
     position: relative;
 }
-.panel h1 {
+.panel .banner {
     position: relative;
     padding: 6px 12px;
     font-size: 120%;
@@ -57,7 +57,7 @@
     background: linear-gradient(to bottom, rgba(58,95,171,1) 0%,rgba(29,44,94,1) 120%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3a5fab', endColorstr='#1d2c5e',GradientType=0 ); /* IE6-9 */
 }
-.panel h1:before {
+.panel .banner:before {
     content: "";
     display: block;
     position: absolute;
@@ -75,9 +75,16 @@
     right: 0;
     opacity: 0.05;
 }
-.panel h1 .logo,
-.panel h1 .subtext,
-.panel h1 .version {
+.panel .banner h1 {
+    display: inline-block;
+    font-size: inherit;
+    line-height: inherit;
+    margin: 0 auto;
+}
+.panel .banner .logo,
+.panel .banner .subtext,
+.panel .banner .version,
+.panel .banner .pokedex {
     display: block;
     margin: 0 auto;
     padding: 0;
@@ -86,10 +93,10 @@
     position: relative;
     z-index: 2;
 }
-.panel h1 .logo {
-    width: 240px;
-    height: 61px;
-    margin-top: 10px;
+.panel .banner .logo {
+    width: 180px;
+    height: 46px;
+    margin-top: 0;
     background-image: url(../images/pokebox-logo.png);
     background-repeat: no-repeat;
     background-position: center center;
@@ -99,18 +106,18 @@
     text-indent: -9999px;
     position: relative;
 }
-.panel h1 .subtext {
+.panel .banner .subtext {
     position: relative;
-    top: -4px;
     font-size: 12px;
     line-height: 16px;
     font-family: Verdana, sans-serif;
     color: #ffffff;
     text-shadow: 1px 1px 0 #4364b5;
-    padding-right: 12px;
-    display: inline-block;
+    display: block;
+    max-width: 178px;
+    overflow: visible;
 }
-.panel h1 .subtext .icon {
+.panel .banner .subtext .icon {
     position: absolute;
     right: -6px;
     top: -2px;
@@ -120,22 +127,43 @@
     transform: translate3d(0, 1px, 0);
     animation: SpriteBounce 0.9s steps(1) infinite;
 }
-.panel h1 .version {
+.panel .banner .version {
     position: absolute;
-    top: 12px;
-    right: 12px;
+    bottom: 9px;
+    left: 9px;
     font-size: 11px;
     line-height: 1;
     color: #cccccc;
     font-weight: normal;
     text-shadow: none;
 }
-.panel h1 .version .bp {
+.panel .banner .version .bp {
     display: none;
     color: magenta;
 }
 .panel .hidden {
     display: none !important;
+}
+.panel .banner .pokedex {
+    position: absolute;
+    bottom: 9px;
+    right: 9px;
+    font-size: 12px;
+    line-height: 1;
+    color: #cccccc;
+    font-weight: normal;
+    text-shadow: none;
+}
+.panel .banner .pokedex .icon,
+.panel .banner .pokedex .count {
+    display: inline-block;
+    vertical-align: middle;
+}
+.panel .banner .pokedex .icon {
+    margin-left: 3px;
+}
+.panel .banner .pokedex .count .current {
+    color: #ffffff;
 }
 
 
@@ -294,7 +322,7 @@
     background-size: cover;
     margin-bottom: 0;
     position: relative;
-    padding: 3px 0 5px;
+    padding: 6px 0 5px;
     min-height: 53px;
 }
 .panel .overview.main .details.pokemon:after {

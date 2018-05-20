@@ -7,7 +7,7 @@
     .panel .overview.types,
     .panel .overview.species {
         position: absolute;
-        top: 190px;
+        top: 154px;
         width: 250px;
         width: calc((100% - 500px) / 2);
         float: none;
@@ -385,7 +385,7 @@
     .bp3:after { content: "b";  }
     .panel .overview.types,
     .panel .overview.species {
-        top: 190px;
+        top: 154px;
         width: calc((100% - 728px) / 2);
     }
 }
