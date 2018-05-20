@@ -499,7 +499,7 @@
     -webkit-animation: SpriteBounce 0.6s steps(1) infinite;
     animation: SpriteBounce 0.6s steps(1) infinite;
 }
-body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
+body[data-speed="faster"] .panel .overview.main .details.pokemon .list .sprite {
     -webkit-animation-duration: 0.3s;
     animation-duration: 0.3s;
 }
@@ -1005,13 +1005,13 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.2);
 }
 .panel .buttons .new-pokemon,
-.panel .buttons .day-speed {
+.panel .buttons .controls {
     display: block;
     clear: both;
     text-align: center;
 }
 .panel .buttons .new-pokemon:after,
-.panel .buttons .day-speed:after {
+.panel .buttons .controls:after {
     content: "";
     display: block;
     clear: both;
@@ -1070,18 +1070,18 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     opacity: 0;
 }
 
-.panel .buttons .day-speed {
+.panel .buttons .controls {
     text-align: left;
     margin-bottom: 8px;
     padding: 0 5px;
 }
-.panel .buttons .day-speed:after {
+.panel .buttons .controls:after {
     content: "";
     display: block;
     clear: both;
     height: 0;
 }
-.panel .buttons .day-speed .option {
+.panel .buttons .controls .control {
     display: block;
     float: left;
     margin: 0 6px 3px 0;
@@ -1102,7 +1102,7 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     -webkit-border-radius: 6px;
     border-radius: 6px;
 }
-.panel .buttons .day-speed .option:before {
+.panel .buttons .controls .control:before {
     content: "";
     display: block;
     vertical-align: middle;
@@ -1118,34 +1118,34 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     height: 26px;
     background-position: 0 0;
 }
-.panel .buttons .day-speed .option:hover {
+.panel .buttons .controls .control:hover {
     background-color: #525256;
 }
-.panel .buttons .day-speed .option.active {
+.panel .buttons .controls .control.active {
     background-color: #757575;
 }
-.panel .buttons .day-speed .option.reset {
+.panel .buttons .controls .control.reset {
     background-color: #b73232;
     float: right;
     margin: 0;
 }
-.panel .buttons .day-speed .option.reset:hover {
+.panel .buttons .controls .control.reset:hover {
     background-color: #c03535;
 }
 
-.panel .buttons .day-speed .option.play:before {
+.panel .buttons .controls .control.play:before {
     background-image: url(../images/icons/controls/play.png);
 }
-.panel .buttons .day-speed .option.slow:before {
+.panel .buttons .controls .control.slow:before {
     background-image: url(../images/icons/controls/slow.png);
 }
-.panel .buttons .day-speed .option.fast:before {
+.panel .buttons .controls .control.fast:before {
     background-image: url(../images/icons/controls/fast.png);
 }
-.panel .buttons .day-speed .option.pause:before {
+.panel .buttons .controls .control.pause:before {
     background-image: url(../images/icons/controls/pause.png);
 }
-.panel .buttons .day-speed .option.reset:before {
+.panel .buttons .controls .control.reset:before {
     background-image: url(../images/icons/controls/reset.png);
 }
 

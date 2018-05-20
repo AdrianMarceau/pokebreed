@@ -191,27 +191,38 @@
         $pokePanelLoading.append('.'); // append loading dot
 
         // Define the click-event for the speed buttons
-        var $speedButtons = $('.day-speed .option[data-speed]', $panelButtons);
-        $speedButtons.bind('click', function(e){
+        var $controlButtons = $('.controls .control[data-control]', $panelButtons);
+        $controlButtons.bind('click', function(e){
             e.preventDefault();
-            var $option = $(this);
-            //var speedValue = parseInt($option.attr('data-speed'));
-            var speedValue = 0;
-            var speedToken = $option.attr('data-speed');
-            if (speedToken === 'normal'){ speedValue = 1200; }
-            else if (speedToken === 'slow'){ speedValue = 2400; }
-            else if (speedToken === 'fast'){ speedValue = 600; }
-            else if (speedToken === 'pause'){ speedValue = 99999999; }
-            if (speedValue === 0){ return false; }
-            else { $('body').attr('data-speed', speedToken); }
-            $speedButtons.removeClass('active');
-            $option.addClass('active');
-            if (speedToken === 'slow'
-                || speedToken === 'fast'){
-                $speedButtons.filter('[data-speed="normal"]').addClass('active');
+
+            // Collect the control and its token
+            var $button = $(this);
+            var control = $button.attr('data-control');
+
+            // If this is a play-speed related button
+            if (control.match(/^(play|pause|faster|slower)$/)){
+                var speedValue = 1200;
+                var speedToken = 'normal';
+                if (control === 'pause'){ speedValue = 99999999999; speedToken = 'pause'; }
+                else if (control === 'faster'){ speedValue = 600; speedToken = 'faster'; }
+                else if (control === 'slower'){ speedValue = 2400; speedToken = 'slower'; }
+                dayTimeoutDuration = speedValue;
+                $('body').attr('data-speed', speedToken);
+                $controlButtons.filter('.speed').removeClass('active');
+                $button.addClass('active');
+                if (control.match(/^(faster|slower)$/)){ $controlButtons.filter('.play').addClass('active'); }
+                if (dayTimeout !== false){
+                    var handler = dayTimeout.getHandler();
+                    dayTimeout.clear();
+                    dayTimeout = createDynamicTimeout(handler, speedValue);
+                    }
+                return;
+            }
+            // Otherwise if this is the reset button
+            else if (control === 'reset'){
+                resetSimulation();
+                return;
                 }
-            dayTimeoutDuration = speedValue;
-            if (dayTimeoutStarted){ updateDay(false); }
             });
 
         // Define the click-event for the info links
@@ -480,13 +491,17 @@
         $panelSpeciesOverview.removeClass('hidden');
 
         // Unhide the day speed controller, hide the pokemon buttons
-        $('.day-speed', $panelButtons).removeClass('hidden');
+        $('.controls', $panelButtons).removeClass('hidden');
         $('.new-pokemon', $panelButtons).addClass('hidden');
         $('.info.links .link.reset', $panelButtons).removeClass('hidden');
 
         // Update the box details header, unhide the details info bar
         $('.details.zone .title', $panelMainOverview).html('Box Details');
         $('.details.zone .list', $panelMainOverview).removeClass('hidden');
+
+        // Update the controls and make the play button show as active
+        $('.controls .control.speed', $panelButtons).removeClass('active');
+        $('.controls .control.speed.play', $panelButtons).addClass('active');
 
     }
 
@@ -510,14 +525,14 @@
             $panelSpeciesOverview.addClass('hidden');
 
             // Hide the day speed controller
-            $('.day-speed', $panelButtons).addClass('hidden');
+            $('.controls', $panelButtons).addClass('hidden');
             $('.info.links .link.reset', $panelButtons).addClass('hidden');
 
             // Clear and reset all the zone variables and history
             resetZoneData();
 
             // Reset the day timeout so we can start fresh
-            if (dayTimeout !== false){ clearTimeout(dayTimeout); }
+            if (dayTimeout !== false){ dayTimeout.clear(); }
             dayTimeout = false;
             dayTimeoutStarted = false;
             dayTimeoutDuration = 1200;
@@ -1663,7 +1678,7 @@
                 //console.log('|- thisZoneData.currentPokemon.length = ', thisZoneData.currentPokemon.length);
                 //console.log('|- thisZoneData.all = ', thisZoneData);
                 if (thisZoneData.currentPokemon.length > 0){
-                    dayTimeout = setTimeout(function(){ updateDay(); }, dayTimeoutDuration);
+                    dayTimeout = createDynamicTimeout(function(){ updateDay(); }, dayTimeoutDuration);
                     //$timer.animate({width:'100%'},dayTimeoutDuration,'linear',function(){ $(this).css({width:'0%'}); });
                     } else {
                     updateOverview();
@@ -3092,6 +3107,24 @@
         return (function(h){
             return new Array(7-h.length).join("0")+h
         })(bin.toString(16).toUpperCase())
+    }
+
+    // Define a function for creating timeouts that can be cancelled, triggerered early, etc.
+    function createDynamicTimeout(timeoutHandler, delay){
+        var timeoutId;
+        timeoutId = setTimeout(timeoutHandler, delay);
+        return {
+            clear: function(){
+                clearTimeout(timeoutId);
+                },
+            trigger: function(){
+                clearTimeout(timeoutId);
+                return timeoutHandler();
+                },
+            getHandler: function(){
+                return timeoutHandler;
+                }
+            };
     }
 
     // Polyfill for requestAnimationFrame if not exists
