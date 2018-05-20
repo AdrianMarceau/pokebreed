@@ -1130,7 +1130,7 @@
                 if (pokeInfo.eggCycles === 0){
 
                     //console.log('this '+pokeInfo.token+' has hatched, show it (cycles:'+pokeInfo.eggCycles+')');
-                    var pokeIcon =  '<span class="swrap">' + getPokemonIcon(pokeInfo.token, false, pokeInfo) + '</span>';
+                    var pokeIcon =  '<span class="swrap"><i>' + getPokemonIcon(pokeInfo.token, false, pokeInfo) + '</i></span>';
                     var pokeCount = '<span class="count growth">+'+pokeInfo.growthCycles+'</span>';
                     var itemClass = 'pokemon ';
                     if (pokeInfo.reachedAdulthood === true){ itemClass += 'adult '; }
@@ -1150,7 +1150,7 @@
                     } else if (pokeInfo.eggCycles > 0){
 
                     //console.log('this '+pokeInfo.token+' has not hatched, show it (cycles:'+pokeInfo.eggCycles+')');
-                    var pokeIcon =  '<span class="swrap">' + getPokemonIcon(pokeInfo.token, true, pokeInfo) + '</span>';
+                    var pokeIcon =  '<span class="swrap"><i>' + getPokemonIcon(pokeInfo.token, true, pokeInfo) + '</i></span>';
                     var pokeCount = '<span class="count egg">-'+pokeInfo.eggCycles+'</span>';
                     var itemClass = 'egg ';
                     //if (pokeInfo.watchFlag === true){ itemClass += 'watched '; }

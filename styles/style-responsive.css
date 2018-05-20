@@ -136,10 +136,11 @@
         margin-right: 0;
     }
     .panel .overview.main .details.pokemon .list.pokemon li .swrap {
-        position: relative;
-        display: inline-block;
-        top: -13px;
-        left: -13px;
+        left: -7px;
+    }
+    .panel .overview.main .details.pokemon .list.pokemon li .swrap i {
+        width: 80px;
+        height: 60px;
     }
     .panel .overview.main .details.pokemon .list .sprite {
         width: 80px;
@@ -199,10 +200,11 @@
         margin-right: 0;
     }
     .panel .overview.main .details.pokemon .list.pokemon li .swrap {
-        position: relative;
-        display: inline-block;
-        top: -13px;
-        left: -13px;
+        left: -7px;
+    }
+    .panel .overview.main .details.pokemon .list.pokemon li .swrap i {
+        width: 80px;
+        height: 60px;
     }
     .panel .overview.main .details.pokemon .list .sprite {
         width: 80px;
@@ -247,7 +249,8 @@
     }
     .panel .overview.types .wrap,
     .panel .overview.species .wrap {
-        max-height: 524px;
+        max-height: 374px;
+        max-height: calc(100vh - 276px);
     }
     .panel .overview.main .details.pokemon .list.slots li,
     .panel .overview.main .details.pokemon .list.pokemon li,
@@ -261,19 +264,18 @@
     .panel .overview.main .details.pokemon .list li:nth-child(10n) {
         margin-right: 0;
     }
-    .panel .overview.main .details.pokemon .list.pokemon li .swrap {
-        position: relative;
-        display: inline-block;
-        top: -13px;
-        left: -7px;
-    }
     .panel .overview.main.started .details.pokemon .list.slots li,
     .panel .overview.main.started .details.pokemon .list.pokemon li,
     .panel .overview.main.started .details.pokemon .list.slots li.slot:before {
         height: calc((100vh - 262px) / 10);
+        max-height: 64px;
     }
-    .panel .overview.main.started .details.pokemon .list.pokemon li .swrap {
-        top: -66%;
+    .panel .overview.main .details.pokemon .list.pokemon li .swrap {
+        left: -7px;
+    }
+    .panel .overview.main .details.pokemon .list.pokemon li .swrap i {
+        width: 80px;
+        height: 60px;
     }
     .panel .overview.main .details.pokemon .list .sprite {
         width: 80px;
@@ -305,6 +307,7 @@
     .panel .overview.types .wrap,
     .panel .overview.species .wrap {
         max-height: 532px;
+        max-height: calc(100vh - 348px);
     }
     .panel .overview.main .details.pokemon .list.slots li,
     .panel .overview.main .details.pokemon .list.pokemon li,
@@ -312,17 +315,17 @@
         width: 64px;
         height: 55px;
     }
-    .panel .overview.main .details.pokemon .list.pokemon li .swrap {
-        top: -7px;
-        left: -7px;
-    }
     .panel .overview.main.started .details.pokemon .list.slots li,
     .panel .overview.main.started .details.pokemon .list.pokemon li,
     .panel .overview.main.started .details.pokemon .list.slots li.slot:before {
         height: calc((100vh - 334px) / 10);
+        max-height: 64px;
     }
-    .panel .overview.main.started .details.pokemon .list.pokemon li .swrap {
-        top: -46%;
+    .panel .overview.main .details.pokemon .list.pokemon li .swrap {
+
+    }
+    .panel .overview.main .details.pokemon .list.pokemon li .swrap {
+
     }
 
 }
@@ -344,8 +347,7 @@
         height: 66px;
     }
     .panel .overview.main .details.pokemon .list.pokemon li .swrap {
-        top: -7px;
-        left: -7px;
+
     }
 
 }

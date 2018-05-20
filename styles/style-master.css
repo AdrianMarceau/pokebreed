@@ -514,6 +514,23 @@ body[data-speed="faster"] .panel .overview.main .details.pokemon .list .sprite {
     left: 0;
     z-index: 20;
 }
+.panel .overview.main .details.pokemon .list .swrap {
+    position: absolute;
+    display: block;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    overflow: visible;
+    text-align: center;
+}
+.panel .overview.main .details.pokemon .list .swrap i {
+    position: relative;
+    display: block;
+    width: 40px;
+    height: 30px;
+    left: 0;
+    margin: auto;
+}
 .panel .overview.main .details.pokemon .list .swrap + .count,
 .panel .overview.main .details.pokemon .list .sprite + .count {
     position: absolute;
