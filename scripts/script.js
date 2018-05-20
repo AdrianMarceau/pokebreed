@@ -484,9 +484,6 @@
         $('.details.zone .title', $panelMainOverview).html('Box Details');
         $('.details.zone .list', $panelMainOverview).removeClass('hidden');
 
-        // Autoscroll to the box details header
-        $panelMainOverview.find('.details.zone .title').trigger('click');
-
     }
 
     // Define a function for resetting the simulation
