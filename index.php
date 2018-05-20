@@ -76,11 +76,6 @@ if (isset($_GET['gen'])
 
                 <div class="details zone">
                     <strong class="title">&nbsp;</strong>
-                    <div class="timer">
-                        <div class="total">
-                            <div class="complete" style="width: 0%"></div>
-                        </div>
-                    </div>
                     <ul class="list hidden">
                         <li class="name"><strong>Biome</strong> <span class="data"></span></li>
                         <li class="day"><strong>Day</strong> <span class="data"></span></li>
@@ -139,10 +134,11 @@ if (isset($_GET['gen'])
             <div class="buttons">
                 <div class="day-speed hidden">
                     <strong>Change Day Speed</strong>
+                    <a class="option active" data-speed="normal">Normal</a>
                     <a class="option" data-speed="slow">Slow</a>
-                    <a class="option" data-speed="normal">Normal</a>
                     <a class="option" data-speed="fast">Fast</a>
                     <a class="option" data-speed="pause">Pause</a>
+                    <a class="option reset" onclick="javascript:PokeboxZoneFunctions.resetSimulation();">Reset</a>
                 </div>
                 <div class="new-pokemon">
                     <strong></strong>
@@ -152,8 +148,7 @@ if (isset($_GET['gen'])
                     <a class="link" data-tab="about">about</a>
                     <a class="link" data-tab="help">help</a>
                     <a class="link" data-tab="credits">credits</a>
-                    <a class="link chat" href="https://discord.gg/8jsSYt5" target="_blank">chat</a>
-                    <a class="link reset hidden" onclick="javascript:PokeboxZoneFunctions.resetSimulation();">reset</a>
+                    <a class="link chat" href="https://discord.gg/8jsSYt5" target="_blank"><span>chat</span></a>
                 </div>
                 <div class="info hidden" data-tab="about">
                     <? require('pages/about.php'); ?>

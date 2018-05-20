@@ -205,7 +205,6 @@
             dayTimeoutDuration = speedValue;
             if (dayTimeoutStarted){ updateDay(false); }
             });
-        $speedButtons.filter('[data-speed="normal"]').click();
 
         // Define the click-event for the info links
         var $linkButtons = $('.info.links .link[data-tab]', $panelButtons);
@@ -516,7 +515,7 @@
             if (dayTimeout !== false){ clearTimeout(dayTimeout); }
             dayTimeout = false;
             dayTimeoutStarted = false;
-            dayTimeoutDuration = 1000;
+            dayTimeoutDuration = 1200;
 
             // Show the pokemon buttons
             $('.new-pokemon', $panelButtons).removeClass('hidden');
@@ -1609,7 +1608,7 @@
     // Define a timeout function for incrementing the day counter
     var dayTimeout = false;
     var dayTimeoutStarted = false;
-    var dayTimeoutDuration = 1000;
+    var dayTimeoutDuration = 1200;
     function updateDay(updateCycles, allowVisitors){
         if (typeof updateCycles !== 'boolean'){ updateCycles = true; }
         if (typeof allowVisitors !== 'boolean'){ allowVisitors = updateCycles; }

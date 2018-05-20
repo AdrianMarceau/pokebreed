@@ -1068,12 +1068,17 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
 }
 
 .panel .buttons .day-speed {
-    text-align: center;
+    text-align: left;
     margin-bottom: 8px;
+    padding: 0 10px;
+}
+.panel .buttons .day-speed > strong {
+    text-align: left;
+    display: none;
 }
 .panel .buttons .day-speed .option {
     display: inline-block;
-    margin: 0 3px 3px;
+    margin: 0 6px 3px 0;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
@@ -1086,6 +1091,14 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
 }
 .panel .buttons .day-speed .option.active {
     background-color: #757575;
+}
+.panel .buttons .day-speed .option.reset {
+    background-color: #b73232;
+    float: right;
+    margin: 0;
+}
+.panel .buttons .day-speed .option.reset:hover {
+    background-color: #c03535;
 }
 
 .panel .buttons .info {
@@ -1151,7 +1164,7 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
 
 .panel .buttons .info.links {
     padding-bottom: 10px;
-    text-align: right;
+    text-align: left;
     border-top: 1px solid #37373a;
     border-color: rgba(0, 0, 0, 0.3);
     font-size: 12px;
@@ -1188,6 +1201,26 @@ body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
 }
 .panel .buttons .info[data-tab="credits"] {
 
+}
+
+.panel .buttons .info.links .link.chat {
+    float: right;
+}
+.panel .buttons .info.links .link.chat span {
+    vertical-align: middle;
+    line-height: 13px;
+}
+.panel .buttons .info.links .link.chat:after {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 13px;
+    background-image: url(../images/discord.png);
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    background-color: transparent;
+    margin-left: 4px;
+    vertical-align: middle;
 }
 
 .panel .buttons .fields {
