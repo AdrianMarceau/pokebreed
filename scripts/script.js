@@ -27,6 +27,8 @@
         width: 20,
         height: 5,
         size: 100,
+        sizeCols: 10,
+        sizeRows: 10,
         capacity: 100,
         diversity: 0,
         baseStats: {},
@@ -678,6 +680,78 @@
         return markup;
     }
 
+    // Define a function for generating Pokemon markup based on current info
+    function generatePokemonCellMarkup(pokeInfo, cellKey){
+
+        // Define a variable to hold the cell markup
+        var cellMarkup = '';
+
+        // Calculate the pokemon's position based on key
+        var colPercent = 100 / thisZoneData.sizeCols;
+        var cellPosition = convertKeyToTableCell(cellKey, thisZoneData.sizeCols);
+
+        // Generate the common item class and style for all cells (position)
+        var itemClass = pokeInfo.eggCycles === 0 ? 'pokemon' : 'egg ';
+        var itemStyle = '';
+        itemStyle += 'left: '+((cellPosition.col - 1) * colPercent)+'%; ';
+        itemStyle += 'top: '+((cellPosition.row - 1) * colPercent)+'%; ';
+
+        // Check if the pokemon is in its egg before drawing the sprite
+        if (pokeInfo.eggCycles === 0){
+
+            //console.log('this '+pokeInfo.token+' has hatched, show it (cycles:'+pokeInfo.eggCycles+')');
+            var pokeIcon =  '<span class="swrap"><i>' + getPokemonIcon(pokeInfo.token, false, pokeInfo) + '</i></span>';
+            var pokeCount = '<span class="count growth">+'+pokeInfo.growthCycles+'</span>';
+            if (pokeInfo.reachedAdulthood === true){ itemClass += 'adult '; }
+            if (pokeInfo.reachedAdulthood === true && pokeInfo.growthCycles <= 0){ itemClass += 'fainted '; }
+            var extraMarkup = '';
+            if (pokeInfo.watchFlag === true){ extraMarkup += '<span class="watched"></span> '; }
+            if (pokeInfo.isVisitor === true){ extraMarkup += '<span class="visitor"></span> '; }
+            if (pokeInfo.isVisitor === true && pokeInfo.daysOld == 0){ itemClass += 'new '; }
+            cellMarkup += '<li ' +
+                'class="'+ itemClass +'" ' +
+                'style="'+itemStyle+'" ' +
+                'data-id="'+ pokeInfo.id +'" ' +
+                'data-key="'+cellKey+'" ' +
+                //'data-position="col:'+pokePosition.col+',row:'+pokePosition.row+'"' +
+                '>' +
+                    '<div>'+
+                        pokeIcon +
+                        pokeCount +
+                        extraMarkup +
+                    '</div>' +
+                '</li>';
+
+            } else if (pokeInfo.eggCycles > 0){
+
+            //console.log('this '+pokeInfo.token+' has not hatched, show it (cycles:'+pokeInfo.eggCycles+')');
+            var pokeIcon =  '<span class="swrap"><i>' + getPokemonIcon(pokeInfo.token, true, pokeInfo) + '</i></span>';
+            var pokeCount = '<span class="count egg">-'+pokeInfo.eggCycles+'</span>';
+            var extraMarkup = '';
+            if (pokeInfo.watchFlag === true){ extraMarkup += '<span class="watched"></span> '; }
+            if (pokeInfo.isVisitor === true){ extraMarkup += '<span class="visitor"></span> '; }
+            if (pokeInfo.daysOld == 0){ itemClass += 'new '; }
+            cellMarkup += '<li ' +
+                'class="'+ itemClass +'" ' +
+                'style="'+itemStyle+'" ' +
+                'data-id="'+ pokeInfo.id +'" ' +
+                'data-key="'+cellKey+'" ' +
+                //'data-position="col:'+pokePosition.col+',row:'+pokePosition.row+'"' +
+                '>' +
+                    '<div>'+
+                        pokeIcon +
+                        pokeCount +
+                        extraMarkup +
+                    '</div>' +
+                '</li>';
+
+            }
+
+        // Return generated cell markup
+        return cellMarkup;
+
+    }
+
     // Define a function for generating the simulator buttons for each Pokemon
     function generatePokemonButtons(){
 
@@ -1117,23 +1191,23 @@
         //var zoneMaxWidth = (thisZoneData.capacity / 10) * (40 + 5);
         //$pokeWrap.css({width:zoneMaxWidth+'px'});
 
+
         // -- POKEMON CANVAS SPRITES
 
         // Loop through and show all pokemon sprites on the field, with eggs last
         var pokeListMarkup = '';
         var cellKey = -1;
-        var maxColumns = 10;
-        var colPercent = 100 / maxColumns;
-        var maxRows = 10;
         for (var key = 0; key < sortedSpeciesTokens.length; key++){
             var token = sortedSpeciesTokens[key];
             var pokeList = getZonePokemonByToken(token);
             //console.log('pokeList = ', pokeList);
             for (var key2 = 0; key2 < pokeList.length; key2++){
                 cellKey++;
-
-                // Collect this pokemons info from the list
                 var pokeInfo = pokeList[key2];
+                //console.log('pokeInfo = ', pokeInfo);
+                pokeListMarkup += generatePokemonCellMarkup(pokeInfo, cellKey);
+
+                /*
 
                 // Calculate the pokemon's position based on key
                 var pokePosition = convertKeyToTableCell(cellKey, maxColumns);
@@ -1196,7 +1270,10 @@
 
                     }
 
+                */
+
                 }
+
             }
 
         // Empty current list and append new markup
