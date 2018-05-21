@@ -487,6 +487,7 @@
         letter-spacing: 12px;
         overflow: hidden;
         text-overflow: unset;
+        display: none;
     }
 }
 @media (min-width: 1366px) and (min-height: 647px){

@@ -56,6 +56,7 @@
     var $panelTypesOverview = false;
     var $panelSpeciesOverview = false;
     var $panelOverviewFloatLists = false;
+    var $panelPokemonSpriteWrapper = false;
     var $panelButtons = false;
 
     var $pokePanelButtons = false;
@@ -113,6 +114,7 @@
         $panelTypesOverview = $('.panel .overview.types');
         $panelSpeciesOverview = $('.panel .overview.species');
         $panelOverviewFloatLists = $('.panel .overview.floatlist');
+        $panelPokemonSpriteWrapper = $('.details.pokemon .list.pokemon', $panelMainOverview);
         $panelButtons = $('.panel > .buttons');
         $pokePanelButtons = $panelButtons.find('.new-pokemon');
         $pokePanelLoading = $pokePanelButtons.find('.loading');
@@ -654,30 +656,46 @@
     }
 
     // Define a function for generating a pokemon's icon image markup
-    function getPokemonIcon(token, egg, info){
+    function getPokemonIcon(token, egg, info, returnProps){
         if (typeof egg !== 'boolean'){ egg = false; }
         if (typeof info === 'undefined'){ info = {}; }
+        if (typeof returnProps !== 'boolean'){ returnProps = false; }
+
         var indexInfo = PokemonSpeciesIndex[token];
-        var image = '';
+        var iconImage = 'images/icons/';
+        var iconClass = 'sprite ';
+        var iconStyle = '';
+
         var filter = '';
-        var markup = '';
         if (typeof info.variantHueOffset !== 'undefined'){ filter += 'hue-rotate('+ info.variantHueOffset +'deg) '; }
         if (typeof info.variantSatOffset !== 'undefined'){ filter += 'saturate('+ info.variantSatOffset +'%) '; }
+        var iconStyle = filter.length ? ' style="-webkit-filter: '+ filter +'; filter: '+ filter +';"' : '';
+
+        var markup = '';
+
         if (egg){
-            image = 'images/icons/eggs/'+indexInfo['types'][0]+'.png';
-            markup += '<img class="sprite"'+ (filter.length ? ' style="-webkit-filter: '+ filter +'; filter: '+ filter +';"' : '') +' src="'+ image +'" data-token="'+ token +'" />';
+
+            iconImage += 'eggs/'+indexInfo['types'][0]+'.png';
+            markup += '<img class="'+ iconClass +'"'+ iconStyle +' src="'+ iconImage +'" data-token="'+ token +'" />';
             if (typeof indexInfo['types'][1] === 'string'){
-                image = 'images/icons/eggs/'+indexInfo['types'][1]+'2.png';
-                markup += '<img class="sprite overlay"'+ (filter.length ? ' style="-webkit-filter: '+ filter +'; filter: '+ filter +';"' : '') +' src="'+ image +'" data-token="'+ token +'" />';
+                iconImage = 'images/icons/eggs/'+indexInfo['types'][1]+'2.png';
+                markup += '<img class="'+ iconClass +' overlay"'+ iconStyle +' src="'+ iconImage +'" data-token="'+ token +'" />';
                 }
+
             } else {
-            image = 'images/icons/pokemon/';
-            if (typeof info['formToken'] !== 'undefined'){ image += indexInfo['number']+'-'+info['formToken']+'.png'; }
-            else if (typeof indexInfo['formToken'] !== 'undefined'){ image += indexInfo['number']+'-'+indexInfo['formToken']+'.png'; }
-            else { image += indexInfo['number']+'.png'; }
-            markup += '<img class="sprite"'+ (filter.length ? ' style="-webkit-filter: '+ filter +'; filter: '+ filter +';"' : '') +' src="'+ image +'" data-token="'+ token +'" />';
+
+            iconImage += 'pokemon/';
+            if (typeof info['formToken'] !== 'undefined'){ iconImage += indexInfo['number']+'-'+info['formToken']+'.png'; }
+            else if (typeof indexInfo['formToken'] !== 'undefined'){ iconImage += indexInfo['number']+'-'+indexInfo['formToken']+'.png'; }
+            else { iconImage += indexInfo['number']+'.png'; }
+            markup += '<img class="'+ iconClass +'"'+ iconStyle +' src="'+ iconImage +'" data-token="'+ token +'" />';
+
             }
-        return markup;
+
+        // Return either props or markup for the pokemon
+        if (returnProps){ return {image: iconImage, class: iconClass, style: iconStyle}; }
+        else { return markup; }
+
     }
 
     // Define a function for generating Pokemon markup based on current info
@@ -713,6 +731,7 @@
                 'style="'+itemStyle+'" ' +
                 'data-id="'+ pokeInfo.id +'" ' +
                 'data-key="'+cellKey+'" ' +
+                'data-order="'+pokeInfo.order+'" ' +
                 //'data-position="col:'+pokePosition.col+',row:'+pokePosition.row+'"' +
                 '>' +
                     '<div>'+
@@ -736,6 +755,7 @@
                 'style="'+itemStyle+'" ' +
                 'data-id="'+ pokeInfo.id +'" ' +
                 'data-key="'+cellKey+'" ' +
+                'data-order="'+pokeInfo.order+'" ' +
                 //'data-position="col:'+pokePosition.col+',row:'+pokePosition.row+'"' +
                 '>' +
                     '<div>'+
@@ -1000,8 +1020,15 @@
             newPokemon.formToken = randomForm;
             }
 
-        // Push the new pokemon to the list and update the overview
+        // Push the new pokemon to the list and collect its key
+        var newKey = thisZoneData.currentPokemon.length;
         thisZoneData.currentPokemon.push(newPokemon);
+
+        // Add this pokemon's cell markup to the container div
+        var cellMarkup = generatePokemonCellMarkup(newPokemon, newKey);
+        $panelPokemonSpriteWrapper.append(cellMarkup);
+
+        // Update the overview with changes
         updateOverview();
 
         // Push an event to Google Analytics
@@ -1034,6 +1061,7 @@
 
     // Define a function for getting an array of zone pokemon matching a filter
     function getZonePokemonByFilter(filterParams, matchMode){
+
         //console.log('getZonePokemonByFilter(filterParams, matchMode):before', filterParams, matchMode);
         if (typeof filterParams !== 'object'){ return false; }
         else if (jQuery.isEmptyObject(filterParams)){ return false; }
@@ -1076,9 +1104,14 @@
             else if (eggA && !eggB){ return 1; }
             else if (orderA < orderB){ return -1; }
             else if (orderA > orderB){ return 1; }
+            else if (pokeA.order < pokeB.order){ return -1; }
+            else if (pokeA.order > pokeB.order){ return 1; }
             else { return 0; }
             });
+
+        // Return collected and sorted matches
         return pokemonMatches;
+
     }
 
     // Define functions for getting a pokemon by ID, token, type, and more
@@ -1166,7 +1199,6 @@
         $('.zone .day .data', $panelMainOverview).text(thisZoneData.day);
         $('.zone .diversity .data', $panelMainOverview).text(' Active: '+totalSpeciesCurrent+' | Overall: '+totalSpeciesSeen+'');
 
-
         // Loop though and count population by types & species
         var pokeSpecies = {};
         if (thisZoneData.currentPokemon.length){
@@ -1179,11 +1211,6 @@
             }
         //console.log('pokeSpecies(All) = ', pokeSpeciesActive);
 
-        // Sort collected species tokens to keep things together
-        var sortedSpeciesTokens = sortSpeciesTokensByOrder(Object.keys(pokeSpecies));
-        //if (simulationStarted){ var sortedSpeciesTokens = sortSpeciesTokensByOrder(Object.keys(pokeSpecies), true); }
-        //else { var sortedSpeciesTokens = Object.keys(pokeSpecies); }
-
         // Loop through each species and update the pokemon list
         var $pokeDetails = $('.details.pokemon', $panelMainOverview);
         var $pokeWrap = $('.wrap', $pokeDetails);
@@ -1191,94 +1218,125 @@
         //var zoneMaxWidth = (thisZoneData.capacity / 10) * (40 + 5);
         //$pokeWrap.css({width:zoneMaxWidth+'px'});
 
+        // Define a function for updating a pokemon's cell
+        function updatePokemonCell(pokeInfo, cellKey){
+
+            // Check if this pokemon is still in its egg
+            var isEgg = pokeInfo.eggCycles > 0 ? true : false;
+
+            // Collect a reference to this pokemon's cell
+            var $pokeCell = $('li[data-id="'+pokeInfo.id+'"]', $panelPokemonSpriteWrapper);
+
+            // Change the sprite class based on egg or not
+            var justHatched = false;
+            if (!isEgg && $pokeCell.hasClass('egg')){ justHatched = true; $pokeCell.removeClass('egg').addClass('pokemon'); }
+            else if (isEgg && !$pokeCell.hasClass('egg')){ $pokeCell.removeClass('pokemon').addClass('egg'); }
+
+            // Update the position of this pokemon based on cell key
+            var colPercent = 100 / thisZoneData.sizeCols;
+            var cellPosition = convertKeyToTableCell(cellKey, thisZoneData.sizeCols);
+            var cellTop = ((cellPosition.row - 1) * colPercent)+'%';
+            var cellLeft = ((cellPosition.col - 1) * colPercent)+'%';
+            $pokeCell.attr('data-key', cellKey);
+            $pokeCell.css({zIndex: cellKey, top: cellTop, left: cellLeft});
+
+            // Collect image data for this pokemon's icon sprite
+            var $spriteImage = $pokeCell.find('.sprite:not(.overlay)').first();
+            var spriteData = getPokemonIcon(pokeInfo.token, isEgg, pokeInfo, true);
+
+            // Check if this pokemon has just evolved or changed forms
+            var imageChanged = false;
+            var currentImage = $spriteImage.attr('src');
+            if (currentImage !== spriteData.image){ imageChanged = true; }
+
+            // If this Pokemon has just hatched, remove overlay and replace sprite
+            if (justHatched){ $pokeCell.find('.sprite.overlay').remove(); }
+
+            // If this pokemon's current image doesn't match what it should be, change it now
+            if (!isEgg && imageChanged){
+
+                var $prevImage = $spriteImage.clone();
+                $prevImage.css({opacity:1});
+                $prevImage.addClass('overlay');
+                $prevImage.insertAfter($spriteImage);
+
+                $spriteImage.css({opacity:0});
+                $spriteImage.removeClass('overlay');
+                $spriteImage.attr('src', spriteData.image);
+                $spriteImage.attr('data-token', pokeInfo.token);
+
+                $prevImage.stop().animate({opacity: 0}, {
+                    duration: 500,
+                    easing: 'linear',
+                    queue: false,
+                    complete: function(){
+                        $pokeCell.find('.sprite.overlay').remove();
+                        }
+                    });
+                $spriteImage.stop().animate({opacity:1}, {
+                    duration: 500,
+                    easing: 'linear',
+                    queue: false
+                    });
+
+                }
+
+            // If this is a HATCHED and growing pokemon, display normal sprite
+            if (!isEgg){
+
+                // Update the growth cycle for this pokemon
+                $pokeCell.find('.count').html('+' + pokeInfo.growthCycles);
+
+                // Add the adult class to this cell if applicable and not already there
+                if (pokeInfo.reachedAdulthood === true
+                    && !$pokeCell.hasClass('adult')){
+                    $pokeCell.addClass('adult');
+                    }
+
+                // Add the fainted class to this cell if applicable and not already there
+                if (pokeInfo.reachedAdulthood === true
+                    && pokeInfo.growthCycles <= 0
+                    && !$pokeCell.hasClass('fainted')){
+                    $pokeCell.addClass('fainted');
+                    }
+
+                }
+            // Else if this is still an EGG and the pokemon is not ready
+            else {
+
+                // Update the egg cycle for this pokemon
+                $pokeCell.find('.count').html('-' + pokeInfo.eggCycles);
+
+                }
+
+        }
+
 
         // -- POKEMON CANVAS SPRITES
 
+        // Sort collected species tokens to keep things together
+        var sortedSpeciesTokens = sortSpeciesTokensByOrder(Object.keys(pokeSpecies));
+        //if (simulationStarted){ var sortedSpeciesTokens = sortSpeciesTokensByOrder(Object.keys(pokeSpecies), true); }
+        //else { var sortedSpeciesTokens = Object.keys(pokeSpecies); }
+
         // Loop through and show all pokemon sprites on the field, with eggs last
-        var pokeListMarkup = '';
         var cellKey = -1;
         for (var key = 0; key < sortedSpeciesTokens.length; key++){
             var token = sortedSpeciesTokens[key];
             var pokeList = getZonePokemonByToken(token);
+            //console.log('------\n key/token', key, token);
             //console.log('pokeList = ', pokeList);
             for (var key2 = 0; key2 < pokeList.length; key2++){
                 cellKey++;
                 var pokeInfo = pokeList[key2];
-                //console.log('pokeInfo = ', pokeInfo);
-                pokeListMarkup += generatePokemonCellMarkup(pokeInfo, cellKey);
-
-                /*
-
-                // Calculate the pokemon's position based on key
-                var pokePosition = convertKeyToTableCell(cellKey, maxColumns);
-
-                // Generate the common item class and style for all cells (position)
-                var itemClass = pokeInfo.eggCycles === 0 ? 'pokemon' : 'egg ';
-                var itemStyle = '';
-                //itemStyle += 'position: absolute; ';
-                itemStyle += 'left: '+((pokePosition.col - 1) * colPercent)+'%; ';
-                itemStyle += 'top: '+((pokePosition.row - 1) * colPercent)+'%; ';
-
-                // Check if the pokemon is in its egg before drawing the sprite
-                if (pokeInfo.eggCycles === 0){
-
-                    //console.log('this '+pokeInfo.token+' has hatched, show it (cycles:'+pokeInfo.eggCycles+')');
-                    var pokeIcon =  '<span class="swrap"><i>' + getPokemonIcon(pokeInfo.token, false, pokeInfo) + '</i></span>';
-                    var pokeCount = '<span class="count growth">+'+pokeInfo.growthCycles+'</span>';
-                    if (pokeInfo.reachedAdulthood === true){ itemClass += 'adult '; }
-                    if (pokeInfo.reachedAdulthood === true && pokeInfo.growthCycles <= 0){ itemClass += 'fainted '; }
-                    var extraMarkup = '';
-                    if (pokeInfo.watchFlag === true){ extraMarkup += '<span class="watched"></span> '; }
-                    if (pokeInfo.isVisitor === true){ extraMarkup += '<span class="visitor"></span> '; }
-                    if (pokeInfo.isVisitor === true && pokeInfo.daysOld == 0){ itemClass += 'new '; }
-                    pokeListMarkup += '<li ' +
-                        'class="'+ itemClass +'" ' +
-                        'style="'+itemStyle+'" ' +
-                        'data-id="'+ pokeInfo.id +'" ' +
-                        'data-key="'+cellKey+'" ' +
-                        //'data-position="col:'+pokePosition.col+',row:'+pokePosition.row+'"' +
-                        '>' +
-                            '<div>'+
-                                pokeIcon +
-                                pokeCount +
-                                extraMarkup +
-                            '</div>' +
-                        '</li>';
-
-                    } else if (pokeInfo.eggCycles > 0){
-
-                    //console.log('this '+pokeInfo.token+' has not hatched, show it (cycles:'+pokeInfo.eggCycles+')');
-                    var pokeIcon =  '<span class="swrap"><i>' + getPokemonIcon(pokeInfo.token, true, pokeInfo) + '</i></span>';
-                    var pokeCount = '<span class="count egg">-'+pokeInfo.eggCycles+'</span>';
-                    var extraMarkup = '';
-                    if (pokeInfo.watchFlag === true){ extraMarkup += '<span class="watched"></span> '; }
-                    if (pokeInfo.isVisitor === true){ extraMarkup += '<span class="visitor"></span> '; }
-                    if (pokeInfo.daysOld == 0){ itemClass += 'new '; }
-                    pokeListMarkup += '<li ' +
-                        'class="'+ itemClass +'" ' +
-                        'style="'+itemStyle+'" ' +
-                        'data-id="'+ pokeInfo.id +'" ' +
-                        'data-key="'+cellKey+'" ' +
-                        //'data-position="col:'+pokePosition.col+',row:'+pokePosition.row+'"' +
-                        '>' +
-                            '<div>'+
-                                pokeIcon +
-                                pokeCount +
-                                extraMarkup +
-                            '</div>' +
-                        '</li>';
-
-                    }
-
-                */
-
+                updatePokemonCell(pokeInfo, cellKey);
+                if (pokeInfo.reachedAdulthood === true && pokeInfo.growthCycles <= 0){ cellKey--; }
                 }
-
             }
 
         // Empty current list and append new markup
-        $pokeList.empty();
-        $pokeList.append(pokeListMarkup);
+        //$pokeList.empty();
+        //$pokeList.append(pokeListMarkup);
 
         // -- TYPE APPEAL LIST
 
@@ -1505,7 +1563,14 @@
             if (pokeInfo.id === id){
                 // Move this pokemon's data to the fainted array and remove from display
                 thisZoneData.faintedPokemon.push(thisZoneData.currentPokemon.splice(key, 1));
-                $pokeItem.remove();
+                $pokeItem.css({opacity:1}).stop().animate({opacity:0},{
+                    duration: 600,
+                    easing: 'linear',
+                    queue: false,
+                    complete: function(){
+                        $(this).remove();
+                        }
+                    });
                 // Create an entry for this species in the global count if not exists
                 var faintedPokemonSpecies = thisZoneData.faintedPokemonSpecies;
                 if (typeof faintedPokemonSpecies[pokeInfo.token] === 'undefined'){ faintedPokemonSpecies[pokeInfo.token] = 0; }
@@ -1554,7 +1619,15 @@
             }
         // Otherwise, clicking simply places a "watched" indicator on the pokemon
         else {
+
+            // Update the watched flag for the pokemon in question
             pokeInfo.watchFlag = pokeInfo.watchFlag !== true ? true : false;
+
+            // Add or remove the watched span from the sprite cell
+            var hasWatched = $li.find('.watched').length;
+            if (pokeInfo.watchFlag && !hasWatched){ $li.find('> div').append('<span class="watched"></span>'); }
+            else if (!pokeInfo.watchFlag && hasWatched){ $li.find('.watched').remove(); }
+
             }
 
         // Update the overview with changes
