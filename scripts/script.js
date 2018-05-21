@@ -160,7 +160,6 @@
         $('.pokedex .count .total', $panelBanner).html(PokemonSpeciesIndexTokens.length);
 
         // Update the title bar to show the next action (Select Pokemon)
-        //$('.details.zone .title', $panelMainOverview).html('Select '+ pokemonRequiredToStart +' Starter Pokémon');
         $('.details.zone .title', $panelMainOverview).html('Select Starter Pokémon');
 
         // Reset zone data to default parameters
@@ -540,12 +539,15 @@
             // Show the pokemon buttons
             $('.new-pokemon', $panelButtons).removeClass('hidden');
 
-            // Clear the box details header, hide the details info bar
+            // Hide the details info bar
             $('.details.zone .title', $panelMainOverview).html('&nbsp;');
             $('.details.zone .list', $panelMainOverview).addClass('hidden');
 
             // Autoscroll to the box details header
-            $panelMainOverview.find('.details.zone .title').trigger('click');updateOverview();
+            $panelMainOverview.find('.details.zone .title').trigger('click');
+
+            // Update the header to indicate the next action (Select Pokemon)
+            $('.details.zone .title', $panelMainOverview).html('Select Starter Pokémon');
 
             // Update the overiew with cleared data
             updateOverview();
@@ -1119,12 +1121,29 @@
 
         // Loop through and show all pokemon sprites on the field, with eggs last
         var pokeListMarkup = '';
+        var cellKey = -1;
+        var maxColumns = 10;
+        var colPercent = 100 / maxColumns;
+        var maxRows = 10;
         for (var key = 0; key < sortedSpeciesTokens.length; key++){
             var token = sortedSpeciesTokens[key];
             var pokeList = getZonePokemonByToken(token);
             //console.log('pokeList = ', pokeList);
             for (var key2 = 0; key2 < pokeList.length; key2++){
+                cellKey++;
+
+                // Collect this pokemons info from the list
                 var pokeInfo = pokeList[key2];
+
+                // Calculate the pokemon's position based on key
+                var pokePosition = convertKeyToTableCell(cellKey, maxColumns);
+
+                // Generate the common item class and style for all cells (position)
+                var itemClass = pokeInfo.eggCycles === 0 ? 'pokemon' : 'egg ';
+                var itemStyle = '';
+                //itemStyle += 'position: absolute; ';
+                itemStyle += 'left: '+((pokePosition.col - 1) * colPercent)+'%; ';
+                itemStyle += 'top: '+((pokePosition.row - 1) * colPercent)+'%; ';
 
                 // Check if the pokemon is in its egg before drawing the sprite
                 if (pokeInfo.eggCycles === 0){
@@ -1132,19 +1151,24 @@
                     //console.log('this '+pokeInfo.token+' has hatched, show it (cycles:'+pokeInfo.eggCycles+')');
                     var pokeIcon =  '<span class="swrap"><i>' + getPokemonIcon(pokeInfo.token, false, pokeInfo) + '</i></span>';
                     var pokeCount = '<span class="count growth">+'+pokeInfo.growthCycles+'</span>';
-                    var itemClass = 'pokemon ';
                     if (pokeInfo.reachedAdulthood === true){ itemClass += 'adult '; }
                     if (pokeInfo.reachedAdulthood === true && pokeInfo.growthCycles <= 0){ itemClass += 'fainted '; }
-                    //if (pokeInfo.watchFlag === true){ itemClass += 'watched '; }
-                    //if (pokeInfo.isVisitor === true){ itemClass += 'visitor '; }
                     var extraMarkup = '';
                     if (pokeInfo.watchFlag === true){ extraMarkup += '<span class="watched"></span> '; }
                     if (pokeInfo.isVisitor === true){ extraMarkup += '<span class="visitor"></span> '; }
                     if (pokeInfo.isVisitor === true && pokeInfo.daysOld == 0){ itemClass += 'new '; }
-                    pokeListMarkup += '<li class="'+ itemClass +'" data-id="'+ pokeInfo.id +'">'+
-                            pokeIcon +
-                            pokeCount +
-                            extraMarkup +
+                    pokeListMarkup += '<li ' +
+                        'class="'+ itemClass +'" ' +
+                        'style="'+itemStyle+'" ' +
+                        'data-id="'+ pokeInfo.id +'" ' +
+                        'data-key="'+cellKey+'" ' +
+                        //'data-position="col:'+pokePosition.col+',row:'+pokePosition.row+'"' +
+                        '>' +
+                            '<div>'+
+                                pokeIcon +
+                                pokeCount +
+                                extraMarkup +
+                            '</div>' +
                         '</li>';
 
                     } else if (pokeInfo.eggCycles > 0){
@@ -1152,17 +1176,22 @@
                     //console.log('this '+pokeInfo.token+' has not hatched, show it (cycles:'+pokeInfo.eggCycles+')');
                     var pokeIcon =  '<span class="swrap"><i>' + getPokemonIcon(pokeInfo.token, true, pokeInfo) + '</i></span>';
                     var pokeCount = '<span class="count egg">-'+pokeInfo.eggCycles+'</span>';
-                    var itemClass = 'egg ';
-                    //if (pokeInfo.watchFlag === true){ itemClass += 'watched '; }
-                    //if (pokeInfo.isVisitor === true){ itemClass += 'visitor '; }
                     var extraMarkup = '';
                     if (pokeInfo.watchFlag === true){ extraMarkup += '<span class="watched"></span> '; }
                     if (pokeInfo.isVisitor === true){ extraMarkup += '<span class="visitor"></span> '; }
                     if (pokeInfo.daysOld == 0){ itemClass += 'new '; }
-                    pokeListMarkup += '<li class="'+ itemClass +'" data-id="'+ pokeInfo.id +'">'+
-                            pokeIcon +
-                            pokeCount +
-                            extraMarkup +
+                    pokeListMarkup += '<li ' +
+                        'class="'+ itemClass +'" ' +
+                        'style="'+itemStyle+'" ' +
+                        'data-id="'+ pokeInfo.id +'" ' +
+                        'data-key="'+cellKey+'" ' +
+                        //'data-position="col:'+pokePosition.col+',row:'+pokePosition.row+'"' +
+                        '>' +
+                            '<div>'+
+                                pokeIcon +
+                                pokeCount +
+                                extraMarkup +
+                            '</div>' +
                         '</li>';
 
                     }
@@ -3125,6 +3154,15 @@
                 return timeoutHandler;
                 }
             };
+    }
+
+    // Define function for calculating table cell co-ordinates (col, row) given a key
+    function convertKeyToTableCell(cellKey, totalCols){
+        var cellNum = cellKey + 1;
+        var colNum = cellNum % totalCols;
+        if (colNum === 0){ colNum = totalCols; }
+        var rowNum = cellNum > totalCols ? Math.ceil(cellNum / totalCols) : 1;
+        return {col: colNum, row: rowNum};
     }
 
     // Polyfill for requestAnimationFrame if not exists
