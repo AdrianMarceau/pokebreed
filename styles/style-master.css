@@ -141,6 +141,11 @@
     display: none;
     color: magenta;
 }
+.panel .banner .version .bp:before,
+.panel .banner .version .bp:after {
+    display: inline-block;
+    padding: 0 2px;
+}
 .panel .hidden {
     display: none !important;
 }
@@ -423,6 +428,7 @@
 }
 .panel .overview.main .details.pokemon .list.pokemon li {
     position: absolute;
+    transition: top 0.2s, left 0.2s;
 }
 .panel .overview.main .details.pokemon .list.pokemon li > div {
     position: relative;

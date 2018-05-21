@@ -2,7 +2,7 @@
 /* -- RESPONSIVE STYLES -- */
 
 @media (min-width: 1024px){
-    .bp1:before { content: "a";  }
+    .bp1:before { content: "a1";  }
 
     .panel .overview.types,
     .panel .overview.species {
@@ -25,7 +25,7 @@
 }
 
 @media (max-width: 1950px){
-    .bp1:before { content: "b";  }
+    .bp1:before { content: "a2";  }
 
     body { padding: 10px 10px 10px; }
     .panel { margin: 0 auto; }
@@ -36,7 +36,7 @@
 
 }
 @media (max-width: 1650px){
-    .bp1:before { content: "b";  }
+    .bp1:before { content: "a3";  }
 
     body { padding: 10px 10px 10px; }
     .panel { margin: 0 auto; }
@@ -47,7 +47,7 @@
 
 }
 @media (max-width: 1366px){
-    .bp1:before { content: "b";  }
+    .bp1:before { content: "a4";  }
 
     body { padding: 10px 10px 10px; }
     .panel { margin: 0 auto; }
@@ -58,7 +58,7 @@
 
 }
 @media (max-width: 1024px){
-    .bp1:before { content: "c";  }
+    .bp1:before { content: "a5";  }
 
     .panel .buttons button {
         width: calc((100% / 10) - 10px);
@@ -66,7 +66,7 @@
 
 }
 @media (max-width: 800px){
-    .bp1:before { content: "d";  }
+    .bp1:before { content: "a6";  }
 
     .panel .buttons .info > div {
         padding-left: 0;
@@ -75,7 +75,7 @@
 
 }
 @media (max-width: 768px){
-    .bp1:before { content: "e";  }
+    .bp1:before { content: "a7";  }
 
     .panel .overview.main {
         padding-left: 6px;
@@ -88,7 +88,7 @@
 
 }
 @media (max-width: 650px){
-    .bp1:before { content: "f";  }
+    .bp1:before { content: "a8";  }
 
     .panel .buttons .info:not(.links) {
         position: relative;
@@ -112,7 +112,7 @@
 /* -- SUPER ZOOM STYLES -- */
 
 @media (min-width: 647px) and (max-width: 768px) and (min-height: 647px){
-    .bp2:before { content: "1";  }
+    .bp2:before { content: "b1";  }
 
     .panel .overview.main .details.pokemon .wrap {
         width: 576px;
@@ -164,7 +164,7 @@
 }
 
 @media (min-width: 768px) and (max-width: 1365px) and (min-height: 647px){
-    .bp2:before { content: "2";  }
+    .bp2:before { content: "b2";  }
 
     .panel .overview.main .details.pokemon .list.pokemon li .watched {
         width: 6px;
@@ -227,8 +227,78 @@
 
 }
 
+@media (min-width: 1125px) and (max-width: 1365px) and (min-height: 647px){
+    .bp2:before { content: "b3";  }
+
+    .panel .overview.main .details.pokemon .list.pokemon li .watched {
+        width: 6px;
+        height: 6px;
+    }
+    .panel .overview.main .details.pokemon .list.pokemon li .visitor {
+        width: 6px;
+        height: 6px;
+    }
+    .panel .overview.main .details.pokemon .list.pokemon li .watched + .visitor,
+    .panel .overview.main .details.pokemon .list.pokemon li .visitor + .watched {
+        top: 12px;
+    }
+
+    .panel .overview.main .details.pokemon .wrap {
+        width: 676px;
+        max-height: 576px;
+    }
+    .panel .overview.types .wrap,
+    .panel .overview.species .wrap {
+        max-height: 374px;
+        max-height: calc(100vh - 276px);
+    }
+    .panel .overview.main .details.pokemon .list.slots li,
+    .panel .overview.main .details.pokemon .list.pokemon li,
+    .panel .overview.main .details.pokemon .list.slots li.slot:before {
+        margin-right: 4px;
+        margin-bottom: 4px;
+        width: 64px;
+        height: 54px;
+    }
+    .panel .overview.main .details.slots .list li:nth-child(10n),
+    .panel .overview.main .details.pokemon .list li:nth-child(10n) {
+        margin-right: 0;
+    }
+    .panel .overview.main.started .details.pokemon .list.slots li,
+    .panel .overview.main.started .details.pokemon .list.pokemon li,
+    .panel .overview.main.started .details.pokemon .list.slots li.slot:before {
+        height: calc((100vh - 262px) / 10);
+        max-height: 64px;
+    }
+    .panel .overview.main .details.pokemon .list.pokemon li .swrap {
+        left: -7px;
+    }
+    .panel .overview.main .details.pokemon .list.pokemon li .swrap i {
+        width: 80px;
+        height: 60px;
+    }
+    .panel .overview.main .details.pokemon .list .sprite {
+        width: 80px;
+        height: 60px;
+        image-rendering: optimizeSpeed;             /*                     */
+        image-rendering: -moz-crisp-edges;          /* Firefox             */
+        image-rendering: -o-crisp-edges;            /* Opera               */
+        image-rendering: -webkit-optimize-contrast; /* Chrome (and Safari) */
+        image-rendering: optimize-contrast;         /* CSS3 Proposed       */
+        image-rendering: pixelated;                 /* CSS3 Proposed?       */
+        -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
+        -webkit-animation-name: SpriteBounceZoom;
+        animation-name: SpriteBounceZoom;
+    }
+    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
+        transform: translate3d(0, -2px, 0);
+        -webkit-animation-name: SpriteBounceZoomAlt;
+        animation-name: SpriteBounceZoomAlt;
+    }
+
+}
 @media (min-width: 1366px) and (min-height: 647px){
-    .bp2:before { content: "3";  }
+    .bp2:before { content: "b4";  }
 
     .panel .overview.main .details.pokemon .list.pokemon li .watched {
         width: 6px;
@@ -298,7 +368,7 @@
 
 }
 @media (min-width: 1366px) and (min-height: 768px){
-    .bp2:before { content: "4";  }
+    .bp2:before { content: "b5";  }
 
     .panel .overview.main .details.pokemon .wrap {
         width: 676px;
@@ -330,7 +400,7 @@
 
 }
 @media (min-width: 1366px) and (min-height: 769px){
-    .bp2:before { content: "5";  }
+    .bp2:before { content: "b6";  }
 
     .panel .overview.main .details.pokemon .wrap {
         width: 696px;
@@ -357,13 +427,13 @@
 /* -- Button Wrapper -- */
 
 @media (min-width: 768px) and (max-height: 647px){
-    .bp3:before { content: "a";  }
+    .bp3:before { content: "c1";  }
     .panel .buttons .new-pokemon .buttonwrap {
         max-height: calc(100vh - 400px);
     }
 }
 @media (min-width: 768px) and (min-height: 648px){
-    .bp3:before { content: "b";  }
+    .bp3:before { content: "c2";  }
 
     .panel .buttons .new-pokemon .buttonwrap {
         max-height: calc(100vh - 400px);
@@ -371,7 +441,7 @@
 
 }
 @media screen and (min-height: 769px){
-    .bp3:before { content: "c";  }
+    .bp3:before { content: "c3";  }
 
     .panel .buttons .new-pokemon .buttonwrap {
         max-height: calc(100vh - 450px);
@@ -383,8 +453,9 @@
 
 /* -- Overview Panels -- */
 
-@media (max-width: 1365px) and (min-height: 647px){
-    .bp3:after { content: "a";  }
+/* @media (max-width: 1365px) and (min-height: 647px){ */
+@media (max-width: 1124px) and (min-height: 647px){
+    .bp3:after { content: "d1";  }
     .panel .overview.types,
     .panel .overview.species {
         position: static;
@@ -400,8 +471,26 @@
         padding-left: 0;
     }
 }
+@media (min-width: 1125px) and (max-width: 1365px) and (min-height: 647px){
+    .bp3:after { content: "d2";  }
+    .panel .overview.types,
+    .panel .overview.species {
+        top: 154px;
+        width: calc((100% - 728px) / 2);
+    }
+    .panel .overview.species .list.current li.species .name,
+    .panel .overview.species .list.alltime li.species .name,
+    .panel .overview.types .list.attract li.type .name,
+    .panel .overview.types .list.repel li.type .name {
+        display: inline-block;
+        width: 12px;
+        letter-spacing: 12px;
+        overflow: hidden;
+        text-overflow: unset;
+    }
+}
 @media (min-width: 1366px) and (min-height: 647px){
-    .bp3:after { content: "b";  }
+    .bp3:after { content: "d3";  }
     .panel .overview.types,
     .panel .overview.species {
         top: 154px;
@@ -409,7 +498,7 @@
     }
 }
 @media (min-width: 1366px) and (min-height: 769px){
-    .bp3:after { content: "c";  }
+    .bp3:after { content: "d4";  }
     .panel .overview.types,
     .panel .overview.species {
         width: calc((100% - 746px) / 2);
