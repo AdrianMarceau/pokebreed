@@ -368,6 +368,43 @@
             prevEvolution: 'murkrow'
             },
 
+        'bronzor': {
+            order: indexOrder++,
+            token: 'bronzor',
+            name: 'Bronzor',
+            number: 436,
+            types: ['steel', 'psychic'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 57, phAttack: 24, phDefense: 86, spAttack: 24, spDefense: 86, speed: 23},
+            abilities: {0: 'levitate', 1: 'heatproof', hidden: 'heavy-metal'},
+            height: 0.5,
+            weight: 60.5,
+            colors: ['green', 'blue', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['mineral'],
+            nextEvolutions: [{
+                species: 'bronzong',
+                method: 'level-up',
+                value: 33
+                }]
+            },
+        'bronzong': {
+            order: indexOrder++,
+            token: 'bronzong',
+            name: 'Bronzong',
+            number: 437,
+            types: ['steel', 'psychic'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 67, phAttack: 89, phDefense: 116, spAttack: 79, spDefense: 116, speed: 33},
+            abilities: {0: 'levitate', 1: 'heatproof', hidden: 'heavy-metal'},
+            height: 1.3,
+            weight: 187,
+            colors: ['green', 'blue', 'red'],
+            eggCycles: 20,
+            eggGroups: ['mineral'],
+            prevEvolution: 'bronzor'
+            },
+
         'bonsly': {
             order: thisIndex.beforeOrder('sudowoodo'),
             token: 'bonsly',
