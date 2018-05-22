@@ -55,6 +55,9 @@
     .panel .buttons button {
         width: calc((100% / 12) - 10px);
     }
+    .panel .buttons .controls .control.start {
+        top: 208px;
+    }
 
 }
 @media (max-width: 1024px){
@@ -104,6 +107,10 @@
 
     .panel .buttons button {
         width: calc((100% / 6) - 10px);
+    }
+
+    .panel .buttons .controls .control.start {
+        top: 208px;
     }
 
 }
@@ -213,12 +220,13 @@
         image-rendering: optimize-contrast;         /* CSS3 Proposed       */
         image-rendering: pixelated;                 /* CSS3 Proposed?       */
         -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
-        -webkit-animation-name: SpriteBounceZoom;
-        animation-name: SpriteBounceZoom;
     }
     .panel .overview.main .details.pokemon .list.odd li.odd .sprite,
     .panel .overview.main .details.pokemon .list.even li.even .sprite {
         transform: translate3d(0, -2px, 0);
+    }
+    .panel .buttons .controls .control.start {
+        top: 208px;
     }
 
 }
@@ -283,12 +291,13 @@
         image-rendering: optimize-contrast;         /* CSS3 Proposed       */
         image-rendering: pixelated;                 /* CSS3 Proposed?       */
         -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
-        -webkit-animation-name: SpriteBounceZoom;
-        animation-name: SpriteBounceZoom;
     }
     .panel .overview.main .details.pokemon .list.odd li.odd .sprite,
     .panel .overview.main .details.pokemon .list.even li.even .sprite {
         transform: translate3d(0, -2px, 0);
+    }
+    .panel .buttons .controls .control.start {
+        top: 208px;
     }
 
 }
@@ -352,8 +361,6 @@
         image-rendering: optimize-contrast;         /* CSS3 Proposed       */
         image-rendering: pixelated;                 /* CSS3 Proposed?       */
         -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
-        -webkit-animation-name: SpriteBounceZoom;
-        animation-name: SpriteBounceZoom;
     }
     .panel .overview.main .details.pokemon .list.odd li.odd .sprite,
     .panel .overview.main .details.pokemon .list.even li.even .sprite {
@@ -422,24 +429,14 @@
 
 @media (min-width: 768px) and (max-height: 647px){
     .bp3:before { content: "c1";  }
-    .panel .buttons .new-pokemon .buttonwrap {
-        max-height: calc(100vh - 400px);
-    }
+
 }
 @media (min-width: 768px) and (min-height: 648px){
     .bp3:before { content: "c2";  }
 
-    .panel .buttons .new-pokemon .buttonwrap {
-        max-height: calc(100vh - 400px);
-    }
-
 }
 @media screen and (min-height: 769px){
     .bp3:before { content: "c3";  }
-
-    .panel .buttons .new-pokemon .buttonwrap {
-        max-height: calc(100vh - 450px);
-    }
 
 }
 

@@ -132,12 +132,13 @@ if (isset($_GET['gen'])
             </div>
 
             <div class="buttons">
-                <div class="controls hidden">
-                    <a class="control speed play" data-control="play" title="Play">Play</a>
-                    <a class="control speed slow" data-control="slower" title="Slower">Slower</a>
-                    <a class="control speed fast" data-control="faster" title="Faster">Faster</a>
-                    <a class="control speed pause" data-control="pause" title="Pause">Pause</a>
-                    <a class="control reset" data-control="reset" title="Reset">Reset</a>
+                <div class="controls">
+                    <a class="control speed play hidden" data-control="play" title="Play">Play</a>
+                    <a class="control speed slower hidden" data-control="slower" title="Slower">Slower</a>
+                    <a class="control speed faster hidden" data-control="faster" title="Faster">Faster</a>
+                    <a class="control speed pause hidden" data-control="pause" title="Pause">Pause</a>
+                    <a class="control reset hidden" data-control="reset" title="Reset">Reset</a>
+                    <a class="control start hidden" data-control="start" title="Start">Start</a>
                 </div>
                 <div class="new-pokemon">
                     <span class="loading">Loading</span>

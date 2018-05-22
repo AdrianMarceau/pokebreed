@@ -226,6 +226,17 @@
                 resetSimulation();
                 return;
                 }
+            // Otherwise if this is the start button
+            else if (control === 'start'){
+                if (thisZoneData.currentPokemon.length > 0
+                    && !simulationStarted
+                    && !dayTimeoutStarted){
+                    startSimulation();
+                    updateDay(false);
+                    }
+                return;
+                }
+
             });
 
         // Define the click-event for the info links
@@ -494,9 +505,11 @@
         $panelSpeciesOverview.removeClass('hidden');
 
         // Unhide the day speed controller, hide the pokemon buttons
-        $('.controls', $panelButtons).removeClass('hidden');
+        $('.controls .control:not(.start)', $panelButtons).removeClass('hidden');
+        $('.controls .start', $panelButtons).addClass('hidden');
+
+        // Remove the hidden class from the pokemon wrapper
         $('.new-pokemon', $panelButtons).addClass('hidden');
-        $('.info.links .link.reset', $panelButtons).removeClass('hidden');
 
         // Update the box details header, unhide the details info bar
         $('.details.zone .title', $panelMainOverview).html('Box Details');
@@ -530,9 +543,8 @@
             $panelTypesOverview.addClass('hidden');
             $panelSpeciesOverview.addClass('hidden');
 
-            // Hide the day speed controller
-            $('.controls', $panelButtons).addClass('hidden');
-            $('.info.links .link.reset', $panelButtons).addClass('hidden');
+            // Update the button controls with the appropriate classes
+            $('.controls .control', $panelButtons).addClass('hidden');
 
             // Clear and reset all the zone variables and history
             resetZoneData();
@@ -545,6 +557,7 @@
 
             // Show the pokemon buttons
             $('.new-pokemon', $panelButtons).removeClass('hidden');
+            $('.controls .start', $panelButtons).removeClass('hidden').removeClass('ready');
 
             // Hide the details info bar
             $('.details.zone .title', $panelMainOverview).html('&nbsp;');
@@ -866,6 +879,9 @@
                 });
             });
 
+        // Unhide the start button now that pokemon list is ready
+        $('.controls .start', $panelButtons).removeClass('hidden');
+
         // Attach a click event to the generated buttons
         $('button[data-action]', $pokePanelButtons).bind('click', function(e){
             e.preventDefault();
@@ -877,6 +893,11 @@
             if (action == 'add'){
                 if (kind == 'pokemon'){
                     addPokemonToZone(token, false);
+                    if (thisZoneData.currentPokemon.length > 0){
+                        $('.controls .start', $panelButtons).addClass('ready');
+                        } else {
+                        $('.controls .start', $panelButtons).removeClass('ready');
+                        }
                     return true;
                     }
                 }
@@ -1549,11 +1570,13 @@
             $('.wrap', $panelOverviewFloatLists).perfectScrollbar('update');
             }
 
+        /*
         // If at least one pokemon has been added, we can start the day timer
         if (totalActiveUnits >= pokemonRequiredToStart && !dayTimeoutStarted){
             if (!simulationStarted){ startSimulation(); }
             updateDay(false);
             }
+            */
 
         // Run the onComplete function now
         onComplete();
@@ -1623,6 +1646,11 @@
             PokemonSpeciesSeen[pokeInfo.token]--;
             if (PokemonSpeciesSeen[pokeInfo.token] === 0){
                 delete PokemonSpeciesSeen[pokeInfo.token];
+                }
+            if (thisZoneData.currentPokemon.length > 0){
+                $('.controls .start', $panelButtons).addClass('ready');
+                } else {
+                $('.controls .start', $panelButtons).removeClass('ready');
                 }
             }
         // Otherwise, clicking simply places a "watched" indicator on the pokemon

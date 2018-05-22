@@ -99,8 +99,6 @@
     .panel .overview.main .details.pokemon .list .sprite {
         width: 40px;
         height: 30px;
-        -webkit-animation-name: SpriteBounce;
-        animation-name: SpriteBounce;
     }
 
     .panel .overview.types,
@@ -188,6 +186,9 @@
     .panel .overview.main .details.pokemon .list.even li.even .sprite {
         transform: translate3d(0, -2px, 0);
     }
+    .panel .buttons .controls .control.start {
+        top: 218px;
+    }
 
 }
 @media only screen
@@ -240,6 +241,9 @@
     }
     .panel .overview.species {
         left: 20px;
+    }
+    .panel .buttons .controls .control.start {
+        top: 200px;
     }
 
 }
@@ -309,12 +313,20 @@
     and (orientation: portrait){
     .bp4:before { content: "e13";  }
 
+    .panel .buttons .controls .control.start {
+        top: 208px;
+    }
+
 }
 @media screen
     and (width: 568px)
     and (height: 320px)
     and (orientation: landscape){
     .bp4:before { content: "e14";  }
+
+    .panel .buttons .controls .control.start {
+        top: 208px;
+    }
 
 }
 

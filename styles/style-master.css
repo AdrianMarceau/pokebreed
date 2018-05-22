@@ -1055,6 +1055,11 @@ body[data-speed="faster"] .panel .overview.main .details.pokemon .list .sprite {
     margin: 0 auto;
 }
 .panel .buttons .new-pokemon.loaded {
+    overflow: hidden;
+    margin-left: 0;
+    margin-right: 80px;
+}
+.panel .buttons .new-pokemon.loaded {
     text-align: left;
 }
 .panel .buttons .new-pokemon > strong {
@@ -1073,7 +1078,7 @@ body[data-speed="faster"] .panel .overview.main .details.pokemon .list .sprite {
 }
 
 .panel .buttons .new-pokemon .buttonwrap {
-    max-height: calc(100vh - 410px);
+    height: 200px;
     overflow: hidden;
     position: relative;
     padding-top: 5px;
@@ -1157,6 +1162,57 @@ body[data-speed="faster"] .panel .overview.main .details.pokemon .list .sprite {
 .panel .buttons .controls .control.active {
     background-color: #757575;
 }
+
+.panel .buttons .controls .control.start {
+    position: absolute;
+    background-color: #373739;
+    color: #FFFFFF;
+    z-index: 9999;
+    width: 70px;
+    height: 210px;
+    float: none;
+    right: 10px;
+    top: 218px;
+}
+.panel .buttons .controls .control.start:hover {
+    background-color: #373739;
+}
+.panel .buttons .controls .control.start:before {
+    top: 84px;
+    left: 16px;
+    width: 44px;
+    height: 44px;
+    opacity: 0.1;
+}
+.panel .buttons .controls .control.start.ready {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#58585b+0,464649+100 */
+    background: #3a5fab; /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(58,95,171,1) 0%, rgba(29,44,94,1) 120%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(58,95,171,1) 0%,rgba(29,44,94,1) 120%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(58,95,171,1) 0%,rgba(29,44,94,1) 120%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3a5fab', endColorstr='#1d2c5e',GradientType=0 ); /* IE6-9 */
+    color: #FFFFFF;
+}
+.panel .buttons .controls .control.start.ready:before {
+    opacity: 0.8;
+}
+.panel .buttons .controls .control.start.ready:hover {
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#58585b+0,464649+100 */
+    background: #416bbe; /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(65,107,190,1) 0%, rgba(29,44,94,1) 120%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(65,107,190,1) 0%,rgba(29,44,94,1) 120%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(65,107,190,1) 0%,rgba(29,44,94,1) 120%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3a5fab', endColorstr='#1d2c5e',GradientType=0 ); /* IE6-9 */
+}
+.panel .buttons .controls .control.start.ready:hover:before {
+    opacity: 1.0;
+}
+
+.panel .buttons .controls .control.start:not(.ready) {
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
 .panel .buttons .controls .control.reset {
     background-color: #b73232;
     float: right;
@@ -1166,13 +1222,14 @@ body[data-speed="faster"] .panel .overview.main .details.pokemon .list .sprite {
     background-color: #c03535;
 }
 
-.panel .buttons .controls .control.play:before {
+.panel .buttons .controls .control.play:before,
+.panel .buttons .controls .control.start:before {
     background-image: url(../images/icons/controls/play.png);
 }
-.panel .buttons .controls .control.slow:before {
+.panel .buttons .controls .control.slower:before {
     background-image: url(../images/icons/controls/slow.png);
 }
-.panel .buttons .controls .control.fast:before {
+.panel .buttons .controls .control.faster:before {
     background-image: url(../images/icons/controls/fast.png);
 }
 .panel .buttons .controls .control.pause:before {
