@@ -388,8 +388,8 @@
 
                 var genderVariantA = false;
                 var genderVariantB = false;
-                if (infoA['formClass'] === 'gender-variant'){ genderVariantA = true; }
-                if (infoB['formClass'] === 'gender-variant'){ genderVariantB = true; }
+                if (infoA['formClass'] === 'gender-variant' && typeof infoA['prevEvolution'] === 'undefined'){ genderVariantA = true; }
+                if (infoB['formClass'] === 'gender-variant' && typeof infoB['prevEvolution'] === 'undefined'){ genderVariantB = true; }
 
                 if (false){ return 0; }
 
