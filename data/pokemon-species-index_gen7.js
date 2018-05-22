@@ -401,7 +401,7 @@
         'kommo-o': {
             order: indexOrder++,
             token: 'kommo-o',
-            species: 'Kommo-o',
+            name: 'Kommo-o',
             number: 784,
             types: ['dragon', 'fighting'],
             baseStats: {hp: 75, phAttack: 110, phDefense: 125, spAttack: 100, spDefense: 105, speed: 85},

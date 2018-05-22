@@ -752,7 +752,7 @@
         'sunflora': {
             order: indexOrder++,
             token: 'sunflora',
-            species: 'Sunflora',
+            name: 'Sunflora',
             number: 192,
             types: ['grass'],
             baseStats: {hp: 75, phAttack: 75, phDefense: 55, spAttack: 105, spDefense: 85, speed: 30},
