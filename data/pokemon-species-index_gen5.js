@@ -227,6 +227,61 @@
             prevEvolution: 'trubbish'
             },
 
+        'vanillite': {
+            order: indexOrder++,
+            token: 'vanillite',
+            name: 'Vanillite',
+            number: 582,
+            types: ['ice'],
+            baseStats: {hp: 36, phAttack: 50, phDefense: 50, spAttack: 65, spDefense: 60, speed: 44},
+            abilities: {0: 'ice-body', 1: 'snow-cloak', hidden: 'weak-armor'},
+            height: 0.4,
+            weight: 5.7,
+            colors: ['white', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['mineral'],
+            nextEvolutions: [{
+                species: 'vanillish',
+                method: 'level-up',
+                value: 35
+                }]
+            },
+        'vanillish': {
+            order: indexOrder++,
+            token: 'vanillish',
+            name: 'Vanillish',
+            number: 583,
+            types: ['ice'],
+            baseStats: {hp: 51, phAttack: 65, phDefense: 65, spAttack: 80, spDefense: 75, speed: 59},
+            abilities: {0: 'ice-body', 1: 'snow-cloak', hidden: 'weak-armor'},
+            height: 1.1,
+            weight: 41,
+            colors: ['white', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['mineral'],
+            prevEvolution: 'vanillite',
+            nextEvolutions: [{
+                species: 'vanilluxe',
+                method: 'level-up',
+                value: 47
+                }]
+            },
+        'vanilluxe': {
+            order: indexOrder++,
+            token: 'vanilluxe',
+            name: 'Vanilluxe',
+            number: 584,
+            types: ['ice'],
+            baseStats: {hp: 71, phAttack: 95, phDefense: 85, spAttack: 110, spDefense: 95, speed: 79},
+            abilities: {0: 'ice-body', 1: 'snow-warning', hidden: 'weak-armor'},
+            height: 1.3,
+            weight: 57.5,
+            colors: ['white', 'blue', 'purple'],
+            eggCycles: 20,
+            eggGroups: ['mineral'],
+            prevEvolution: 'vanillish'
+            },
+
         'emolga': {
             order: indexOrder++,
             token: 'emolga',
