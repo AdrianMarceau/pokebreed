@@ -1230,6 +1230,45 @@
             prevEvolution: 'vibrava'
             },
 
+        'feebas': {
+            order: indexOrder++,
+            token: 'feebas',
+            name: 'Feebas',
+            number: 349,
+            types: ['water'],
+            baseStats: {hp: 20, phAttack: 15, phDefense: 20, spAttack: 10, spDefense: 55, speed: 80},
+            abilities: {0: 'swift-wwim', 1: 'oblivious', hidden: 'adaptability'},
+            height: 0.6,
+            weight: 7.4,
+            colors: ['brown', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'dragon'],
+            nextEvolutions: [{
+                species: 'milotic',
+                method: 'level-up',
+                value: 30,
+                method2: 'type-surge',
+                value2: 'water',
+                method3: 'affection',
+                value3: 'max'
+                }]
+            },
+        'milotic': {
+            order: indexOrder++,
+            token: 'milotic',
+            name: 'Milotic',
+            number: 350,
+            types: ['water'],
+            baseStats: {hp: 95, phAttack: 60, phDefense: 79, spAttack: 100, spDefense: 125, speed: 81},
+            abilities: {0: 'marvel-scale', 1: 'competitive', hidden: 'cute-charm'},
+            height: 6.2,
+            weight: 162,
+            colors: ['yellow', 'pink', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'dragon'],
+            prevEvolution: 'feebas'
+            },
+
         'wynaut': {
             order: thisIndex.beforeOrder('wobbuffet'),
             token: 'wynaut',
