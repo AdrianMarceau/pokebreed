@@ -510,8 +510,6 @@
     transform: translate3d(0, 0, 0);
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    -webkit-animation: SpriteBounce 1s steps(1) infinite;
-    animation: SpriteBounce 1s steps(1) infinite;
     pointer-events: none;
 }
 body[data-speed="slower"] .panel .overview.main .details.pokemon .list .sprite {
@@ -522,10 +520,9 @@ body[data-speed="faster"] .panel .overview.main .details.pokemon .list .sprite {
     -webkit-animation-duration: 0.5s;
     animation-duration: 0.5s;
 }
-.panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
+.panel .overview.main .details.pokemon .list.odd li.odd .sprite,
+.panel .overview.main .details.pokemon .list.even li.even .sprite {
     transform: translate3d(0, -1px, 0);
-    -webkit-animation-name: SpriteBounceAlt;
-    animation-name: SpriteBounceAlt;
 }
 .panel .overview.main .details.pokemon .list .sprite.overlay {
     position: absolute;

@@ -712,7 +712,7 @@
         var cellPosition = convertKeyToTableCell(cellKey, thisZoneData.sizeCols);
 
         // Generate the common item class and style for all cells (position)
-        var itemClass = pokeInfo.eggCycles === 0 ? 'pokemon' : 'egg ';
+        var itemClass = pokeInfo.eggCycles === 0 ? 'pokemon ' : 'egg ';
         var itemStyle = '';
         itemStyle += 'left: '+((cellPosition.col - 1) * colPercent)+'%; ';
         itemStyle += 'top: '+((cellPosition.row - 1) * colPercent)+'%; ';
@@ -1229,6 +1229,11 @@
 
             // Collect a reference to this pokemon's cell
             var $pokeCell = $('li[data-id="'+pokeInfo.id+'"]', $panelPokemonSpriteWrapper);
+
+            // Update the odd/even class on this pokemon's cell
+            var isEven = cellKey % 2 === 0 ? true : false;
+            if (isEven){ $pokeCell.removeClass('odd').addClass('even'); }
+            else { $pokeCell.removeClass('even').addClass('odd'); }
 
             // Change the sprite class based on egg or not
             var justHatched = false;
@@ -1819,6 +1824,11 @@
         dayTimeoutStarted = true;
         thisZoneData.day++;
         //console.log('Day #'+thisZoneData.day);
+
+        // Update the odd/even class on the pokemon sprite wrapper
+        var isEven = thisZoneData.day % 2 === 0 ? true : false;
+        if (isEven){ $panelPokemonSpriteWrapper.removeClass('odd').addClass('even'); }
+        else { $panelPokemonSpriteWrapper.removeClass('even').addClass('odd'); }
 
         // Send an analytics event for the amount of time that has passed
         if (typeof ga !== 'undefined'){ sendSessionAnalytics(thisZoneData.day); }

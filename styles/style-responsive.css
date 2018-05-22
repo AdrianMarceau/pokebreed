@@ -152,13 +152,10 @@
         image-rendering: optimize-contrast;         /* CSS3 Proposed       */
         image-rendering: pixelated;                 /* CSS3 Proposed?       */
         -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
-        -webkit-animation-name: SpriteBounceZoom;
-        animation-name: SpriteBounceZoom;
     }
-    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
+    .panel .overview.main .details.pokemon .list.odd li.odd .sprite,
+    .panel .overview.main .details.pokemon .list.even li.even .sprite {
         transform: translate3d(0, -2px, 0);
-        -webkit-animation-name: SpriteBounceZoomAlt;
-        animation-name: SpriteBounceZoomAlt;
     }
 
 }
@@ -219,10 +216,9 @@
         -webkit-animation-name: SpriteBounceZoom;
         animation-name: SpriteBounceZoom;
     }
-    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
+    .panel .overview.main .details.pokemon .list.odd li.odd .sprite,
+    .panel .overview.main .details.pokemon .list.even li.even .sprite {
         transform: translate3d(0, -2px, 0);
-        -webkit-animation-name: SpriteBounceZoomAlt;
-        animation-name: SpriteBounceZoomAlt;
     }
 
 }
@@ -290,10 +286,9 @@
         -webkit-animation-name: SpriteBounceZoom;
         animation-name: SpriteBounceZoom;
     }
-    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
+    .panel .overview.main .details.pokemon .list.odd li.odd .sprite,
+    .panel .overview.main .details.pokemon .list.even li.even .sprite {
         transform: translate3d(0, -2px, 0);
-        -webkit-animation-name: SpriteBounceZoomAlt;
-        animation-name: SpriteBounceZoomAlt;
     }
 
 }
@@ -360,10 +355,9 @@
         -webkit-animation-name: SpriteBounceZoom;
         animation-name: SpriteBounceZoom;
     }
-    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
+    .panel .overview.main .details.pokemon .list.odd li.odd .sprite,
+    .panel .overview.main .details.pokemon .list.even li.even .sprite {
         transform: translate3d(0, -2px, 0);
-        -webkit-animation-name: SpriteBounceZoomAlt;
-        animation-name: SpriteBounceZoomAlt;
     }
 
 }

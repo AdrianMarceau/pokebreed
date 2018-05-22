@@ -62,13 +62,10 @@
         image-rendering: optimize-contrast;         /* CSS3 Proposed       */
         image-rendering: pixelated;                 /* CSS3 Proposed?       */
         -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
-        -webkit-animation-name: SpriteBounceZoom;
-        animation-name: SpriteBounceZoom;
     }
-    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
+    .panel .overview.main .details.pokemon .list.odd li.odd .sprite,
+    .panel .overview.main .details.pokemon .list.even li.even .sprite {
         transform: translate3d(0, -2px, 0);
-        -webkit-animation-name: SpriteBounceZoomAlt;
-        animation-name: SpriteBounceZoomAlt;
     }
 
 }
@@ -186,19 +183,10 @@
         image-rendering: optimize-contrast;         /* CSS3 Proposed       */
         image-rendering: pixelated;                 /* CSS3 Proposed?       */
         -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
-        /*
-        -webkit-animation-name: SpriteBounceZoom;
-        animation-name: SpriteBounceZoom;
-        */
-        animation: none;
     }
-    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
+    .panel .overview.main .details.pokemon .list.odd li.odd .sprite,
+    .panel .overview.main .details.pokemon .list.even li.even .sprite {
         transform: translate3d(0, -2px, 0);
-        /*
-        -webkit-animation-name: SpriteBounceZoomAlt;
-        animation-name: SpriteBounceZoomAlt;
-        */
-        animation: none;
     }
 
 }
@@ -233,19 +221,10 @@
     .panel .overview.main .details.pokemon .list .sprite {
         width: 40px;
         height: 30px;
-        /*
-        -webkit-animation-name: SpriteBounce;
-        animation-name: SpriteBounce;
-        */
-        animation: none;
     }
-    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
+    .panel .overview.main .details.pokemon .list.odd li.odd .sprite,
+    .panel .overview.main .details.pokemon .list.even li.even .sprite {
         transform: translate3d(0, -1px, 0);
-        /*
-        -webkit-animation-name: SpriteBounceZoom;
-        animation-name: SpriteBounceZoom;
-        */
-        animation: none;
     }
 
     .panel .overview.types,
@@ -277,22 +256,12 @@
         max-height: 300px;
     }
 
-    .panel .overview.main .details.pokemon .list .sprite,
-    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
-        animation: none;
-    }
-
 }
 @media screen
     and (width: 812px)
     and (height: 375px)
     and (orientation: landscape){
     .bp4:before { content: "e8";  }
-
-    .panel .overview.main .details.pokemon .list .sprite,
-    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
-        animation: none;
-    }
 
 }
 
@@ -308,22 +277,12 @@
         max-height: 300px;
     }
 
-    .panel .overview.main .details.pokemon .list .sprite,
-    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
-        animation: none;
-    }
-
 }
 @media screen
     and (width: 736px)
     and (height: 414px)
     and (orientation: landscape){
     .bp4:before { content: "e10";  }
-
-    .panel .overview.main .details.pokemon .list .sprite,
-    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
-        animation: none;
-    }
 
 }
 
@@ -334,22 +293,12 @@
     and (orientation: portrait){
     .bp4:before { content: "e11";  }
 
-    .panel .overview.main .details.pokemon .list .sprite,
-    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
-        animation: none;
-    }
-
 }
 @media screen
     and (width: 667px)
     and (height: 375px)
     and (orientation: landscape){
     .bp4:before { content: "e12";  }
-
-    .panel .overview.main .details.pokemon .list .sprite,
-    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
-        animation: none;
-    }
 
 }
 
@@ -360,22 +309,12 @@
     and (orientation: portrait){
     .bp4:before { content: "e13";  }
 
-    .panel .overview.main .details.pokemon .list .sprite,
-    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
-        animation: none;
-    }
-
 }
 @media screen
     and (width: 568px)
     and (height: 320px)
     and (orientation: landscape){
     .bp4:before { content: "e14";  }
-
-    .panel .overview.main .details.pokemon .list .sprite,
-    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
-        animation: none;
-    }
 
 }
 
@@ -386,22 +325,12 @@
     and (orientation: portrait){
     .bp4:before { content: "e15";  }
 
-    .panel .overview.main .details.pokemon .list .sprite,
-    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
-        animation: none;
-    }
-
 }
 @media screen
     and (width: 823px)
     and (height: 411px)
     and (orientation: landscape){
     .bp4:before { content: "e16";  }
-
-    .panel .overview.main .details.pokemon .list .sprite,
-    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
-        animation: none;
-    }
 
 }
 
@@ -412,22 +341,12 @@
     and (orientation: portrait){
     .bp4:before { content: "e17";  }
 
-    .panel .overview.main .details.pokemon .list .sprite,
-    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
-        animation: none;
-    }
-
 }
 @media screen
     and (width: 731px)
     and (height: 411px)
     and (orientation: landscape){
     .bp4:before { content: "e18";  }
-
-    .panel .overview.main .details.pokemon .list .sprite,
-    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
-        animation: none;
-    }
 
 }
 
@@ -438,21 +357,11 @@
     and (orientation: portrait){
     .bp4:before { content: "e19";  }
 
-    .panel .overview.main .details.pokemon .list .sprite,
-    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
-        animation: none;
-    }
-
 }
 @media screen
     and (width: 640px)
     and (height: 360px)
     and (orientation: landscape){
     .bp4:before { content: "e20";  }
-
-    .panel .overview.main .details.pokemon .list .sprite,
-    .panel .overview.main .details.pokemon .list li:nth-child(odd) .sprite {
-        animation: none;
-    }
 
 }

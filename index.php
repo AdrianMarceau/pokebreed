@@ -87,7 +87,7 @@ if (isset($_GET['gen'])
                     <strong class="title">Current Pokémon</strong>
                     <div class="wrap">
                         <ul class="list slots"></ul>
-                        <ul class="list pokemon"></ul>
+                        <ul class="list pokemon even"></ul>
                     </div>
                     <div class="field">
                         <span class="bg"></span>
