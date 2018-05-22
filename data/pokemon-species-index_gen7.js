@@ -193,6 +193,61 @@
             prevEvolution: 'brionne'
             },
 
+        'pikipek': {
+            order: indexOrder++,
+            token: 'pikipek',
+            name: 'Pikipek',
+            number: 731,
+            types: ['normal', 'flying'],
+            baseStats: {hp: 35, phAttack: 75, phDefense: 30, spAttack: 30, spDefense: 30, speed: 65},
+            abilities: {0: 'keen-eye', 1: 'skill-link', hidden: 'pickup'},
+            height: 0.3,
+            weight: 1.2,
+            colors: ['black', 'white', 'red', 'gray', 'blue'],
+            eggCycles: 15,
+            eggGroups: ['flying'],
+            nextEvolutions: [{
+                species: 'trumbeak',
+                method: 'level-up',
+                value: 14
+                }]
+            },
+        'trumbeak': {
+            order: indexOrder++,
+            token: 'trumbeak',
+            name: 'Trumbeak',
+            number: 732,
+            types: ['normal', 'flying'],
+            baseStats: {hp: 55, phAttack: 85, phDefense: 50, spAttack: 40, spDefense: 50, speed: 75},
+            abilities: {0: 'keen-eye', 1: 'skill-link', hidden: 'pickup'},
+            height: 0.6,
+            weight: 14.8,
+            colors: ['black', 'white', 'red', 'orange', 'blue'],
+            eggCycles: 15,
+            eggGroups: ['flying'],
+            prevEvolution: 'pikipek',
+            nextEvolutions: [{
+                species: 'toucannon',
+                method: 'level-up',
+                value: 28
+                }]
+            },
+        'toucannon': {
+            order: indexOrder++,
+            token: 'toucannon',
+            name: 'Toucannon',
+            number: 733,
+            types: ['normal', 'flying'],
+            baseStats: {hp: 80, phAttack: 120, phDefense: 75, spAttack: 75, spDefense: 75, speed: 60},
+            abilities: {0: 'keen-eye', 1: 'skill-link', hidden: 'sheer-force'},
+            height: 1.1,
+            weight: 26,
+            colors: ['black', 'white', 'red', 'orange', 'yellow', 'blue'],
+            eggCycles: 15,
+            eggGroups: ['flying'],
+            prevEvolution: 'trumbeak'
+            },
+
         'mareanie': {
             order: indexOrder++,
             token: 'mareanie',
