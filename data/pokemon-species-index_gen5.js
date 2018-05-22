@@ -192,6 +192,41 @@
             prevEvolution: 'dewott'
             },
 
+        'trubbish': {
+            order: indexOrder++,
+            token: 'trubbish',
+            name: 'Trubbish',
+            number: 568,
+            types: ['poison'],
+            baseStats: {hp: 50, phAttack: 50, phDefense: 62, spAttack: 40, spDefense: 62, speed: 65},
+            abilities: {0: 'stench', 1: 'sticky-hold', hidden: 'aftermath'},
+            height: 0.6,
+            weight: 31,
+            colors: ['green', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['mineral'],
+            nextEvolutions: [{
+                species: 'garbodor',
+                method: 'level-up',
+                value: 36
+                }]
+            },
+        'garbodor': {
+            order: indexOrder++,
+            token: 'garbodor',
+            name: 'Garbodor',
+            number: 569,
+            types: ['poison'],
+            baseStats: {hp: 80, phAttack: 95, phDefense: 82, spAttack: 60, spDefense: 82, speed: 75},
+            abilities: {0: 'stench', 1: 'weak-armor', hidden: 'aftermath'},
+            height: 1.9,
+            weight: 107.3,
+            colors: ['green', 'brown', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['mineral'],
+            prevEvolution: 'trubbish'
+            },
+
         'emolga': {
             order: indexOrder++,
             token: 'emolga',
