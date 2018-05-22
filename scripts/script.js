@@ -523,6 +523,9 @@
             // Add "waiting" classes to pokemon slots
             $('.details.pokemon .list.slots li:lt(11)', $panelMainOverview).addClass('waiting');
 
+            // Remove all list items from the sprite wrapper
+            $('li', $panelPokemonSpriteWrapper).remove();
+
             // Hide the type and species overview panels
             $panelTypesOverview.addClass('hidden');
             $panelSpeciesOverview.addClass('hidden');
