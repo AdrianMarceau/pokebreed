@@ -192,6 +192,90 @@
             prevEvolution: 'dewott'
             },
 
+        'pidove': {
+            order: indexOrder++,
+            token: 'pidove',
+            name: 'Pidove',
+            number: 519,
+            types: ['normal', 'flying'],
+            baseStats: {hp: 50, phAttack: 55, phDefense: 50, spAttack: 36, spDefense: 30, speed: 43},
+            abilities: {0: 'big-pecks', 1: 'super-luck', hidden: 'rivalry'},
+            height: 0.3,
+            weight: 2.1,
+            colors: ['gray', 'black', 'white', 'pink', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['flying'],
+            nextEvolutions: [{
+                species: 'tranquill',
+                method: 'level-up',
+                value: 21
+                }]
+            },
+        'tranquill': {
+            order: indexOrder++,
+            token: 'tranquill',
+            name: 'Tranquill',
+            number: 520,
+            types: ['normal', 'flying'],
+            baseStats: {hp: 62, phAttack: 77, phDefense: 62, spAttack: 50, spDefense: 42, speed: 65},
+            abilities: {0: 'big-pecks', 1: 'super-luck', hidden: 'rivalry'},
+            height: 0.6,
+            weight: 15,
+            colors: ['gray', 'black', 'white', 'pink', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['flying'],
+            prevEvolution: 'pidove',
+            nextEvolutions: [{
+                species: 'unfezant-m',
+                method: 'level-up',
+                value: 32,
+                method2: 'chance',
+                value2: 50
+                }, {
+                species: 'unfezant-f',
+                method: 'level-up',
+                value: 32,
+                method2: 'chance',
+                value2: 50
+                }]
+            },
+        'unfezant-m': {
+            order: indexOrder++,
+            token: 'unfezant-m',
+            name: 'Unfezant \u2642',
+            formClass: 'gender-variant',
+            formToken: 'male',
+            number: 521,
+            types: ['normal', 'flying'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 80, phAttack: 115, phDefense: 80, spAttack: 65, spDefense: 55, speed: 93},
+            abilities: {0: 'big-pecks', 1: 'super-luck', hidden: 'rivalry'},
+            height: 1.2,
+            weight: 29,
+            colors: ['gray', 'black', 'green', 'pink', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['flying'],
+            prevEvolution: 'tranquill'
+            },
+        'unfezant-f': {
+            order: indexOrder++,
+            token: 'unfezant-f',
+            name: 'Unfezant \u2640',
+            formClass: 'gender-variant',
+            formToken: 'female',
+            number: 521,
+            types: ['normal', 'flying'],
+            genderRatio: {female: 1.0000},
+            baseStats: {hp: 80, phAttack: 115, phDefense: 80, spAttack: 65, spDefense: 55, speed: 93},
+            abilities: {0: 'big-pecks', 1: 'super-luck', hidden: 'rivalry'},
+            height: 1.2,
+            weight: 29,
+            colors: ['gray', 'black', 'brown', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['flying'],
+            prevEvolution: 'tranquill'
+            },
+
         'trubbish': {
             order: indexOrder++,
             token: 'trubbish',
