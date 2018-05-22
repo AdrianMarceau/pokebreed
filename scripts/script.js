@@ -885,7 +885,10 @@
         // Attach a click event to the generated buttons
         $('button[data-action]', $pokePanelButtons).bind('click', function(e){
             e.preventDefault();
-            if (simulationStarted){ return false; }
+            if (simulationStarted
+                || thisZoneData.currentPokemon.length >= 10){
+                return false;
+                }
             var $button = $(this);
             var action = $button.attr('data-action');
             var kind = $button.attr('data-kind');
