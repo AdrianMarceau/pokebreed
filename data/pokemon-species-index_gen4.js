@@ -590,6 +590,102 @@
             prevEvolution: 'riolu'
             },
 
+        'hippopotas-f': {
+            order: indexOrder++,
+            token: 'hippopotas-f',
+            name: 'Hippopotas \u2640',
+            formClass: 'gender-variant',
+            formToken: 'female',
+            number: 449,
+            types: ['ground'],
+            genderRatio: {female: 1.0000},
+            baseStats: {hp: 68, phAttack: 72, phDefense: 78, spAttack: 38, spDefense: 42, speed: 32},
+            abilities: {0: 'sand-stream', hidden: 'sand-force'},
+            height: 0.8,
+            weight: 49.5,
+            colors: ['yellow', 'brown'],
+            eggCycles: 30,
+            eggGroups: ['field'],
+            eggPartner: 'hippopotas-m',
+            nextEvolutions: [{
+                species: 'hippowdon-f',
+                method: 'level-up',
+                value: 34
+                }],
+            altBaseEvolutions: [{
+                'species': 'hippopotas-m',
+                'method': 'chance',
+                'value': 50
+                }]
+            },
+        'hippowdon-f': {
+            order: indexOrder++,
+            token: 'hippowdon-f',
+            name: 'Hippowdon \u2640',
+            formClass: 'gender-variant',
+            formToken: 'female',
+            number: 450,
+            types: ['ground'],
+            genderRatio: {female: 1.0000},
+            baseStats: {hp: 108, phAttack: 112, phDefense: 118, spAttack: 68, spDefense: 72, speed: 47},
+            abilities: {0: 'sand-stream', hidden: 'sand-force'},
+            height: 2,
+            weight: 300,
+            colors: ['yellow', 'brown'],
+            eggCycles: 30,
+            eggGroups: ['field'],
+            eggPartner: 'hippowdon-m',
+            prevEvolution: 'hippopotas-f'
+            },
+
+        'hippopotas-m': {
+            order: indexOrder++,
+            token: 'hippopotas-m',
+            name: 'Hippopotas \u2642',
+            formClass: 'gender-variant',
+            formToken: 'male',
+            number: 449,
+            types: ['ground'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 68, phAttack: 72, phDefense: 78, spAttack: 38, spDefense: 42, speed: 32},
+            abilities: {0: 'sand-stream', hidden: 'sand-force'},
+            height: 0.8,
+            weight: 49.5,
+            colors: ['yellow', 'brown'],
+            eggCycles: 30,
+            eggGroups: ['field'],
+            eggPartner: 'hippopotas-f',
+            nextEvolutions: [{
+                species: 'hippowdon-m',
+                method: 'level-up',
+                value: 34
+                }],
+            altBaseEvolutions: [{
+                'species': 'hippopotas-f',
+                'method': 'chance',
+                'value': 50
+                }]
+            },
+        'hippowdon-m': {
+            order: indexOrder++,
+            token: 'hippowdon-m',
+            name: 'Hippowdon \u2642',
+            formClass: 'gender-variant',
+            formToken: 'male',
+            number: 450,
+            types: ['ground'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 108, phAttack: 112, phDefense: 118, spAttack: 68, spDefense: 72, speed: 47},
+            abilities: {0: 'sand-stream', hidden: 'sand-force'},
+            height: 2,
+            weight: 300,
+            colors: ['yellow', 'brown'],
+            eggCycles: 30,
+            eggGroups: ['field'],
+            eggPartner: 'hippowdon-f',
+            prevEvolution: 'hippopotas-m'
+            },
+
         'skorupi': {
             order: indexOrder++,
             token: 'skorupi',

@@ -427,6 +427,7 @@
             color2: 'blue',
             eggCycles: 20,
             eggGroups: ['amorphous'],
+            eggPartner: 'jellicent-f',
             prevEvolution: 'frillish-m'
             },
 
@@ -478,6 +479,7 @@
             color2: 'pink',
             eggCycles: 20,
             eggGroups: ['amorphous'],
+            eggPartner: 'jellicent-m',
             prevEvolution: 'frillish-f'
             },
 
