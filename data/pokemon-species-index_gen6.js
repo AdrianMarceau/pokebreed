@@ -1527,6 +1527,26 @@
             prevEvolution: 'garchomp'
             },
 
+        'mega-lucario': {
+            order: thisIndex.afterOrder('lucario'),
+            token: 'mega-lucario',
+            name: 'Mega Lucario',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'lucario',
+            number: 448,
+            types: ['fighting', 'steel'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 70, phAttack: 145, phDefense: 88, spAttack: 140, spDefense: 70, speed: 112},
+            abilities: {0: 'adaptability'},
+            height: 1.3,
+            weight: 57.5,
+            colors: ['blue', 'black', 'yellow', 'red', 'white'],
+            eggCycles: 25,
+            eggGroups: ['field', 'human-like'],
+            prevEvolution: 'lucario'
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
@@ -1586,6 +1606,7 @@
         {base: 'rayquaza', species: 'mega-rayquaza', method: 'mega-evolution', value: 'meteorite'},
 
         {base: 'garchomp', species: 'mega-garchomp', method: 'mega-evolution', value: 'garchompite'},
+        {base: 'lucario', species: 'mega-lucario', method: 'mega-evolution', value: 'lucarionite'},
 
         ]);
 

@@ -515,6 +515,44 @@
                 }]
             },
 
+        'riolu': {
+            order: indexOrder++,
+            token: 'riolu',
+            name: 'Riolu',
+            class: 'baby',
+            number: 447,
+            types: ['fighting'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 40, phAttack: 70, phDefense: 40, spAttack: 35, spDefense: 40, speed: 60},
+            abilities: {0: 'steadfast', 1: 'inner-focus', hidden: 'prankster'},
+            height: 0.7,
+            weight: 20.2,
+            colors: ['blue', 'black', 'white', 'red'],
+            eggCycles: 25,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'lucario',
+                method: 'happiness',
+                value: 'high'
+                }]
+            },
+        'lucario': {
+            order: indexOrder++,
+            token: 'lucario',
+            name: 'Lucario',
+            number: 448,
+            types: ['fighting', 'steel'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 70, phAttack: 110, phDefense: 70, spAttack: 115, spDefense: 70, speed: 90},
+            abilities: {0: 'steadfast', 1: 'inner-focus', hidden: 'justified'},
+            height: 1.2,
+            weight: 54,
+            colors: ['blue', 'black', 'yellow', 'white', 'red'],
+            eggCycles: 25,
+            eggGroups: ['field', 'human-like'],
+            prevEvolution: 'riolu'
+            },
+
         'mantyke': {
             order: thisIndex.beforeOrder('mantine'),
             token: 'mantyke',
