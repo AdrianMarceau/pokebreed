@@ -590,6 +590,41 @@
             prevEvolution: 'riolu'
             },
 
+        'skorupi': {
+            order: indexOrder++,
+            token: 'skorupi',
+            name: 'Skorupi',
+            number: 451,
+            types: ['poison', 'bug'],
+            baseStats: {hp: 40, phAttack: 50, phDefense: 90, spAttack: 30, spDefense: 55, speed: 65},
+            abilities: {0: 'battle-armor', 1: 'sniper', hidden: 'keen-eye'},
+            height: 0.8,
+            weight: 12,
+            colors: ['purple', 'white', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['bug', 'water-3'],
+            nextEvolutions: [{
+                species: 'drapion',
+                method: 'level-up',
+                value: 40
+                }]
+            },
+        'drapion': {
+            order: indexOrder++,
+            token: 'drapion',
+            name: 'Drapion',
+            number: 452,
+            types: ['poison', 'dark'],
+            baseStats: {hp: 70, phAttack: 90, phDefense: 110, spAttack: 60, spDefense: 75, speed: 95},
+            abilities: {0: 'battle-armor', 1: 'sniper', hidden: 'keen-eye'},
+            height: 1.3,
+            weight: 61.5,
+            colors: ['purple', 'white', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['bug', 'water-3'],
+            prevEvolution: 'skorupi'
+            },
+
         'mantyke': {
             order: thisIndex.beforeOrder('mantine'),
             token: 'mantyke',
