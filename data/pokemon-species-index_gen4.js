@@ -721,6 +721,41 @@
             prevEvolution: 'skorupi'
             },
 
+        'croagunk': {
+            order: indexOrder++,
+            token: 'croagunk',
+            name: 'Croagunk',
+            number: 453,
+            types: ['poison', 'fighting'],
+            baseStats: {hp: 48, phAttack: 61, phDefense: 40, spAttack: 61, spDefense: 40, speed: 50},
+            abilities: {0: 'anticipation', 1: 'dry-skin', hidden: 'poison-touch'},
+            height: 0.7,
+            weight: 23,
+            colors: ['blue', 'black', 'white', 'orange', 'yellow'],
+            eggCycles: 10,
+            eggGroups: ['human-like'],
+            nextEvolutions: [{
+                species: 'toxicroak',
+                method: 'level-up',
+                value: 37
+                }]
+            },
+        'toxicroak': {
+            order: indexOrder++,
+            token: 'toxicroak',
+            name: 'Toxicroak',
+            number: 454,
+            types: ['poison', 'fighting'],
+            baseStats: {hp: 83, phAttack: 106, phDefense: 65, spAttack: 86, spDefense: 65, speed: 85},
+            abilities: {0: 'anticipation', 1: 'dry-skin', hidden: 'poison-touch'},
+            height: 1.3,
+            weight: 44.4,
+            colors: ['blue', 'black', 'red', 'white', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['human-like'],
+            prevEvolution: 'croagunk'
+            },
+
         'mantyke': {
             order: thisIndex.beforeOrder('mantine'),
             token: 'mantyke',
