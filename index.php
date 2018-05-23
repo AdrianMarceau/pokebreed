@@ -58,18 +58,18 @@ if (isset($_GET['gen'])
 
             <div class="banner">
                 <a class="logo" href="/"><img src="images/pokebox-logo.png" alt="PokéBox" /></a>
-                <span class="subtext"><h1>Pokémon Box Simulator</h1></span>
-                <span class="version">
+                <div class="subtext"><h1>Pokémon Box Simulator</h1></div>
+                <div class="version">
                     v<?= $version_number ?>
                     <span class="bp bp1"></span>
                     <span class="bp bp2"></span>
                     <span class="bp bp3"></span>
                     <span class="bp bp4"></span>
-                </span>
-                <span class="pokedex">
+                </div>
+                <div class="pokedex">
                     <span class="count"><span class="current">0</span> / <span class="total">0</span></span>
                     <img class="icon" src="images/pokeball.png" />
-                </span>
+                </div>
             </div>
 
             <div class="overview main">
@@ -134,8 +134,9 @@ if (isset($_GET['gen'])
             <div class="buttons">
                 <div class="controls">
                     <a class="control speed play hidden" data-control="play" title="Play">Play</a>
-                    <a class="control speed slower hidden" data-control="slower" title="Slower">Slower</a>
-                    <a class="control speed faster hidden" data-control="faster" title="Faster">Faster</a>
+                    <a class="control speed slow hidden" data-control="slow" title="Slow">Slow</a>
+                    <a class="control speed fast hidden" data-control="fast" title="Fast">Fast</a>
+                    <a class="control speed warp hidden" data-control="warp" title="Warp">Warp</a>
                     <a class="control speed pause hidden" data-control="pause" title="Pause">Pause</a>
                     <a class="control reset hidden" data-control="reset" title="Reset">Reset</a>
                     <a class="control start hidden" data-control="start" title="Start">Start</a>

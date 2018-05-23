@@ -123,7 +123,7 @@
         $panelMainOverview.find('.details.zone .title').bind('click', function(e){
             e.preventDefault();
             var $title = $(this);
-            $('html, body').animate({scrollTop: $title.offset().top}, 300);
+            $('html, body').animate({scrollTop: $title.offset().top}, Math.ceil(300 * dayTimeoutDurationMultiplier));
             });
 
         // Update any scroll wrappers when the window resizes
@@ -203,17 +203,21 @@
             var control = $button.attr('data-control');
 
             // If this is a play-speed related button
-            if (control.match(/^(play|pause|faster|slower)$/)){
-                var speedValue = 1200;
+            if (control.match(/^(play|pause|fast|slow|warp)$/)){
+                var speedValue = 1200; //
                 var speedToken = 'normal';
                 if (control === 'pause'){ speedValue = 99999999999; speedToken = 'pause'; }
-                else if (control === 'faster'){ speedValue = 600; speedToken = 'faster'; }
-                else if (control === 'slower'){ speedValue = 2400; speedToken = 'slower'; }
+                else if (control === 'warp'){ speedValue = 100; speedToken = 'warp'; } // 0.1s
+                else if (control === 'fast'){ speedValue = 600; speedToken = 'fast'; } // 0.6s
+                else if (control === 'slow'){ speedValue = 2400; speedToken = 'slow'; } // 2.4s
+                //else if (control === 'play'){ speedValue = 1200; speedToken = 'normal'; } // 1.2s
                 dayTimeoutDuration = speedValue;
+                dayTimeoutDurationMultiplier = dayTimeoutDuration / dayTimeoutDurationBase;
                 $('body').attr('data-speed', speedToken);
+                dayTimeoutDurationToken = speedToken;
                 $controlButtons.filter('.speed').removeClass('active');
                 $button.addClass('active');
-                if (control.match(/^(faster|slower)$/)){ $controlButtons.filter('.play').addClass('active'); }
+                if (control.match(/^(fast|slow|warp)$/)){ $controlButtons.filter('.play').addClass('active'); }
                 if (dayTimeout !== false){
                     var handler = dayTimeout.getHandler();
                     dayTimeout.clear();
@@ -554,6 +558,7 @@
             dayTimeout = false;
             dayTimeoutStarted = false;
             dayTimeoutDuration = 1200;
+            dayTimeoutDurationMultiplier = 1;
 
             // Show the pokemon buttons
             $('.new-pokemon', $panelButtons).removeClass('hidden');
@@ -1298,7 +1303,7 @@
                 $spriteImage.attr('data-token', pokeInfo.token);
 
                 $prevImage.stop().animate({opacity: 0}, {
-                    duration: 500,
+                    duration: Math.ceil(500 * dayTimeoutDurationMultiplier),
                     easing: 'linear',
                     queue: false,
                     complete: function(){
@@ -1306,7 +1311,7 @@
                         }
                     });
                 $spriteImage.stop().animate({opacity:1}, {
-                    duration: 500,
+                    duration: Math.ceil(500 * dayTimeoutDurationMultiplier),
                     easing: 'linear',
                     queue: false
                     });
@@ -1598,7 +1603,7 @@
                 // Move this pokemon's data to the fainted array and remove from display
                 thisZoneData.faintedPokemon.push(thisZoneData.currentPokemon.splice(key, 1));
                 $pokeItem.css({opacity:1}).stop().animate({opacity:0},{
-                    duration: 600,
+                    duration: Math.ceil(600 * dayTimeoutDurationMultiplier),
                     easing: 'linear',
                     queue: false,
                     complete: function(){
@@ -1844,6 +1849,9 @@
     var dayTimeout = false;
     var dayTimeoutStarted = false;
     var dayTimeoutDuration = 1200;
+    var dayTimeoutDurationBase = 1200;
+    var dayTimeoutDurationMultiplier = 1;
+    var dayTimeoutDurationToken = 'normal';
     function updateDay(updateCycles, allowVisitors){
         if (typeof updateCycles !== 'boolean'){ updateCycles = true; }
         if (typeof allowVisitors !== 'boolean'){ allowVisitors = updateCycles; }
