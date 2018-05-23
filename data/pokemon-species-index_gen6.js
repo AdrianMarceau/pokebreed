@@ -1547,6 +1547,25 @@
             prevEvolution: 'lucario'
             },
 
+        'mega-abomasnow': {
+            order: thisIndex.afterOrder('abomasnow'),
+            token: 'mega-abomasnow',
+            name: 'Mega Abomasnow',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'abomasnow',
+            number: 460,
+            types: ['grass', 'ice'],
+            baseStats: {hp: 90, phAttack: 132, phDefense: 105, spAttack: 132, spDefense: 105, speed: 30},
+            abilities: {0: 'snow-warning'},
+            height: 2.7,
+            weight: 185,
+            colors: ['white', 'green', 'blue', 'purple'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'grass'],
+            prevEvolution: 'abomasnow'
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
@@ -1607,6 +1626,7 @@
 
         {base: 'garchomp', species: 'mega-garchomp', method: 'mega-evolution', value: 'garchompite'},
         {base: 'lucario', species: 'mega-lucario', method: 'mega-evolution', value: 'lucarionite'},
+        {base: 'abomasnow', species: 'mega-abomasnow', method: 'mega-evolution', value: 'abomasite'},
 
         ]);
 

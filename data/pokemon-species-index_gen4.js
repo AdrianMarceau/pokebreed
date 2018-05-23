@@ -742,6 +742,41 @@
                 }]
             },
 
+        'snover': {
+            order: indexOrder++,
+            token: 'snover',
+            name: 'Snover',
+            number: 459,
+            types: ['grass', 'ice'],
+            baseStats: {hp: 60, phAttack: 62, phDefense: 50, spAttack: 62, spDefense: 60, speed: 40},
+            abilities: {0: 'snow-warning', hidden: 'soundproof'},
+            height: 1,
+            weight: 50.5,
+            colors: ['white', 'brown', 'green'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'grass'],
+            nextEvolutions: [{
+                species: 'abomasnow',
+                method: 'level-up',
+                value: 40
+                }]
+            },
+        'abomasnow': {
+            order: indexOrder++,
+            token: 'abomasnow',
+            name: 'Abomasnow',
+            number: 460,
+            types: ['grass', 'ice'],
+            baseStats: {hp: 90, phAttack: 92, phDefense: 75, spAttack: 92, spDefense: 85, speed: 60},
+            abilities: {0: 'snow-warning', hidden: 'soundproof'},
+            height: 2.2,
+            weight: 135.5,
+            colors: ['white', 'green', 'purple'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'grass'],
+            prevEvolution: 'snover'
+            },
+
         'weavile': {
             order: thisIndex.afterOrder('sneasel'),
             token: 'weavile',
