@@ -6,6 +6,7 @@
     var appLastUpdated = '2018-03-29'; // first date
     var appVersionNumber = '0.1.0'; // first version
     var appDebugMode = false; // debug mode
+    var appFreeMode = true; // free-mode (show all pokemon)
 
     var requiredPokemonIndexes = ['', 1, 2, 3, 4, 5, 6, 7, 'x'];
     var maxIndexKeyToLoad = 8;
@@ -92,6 +93,9 @@
         if (typeof window.PokemonAppLastUpdated !== 'undefined'){ appLastUpdated = window.PokemonAppLastUpdated; }
         if (typeof window.PokemonAppVersionNumber !== 'undefined'){ appVersionNumber = window.PokemonAppVersionNumber; }
         if (typeof window.PokemonAppDebugMode !== 'undefined'){ appDebugMode = window.PokemonAppDebugMode; }
+        if (typeof window.PokemonAppFreeMode !== 'undefined'){ appFreeMode = window.PokemonAppFreeMode; }
+
+        console.log('appFreeMode = ', appFreeMode);
 
         // Request the live version number from the server and wait to compare (refresh if out of date)
         $.get({
@@ -560,6 +564,9 @@
             dayTimeoutDuration = 1200;
             dayTimeoutDurationMultiplier = 1;
 
+            // Regenerate the pokemon buttons
+            generatePokemonButtons();
+
             // Show the pokemon buttons
             $('.new-pokemon', $panelButtons).removeClass('hidden');
             $('.controls .start', $panelButtons).removeClass('hidden').removeClass('ready');
@@ -799,6 +806,11 @@
         //console.log('generatePokemonButtons()');
         $pokePanelLoading.append('.'); // append loading dot
 
+        // Define the pokemon allowed regardless of seen status
+        var freeStarterPokemon = [];
+        freeStarterPokemon.push('bulbasaur', 'charmander', 'squirtle');
+        freeStarterPokemon.push('pikachu', 'eevee');
+
         // Loop through and generate buttons for each Pokemon
         var lastGeneration = false;
         var pokePanelMarkup = '';
@@ -817,7 +829,11 @@
                 || pokemonData['class'] === 'legendary'
                 || pokemonData['class'] === 'mythical'
                 || pokemonData['class'] === 'ultra-beast'
-                || pokemonData['eggGroups'][0] === 'undiscovered')){
+                || pokemonData['eggGroups'][0] === 'undiscovered')
+                || (!appFreeMode
+                    && freeStarterPokemon.indexOf(pokemonToken) === -1
+                    && (typeof PokemonSpeciesSeen[pokemonToken] === 'undefined'
+                        || PokemonSpeciesSeen[pokemonToken] < 1))){
                 continue;
                 }
 
@@ -862,7 +878,9 @@
             }
 
         // Append generated markup to the panel at once
-        $pokePanelButtons.append('<div class="buttonwrap">'+pokePanelMarkup+'</div>');
+        if (!$('.buttonwrap', $pokePanelButtons).length){ $pokePanelButtons.append('<div class="buttonwrap"></div>'); }
+        else { $('.buttonwrap', $pokePanelButtons).empty(); }
+        $('.buttonwrap', $pokePanelButtons).append(pokePanelMarkup);
 
         // Remove the loading dotts
         $pokePanelLoading.parent().addClass('loaded');

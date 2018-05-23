@@ -57,7 +57,8 @@ if (isset($_GET['gen'])
         <div class="panel">
 
             <div class="banner">
-                <a class="logo" href="/"><img src="images/pokebox-logo.png" alt="PokéBox" /></a>
+                <? /* <a class="logo" href="/"><img src="images/pokebox-logo.png" alt="PokéBox" /></a> */ ?>
+                <div class="logo"><img src="images/pokebox-logo.png" alt="PokéBox" /></div>
                 <div class="subtext"><h1>Pokémon Box Simulator</h1></div>
                 <div class="version">
                     v<?= $version_number ?>
@@ -171,6 +172,7 @@ if (isset($_GET['gen'])
             window.PokemonAppLastUpdated = '<?= $last_updated ?>';
             window.PokemonAppVersionNumber = '<?= $version_number ?>';
             window.PokemonAppDebugMode = <?= POKEBS_DEBUG_MODE === true ? 'true' : 'false' ?>;
+            window.PokemonAppFreeMode = <?= isset($_GET['freeMode']) && $_GET['freeMode'] === 'false' ? 'false' : 'true' ?>;
             window.PokemonAllowedGenerationsMax = <?= $allowed_generations ?>;
 
         </script>
