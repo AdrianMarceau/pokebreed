@@ -1065,7 +1065,7 @@
                 if (typeof pokeIndex['types'][1] !== 'undefined'){ liClass += pokeIndex['types'][1]+'2 '; }
                 if (!isUnlocked){ liClass += 'unknown '; }
                 pokedexMarkup.push('<li class="'+ liClass +'" data-token="' + pokeToken + '"><div class="bubble">' +
-                        '<span class="num">#' + (pokeNum + '').padStart(3, '0') + '</span> ' +
+                        '<span class="num">#' + strPad('000', pokeNum, true) + '</span> ' +
                         '<span class="name"><span>' + pokeIndex.name + '</span><span>- - -</span></span> ' +
                         '<span class="sprites">' + getPokemonIcon(pokeToken, false) + '</span>' +
                     '</div></li>');
@@ -3549,6 +3549,16 @@
         if (colNum === 0){ colNum = totalCols; }
         var rowNum = cellNum > totalCols ? Math.ceil(cellNum / totalCols) : 1;
         return {col: colNum, row: rowNum};
+    }
+
+    // Define an optimized function for padding a number/string
+    function strPad(pad, str, padLeft){
+        if (typeof str === 'undefined') return pad;
+        if (padLeft) {
+            return (pad + str).slice(-pad.length);
+            } else {
+            return (str + pad).substring(0, pad.length);
+            }
     }
 
     // Polyfill for requestAnimationFrame if not exists
