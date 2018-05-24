@@ -394,7 +394,7 @@ body[data-mode="free"] .panel .banner .subtext {
     filter: blur(2px);
     z-index: 1;
 }
-body[data-speed="warp"] .panel .overview.main .details.pokemon .field .bg { transition: background-image 0.05s; }
+body[data-speed="warp"] .panel .overview.main .details.pokemon .field .bg { transition: none; }
 body[data-speed="fast"] .panel .overview.main .details.pokemon .field .bg { transition: background-image 0.30s; }
 body[data-speed="normal"] .panel .overview.main .details.pokemon .field .bg { transition: background-image 0.60s; }
 body[data-speed="slow"] .panel .overview.main .details.pokemon .field .bg { transition: background-image 1.20s; }
@@ -433,7 +433,7 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .field .bg { tran
 .panel .overview.main .details.pokemon .list.pokemon li {
     position: absolute;
 }
-body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li { transition: top 0.03s, left 0.03s; }
+body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li { transition: none; }
 body[data-speed="fast"] .panel .overview.main .details.pokemon .list.pokemon li { transition: top 0.20s, left 0.20s; }
 body[data-speed="normal"] .panel .overview.main .details.pokemon .list.pokemon li { transition: top 0.40s, left 0.40s; }
 body[data-speed="slow"] .panel .overview.main .details.pokemon .list.pokemon li { transition: top 0.80s, left 0.80s; }
@@ -490,6 +490,10 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.pokemon li 
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }
+body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li.new {
+    -webkit-animation: none;
+    animation: none;
+}
 .panel .overview.main .details.pokemon .list.pokemon li.adult:after {
     content: "";
     position: absolute;
@@ -509,6 +513,10 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.pokemon li 
     animation: SpriteFadeOut 0.6s linear;
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
+}
+body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li.fainted {
+    -webkit-animation: none;
+    animation: none;
 }
 .panel .overview.main .details.pokemon .list .sprite {
     position: relative;
@@ -590,7 +598,7 @@ body[data-speed="faster"] .panel .overview.main .details.pokemon .list .sprite {
     border-radius: 3px;
     overflow: hidden;
 }
-body[data-speed="warp"] .panel .overview.main .details.pokemon .list.slots li.slot:before { transition: background-color 0.08s, box-shadow 0.08s;  }
+body[data-speed="warp"] .panel .overview.main .details.pokemon .list.slots li.slot:before { transition: none;  }
 body[data-speed="fast"] .panel .overview.main .details.pokemon .list.slots li.slot:before { transition: background-color 0.50s, box-shadow 0.50s; }
 body[data-speed="normal"] .panel .overview.main .details.pokemon .list.slots li.slot:before { transition: background-color 1.00s, box-shadow 1s;  }
 body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.slot:before { transition: background-color 2.00s, box-shadow 2.00s;  }
@@ -1535,49 +1543,4 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
 }
 .panel .buttons .info.links .link.mode:hover {
     color: #e2e2e2;
-}
-
-.panel .buttons .fields {
-    display: block;
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    margin: 0;
-    text-align: left;
-}
-.panel .buttons .fields:after {
-    content: "";
-    display: block;
-    clear: both;
-    height: 0;
-}
-.panel .buttons .fields .field {
-    display: block;
-    box-sizing: border-box;
-    float: left;
-    margin: 0 5px 0 0;
-    padding: 0;
-    width: 30px;
-    height: auto;
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-    border-radius: 6px;
-    overflow: hidden;
-    opacity: 0.4;
-    transition: opacity 0.3s;
-    cursor: pointer;
-}
-body[data-speed="warp"] .panel .buttons .fields .field { transition: opacity 0.03s; }
-body[data-speed="fast"] .panel .buttons .fields .field { transition: opacity 0.15s; }
-body[data-speed="normal"] .panel .buttons .fields .field { transition: opacity 0.30s; }
-body[data-speed="slow"] .panel .buttons .fields .field { transition: opacity 0.60s; }
-
-.panel .buttons .fields .field img {
-    display: block;
-    width: 100%;
-    height: auto;
-}
-.panel .buttons .fields .field:hover,
-.panel .buttons .fields .field.active {
-    opacity: 1.0;
 }
