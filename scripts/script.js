@@ -15,6 +15,7 @@
     var PokemonSpeciesIndexTokens = [];
     var BasicPokemonSpeciesIndexTokens = [];
     var PokemonSpeciesDisplayOrder = [];
+    var PokemonSpeciesDexOrder = [];
     var PokemonTypesIndex = {};
     var PokemonTypesIndexTokens = [];
 
@@ -199,6 +200,9 @@
         // Generate the actual pokemon buttons for the user to select from
         generatePokemonButtons();
 
+        // Generate the pokedex listing for the user to view their progress
+        generatePokemonPokedex();
+
         // Generate the click events for all the other panel buttons
         generateButtonPanelEvents();
 
@@ -348,8 +352,90 @@
             // Create a sorted list of pokemon species tokens so we don't have to later
             for (var key = 0; key < PokemonSpeciesIndexTokens.length; key++){
                 var token = PokemonSpeciesIndexTokens[key];
+                PokemonSpeciesDexOrder.push(token);
                 PokemonSpeciesDisplayOrder.push(token);
                 }
+
+            // Sort the dex list in official national order, BUT with family lines together
+            PokemonSpeciesDexOrder.sort(function(tokenA, tokenB){
+
+                var infoA = PokemonSpeciesIndex[tokenA];
+                var infoB = PokemonSpeciesIndex[tokenB];
+
+                var baseInfoA = PokemonSpeciesIndex[infoA.basicEvolution];
+                var baseInfoB = PokemonSpeciesIndex[infoB.basicEvolution];
+
+                var basicA = tokenA === infoA.basicEvolution ? true : false;
+                var basicB = tokenB === infoB.basicEvolution ? true : false;
+
+                var baseNumA = baseInfoA['number'];
+                var baseNumB = baseInfoB['number'];
+                if (typeof baseInfoA['subNumber'] !== 'undefined'){ baseNumA += (baseInfoA['subNumber'] / 10); }
+                if (typeof baseInfoB['subNumber'] !== 'undefined'){ baseNumB += (baseInfoB['subNumber'] / 10); }
+
+                var dittoA = false;
+                var dittoB = false;
+                if (tokenA === 'ditto'){ dittoA = true; }
+                if (tokenB === 'ditto'){ dittoB = true; }
+
+                var shinyDittoA = false;
+                var shinyDittoB = false;
+                if (tokenA === 'shiny-ditto'){ shinyDittoA = true; }
+                if (tokenB === 'shiny-ditto'){ shinyDittoB = true; }
+
+                var unownA = false;
+                var unownB = false;
+                if (tokenA === 'unown'){ unownA = true; }
+                if (tokenB === 'unown'){ unownB = true; }
+
+                var specialA = false;
+                var specialB = false;
+                if (infoA['class'] === 'legendary' || infoA['class'] === 'mythical' || infoA['class'] === 'ultra-beast'){ specialA = true; }
+                if (infoB['class'] === 'legendary' || infoB['class'] === 'mythical' || infoB['class'] === 'ultra-beast'){ specialB = true; }
+
+                var regVariantA = false;
+                var regVariantB = false;
+                if (infoA['formClass'] === 'regional-variant'){ regVariantA = true; }
+                if (infoB['formClass'] === 'regional-variant'){ regVariantB = true; }
+
+                var genderVariantA = false;
+                var genderVariantB = false;
+                if (infoA['formClass'] === 'gender-variant' && typeof infoA['prevEvolution'] === 'undefined'){ genderVariantA = true; }
+                if (infoB['formClass'] === 'gender-variant' && typeof infoB['prevEvolution'] === 'undefined'){ genderVariantB = true; }
+
+                if (false){ return 0; }
+
+                else if (baseNumA < baseNumB){ return -1; }
+                else if (baseNumA > baseNumB){ return 1; }
+
+                else if (regVariantA && !regVariantB){ return 1; }
+                else if (!regVariantA && regVariantB){ return -1; }
+
+                else if (genderVariantA && !genderVariantB){ return 1; }
+                else if (!genderVariantA && genderVariantB){ return -1; }
+
+                else if (genderVariantA && genderVariantB){
+
+                    if (infoA['order'] < infoB['order']){ return -1; }
+                    else if (infoA['order'] > infoB['order']){ return 1; }
+                    else { return 0; }
+
+                } else {
+
+                    var invertVariant = false;
+                    if (regVariantA && regVariantB && basicA && basicB){ invertVariant = true; }
+
+                    if (infoA['order'] < infoB['order']){ return -1 * (invertVariant ? -1 : 1); }
+                    else if (infoA['order'] > infoB['order']){ return 1 * (invertVariant ? -1 : 1); }
+                    else { return 0; }
+
+                }
+
+                return 0;
+
+                });
+
+            // Sort the display list in national order, BUT with family lines together and inverted (parents on top)
             PokemonSpeciesDisplayOrder.sort(function(tokenA, tokenB){
 
                 var infoA = PokemonSpeciesIndex[tokenA];
@@ -803,129 +889,210 @@
         //console.log('generatePokemonButtons()');
         $pokePanelLoading.append('.'); // append loading dot
 
-        // Define the pokemon allowed regardless of seen status
+        // Count the number of species seen so far
+        var seenSpeciesTokens = Object.keys(PokemonSpeciesSeen);
+
+        // Define the pokemon allowed regardless of seen status, (starters for each gen)
         var freeStarterPokemon = [];
-        freeStarterPokemon.push('bulbasaur', 'charmander', 'squirtle');
-        freeStarterPokemon.push('pikachu', 'eevee');
+        freeStarterPokemon.push('bulbasaur', 'charmander', 'squirtle'); // gen 1 starters
+        freeStarterPokemon.push('pikachu', 'eevee'); // special edition starters
+        if (seenSpeciesTokens.length >= 151){ freeStarterPokemon.push('chikorita', 'cyndaquil', 'totodile'); } // gen 2 starters
+        if (seenSpeciesTokens.length >= 251){ freeStarterPokemon.push('treecko', 'torchic', 'mudkip'); } // gen 3 starters
+        if (seenSpeciesTokens.length >= 386){ freeStarterPokemon.push('turtwig', 'chimchar', 'piplup'); } // gen 4 starters
+        if (seenSpeciesTokens.length >= 493){ freeStarterPokemon.push('snivy', 'tepid', 'oshawott'); } // gen 5 starters
+        if (seenSpeciesTokens.length >= 649){ freeStarterPokemon.push('chespin', 'fennekin', 'froakie'); } // gen 6 starters
+        if (seenSpeciesTokens.length >= 721){ freeStarterPokemon.push('rowlet', 'litten', 'popplio'); } // gen 7 starters
+        //if (seenSpeciesTokens.length >= 807){ freeStarterPokemon.push('?', '?', '?'); }
 
-        // Loop through and generate buttons for each Pokemon
-        var lastGeneration = false;
-        var pokePanelMarkup = '';
-        for (var key = 0; key < BasicPokemonSpeciesIndexTokens.length; key++){
+        // Wrap execution in timeout to prevent render-blocking
+        window.setTimeout(function(){
 
-            // Collect the pokemon's token, data, and types
-            var pokemonToken = BasicPokemonSpeciesIndexTokens[key];
-            //console.log('pokemonToken = ', pokemonToken);
-            var pokemonData = PokemonSpeciesIndex[pokemonToken];
-            var pokemonTypes = pokemonData.types;
-            //console.log('pokemonTypes = ', pokemonTypes);
+            // Loop through and generate buttons for each Pokemon
+            var lastGeneration = false;
+            var pokePanelMarkup = '';
+            for (var key = 0; key < BasicPokemonSpeciesIndexTokens.length; key++){
 
-            // Continue if this is not an appropriate starter pokemon
-            if (!appDebugMode && (pokemonToken === 'ditto'
-                || pokemonToken === 'shiny-ditto'
-                || pokemonData['class'] === 'legendary'
-                || pokemonData['class'] === 'mythical'
-                || pokemonData['class'] === 'ultra-beast'
-                || pokemonData['eggGroups'][0] === 'undiscovered')
-                || (!appFreeMode
-                    && freeStarterPokemon.indexOf(pokemonToken) === -1
-                    && (typeof PokemonSpeciesSeen[pokemonToken] === 'undefined'
-                        || PokemonSpeciesSeen[pokemonToken] < 1))){
-                continue;
-                }
+                // Collect the pokemon's token, data, and types
+                var pokemonToken = BasicPokemonSpeciesIndexTokens[key];
+                //console.log('pokemonToken = ', pokemonToken);
+                var pokemonData = PokemonSpeciesIndex[pokemonToken];
+                var pokemonTypes = pokemonData.types;
+                //console.log('pokemonTypes = ', pokemonTypes);
 
-            // Insert a break after each new generation
-            if (pokemonData.gameGeneration !== lastGeneration
-                && pokemonData.formClass !== 'gender-variant'
-                && pokemonData.formClass !== 'regional-variant'){
-                if (lastGeneration !== false){ pokePanelMarkup += '<hr class="breaker" />'; }
-                lastGeneration = pokemonData.gameGeneration;
-            }
-
-            // Collect the pokemon's image icon
-            var pokemonIcon = getPokemonIcon(pokemonToken);
-
-            // Generate the pokemon's name for the hover
-            var pokemonName = pokemonData.name;
-            pokemonName += ' ('+ (pokemonData.types.join(' / ').toLowerCase().replace(/\b[a-z]/g, function(l) { return l.toUpperCase(); })) +')';
-
-            // Define the class for the pokemon button
-            var buttonClass = 'button type ';
-            if (typeof pokemonTypes[0] === 'string'){ buttonClass += pokemonTypes[0]+' '; }
-            if (typeof pokemonTypes[1] === 'string'){ buttonClass += pokemonTypes[1]+'2 '; }
-
-            // Generate the markup for the pokemon button
-            var buttonMarkup = '';
-            buttonMarkup += '<button '+
-                'class="'+ buttonClass +'" '+
-                'data-action="add" '+
-                'data-kind="pokemon" '+
-                'data-token="'+ pokemonToken +'" '+
-                'title="'+ pokemonName +'" '+
-                '>';
-                buttonMarkup += '<span class="gloss"></span>';
-                buttonMarkup += '<span class="plus">+</span>';
-                buttonMarkup += pokemonIcon;
-                //buttonMarkup += '<strong>' + pokemonData['name'] +'</strong>';
-            buttonMarkup += '</button>';
-
-            // Appent this button's markup the full list
-            pokePanelMarkup += buttonMarkup;
-
-            }
-
-        // Append generated markup to the panel at once
-        if (!$('.buttonwrap', $pokePanelButtons).length){ $pokePanelButtons.append('<div class="buttonwrap"></div>'); }
-        else { $('.buttonwrap', $pokePanelButtons).empty(); }
-        $('.buttonwrap', $pokePanelButtons).append(pokePanelMarkup);
-
-        // Remove the loading dotts
-        $pokePanelLoading.parent().addClass('loaded');
-        $pokePanelLoading.remove();
-
-        // Atach a scrollbar to the markup panel
-        $pokePanelButtons.find('.buttonwrap').perfectScrollbar({suppressScrollX: true});
-
-        // Update scrollbar once images have loaded
-        var $buttonImages = $('img', $pokePanelButtons);
-        var loadedImages = 0;
-        $buttonImages.each(function(){
-            $(this).on('load', function(){
-                loadedImages++;
-                if (loadedImages === $buttonImages.length){
-                    //console.log('update scrollbar');
-                    $pokePanelButtons.find('.buttonwrap').perfectScrollbar('update');
+                // Continue if this is not an appropriate starter pokemon
+                if (!appDebugMode && (pokemonToken === 'ditto'
+                    || pokemonToken === 'shiny-ditto'
+                    || pokemonData['class'] === 'legendary'
+                    || pokemonData['class'] === 'mythical'
+                    || pokemonData['class'] === 'ultra-beast'
+                    || pokemonData['eggGroups'][0] === 'undiscovered')
+                    || (!appFreeMode
+                        && freeStarterPokemon.indexOf(pokemonToken) === -1
+                        && (typeof PokemonSpeciesSeen[pokemonToken] === 'undefined'
+                            || PokemonSpeciesSeen[pokemonToken] < 1))){
+                    continue;
                     }
-                });
-            });
 
-        // Unhide the start button now that pokemon list is ready
-        $('.controls .start', $panelButtons).removeClass('hidden');
-
-        // Attach a click event to the generated buttons
-        $('button[data-action]', $pokePanelButtons).bind('click', function(e){
-            e.preventDefault();
-            if (simulationStarted
-                || thisZoneData.currentPokemon.length >= 10){
-                return false;
+                // Insert a break after each new generation
+                if (pokemonData.gameGeneration !== lastGeneration
+                    && pokemonData.formClass !== 'gender-variant'
+                    && pokemonData.formClass !== 'regional-variant'){
+                    if (lastGeneration !== false){ pokePanelMarkup += '<hr class="breaker" />'; }
+                    lastGeneration = pokemonData.gameGeneration;
                 }
-            var $button = $(this);
-            var action = $button.attr('data-action');
-            var kind = $button.attr('data-kind');
-            var token = $button.attr('data-token');
-            if (action == 'add'){
-                if (kind == 'pokemon'){
-                    addPokemonToZone(token, false);
-                    if (thisZoneData.currentPokemon.length > 0){
-                        $('.controls .start', $panelButtons).addClass('ready');
-                        } else {
-                        $('.controls .start', $panelButtons).removeClass('ready');
+
+                // Collect the pokemon's image icon
+                var pokemonIcon = getPokemonIcon(pokemonToken);
+
+                // Generate the pokemon's name for the hover
+                var pokemonName = pokemonData.name;
+                pokemonName += ' ('+ (pokemonData.types.join(' / ').toLowerCase().replace(/\b[a-z]/g, function(l) { return l.toUpperCase(); })) +')';
+
+                // Define the class for the pokemon button
+                var buttonClass = 'button type ';
+                if (typeof pokemonTypes[0] === 'string'){ buttonClass += pokemonTypes[0]+' '; }
+                if (typeof pokemonTypes[1] === 'string'){ buttonClass += pokemonTypes[1]+'2 '; }
+
+                // Generate the markup for the pokemon button
+                var buttonMarkup = '';
+                buttonMarkup += '<button '+
+                    'class="'+ buttonClass +'" '+
+                    'data-action="add" '+
+                    'data-kind="pokemon" '+
+                    'data-token="'+ pokemonToken +'" '+
+                    'title="'+ pokemonName +'" '+
+                    '>';
+                    buttonMarkup += '<span class="gloss"></span>';
+                    buttonMarkup += '<span class="plus">+</span>';
+                    buttonMarkup += pokemonIcon;
+                    //buttonMarkup += '<strong>' + pokemonData['name'] +'</strong>';
+                buttonMarkup += '</button>';
+
+                // Appent this button's markup the full list
+                pokePanelMarkup += buttonMarkup;
+
+                }
+
+            // Append generated markup to the panel at once
+            if (!$('.buttonwrap', $pokePanelButtons).length){ $pokePanelButtons.append('<div class="buttonwrap"></div>'); }
+            else { $('.buttonwrap', $pokePanelButtons).empty(); }
+            $('.buttonwrap', $pokePanelButtons).append(pokePanelMarkup);
+
+            // Remove the loading dotts
+            $pokePanelLoading.parent().addClass('loaded');
+            $pokePanelLoading.remove();
+            //console.log('JUST removed the loading panel');
+
+            // Atach a scrollbar to the markup panel
+            $pokePanelButtons.find('.buttonwrap').perfectScrollbar({suppressScrollX: true});
+
+            // Update scrollbar once images have loaded
+            var $buttonImages = $('img', $pokePanelButtons);
+            var loadedImages = 0;
+            $buttonImages.each(function(){
+                $(this).on('load', function(){
+                    loadedImages++;
+                    if (loadedImages === $buttonImages.length){
+                        //console.log('update scrollbar');
+                        $pokePanelButtons.find('.buttonwrap').perfectScrollbar('update');
                         }
-                    return true;
+                    });
+                });
+
+            // Unhide the start button now that pokemon list is ready
+            $('.controls .start', $panelButtons).removeClass('hidden');
+
+            // Attach a click event to the generated buttons
+            $('button[data-action]', $pokePanelButtons).bind('click', function(e){
+                e.preventDefault();
+                if (simulationStarted
+                    || thisZoneData.currentPokemon.length >= 10){
+                    return false;
                     }
+                var $button = $(this);
+                var action = $button.attr('data-action');
+                var kind = $button.attr('data-kind');
+                var token = $button.attr('data-token');
+                if (action == 'add'){
+                    if (kind == 'pokemon'){
+                        addPokemonToZone(token, false);
+                        if (thisZoneData.currentPokemon.length > 0){
+                            $('.controls .start', $panelButtons).addClass('ready');
+                            } else {
+                            $('.controls .start', $panelButtons).removeClass('ready');
+                            }
+                        return true;
+                        }
+                    }
+                return false;
+                });
+
+
+            }, 0);
+
+    }
+
+    // Define a function for generating the pokedex tab's content for the user
+    function generatePokemonPokedex(){
+
+        //console.log('generatePokemonPokedex()');
+        //$pokePanelLoading.append('.'); // append loading dot
+
+        // Remove the hidden class from the pokedex link
+        $('.info.links .link[data-tab="pokedex"]', $panelButtons).removeClass('hidden');
+
+        // Wrap execution in timeout to prevent render-blocking
+        window.setTimeout(function(){
+
+            // Collect a reference to the pokedex list wrapper
+            var $pokedexContainer = $('.info[data-tab="pokedex"]', $panelButtons);
+            var $pokedexList = $('.list', $pokedexContainer);
+
+            // Loop through the display order for all the pokemon
+            var pokedexMarkup = [];
+            for (var key = 0; key < PokemonSpeciesDexOrder.length; key++){
+                //console.log('pokedex markup ', key);
+                var pokeNum = key + 1;
+                var pokeToken = PokemonSpeciesDexOrder[key];
+                var pokeIndex = PokemonSpeciesIndex[pokeToken];
+                var isUnlocked = false;
+                if (typeof PokemonSpeciesSeen[pokeToken] !== 'undefined'
+                    && PokemonSpeciesSeen[pokeToken] > 0){
+                    isUnlocked = true;
+                    }
+                var liClass = 'species ';
+                liClass += 'type '+pokeIndex['types'][0]+' ';
+                if (typeof pokeIndex['types'][1] !== 'undefined'){ liClass += pokeIndex['types'][1]+'2 '; }
+                if (!isUnlocked){ liClass += 'unknown '; }
+                pokedexMarkup.push('<li class="'+ liClass +'" data-token="' + pokeToken + '"><div class="bubble">' +
+                        '<span class="num">#' + (pokeNum + '').padStart(3, '0') + '</span> ' +
+                        '<span class="name"><span>' + pokeIndex.name + '</span><span>- - -</span></span> ' +
+                        '<span class="sprites">' + getPokemonIcon(pokeToken, false) + '</span>' +
+                    '</div></li>');
                 }
-            return false;
-            });
+            $pokedexList.append(pokedexMarkup.join(''));
+
+            // Remove the hidden class from the pokedex link
+            $('.info.links .link[data-tab="pokedex"]', $panelButtons).removeClass('wait');
+
+            }, 0);
+
+    }
+
+    // Define a function for updating the pokedex with currently seen species
+    function updatePokemonPokedex(){
+
+        // Collect a reference to the pokedex list wrapper
+        var $pokedexContainer = $('.info[data-tab="pokedex"]', $panelButtons);
+        var $pokedexList = $('.list', $pokedexContainer);
+
+        // Loop through the list of seen species and unhide appropriate blocks
+        var seenSpeciesTokens = Object.keys(PokemonSpeciesSeen);
+        for (var key = 0; key < seenSpeciesTokens.length; key++){
+            var pokeToken = seenSpeciesTokens[key];
+            var $pokeBlock = $('.species[data-token="'+ pokeToken +'"]', $pokedexList);
+            if ($pokeBlock.hasClass('unknown')){ $pokeBlock.removeClass('unknown') }
+            }
 
     }
 
@@ -1914,6 +2081,9 @@
             else if (thisZoneData.day % 30 === 0){ triggerZoneVisitor('basic'); }
 
             }
+
+        // Update the pokedex with any changes last day
+        updatePokemonPokedex();
 
         //var $timer = $('.details.zone .timer .complete', $panelMainOverview);
         if (dayTimeout !== false){ clearTimeout(dayTimeout); }

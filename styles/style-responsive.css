@@ -110,7 +110,11 @@
     }
 
     .panel .buttons .controls .control.start {
-        top: 208px;
+        top: 202px;
+    }
+
+    .panel .buttons .info .group.pokedex .list .species {
+        width: calc(33% - 5px);
     }
 
 }

@@ -160,8 +160,9 @@ if (isset($_GET['gen'])
                     <a class="link" data-tab="help">help</a>
                     <a class="link" data-tab="credits">credits</a>
                     <a class="link chat" href="https://discord.gg/8jsSYt5" target="_blank"><span>chat</span></a>
+                    <a class="link pokedex hidden wait" data-tab="pokedex"><span>pokédex</span><span>&hellip;</span></a>
                     <? if ($is_free_mode){ ?>
-                        <a class="link mode story" href="/"><span>&laquo; normal mode</span></a>
+                        <a class="link mode" href="/"><span>&laquo; normal mode</span></a>
                     <? } ?>
                 </div>
                 <div class="info hidden" data-tab="about">
@@ -172,6 +173,9 @@ if (isset($_GET['gen'])
                 </div>
                 <div class="info hidden" data-tab="credits">
                     <? require('pages/credits.php'); ?>
+                </div>
+                <div class="info hidden" data-tab="pokedex">
+                    <? require('pages/pokedex.php'); ?>
                 </div>
             </div>
 

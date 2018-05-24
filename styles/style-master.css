@@ -1100,6 +1100,10 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     overflow: hidden;
     margin-right: 0;
     padding-right: 12px;
+    background-color: rgba(0, 0, 0, 0.05);
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
 }
 .panel .buttons .new-pokemon .ps-container > .ps-scrollbar-y-rail {
     width: 6px;
@@ -1271,7 +1275,7 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
 .panel .buttons .info > div {
     display: block;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0;
 }
 .panel .buttons hr.breaker {
     display: block;
@@ -1313,6 +1317,116 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
 }
 .panel .buttons .info .group .group {
     margin-bottom: 20px;
+}
+
+.panel .buttons .info .group.pokedex {
+
+
+}
+.panel .buttons .info .group.pokedex .list {
+    padding: 0;
+    margin: 0 auto;
+}
+.panel .buttons .info .group.pokedex .list .species {
+    display: block;
+    box-sizing: border-box;
+    margin: 0 5px 5px 0;
+    float: left;
+    width: calc(25% - 5px);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    background-color: #59595f;
+    padding: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+    position: relative;
+    opacity: 1.0;
+    transition: opacity 0.3s;
+}
+.panel .buttons .info .group.pokedex .list .species:after {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 50%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    pointer-events: none;
+    background-color: transparent;
+}
+.panel .buttons .info .group.pokedex .list .species .bubble {
+    display: block;
+    padding: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #373739;
+    color: #FFFFFF;
+    position: relative;
+    z-index: 2;
+    font-size: 11px;
+    line-height: 1.2;
+    padding: 3px 6px;
+    position: relative;
+}
+.panel .buttons .info .group.pokedex .list .species .bubble:after {
+    content: "";
+    display: block;
+    clear: both;
+    height: 0;
+}
+.panel .buttons .info .group.pokedex .list .species .bubble .num,
+.panel .buttons .info .group.pokedex .list .species .bubble .name {
+    display: block;
+    float: left;
+    clear: left;
+}
+.panel .buttons .info .group.pokedex .list .species .bubble .name {
+    font-size: 12px;
+}
+.panel .buttons .info .group.pokedex .list .species .bubble .name span:first-child {
+    display: inline;
+}
+.panel .buttons .info .group.pokedex .list .species .bubble .name span:last-child {
+    display: none;
+}
+.panel .buttons .info .group.pokedex .list .species .bubble .sprites {
+    display: block;
+    width: 90px;
+    height: 30px;
+    position: absolute;
+    text-align: right;
+    top: 2px;
+    right: 2px;
+}
+.panel .buttons .info .group.pokedex .list .species .bubble .sprites .sprite {
+    display: block;
+    float: right;
+    margin-left: -20px;
+    position: relative;
+    top: -2px;
+}
+.panel .buttons .info .group.pokedex .list .species.unknown {
+    opacity: 0.3;
+}
+.panel .buttons .info .group.pokedex .list .species.unknown .bubble .sprites .sprite {
+    -webkit-filter: grayscale(100%) brightness(0);
+    filter: grayscale(100%) brightness(0);
+    opacity: 0.3;
+}
+.panel .buttons .info .group.pokedex .list .species.unknown .num {
+    color: #adadad;
+}
+.panel .buttons .info .group.pokedex .list .species.unknown .name {
+    color: #757575;
+}
+.panel .buttons .info .group.pokedex .list .species.unknown .bubble .name span:first-child {
+    display: none;
+}
+.panel .buttons .info .group.pokedex .list .species.unknown .bubble .name span:last-child {
+    display: inline;
 }
 
 .panel .buttons .info.links {
@@ -1359,25 +1473,52 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
 }
 
 .panel .buttons .info.links .link.chat,
-.panel .buttons .info.links .link.mode {
+.panel .buttons .info.links .link.mode,
+.panel .buttons .info.links .link.pokedex {
     float: right;
 }
 .panel .buttons .info.links .link.chat span,
-.panel .buttons .info.links .link.mode span {
+.panel .buttons .info.links .link.mode span,
+.panel .buttons .info.links .link.pokedex span {
     vertical-align: middle;
     line-height: 13px;
 }
-.panel .buttons .info.links .link.chat:after {
+.panel .buttons .info.links .link.chat:after,
+.panel .buttons .info.links .link.pokedex:after {
     content: "";
     display: inline-block;
     width: 18px;
     height: 13px;
-    background-image: url(../images/discord.png);
+    background-image: none;
     background-position: 0 0;
     background-repeat: no-repeat;
     background-color: transparent;
     margin-left: 4px;
     vertical-align: middle;
+}
+.panel .buttons .info.links .link.chat:after {
+    background-image: url(../images/discord.png);
+}
+.panel .buttons .info.links .link.pokedex:after {
+    background-image: url(../images/pokeball.png);
+    width: 13px;
+    background-size: contain;
+}
+.panel .buttons .info.links .link.pokedex span:first-child {
+    display: inline;
+}
+.panel .buttons .info.links .link.pokedex span:last-child {
+    display: none;
+}
+.panel .buttons .info.links .link.pokedex.wait {
+    pointer-events: none;
+    opacity: 0.6;
+}
+.panel .buttons .info.links .link.pokedex.wait span:first-child {
+    display: none;
+}
+.panel .buttons .info.links .link.pokedex.wait span:last-child {
+    display: inline;
 }
 .panel .buttons .info.links .link.mode {
     float: none;
