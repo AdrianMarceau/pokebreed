@@ -1097,11 +1097,11 @@
     }
 
     // Define a function for getting the next pokemon ID
+    var nextPokemonID = 0;
     function getNextPokemonID(){
-        var newID = 0;
-        newID += thisZoneData.currentPokemon.length;
-        newID += thisZoneData.faintedPokemon.length;
-        return newID;
+        var nextID = nextPokemonID;
+        nextPokemonID++;
+        return nextID;
     }
 
     // Define a function for adding a new pokemon to a zone
@@ -1834,9 +1834,8 @@
             thisZoneData.addedPokemonSpecies[pokeInfo.token]--;
             thisZoneData.currentPokemon.splice(pokeKey, 1);
             PokemonSpeciesSeen[pokeInfo.token]--;
-            if (PokemonSpeciesSeen[pokeInfo.token] === 0){
-                delete PokemonSpeciesSeen[pokeInfo.token];
-                }
+            if (PokemonSpeciesSeen[pokeInfo.token] === 0){ delete PokemonSpeciesSeen[pokeInfo.token]; }
+            updateOverview();
             if (thisZoneData.currentPokemon.length > 0){
                 $('.controls .start', $panelButtons).addClass('ready');
                 } else {
