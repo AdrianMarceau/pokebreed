@@ -43,7 +43,10 @@ RewriteEngine on
 # Redirect requires for minified files to the appropriate scripts
 #RewriteCond %{REQUEST_FILENAME} -d [OR]
 RewriteCond %{REQUEST_FILENAME} -f
-RewriteRule (.*) - [S=3]
+RewriteRule (.*) - [S=4]
+#
 RewriteRule ^styles/([-_a-z0-9\.]+)\.min\.css$ styles/style.php?file=styles/$1.css [L]
 RewriteRule ^scripts/([-_a-z0-9\.]+)\.min\.js$ scripts/script.php?file=scripts/$1.js [L]
 RewriteRule ^data/([-_a-z0-9\.]+)\.min\.js$ scripts/script.php?file=data/$1.js [L]
+#
+RewriteRule ^free-mode/$ index.php?freeMode=true [L]

@@ -7,6 +7,13 @@
         <p>This is a simulator and not an actual game, so you're free to play however you want and come up with your own goals. Just relax and let the Pokémon do their thing.</p>
     </div>
     <div class="group">
+        <h2>Available Modes</h2>
+        <ul>
+            <li><a href="/">Normal Mode</a> - Complete your Pokedex! Use starter Pokémon to attract new species, then chain to find them all!</li>
+            <li><a href="free-mode/">Free Mode</a> - No Limits! Any basic Pokémon can be added to your box, but records are not saved.</li>
+        </ul>
+    </div>
+    <div class="group">
         <h2>Future Goals for the Project</h2>
         <ul>
             <li>Allow the user to start the simulator with less than 10 Pokémon if they want to</li>

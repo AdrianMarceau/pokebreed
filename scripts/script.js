@@ -6,7 +6,7 @@
     var appLastUpdated = '2018-03-29'; // first date
     var appVersionNumber = '0.1.0'; // first version
     var appDebugMode = false; // debug mode
-    var appFreeMode = true; // free-mode (show all pokemon)
+    var appFreeMode = false; // free-mode (show all pokemon)
 
     var requiredPokemonIndexes = ['', 1, 2, 3, 4, 5, 6, 7, 'x'];
     var maxIndexKeyToLoad = 8;
@@ -95,8 +95,6 @@
         if (typeof window.PokemonAppDebugMode !== 'undefined'){ appDebugMode = window.PokemonAppDebugMode; }
         if (typeof window.PokemonAppFreeMode !== 'undefined'){ appFreeMode = window.PokemonAppFreeMode; }
 
-        console.log('appFreeMode = ', appFreeMode);
-
         // Request the live version number from the server and wait to compare (refresh if out of date)
         $.get({
             url: 'version.php?return=version_number',
@@ -149,6 +147,22 @@
                 });
             });
 
+        // Define the click-event for the info links
+        var $linkButtons = $('.info.links .link[data-tab]', $panelButtons);
+        var $linkContainers = $('.info[data-tab]', $panelButtons);
+        $linkButtons.bind('click', function(e){
+            //console.log('tab clicked');
+            e.preventDefault();
+            var $link = $(this);
+            var tab = $link.attr('data-tab');
+            var active = $link.hasClass('active');
+            $linkButtons.removeClass('active');
+            $linkContainers.addClass('hidden');
+            if (!active){
+                $link.addClass('active');
+                $linkContainers.filter('[data-tab="'+tab+'"]').removeClass('hidden');
+                }
+            });
 
     });
 
@@ -245,23 +259,6 @@
                 return;
                 }
 
-            });
-
-        // Define the click-event for the info links
-        var $linkButtons = $('.info.links .link[data-tab]', $panelButtons);
-        var $linkContainers = $('.info[data-tab]', $panelButtons);
-        $linkButtons.bind('click', function(e){
-            //console.log('tab clicked');
-            e.preventDefault();
-            var $link = $(this);
-            var tab = $link.attr('data-tab');
-            var active = $link.hasClass('active');
-            $linkButtons.removeClass('active');
-            $linkContainers.addClass('hidden');
-            if (!active){
-                $link.addClass('active');
-                $linkContainers.filter('[data-tab="'+tab+'"]').removeClass('hidden');
-                }
             });
 
 

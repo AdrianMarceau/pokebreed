@@ -16,6 +16,13 @@
 // Require the global config file
 require('config.php');
 
+// Define the seo index flag as true
+$page_is_indexed = true;
+
+// Check if we're in "Free Mode" or not
+$is_free_mode = isset($_GET['freeMode']) && $_GET['freeMode'] === 'true' ? true : false;
+if ($is_free_mode){ $page_is_indexed = false; }
+
 // Collect the max generation number and make sure it doesn't go over
 $allowed_generations = 8;
 if (isset($_GET['gen'])
@@ -30,8 +37,12 @@ if (isset($_GET['gen'])
 <html>
     <head>
         <meta charset="utf8">
-        <title>PokéBox | Pokémon Box Simulator | v<?= $version_number ?></title>
-        <meta name="robots" content="index,follow" />
+        <title>PokéBox <?= $is_free_mode ? '(Free Mode) ' : '' ?>| Pokémon Box Simulator | v<?= $version_number ?></title>
+        <? if ($page_is_indexed){ ?>
+            <meta name="robots" content="index,follow" />
+        <? } else { ?>
+            <meta name="robots" content="noindex,follow" />
+        <? } ?>
         <meta id="myViewport" name="viewport" content="width=device-width, initial-scale=1">
         <base href="<?= POKEBS_ROOT_URL ?>" />
         <link type="text/css" rel="stylesheet" href="styles/style-base.min.css?v<?= $version_number ?>" />
@@ -53,13 +64,12 @@ if (isset($_GET['gen'])
         </script>
         <? } ?>
     </head>
-    <body data-speed="normal">
+    <body data-speed="normal" data-mode="<?= $is_free_mode ? 'free' : 'normal' ?>">
         <div class="panel">
 
             <div class="banner">
-                <? /* <a class="logo" href="/"><img src="images/pokebox-logo.png" alt="PokéBox" /></a> */ ?>
                 <div class="logo"><img src="images/pokebox-logo.png" alt="PokéBox" /></div>
-                <div class="subtext"><h1>Pokémon Box Simulator</h1></div>
+                <div class="subtext"><h1>Pokémon Box Simulator<?= $is_free_mode ? ' <sup>(Free Mode)</sup>' : '' ?></h1></div>
                 <div class="version">
                     v<?= $version_number ?>
                     <span class="bp bp1"></span>
@@ -150,6 +160,9 @@ if (isset($_GET['gen'])
                     <a class="link" data-tab="help">help</a>
                     <a class="link" data-tab="credits">credits</a>
                     <a class="link chat" href="https://discord.gg/8jsSYt5" target="_blank"><span>chat</span></a>
+                    <? if ($is_free_mode){ ?>
+                        <a class="link mode story" href="/"><span>&laquo; normal mode</span></a>
+                    <? } ?>
                 </div>
                 <div class="info hidden" data-tab="about">
                     <? require('pages/about.php'); ?>
@@ -172,7 +185,7 @@ if (isset($_GET['gen'])
             window.PokemonAppLastUpdated = '<?= $last_updated ?>';
             window.PokemonAppVersionNumber = '<?= $version_number ?>';
             window.PokemonAppDebugMode = <?= POKEBS_DEBUG_MODE === true ? 'true' : 'false' ?>;
-            window.PokemonAppFreeMode = <?= isset($_GET['freeMode']) && $_GET['freeMode'] === 'false' ? 'false' : 'true' ?>;
+            window.PokemonAppFreeMode = <?= isset($_GET['freeMode']) && $_GET['freeMode'] === 'true' ? 'true' : 'false' ?>;
             window.PokemonAllowedGenerationsMax = <?= $allowed_generations ?>;
 
         </script>
