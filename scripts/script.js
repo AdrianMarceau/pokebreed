@@ -83,6 +83,16 @@
         updateDeviceWidth();
         //console.log('thisDeviceWidth = ', thisDeviceWidth);
 
+        // Do not update local storage records if we're in free mode
+        if (!appFreeMode){
+            // Check if a localStorage value exsists for species seen
+            if (typeof window.localStorage !== 'undefined'){
+                var savedData = window.localStorage.getItem('PokemonSpeciesSeen');
+                if (typeof savedData === 'string'){ PokemonSpeciesSeen = JSON.parse(savedData); }
+                //console.log('savedData = ', savedData);
+                }
+            }
+
         // Expose the zone zata as a public variable
         window.PokeboxZoneData = thisZoneData;
         window.PokeboSpeciesSeen = PokemonSpeciesSeen;
@@ -1041,12 +1051,12 @@
         // Remove the hidden class from the pokedex link
         $('.info.links .link[data-tab="pokedex"]', $panelButtons).removeClass('hidden');
 
+        // Collect a reference to the pokedex list wrapper
+        var $pokedexContainer = $('.info[data-tab="pokedex"]', $panelButtons);
+        var $pokedexList = $('.list', $pokedexContainer);
+
         // Wrap execution in timeout to prevent render-blocking
         window.setTimeout(function(){
-
-            // Collect a reference to the pokedex list wrapper
-            var $pokedexContainer = $('.info[data-tab="pokedex"]', $panelButtons);
-            var $pokedexList = $('.list', $pokedexContainer);
 
             // Loop through the display order for all the pokemon
             var pokedexMarkup = [];
@@ -1064,11 +1074,16 @@
                 liClass += 'type '+pokeIndex['types'][0]+' ';
                 if (typeof pokeIndex['types'][1] !== 'undefined'){ liClass += pokeIndex['types'][1]+'2 '; }
                 if (!isUnlocked){ liClass += 'unknown '; }
-                pokedexMarkup.push('<li class="'+ liClass +'" data-token="' + pokeToken + '"><div class="bubble">' +
-                        '<span class="num">#' + strPad('000', pokeNum, true) + '</span> ' +
-                        '<span class="name"><span>' + pokeIndex.name + '</span><span>- - -</span></span> ' +
-                        '<span class="sprites">' + getPokemonIcon(pokeToken, false) + '</span>' +
-                    '</div></li>');
+                var numText = '#' + strPad('000', pokeNum, true);
+                var nameText = pokeIndex.name;
+                var titleText = numText;
+                if (isUnlocked){ titleText += ' : ' + nameText; }
+                var pokeIcon = getPokemonIcon(pokeToken, false);
+                pokedexMarkup.push('<li><div class="'+ liClass +'" data-token="' + pokeToken + '" title="'+ titleText +'"><div class="bubble">' +
+                        '<span class="num">' + numText + '</span> ' +
+                        '<span class="name"><span>' + nameText + '</span><span>- - -</span></span> ' +
+                        '<span class="sprites">' + pokeIcon + '</span>' +
+                    '</div></div></li>');
                 }
             $pokedexList.append(pokedexMarkup.join(''));
 
@@ -1076,6 +1091,21 @@
             $('.info.links .link[data-tab="pokedex"]', $panelButtons).removeClass('wait');
 
             }, 0);
+
+        // Add a click event for the pokedex reset button (w/ warning)
+        $('.reset .link', $pokedexContainer).bind('click', function(e){
+            e.preventDefault();
+            if (confirm('Are you sure you want to clear all Pokédex data? \n'
+                + 'This action absolutely can NOT be undone! \n'
+                + 'Continue anyway?')){
+                if (typeof window.localStorage !== 'undefined'){
+                    window.localStorage.removeItem('PokemonSpeciesSeen');
+                    window.location = window.location.href;
+                    return true;
+                    }
+                }
+            return false;
+            });
 
     }
 
@@ -1091,7 +1121,13 @@
         for (var key = 0; key < seenSpeciesTokens.length; key++){
             var pokeToken = seenSpeciesTokens[key];
             var $pokeBlock = $('.species[data-token="'+ pokeToken +'"]', $pokedexList);
-            if ($pokeBlock.hasClass('unknown')){ $pokeBlock.removeClass('unknown') }
+            if ($pokeBlock.hasClass('unknown')){
+                $pokeBlock.removeClass('unknown');
+                var numText = $pokeBlock.find('.num').text();
+                var nameText = $pokeBlock.find('.name').text();
+                var titleText = numText + ' : ' + nameText;
+                $pokeBlock.attr('title', $pokeBlock);
+                }
             }
 
     }
@@ -2083,6 +2119,16 @@
 
         // Update the pokedex with any changes last day
         updatePokemonPokedex();
+
+        // Do not update local storage records if we're in free mode
+        if (!appFreeMode){
+            // Update local storage with the current seen pokemon index
+            if (typeof window.localStorage !== 'undefined'){
+                var savedData = JSON.stringify(PokemonSpeciesSeen);
+                window.localStorage.setItem('PokemonSpeciesSeen', savedData);
+                //console.log('savedData = ', savedData);
+                }
+            }
 
         //var $timer = $('.details.zone .timer .complete', $panelMainOverview);
         if (dayTimeout !== false){ clearTimeout(dayTimeout); }

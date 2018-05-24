@@ -1335,12 +1335,18 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     padding: 0;
     margin: 0 auto;
 }
-.panel .buttons .info .group.pokedex .list .species {
+.panel .buttons .info .group.pokedex .list li {
     display: block;
     box-sizing: border-box;
     margin: 0 5px 5px 0;
     float: left;
-    width: calc(25% - 5px);
+    width: calc(5% - 5px);
+}
+.panel .buttons .info .group.pokedex .list .species {
+    display: block;
+    box-sizing: border-box;
+    margin: 0 auto;
+    width: 100%;
     border: 1px solid rgba(0, 0, 0, 0.3);
     background-color: #59595f;
     padding: 3px;
@@ -1350,7 +1356,8 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
     position: relative;
     opacity: 1.0;
-    transition: opacity 0.3s;
+    transition: opacity 0.3s, width 0.3s;
+    /* cursor: pointer; */
 }
 .panel .buttons .info .group.pokedex .list .species:after {
     content: "";
@@ -1366,6 +1373,7 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
 }
 .panel .buttons .info .group.pokedex .list .species .bubble {
     display: block;
+    height: 30px;
     padding: 3px;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
@@ -1390,32 +1398,42 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     display: block;
     float: left;
     clear: left;
+    max-width: 0;
+    opacity: 0;
+    /* transition: max-width 0.3s, opacity 0.3s; */
+    display: none;
 }
 .panel .buttons .info .group.pokedex .list .species .bubble .name {
     font-size: 12px;
 }
 .panel .buttons .info .group.pokedex .list .species .bubble .name span:first-child {
-    display: inline;
+    display: inline-block;
 }
 .panel .buttons .info .group.pokedex .list .species .bubble .name span:last-child {
     display: none;
 }
 .panel .buttons .info .group.pokedex .list .species .bubble .sprites {
     display: block;
-    width: 90px;
-    height: 30px;
     position: absolute;
-    text-align: right;
-    top: 2px;
-    right: 2px;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: top 0.3s, right 0.3s. width 0.3s, height 0.3s, text-align 0.3s;
 }
 .panel .buttons .info .group.pokedex .list .species .bubble .sprites .sprite {
     display: block;
-    float: right;
-    margin-left: -20px;
+    float: none;
+    margin: 0 auto;
     position: relative;
-    top: -2px;
+    top: 0;
 }
+.panel .buttons .info .group.pokedex .list .species .bubble .sprites .sprite + .sprite {
+    opacity: 0;
+    width: 0;
+}
+
 .panel .buttons .info .group.pokedex .list .species.unknown {
     opacity: 0.3;
 }
@@ -1434,7 +1452,46 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     display: none;
 }
 .panel .buttons .info .group.pokedex .list .species.unknown .bubble .name span:last-child {
-    display: inline;
+    display: inline-block;
+}
+
+/*
+.panel .buttons .info .group.pokedex .list li:hover .species:not(.unknown) {
+    width: 250px;
+}
+.panel .buttons .info .group.pokedex .list li:hover .species:not(.unknown) .bubble .num,
+.panel .buttons .info .group.pokedex .list li:hover .species:not(.unknown) .bubble .name {
+    opacity: 1.0;
+    max-width: 100%;
+}
+.panel .buttons .info .group.pokedex .list li:hover .species:not(.unknown) .bubble .sprites {
+    width: 90px;
+    height: 30px;
+    text-align: right;
+    top: 2px;
+    right: 2px;
+}
+.panel .buttons .info .group.pokedex .list li:hover .species:not(.unknown) .bubble .sprites .sprite {
+    float: right;
+    margin-left: -20px;
+}
+.panel .buttons .info .group.pokedex .list li:hover .species:not(.unknown) .bubble .sprites .sprite + .sprite {
+    opacity: 1.0;
+    width: 40px;
+}
+*/
+
+.panel .buttons .info .group.pokedex .reset {
+    display: block;
+    padding-top: 10px;
+    margin: 0 auto;
+    clear: both;
+    font-size: 80%;
+    color: #cacaca;
+}
+.panel .buttons .info .group.pokedex .reset .link {
+    cursor: pointer;
+    color: #ce4949;
 }
 
 .panel .buttons .info.links {

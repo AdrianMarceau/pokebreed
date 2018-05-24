@@ -34,6 +34,10 @@
         width: calc((100% / 25) - 10px);
     }
 
+    .panel .buttons .info .group.pokedex .list li {
+        width: calc((100% / 25) - 5px);
+    }
+
 }
 @media (max-width: 1650px){
     .bp1:before { content: "a3";  }
@@ -43,6 +47,10 @@
 
     .panel .buttons button {
         width: calc((100% / 18) - 10px);
+    }
+
+    .panel .buttons .info .group.pokedex .list li {
+        width: calc((100% / 20) - 5px);
     }
 
 }
@@ -59,12 +67,20 @@
         top: 208px;
     }
 
+    .panel .buttons .info .group.pokedex .list li {
+        width: calc((100% / 16) - 5px);
+    }
+
 }
 @media (max-width: 1024px){
     .bp1:before { content: "a5";  }
 
     .panel .buttons button {
         width: calc((100% / 10) - 10px);
+    }
+
+    .panel .buttons .info .group.pokedex .list li {
+        width: calc((100% / 14) - 5px);
     }
 
 }
@@ -74,6 +90,10 @@
     .panel .buttons .info > div {
         padding-left: 0;
         padding-right: 0;
+    }
+
+    .panel .buttons .info .group.pokedex .list li {
+        width: calc((100% / 12) - 5px);
     }
 
 }
@@ -87,6 +107,10 @@
 
     .panel .buttons button {
         width: calc((100% / 8) - 10px);
+    }
+
+    .panel .buttons .info .group.pokedex .list li {
+        width: calc((100% / 11) - 5px);
     }
 
 }
@@ -113,8 +137,8 @@
         top: 202px;
     }
 
-    .panel .buttons .info .group.pokedex .list .species {
-        width: calc(33% - 5px);
+    .panel .buttons .info .group.pokedex .list li {
+        width: calc((100% / 10) - 5px);
     }
 
 }
