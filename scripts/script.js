@@ -615,7 +615,7 @@
     // Define a function for resetting the simulation
     function resetSimulation(){
         if (confirm('Are you sure you want to reset? \n'
-            + 'All progress will be lost! \n'
+            + 'The current simulation will end! \n'
             + 'Continue anyway?')){
 
             // Set the start flag to false
