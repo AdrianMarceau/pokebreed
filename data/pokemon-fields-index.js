@@ -42,7 +42,7 @@
             order: indexOrder++,
             token: 'river',
             name: 'River',
-            baseTypes: ['water', '', 'grass']
+            baseTypes: ['water', '', 'grass', 'bug']
             },
         'seafloor': {
             order: indexOrder++,
