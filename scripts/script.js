@@ -83,16 +83,6 @@
         updateDeviceWidth();
         //console.log('thisDeviceWidth = ', thisDeviceWidth);
 
-        // Do not update local storage records if we're in free mode
-        if (!appFreeMode){
-            // Check if a localStorage value exsists for species seen
-            if (typeof window.localStorage !== 'undefined'){
-                var savedData = window.localStorage.getItem('PokemonSpeciesSeen');
-                if (typeof savedData === 'string'){ PokemonSpeciesSeen = JSON.parse(savedData); }
-                //console.log('savedData = ', savedData);
-                }
-            }
-
         // Expose the zone zata as a public variable
         window.PokeboxZoneData = thisZoneData;
         window.PokeboSpeciesSeen = PokemonSpeciesSeen;
@@ -105,6 +95,17 @@
         if (typeof window.PokemonAppVersionNumber !== 'undefined'){ appVersionNumber = window.PokemonAppVersionNumber; }
         if (typeof window.PokemonAppDebugMode !== 'undefined'){ appDebugMode = window.PokemonAppDebugMode; }
         if (typeof window.PokemonAppFreeMode !== 'undefined'){ appFreeMode = window.PokemonAppFreeMode; }
+
+        // Do not update local storage records if we're in free mode
+        if (!appFreeMode){
+            console.log('NOT in free mode, let us LOAD');
+            // Check if a localStorage value exsists for species seen
+            if (typeof window.localStorage !== 'undefined'){
+                var savedData = window.localStorage.getItem('PokemonSpeciesSeen');
+                if (typeof savedData === 'string'){ PokemonSpeciesSeen = JSON.parse(savedData); }
+                //console.log('savedData = ', savedData);
+                }
+            }
 
         // Request the live version number from the server and wait to compare (refresh if out of date)
         $.get({
