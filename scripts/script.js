@@ -98,7 +98,7 @@
 
         // Do not update local storage records if we're in free mode
         if (!appFreeMode){
-            console.log('NOT in free mode, let us LOAD');
+            //console.log('NOT in free mode, let us LOAD');
             // Check if a localStorage value exsists for species seen
             if (typeof window.localStorage !== 'undefined'){
                 var savedData = window.localStorage.getItem('PokemonSpeciesSeen');
