@@ -1191,7 +1191,8 @@
             eggCycles: eggCycles,
             daysOld: 0,
             growthCycles: 0,
-            reachedAdulthood: false
+            growthCooldown: 0,
+            reachedAdulthood: false,
             };
 
         // If custom data was provdied, use it to overwrite above
@@ -2253,8 +2254,16 @@
                     pokemonInfo.growthCycles += 1;
                     }
 
+                // Check to see to see if this pokemon is in growth cooldown, else no evolution
+                var allowEvolution = true;
+                if (pokemonInfo.growthCooldown > 0){
+                    pokemonInfo.growthCooldown -= 1;
+                    allowEvolution = false;
+                    }
+
                 // If this Pokemon has any evolutions, check to see if should be triggered
-                if (typeof indexInfo.nextEvolutions !== 'undefined'
+                if (allowEvolution
+                    && typeof indexInfo.nextEvolutions !== 'undefined'
                     && indexInfo.nextEvolutions.length){
 
                     // Count the number of active species related to this pokemon
@@ -2518,6 +2527,7 @@
                         var backupToken = pokemonInfo.token;
                         pokemonInfo.token = selectedEvolution.token;
                         pokemonInfo.types = selectedEvolution.types;
+                        pokemonInfo.growthCooldown += 10;
 
                         // If the selected evolution was Vivillon, we need to calculate its form
                         if (selectedEvolution.token === 'vivillon'){
