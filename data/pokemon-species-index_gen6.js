@@ -534,6 +534,43 @@
             prevEvolution: 'spritzee'
             },
 
+        'swirlix': {
+            order: indexOrder++,
+            token: 'swirlix',
+            name: 'Swirlix',
+            number: 684,
+            types: ['fairy'],
+            baseStats: {hp: 62, phAttack: 48, phDefense: 66, spAttack: 59, spDefense: 57, speed: 49},
+            abilities: {0: 'sweet-veil', hidden: 'unburden'},
+            height: 0.4,
+            weight: 3.5,
+            colors: ['white', 'pink', 'red'],
+            eggCycles: 20,
+            eggGroups: ['fairy'],
+            nextEvolutions: [{
+                species: 'slurpuff',
+                method: 'trade',
+                value: 'whipped-dream',
+                method2: 'type-appeal',
+                value2: 'fairy'
+                }]
+            },
+        'slurpuff': {
+            order: indexOrder++,
+            token: 'slurpuff',
+            name: 'Slurpuff',
+            number: 685,
+            types: ['fairy'],
+            baseStats: {hp: 82, phAttack: 80, phDefense: 86, spAttack: 85, spDefense: 75, speed: 72},
+            abilities: {0: 'sweet-veil', hidden: 'unburden'},
+            height: 0.8,
+            weight: 5,
+            colors: ['white', 'pink', 'red'],
+            eggCycles: 20,
+            eggGroups: ['fairy'],
+            prevEvolution: 'swirlix'
+            },
+
         'skrelp': {
             order: indexOrder++,
             token: 'skrelp',
