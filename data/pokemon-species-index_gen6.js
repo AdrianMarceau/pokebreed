@@ -571,6 +571,43 @@
             prevEvolution: 'swirlix'
             },
 
+        'inkay': {
+            order: indexOrder++,
+            token: 'inkay',
+            name: 'Inkay',
+            number: 686,
+            types: ['dark', 'psychic'],
+            baseStats: {hp: 53, phAttack: 54, phDefense: 53, spAttack: 37, spDefense: 46, speed: 45},
+            abilities: {0: 'contrary', 1: 'suction-cups', hidden: 'infiltrator'},
+            height: 0.4,
+            weight: 3.5,
+            colors: ['blue', 'pink', 'white', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'water-2'],
+            nextEvolutions: [{
+                species: 'malamar',
+                method: 'level-up',
+                value: 30,
+                method2: 'type-appeal',
+                value2: ['dark', 'psychic']
+                }]
+            },
+        'malamar': {
+            order: indexOrder++,
+            token: 'malamar',
+            name: 'Malamar',
+            number: 687,
+            types: ['dark', 'psychic'],
+            baseStats: {hp: 86, phAttack: 92, phDefense: 88, spAttack: 68, spDefense: 75, speed: 73},
+            abilities: {0: 'contrary', 1: 'suction-cups', hidden: 'infiltrator'},
+            height: 1.5,
+            weight: 47,
+            colors: ['purple', 'blue', 'pink', 'yellow', 'white', 'black'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'water-2'],
+            prevEvolution: 'inkay'
+            },
+
         'skrelp': {
             order: indexOrder++,
             token: 'skrelp',
