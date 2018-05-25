@@ -300,7 +300,7 @@
     .panel .overview.main.started .details.pokemon .list.pokemon li,
     .panel .overview.main.started .details.pokemon .list.slots li.slot:before {
         height: calc((100vh - 262px) / 10);
-        max-height: 64px;
+        max-height: 54px;
     }
     .panel .overview.main .details.pokemon .list.pokemon li .swrap {
         left: -7px;

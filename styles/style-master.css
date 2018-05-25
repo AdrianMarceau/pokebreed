@@ -397,6 +397,7 @@ body[data-mode="free"] .panel .banner .pokedex .count .total {
     filter: blur(2px);
     z-index: 1;
 }
+body[data-speed="pause"] .panel .overview.main .details.pokemon .field .bg,
 body[data-speed="warp"] .panel .overview.main .details.pokemon .field .bg { transition: none; }
 body[data-speed="fast"] .panel .overview.main .details.pokemon .field .bg { transition: background-image 0.30s; }
 body[data-speed="normal"] .panel .overview.main .details.pokemon .field .bg { transition: background-image 0.60s; }
@@ -436,6 +437,7 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .field .bg { tran
 .panel .overview.main .details.pokemon .list.pokemon li {
     position: absolute;
 }
+body[data-speed="pause"] .panel .overview.main .details.pokemon .list.pokemon li,
 body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li { transition: none; }
 body[data-speed="fast"] .panel .overview.main .details.pokemon .list.pokemon li { transition: top 0.20s, left 0.20s; }
 body[data-speed="normal"] .panel .overview.main .details.pokemon .list.pokemon li { transition: top 0.40s, left 0.40s; }
@@ -493,6 +495,7 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.pokemon li 
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }
+body[data-speed="pause"] .panel .overview.main .details.pokemon .list.pokemon li.new,
 body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li.new {
     -webkit-animation: none;
     animation: none;
@@ -517,6 +520,7 @@ body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li.
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }
+body[data-speed="pause"] .panel .overview.main .details.pokemon .list.pokemon li.fainted,
 body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li.fainted {
     -webkit-animation: none;
     animation: none;
@@ -601,6 +605,7 @@ body[data-speed="faster"] .panel .overview.main .details.pokemon .list .sprite {
     border-radius: 3px;
     overflow: hidden;
 }
+body[data-speed="pause"] .panel .overview.main .details.pokemon .list.slots li.slot:before,
 body[data-speed="warp"] .panel .overview.main .details.pokemon .list.slots li.slot:before { transition: none;  }
 body[data-speed="fast"] .panel .overview.main .details.pokemon .list.slots li.slot:before { transition: background-color 0.50s, box-shadow 0.50s; }
 body[data-speed="normal"] .panel .overview.main .details.pokemon .list.slots li.slot:before { transition: background-color 1.00s, box-shadow 1s;  }
