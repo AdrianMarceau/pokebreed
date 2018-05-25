@@ -248,6 +248,65 @@
             prevEvolution: 'trumbeak'
             },
 
+        'grubbin': {
+            order: indexOrder++,
+            token: 'grubbin',
+            name: 'Grubbin',
+            number: 736,
+            types: ['bug'],
+            baseStats: {hp: 47, phAttack: 62, phDefense: 45, spAttack: 55, spDefense: 45, speed: 46},
+            abilities: {0: 'swarm'},
+            height: 0.4,
+            weight: 4.4,
+            colors: ['white', 'yellow', 'orange', 'brown'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            nextEvolutions: [{
+                species: 'charjabug',
+                method: 'level-up',
+                value: 20
+                }]
+            },
+        'charjabug': {
+            order: indexOrder++,
+            token: 'charjabug',
+            name: 'Charjabug',
+            number: 737,
+            types: ['bug', 'electric'],
+            baseStats: {hp: 57, phAttack: 82, phDefense: 95, spAttack: 55, spDefense: 75, speed: 36},
+            abilities: {0: 'battery'},
+            height: 0.5,
+            weight: 10.5,
+            colors: ['green', 'gray', 'blue', 'yellow'],
+            prevo: 'grubbin',
+            evos: ['vikavolt'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            prevEvolution: 'grubbin',
+            nextEvolutions: [{
+                species: 'vikavolt',
+                method: 'evolution-location',
+                value: 'magnetic-field',
+                method2: 'type-surge',
+                value2: 'electric'
+                }]
+            },
+        'vikavolt': {
+            order: indexOrder++,
+            token: 'vikavolt',
+            name: 'Vikavolt',
+            number: 738,
+            types: ['bug', 'electric'],
+            baseStats: {hp: 77, phAttack: 70, phDefense: 90, spAttack: 145, spDefense: 75, speed: 43},
+            abilities: {0: 'levitate'},
+            height: 1.5,
+            weight: 45,
+            colors: ['blue', 'yellow', 'black'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            prevEvolution: 'charjabug'
+            },
+
         'mareanie': {
             order: indexOrder++,
             token: 'mareanie',
