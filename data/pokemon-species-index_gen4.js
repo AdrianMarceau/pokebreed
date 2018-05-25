@@ -372,6 +372,41 @@
             prevEvolution: 'drifloon'
             },
 
+        'buneary': {
+            order: indexOrder++,
+            token: 'buneary',
+            name: 'Buneary',
+            number: 427,
+            types: ['normal'],
+            baseStats: {hp: 55, phAttack: 66, phDefense: 44, spAttack: 44, spDefense: 56, speed: 85},
+            abilities: {0: 'run-away', 1: 'klutz', hidden: 'limber'},
+            height: 0.4,
+            weight: 5.5,
+            colors: ['brown', 'white', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['field', 'human-like'],
+            nextEvolutions: [{
+                species: 'lopunny',
+                method: 'happiness',
+                value: 'high'
+                }]
+            },
+        'lopunny': {
+            order: indexOrder++,
+            token: 'lopunny',
+            name: 'Lopunny',
+            number: 428,
+            types: ['normal'],
+            baseStats: {hp: 65, phAttack: 76, phDefense: 84, spAttack: 54, spDefense: 96, speed: 105},
+            abilities: {0: 'cute-charm', 1: 'klutz', hidden: 'limber'},
+            height: 1.2,
+            weight: 33.3,
+            colors: ['white', 'brown', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['field', 'human-like'],
+            prevEvolution: 'buneary'
+            },
+
         'mismagius': {
             order: thisIndex.afterOrder('misdreavus'),
             token: 'mismagius',

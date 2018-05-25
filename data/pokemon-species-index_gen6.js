@@ -1508,6 +1508,25 @@
             prevEvolution: 'rayquaza'
             },
 
+        'mega-lopunny': {
+            order: thisIndex.afterOrder('lopunny'),
+            token: 'mega-lopunny',
+            name: 'Mega Lopunny',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'lopunny',
+            number: 428,
+            types: ['normal', 'fighting'],
+            baseStats: {hp: 65, phAttack: 136, phDefense: 94, spAttack: 54, spDefense: 96, speed: 135},
+            abilities: {0: 'scrappy'},
+            height: 1.3,
+            weight: 28.3,
+            colors: ['brown', 'white', 'black', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['field', 'human-like'],
+            prevEvolution: 'lopunny'
+            },
+
         'mega-garchomp': {
             order: thisIndex.afterOrder('garchomp'),
             token: 'mega-garchomp',
@@ -1624,6 +1643,7 @@
 
         {base: 'rayquaza', species: 'mega-rayquaza', method: 'mega-evolution', value: 'meteorite'},
 
+        {base: 'lopunny', species: 'mega-lopunny', method: 'mega-evolution', value: 'lopunnite'},
         {base: 'garchomp', species: 'mega-garchomp', method: 'mega-evolution', value: 'garchompite'},
         {base: 'lucario', species: 'mega-lucario', method: 'mega-evolution', value: 'lucarionite'},
         {base: 'abomasnow', species: 'mega-abomasnow', method: 'mega-evolution', value: 'abomasite'},
