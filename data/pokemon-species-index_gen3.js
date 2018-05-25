@@ -1175,6 +1175,21 @@
                 }]
             },
 
+        'roselia': {
+            order: indexOrder++,
+            token: 'roselia',
+            name: 'Roselia',
+            number: 315,
+            types: ['grass', 'poison'],
+            baseStats: {hp: 50, phAttack: 60, phDefense: 45, spAttack: 100, spDefense: 80, speed: 65},
+            abilities: {0: 'natural-cure', 1: 'poison-point', hidden: 'leaf-guard'},
+            height: 0.3,
+            weight: 2,
+            colors: ['green', 'red', 'blue', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'grass']
+            },
+
         'trapinch': {
             order: indexOrder++,
             token: 'trapinch',

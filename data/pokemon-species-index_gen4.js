@@ -337,6 +337,42 @@
             prevEvolution: 'aipom'
             },
 
+        'budew': {
+            order: thisIndex.beforeOrder('roselia'),
+            token: 'budew',
+            name: 'Budew',
+            class: 'baby',
+            number: 406,
+            types: ['grass', 'poison'],
+            baseStats: {hp: 40, phAttack: 30, phDefense: 35, spAttack: 50, spDefense: 70, speed: 55},
+            abilities: {0: 'natural-cure', 1: 'poison-point', hidden: 'leaf-guard'},
+            height: 0.2,
+            weight: 1.2,
+            colors: ['green', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'roselia',
+                method: 'happiness',
+                value: 'high'
+                }]
+            },
+        'roserade': {
+            order: thisIndex.afterOrder('roselia'),
+            token: 'roserade',
+            name: 'Roserade',
+            number: 407,
+            types: ['grass', 'poison'],
+            baseStats: {hp: 60, phAttack: 70, phDefense: 65, spAttack: 125, spDefense: 105, speed: 90},
+            abilities: {0: 'natural-cure', 1: 'poison-point', hidden: 'technician'},
+            height: 0.9,
+            weight: 14.5,
+            colors: ['green', 'white', 'red', 'blue', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'grass'],
+            prevEvolution: 'roselia'
+            },
+
         'drifloon': {
             order: indexOrder++,
             token: 'drifloon',
@@ -1243,6 +1279,7 @@
 
     // Update previous gen pokemon with new prev evolution data
     thisIndex.addPrevEvolutions([
+        {base: 'roselia', species: 'budew'},
         {base: 'sudowoodo', species: 'bonsly'},
         {base: 'mr-mime', species: 'mime-jr'},
         {base: 'chansey', species: 'happiny'},
@@ -1253,6 +1290,7 @@
     // Update previous gen pokemon with new next evolution data
     thisIndex.addNextEvolutions([
         {base: 'aipom', species: 'ambipom', method: 'evolution-move', value: 'double-hit', method2: 'type-surge', value2: 'normal'},
+        {base: 'roselia', species: 'roserade', method: 'evolution-move', value: 'shiny-stone', method2: 'type-surge', value2: ['grass', 'poison']},
         {base: 'misdreavus', species: 'mismagius', method: 'evolution-stone', value: 'dusk-stone', method2: 'type-appeal', value2: ['ghost']},
         {base: 'murkrow', species: 'honchkrow', method: 'evolution-stone', value: 'dusk-stone', method2: 'type-appeal', value2: ['dark', 'flying']},
         {base: 'sneasel', species: 'weavile', method: 'evolution-item', value: 'razor-claw', method2: 'type-surge', value2: ['dark', 'ice']},
