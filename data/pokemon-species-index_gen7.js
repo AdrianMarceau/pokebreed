@@ -342,6 +342,41 @@
             prevEvolution: 'mareanie'
             },
 
+        'morelull': {
+            order: indexOrder++,
+            token: 'morelull',
+            name: 'Morelull',
+            number: 755,
+            types: ['grass', 'fairy'],
+            baseStats: {hp: 40, phAttack: 35, phDefense: 55, spAttack: 65, spDefense: 75, speed: 15},
+            abilities: {0: 'illuminate', 1: 'effect-spore', hidden: 'rain-dish'},
+            height: 0.2,
+            weight: 1.5,
+            colors: ['pink', 'purple', 'white'],
+            eggCycles: 20,
+            eggGroups: ['grass'],
+            nextEvolutions: [{
+                species: 'shiinotic',
+                method: 'level-up',
+                value: 24
+                }]
+            },
+        'shiinotic': {
+            order: indexOrder++,
+            token: 'shiinotic',
+            name: 'Shiinotic',
+            number: 756,
+            types: ['grass', 'fairy'],
+            baseStats: {hp: 60, phAttack: 45, phDefense: 80, spAttack: 90, spDefense: 100, speed: 30},
+            abilities: {0: 'illuminate', 1: 'effect-spore', hidden: 'rain-dish'},
+            height: 1,
+            weight: 11.5,
+            colors: ['purple', 'pink', 'white', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['grass'],
+            prevEvolution: 'morelull'
+            },
+
         'stufful': {
             order: indexOrder++,
             token: 'stufful',
