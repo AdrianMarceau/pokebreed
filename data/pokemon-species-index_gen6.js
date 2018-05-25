@@ -497,6 +497,43 @@
             prevEvolution: 'doublade'
             },
 
+        'spritzee': {
+            order: indexOrder++,
+            token: 'spritzee',
+            name: 'Spritzee',
+            number: 682,
+            types: ['fairy'],
+            baseStats: {hp: 78, phAttack: 52, phDefense: 60, spAttack: 63, spDefense: 65, speed: 23},
+            abilities: {0: 'healer', hidden: 'aroma-veil'},
+            height: 0.2,
+            weight: 0.5,
+            colors: ['pink', 'white', 'red', 'black', 'purple'],
+            eggCycles: 20,
+            eggGroups: ['fairy'],
+            nextEvolutions: [{
+                species: 'aromatisse',
+                method: 'trade',
+                value: 'sachet',
+                method2: 'type-appeal',
+                value2: 'fairy'
+                }]
+            },
+        'aromatisse': {
+            order: indexOrder++,
+            token: 'aromatisse',
+            name: 'Aromatisse',
+            number: 683,
+            types: ['fairy'],
+            baseStats: {hp: 101, phAttack: 72, phDefense: 72, spAttack: 99, spDefense: 89, speed: 29},
+            abilities: {0: 'healer', hidden: 'aroma-veil'},
+            height: 0.8,
+            weight: 15.5,
+            colors: ['pink', 'purple', 'white', 'red', 'black', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['fairy'],
+            prevEvolution: 'spritzee'
+            },
+
         'skrelp': {
             order: indexOrder++,
             token: 'skrelp',
