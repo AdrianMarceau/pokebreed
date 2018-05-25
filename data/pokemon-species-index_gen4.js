@@ -337,6 +337,41 @@
             prevEvolution: 'aipom'
             },
 
+        'drifloon': {
+            order: indexOrder++,
+            token: 'drifloon',
+            name: 'Drifloon',
+            number: 425,
+            types: ['ghost', 'flying'],
+            baseStats: {hp: 90, phAttack: 50, phDefense: 34, spAttack: 60, spDefense: 44, speed: 70},
+            abilities: {0: 'aftermath', 1: 'unburden', hidden: 'flare-boost'},
+            height: 0.4,
+            weight: 1.2,
+            colors: ['purple', 'white', 'yellow'],
+            eggCycles: 30,
+            eggGroups: ['amorphous'],
+            nextEvolutions: [{
+                species: 'drifblim',
+                method: 'level-up',
+                value: 28
+                }]
+            },
+        'drifblim': {
+            order: indexOrder++,
+            token: 'drifblim',
+            name: 'Drifblim',
+            number: 426,
+            types: ['ghost', 'flying'],
+            baseStats: {hp: 150, phAttack: 80, phDefense: 44, spAttack: 90, spDefense: 54, speed: 80},
+            abilities: {0: 'aftermath', 1: 'unburden', hidden: 'flare-boost'},
+            height: 1.2,
+            weight: 15,
+            colors: ['purple', 'yellow', 'white', 'red'],
+            eggCycles: 30,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'drifloon'
+            },
+
         'mismagius': {
             order: thisIndex.afterOrder('misdreavus'),
             token: 'mismagius',
