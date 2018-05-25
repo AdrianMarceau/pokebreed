@@ -265,6 +265,41 @@
             prevEvolution: 'floette'
             },
 
+        'bunnelby': {
+            order: indexOrder++,
+            token: 'bunnelby',
+            name: 'Bunnelby',
+            number: 659,
+            types: ['normal'],
+            baseStats: {hp: 38, phAttack: 36, phDefense: 38, spAttack: 32, spDefense: 36, speed: 57},
+            abilities: {0: 'pickup', 1: 'cheek-pouch', hidden: 'huge-power'},
+            height: 0.4,
+            weight: 5,
+            colors: ['brown', 'gray', 'pink', 'white'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'diggersby',
+                method: 'level-up',
+                value: 20
+                }]
+            },
+        'diggersby': {
+            order: indexOrder++,
+            token: 'diggersby',
+            name: 'Diggersby',
+            number: 660,
+            types: ['normal', 'ground'],
+            baseStats: {hp: 85, phAttack: 56, phDefense: 77, spAttack: 50, spDefense: 77, speed: 78},
+            abilities: {0: 'pickup', 1: 'cheek-pouch', hidden: 'huge-power'},
+            height: 1,
+            weight: 42.4,
+            colors: ['brown', 'gray', 'yellow', 'white', 'pink'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            prevEvolution: 'bunnelby'
+            },
+
         'fletchling': {
             order: indexOrder++,
             token: 'fletchling',
