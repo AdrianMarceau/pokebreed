@@ -440,6 +440,63 @@
             prevEvolution: 'pancham'
             },
 
+        'honedge': {
+            order: indexOrder++,
+            token: 'honedge',
+            name: 'Honedge',
+            number: 679,
+            types: ['steel', 'ghost'],
+            baseStats: {hp: 45, phAttack: 80, phDefense: 100, spAttack: 35, spDefense: 37, speed: 28},
+            abilities: {0: 'no-guard'},
+            height: 0.8,
+            weight: 2,
+            colors: ['brown', 'blue', 'yellow', 'white'],
+            eggCycles: 20,
+            eggGroups: ['mineral'],
+            nextEvolutions: [{
+                species: 'doublade',
+                method: 'level-up',
+                value: 35
+                }]
+            },
+        'doublade': {
+            order: indexOrder++,
+            token: 'doublade',
+            name: 'Doublade',
+            number: 680,
+            types: ['steel', 'ghost'],
+            baseStats: {hp: 59, phAttack: 110, phDefense: 150, spAttack: 45, spDefense: 49, speed: 35},
+            abilities: {0: 'no-guard'},
+            height: 0.8,
+            weight: 4.5,
+            colors: ['brown', 'purple', 'pink', 'yellow', 'white'],
+            eggCycles: 20,
+            eggGroups: ['mineral'],
+            prevEvolution: 'honedge',
+            nextEvolutions: [{
+                species: 'aegislash',
+                method: 'evolution-stone',
+                value: 'dusk-stone',
+                method2: 'type-surge',
+                value2: ['steel', 'ghost']
+                }]
+            },
+        'aegislash': {
+            order: indexOrder++,
+            token: 'aegislash',
+            name: 'Aegislash',
+            number: 681,
+            types: ['steel', 'ghost'],
+            baseStats: {hp: 60, phAttack: 50, phDefense: 150, spAttack: 50, spDefense: 150, speed: 60},
+            abilities: {0: 'stance-change'},
+            height: 1.7,
+            weight: 53,
+            colors: ['yellow', 'brown', 'purple', 'black', 'white'],
+            eggCycles: 20,
+            eggGroups: ['mineral'],
+            prevEvolution: 'doublade'
+            },
+
         'skrelp': {
             order: indexOrder++,
             token: 'skrelp',

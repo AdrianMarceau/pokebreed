@@ -229,6 +229,25 @@
             prevEvolution: 'floette',
             },
 
+        'blade-aegislash': {
+            order: thisIndex.afterOrder('aegislash'),
+            token: 'blade-aegislash',
+            name: 'Blade Aegislash',
+            formClass: 'burst-evolution',
+            formToken: 'blade',
+            baseSpecies: 'aegislash',
+            number: 681,
+            types: ['steel', 'ghost'],
+            baseStats: {hp: 60, phAttack: 150, phDefense: 50, spAttack: 150, spDefense: 50, speed: 60},
+            abilities: {0: 'stance-change'},
+            height: 1.7,
+            weight: 53,
+            colors: ['yellow', 'brown', 'purple', 'black', 'white'],
+            eggCycles: 20,
+            eggGroups: ['mineral'],
+            prevEvolution: 'aegislash'
+            },
+
         'meteor-minior': {
             order: thisIndex.afterOrder('minior'),
             token: 'meteor-minior',
@@ -282,8 +301,8 @@
         {base: 'deoxys', species: 'speed-deoxys', method: 'burst-evolution', value: 'speed-surge', method2: 'chance', value2: 33},
 
         {base: 'floette', species: 'eternal-floette', method: 'burst-evolution', value: 'ultimate-weapon', method2: 'extinction', value2: true},
-
         {base: 'greninja', species: 'ash-greninja', method: 'burst-evolution', value: 'battle-bond', method2: 'type-surge', value2: 'water'},
+        {base: 'aegislash', species: 'blade-aegislash', method: 'burst-evolution', value: 'stance-change'},
 
         {base: 'minior', species: 'meteor-minior', method: 'burst-evolution', value: 'shields-down'},
 
