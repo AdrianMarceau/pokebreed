@@ -812,6 +812,41 @@
             prevEvolution: 'golett'
             },
 
+        'pawniard': {
+            order: indexOrder++,
+            token: 'pawniard',
+            name: 'Pawniard',
+            number: 624,
+            types: ['dark', 'steel'],
+            baseStats: {hp: 45, phAttack: 85, phDefense: 70, spAttack: 40, spDefense: 40, speed: 60},
+            abilities: {0: 'defiant', 1: 'inner-focus', hidden: 'pressure'},
+            height: 0.5,
+            weight: 10.2,
+            colors: ['red', 'black', 'gray', 'white', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['human-like'],
+            nextEvolutions: [{
+                species: 'bisharp',
+                method: 'level-up',
+                value: 52
+                }]
+            },
+        'bisharp': {
+            order: indexOrder++,
+            token: 'bisharp',
+            name: 'Bisharp',
+            number: 625,
+            types: ['dark', 'steel'],
+            baseStats: {hp: 65, phAttack: 125, phDefense: 100, spAttack: 60, spDefense: 70, speed: 70},
+            abilities: {0: 'defiant', 1: 'inner-focus', hidden: 'pressure'},
+            height: 1.6,
+            weight: 70,
+            colors: ['red', 'black', 'gray', 'yellow', 'white'],
+            eggCycles: 20,
+            eggGroups: ['human-like'],
+            prevEvolution: 'pawniard'
+            },
+
         'deino': {
             order: indexOrder++,
             token: 'deino',
