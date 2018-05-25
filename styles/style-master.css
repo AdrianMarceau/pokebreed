@@ -1320,7 +1320,8 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     color: #f3de91;
     text-decoration: none;
 }
-.panel .buttons .info a:hover {
+.panel .buttons .info a:hover,
+.panel .buttons .info a.active {
     color: #f7e9b6;
     text-decoration: underline;
 }

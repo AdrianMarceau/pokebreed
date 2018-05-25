@@ -2,13 +2,16 @@
     <div class="group">
         <h2>Basic Mechanics</h2>
         <p>
-            Add up to 10 different Pokémon to the zone and then watch as they grow, evolve, multiply, and eventually faint
-            leaving their offspring to continue the cycle. The kinds of Pokémon you add to a zone can alter it's appeal to
-            other species and can either positively or negatively affect their growth and breeding behaviors over time.
+            Add up to 10 different Pokémon to your box and then press play.  Watch as they grow, evolve,
+            multiply, and eventually die leaving their offspring to continue the cycle. The kinds of Pokémon
+            you add to a box can alter its appeal to other species and can greatly affect its resident's growth
+            and breeding behaviours over time.
         </p>
         <p>
-            Pokémon will typically only breed with their own species, but if even a single Ditto appears in your zone it
-            can and will breed with almost any species your box, greatly boosting egg production.
+            The basic goal of the simulator is to encounter <em>all</em> the different species and forms
+            of Pokémon using a single box and only a handful of starter Pokémon as seeds. Your starter Pokémon
+            can be used to attract other similar species, and then those can be used to attract even more.
+            Check your Pokédex after playing for a bit to see how many species you've registered so far!
         </p>
     </div>
     <div class="group">
@@ -16,10 +19,10 @@
         <div class="group">
             <h3>Type Appeal</h2>
             <p>
-                Each species added or born into a zone contributes to the global Type Appeal values in some way.
-                Fire types, for example, make an area more appealing to other Fire types...  but they also make it <em>less</em> appealing to Bug, Grass, and Steel types.
-                Some Pokémon have more types than others and some Pokémon have more influence than others, but the base mechanics are the same for every species added to a zone.
-                Of note - evolved, legendary, and otherwise special Pokémon have more influence than others.
+                Each species that lives in your box contributes to the global Type Appeal values in some way.
+                Fire types, for example, attract other Fire types...  but they also <em>repel</em> Bug, Grass, and Steel types due to their type-advantage over them.
+                Likewise, because Fire types are weak to Rock and Ground attacks themselves, Pokemon of those types may be attracted to the box as well.
+                All basic Pokémon have the same potential influence over a box's appeal but fully-evolved and special or legendary Pokémon have considerably more.
             </p>
             <p>
                 Type Appeal values affect many things, but the most notable are evolutions and breeding.
@@ -30,36 +33,31 @@
         <div class="group">
             <h3>Evolution Mechanics</h3>
             <p>
-                Simply putting Pokémon into a zone will cause most of them to grow and eventually evolve naturally, but some Pokémon require specific conditions to reach their next stage of development.
-            </p>
-            <p>
-                In the main-series games, these evolutions are triggered by things like items, trading with friends, or leveling up in a certain location.
-                In the simulator these evolutions are triggered differently, oftentimes relying on the current appeal value of a given type, the amount of family members on the field, or some other fluctuating stat.
+                Simply putting Pokémon into a zone will cause most of them to grow and eventually evolve naturally, but some Pokémon require specific conditions to reach their next stage of development.  Some species rely on high or low type appeal values to evolve, others rely on the presence of other Pokémon, and some even have their own unique evolution methods. Experiment with different combinations of Pokémon to see what happens!
             </p>
             <ul>
-                <li>Level-up evolutions trigger naturally and are based on a Pokémon's growth level (1-to-1 with official sources)</li>
-                <li>Happiness-based evolutions trigger at growth level 10 when the appeal value matching either of a Pokémon's types is high</li>
-                <li>Sadness-based evolutions trigger at growth level 10 when the appeal value matching either of a Pokémon's types is low **</li>
-                <li>Affection-based evolutions trigger at growth level 20 when the number of related* Pokémon on the field is high</li>
-                <li>Loneliness-based evolutions trigger at growth level 20 when the number of related* Pokémon on the field is low **</li>
-                <li>Type-appeal based evolutions trigger when the given type is either high or very high (depending on the Pokémon) **</li>
-                <li>Type-warning based evolutions trigger when the given type is either low or very low (depending on the Pokémon) **</li>
-                <li>Stone, item, and location-based evolutions trigger automatically at growth level 20, but often rely on a secondary qualifier (like type appeal)</li>
-                <li>Trade-based evolutions trigger at growth level 30 as long as current number of Pokémon on the field matching this one's species is even-numbered</li>
-                <li>Extinction-based evolutions trigger at growth level 30 when this Pokémon is the last active member of its family and species **</li>
-                <li>Burst evolutions trigger automatically at the end of a Pokémon's life-cycle before they faint, but often rely on a secondary qualifier (like extinction) **</li>
-                <li>Mega evolutions trigger automatically at the end of a Pokémon's life-cycle before they faint, using appeal values to decide priority when multiple options exist</li>
+                <li>Level-up evolutions trigger naturally when a Pokémon reaches a certain growth level</li>
+                <li>Happiness-based evolutions trigger when a Pokémon's favourite type(s) have high appeal values</li>
+                <li>Sadness-based evolutions trigger when a Pokémon's favourite types(s) have low appeal values</li>
+                <li>Affection-based evolutions trigger when a Pokémon is surrounded with species from its own family</li>
+                <li>Loneliness-based evolutions trigger when a Pokémon is surrounded with species its not related to</li>
+                <li>Type-appeal based evolutions trigger when the given type is either high or very high</li>
+                <li>Type-warning based evolutions trigger when the given type is either low or very low</li>
+                <li>Trade-based evolutions trigger at certain growth levels as long as a Pokémon has a partner</li>
+                <li>Extinction-based evolutions trigger when this Pokémon is the last active member of its species</li>
             </ul>
-            <p>
-                <em>* Related Pokémon refer to any other Pokémon on the field that are in this one's evolution chain(s)</em><br />
-                <em>** These methods are not official and do not appear in any main-series games (they were made-up for the simulator)</em>
-            </p>
+            <ul>
+                <li>Burst evolutions may trigger at the end of a Pokémon's life-cycle if qualifiers are met</li>
+                <li>Mega evolutions trigger automatically at the end of a Pokémon's life-cycle no matter what</li>
+            </ul>
         </div>
-        <div class="group">
-            <h3>Life-cycles and Breeding</h3>
-            <p>Each species of Pokémon has a calculated amount of Life Points and Breed Points based on their stats in the main-series games. Pokémon with higher Life Points last longer but Pokémon with higher Breed Points are the first to lay eggs when space opens up, so the population and diversity of a given zone can change dramatically, even in just a few in-game months.</p>
-            <p>Life Points are based on a Pokémon's combined HP, Defense, and Special Defense while a Pokémon's Breed Points are based on a Pokémon's Speed, Attack, and Special Attack.  Naturally, the Pokémon with the highest base stats from the games (fully-evolved, legendary, mega evolutions, etc.) have the best chance of proliferation in the simulator.</li>
-            <p>Once a Pokémon has reached the end of its life-cycle, it enters a final burn-out phase where it loses 10% of its energy each day until it eventually faints.  Pokémon that are fainting will appear with a red background and once the counter reaches zero they are removed from view.  If a given Pokémon has a Mega or Burst evolution, it will trigger in this state.</p>
-        </div>
+    </div>
+    <div class="group">
+        <h2>Need More Help?</h2>
+        <p>
+            If you have any questions or feedback about the simulator at all, please
+            <a href="https://discord.gg/8jsSYt5" target="_blank">join us on Discord</a>
+            and let us know your thoughts.  We look forward to hearing from you!
+        </p>
     </div>
 </div>
