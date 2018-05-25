@@ -248,6 +248,41 @@
             prevEvolution: 'trumbeak'
             },
 
+        'yungoos': {
+            order: indexOrder++,
+            token: 'yungoos',
+            name: 'Yungoos',
+            number: 734,
+            types: ['normal'],
+            baseStats: {hp: 48, phAttack: 70, phDefense: 30, spAttack: 30, spDefense: 30, speed: 45},
+            abilities: {0: 'stakeout', 1: 'strong-jaw', hidden: 'adaptability'},
+            height: 0.4,
+            weight: 6,
+            colors: ['brown', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'gumshoos',
+                method: 'level-up',
+                value: 20
+                }]
+            },
+        'gumshoos': {
+            order: indexOrder++,
+            token: 'gumshoos',
+            name: 'Gumshoos',
+            number: 735,
+            types: ['normal'],
+            baseStats: {hp: 88, phAttack: 110, phDefense: 60, spAttack: 55, spDefense: 60, speed: 45},
+            abilities: {0: 'stakeout', 1: 'strong-jaw', hidden: 'adaptability'},
+            height: 0.7,
+            weight: 14.2,
+            colors: ['yellow', 'brown'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            prevEvolution: 'yungoos'
+            },
+
         'grubbin': {
             order: indexOrder++,
             token: 'grubbin',
