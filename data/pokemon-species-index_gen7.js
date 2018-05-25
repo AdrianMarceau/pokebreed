@@ -342,6 +342,41 @@
             prevEvolution: 'mareanie'
             },
 
+        'dewpider': {
+            order: indexOrder++,
+            token: 'dewpider',
+            name: 'Dewpider',
+            number: 751,
+            types: ['water', 'bug'],
+            baseStats: {hp: 38, phAttack: 40, phDefense: 52, spAttack: 40, spDefense: 72, speed: 27},
+            abilities: {0: 'water-bubble', hidden: 'water-absorb'},
+            height: 0.3,
+            weight: 4,
+            colors: ['green', 'blue', 'black'],
+            eggCycles: 15,
+            eggGroups: ['water-1', 'bug'],
+            nextEvolutions: [{
+                species: 'araquanid',
+                method: 'level-up',
+                value: 22
+                }]
+            },
+        'araquanid': {
+            order: indexOrder++,
+            token: 'araquanid',
+            name: 'Araquanid',
+            number: 752,
+            types: ['water', 'bug'],
+            baseStats: {hp: 68, phAttack: 70, phDefense: 92, spAttack: 50, spDefense: 132, speed: 42},
+            abilities: {0: 'water-bubble', hidden: 'water-absorb'},
+            height: 1.8,
+            weight: 82,
+            colors: ['green', 'blue', 'black', 'brown'],
+            eggCycles: 15,
+            eggGroups: ['water-1', 'bug'],
+            prevEvolution: 'dewpider'
+            },
+
         'morelull': {
             order: indexOrder++,
             token: 'morelull',
