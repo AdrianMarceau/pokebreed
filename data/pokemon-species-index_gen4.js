@@ -877,6 +877,41 @@
             eggGroups: ['grass']
             },
 
+        'finneon': {
+            order: indexOrder++,
+            token: 'finneon',
+            name: 'Finneon',
+            number: 456,
+            types: ['water'],
+            baseStats: {hp: 49, phAttack: 49, phDefense: 56, spAttack: 49, spDefense: 61, speed: 66},
+            abilities: {0: 'swift-swim', 1: 'storm-drain', hidden: 'water-veil'},
+            height: 0.4,
+            weight: 7,
+            colors: ['blue', 'black', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['water-2'],
+            nextEvolutions: [{
+                species: 'lumineon',
+                method: 'level-up',
+                value: 21
+                }]
+            },
+        'lumineon': {
+            order: indexOrder++,
+            token: 'lumineon',
+            name: 'Lumineon',
+            number: 457,
+            types: ['water'],
+            baseStats: {hp: 69, phAttack: 69, phDefense: 76, spAttack: 69, spDefense: 86, speed: 91},
+            abilities: {0: 'swift-swim', 1: 'storm-drain', hidden: 'water-veil'},
+            height: 1.2,
+            weight: 24,
+            colors: ['blue', 'black', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['water-2'],
+            prevEvolution: 'finneon'
+            },
+
         'mantyke': {
             order: thisIndex.beforeOrder('mantine'),
             token: 'mantyke',
