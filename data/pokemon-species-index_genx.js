@@ -334,11 +334,46 @@
         {base: 'fletchling', species: 'scatterbug'},
         {base: 'fletchinder', species: 'spewpa'},
         {base: 'fearow', species: 'bounsweet'},
+        {base: 'pinsir', species: 'cherubi'},
+        {base: 'heracross', species: 'bulbasaur'}, // ish
+        {base: 'lurantis', species: 'caterpie'},
+        {base: 'scyther', species: 'wurmple'},
 
         // Hinted-at simbiotic relationships
         {base: 'luvdisc', species: 'alomomola'},
         {base: 'plusle', species: 'minun'},
         {base: 'minun', species: 'plusle'},
+
+        // Lots of different bugs are attracted to flowers and nectar
+        // bflies: butterfree, beautifly, vivillon
+        // moths: venomoth, mothim, dustox, cutiefly
+        // bees: beedrill, combee
+        // beetles: heracross, pinsir
+        // dflies: yanma, cacnea
+        // foul: venusaur, vileplume, victreebel
+        // spicy: bayleaf, sunflora, lilligant, meganium
+        // sweet: bellossom, roselia, roserade, comfey, florges
+        // cactus: cacnea, maractus
+
+        {base: 'butterfree', species: 'venusaur'},
+        {base: 'butterfree', species: 'meganium'},
+        {base: 'beautifly', species: 'victreebel'},
+        {base: 'beautifly', species: 'lilligant'},
+        {base: 'vivillon', species: 'florges'},
+        {base: 'vivillon', species: 'comfey'},
+
+        {base: 'dustox', species: 'gloom'},
+        {base: 'venomoth', species: 'vileplume'},
+        {base: 'cutiefly', species: 'roselia'},
+        {base: 'mothim', species: 'roserade'},
+
+        {base: 'beedrill', species: 'bayleaf'},
+        {base: 'combee', species: 'bellossom'},
+
+        {base: 'ledyba', species: 'sunflora'},
+
+        {base: 'vibrava', species: 'maractus'},
+        {base: 'yanma', species: 'cacnea'},
 
         ]);
 
