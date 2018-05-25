@@ -1048,6 +1048,9 @@
         //console.log('generatePokemonPokedex()');
         //$pokePanelLoading.append('.'); // append loading dot
 
+        // If we're in the free mode, do not generate the pokedex
+        if (appFreeMode){ return false; }
+
         // Remove the hidden class from the pokedex link
         $('.info.links .link[data-tab="pokedex"]', $panelButtons).removeClass('hidden');
 
@@ -1111,6 +1114,9 @@
 
     // Define a function for updating the pokedex with currently seen species
     function updatePokemonPokedex(){
+
+        // If we're in the free mode, there is no pokedex to update
+        if (appFreeMode){ return false; }
 
         // Collect a reference to the pokedex list wrapper
         var $pokedexContainer = $('.info[data-tab="pokedex"]', $panelButtons);

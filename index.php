@@ -77,7 +77,7 @@ if (isset($_GET['gen'])
                     <span class="bp bp3"></span>
                     <span class="bp bp4"></span>
                 </div>
-                <div class="pokedex">
+                <div class="pokedex"<?= $is_free_mode ? ' title="Data is NOT saved in free mode!"' : '' ?>>
                     <span class="count"><span class="current">0</span> / <span class="total">0</span></span>
                     <img class="icon" src="images/pokeball.png" />
                 </div>
@@ -160,8 +160,9 @@ if (isset($_GET['gen'])
                     <a class="link" data-tab="help">help</a>
                     <a class="link" data-tab="credits">credits</a>
                     <a class="link chat" href="https://discord.gg/8jsSYt5" target="_blank"><span>chat</span></a>
-                    <a class="link pokedex hidden wait" data-tab="pokedex"><span>pokédex</span><span>&hellip;</span></a>
-                    <? if ($is_free_mode){ ?>
+                    <? if (!$is_free_mode){ ?>
+                        <a class="link pokedex hidden wait" data-tab="pokedex"><span>pokédex</span><span>&hellip;</span></a>
+                    <? } else { ?>
                         <a class="link mode" href="/"><span>&laquo; normal mode</span></a>
                     <? } ?>
                 </div>
@@ -174,9 +175,11 @@ if (isset($_GET['gen'])
                 <div class="info hidden" data-tab="credits">
                     <? require('pages/credits.php'); ?>
                 </div>
-                <div class="info hidden" data-tab="pokedex">
-                    <? require('pages/pokedex.php'); ?>
-                </div>
+                <? if (!$is_free_mode){ ?>
+                    <div class="info hidden" data-tab="pokedex">
+                        <? require('pages/pokedex.php'); ?>
+                    </div>
+                <? } ?>
             </div>
 
         </div>

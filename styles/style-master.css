@@ -170,6 +170,9 @@ body[data-mode="free"] .panel .banner .subtext {
 .panel .banner .pokedex .count .current {
     color: #ffffff;
 }
+body[data-mode="free"] .panel .banner .pokedex .count .total {
+    text-decoration: line-through;
+}
 
 
 .panel .overview {
@@ -1107,8 +1110,8 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     position: relative;
     overflow: hidden;
     margin-right: 0;
-    padding-right: 12px;
-    background-color: rgba(0, 0, 0, 0.05);
+    padding: 6px 12px 6px 6px;
+    background-color: rgba(0, 0, 0, 0.1);
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
