@@ -775,6 +775,43 @@
             eggGroups: ['water-1', 'amorphous']
             },
 
+        'golett': {
+            order: indexOrder++,
+            token: 'golett',
+            name: 'Golett',
+            number: 622,
+            types: ['ground', 'ghost'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 59, phAttack: 74, phDefense: 50, spAttack: 35, spDefense: 50, speed: 35},
+            abilities: {0: 'iron-fist', 1: 'klutz', hidden: 'no-guard'},
+            height: 1,
+            weight: 92,
+            colors: ['blue', 'green', 'brown', 'yellow'],
+            eggCycles: 25,
+            eggGroups: ['mineral'],
+            nextEvolutions: [{
+                species: 'golurk',
+                method: 'level-up',
+                value: 43
+                }]
+            },
+        'golurk': {
+            order: indexOrder++,
+            token: 'golurk',
+            name: 'Golurk',
+            number: 623,
+            types: ['ground', 'ghost'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 89, phAttack: 124, phDefense: 80, spAttack: 55, spDefense: 80, speed: 55},
+            abilities: {0: 'iron-fist', 1: 'klutz', hidden: 'no-guard'},
+            height: 2.8,
+            weight: 330,
+            colors: ['blue', 'green', 'brown', 'yellow'],
+            eggCycles: 25,
+            eggGroups: ['mineral'],
+            prevEvolution: 'golett'
+            },
+
         'deino': {
             order: indexOrder++,
             token: 'deino',
