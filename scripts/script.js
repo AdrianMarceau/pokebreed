@@ -3210,7 +3210,7 @@
                         && thisZoneData.currentStats['types'][baseEvolution.value] <= -5){
                         queuedBaseEvolutions.push({
                             token: baseEvolution.species,
-                            chance: 2 + (thisZoneData.currentStats['types'][baseEvolution.value] * -1)
+                            chance: (2 + (thisZoneData.currentStats['types'][baseEvolution.value] * -1)) * 2
                             });
                         } else if (baseEvolution.method === 'chance'
                         && (Math.random() < (baseEvolution.value / 100))){
