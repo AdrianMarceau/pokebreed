@@ -826,6 +826,21 @@
             prevEvolution: 'croagunk'
             },
 
+        'carnivine': {
+            order: indexOrder++,
+            token: 'carnivine',
+            name: 'Carnivine',
+            number: 455,
+            types: ['grass'],
+            baseStats: {hp: 74, phAttack: 100, phDefense: 72, spAttack: 90, spDefense: 72, speed: 46},
+            abilities: {0: 'levitate'},
+            height: 1.4,
+            weight: 27,
+            colors: ['green', 'red', 'yellow'],
+            eggCycles: 25,
+            eggGroups: ['grass']
+            },
+
         'mantyke': {
             order: thisIndex.beforeOrder('mantine'),
             token: 'mantyke',
