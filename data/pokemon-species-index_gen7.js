@@ -613,6 +613,21 @@
             eggGroups: ['field', 'fairy']
             },
 
+        'bruxish': {
+            order: indexOrder++,
+            token: 'bruxish',
+            name: 'Bruxish',
+            number: 779,
+            types: ['water', 'psychic'],
+            baseStats: {hp: 68, phAttack: 105, phDefense: 70, spAttack: 70, spDefense: 70, speed: 92},
+            abilities: {0: 'dazzling', 1: 'strong-jaw', hidden: 'wonder-skin'},
+            height: 0.9,
+            weight: 19,
+            colors: ['pink', 'yellow', 'purple', 'blue', 'white'],
+            eggCycles: 15,
+            eggGroups: ['water-2']
+            },
+
         'jangmo-o': {
             order: indexOrder++,
             token: 'jangmo-o',
