@@ -189,6 +189,27 @@
             prevEvolution: 'deoxys'
             },
 
+        'origin-giratina': {
+            order: thisIndex.afterOrder('giratina'),
+            token: 'origin-giratina',
+            name: 'Origin Giratina',
+            class: 'legendary',
+            formClass: 'burst-evolution',
+            formToken: 'origin',
+            baseSpecies: 'giratina',
+            number: 487,
+            types: ['ghost', 'dragon'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 150, phAttack: 120, phDefense: 100, spAttack: 120, spDefense: 100, speed: 90},
+            abilities: {0: 'levitate'},
+            height: 6.9,
+            weight: 650,
+            colors: ['black', 'gray', 'yellow', 'red'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'giratina'
+            },
+
         'ash-greninja': {
             order: thisIndex.afterOrder('greninja'),
             token: 'ash-greninja',
@@ -300,8 +321,10 @@
         {base: 'deoxys', species: 'defense-deoxys', method: 'burst-evolution', value: 'defense-surge', method2: 'chance', value2: 33},
         {base: 'deoxys', species: 'speed-deoxys', method: 'burst-evolution', value: 'speed-surge', method2: 'chance', value2: 33},
 
-        {base: 'floette', species: 'eternal-floette', method: 'burst-evolution', value: 'ultimate-weapon', method2: 'extinction', value2: true},
+        {base: 'giratina', species: 'origin-giratina', method: 'burst-evolution', value: 'griseous-orb'},
+
         {base: 'greninja', species: 'ash-greninja', method: 'burst-evolution', value: 'battle-bond', method2: 'type-surge', value2: 'water'},
+        {base: 'floette', species: 'eternal-floette', method: 'burst-evolution', value: 'ultimate-weapon', method2: 'extinction', value2: true},
         {base: 'aegislash', species: 'blade-aegislash', method: 'burst-evolution', value: 'stance-change'},
 
         {base: 'minior', species: 'meteor-minior', method: 'burst-evolution', value: 'shields-down'},

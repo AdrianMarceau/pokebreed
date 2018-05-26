@@ -1302,6 +1302,23 @@
             eggGroups: ['undiscovered'],
             },
 
+        giratina: {
+            order: indexOrder++,
+            token: 'giratina',
+            name: 'Giratina',
+            class: 'legendary',
+            number: 487,
+            types: ['ghost', 'dragon'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 150, phAttack: 100, phDefense: 120, spAttack: 100, spDefense: 120, speed: 90},
+            abilities: {0: 'pressure', hidden: 'telepathy'},
+            height: 4.5,
+            weight: 750,
+            colors: ['gray', 'black', 'yellow', 'red'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
         'phione': {
             order: indexOrder++,
             token: 'phione',
