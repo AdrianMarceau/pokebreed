@@ -977,6 +977,23 @@
             eggGroups: ['undiscovered']
             },
 
+        'volcanion': {
+            order: indexOrder++,
+            token: 'volcanion',
+            name: 'Volcanion',
+            class: 'legendary',
+            number: 721,
+            types: ['fire', 'water'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 80, phAttack: 110, phDefense: 120, spAttack: 130, spDefense: 90, speed: 70},
+            abilities: {0: 'water-absorb'},
+            height: 1.7,
+            weight: 195,
+            colors: ['red', 'yellow', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            },
+
         // Mega Evolutions
 
         'mega-venusaur': {
