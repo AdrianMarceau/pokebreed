@@ -243,9 +243,6 @@ body[data-mode="free"] .panel .banner .pokedex .count .total {
     border: 1px dotted #DEDEDE;
     border-width: 0 1px 1px 0;
 }
-.panel .overview .details .list li:nth-child(10n) {
-    margin-right: 0;
-}
 .panel .overview .details .wrap {
     display: block;
     margin: 0 auto;
@@ -436,20 +433,24 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .field .bg { tran
 }
 .panel .overview.main .details.pokemon .list.pokemon li {
     position: absolute;
+    opacity: 1.0;
+    transform: translate(0, 0) scale(1, 1);
+}
+.panel .overview.main .details.pokemon .list.slots li:nth-child(10n) {
+    margin-right: 0;
 }
 body[data-speed="pause"] .panel .overview.main .details.pokemon .list.pokemon li,
 body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li { transition: none; }
-body[data-speed="fast"] .panel .overview.main .details.pokemon .list.pokemon li { transition: top 0.20s, left 0.20s; }
-body[data-speed="normal"] .panel .overview.main .details.pokemon .list.pokemon li { transition: top 0.40s, left 0.40s; }
-body[data-speed="slow"] .panel .overview.main .details.pokemon .list.pokemon li { transition: top 0.80s, left 0.80s; }
+body[data-speed="fast"] .panel .overview.main .details.pokemon .list.pokemon li { transition: top 0.20s, left 0.20s, opacity 0.20s, transform 0.20s; }
+body[data-speed="normal"] .panel .overview.main .details.pokemon .list.pokemon li { transition: top 0.40s, left 0.40s, opacity 0.40s, transform 0.40s; }
+body[data-speed="slow"] .panel .overview.main .details.pokemon .list.pokemon li { transition: top 0.80s, left 0.80s, opacity 0.80s, transform 0.80s; }
 
 .panel .overview.main .details.pokemon .list.pokemon li > div {
     position: relative;
     width: 100%;
     height: 100%;
 }
-.panel .overview.main .details.pokemon .list.pokemon li .watched,
-.panel .overview.main .details.pokemon .list.pokemon li .visitor {
+.panel .overview.main .details.pokemon .list.pokemon li .tag {
     content: "";
     display: block;
     position: absolute;
@@ -466,26 +467,28 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.pokemon li 
     -moz-box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
     box-shadow: 1px 1px 0px rgba(0, 0, 0, 0.1);
-}
-.panel .overview.main .details.pokemon .list.pokemon li .watched {
-    background-color: #ceff94;
-    border: 1px solid #4caf50;
     width: 3px;
     height: 3px;
-    top: 2px;
+    top: 8%;
     right: 2px;
 }
 .panel .overview.main .details.pokemon .list.pokemon li .visitor {
-    background-color: #ffffff;
-    border: 1px solid #929292;
-    width: 3px;
-    height: 3px;
-    top: 2px;
-    right: 2px;
+    background-color: #efefef;
+    border: 1px solid #dedede;
 }
-.panel .overview.main .details.pokemon .list.pokemon li .watched + .visitor,
-.panel .overview.main .details.pokemon .list.pokemon li .visitor + .watched {
-    top: 8px;
+.panel .overview.main .details.pokemon .list.pokemon li .watched {
+    background-color: #ceff94;
+    border: 1px solid #7cc57e;
+}
+.panel .overview.main .details.pokemon .list.pokemon li .adult {
+    background-color: #dc7474;
+    border: 1px solid #d45454;
+}
+.panel .overview.main .details.pokemon .list.pokemon li .tag + .tag {
+    top: calc(8% + 6px);
+}
+.panel .overview.main .details.pokemon .list.pokemon li .tag + .tag + .tag {
+    top: calc(8% + 12px);
 }
 .panel .overview.main .details.pokemon .list.pokemon li.new {
     -webkit-animation: SpritePopIn 0.3s linear;
@@ -500,19 +503,45 @@ body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li.
     -webkit-animation: none;
     animation: none;
 }
-.panel .overview.main .details.pokemon .list.pokemon li.adult:after {
+
+/*
+.panel .overview.main .details.pokemon .list.pokemon li.adult > div:after {
     content: "";
     position: absolute;
     z-index: 1;
-    top: 2px;
+    top: 0;
     left: 2px;
-    right: 2px;
-    bottom: 2px;
-    background-color: rgba(200, 0, 10, 0.2);
+    right: auto;
+    bottom: auto;
+    background-color: rgba(212, 60, 68, 0.1);
     border-radius: 6px;
+    width: 100%;
+    height: 100%;
 }
+.panel .overview.main .details.pokemon .list.pokemon li.adult[data-dnote="9"] > div:after { background-color: rgba(212, 60, 68, 0.10); transform: scale(1.0); }
+.panel .overview.main .details.pokemon .list.pokemon li.adult[data-dnote="8"] > div:after { background-color: rgba(212, 60, 68, 0.15); transform: scale(0.9); }
+.panel .overview.main .details.pokemon .list.pokemon li.adult[data-dnote="7"] > div:after { background-color: rgba(212, 60, 68, 0.20); transform: scale(0.8); }
+.panel .overview.main .details.pokemon .list.pokemon li.adult[data-dnote="6"] > div:after { background-color: rgba(212, 60, 68, 0.25); transform: scale(0.7); }
+.panel .overview.main .details.pokemon .list.pokemon li.adult[data-dnote="5"] > div:after { background-color: rgba(212, 60, 68, 0.30); transform: scale(0.6); }
+.panel .overview.main .details.pokemon .list.pokemon li.adult[data-dnote="4"] > div:after { background-color: rgba(212, 60, 68, 0.35); transform: scale(0.5); }
+.panel .overview.main .details.pokemon .list.pokemon li.adult[data-dnote="3"] > div:after { background-color: rgba(212, 60, 68, 0.40); transform: scale(0.4); }
+.panel .overview.main .details.pokemon .list.pokemon li.adult[data-dnote="2"] > div:after { background-color: rgba(212, 60, 68, 0.45); transform: scale(0.3); }
+.panel .overview.main .details.pokemon .list.pokemon li.adult[data-dnote="1"] > div:after { background-color: rgba(212, 60, 68, 0.50); transform: scale(0.2); }
+.panel .overview.main .details.pokemon .list.pokemon li.adult[data-dnote="0"] > div:after { background-color: rgba(212, 60, 68, 0.50); transform: scale(0.1); }
+*/
+
+.panel .overview.main .details.pokemon .list.pokemon li[data-dnote="9"] > div .swrap { filter: brightness(1.0); opacity: 1.0; }
+.panel .overview.main .details.pokemon .list.pokemon li[data-dnote="8"] > div .swrap { filter: brightness(0.9); opacity: 0.9; }
+.panel .overview.main .details.pokemon .list.pokemon li[data-dnote="7"] > div .swrap { filter: brightness(0.8); opacity: 0.8; }
+.panel .overview.main .details.pokemon .list.pokemon li[data-dnote="6"] > div .swrap { filter: brightness(0.7); opacity: 0.7; }
+.panel .overview.main .details.pokemon .list.pokemon li[data-dnote="5"] > div .swrap { filter: brightness(0.6); opacity: 0.6; }
+.panel .overview.main .details.pokemon .list.pokemon li[data-dnote="4"] > div .swrap { filter: brightness(0.5); opacity: 0.5; }
+.panel .overview.main .details.pokemon .list.pokemon li[data-dnote="3"] > div .swrap { filter: brightness(0.4); opacity: 0.4; }
+.panel .overview.main .details.pokemon .list.pokemon li[data-dnote="2"] > div .swrap { filter: brightness(0.3); opacity: 0.3; }
+.panel .overview.main .details.pokemon .list.pokemon li[data-dnote="1"] > div .swrap { filter: brightness(0.2); opacity: 0.2; }
+.panel .overview.main .details.pokemon .list.pokemon li[data-dnote="0"] > div .swrap { filter: brightness(0.1); opacity: 0.1; }
+
 .panel .overview.main .details.pokemon .list.pokemon li.fainted {
-    position: relative;
     -webkit-animation: SpriteFadeOut 0.6s linear;
     -webkit-animation-iteration-count: 1;
     -webkit-animation-fill-mode: forwards;
@@ -524,7 +553,9 @@ body[data-speed="pause"] .panel .overview.main .details.pokemon .list.pokemon li
 body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li.fainted {
     -webkit-animation: none;
     animation: none;
+    display: none;
 }
+
 .panel .overview.main .details.pokemon .list .sprite {
     position: relative;
     z-index: 2;
@@ -561,6 +592,7 @@ body[data-speed="faster"] .panel .overview.main .details.pokemon .list .sprite {
     right: 0;
     overflow: visible;
     text-align: center;
+    z-index: 2;
 }
 .panel .overview.main .details.pokemon .list .swrap i {
     position: relative;

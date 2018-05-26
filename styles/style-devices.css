@@ -41,8 +41,7 @@
         margin-right: 4px;
         margin-bottom: 4px;
     }
-    .panel .overview.main .details.slots .list li:nth-child(10n),
-    .panel .overview.main .details.pokemon .list li:nth-child(10n) {
+    .panel .overview.main .details.pokemon .list.slots li:nth-child(10n) {
         margin-right: 0;
     }
     .panel .overview.main .details.pokemon .list.pokemon li .swrap {
@@ -160,8 +159,7 @@
         height: calc((100vh - 566px) / 10);
         max-height: 64px;
     }
-    .panel .overview.main .details.slots .list li:nth-child(10n),
-    .panel .overview.main .details.pokemon .list li:nth-child(10n) {
+    .panel .overview.main .details.pokemon .list.slots li:nth-child(10n) {
         margin-right: 0;
     }
     .panel .overview.main .details.pokemon .list.pokemon li .swrap {

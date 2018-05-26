@@ -246,6 +246,7 @@
                 //else if (control === 'play'){ speedValue = 1200; speedToken = 'normal'; } // 1.2s
                 dayTimeoutDuration = speedValue;
                 dayTimeoutDurationMultiplier = dayTimeoutDuration / dayTimeoutDurationBase;
+                if (control.match(/^(pause|warp)$/)){ dayTimeoutDurationMultiplier = 0; }
                 $('body').attr('data-speed', speedToken);
                 dayTimeoutDurationToken = speedToken;
                 $controlButtons.filter('.speed').removeClass('active');
@@ -842,12 +843,12 @@
             //console.log('this '+pokeInfo.token+' has hatched, show it (cycles:'+pokeInfo.eggCycles+')');
             var pokeIcon =  '<span class="swrap"><i>' + getPokemonIcon(pokeInfo.token, false, pokeInfo) + '</i></span>';
             var pokeCount = '<span class="count growth">+'+pokeInfo.growthCycles+'</span>';
-            if (pokeInfo.reachedAdulthood === true){ itemClass += 'adult '; }
-            if (pokeInfo.reachedAdulthood === true && pokeInfo.growthCycles <= 0){ itemClass += 'fainted '; }
             var extraMarkup = '';
-            if (pokeInfo.watchFlag === true){ extraMarkup += '<span class="watched"></span> '; }
-            if (pokeInfo.isVisitor === true){ extraMarkup += '<span class="visitor"></span> '; }
+            if (pokeInfo.watchFlag === true){ extraMarkup += '<span class="tag watched"></span> '; }
+            if (pokeInfo.isVisitor === true){ extraMarkup += '<span class="tag visitor"></span> '; }
+            if (pokeInfo.reachedAdulthood === true){ extraMarkup += '<span class="tag adult"></span> '; }
             if (pokeInfo.isVisitor === true && pokeInfo.daysOld == 0){ itemClass += 'new '; }
+            if (pokeInfo.reachedAdulthood === true && pokeInfo.growthCycles <= 0){ itemClass += 'fainted '; }
             cellMarkup += '<li ' +
                 'class="'+ itemClass +'" ' +
                 'style="'+itemStyle+'" ' +
@@ -869,8 +870,8 @@
             var pokeIcon =  '<span class="swrap"><i>' + getPokemonIcon(pokeInfo.token, true, pokeInfo) + '</i></span>';
             var pokeCount = '<span class="count egg">-'+pokeInfo.eggCycles+'</span>';
             var extraMarkup = '';
-            if (pokeInfo.watchFlag === true){ extraMarkup += '<span class="watched"></span> '; }
-            if (pokeInfo.isVisitor === true){ extraMarkup += '<span class="visitor"></span> '; }
+            if (pokeInfo.watchFlag === true){ extraMarkup += '<span class="tag watched"></span> '; }
+            if (pokeInfo.isVisitor === true){ extraMarkup += '<span class="tag visitor"></span> '; }
             if (pokeInfo.daysOld == 0){ itemClass += 'new '; }
             cellMarkup += '<li ' +
                 'class="'+ itemClass +'" ' +
@@ -1479,8 +1480,12 @@
         // Define a function for updating a pokemon's cell
         function updatePokemonCell(pokeInfo, cellKey){
 
+            // Collect index info for this pokemon
+            var pokeIndex = PokemonSpeciesIndex[pokeInfo.token];
+
             // Check if this pokemon is still in its egg
             var isEgg = pokeInfo.eggCycles > 0 ? true : false;
+            var hasFainted = pokeInfo.reachedAdulthood === true && pokeInfo.growthCycles <= 0 ? true : false;
 
             // Collect a reference to this pokemon's cell
             var $pokeCell = $('li[data-id="'+pokeInfo.id+'"]', $panelPokemonSpriteWrapper);
@@ -1501,7 +1506,8 @@
             var cellTop = ((cellPosition.row - 1) * colPercent)+'%';
             var cellLeft = ((cellPosition.col - 1) * colPercent)+'%';
             $pokeCell.attr('data-key', cellKey);
-            $pokeCell.css({zIndex: cellKey, top: cellTop, left: cellLeft});
+            if (!hasFainted){ $pokeCell.css({zIndex: cellKey, top: cellTop, left: cellLeft}); }
+            else { $pokeCell.css({zIndex: cellKey}); }
 
             // Collect image data for this pokemon's icon sprite
             var $spriteImage = $pokeCell.find('.sprite:not(.overlay)').first();
@@ -1551,14 +1557,14 @@
                 $pokeCell.find('.count').html('+' + pokeInfo.growthCycles);
 
                 // Add the adult class to this cell if applicable and not already there
-                if (pokeInfo.reachedAdulthood === true
-                    && !$pokeCell.hasClass('adult')){
-                    $pokeCell.addClass('adult');
+                if (pokeInfo.reachedAdulthood === true){
+                    var hasAdultTag = $pokeCell.find('.tag.adult').length;
+                    if (!hasAdultTag){ $pokeCell.find('> div').append('<span class="tag adult"></span>'); }
+                    $pokeCell.attr('data-dnote', Math.ceil((pokeInfo.growthCycles / pokeIndex.lifePoints) * 10));
                     }
 
                 // Add the fainted class to this cell if applicable and not already there
-                if (pokeInfo.reachedAdulthood === true
-                    && pokeInfo.growthCycles <= 0
+                if (hasFainted
                     && !$pokeCell.hasClass('fainted')){
                     $pokeCell.addClass('fainted');
                     }
@@ -1894,7 +1900,7 @@
 
             // Add or remove the watched span from the sprite cell
             var hasWatched = $li.find('.watched').length;
-            if (pokeInfo.watchFlag && !hasWatched){ $li.find('> div').append('<span class="watched"></span>'); }
+            if (pokeInfo.watchFlag && !hasWatched){ $li.find('> div').append('<span class="tag watched"></span>'); }
             else if (!pokeInfo.watchFlag && hasWatched){ $li.find('.watched').remove(); }
 
             }
