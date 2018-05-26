@@ -1245,6 +1245,41 @@
             prevEvolution: 'vibrava'
             },
 
+        'cacnea': {
+            order: indexOrder++,
+            token: 'cacnea',
+            name: 'Cacnea',
+            number: 331,
+            types: ['grass'],
+            baseStats: {hp: 50, phAttack: 85, phDefense: 40, spAttack: 85, spDefense: 40, speed: 35},
+            abilities: {0: 'sand-veil', hidden: 'water-absorb'},
+            height: 0.4,
+            weight: 51.3,
+            colors: ['green', 'yellow', 'black'],
+            eggCycles: 20,
+            eggGroups: ['grass', 'human-like'],
+            nextEvolutions: [{
+                species: 'cacturne',
+                method: 'level-up',
+                value: 32
+                }]
+            },
+        'cacturne': {
+            order: indexOrder++,
+            token: 'cacturne',
+            name: 'Cacturne',
+            number: 332,
+            types: ['grass', 'dark'],
+            baseStats: {hp: 70, phAttack: 115, phDefense: 60, spAttack: 115, spDefense: 60, speed: 55},
+            abilities: {0: 'sand-veil', hidden: 'water-absorb'},
+            height: 1.3,
+            weight: 77.4,
+            colors: ['green', 'black', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['grass', 'human-like'],
+            prevEvolution: 'cacnea'
+            },
+
         'feebas': {
             order: indexOrder++,
             token: 'feebas',
