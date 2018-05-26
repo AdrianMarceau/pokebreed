@@ -3027,14 +3027,22 @@
             }
             //console.log('speciesAppealIndex = ', speciesAppealIndex);
 
+            // Collect a reference to the current type stats
+            var currentTypeStats = thisZoneData.currentStats['types'];
+
+            // Collect ranked zone stats for special appeal calc
+            var rankedZoneStats = getRankedZoneStats();
+
             // Create an array of Pokemon that can appear as visitors
             var allowedVisitorTokens = [];
             allowedVisitorTokens = allowedVisitorTokens.concat(BasicPokemonSpeciesIndexTokens);
             if (!jQuery.isEmptyObject(speciesAppealIndex)){ allowedVisitorTokens = allowedVisitorTokens.concat(Object.keys(speciesAppealIndex)); }
+            allowedVisitorTokens = Array.from(new Set(allowedVisitorTokens));
             //console.log('allowedVisitorTokens = ', allowedVisitorTokens);
 
             // Loop through basic pokemon and calculate chances of each
             var basicPokemonChances = [];
+            var basicPokemonChanceTokens = [];
             for (var key = 0; key < allowedVisitorTokens.length; key++){
                 var pokeToken = allowedVisitorTokens[key];
                 var pokeInfo = PokemonSpeciesIndex[pokeToken];
@@ -3046,17 +3054,21 @@
                 else if (pokeToken === 'ditto' || pokeToken === 'shiny-ditto'){ continue; }
 
                 // Increase the chance of this pokemon appearing based on type appeal
-                var typeVal = 1; // / pokeInfo.types.length;
-                for (var key2 = 0; key2 < pokeInfo.types.length; key2++){
-                    typeVal -= key2 * 0.1;
-                    var typeToken = pokeInfo.types[key2];
-                    if (thisZoneData.currentStats['types'][typeToken] !== 0){
-                        pokeChance += thisZoneData.currentStats['types'][typeToken] * typeVal;
+                var pokeTypes = pokeInfo.types;
+                if (pokeTypes.length === 1){
+                    if (rankedZoneStats[0] === pokeTypes[0]
+                        && currentTypeStats[rankedZoneStats[0]] >= (currentTypeStats[rankedZoneStats[1]] * 2)){
+                        if (currentTypeStats[pokeTypes[0]] !== 0){ pokeChance += currentTypeStats[pokeTypes[0]] * 1; }
+                        } else {
+                        if (currentTypeStats[pokeTypes[0]] !== 0){ pokeChance += currentTypeStats[pokeTypes[0]] * 0.5; }
                         }
+                    } else {
+                    if (currentTypeStats[pokeTypes[0]] !== 0){ pokeChance += currentTypeStats[pokeTypes[0]] * 0.5; }
+                    if (currentTypeStats[pokeTypes[1]] !== 0){ pokeChance += currentTypeStats[pokeTypes[1]] * 0.5; }
                     }
 
                 // Increase the chance of this pokemon appearing based on group appeal
-                var groupVal = 0.9 / pokeInfo.eggGroups.length;
+                var groupVal = 0.01 / pokeInfo.eggGroups.length;
                 for (var key2 = 0; key2 < pokeInfo.eggGroups.length; key2++){
                     var groupToken = pokeInfo.eggGroups[key2];
                     if (typeof thisZoneData.currentStats['eggGroups'][groupToken] !== 'undefined'
@@ -3066,7 +3078,7 @@
                     }
 
                 // Increase the chance of this pokemon appearing based on region appeal
-                var regionVal = 0.1;
+                var regionVal = 0.01;
                 if (typeof thisZoneData.currentStats['gameRegion'][pokeInfo.gameRegion] !== 'undefined'
                     && thisZoneData.currentStats['gameRegion'][pokeInfo.gameRegion] !== 0){
                     pokeChance += thisZoneData.currentStats['gameRegion'][pokeInfo.gameRegion] * regionVal;
@@ -3096,8 +3108,9 @@
                     }
 
                 // If the chance was more than zero, push into the queue
-                if (pokeChance > 0
-                    || visitorKind !== 'basic'){
+                if ((pokeChance > 0 || visitorKind !== 'basic')
+                    && basicPokemonChanceTokens.indexOf(pokeToken) === -1){
+                    basicPokemonChanceTokens.push(pokeToken);
                     basicPokemonChances.push({
                         token: pokeToken,
                         chance: pokeChance
