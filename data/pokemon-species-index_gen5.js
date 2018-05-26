@@ -533,6 +533,41 @@
             prevEvolution: 'joltik'
             },
 
+        'ferroseed': {
+            order: indexOrder++,
+            token: 'ferroseed',
+            name: 'Ferroseed',
+            number: 597,
+            types: ['grass', 'steel'],
+            baseStats: {hp: 44, phAttack: 50, phDefense: 91, spAttack: 24, spDefense: 86, speed: 10},
+            abilities: {0: 'iron-barbs'},
+            height: 0.6,
+            weight: 18.8,
+            colors: ['gray', 'green', 'black', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['grass', 'mineral'],
+            nextEvolutions: [{
+                species: 'ferrothorn',
+                method: 'level-up',
+                value: 40
+                }],
+            },
+        'ferrothorn': {
+            order: indexOrder++,
+            token: 'ferrothorn',
+            name: 'Ferrothorn',
+            number: 598,
+            types: ['grass', 'steel'],
+            baseStats: {hp: 74, phAttack: 94, phDefense: 131, spAttack: 54, spDefense: 116, speed: 20},
+            abilities: {0: 'iron-barbs', hidden: 'anticipation'},
+            height: 1,
+            weight: 110,
+            colors: ['gray', 'green', 'black', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['grass', 'mineral'],
+            prevEvolution: 'ferroseed'
+            },
+
         'klink': {
             order: indexOrder++,
             token: 'klink',
