@@ -628,6 +628,21 @@
             eggGroups: ['water-2']
             },
 
+        'drampa': {
+            order: indexOrder++,
+            token: 'drampa',
+            name: 'Drampa',
+            number: 780,
+            types: ['normal', 'dragon'],
+            baseStats: {hp: 78, phAttack: 60, phDefense: 85, spAttack: 135, spDefense: 91, speed: 36},
+            abilities: {0: 'berserk', 1: 'sap-sipper', hidden: 'cloud-nine'},
+            height: 3,
+            weight: 185,
+            colors: ['white', 'green', 'yellow', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'dragon']
+            },
+
         'jangmo-o': {
             order: indexOrder++,
             token: 'jangmo-o',
