@@ -21,6 +21,12 @@
 
     var PokemonSpeciesSeen = {};
 
+    var totalSpecialPokemon = 0;
+    var totalLegendaryPokemon = 0;
+    var totalMythicalPokemon = 0;
+    var totalUltraBeasts = 0;
+    var totalMiscBeasts = 0;
+
     // GLOBAL ZONE DATA
 
     var defaultZoneData = {
@@ -340,26 +346,41 @@
                 indexInfo.baseEvolution = pokemonGetBaseEvolution(indexInfo.token, true, false);
                 indexInfo.basicEvolution = pokemonGetBasicEvolution(indexInfo.token, false, false);
 
-                /*
-                // If this pokemon has species appeal, cascade to the base form
-                if (typeof indexInfo.speciesAppeal !== 'undefined'
-                    && indexInfo.basicEvolution !== indexInfo.token){
-                    //console.log(indexInfo.token + ' has species appeal!', indexInfo.speciesAppeal);
-                    var basicEvolutionInfo = PokemonSpeciesIndex[indexInfo.basicEvolution];
-                    if (typeof basicEvolutionInfo.speciesAppeal === 'undefined'){ basicEvolutionInfo.speciesAppeal = []; }
-                    //console.log('applying species appeal to '+indexInfo.basicEvolution+'...', basicEvolutionInfo);
-                    for (var key2 = 0; key2 < indexInfo.speciesAppeal.length; key2++){
-                        var appealSpecies = indexInfo.speciesAppeal[key2];
-                        //console.log('Check if species appeal already added for (X is attracted to Y)', basicEvolutionInfo.token, appealSpecies);
-                        if (basicEvolutionInfo.speciesAppeal.indexOf(appealSpecies) === -1){
-                            basicEvolutionInfo.speciesAppeal.push(appealSpecies);
-                            //console.log('Add species appeal to pokemon (X is attracted to Y)', basicEvolutionInfo.token, basicEvolutionInfo.speciesAppeal);
-                            }
-                        }
+                // If this pokemon is in a special class, incremeent appropriate counters
+                var isSpecial = false;
+                if (indexInfo.token === 'unown'
+                    || indexInfo.token === 'ditto'
+                    || indexInfo.token === 'shiny-ditto'){
+                    totalMiscBeasts++;
+                    isSpecial = true;
+                    } else if (indexInfo.class === 'legendary'){
+                    totalLegendaryPokemon++;
+                    isSpecial = true;
+                    } else if (indexInfo.class === 'mythical'){
+                    totalMythicalPokemon++;
+                    isSpecial = true;
+                    } else if (indexInfo.class === 'ultra-beast'){
+                    totalUltraBeasts++;
+                    isSpecial = true;
+                    } else if (indexInfo.class === 'mythical'){
+                    totalMythicalPokemon++;
+                    isSpecial = true;
+                }
+                if (isSpecial){
+                    totalSpecialPokemon++;
                     }
-                    */
 
                 }
+
+            /*
+            console.log('totalSpecialPokemon = ', totalSpecialPokemon);
+            console.log('totalLegendaryPokemon = ', totalLegendaryPokemon);
+            console.log('totalMythicalPokemon = ', totalMythicalPokemon);
+            console.log('totalUltraBeasts = ', totalUltraBeasts);
+            console.log('totalMiscBeasts = ', totalMiscBeasts);
+            console.log('PokemonSpeciesIndexTokens.length = ', PokemonSpeciesIndexTokens.length);
+            console.log('numRequiredToCompletePokedex = ', (PokemonSpeciesIndexTokens.length - totalSpecialPokemon));
+            */
 
             // Create a sorted list of pokemon species tokens so we don't have to later
             for (var key = 0; key < PokemonSpeciesIndexTokens.length; key++){
@@ -916,9 +937,12 @@
         if (seenSpeciesTokens.length >= 721){ freeStarterPokemon.push('rowlet', 'litten', 'popplio'); } // gen 7 starters
         //if (seenSpeciesTokens.length >= 807){ freeStarterPokemon.push('?', '?', '?'); }
 
-        // Check to see if we should allow special pokemon now
+        // Unlock the shiny ditto to be used if the user has a super-high dex count
+        if (seenSpeciesTokens.length >= (PokemonSpeciesIndexTokens.length - totalSpecialPokemon)){ freeStarterPokemon.push('shiny-ditto'); }
+
+        // Check to see if we can allow special pokemon to be selected yet
         var allowSpecialPokemon = false;
-        if (seenSpeciesTokens.length >= PokemonSpeciesIndexTokens.length){ allowSpecialPokemon = true; }
+        if (seenSpeciesTokens.length >= (PokemonSpeciesIndexTokens.length - 1)){ allowSpecialPokemon = true; } // -1 for phione
 
         // Wrap execution in timeout to prevent render-blocking
         window.setTimeout(function(){
@@ -937,12 +961,9 @@
 
                 // Check to see if this pokemon is special in some way
                 var pokemonIsSpecial = false;
-                if (pokemonToken === 'ditto'
-                    || pokemonToken === 'shiny-ditto'
-                    || pokemonData['class'] === 'legendary'
+                if (pokemonData['class'] === 'legendary'
                     || pokemonData['class'] === 'mythical'
-                    || pokemonData['class'] === 'ultra-beast'
-                    || pokemonData['eggGroups'][0] === 'undiscovered'){
+                    || pokemonData['class'] === 'ultra-beast'){
                     pokemonIsSpecial = true;
                     }
 
@@ -950,7 +971,7 @@
                 var allowPokemon = true;
                 if (!appFreeMode && freeStarterPokemon.indexOf(pokemonToken) === -1){
                     if (pokemonIsSpecial && !allowSpecialPokemon){ allowPokemon = false; }
-                    if (typeof PokemonSpeciesSeen[pokemonToken] === 'undefined' || PokemonSpeciesSeen[pokemonToken] < 1){ allowPokemon = false; }
+                    else if (typeof PokemonSpeciesSeen[pokemonToken] === 'undefined' || PokemonSpeciesSeen[pokemonToken] < 1){ allowPokemon = false; }
                     }
 
                 // If this is not an appropriate starter pokemon, continue
@@ -958,7 +979,7 @@
 
                 // Insert a break after each new generation
                 var thisGeneration = pokemonData.gameGeneration;
-                if (pokemonIsSpecial){ thisGeneration = 'specials'; }
+                if (pokemonIsSpecial || pokemonToken.match(/(unown|ditto)$/)){ thisGeneration = 'specials'; }
                 if (thisGeneration !== lastGeneration
                     && pokemonData.formClass !== 'gender-variant'
                     && pokemonData.formClass !== 'regional-variant'){
@@ -2151,7 +2172,11 @@
             && remainingSlots >= 1){
 
             // Always summon a ditto on the first day of the sim
-            if (thisZoneData.day === 1){ triggerZoneVisitor('ditto'); }
+            if (thisZoneData.day === 1
+                && (typeof PokemonSpeciesSeen['ditto'] === 'undefined'
+                    || PokemonSpeciesSeen['ditto'] < 1)){
+                triggerZoneVisitor('ditto');
+                }
 
             // Else if population numbers are low after a year, summon a shiny ditto
             else if (thisZoneData.day > 360 && remainingPercent >= 90){ triggerZoneVisitor('shiny-ditto'); }
@@ -3549,6 +3574,10 @@
             if (indexInfo.class === 'ultra-beast'){ influencePoints = influencePoints * 8;  }
             else if (indexInfo.class === 'legendary'){ influencePoints = influencePoints * 10;  }
             else if (indexInfo.class === 'mythical'){ influencePoints = influencePoints * 12;  }
+            else if (indexInfo.token === 'ditto'
+                || indexInfo.token === 'shiny-ditto'){
+                influencePoints = 0;
+                }
             }
 
         // Return calculated influence points
