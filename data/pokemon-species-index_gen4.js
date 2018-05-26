@@ -1269,6 +1269,22 @@
             eggGroups: ['undiscovered']
             },
 
+        'heatran': {
+            order: indexOrder++,
+            token: 'heatran',
+            name: 'Heatran',
+            class: 'legendary',
+            number: 485,
+            types: ['fire', 'steel'],
+            baseStats: {hp: 91, phAttack: 90, phDefense: 106, spAttack: 130, spDefense: 106, speed: 77},
+            abilities: {0: 'flash-fire', hidden: 'flame-body'},
+            height: 1.7,
+            weight: 430,
+            colors: ['brown', 'gray', 'orange'],
+            eggCycles: 10,
+            eggGroups: ['undiscovered']
+            },
+
         'phione': {
             order: indexOrder++,
             token: 'phione',
