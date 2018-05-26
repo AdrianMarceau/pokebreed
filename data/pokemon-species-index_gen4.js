@@ -1285,6 +1285,23 @@
             eggGroups: ['undiscovered']
             },
 
+        'regigigas': {
+            order: indexOrder++,
+            token: 'regigigas',
+            name: 'Regigigas',
+            class: 'legendary',
+            number: 486,
+            types: ['normal'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 110, phAttack: 160, phDefense: 110, spAttack: 80, spDefense: 110, speed: 100},
+            abilities: {0: 'slow-start'},
+            height: 3.7,
+            weight: 420,
+            colors: ['white', 'yellow', 'green', 'red', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            },
+
         'phione': {
             order: indexOrder++,
             token: 'phione',
