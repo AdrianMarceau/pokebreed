@@ -1094,8 +1094,7 @@
                 if (!isUnlocked){ liClass += 'unknown '; }
                 var numText = '#' + strPad('000', pokeNum, true);
                 var nameText = pokeIndex.name;
-                var titleText = numText;
-                if (isUnlocked){ titleText += ' : ' + nameText; }
+                var titleText = getPokemonTitleText(pokeToken);
                 var pokeIcon = getPokemonIcon(pokeToken, false);
                 pokedexMarkup.push('<li><div class="'+ liClass +'" data-token="' + pokeToken + '" title="'+ titleText +'"><div class="bubble">' +
                         '<span class="num">' + numText + '</span> ' +
@@ -1144,13 +1143,33 @@
             var $pokeBlock = $('.species[data-token="'+ pokeToken +'"]', $pokedexList);
             if ($pokeBlock.hasClass('unknown')){
                 $pokeBlock.removeClass('unknown');
-                var numText = $pokeBlock.find('.num').text();
-                var nameText = $pokeBlock.find('.name').text();
-                var titleText = numText + ' : ' + nameText;
-                $pokeBlock.attr('title', $pokeBlock);
+                var titleText = getPokemonTitleText(pokeToken);
+                $pokeBlock.attr('title', titleText);
                 }
             }
 
+    }
+
+    // Define a function for generating pokemon title text given a token
+    function getPokemonTitleText(pokeToken){
+        var pokeIndex = PokemonSpeciesIndex[pokeToken];
+        var isUnlocked = false;
+        if (typeof PokemonSpeciesSeen[pokeToken] !== 'undefined' && PokemonSpeciesSeen[pokeToken] > 0){ isUnlocked = true; }
+        var pokeNum = PokemonSpeciesDexOrder.indexOf(pokeToken) + 1;
+        var numText = '#' + strPad('000', pokeNum, true);
+        var nameText = pokeIndex.name;
+        var typeText = pokeIndex.types.join(' / ').toLowerCase().replace(/\b[a-z]/g, function(l) { return l.toUpperCase(); }) + ' Type';
+        var titleText = numText;
+        titleText += ' : ' + (isUnlocked ? nameText : '- - -') + ' ';
+        titleText += '\n' + '(' + typeText + ') ';
+        if (isUnlocked){
+            titleText += '\n' + 'LP: ' + pokeIndex.lifePoints + ' ';
+            if (pokeIndex.class !== 'baby'
+                && pokeIndex.eggGroups.indexOf('undiscovered') === -1){
+                titleText += '/ ' + 'BP: ' + pokeIndex.breedPoints + ' ';
+                }
+            }
+        return titleText;
     }
 
     // Define a function for getting the next pokemon ID

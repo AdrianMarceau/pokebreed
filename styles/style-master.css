@@ -1403,7 +1403,8 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     height: 0;
 }
 .panel .buttons .info .group.pokedex .list .species .bubble .num,
-.panel .buttons .info .group.pokedex .list .species .bubble .name {
+.panel .buttons .info .group.pokedex .list .species .bubble .name,
+.panel .buttons .info .group.pokedex .list .species .bubble .types {
     display: block;
     float: left;
     clear: left;
@@ -1449,7 +1450,7 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
 .panel .buttons .info .group.pokedex .list .species.unknown .bubble .sprites .sprite {
     -webkit-filter: grayscale(100%) brightness(0);
     filter: grayscale(100%) brightness(0);
-    opacity: 0.3;
+    opacity: 0.4;
 }
 .panel .buttons .info .group.pokedex .list .species.unknown .num {
     color: #adadad;
