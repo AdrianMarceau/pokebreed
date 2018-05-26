@@ -383,7 +383,7 @@ body[data-mode="free"] .panel .banner .pokedex .count .total {
     overflow: hidden;
 }
 .panel .overview.main .details.pokemon .field .bg {
-    background-image: url(../images/fields/savanna-fullsize.png);
+    background-image: url(../images/fields/none-fullsize.png);
     background-position: center bottom;
     background-size: 100%;
     background-size: cover;

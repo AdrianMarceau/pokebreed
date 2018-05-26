@@ -18,13 +18,13 @@
             order: indexOrder++,
             token: 'forest',
             name: 'Forest',
-            baseTypes: ['grass', 'bug', 'fairy', 'poison']
+            baseTypes: ['grass', 'bug', 'fairy']
             },
         'savanna': {
             order: indexOrder++,
             token: 'savanna',
             name: 'Savanna',
-            baseTypes: ['normal']
+            baseTypes: ['normal', '', 'fairy', 'electric']
             },
         'desert': {
             order: indexOrder++,
@@ -54,7 +54,7 @@
             order: indexOrder++,
             token: 'cave',
             name: 'Cave',
-            baseTypes: ['rock', 'ground', 'poison']
+            baseTypes: ['ground', 'poison', 'rock']
             },
         'crag': {
             order: indexOrder++,
@@ -78,7 +78,7 @@
             order: indexOrder++,
             token: 'city',
             name: 'City',
-            baseTypes: ['electric', 'steel', 'poison', 'fighting']
+            baseTypes: ['fighting', 'poison', 'normal']
             },
         'sky': {
             order: indexOrder++,
@@ -91,6 +91,24 @@
             token: 'space',
             name: 'Space',
             baseTypes: ['psychic', '', 'dragon']
+            },
+        'graveyard': {
+            order: indexOrder++,
+            token: 'graveyard',
+            name: 'Graveyard',
+            baseTypes: ['ghost', 'dark', '', 'poison', 'grass']
+            },
+        'factory': {
+            order: indexOrder++,
+            token: 'factory',
+            name: 'Factory',
+            baseTypes: ['electric', 'steel']
+            },
+        'cliffside': {
+            order: indexOrder++,
+            token: 'cliffside',
+            name: 'Cliffside',
+            baseTypes: ['rock', '', 'ground']
             },
         };
 
