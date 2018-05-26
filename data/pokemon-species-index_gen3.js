@@ -1280,6 +1280,42 @@
             prevEvolution: 'cacnea'
             },
 
+        'swablu': {
+            order: indexOrder++,
+            token: 'swablu',
+            name: 'Swablu',
+            number: 333,
+            types: ['normal', 'flying'],
+            baseStats: {hp: 45, phAttack: 40, phDefense: 60, spAttack: 40, spDefense: 75, speed: 50},
+            abilities: {0: 'natural-cure', hidden: 'cloud-nine'},
+            height: 0.4,
+            weight: 1.2,
+            colors: ['blue', 'white'],
+            evos: ['altaria'],
+            eggCycles: 20,
+            eggGroups: ['flying', 'dragon'],
+            nextEvolutions: [{
+                species: 'altaria',
+                method: 'level-up',
+                value: 35
+                }]
+            },
+        'altaria': {
+            order: indexOrder++,
+            token: 'altaria',
+            name: 'Altaria',
+            number: 334,
+            types: ['dragon', 'flying'],
+            baseStats: {hp: 75, phAttack: 70, phDefense: 90, spAttack: 70, spDefense: 105, speed: 80},
+            abilities: {0: 'natural-cure', hidden: 'cloud-nine'},
+            height: 1.1,
+            weight: 20.6,
+            colors: ['white', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['flying', 'dragon'],
+            prevEvolution: 'swablu'
+            },
+
         'feebas': {
             order: indexOrder++,
             token: 'feebas',

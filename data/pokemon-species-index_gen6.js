@@ -1570,6 +1570,25 @@
             prevEvolution: 'manectric'
             },
 
+        'mega-altaria': {
+            order: thisIndex.afterOrder('altaria'),
+            token: 'mega-altaria',
+            name: 'Mega Altaria',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'altaria',
+            number: 334,
+            types: ['dragon', 'fairy'],
+            baseStats: {hp: 75, phAttack: 110, phDefense: 110, spAttack: 110, spDefense: 105, speed: 80},
+            abilities: {0: 'pixilate'},
+            height: 1.5,
+            weight: 20.6,
+            colors: ['white', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['flying', 'dragon'],
+            prevEvolution: 'altaria'
+            },
+
         'mega-salamence': {
             order: thisIndex.afterOrder('salamence'),
             token: 'mega-salamence',
@@ -1832,6 +1851,7 @@
         {base: 'aggron', species: 'mega-aggron', method: 'mega-evolution', value: 'aggronite'},
         {base: 'medicham', species: 'mega-medicham', method: 'mega-evolution', value: 'medichamite'},
         {base: 'manectric', species: 'mega-manectric', method: 'mega-evolution', value: 'manectricite'},
+        {base: 'altaria', species: 'mega-altaria', method: 'mega-evolution', value: 'altarianite'},
         {base: 'salamence', species: 'mega-salamence', method: 'mega-evolution', value: 'salamencite'},
         {base: 'metagross', species: 'mega-metagross', method: 'mega-evolution', value: 'metagrossite'},
 
