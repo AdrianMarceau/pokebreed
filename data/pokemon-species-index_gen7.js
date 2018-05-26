@@ -342,6 +342,41 @@
             prevEvolution: 'charjabug'
             },
 
+        'cutiefly': {
+            order: indexOrder++,
+            token: 'cutiefly',
+            name: 'Cutiefly',
+            number: 742,
+            types: ['bug', 'fairy'],
+            baseStats: {hp: 40, phAttack: 45, phDefense: 40, spAttack: 55, spDefense: 40, speed: 84},
+            abilities: {0: 'honey-gather', 1: 'shield-dust', hidden: 'sweet-veil'},
+            height: 0.1,
+            weight: 0.2,
+            colors: ['yellow', 'white', 'black', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['bug', 'fairy'],
+            nextEvolutions: [{
+                species: 'ribombee',
+                method: 'level-up',
+                value: 25
+                }]
+            },
+        'ribombee': {
+            order: indexOrder++,
+            token: 'ribombee',
+            name: 'Ribombee',
+            number: 743,
+            types: ['bug', 'fairy'],
+            baseStats: {hp: 60, phAttack: 55, phDefense: 60, spAttack: 95, spDefense: 70, speed: 124},
+            abilities: {0: 'honey-gather', 1: 'shield-dust', hidden: 'sweet-veil'},
+            height: 0.2,
+            weight: 0.5,
+            colors: ['yellow', 'white', 'brown', 'black'],
+            eggCycles: 20,
+            eggGroups: ['bug', 'fairy'],
+            prevEvolution: 'cutiefly'
+            },
+
         'mareanie': {
             order: indexOrder++,
             token: 'mareanie',
