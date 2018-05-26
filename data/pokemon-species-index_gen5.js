@@ -498,6 +498,41 @@
             eggGroups: ['water-1', 'water-2']
             },
 
+        'joltik': {
+            order: indexOrder++,
+            token: 'joltik',
+            name: 'Joltik',
+            number: 595,
+            types: ['bug', 'electric'],
+            baseStats: {hp: 50, phAttack: 47, phDefense: 50, spAttack: 57, spDefense: 50, speed: 65},
+            abilities: {0: 'compound-eyes', 1: 'unnerve', hidden: 'swarm'},
+            height: 0.1,
+            weight: 0.6,
+            colors: ['yellow', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['bug'],
+            nextEvolutions: [{
+                species: 'galvantula',
+                method: 'level-up',
+                value: 36
+                }],
+            },
+        'galvantula': {
+            order: indexOrder++,
+            token: 'galvantula',
+            name: 'Galvantula',
+            number: 596,
+            types: ['bug', 'electric'],
+            baseStats: {hp: 70, phAttack: 77, phDefense: 60, spAttack: 97, spDefense: 60, speed: 108},
+            abilities: {0: 'compound-eyes', 1: 'unnerve', hidden: 'swarm'},
+            height: 0.8,
+            weight: 14.3,
+            colors: ['yellow', 'purple', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['bug'],
+            prevEvolution: 'joltik'
+            },
+
         'klink': {
             order: indexOrder++,
             token: 'klink',
