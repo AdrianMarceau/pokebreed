@@ -916,6 +916,10 @@
         if (seenSpeciesTokens.length >= 721){ freeStarterPokemon.push('rowlet', 'litten', 'popplio'); } // gen 7 starters
         //if (seenSpeciesTokens.length >= 807){ freeStarterPokemon.push('?', '?', '?'); }
 
+        // Check to see if we should allow special pokemon now
+        var allowSpecialPokemon = false;
+        if (seenSpeciesTokens.length >= PokemonSpeciesIndexTokens.length){ allowSpecialPokemon = true; }
+
         // Wrap execution in timeout to prevent render-blocking
         window.setTimeout(function(){
 
@@ -931,26 +935,35 @@
                 var pokemonTypes = pokemonData.types;
                 //console.log('pokemonTypes = ', pokemonTypes);
 
-                // Continue if this is not an appropriate starter pokemon
-                if (!appDebugMode && (pokemonToken === 'ditto'
+                // Check to see if this pokemon is special in some way
+                var pokemonIsSpecial = false;
+                if (pokemonToken === 'ditto'
                     || pokemonToken === 'shiny-ditto'
                     || pokemonData['class'] === 'legendary'
                     || pokemonData['class'] === 'mythical'
                     || pokemonData['class'] === 'ultra-beast'
-                    || pokemonData['eggGroups'][0] === 'undiscovered')
-                    || (!appFreeMode
-                        && freeStarterPokemon.indexOf(pokemonToken) === -1
-                        && (typeof PokemonSpeciesSeen[pokemonToken] === 'undefined'
-                            || PokemonSpeciesSeen[pokemonToken] < 1))){
-                    continue;
+                    || pokemonData['eggGroups'][0] === 'undiscovered'){
+                    pokemonIsSpecial = true;
                     }
 
+                // If we're in normal mode, only non-special seen pokemon can be used
+                var allowPokemon = true;
+                if (!appFreeMode && freeStarterPokemon.indexOf(pokemonToken) === -1){
+                    if (pokemonIsSpecial && !allowSpecialPokemon){ allowPokemon = false; }
+                    if (typeof PokemonSpeciesSeen[pokemonToken] === 'undefined' || PokemonSpeciesSeen[pokemonToken] < 1){ allowPokemon = false; }
+                    }
+
+                // If this is not an appropriate starter pokemon, continue
+                if (!allowPokemon){ continue; }
+
                 // Insert a break after each new generation
-                if (pokemonData.gameGeneration !== lastGeneration
+                var thisGeneration = pokemonData.gameGeneration;
+                if (pokemonIsSpecial){ thisGeneration = 'specials'; }
+                if (thisGeneration !== lastGeneration
                     && pokemonData.formClass !== 'gender-variant'
                     && pokemonData.formClass !== 'regional-variant'){
                     if (lastGeneration !== false){ pokePanelMarkup += '<hr class="breaker" />'; }
-                    lastGeneration = pokemonData.gameGeneration;
+                    lastGeneration = thisGeneration;
                 }
 
                 // Collect the pokemon's image icon
