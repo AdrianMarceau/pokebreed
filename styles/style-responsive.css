@@ -281,8 +281,8 @@
     }
     .panel .overview.types .wrap,
     .panel .overview.species .wrap {
-        max-height: 374px;
-        max-height: calc(100vh - 276px);
+        height: calc(100vh - 276px);
+        max-height: 528px;
     }
     .panel .overview.main .details.pokemon .list.slots li,
     .panel .overview.main .details.pokemon .list.pokemon li,
