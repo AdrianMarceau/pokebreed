@@ -9,6 +9,5 @@
             distribute this data, or use this data in any fashion without the express permission of the user, and only to assist the user with application related issues.
             If such data were to be collected in the process of assisting a user, said data would be destroyed promptly following a successful resolution of the issues.
         </p>
-        <p>(!) If you'd like to clear <strong>all save data</strong> and start over <strong>from scratch</strong>, please <a class="link reset_simulator">click here</a>.</p>
     </div>
 </div>
