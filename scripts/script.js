@@ -1962,6 +1962,7 @@
         // Otherwise, clicking simply places a "watched" indicator on the pokemon
         else {
 
+            /*
             // Update the watched flag for the pokemon in question
             pokeInfo.watchFlag = pokeInfo.watchFlag !== true ? true : false;
 
@@ -1969,6 +1970,8 @@
             var hasWatched = $li.find('.watched').length;
             if (pokeInfo.watchFlag && !hasWatched){ $li.find('> div').append('<span class="tag watched"></span>'); }
             else if (!pokeInfo.watchFlag && hasWatched){ $li.find('.watched').remove(); }
+            */
+            return false;
 
             }
 
