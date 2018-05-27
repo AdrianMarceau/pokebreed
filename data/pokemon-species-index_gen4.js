@@ -1350,6 +1350,23 @@
             eggGroups: ['undiscovered']
             },
 
+        'cresselia': {
+            order: indexOrder++,
+            token: 'cresselia',
+            name: 'Cresselia',
+            class: 'legendary',
+            number: 488,
+            types: ['psychic'],
+            genderRatio: {female: 1.0000},
+            baseStats: {hp: 120, phAttack: 70, phDefense: 120, spAttack: 75, spDefense: 130, speed: 85},
+            abilities: {0: 'levitate'},
+            height: 1.5,
+            weight: 85.6,
+            colors: ['yellow', 'pink', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
         'phione': {
             order: indexOrder++,
             token: 'phione',
