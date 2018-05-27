@@ -185,6 +185,9 @@ body[data-mode="free"] .panel .banner .version {
 .panel .banner .counter.timer .count .total {
     color: #ffffff;
 }
+body[data-mode="free"] .panel .banner .counter.pokedex {
+    cursor: default;
+}
 body[data-mode="free"] .panel .banner .counter.pokedex .count .total {
     text-decoration: line-through;
 }
