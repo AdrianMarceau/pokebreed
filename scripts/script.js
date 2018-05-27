@@ -234,7 +234,7 @@
         // Update the banner counters with the total days and current species
         var pokedexCurrent = Object.keys(PokemonSpeciesSeen).length;
         var pokedexTotal = PokemonSpeciesIndexTokens.length;
-        var pokedexPercent = Math.ceil((pokedexCurrent / pokedexTotal) * 100);
+        var pokedexPercent = (Math.ceil((pokedexCurrent / pokedexTotal) * 1000) / 10);
         $('.timer .count .total', $panelBanner).html(numberWithCommas(PokeboxDaysPassed));
         $('.pokedex .count .current', $panelBanner).html(pokedexCurrent);
         $('.pokedex .count .total', $panelBanner).html(pokedexTotal);
@@ -1513,7 +1513,7 @@
 
         // Update the banner counters with the total days and current species
         var pokedexCurrent = Object.keys(PokemonSpeciesSeen).length;
-        var pokedexPercent = Math.ceil((pokedexCurrent / PokemonSpeciesIndexTokens.length) * 100)
+        var pokedexPercent = (Math.ceil((pokedexCurrent / PokemonSpeciesIndexTokens.length) * 1000) / 10);
         $('.timer .count .total', $panelBanner).html(numberWithCommas(PokeboxDaysPassed));
         $('.pokedex .count .current', $panelBanner).html(pokedexCurrent);
         $('.pokedex .count .percent', $panelBanner).html(pokedexPercent+'%');
