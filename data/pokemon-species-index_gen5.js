@@ -750,7 +750,7 @@
             colors: ['black', 'purple', 'yellow'],
             eggCycles: 20,
             eggGroups: ['amorphous'],
-            prevEvolution: 'tynamo',
+            prevEvolution: 'litwick',
             nextEvolutions: [{
                 species: 'chandelure',
                 method: 'evolution-stone',
