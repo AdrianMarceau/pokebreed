@@ -1407,6 +1407,23 @@
                 }]
             },
 
+        'darkrai': {
+            order: indexOrder++,
+            token: 'darkrai',
+            name: 'Darkrai',
+            class: 'mythical',
+            number: 491,
+            types: ['dark'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 70, phAttack: 90, phDefense: 90, spAttack: 135, spDefense: 90, speed: 125},
+            abilities: {0: 'bad-dreams'},
+            height: 1.5,
+            weight: 50.5,
+            colors: ['black', 'white', 'red'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
