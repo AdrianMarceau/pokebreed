@@ -121,7 +121,7 @@
                 strengths: ['ghost'],
                 handicaps: [],
                 futilities: ['normal', 'psychic'],
-                weaknesses: ['ghost'],
+                weaknesses: ['ghost', 'dark'],
                 resistances: ['bug', 'poison'],
                 immunities: ['normal', 'fighting']
                 }
