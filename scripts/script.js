@@ -1157,7 +1157,15 @@
                 var numText = '#' + strPad('000', pokeNum, true);
                 var nameText = pokeIndex.name;
                 var titleText = getPokemonTitleText(pokeToken);
-                var pokeIcon = getPokemonIcon(pokeToken, false);
+                var customData = {};
+                if (typeof pokeIndex.formToken === 'string' && pokeIndex.formToken.length > 0){
+                    customData.formToken = pokeIndex.formToken; // Preset form
+                    } else if (pokeIndex.randomizeForms === true
+                        && typeof pokeIndex.baseForme !== 'undefined'
+                        && pokeIndex.baseForme.length > 0){
+                    customData.formToken = pokeIndex.baseForme; // Random form with base
+                    }
+                var pokeIcon = getPokemonIcon(pokeToken, false, customData);
                 pokedexMarkup.push('<li><div class="'+ liClass +'" data-token="' + pokeToken + '" title="'+ titleText +'"><div class="bubble">' +
                         '<span class="num">' + numText + '</span> ' +
                         '<span class="name"><span>' + nameText + '</span><span>- - -</span></span> ' +
