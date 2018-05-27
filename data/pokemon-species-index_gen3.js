@@ -1190,6 +1190,41 @@
             eggGroups: ['fairy', 'grass']
             },
 
+        'gulpin': {
+            order: indexOrder++,
+            token: 'gulpin',
+            name: 'Gulpin',
+            number: 316,
+            types: ['poison'],
+            baseStats: {hp: 70, phAttack: 43, phDefense: 53, spAttack: 43, spDefense: 53, speed: 40},
+            abilities: {0: 'liquid-ooze', 1: 'sticky-hold', hidden: 'gluttony'},
+            height: 0.4,
+            weight: 10.3,
+            colors: ['green', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            nextEvolutions: [{
+                species: 'swalot',
+                method: 'level-up',
+                value: 26
+                }]
+            },
+        'swalot': {
+            order: indexOrder++,
+            token: 'swalot',
+            name: 'Swalot',
+            number: 317,
+            types: ['poison'],
+            baseStats: {hp: 100, phAttack: 73, phDefense: 83, spAttack: 73, spDefense: 83, speed: 55},
+            abilities: {0: 'liquid-ooze', 1: 'sticky-hold', hidden: 'gluttony'},
+            height: 1.7,
+            weight: 80,
+            colors: ['purple', 'black', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'gulpin'
+            },
+
         'torkoal': {
             order: indexOrder++,
             token: 'torkoal',
