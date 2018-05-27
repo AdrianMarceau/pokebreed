@@ -1331,6 +1331,21 @@
             prevEvolution: 'swablu'
             },
 
+        'zangoose': {
+            order: indexOrder++,
+            token: 'zangoose',
+            name: 'Zangoose',
+            number: 335,
+            types: ['normal'],
+            baseStats: {hp: 73, phAttack: 115, phDefense: 60, spAttack: 60, spDefense: 60, speed: 90},
+            abilities: {0: 'immunity', hidden: 'toxic-boost'},
+            height: 1.3,
+            weight: 40.3,
+            colors: ['white', 'red', 'black'],
+            eggCycles: 20,
+            eggGroups: ['field']
+            },
+
         'feebas': {
             order: indexOrder++,
             token: 'feebas',
