@@ -1345,6 +1345,20 @@
             eggCycles: 20,
             eggGroups: ['field']
             },
+        'seviper': {
+            order: indexOrder++,
+            token: 'seviper',
+            name: 'Seviper',
+            number: 336,
+            types: ['poison'],
+            baseStats: {hp: 73, phAttack: 100, phDefense: 60, spAttack: 100, spDefense: 60, speed: 65},
+            abilities: {0: 'shed-skin', hidden: 'infiltrator'},
+            height: 2.7,
+            weight: 52.5,
+            colors: ['black', 'yellow', 'purple', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field', 'dragon']
+            },
 
         'feebas': {
             order: indexOrder++,
