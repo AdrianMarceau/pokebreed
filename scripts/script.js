@@ -91,10 +91,6 @@
         updateDeviceWidth();
         //console.log('thisDeviceWidth = ', thisDeviceWidth);
 
-        // Expose the zone zata and species seen as public variables
-        window.PokeboxZoneData = thisZoneData;
-        window.PokemonSpeciesSeen = PokemonSpeciesSeen;
-
         // Populate the app details with global values if set
         if (typeof window.PokemonAppLastUpdated !== 'undefined'){ appLastUpdated = window.PokemonAppLastUpdated; }
         if (typeof window.PokemonAppVersionNumber !== 'undefined'){ appVersionNumber = window.PokemonAppVersionNumber; }
@@ -1471,6 +1467,7 @@
             var statToken = zoneStatTokens[key];
             thisZoneData.currentStats[statToken] = currentZoneStats[statToken];
             }
+        //console.log('thisZoneData.currentStats = ', thisZoneData.currentStats);
 
         // Loop though and count population by types & species
         var pokeSpeciesActive = {};
@@ -1876,14 +1873,6 @@
             $('.wrap', $panelOverviewFloatLists).perfectScrollbar('update');
             }
 
-        /*
-        // If at least one pokemon has been added, we can start the day timer
-        if (totalActiveUnits >= pokemonRequiredToStart && !dayTimeoutStarted){
-            if (!simulationStarted){ startSimulation(); }
-            updateDay(false);
-            }
-            */
-
         // Run the onComplete function now
         onComplete();
 
@@ -2009,7 +1998,7 @@
         currentZoneStats['eggs'] = {};
 
         // Define the sub-stats to calculate
-        var subZoneStats = ['eggGroups', 'gameGeneration', 'gameRegion'];
+        var subZoneStats = ['colors', 'eggGroups', 'gameGeneration', 'gameRegion'];
 
         // Predefine all the types with zero points
         if (typeof PokemonTypesIndex !== 'undefined'){
@@ -2140,7 +2129,7 @@
                 }
             }
 
-        //console.log('thisZoneData.currentStats[\'types\'] = ', currentZoneStats['types']);
+        //console.log('thisZoneData.currentStats = ', currentZoneStats);
         return currentZoneStats;
 
     }
@@ -2264,6 +2253,45 @@
 
     }
 
+    // Define a function for calculating the current Vivillon pattern
+    var currentVivillonPattern = '';
+    function calculateCurrentVivillonPattern(){
+        //console.log('calculateCurrentVivillonPattern()');
+
+        // If there the Vivillon line on the field, pre-calculate current colour stats
+        if (typeof PokemonSpeciesIndex['vivillon'] !== 'undefined'
+            && currentVivillonPattern === ''){
+
+            // Loop through and calculate likelihood of each pattern
+            var currentColourStats = thisZoneData.currentStats['colors'];
+            var possibleFormsColors = PokemonSpeciesIndex['vivillon']['possibleFormsColors'];
+            var possibleFormsColorsTokens = Object.keys(possibleFormsColors);
+            var possibleFormsChances = {};
+            for (var key = 0; key < possibleFormsColorsTokens.length; key++){
+                var formToken = possibleFormsColorsTokens[key];
+                var formChance = 0;
+                var formColors = possibleFormsColors[formToken];
+                for (var i = 0; i < formColors.length; i++){
+                    var formColor = formColors[i];
+                    if (typeof currentColourStats[formColor] !== 'undefined'){
+                        formChance += currentColourStats[formColor];
+                        }
+                    }
+                possibleFormsChances[formToken] = formChance;
+                }
+            var possibleFormRanking = getSortedKeys(possibleFormsChances);
+            //console.log('possibleFormsColors = ', possibleFormsColors);
+            //console.log('possibleFormsChances = ', possibleFormsChances);
+            //console.log('possibleFormRanking = ', possibleFormRanking);
+
+            // Update the current pattern var with the top result
+            currentVivillonPattern = possibleFormRanking[0];
+            //console.log('currentVivillonPattern = ', currentVivillonPattern);
+
+            }
+
+    }
+
     // Define a function for updating growth cycles
     function updateGrowthCycles(){
 
@@ -2278,69 +2306,8 @@
         var allowedTradeEvolutions = {};
 
         // Predefine a variable for colour stats in case we need them
-        var currentColourStats = {};
-        var currentVivillonPattern = '';
-
-        // Define a function for calculating the current Vivillon pattern
-        function calculateCurrentVivillonPattern(){
-            //console.log('calculateCurrentVivillonPattern()');
-
-            // If there the Vivillon line on the field, pre-calculate current colour stats
-            if (typeof PokemonSpeciesIndex['vivillon'] !== 'undefined'
-                && currentVivillonPattern === ''){
-
-                // Precalculate current colour stats by looping through all pokemon
-                var currentColourStats = {};
-                if (thisZoneData.currentPokemon.length){
-                    for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
-                        var pokemonInfo = thisZoneData.currentPokemon[key];
-                        if (pokemonInfo.eggCycles > 0){ continue; }
-                        else if (pokemonInfo.token === 'vivillon'){ continue; }
-                        var indexInfo = PokemonSpeciesIndex[pokemonInfo.token];
-                        if (typeof indexInfo.color !== 'undefined'){
-                            if (typeof currentColourStats[indexInfo.color] === 'undefined'){ currentColourStats[indexInfo.color] = 0; }
-                            currentColourStats[indexInfo.color] += 1;
-                            }
-                        if (typeof indexInfo.colors !== 'undefined'){
-                            for (var i = 0; i < indexInfo.colors.length; i++){
-                                var color = indexInfo.colors[i];
-                                if (typeof currentColourStats[color] === 'undefined'){ currentColourStats[color] = 0; }
-                                var incVal = 1 - (i * 0.25);
-                                if (incVal > 0){ currentColourStats[color] += incVal; }
-                                }
-                            }
-                        }
-                    }
-                //console.log('currentColourStats = ', currentColourStats);
-
-                // Loop through and calculate likelihood of each pattern
-                var possibleFormsColors = PokemonSpeciesIndex['vivillon']['possibleFormsColors'];
-                var possibleFormsColorsTokens = Object.keys(possibleFormsColors);
-                var possibleFormsChances = {};
-                for (var key = 0; key < possibleFormsColorsTokens.length; key++){
-                    var formToken = possibleFormsColorsTokens[key];
-                    var formChance = 0;
-                    var formColors = possibleFormsColors[formToken];
-                    for (var i = 0; i < formColors.length; i++){
-                        var formColor = formColors[i];
-                        if (typeof currentColourStats[formColor] !== 'undefined'){
-                            formChance += currentColourStats[formColor];
-                            }
-                        }
-                    possibleFormsChances[formToken] = formChance;
-                    }
-                var possibleFormRanking = getSortedKeys(possibleFormsChances);
-                //console.log('possibleFormsColors = ', possibleFormsColors);
-                //console.log('possibleFormsChances = ', possibleFormsChances);
-                //console.log('possibleFormRanking = ', possibleFormRanking);
-
-                // Update the current pattern var with the top result
-                currentVivillonPattern = possibleFormRanking[0];
-                //console.log('currentVivillonPattern = ', currentVivillonPattern);
-
-                }
-
-        }
+        currentVivillonPattern = '';
+        calculateCurrentVivillonPattern();
 
         // First, loop through all the non-egg pokemon and increment growth cycle
         if (thisZoneData.currentPokemon.length){
@@ -2638,7 +2605,6 @@
 
                         // If the selected evolution was Vivillon, we need to calculate its form
                         if (selectedEvolution.token === 'vivillon'){
-                            calculateCurrentVivillonPattern();
                             pokemonInfo.formToken = currentVivillonPattern;
                             }
                         // Otherwise if this pokemon has a randomized form, decide it now
@@ -3190,6 +3156,16 @@
                 if (typeof thisZoneData.currentStats['gameRegion'][pokeInfo.gameRegion] !== 'undefined'
                     && thisZoneData.currentStats['gameRegion'][pokeInfo.gameRegion] !== 0){
                     pokeChance += thisZoneData.currentStats['gameRegion'][pokeInfo.gameRegion] * regionVal;
+                    }
+
+                // Increase the chance of this pokemon appearing based on colour appeal
+                var colourVal = 0.001 / pokeInfo.colors.length;
+                for (var key2 = 0; key2 < pokeInfo.colors.length; key2++){
+                    var colourToken = pokeInfo.colors[key2];
+                    if (typeof thisZoneData.currentStats['colors'][colourToken] !== 'undefined'
+                        && thisZoneData.currentStats['colors'][colourToken] !== 0){
+                        pokeChance += thisZoneData.currentStats['colors'][colourToken] * colourVal;
+                        }
                     }
 
                 // Increase the chance of this pokemon appearing based on species appeal
@@ -3777,5 +3753,25 @@
     window.cancelAnimationFrame = window.cancelAnimationFrame
         || window.mozCancelAnimationFrame
         || function(requestID){clearTimeout(requestID)};
+
+    // Define public functions for reading certain data
+    window.PokeBoxAPI = {
+        getPokeboxZoneData: function(){ return JSON.parse(JSON.stringify(thisZoneData)); },
+        getPokemonSpeciesSeen: function(){ return JSON.parse(JSON.stringify(PokemonSpeciesSeen)); },
+        getPokemonSpeciesIndex: function(){ return JSON.parse(JSON.stringify(PokemonSpeciesIndex)); },
+        getPokemonSpeciesIndexTokens: function(){ return JSON.parse(JSON.stringify(PokemonSpeciesIndexTokens)); },
+        getBasicPokemonSpeciesIndexTokens: function(){ return JSON.parse(JSON.stringify(BasicPokemonSpeciesIndexTokens)); },
+        getPokemonSpeciesDisplayOrder: function(){ return JSON.parse(JSON.stringify(PokemonSpeciesDisplayOrder)); },
+        getPokemonSpeciesDexOrder: function(){ return JSON.parse(JSON.stringify(PokemonSpeciesDexOrder)); },
+        getPokemonTypesIndex: function(){ return JSON.parse(JSON.stringify(PokemonTypesIndex)); },
+        getPokemonTypesIndexTokens: function(){ return JSON.parse(JSON.stringify(PokemonTypesIndexTokens)); },
+        getPokemonTotals: function(){ return {
+            specialPokemon: totalSpecialPokemon,
+            legendaryPokemon: totalLegendaryPokemon,
+            mythicalPokemon: totalMythicalPokemon,
+            ultraBeasts: totalUltraBeasts,
+            miscBeasts: totalMiscBeasts
+            }; }
+        };
 
 })();
