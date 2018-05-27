@@ -393,7 +393,7 @@
         // beetles: heracross, pinsir
         // dflies: yanma, cacnea
         // foul: venusaur, vileplume, victreebel
-        // spicy: bayleaf, sunflora, lilligant, meganium
+        // spicy: bayleef, sunflora, lilligant, meganium
         // sweet: bellossom, roselia, roserade, comfey, florges
         // cactus: cacnea, maractus
 
@@ -409,7 +409,7 @@
         {base: 'cutiefly', species: 'roselia'},
         {base: 'mothim', species: 'roserade'},
 
-        {base: 'beedrill', species: 'bayleaf'},
+        {base: 'beedrill', species: 'bayleef'},
         {base: 'combee', species: 'bellossom'},
 
         {base: 'ledyba', species: 'sunflora'},
