@@ -474,8 +474,8 @@
 
                 var genderVariantA = false;
                 var genderVariantB = false;
-                if (infoA['formClass'] === 'gender-variant' && typeof infoA['prevEvolution'] === 'undefined'){ genderVariantA = true; }
-                if (infoB['formClass'] === 'gender-variant' && typeof infoB['prevEvolution'] === 'undefined'){ genderVariantB = true; }
+                //if (infoA['formClass'] === 'gender-variant' && typeof infoA['prevEvolution'] === 'undefined'){ genderVariantA = true; }
+                //if (infoB['formClass'] === 'gender-variant' && typeof infoB['prevEvolution'] === 'undefined'){ genderVariantB = true; }
 
                 if (false){ return 0; }
 
@@ -485,16 +485,7 @@
                 else if (regVariantA && !regVariantB){ return 1; }
                 else if (!regVariantA && regVariantB){ return -1; }
 
-                else if (genderVariantA && !genderVariantB){ return 1; }
-                else if (!genderVariantA && genderVariantB){ return -1; }
-
-                else if (genderVariantA && genderVariantB){
-
-                    if (infoA['order'] < infoB['order']){ return -1; }
-                    else if (infoA['order'] > infoB['order']){ return 1; }
-                    else { return 0; }
-
-                } else {
+                else {
 
                     var invertVariant = false;
                     if (regVariantA && regVariantB && basicA && basicB){ invertVariant = true; }
