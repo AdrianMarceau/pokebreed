@@ -1236,6 +1236,22 @@
             prevEvolution: 'nosepass'
             },
 
+        'rotom': {
+            order: indexOrder++,
+            token: 'rotom',
+            name: 'Rotom',
+            number: 479,
+            types: ['electric', 'ghost'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 50, phAttack: 50, phDefense: 77, spAttack: 95, spDefense: 77, speed: 91},
+            abilities: {0: 'levitate'},
+            height: 0.3,
+            weight: 0.3,
+            colors: ['orange', 'white', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['amorphous']
+            },
+
         'dialga': {
             order: indexOrder++,
             token: 'dialga',
