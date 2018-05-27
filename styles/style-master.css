@@ -138,6 +138,10 @@ body[data-mode="free"] .panel .banner .subtext {
     font-weight: normal;
     text-shadow: none;
 }
+body[data-mode="free"] .panel .banner .version {
+    left: auto;
+    right: 9px;
+}
 .panel .banner .version .bp {
     display: none;
     color: magenta;

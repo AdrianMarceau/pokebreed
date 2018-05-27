@@ -95,7 +95,9 @@ if (isset($_GET['gen'])
                     <span class="count"><span class="total">0</span></span>
                     <img class="icon" src="images/timer.png" />
                 </div>
-                <a class="reset_simulator" title="Clear Save Data?"><i>&times;</i></a>
+                <? if (!$is_free_mode){ ?>
+                    <a class="reset_simulator" title="Clear Save Data?"><i>&times;</i></a>
+                <? } ?>
             </div>
 
             <div class="overview main">
