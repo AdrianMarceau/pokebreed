@@ -29,7 +29,7 @@
             abilities: {0: 'overgrow', hidden: 'long-reach'},
             height: 0.3,
             weight: 1.5,
-            color: 'brown',
+            colors: ['brown', 'white', 'green', 'orange'],
             eggCycles: 15,
             eggGroups: ['flying'],
             nextEvolutions: [{
@@ -49,7 +49,7 @@
             abilities: {0: 'overgrow', hidden: 'long-reach'},
             height: 0.7,
             weight: 16,
-            color: 'brown',
+            colors: ['green', 'brown', 'white', 'orange'],
             eggCycles: 15,
             eggGroups: ['flying'],
             prevEvolution: 'rowlet',
@@ -70,7 +70,7 @@
             abilities: {0: 'overgrow', hidden: 'long-reach'},
             height: 1.6,
             weight: 36.6,
-            color: 'brown',
+            colors: ['green', 'brown', 'orange', 'white'],
             eggCycles: 15,
             eggGroups: ['flying'],
             prevEvolution: 'dartrix'
@@ -88,7 +88,7 @@
             abilities: {0: 'blaze', hidden: 'intimidate'},
             height: 0.4,
             weight: 4.3,
-            color: 'red',
+            colors: ['black', 'red', 'yellow'],
             eggCycles: 15,
             eggGroups: ['field'],
             nextEvolutions: [{
@@ -108,7 +108,7 @@
             abilities: {0: 'blaze', hidden: 'intimidate'},
             height: 0.7,
             weight: 25,
-            color: 'red',
+            colors: ['red', 'black', 'yellow'],
             eggCycles: 15,
             eggGroups: ['field'],
             prevEvolution: 'litten',
@@ -129,7 +129,7 @@
             abilities: {0: 'blaze', hidden: 'intimidate'},
             height: 1.8,
             weight: 83,
-            color: 'red',
+            colors: ['red', 'black', 'gray', 'yellow'],
             eggCycles: 15,
             eggGroups: ['field'],
             prevEvolution: 'torracat'
@@ -146,7 +146,7 @@
             abilities: {0: 'torrent', hidden: 'liquid-voice'},
             height: 0.4,
             weight: 7.5,
-            color: 'blue',
+            colors: ['blue', 'white', 'pink'],
             eggCycles: 15,
             eggGroups: ['water-1', 'field'],
             nextEvolutions: [{
@@ -166,7 +166,7 @@
             abilities: {0: 'torrent', hidden: 'liquid-voice'},
             height: 0.6,
             weight: 17.5,
-            color: 'blue',
+            colors: ['blue', 'white', 'pink'],
             eggCycles: 15,
             eggGroups: ['water-1', 'field'],
             prevEvolution: 'popplio',
@@ -187,7 +187,7 @@
             abilities: {0: 'torrent', hidden: 'liquid-voice'},
             height: 1.8,
             weight: 44,
-            color: 'blue',
+            colors: ['white', 'blue', 'pink'],
             eggCycles: 15,
             eggGroups: ['water-1', 'field'],
             prevEvolution: 'brionne'
@@ -653,7 +653,7 @@
             abilities: {0: 'bulletproof', 1: 'soundproof', hidden: 'overcoat'},
             height: 0.6,
             weight: 29.7,
-            color: ['gray', 'yellow', 'black'],
+            colors: ['gray', 'yellow', 'black'],
             eggCycles: 40,
             eggGroups: ['dragon'],
             nextEvolutions: [{
@@ -672,7 +672,7 @@
             abilities: {0: 'bulletproof', 1: 'soundproof', hidden: 'overcoat'},
             height: 1.2,
             weight: 47,
-            color: ['gray', 'yellow', 'black', 'red'],
+            colors: ['gray', 'yellow', 'black', 'red'],
             eggCycles: 40,
             eggGroups: ['dragon'],
             prevEvolution: 'jangmo-o',
@@ -692,7 +692,7 @@
             abilities: {0: 'bulletproof', 1: 'soundproof', hidden: 'overcoat'},
             height: 1.6,
             weight: 78.2,
-            color: ['gray', 'yellow', 'red', 'white', 'black'],
+            colors: ['gray', 'yellow', 'red', 'white', 'black'],
             eggCycles: 40,
             eggGroups: ['dragon'],
             prevEvolution: 'hakamo-o',
@@ -715,7 +715,7 @@
             abilities: {0: 'Gluttony', 1: 'Hustle', hidden: 'Thick Fat'},
             height: 0.3,
             weight: 3.8,
-            color: 'black',
+            colors: ['black', 'white'],
             eggCycles: 15,
             eggGroups: ['field'],
             nextEvolutions: [{
@@ -744,7 +744,7 @@
             abilities: {0: 'Gluttony', 1: 'Hustle', hidden: 'Thick Fat'},
             height: 0.7,
             weight: 25.5,
-            color: 'black',
+            colors: ['black', 'white'],
             eggCycles: 15,
             eggGroups: ['field'],
             prevEvolution: 'alolan-rattata'
@@ -763,7 +763,7 @@
             abilities: {0: 'surge-surfer'},
             height: 0.7,
             weight: 21,
-            color: 'brown',
+            colors: ['orange', 'yellow', 'white', 'blue'],
             eggCycles: 10,
             eggGroups: ['field', 'fairy'],
             prevEvolution: 'pikachu'
@@ -782,7 +782,7 @@
             abilities: {0: 'snow-cloak', hidden: 'slush-rush'},
             height: 0.7,
             weight: 40,
-            color: 'white',
+            colors: ['white', 'blue', 'black'],
             eggCycles: 20,
             eggGroups: ['field'],
             nextEvolutions: [{
@@ -811,7 +811,7 @@
             abilities: {0: 'snow-cloak', hidden: 'slush-rush'},
             height: 1.2,
             weight: 55,
-            color: 'blue',
+            colors: ['white', 'blue', 'gray', 'black'],
             eggCycles: 20,
             eggGroups: ['field'],
             prevEvolution: 'alolan-sandshrew'
@@ -831,7 +831,7 @@
             abilities: {0: 'snow-cloak', hidden: 'snow-warning'},
             height: 0.6,
             weight: 9.9,
-            color: 'white',
+            colors: ['white', 'blue'],
             eggCycles: 20,
             eggGroups: ['field'],
             nextEvolutions: [{
@@ -861,7 +861,7 @@
             abilities: {0: 'snow-cloak', hidden: 'snow-warning'},
             height: 1.1,
             weight: 19.9,
-            color: 'blue',
+            colors: ['white', 'blue'],
             eggCycles: 20,
             eggGroups: ['field'],
             prevEvolution: 'alolan-vulpix'
@@ -880,7 +880,7 @@
             abilities: {0: 'sand-veil', 1: 'tangling-hair', hidden: 'sand-force'},
             height: 0.2,
             weight: 1,
-            color: 'brown',
+            colors: ['brown', 'pink', 'yellow'],
             eggCycles: 20,
             eggGroups: ['field'],
             nextEvolutions: [{
@@ -907,7 +907,7 @@
             abilities: {0: 'sand-veil', 1: 'tangling-hair', hidden: 'sand-force'},
             height: 0.7,
             weight: 66.6,
-            color: 'brown',
+            colors: ['yellow', 'brown', 'yellow'],
             eggCycles: 20,
             eggGroups: ['field'],
             prevEvolution: 'alolan-diglett'
@@ -928,7 +928,7 @@
             abilities: {0: 'pickup', 1: 'technician', hidden: 'rattled'},
             height: 0.4,
             weight: 4.2,
-            color: 'blue',
+            colors: ['gray', 'black', 'yellow'],
             eggCycles: 20,
             eggGroups: ['field'],
             nextEvolutions: [{
@@ -955,7 +955,7 @@
             abilities: {0: 'pickup', 1: 'technician', hidden: 'rattled'},
             height: 1.1,
             weight: 33,
-            color: 'blue',
+            colors: ['gray', 'black', 'blue'],
             eggCycles: 20,
             eggGroups: ['field'],
             prevEvolution: 'alolan-meowth'
@@ -974,7 +974,7 @@
             abilities: {0: 'magnet-pull', 1: 'sturdy', hidden: 'galvanize'},
             height: 0.4,
             weight: 20.3,
-            color: 'gray',
+            colors: ['gray', 'black'],
             eggCycles: 15,
             eggGroups: ['mineral'],
             nextEvolutions: [{
@@ -1001,7 +1001,7 @@
             abilities: {0: 'magnet-pull', 1: 'sturdy', hidden: 'galvanize'},
             height: 1,
             weight: 110,
-            color: 'gray',
+            colors: ['gray', 'black', 'yellow'],
             eggCycles: 15,
             eggGroups: ['mineral'],
             nextEvolutions: [{
@@ -1024,7 +1024,7 @@
             abilities: {0: 'magnet-pull', 1: 'sturdy', hidden: 'galvanize'},
             height: 1.7,
             weight: 316,
-            color: 'gray',
+            colors: ['black', 'gray', 'yellow'],
             eggCycles: 15,
             eggGroups: ['mineral'],
             prevEvolution: 'alolan-graveler'
@@ -1089,7 +1089,7 @@
             abilities: {0: 'frisk', hidden: 'harvest'},
             height: 10.9,
             weight: 415.6,
-            color: 'yellow',
+            colors: ['brown', 'green', 'yellow'],
             eggCycles: 20,
             eggGroups: ['grass'],
             prevEvolution: 'exeggcute'
@@ -1108,7 +1108,7 @@
             abilities: {0: 'cursed-body', 1: 'lightning-rod', hidden: 'rock-head'},
             height: 1,
             weight: 34,
-            color: 'purple',
+            colors: ['black', 'gray', 'green'],
             eggCycles: 20,
             eggGroups: ['monster'],
             prevEvolution: 'cubone'

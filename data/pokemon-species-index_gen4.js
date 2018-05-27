@@ -663,7 +663,7 @@
             abilities: {0: 'pickup', 1: 'thick-fat', hidden: 'gluttony'},
             height: 0.6,
             weight: 105,
-            color: ['black', 'yellow'],
+            colors: ['black', 'yellow'],
             eggCycles: 40,
             eggGroups: ['undiscovered'],
             nextEvolutions: [{
@@ -1061,7 +1061,7 @@
             abilities: {0: 'chlorophyll', 1: 'leaf-guard', hidden: 'regenerator'},
             height: 2,
             weight: 128.6,
-            color: ['blue', 'red', 'black'],
+            colors: ['blue', 'red', 'black'],
             eggCycles: 20,
             eggGroups: ['grass'],
             prevEvolution: 'tangela'

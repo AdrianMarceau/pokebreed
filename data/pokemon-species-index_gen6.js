@@ -365,7 +365,7 @@
             abilities: {0: 'shield-dust', 1: 'compound-eyes', hidden: 'friend-guard'},
             height: 0.3,
             weight: 2.5,
-            color: 'black',
+            colors: ['black', 'white'],
             eggCycles: 15,
             eggGroups: ['bug'],
             nextEvolutions: [{
@@ -384,7 +384,7 @@
             abilities: {0: 'shed-skin', hidden: 'friend-guard'},
             height: 0.3,
             weight: 8.4,
-            color: 'black',
+            colors: ['black', 'white', 'brown', 'red'],
             eggCycles: 15,
             eggGroups: ['bug'],
             nextEvolutions: [{
@@ -434,7 +434,7 @@
             abilities: {0: 'shield-dust', 1: 'compound-eyes', hidden: 'friend-guard'},
             height: 1.2,
             weight: 17,
-            color: 'white',
+            colors: ['black'],
             eggCycles: 15,
             eggGroups: ['bug'],
             prevEvolution: 'spewpa'
@@ -689,7 +689,7 @@
             abilities: {0: 'cute-charm', hidden: 'pixilate'},
             height: 1,
             weight: 23.5,
-            color: 'pink',
+            colors: ['white', 'pink', 'blue'],
             eggCycles: 35,
             eggGroups: ['field'],
             prevEvolution: 'eevee',
@@ -1082,7 +1082,7 @@
             abilities: {0: 'adaptability'},
             height: 1.4,
             weight: 40.5,
-            color: 'Yellow',
+            colors: ['yellow', 'black', 'red', 'blue'],
             eggCycles: 15,
             eggGroups: ['bug'],
             prevEvolution: 'beedrill'
@@ -1101,7 +1101,7 @@
             abilities: {0: 'no-guard'},
             height: 2.2,
             weight: 50.5,
-            color: 'brown',
+            colors: ['brown', 'yellow', 'red', 'black'],
             eggCycles: 15,
             eggGroups: ['flying'],
             prevEvolution: 'pidgeot'
@@ -1121,7 +1121,7 @@
             abilities: {0: 'trace'},
             height: 1.2,
             weight: 48,
-            color: 'brown',
+            colors: ['yellow', 'pink', 'white', 'red', 'gray'],
             eggCycles: 20,
             eggGroups: ['human-like'],
             prevEvolution: 'alakazam'
@@ -1140,7 +1140,7 @@
             abilities: {0: 'shell-armor'},
             height: 2,
             weight: 120,
-            color: 'pink',
+            colors: ['gray', 'pink', 'white', 'yellow'],
             eggGroups: ['monster', 'water-1'],
             prevEvolution: 'slowbro'
             },
@@ -1158,7 +1158,7 @@
             abilities: {0: 'shadow-tag'},
             height: 1.4,
             weight: 40.5,
-            color: 'purple',
+            colors: ['purple', 'red', 'white', 'yellow'],
             eggCycles: 20,
             eggGroups: ['amorphous'],
             prevEvolution: 'gengar'
@@ -1216,7 +1216,7 @@
             abilities: {0: 'mold-breaker'},
             height: 6.5,
             weight: 305,
-            color: 'blue',
+            colors: ['blue', 'yellow', 'black', 'red'],
             eggCycles: 5,
             eggGroups: ['water-2', 'dragon'],
             prevEvolution: 'gyarados'
@@ -1314,7 +1314,7 @@
             abilities: {0: 'Steadfast'},
             height: 2.3,
             weight: 127,
-            colors: ['white', 'purple'],
+            colors: ['white', 'purple', 'red'],
             eggGroups: ['undiscovered'],
             prevEvolution: 'mewtwo'
             },
@@ -1333,7 +1333,7 @@
             abilities: {0: 'Insomnia'},
             height: 1.5,
             weight: 33,
-            color: 'Purple',
+            colors: ['purple', 'white', 'blue'],
             eggGroups: ['undiscovered'],
             prevEvolution: 'mewtwo'
             },

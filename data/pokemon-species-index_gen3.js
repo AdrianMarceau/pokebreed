@@ -221,7 +221,7 @@
             abilities: {0: 'intimidate', 1: 'quick-feet', hidden: 'moxie'},
             height: 1,
             weight: 37,
-            color: ['gray', 'black'],
+            colors: ['gray', 'black'],
             eggCycles: 15,
             eggGroups: ['field'],
             prevEvolution: 'poochyena'
@@ -370,7 +370,7 @@
             abilities: {0: 'swift-swim', 1: 'rain-dish', hidden: 'own-tempo'},
             height: 0.5,
             weight: 2.6,
-            color: ['green', 'blue', 'yellow'],
+            colors: ['green', 'blue', 'yellow'],
             eggCycles: 15,
             eggGroups: ['water-1', 'grass'],
             nextEvolutions: [{
@@ -389,7 +389,7 @@
             abilities: {0: 'swift-swim', 1: 'rain-dish', hidden: 'own-tempo'},
             height: 1.2,
             weight: 32.5,
-            color: ['green', 'blue', 'red'],
+            colors: ['green', 'blue', 'red'],
             eggCycles: 15,
             eggGroups: ['water-1', 'grass'],
             prevEvolution: 'lotad',
@@ -411,7 +411,7 @@
             abilities: {0: 'swift-swim', 1: 'rain-dish', hidden: 'own-tempo'},
             height: 1.5,
             weight: 55,
-            color: ['green', 'yellow', 'brown'],
+            colors: ['green', 'yellow', 'brown'],
             eggCycles: 15,
             eggGroups: ['water-1', 'grass'],
             prevEvolution: 'lombre'
@@ -427,7 +427,7 @@
             abilities: {0: 'chlorophyll', 1: 'early-bird', hidden: 'pickpocket'},
             height: 0.5,
             weight: 4,
-            color: ['brown', 'black', 'yellow'],
+            colors: ['brown', 'black', 'yellow'],
             eggCycles: 15,
             eggGroups: ['field', 'grass'],
             nextEvolutions: [{
@@ -446,7 +446,7 @@
             abilities: {0: 'chlorophyll', 1: 'early-bird', hidden: 'pickpocket'},
             height: 1,
             weight: 28,
-            color: ['brown', 'green', 'white'],
+            colors: ['brown', 'green', 'white'],
             eggCycles: 15,
             eggGroups: ['field', 'grass'],
             prevEvolution: 'seedot',
@@ -468,7 +468,7 @@
             abilities: {0: 'chlorophyll', 1: 'early-bird', hidden: 'pickpocket'},
             height: 1.3,
             weight: 59.6,
-            color: ['brown', 'white', 'green'],
+            colors: ['brown', 'white', 'green'],
             eggCycles: 15,
             eggGroups: ['field', 'grass'],
             prevEvolution: 'nuzleaf'
