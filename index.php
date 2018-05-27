@@ -77,10 +77,25 @@ if (isset($_GET['gen'])
                     <span class="bp bp3"></span>
                     <span class="bp bp4"></span>
                 </div>
-                <div class="pokedex"<?= $is_free_mode ? ' title="Data is NOT saved in free mode!"' : '' ?>>
-                    <span class="count"><span class="current">0</span> / <span class="total">0</span></span>
+                <div class="counter pokedex" title="<?= !$is_free_mode
+                    ? 'Current Pokédex Completion'
+                    : 'Pokédex data is NOT saved in free mode!'
+                    ?>">
                     <img class="icon" src="images/pokeball.png" />
+                    <span class="count">
+                        <span class="current">0</span>
+                        / <span class="total">0</span>
+                        <span class="percent">0%</span>
+                    </span>
                 </div>
+                <div class="counter timer" title="<?= !$is_free_mode
+                    ? 'Total Days Passed'
+                    : 'Counter data is NOT saved in free mode!'
+                    ?>">
+                    <span class="count"><span class="total">0</span></span>
+                    <img class="icon" src="images/timer.png" />
+                </div>
+                <a class="reset_simulator" title="Clear Save Data?"><i>&times;</i></a>
             </div>
 
             <div class="overview main">

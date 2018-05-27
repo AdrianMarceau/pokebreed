@@ -19,6 +19,7 @@
     var PokemonTypesIndex = {};
     var PokemonTypesIndexTokens = [];
 
+    var PokeboxDaysPassed = 0;
     var PokemonSpeciesSeen = {};
 
     var totalSpecialPokemon = 0;
@@ -59,6 +60,7 @@
 
     // GLOBAL ELEMENT REFERENCES
 
+    var $panelDiv = false;
     var $panelBanner = false;
     var $panelMainOverview = false;
     var $panelTypesOverview = false;
@@ -89,12 +91,9 @@
         updateDeviceWidth();
         //console.log('thisDeviceWidth = ', thisDeviceWidth);
 
-        // Expose the zone zata as a public variable
+        // Expose the zone zata and species seen as public variables
         window.PokeboxZoneData = thisZoneData;
-        window.PokeboSpeciesSeen = PokemonSpeciesSeen;
-        window.PokeboxZoneFunctions = {
-            resetSimulation: resetSimulation
-            };
+        window.PokemonSpeciesSeen = PokemonSpeciesSeen;
 
         // Populate the app details with global values if set
         if (typeof window.PokemonAppLastUpdated !== 'undefined'){ appLastUpdated = window.PokemonAppLastUpdated; }
@@ -105,12 +104,25 @@
         // Do not update local storage records if we're in free mode
         if (!appFreeMode){
             //console.log('NOT in free mode, let us LOAD');
+
+            // Check if a localStorage value exsists for total days
+            if (typeof window.localStorage !== 'undefined'){
+                var savedPokeboxDaysPassed = window.localStorage.getItem('PokeboxDaysPassed');
+                if (typeof savedPokeboxDaysPassed !== 'undefined'){ PokeboxDaysPassed = parseInt(savedPokeboxDaysPassed); }
+                //console.log('savedPokeboxDaysPassed = ', savedPokeboxDaysPassed, typeof savedPokeboxDaysPassed);
+                //console.log('PokeboxDaysPassed = ', PokeboxDaysPassed, typeof PokeboxDaysPassed);
+                }
+
             // Check if a localStorage value exsists for species seen
             if (typeof window.localStorage !== 'undefined'){
-                var savedData = window.localStorage.getItem('PokemonSpeciesSeen');
-                if (typeof savedData === 'string'){ PokemonSpeciesSeen = JSON.parse(savedData); }
-                //console.log('savedData = ', savedData);
+                var savedPokemonSpeciesSeen = window.localStorage.getItem('PokemonSpeciesSeen');
+                if (typeof savedPokemonSpeciesSeen === 'string'){ PokemonSpeciesSeen = JSON.parse(savedPokemonSpeciesSeen); }
+                //console.log('savedPokemonSpeciesSeen = ', savedPokemonSpeciesSeen);
+                //console.log('PokemonSpeciesSeen = ', PokemonSpeciesSeen);
                 }
+
+
+
             }
 
         // Request the live version number from the server and wait to compare (refresh if out of date)
@@ -129,13 +141,14 @@
         //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
 
         // Collect references to key elements
-        $panelBanner = $('.panel .banner');
-        $panelMainOverview = $('.panel .overview.main');
-        $panelTypesOverview = $('.panel .overview.types');
-        $panelSpeciesOverview = $('.panel .overview.species');
-        $panelOverviewFloatLists = $('.panel .overview.floatlist');
+        $panelDiv = $('.panel');
+        $panelBanner = $('.banner', $panelDiv);
+        $panelMainOverview = $('.overview.main', $panelDiv);
+        $panelTypesOverview = $('.overview.types', $panelDiv);
+        $panelSpeciesOverview = $('.overview.species', $panelDiv);
+        $panelOverviewFloatLists = $('.overview.floatlist', $panelDiv);
         $panelPokemonSpriteWrapper = $('.details.pokemon .list.pokemon', $panelMainOverview);
-        $panelButtons = $('.panel > .buttons');
+        $panelButtons = $('> .buttons', $panelDiv);
         $pokePanelButtons = $panelButtons.find('.new-pokemon');
         $pokePanelLoading = $pokePanelButtons.find('.loading');
 
@@ -196,8 +209,14 @@
         PokemonFieldsIndex = window.PokemonFieldsIndex;
         PokemonFieldsIndexTokens = Object.keys(PokemonFieldsIndex);
 
-        // Update the banner counter with the total species
-        $('.pokedex .count .total', $panelBanner).html(PokemonSpeciesIndexTokens.length);
+        // Update the banner counters with the total days and current species
+        var pokedexCurrent = Object.keys(PokemonSpeciesSeen).length;
+        var pokedexTotal = PokemonSpeciesIndexTokens.length;
+        var pokedexPercent = Math.ceil((pokedexCurrent / pokedexTotal) * 100);
+        $('.timer .count .total', $panelBanner).html(numberWithCommas(PokeboxDaysPassed));
+        $('.pokedex .count .current', $panelBanner).html(pokedexCurrent);
+        $('.pokedex .count .total', $panelBanner).html(pokedexTotal);
+        $('.pokedex .count .percent', $panelBanner).html(pokedexPercent+'%');
 
         // Update the title bar to show the next action (Select Pokemon)
         $('.details.zone .title', $panelMainOverview).html('Select Starter Pokémon');
@@ -373,13 +392,13 @@
                 }
 
             /*
-            console.log('totalSpecialPokemon = ', totalSpecialPokemon);
-            console.log('totalLegendaryPokemon = ', totalLegendaryPokemon);
-            console.log('totalMythicalPokemon = ', totalMythicalPokemon);
-            console.log('totalUltraBeasts = ', totalUltraBeasts);
-            console.log('totalMiscBeasts = ', totalMiscBeasts);
-            console.log('PokemonSpeciesIndexTokens.length = ', PokemonSpeciesIndexTokens.length);
-            console.log('numRequiredToCompletePokedex = ', (PokemonSpeciesIndexTokens.length - totalSpecialPokemon));
+            //console.log('totalSpecialPokemon = ', totalSpecialPokemon);
+            //console.log('totalLegendaryPokemon = ', totalLegendaryPokemon);
+            //console.log('totalMythicalPokemon = ', totalMythicalPokemon);
+            //console.log('totalUltraBeasts = ', totalUltraBeasts);
+            //console.log('totalMiscBeasts = ', totalMiscBeasts);
+            //console.log('PokemonSpeciesIndexTokens.length = ', PokemonSpeciesIndexTokens.length);
+            //console.log('numRequiredToCompletePokedex = ', (PokemonSpeciesIndexTokens.length - totalSpecialPokemon));
             */
 
             // Create a sorted list of pokemon species tokens so we don't have to later
@@ -1131,12 +1150,13 @@
             }, 0);
 
         // Add a click event for the pokedex reset button (w/ warning)
-        $('.reset .link', $pokedexContainer).bind('click', function(e){
+        $('a.reset_simulator', $panelDiv).bind('click', function(e){
             e.preventDefault();
-            if (confirm('Are you sure you want to clear all Pokédex data? \n'
+            if (confirm('Are you sure you want to clear all save data? \n'
                 + 'This action absolutely can NOT be undone! \n'
                 + 'Continue anyway?')){
                 if (typeof window.localStorage !== 'undefined'){
+                    window.localStorage.removeItem('PokeboxDaysPassed');
                     window.localStorage.removeItem('PokemonSpeciesSeen');
                     window.location = window.location.href;
                     return true;
@@ -1486,13 +1506,17 @@
             }
         }
 
-        // Update the banner counter with the current species
-        $('.pokedex .count .current', $panelBanner).html(Object.keys(PokemonSpeciesSeen).length);
+        // Update the banner counters with the total days and current species
+        var pokedexCurrent = Object.keys(PokemonSpeciesSeen).length;
+        var pokedexPercent = Math.ceil((pokedexCurrent / PokemonSpeciesIndexTokens.length) * 100)
+        $('.timer .count .total', $panelBanner).html(numberWithCommas(PokeboxDaysPassed));
+        $('.pokedex .count .current', $panelBanner).html(pokedexCurrent);
+        $('.pokedex .count .percent', $panelBanner).html(pokedexPercent+'%');
 
         // Update the zone details
         $('.zone .name .data', $panelMainOverview).text(thisZoneData.name);
         $('.zone .capacity .data', $panelMainOverview).text(thisZoneData.currentPokemon.length + ' / ' + thisZoneData.capacity);
-        $('.zone .day .data', $panelMainOverview).text(thisZoneData.day);
+        $('.zone .day .data', $panelMainOverview).text(numberWithCommas(thisZoneData.day));
         $('.zone .diversity .data', $panelMainOverview).text(' Active: '+totalSpeciesCurrent+' | Overall: '+totalSpeciesSeen+'');
 
         // Loop though and count population by types & species
@@ -2131,7 +2155,9 @@
 
         dayTimeoutStarted = true;
         thisZoneData.day++;
+        PokeboxDaysPassed++;
         //console.log('Day #'+thisZoneData.day);
+        //console.log('PokeboxDaysPassed = ', PokeboxDaysPassed);
 
         // Update the odd/even class on the pokemon sprite wrapper
         var isEven = thisZoneData.day % 2 === 0 ? true : false;
@@ -2193,12 +2219,21 @@
 
         // Do not update local storage records if we're in free mode
         if (!appFreeMode){
+
+            // Update local storage with the new day total
+            if (typeof window.localStorage !== 'undefined'){
+                var savePokeboxDaysPassed = PokeboxDaysPassed;
+                window.localStorage.setItem('PokeboxDaysPassed', savePokeboxDaysPassed);
+                //console.log('savePokeboxDaysPassed = ', savePokeboxDaysPassed);
+                }
+
             // Update local storage with the current seen pokemon index
             if (typeof window.localStorage !== 'undefined'){
-                var savedData = JSON.stringify(PokemonSpeciesSeen);
-                window.localStorage.setItem('PokemonSpeciesSeen', savedData);
-                //console.log('savedData = ', savedData);
+                var savedPokemonSpeciesSeen = JSON.stringify(PokemonSpeciesSeen);
+                window.localStorage.setItem('PokemonSpeciesSeen', savedPokemonSpeciesSeen);
+                //console.log('savedPokemonSpeciesSeen = ', savedPokemonSpeciesSeen);
                 }
+
             }
 
         //var $timer = $('.details.zone .timer .complete', $panelMainOverview);
@@ -3716,6 +3751,11 @@
         }
     Math.seededRandomChance = function(){
         return Math.seededRandom(0, 100);
+    }
+
+    // Define a constant function for printing whole bumbers with commas
+    const numberWithCommas = (x) => {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
     // Polyfill for requestAnimationFrame if not exists

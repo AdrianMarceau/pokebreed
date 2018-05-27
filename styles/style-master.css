@@ -83,6 +83,7 @@ body[data-mode="free"] .panel .banner {
 .panel .banner .logo,
 .panel .banner .subtext,
 .panel .banner .version,
+.panel .banner .timer,
 .panel .banner .pokedex {
     display: block;
     margin: 0 auto;
@@ -129,7 +130,7 @@ body[data-mode="free"] .panel .banner .subtext {
 }
 .panel .banner .version {
     position: absolute;
-    bottom: 9px;
+    top: 9px;
     left: 9px;
     font-size: 11px;
     line-height: 1;
@@ -149,29 +150,96 @@ body[data-mode="free"] .panel .banner .subtext {
 .panel .hidden {
     display: none !important;
 }
-.panel .banner .pokedex {
+.panel .banner .counter {
     position: absolute;
     bottom: 9px;
-    right: 9px;
     font-size: 12px;
     line-height: 1;
     color: #cccccc;
     font-weight: normal;
     text-shadow: none;
 }
-.panel .banner .pokedex .icon,
-.panel .banner .pokedex .count {
+.panel .banner .counter .icon,
+.panel .banner .counter .count {
     display: inline-block;
     vertical-align: middle;
 }
-.panel .banner .pokedex .icon {
+.panel .banner .counter.pokedex .icon {
+    margin-right: 3px;
+}
+.panel .banner .counter.timer .icon {
     margin-left: 3px;
 }
-.panel .banner .pokedex .count .current {
+.panel .banner .counter.pokedex .count .current,
+.panel .banner .counter.timer .count .total {
     color: #ffffff;
 }
-body[data-mode="free"] .panel .banner .pokedex .count .total {
+body[data-mode="free"] .panel .banner .counter.pokedex .count .total {
     text-decoration: line-through;
+}
+.panel .banner .counter.pokedex .count .percent {
+    position: relative;
+    left: 2px;
+    bottom: 2px;
+    font-size: 11px;
+    line-height: 1;
+    color: #b3b3b3;
+}
+.panel .banner .counter.pokedex .count .percent:before,
+.panel .banner .counter.pokedex .count .percent:after {
+    display: inline-block;
+    padding: 0 1px;
+}
+.panel .banner .counter.pokedex .count .percent:before {
+    content: "(";
+}
+.panel .banner .counter.pokedex .count .percent:after {
+    content: ")";
+
+}
+.panel .banner .counter.timer {
+    right: 9px;
+}
+.panel .banner .counter.pokedex {
+    left: 9px;
+}
+.panel .banner .reset_simulator {
+    display: block;
+    width: auto;
+    height: auto;
+    padding: 3px 6px;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    background-color: #262626;
+    border: 1px solid #37373a;
+    color: #e0e0e0;
+    font-size: 16px;
+    line-height: 1;
+    text-align: center;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#58585b+0,464649+100 */
+    background: rgb(171, 58, 58); /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(171, 58, 58, 1) 0%, rgba(97, 20, 41, 1) 120%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(171, 58, 58, 1) 0%,rgba(97, 20, 41, 1) 120%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(171, 58, 58, 1) 0%,rgba(97, 20, 41, 1) 120%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ab3a3a', endColorstr='#611429',GradientType=0 ); /* IE6-9 */
+}
+.panel .banner .reset_simulator:hover {
+    color: #efefef;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#58585b+0,464649+100 */
+    background: rgb(189, 66, 66); /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(189, 66, 66, 1) 0%, rgba(97, 20, 41, 1) 120%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(189, 66, 66, 1) 0%,rgba(97, 20, 41, 1) 120%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(189, 66, 66, 1) 0%,rgba(97, 20, 41, 1) 120%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bd4242', endColorstr='#611429',GradientType=0 ); /* IE6-9 */
+}
+.panel .banner .reset_simulator i {
+    display: inline-block;
+    font-style: normal;
 }
 
 
@@ -1499,7 +1567,7 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     font-size: 80%;
     color: #cacaca;
 }
-.panel .buttons .info .group.pokedex .reset .link {
+.panel .buttons a.reset_simulator {
     cursor: pointer;
     color: #ce4949;
 }

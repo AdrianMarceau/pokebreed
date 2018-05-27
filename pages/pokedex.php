@@ -11,7 +11,7 @@
         <ul class="list"></ul>
         <div class="reset">
             <? if (!$is_free_mode){ ?>
-                <p>(!) If you'd like to clear <strong>all saved Pokedex data</strong> and start over <strong>from scratch</strong>, please <a class="link reset_pokedex">click here</a>.</p>
+                <p>(!) If you'd like to clear <strong>all save data</strong> and start over <strong>from scratch</strong>, please <a class="link reset_simulator">click here</a>.</p>
             <? } else { ?>
                 <p>(!) Pokédex data collected in Free Mode is <strong>temporary</strong> and will <strong>not</strong> be saved.</p>
             <? } ?>
