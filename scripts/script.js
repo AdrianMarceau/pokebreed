@@ -101,14 +101,14 @@
         if (typeof window.PokemonAppDebugMode !== 'undefined'){ appDebugMode = window.PokemonAppDebugMode; }
         if (typeof window.PokemonAppFreeMode !== 'undefined'){ appFreeMode = window.PokemonAppFreeMode; }
 
-        // Do not update local storage records if we're in free mode
+        // Do not update LOCAL STORAGE records if we're in free mode
         if (!appFreeMode){
             //console.log('NOT in free mode, let us LOAD');
 
             // Check if a localStorage value exsists for total days
             if (typeof window.localStorage !== 'undefined'){
                 var savedPokeboxDaysPassed = window.localStorage.getItem('PokeboxDaysPassed');
-                if (typeof savedPokeboxDaysPassed !== 'undefined'){ PokeboxDaysPassed = parseInt(savedPokeboxDaysPassed); }
+                if (typeof savedPokeboxDaysPassed !== 'undefined'){ PokeboxDaysPassed = savedPokeboxDaysPassed ? parseInt(savedPokeboxDaysPassed) : 0; }
                 //console.log('savedPokeboxDaysPassed = ', savedPokeboxDaysPassed, typeof savedPokeboxDaysPassed);
                 //console.log('PokeboxDaysPassed = ', PokeboxDaysPassed, typeof PokeboxDaysPassed);
                 }
