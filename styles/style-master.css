@@ -168,8 +168,15 @@ body[data-mode="free"] .panel .banner .version {
     display: inline-block;
     vertical-align: middle;
 }
+.panel .banner .counter.pokedex {
+    cursor: pointer;
+}
 .panel .banner .counter.pokedex .icon {
     margin-right: 3px;
+    position: relative;
+}
+.panel .banner .counter.pokedex:hover .icon {
+    bottom: 1px;
 }
 .panel .banner .counter.timer .icon {
     margin-left: 3px;
@@ -1578,7 +1585,7 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
 
 .panel .buttons .info.links {
     padding-bottom: 10px;
-    text-align: left;
+    text-align: right;
     border-top: 1px solid #37373a;
     border-color: rgba(0, 0, 0, 0.3);
     font-size: 12px;
@@ -1603,14 +1610,6 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     color: #b0b0b0;
     background-color: rgba(0, 0, 0, 0.2);
 }
-.panel .buttons .info.links .link.reset {
-    color: #b0b0b0;
-    background-color: rgba(255, 0, 0, 0.2);
-}
-.panel .buttons .info.links .link.reset:hover {
-    color: #cacaca;
-    background-color: rgba(255, 0, 0, 0.4);
-}
 
 .panel .buttons .info[data-tab="help"] {
 
@@ -1619,10 +1618,8 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
 
 }
 
-.panel .buttons .info.links .link.chat,
-.panel .buttons .info.links .link.mode,
 .panel .buttons .info.links .link.pokedex {
-    float: right;
+    float: left;
 }
 .panel .buttons .info.links .link.chat span,
 .panel .buttons .info.links .link.mode span,

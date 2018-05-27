@@ -121,8 +121,6 @@
                 //console.log('PokemonSpeciesSeen = ', PokemonSpeciesSeen);
                 }
 
-
-
             }
 
         // Request the live version number from the server and wait to compare (refresh if out of date)
@@ -181,7 +179,7 @@
         // Define the click-event for the info links
         var $linkButtons = $('.info.links .link[data-tab]', $panelButtons);
         var $linkContainers = $('.info[data-tab]', $panelButtons);
-        $linkButtons.bind('click', function(e){
+        var linkButtonFunction = function(e){
             //console.log('tab clicked');
             e.preventDefault();
             var $link = $(this);
@@ -193,6 +191,30 @@
                 $link.addClass('active');
                 $linkContainers.filter('[data-tab="'+tab+'"]').removeClass('hidden');
                 }
+            };
+        $linkButtons.bind('click', linkButtonFunction);
+
+        // Add a click event for the pokedex reset button (w/ warning)
+        $('a.reset_simulator', $panelDiv).bind('click', function(e){
+            e.preventDefault();
+            if (confirm('Are you sure you want to clear all save data? \n'
+                + 'This action absolutely can NOT be undone! \n'
+                + 'Continue anyway?')){
+                if (typeof window.localStorage !== 'undefined'){
+                    window.localStorage.removeItem('PokeboxDaysPassed');
+                    window.localStorage.removeItem('PokemonSpeciesSeen');
+                    window.location = window.location.href;
+                    return true;
+                    }
+                }
+            return false;
+            });
+
+        // Add a click event for the pokedex reset button (w/ warning)
+        $('.counter.pokedex', $panelBanner).bind('click', function(e){
+            e.preventDefault();
+            $linkButtons.filter('.pokedex').click();
+            return;
             });
 
     });
@@ -1148,22 +1170,6 @@
             $('.info.links .link[data-tab="pokedex"]', $panelButtons).removeClass('wait');
 
             }, 0);
-
-        // Add a click event for the pokedex reset button (w/ warning)
-        $('a.reset_simulator', $panelDiv).bind('click', function(e){
-            e.preventDefault();
-            if (confirm('Are you sure you want to clear all save data? \n'
-                + 'This action absolutely can NOT be undone! \n'
-                + 'Continue anyway?')){
-                if (typeof window.localStorage !== 'undefined'){
-                    window.localStorage.removeItem('PokeboxDaysPassed');
-                    window.localStorage.removeItem('PokemonSpeciesSeen');
-                    window.location = window.location.href;
-                    return true;
-                    }
-                }
-            return false;
-            });
 
     }
 
