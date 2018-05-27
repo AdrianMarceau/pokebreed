@@ -2206,7 +2206,7 @@
             else if (thisZoneData.day > 360 && remainingPercent >= 90){ triggerZoneVisitor('shiny-ditto'); }
 
             // Otherwise, summon a legendary, mythical, or basic pokemon based on number of days passed
-            else if (thisZoneData.day % 1780 === 0){ triggerZoneVisitor('mythical'); }
+            else if (thisZoneData.day % 1080 === 0){ triggerZoneVisitor('mythical'); }
             else if (thisZoneData.day % 360 === 0){ triggerZoneVisitor('legendary'); }
             else if (thisZoneData.day % 30 === 0){ triggerZoneVisitor('basic'); }
 
@@ -3174,6 +3174,12 @@
                     pokeChance += 1 + (speciesAppealIndex[pokeToken] * 2);
                     //console.log('pokeChance = ', pokeChance);
                 }
+
+                // If this is a special pokemon, appearances from other runs should influence appeal
+                if (visitorKind !== 'basic'
+                    && typeof PokemonSpeciesSeen[pokeToken] !== 'undefined'){
+                    pokeChance -= (PokemonSpeciesSeen[pokeToken] / 100);
+                    }
 
                 // Decrease the chance if there is already a colony of this species
                 if (typeof thisZoneData.addedPokemonSpecies[pokeToken] !== 'undefined'){
