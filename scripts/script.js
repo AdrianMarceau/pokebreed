@@ -2204,7 +2204,8 @@
             && remainingSlots >= 1){
 
             // Always summon a ditto on the first day of the sim
-            if (thisZoneData.day === 1
+            if (!appFreeMode
+                && thisZoneData.day === 1
                 && (typeof PokemonSpeciesSeen['ditto'] === 'undefined'
                     || PokemonSpeciesSeen['ditto'] < 1)){
                 triggerZoneVisitor('ditto');
