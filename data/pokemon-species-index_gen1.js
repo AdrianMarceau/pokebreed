@@ -202,7 +202,7 @@
             abilities: {0: 'shield-dust', hidden: 'run-away'},
             height: 0.3,
             weight: 2.9,
-            colours: ['green', 'yellow', 'red'],
+            colors: ['green', 'yellow', 'red'],
             eggCycles: 15,
             eggGroups: ['bug'],
             nextEvolutions: [{
@@ -221,7 +221,7 @@
             abilities: {0: 'shed-skin'},
             height: 0.7,
             weight: 9.9,
-            colours: ['green'],
+            colors: ['green'],
             eggCycles: 15,
             eggGroups: ['bug'],
             prevEvolution: 'caterpie',
@@ -241,7 +241,7 @@
             abilities: {0: 'compound-eyes', hidden: 'tinted-lens'},
             height: 1.1,
             weight: 32,
-            colours: ['purple', 'white', 'red', 'blue', 'black'],
+            colors: ['purple', 'white', 'red', 'blue', 'black'],
             eggCycles: 15,
             eggGroups: ['bug'],
             prevEvolution: 'metapod'

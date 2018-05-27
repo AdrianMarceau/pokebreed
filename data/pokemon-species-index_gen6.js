@@ -1010,7 +1010,7 @@
             abilities: {0: 'thick-fat'},
             height: 2.4,
             weight: 155.5,
-            colour: 'green',
+            colors: ['green', 'red', 'yellow', 'blue'],
             eggGroups: ['monster', 'grass'],
             prevEvolution: 'venusaur'
             },
@@ -1028,7 +1028,7 @@
             abilities: {0: 'tough claws'},
             height: 1.7,
             weight: 110.5,
-            colour: 'black',
+            colors: ['black', 'blue'],
             eggGroups: ['monster', 'dragon'],
             prevEvolution: 'charizard'
             },
@@ -1046,7 +1046,7 @@
             abilities: {0: 'drought'},
             height: 1.7,
             weight: 100.5,
-            colour: 'red',
+            colors: ['orange', 'yellow', 'green'],
             eggGroups: ['monster', 'dragon'],
             prevEvolution: 'charizard'
             },
@@ -1064,7 +1064,7 @@
             abilities: {0: 'mega-launcher'},
             height: 1.6,
             weight: 101.1,
-            colour: 'blue',
+            colors: ['blue', 'brown', 'gray', 'yellow'],
             eggGroups: ['monster', 'water-1'],
             prevEvolution: 'blastoise'
             },
