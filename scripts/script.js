@@ -1274,52 +1274,35 @@
             && Math.random() >= 0.75){
             //console.log('allowVariant for '+ pokemonToken +'! ');
 
+            // Generate several random numbers to use later
+            var randNum = Math.random() * 100; //Math.seededRandomChance();
+            var randNum2 = Math.random() * 100; //Math.seededRandomChance();
+            var randNum3 = Math.random() * 100; //Math.seededRandomChance();
+            var randNum4 = Math.random() * 100; //Math.seededRandomChance();
+
             // Use the max and min to define the hue offset
-            //console.log('|- Randomize the hue offset...');
-            var randNum = Math.random();
-            var randNum2 = Math.random();
             var minOffset = 0;
             var maxOffset = 30;
             if (pokemonToken === 'smeargle'){
                 maxOffset = 360;
                 } else {
-                if (randNum >= 0.75){ maxOffset += 20; }
-                if (randNum >= 0.85){ maxOffset += 20; }
-                if (randNum >= 0.95){ maxOffset += 20; }
-                if (randNum2 >= 0.90){ minOffset += 180; maxOffset += 180; }
+                if (randNum >= 75){ maxOffset += 20; }
+                if (randNum >= 85){ maxOffset += 20; }
+                if (randNum >= 95){ maxOffset += 20; }
+                if (randNum2 >= 90){ minOffset += 180; maxOffset += 180; }
                 }
-            var variantHueOffset = Math.ceil((Math.random() * (maxOffset - minOffset)) + minOffset);
+            var variantHueOffset = Math.ceil(((randNum3 / 100) * (maxOffset - minOffset)) + minOffset);
             newPokemon.variantHueOffset = variantHueOffset * -1;
-            //console.log('|- set the variantHueOffset = ', newPokemon.variantHueOffset);
-            var randNum = Math.random();
-            //console.log('|- randNum = '+ randNum +' | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
-            if (randNum >= 0.90){
-                //console.log('|- invert the variantHueOffset = ', newPokemon.variantHueOffset, newPokemon.variantHueOffset * -1);
-                newPokemon.variantHueOffset *= -1;
-                }
+            if (randNum4 >= 90){ newPokemon.variantHueOffset *= -1; }
 
             // Use the max and min to define the saturation offset
-            var randNum = Math.random();
             var minOffset = 60;
             var maxOffset = 110;
-            //console.log('|-- randNum = '+ randNum +' | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
-            if (randNum >= 0.75){
-                minOffset -= 10;
-                maxOffset += 10;
-                //console.log('|-- randNum >= 0.75 | minOffset -= 10 && maxOffset += 10 | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
-                }
-            if (randNum >= 0.85){
-                minOffset -= 10;
-                maxOffset += 10;
-                //console.log('|-- randNum >= 0.85 | minOffset -= 10 && maxOffset += 10 | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
-                }
-            if (randNum >= 0.95){
-                minOffset -= 30;
-                //console.log('|-- randNum >= 0.95 | minOffset -= 30 | minOffset '+ minOffset +' => maxOffset '+ maxOffset +' ');
-                }
-            var variantSatOffset = Math.ceil((Math.random() * (maxOffset - minOffset)) + minOffset);
+            if (randNum >= 0.75){ minOffset -= 10; maxOffset += 10; }
+            if (randNum >= 0.85){ minOffset -= 10; maxOffset += 10; }
+            if (randNum >= 0.95){ minOffset -= 30; }
+            var variantSatOffset = Math.ceil(((randNum4 / 100) * (maxOffset - minOffset)) + minOffset);
             newPokemon.variantSatOffset = variantSatOffset;
-            //console.log('|- set the variantSatOffset = ', newPokemon.variantSatOffset);
 
             }
 
@@ -1328,7 +1311,8 @@
             && indexData['randomizeForms'] === true
             && typeof indexData['possibleForms'] !== 'undefined'){
             var possibleForms = indexData['possibleForms'];
-            var randomForm = possibleForms[Math.floor(Math.random() * possibleForms.length)];
+            var randomKey = Math.floor((Math.seededRandomChance() / 100) * possibleForms.length);
+            var randomForm = possibleForms[randomKey];
             newPokemon.formToken = randomForm;
             }
 
@@ -2141,6 +2125,7 @@
         if (typeof allowVisitors !== 'boolean'){ allowVisitors = updateCycles; }
 
         // Generate a snapshot of the zone stats and add to history
+        var rankedZoneStats = getRankedZoneStats();
         var currentZoneStats = getCurrentZoneStats();
         thisZoneHistory.push(currentZoneStats);
 
@@ -2155,6 +2140,21 @@
 
         // Send an analytics event for the amount of time that has passed
         if (typeof ga !== 'undefined'){ sendSessionAnalytics(thisZoneData.day); }
+
+        // If this is the very first day, let's update our random seed
+        if (thisZoneData.day ===  1){
+            Math.seed = 1;
+            for (var i = 0; i < thisZoneData.currentPokemon.length; i++){
+                var pokeToken = thisZoneData.currentPokemon[i].token;
+                Math.seed += PokemonSpeciesIndex[pokeToken].order;
+                }
+            //console.log('\nSTART SEED = '+Math.seed);
+            }
+
+        //var randomNumber = Math.seededRandom(0, 100);
+        //console.log('Day #'+thisZoneData.day);
+        //console.log('Math.seed = ', Math.seed);
+        //console.log('randomNumber = ', randomNumber);
 
         // Update growth, egg, etc, cycles if allowed
         if (updateCycles){
@@ -2360,7 +2360,7 @@
                         //console.log('|-- calculateEvolutionChance(pokemonInfo, methodToken, methodValue)', pokemonInfo, methodToken, methodValue);
 
                         // Calculate chance value in case we need it
-                        var chanceValue = Math.random();
+                        var chanceValue = Math.seededRandomChance();
 
                         // Level-up evolutions are triggered by current growth cycles alone
                         if (methodToken === 'level-up'
@@ -2470,8 +2470,8 @@
 
                         // Chance-based evolutions are triggered by random simulator values
                         if (methodToken === 'chance'
-                            && (chanceValue < (methodValue / 100))){
-                            return 1 + Math.ceil((1 - chanceValue) * 100);
+                            && (chanceValue < methodValue)){
+                            return 1 + Math.ceil(100 - chanceValue);
                             }
 
                         // Extinction-based evolutions trigger when this pokemon is the last  of its species
@@ -2603,7 +2603,8 @@
                             && typeof selectedEvolutionData['possibleForms'] !== 'undefined'
                             && typeof pokemonInfo.formToken === 'undefined'){
                             var possibleForms = selectedEvolutionData['possibleForms'];
-                            var randomForm = possibleForms[Math.floor(Math.random() * possibleForms.length)];
+                            var randomKey = Math.floor((Math.seededRandomChance() / 100) * possibleForms.length);
+                            var randomForm = possibleForms[randomKey];
                             pokemonInfo.formToken = randomForm;
                             }
 
@@ -3289,7 +3290,7 @@
                             chance: (2 + (thisZoneData.currentStats['types'][baseEvolution.value] * -1)) * 2
                             });
                         } else if (baseEvolution.method === 'chance'
-                        && (Math.random() < (baseEvolution.value / 100))){
+                        && (Math.seededRandomChance() < baseEvolution.value)){
                         queuedBaseEvolutions.push({
                             token: baseEvolution.species,
                             chance: 2 + thisZoneData.currentStats['types'][indexInfo.types[0]]
@@ -3702,6 +3703,19 @@
             } else {
             return (str + pad).substring(0, pad.length);
             }
+    }
+
+    // Update the math object with a seeded random functon
+    Math.seed = 1;
+    Math.seededRandom = function(min, max){
+        min = min || 0;
+        max = max || 1;
+        Math.seed = (Math.seed * 9301 + 49297) % 233280;
+        var rnd = Math.seed / 233280;
+        return min + rnd * (max - min);
+        }
+    Math.seededRandomChance = function(){
+        return Math.seededRandom(0, 100);
     }
 
     // Polyfill for requestAnimationFrame if not exists
