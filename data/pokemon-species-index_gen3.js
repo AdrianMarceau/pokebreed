@@ -1190,6 +1190,21 @@
             eggGroups: ['fairy', 'grass']
             },
 
+        'torkoal': {
+            order: indexOrder++,
+            token: 'torkoal',
+            name: 'Torkoal',
+            number: 324,
+            types: ['fire'],
+            baseStats: {hp: 70, phAttack: 85, phDefense: 140, spAttack: 85, spDefense: 70, speed: 20},
+            abilities: {0: 'white-smoke', 1: 'drought', hidden: 'shell-armor'},
+            height: 0.5,
+            weight: 80.4,
+            colors: ['black', 'orange', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            },
+
         'trapinch': {
             order: indexOrder++,
             token: 'trapinch',
