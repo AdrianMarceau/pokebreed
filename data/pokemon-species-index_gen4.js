@@ -581,6 +581,21 @@
                 }]
             },
 
+        'spiritomb': {
+            order: indexOrder++,
+            token: 'spiritomb',
+            name: 'Spiritomb',
+            number: 442,
+            types: ['ghost', 'dark'],
+            baseStats: {hp: 50, phAttack: 92, phDefense: 108, spAttack: 92, spDefense: 108, speed: 35},
+            abilities: {0: 'pressure', hidden: 'infiltrator'},
+            height: 1,
+            weight: 108,
+            colors: ['purple', 'green', 'brown'],
+            eggCycles: 30,
+            eggGroups: ['amorphous']
+            },
+
         'gible': {
             order: indexOrder++,
             token: 'gible',
