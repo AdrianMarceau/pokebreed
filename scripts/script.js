@@ -3195,7 +3195,7 @@
                 // Increase the chance of this pokemon appearing based on species appeal
                 if (typeof speciesAppealIndex[pokeToken] !== 'undefined'){
                     //console.log('speciesAppealIndex['+pokeToken+'] = ', speciesAppealIndex[pokeToken]);
-                    pokeChance *= (1 + Math.ceil(speciesAppealIndex[pokeToken] / 5));
+                    pokeChance += 1 + (speciesAppealIndex[pokeToken] * 2);
                     //console.log('pokeChance = ', pokeChance);
                 }
 
@@ -3241,6 +3241,7 @@
                 }
             //console.log('basicPokemonChances = ', basicPokemonChances);
             //console.log('basicPokemonChances(top20) = ', basicPokemonChances[0], basicPokemonChances[1], basicPokemonChances[2], basicPokemonChances.slice(0, 20));
+            //console.log('basicPokemonChances(top100) = ', basicPokemonChances[0], basicPokemonChances[1], basicPokemonChances[2], basicPokemonChances.slice(0, 100));
 
             } else if (typeof PokemonSpeciesIndex[visitorKind] !== 'undefined'){
 
