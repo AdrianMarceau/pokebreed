@@ -431,7 +431,7 @@
     // Update previous gen pokemon with known species appeal data
     thisIndex.addSpeciesAppealValues([
 
-        // Confirmed predator/prey relationships
+        // Predator/prey relationships
         {base: 'pidgeotto', species: 'exeggcute'},
         {base: 'crabrawler', species: 'exeggcute'},
         {base: 'pidgeot', species: 'magikarp'},
@@ -456,63 +456,87 @@
         {base: 'toucannon', species: 'bounsweet'},
         {base: 'mareanie', species: 'corsola'},
         {base: 'toxapex', species: 'corsola'},
-
-        // Confirmed simbiotic relationships
-        {base: 'shellder', species: 'slowpoke'},
-        {base: 'remoraid', species: 'mantyke'},
-
-        // Confirmed rival relationships
-        {base: 'zangoose', species: 'seviper'},
-        {base: 'seviper', species: 'zangoose'},
-
-        // Confirmed romantic relationships
-        {base: 'tauros', species: 'miltank'},
-        {base: 'illumise', species: 'volbeat'},
-
-        // Hinted-at predator/prey relationships
         {base: 'fletchling', species: 'scatterbug'},
         {base: 'fletchinder', species: 'spewpa'},
         {base: 'fearow', species: 'bounsweet'},
         {base: 'pinsir', species: 'cherubi'},
-        {base: 'heracross', species: 'bulbasaur'}, // ish
         {base: 'lurantis', species: 'caterpie'},
         {base: 'scyther', species: 'wurmple'},
+        {base: 'yungoos', species: 'rattata'},
+        {base: 'gumshoos', species: 'raticate'},
+        {base: 'spinarak', species: 'cutiefly'},
+        {base: 'pineco', species: 'cutiefly'},
+        {base: 'pineco', species: 'dwebble'},
+        {base: 'sneasel', species: 'alolan-vulpix'},
+        {base: 'weavile', species: 'alolan-sandshew'},
+        {base: 'gabite', species: 'carbink'},
+        {base: 'sableye', species: 'carbink'},
+        {base: 'sableye', species: 'diancie'},
+        {base: 'garchomp', species: 'diancie'},
+        {base: 'pikipek', species: 'metapod'},
 
-        // Hinted-at simbiotic relationships
+        // Symbiotic relationships
+        {base: 'shellder', species: 'slowpoke'},
+        {base: 'remoraid', species: 'mantyke'},
+        {base: 'dusknoir', species: 'yamask'},
+        {base: 'dusknoir', species: 'froslass'},
+        {base: 'luvdisc', species: 'corsola'},
         {base: 'luvdisc', species: 'alomomola'},
+        {base: 'alomomola', species: 'luvdisc'},
         {base: 'plusle', species: 'minun'},
         {base: 'minun', species: 'plusle'},
+        {base: 'heracross', species: 'bulbasaur'},
+        {base: 'heracross', species: 'pinsir'},
+        {base: 'pinsir', species: 'heracross'},
+        {base: 'karrablast', species: 'shelmet'},
+        {base: 'shelmet', species: 'karrablast'},
 
-        // Lots of different bugs are attracted to flowers and nectar
-        // bflies: butterfree, beautifly, vivillon
-        // moths: venomoth, mothim, dustox, cutiefly
-        // bees: beedrill, combee
-        // beetles: heracross, pinsir
-        // dflies: yanma, cacnea
-        // foul: venusaur, vileplume, victreebel
-        // spicy: bayleef, sunflora, lilligant, meganium
-        // sweet: bellossom, roselia, roserade, comfey, florges
-        // cactus: cacnea, maractus
+        // Rival relationships
+        {base: 'zangoose', species: 'seviper'},
+        {base: 'seviper', species: 'zangoose'},
+        {base: 'pinsir', species: 'vikavolt'},
+        {base: 'mimikyu', species: 'pikachu'},
+        {base: 'carvanna', species: 'basculine'},
 
+        // Romantic relationships
+        {base: 'tauros', species: 'miltank'},
+        {base: 'volbeat', species: 'illumise'},
+
+        // Feeding/pollination relationships
         {base: 'butterfree', species: 'venusaur'},
         {base: 'butterfree', species: 'meganium'},
         {base: 'beautifly', species: 'victreebel'},
         {base: 'beautifly', species: 'lilligant'},
         {base: 'vivillon', species: 'florges'},
         {base: 'vivillon', species: 'comfey'},
-
         {base: 'dustox', species: 'gloom'},
         {base: 'venomoth', species: 'vileplume'},
         {base: 'cutiefly', species: 'roselia'},
         {base: 'mothim', species: 'roserade'},
-
+        {base: 'mothim', species: 'combee'},
         {base: 'beedrill', species: 'bayleef'},
         {base: 'combee', species: 'bellossom'},
-
         {base: 'ledyba', species: 'sunflora'},
-
         {base: 'vibrava', species: 'maractus'},
         {base: 'yanma', species: 'cacnea'},
+
+        // One-sided (theft) relationships
+        {base: 'heracross', species: 'vespiquen'},
+        {base: 'dewpider', species: 'surskit'},
+        {base: 'murkrow', species: 'wimpod'},
+        {base: 'meowth', species: 'wimpod'},
+        {base: 'spoink', species: 'clamperl'},
+
+        // Mistaken identify relationships
+        {base: 'illumise', species: 'lanturn'},
+        {base: 'kricketot ', species: 'chatot'},
+
+        // Legendary trigger relationships
+        {base: 'mew', species: 'mewtwo'},
+        {base: 'regirock', species: 'relicanth'},
+        {base: 'regice', species: 'relicanth'},
+        {base: 'registeel', species: 'relicanth'},
+        {base: 'diancie', species: 'carbink'},
 
         ]);
 
