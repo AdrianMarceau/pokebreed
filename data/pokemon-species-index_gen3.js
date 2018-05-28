@@ -1747,6 +1747,21 @@
             eggGroups: ['field']
             },
 
+        'tropius': {  // TODO: Make a few different berry patterns
+            order: indexOrder++,
+            token: 'tropius',
+            name: 'Tropius',
+            number: 357,
+            types: ['grass', 'flying'],
+            baseStats: {hp: 99, phAttack: 68, phDefense: 83, spAttack: 72, spDefense: 87, speed: 51},
+            abilities: {0: 'chlorophyll', 1: 'solar-power', hidden: 'harvest'},
+            height: 2,
+            weight: 100,
+            colors: ['green', 'brown', 'yellow'],
+            eggCycles: 25,
+            eggGroups: ['monster', 'grass']
+            },
+
         'wynaut': {
             order: thisIndex.beforeOrder('wobbuffet'),
             token: 'wynaut',
