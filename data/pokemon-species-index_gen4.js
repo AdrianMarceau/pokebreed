@@ -581,6 +581,21 @@
                 }]
             },
 
+        'chatot': {
+            order: indexOrder++,
+            token: 'chatot',
+            name: 'Chatot',
+            number: 441,
+            types: ['normal', 'flying'],
+            baseStats: {hp: 76, phAttack: 65, phDefense: 45, spAttack: 92, spDefense: 42, speed: 91},
+            abilities: {0: 'keen-eye', 1: 'tangled-feet', hidden: 'big-pecks'},
+            height: 0.5,
+            weight: 1.9,
+            colors: ['black', 'white', 'blue', 'yellow', 'green', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['flying']
+            },
+
         'spiritomb': {
             order: indexOrder++,
             token: 'spiritomb',
