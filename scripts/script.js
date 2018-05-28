@@ -2735,7 +2735,7 @@
         // If we're at or over capacity, no more breeding action should take place
         if (thisZoneData.currentPokemon.length >= thisZoneData.capacity){ return false; }
 
-        // Check to see if we're at high (90%) zone capacity already
+        // Check to see if we're at high (95%) zone capacity already
         var zoneCapacityPercent = ((thisZoneData.currentPokemon.length / thisZoneData.capacity) * 100);
         var zoneIsOvercrowded = zoneCapacityPercent >= 95 ? true : false;
         //console.log('zoneCapacityPercent = ', zoneCapacityPercent);
@@ -2952,29 +2952,31 @@
             //console.log('----------\nLoop through through and generate required eggs...');
             var eggsAddedCount = 0;
             var eggsToAddIndexTokens = !jQuery.isEmptyObject(eggsToAddIndex) ? Object.keys(eggsToAddIndex) : [];
-            if ((eggsAddedCount < eggsToAddCount)
-                && (thisZoneData.currentPokemon.length < thisZoneData.capacity)){
+            if (eggsAddedCount < eggsToAddCount){
                 //console.log('(eggsAddedCount('+eggsAddedCount+') < eggsToAddCount('+eggsToAddCount+')) && (thisZoneData.currentPokemon.length('+thisZoneData.currentPokemon.length+') < thisZoneData.capacity('+thisZoneData.capacity+'))');
                 //console.log('eggsToAddIndex = ', eggsToAddIndex);
                 for (var key = 0; key < eggsToAddIndexTokens.length; key++){
                     var pokeToken = eggsToAddIndexTokens[key];
+                    // Check again to see if we're at overcrowded capacity
+                    zoneCapacityPercent = ((thisZoneData.currentPokemon.length / thisZoneData.capacity) * 100);
+                    zoneIsOvercrowded = zoneCapacityPercent >= 95 ? true : false;
+                    //console.log('zoneCapacityPercent = ', zoneCapacityPercent);
+                    //console.log('zoneIsOvercrowded = ', zoneIsOvercrowded);
                     //console.log('eggsToAddIndex[pokeToken] = ', pokeToken, eggsToAddIndex[pokeToken]);
-                    if (eggsToAddIndex[pokeToken] > 0){
+                    if (zoneIsOvercrowded){
+                        eggsToAddIndex[pokeToken] = 0;
+                        delete eggsToAddIndex[pokeToken];
+                        } else if (eggsToAddIndex[pokeToken] > 0){
                         if (existingShinyDitto > 0){ addPokemonToZone(pokeToken, true, existingShinyDitto); }
                         else { addPokemonToZone(pokeToken, true); }
                         eggsAddedCount++;
-                        zoneCapacityPercent = ((thisZoneData.currentPokemon.length / thisZoneData.capacity) * 100);
-                        zoneIsOvercrowded = zoneCapacityPercent >= 90 ? true : false;
-                        //console.log('zoneCapacityPercent = ', zoneCapacityPercent);
-                        //console.log('zoneIsOvercrowded = ', zoneIsOvercrowded);
-                        if (zoneIsOvercrowded){ eggsToAddIndex[pokeToken] = 0; }
-                        else { eggsToAddIndex[pokeToken] -= 1; }
+                        eggsToAddIndex[pokeToken] -= 1;
                         if (eggsToAddIndex[pokeToken] == 0){
                             delete eggsToAddIndex[pokeToken];
                             }
                         }
                     if (jQuery.isEmptyObject(eggsToAddIndex)){ break; }
-                    if (thisZoneData.currentPokemon.length >= thisZoneData.capacity){ break; }
+                    else if (zoneIsOvercrowded){ break; }
                     }
                 }
 
@@ -3159,12 +3161,14 @@
                     }
 
                 // Increase the chance of this pokemon appearing based on colour appeal
-                var colourVal = 0.001 / pokeInfo.colors.length;
-                for (var key2 = 0; key2 < pokeInfo.colors.length; key2++){
-                    var colourToken = pokeInfo.colors[key2];
-                    if (typeof thisZoneData.currentStats['colors'][colourToken] !== 'undefined'
-                        && thisZoneData.currentStats['colors'][colourToken] !== 0){
-                        pokeChance += thisZoneData.currentStats['colors'][colourToken] * colourVal;
+                if (typeof pokeInfo.colors !== 'undefined'){
+                    var colourVal = 0.001 / pokeInfo.colors.length;
+                    for (var key2 = 0; key2 < pokeInfo.colors.length; key2++){
+                        var colourToken = pokeInfo.colors[key2];
+                        if (typeof thisZoneData.currentStats['colors'][colourToken] !== 'undefined'
+                            && thisZoneData.currentStats['colors'][colourToken] !== 0){
+                            pokeChance += thisZoneData.currentStats['colors'][colourToken] * colourVal;
+                            }
                         }
                     }
 
