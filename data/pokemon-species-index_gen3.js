@@ -1346,6 +1346,41 @@
             eggGroups: ['field'],
             },
 
+        'spoink': {
+            order: indexOrder++,
+            token: 'spoink',
+            name: 'Spoink',
+            number: 325,
+            types: ['psychic'],
+            baseStats: {hp: 60, phAttack: 25, phDefense: 35, spAttack: 70, spDefense: 80, speed: 60},
+            abilities: {0: 'thick-fat', 1: 'own-tempo', hidden: 'gluttony'},
+            height: 0.7,
+            weight: 30.6,
+            colors: ['gray', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'grumpig',
+                method: 'level-up',
+                value: 32
+                }]
+            },
+        'grumpig': {
+            order: indexOrder++,
+            token: 'grumpig',
+            name: 'Grumpig',
+            number: 326,
+            types: ['psychic'],
+            baseStats: {hp: 80, phAttack: 45, phDefense: 65, spAttack: 90, spDefense: 110, speed: 80},
+            abilities: {0: 'thick-fat', 1: 'own-tempo', hidden: 'gluttony'},
+            height: 0.9,
+            weight: 71.5,
+            colors: ['purple', 'black', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'spoink'
+            },
+
         'trapinch': {
             order: indexOrder++,
             token: 'trapinch',
