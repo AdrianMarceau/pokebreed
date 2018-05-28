@@ -1621,6 +1621,41 @@
             prevEvolution: 'barboach'
             },
 
+        'corphish': {
+            order: indexOrder++,
+            token: 'corphish',
+            name: 'Corphish',
+            number: 341,
+            types: ['water'],
+            baseStats: {hp: 43, phAttack: 80, phDefense: 65, spAttack: 50, spDefense: 35, speed: 35},
+            abilities: {0: 'hyper-cutter', 1: 'shell-armor', hidden: 'adaptability'},
+            height: 0.6,
+            weight: 11.5,
+            colors: ['red', 'white'],
+            eggCycles: 15,
+            eggGroups: ['water-1', 'water-3'],
+            nextEvolutions: [{
+                species: 'crawdaunt',
+                method: 'level-up',
+                value: 30
+                }]
+            },
+        'crawdaunt': {
+            order: indexOrder++,
+            token: 'crawdaunt',
+            name: 'Crawdaunt',
+            number: 342,
+            types: ['water', 'dark'],
+            baseStats: {hp: 63, phAttack: 120, phDefense: 85, spAttack: 90, spDefense: 55, speed: 55},
+            abilities: {0: 'hyper-cutter', 1: 'shell-armor', hidden: 'adaptability'},
+            height: 1.1,
+            weight: 32.8,
+            colors: ['red', 'white', 'yellow', 'blue', 'black'],
+            eggCycles: 15,
+            eggGroups: ['water-1', 'water-3'],
+            prevEvolution: 'corphish'
+            },
+
         'feebas': {
             order: indexOrder++,
             token: 'feebas',
