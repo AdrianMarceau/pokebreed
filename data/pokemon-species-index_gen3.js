@@ -1381,6 +1381,25 @@
             prevEvolution: 'spoink'
             },
 
+        'spinda': {
+            order: indexOrder++,
+            token: 'spinda',
+            name: 'Spinda',
+            number: 327,
+            formClass: 'random-variant',
+            possibleForms: ['p1', 'p2', 'p3', 'p4', 'p5', 'p6'],
+            randomizeForms: true,
+            baseForme: 'p1',
+            types: ['normal'],
+            baseStats: {hp: 60, phAttack: 60, phDefense: 60, spAttack: 60, spDefense: 60, speed: 60},
+            abilities: {0: 'own-tempo', 1: 'tangled-feet', hidden: 'contrary'},
+            height: 1.1,
+            weight: 5,
+            colors: ['brown', 'red'],
+            eggCycles: 15,
+            eggGroups: ['field', 'human-like']
+            },
+
         'trapinch': {
             order: indexOrder++,
             token: 'trapinch',
