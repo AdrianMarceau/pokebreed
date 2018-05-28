@@ -2169,7 +2169,7 @@
             Math.seed = 1;
             for (var i = 0; i < thisZoneData.currentPokemon.length; i++){
                 var pokeToken = thisZoneData.currentPokemon[i].token;
-                Math.seed += PokemonSpeciesIndex[pokeToken].order;
+                Math.seed += PokemonSpeciesIndex[pokeToken].number;
                 }
             //console.log('\nSTART SEED = '+Math.seed);
             }
