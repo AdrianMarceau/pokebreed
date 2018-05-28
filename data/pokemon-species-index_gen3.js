@@ -1261,6 +1261,41 @@
             prevEvolution: 'carvanha'
             },
 
+        'wailmer': {
+            order: indexOrder++,
+            token: 'wailmer',
+            name: 'Wailmer',
+            number: 320,
+            types: ['water'],
+            baseStats: {hp: 130, phAttack: 70, phDefense: 35, spAttack: 70, spDefense: 35, speed: 60},
+            abilities: {0: 'water-veil', 1: 'oblivious', hidden: 'pressure'},
+            height: 2,
+            weight: 130,
+            colors: ['blue', 'yellow'],
+            eggCycles: 40,
+            eggGroups: ['field', 'water-2'],
+            nextEvolutions: [{
+                species: 'wailord',
+                method: 'level-up',
+                value: 40
+                }]
+            },
+        'wailord': {
+            order: indexOrder++,
+            token: 'wailord',
+            name: 'Wailord',
+            number: 321,
+            types: ['water'],
+            baseStats: {hp: 170, phAttack: 90, phDefense: 45, spAttack: 90, spDefense: 45, speed: 60},
+            abilities: {0: 'water-veil', 1: 'oblivious', hidden: 'pressure'},
+            height: 14.5,
+            weight: 398,
+            colors: ['blue', 'white'],
+            eggCycles: 40,
+            eggGroups: ['field', 'water-2'],
+            prevEvolution: 'wailmer'
+            },
+
         'torkoal': {
             order: indexOrder++,
             token: 'torkoal',
