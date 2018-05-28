@@ -1606,6 +1606,25 @@
             prevEvolution: 'sharpedo'
             },
 
+        'mega-camerupt': {
+            order: thisIndex.afterOrder('camerupt'),
+            token: 'mega-camerupt',
+            name: 'Mega Camerupt',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'camerupt',
+            number: 323,
+            types: ['fire', 'ground'],
+            baseStats: {hp: 70, phAttack: 120, phDefense: 100, spAttack: 145, spDefense: 105, speed: 20},
+            abilities: {0: 'sheer-force'},
+            height: 2.5,
+            weight: 320.5,
+            colors: ['red', 'black', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'camerupt'
+            },
+
         'mega-altaria': {
             order: thisIndex.afterOrder('altaria'),
             token: 'mega-altaria',
@@ -1887,6 +1906,7 @@
         {base: 'medicham', species: 'mega-medicham', method: 'mega-evolution', value: 'medichamite'},
         {base: 'manectric', species: 'mega-manectric', method: 'mega-evolution', value: 'manectricite'},
         {base: 'sharpedo', species: 'mega-sharpedo', method: 'mega-evolution', value: 'sharpedonite'},
+        {base: 'camerupt', species: 'mega-camerupt', method: 'mega-evolution', value: 'cameruptite'},
         {base: 'altaria', species: 'mega-altaria', method: 'mega-evolution', value: 'altarianite'},
         {base: 'salamence', species: 'mega-salamence', method: 'mega-evolution', value: 'salamencite'},
         {base: 'metagross', species: 'mega-metagross', method: 'mega-evolution', value: 'metagrossite'},

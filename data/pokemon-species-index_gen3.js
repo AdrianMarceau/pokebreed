@@ -1296,6 +1296,41 @@
             prevEvolution: 'wailmer'
             },
 
+        'numel': {
+            order: indexOrder++,
+            token: 'numel',
+            name: 'Numel',
+            number: 322,
+            types: ['fire', 'ground'],
+            baseStats: {hp: 60, phAttack: 60, phDefense: 40, spAttack: 65, spDefense: 45, speed: 35},
+            abilities: {0: 'oblivious', 1: 'simple', hidden: 'own-tempo'},
+            height: 0.7,
+            weight: 24,
+            colors: ['yellow', 'green', 'white'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'camerupt',
+                method: 'level-up',
+                value: 33
+                }]
+            },
+        'camerupt': {
+            order: indexOrder++,
+            token: 'camerupt',
+            name: 'Camerupt',
+            number: 323,
+            types: ['fire', 'ground'],
+            baseStats: {hp: 70, phAttack: 100, phDefense: 70, spAttack: 105, spDefense: 75, speed: 40},
+            abilities: {0: 'magma-armor', 1: 'solid-rock', hidden: 'anger-point'},
+            height: 1.9,
+            weight: 220,
+            colors: ['red', 'brown', 'blue', 'black'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'numel'
+            },
+
         'torkoal': {
             order: indexOrder++,
             token: 'torkoal',
