@@ -1225,6 +1225,42 @@
             prevEvolution: 'gulpin'
             },
 
+        'carvanha': {
+            order: indexOrder++,
+            token: 'carvanha',
+            name: 'Carvanha',
+            number: 318,
+            types: ['water', 'dark'],
+            baseStats: {hp: 45, phAttack: 90, phDefense: 20, spAttack: 65, spDefense: 20, speed: 65},
+            abilities: {0: 'rough-skin', hidden: 'speed-boost'},
+            height: 0.8,
+            weight: 20.8,
+            colors: ['yellow', 'red', 'blue', 'black'],
+            evos: ['sharpedo'],
+            eggCycles: 20,
+            eggGroups: ['water-2'],
+            nextEvolutions: [{
+                species: 'sharpedo',
+                method: 'level-up',
+                value: 30
+                }]
+            },
+        'sharpedo': {
+            order: indexOrder++,
+            token: 'sharpedo',
+            name: 'Sharpedo',
+            number: 319,
+            types: ['water', 'dark'],
+            baseStats: {hp: 70, phAttack: 120, phDefense: 40, spAttack: 95, spDefense: 40, speed: 95},
+            abilities: {0: 'rough-skin', hidden: 'speed-boost'},
+            height: 1.8,
+            weight: 88.8,
+            colors: ['blue', 'white', 'pink', 'yellow', 'black', 'red'],
+            eggCycles: 20,
+            eggGroups: ['water-2'],
+            prevEvolution: 'carvanha'
+            },
+
         'torkoal': {
             order: indexOrder++,
             token: 'torkoal',

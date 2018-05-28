@@ -1587,6 +1587,25 @@
             prevEvolution: 'manectric'
             },
 
+        'mega-sharpedo': {
+            order: thisIndex.afterOrder('sharpedo'),
+            token: 'mega-sharpedo',
+            name: 'Mega Sharpedo',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'sharpedo',
+            number: 319,
+            types: ['water', 'dark'],
+            baseStats: {hp: 70, phAttack: 140, phDefense: 70, spAttack: 110, spDefense: 65, speed: 105},
+            abilities: {0: 'strong-jaw'},
+            height: 2.5,
+            weight: 130.3,
+            colors: ['blue', 'white', 'yellow', 'pink', 'black', 'red'],
+            eggCycles: 20,
+            eggGroups: ['water-2'],
+            prevEvolution: 'sharpedo'
+            },
+
         'mega-altaria': {
             order: thisIndex.afterOrder('altaria'),
             token: 'mega-altaria',
@@ -1864,10 +1883,10 @@
 
         {base: 'sableye', species: 'mega-sableye', method: 'mega-evolution', value: 'sablinite'},
         {base: 'mawile', species: 'mega-mawile', method: 'mega-evolution', value: 'mawilite'},
-
         {base: 'aggron', species: 'mega-aggron', method: 'mega-evolution', value: 'aggronite'},
         {base: 'medicham', species: 'mega-medicham', method: 'mega-evolution', value: 'medichamite'},
         {base: 'manectric', species: 'mega-manectric', method: 'mega-evolution', value: 'manectricite'},
+        {base: 'sharpedo', species: 'mega-sharpedo', method: 'mega-evolution', value: 'sharpedonite'},
         {base: 'altaria', species: 'mega-altaria', method: 'mega-evolution', value: 'altarianite'},
         {base: 'salamence', species: 'mega-salamence', method: 'mega-evolution', value: 'salamencite'},
         {base: 'metagross', species: 'mega-metagross', method: 'mega-evolution', value: 'metagrossite'},
