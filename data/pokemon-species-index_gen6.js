@@ -981,7 +981,7 @@
             order: indexOrder++,
             token: 'volcanion',
             name: 'Volcanion',
-            class: 'legendary',
+            class: 'mythical',
             number: 721,
             types: ['fire', 'water'],
             genderRatio: {none: 1.000},
