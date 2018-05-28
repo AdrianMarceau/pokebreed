@@ -1586,6 +1586,41 @@
             eggGroups: ['mineral']
             },
 
+        'barboach': {
+            order: indexOrder++,
+            token: 'barboach',
+            name: 'Barboach',
+            number: 339,
+            types: ['water', 'ground'],
+            baseStats: {hp: 50, phAttack: 48, phDefense: 43, spAttack: 46, spDefense: 41, speed: 60},
+            abilities: {0: 'oblivious', 1: 'anticipation', hidden: 'hydration'},
+            height: 0.4,
+            weight: 1.9,
+            colors: ['gray', 'blue', 'black'],
+            eggCycles: 20,
+            eggGroups: ['water-2'],
+            nextEvolutions: [{
+                species: 'whiscash',
+                method: 'level-up',
+                value: 30
+                }]
+            },
+        'whiscash': {
+            order: indexOrder++,
+            token: 'whiscash',
+            name: 'Whiscash',
+            number: 340,
+            types: ['water', 'ground'],
+            baseStats: {hp: 110, phAttack: 78, phDefense: 73, spAttack: 76, spDefense: 71, speed: 60},
+            abilities: {0: 'oblivious', 1: 'anticipation', hidden: 'hydration'},
+            height: 0.9,
+            weight: 23.6,
+            colors: ['blue', 'yellow', 'black'],
+            eggCycles: 20,
+            eggGroups: ['water-2'],
+            prevEvolution: 'barboach'
+            },
+
         'feebas': {
             order: indexOrder++,
             token: 'feebas',
