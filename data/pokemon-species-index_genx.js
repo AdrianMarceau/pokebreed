@@ -490,6 +490,8 @@
         {base: 'pinsir', species: 'heracross'},
         {base: 'karrablast', species: 'shelmet'},
         {base: 'shelmet', species: 'karrablast'},
+        {base: 'solrock', species: 'lunatone'},
+        {base: 'lunatone', species: 'solrock'},
 
         // Rival relationships
         {base: 'zangoose', species: 'seviper'},

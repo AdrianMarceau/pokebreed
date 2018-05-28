@@ -1555,6 +1555,37 @@
             eggGroups: ['field', 'dragon']
             },
 
+        'lunatone': {
+            order: indexOrder++,
+            token: 'lunatone',
+            name: 'Lunatone',
+            number: 337,
+            types: ['rock', 'psychic'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 90, phAttack: 55, phDefense: 65, spAttack: 95, spDefense: 85, speed: 70},
+            abilities: {0: 'levitate'},
+            height: 1,
+            weight: 168,
+            colors: ['yellow', 'black', 'red'],
+            eggCycles: 25,
+            eggGroups: ['mineral']
+            },
+        'solrock': {
+            order: indexOrder++,
+            token: 'solrock',
+            name: 'Solrock',
+            number: 338,
+            types: ['rock', 'psychic'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 90, phAttack: 95, phDefense: 85, spAttack: 55, spDefense: 65, speed: 70},
+            abilities: {0: 'levitate'},
+            height: 1.2,
+            weight: 154,
+            colors: ['orange', 'yellow', 'black', 'red'],
+            eggCycles: 25,
+            eggGroups: ['mineral']
+            },
+
         'feebas': {
             order: indexOrder++,
             token: 'feebas',
