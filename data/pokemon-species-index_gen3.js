@@ -1732,6 +1732,21 @@
             prevEvolution: 'feebas'
             },
 
+        'kecleon': {  // TODO: Make appearance based on current colour (dynamic, tie to ability)
+            order: indexOrder++,
+            token: 'kecleon',
+            name: 'Kecleon',
+            number: 352,
+            types: ['normal'],
+            baseStats: {hp: 60, phAttack: 90, phDefense: 70, spAttack: 60, spDefense: 120, speed: 40},
+            abilities: {0: 'color-change', hidden: 'protean'},
+            height: 1,
+            weight: 22,
+            colors: ['green', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field']
+            },
+
         'wynaut': {
             order: thisIndex.beforeOrder('wobbuffet'),
             token: 'wynaut',

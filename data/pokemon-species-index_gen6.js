@@ -193,7 +193,7 @@
             prevEvolution: 'frogadier'
             },
 
-        'flabebe': {
+        'flabebe': {  // TODO: Make appearance based on current colour (permanent, decided at birth)
             order: indexOrder++,
             token: 'flabebe',
             name: 'Flabe\u0301be\u0301',
