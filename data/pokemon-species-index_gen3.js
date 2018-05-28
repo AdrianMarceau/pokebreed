@@ -1783,6 +1783,22 @@
                 }]
             },
 
+        'relicanth': {
+            order: indexOrder++,
+            token: 'relicanth',
+            name: 'Relicanth',
+            number: 369,
+            types: ['water', 'rock'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 100, phAttack: 90, phDefense: 130, spAttack: 45, spDefense: 65, speed: 55},
+            abilities: {0: 'swift Swim', 1: 'rock-head', hidden: 'sturdy'},
+            height: 1,
+            weight: 23.4,
+            colors: ['gray', 'brown', 'red'],
+            eggCycles: 40,
+            eggGroups: ['water-1', 'water-2']
+            },
+
         'luvdisc': {
             order: indexOrder++,
             token: 'luvdisc',
