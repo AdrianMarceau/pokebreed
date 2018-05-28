@@ -1656,6 +1656,43 @@
             prevEvolution: 'corphish'
             },
 
+        'baltoy': {
+            order: indexOrder++,
+            token: 'baltoy',
+            name: 'Baltoy',
+            number: 343,
+            types: ['ground', 'psychic'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 40, phAttack: 40, phDefense: 55, spAttack: 40, spDefense: 70, speed: 55},
+            abilities: {0: 'levitate'},
+            height: 0.5,
+            weight: 21.5,
+            colors: ['brown', 'red'],
+            eggCycles: 20,
+            eggGroups: ['mineral'],
+            nextEvolutions: [{
+                species: 'claydol',
+                method: 'level-up',
+                value: 36
+                }]
+            },
+        'claydol': {
+            order: indexOrder++,
+            token: 'claydol',
+            name: 'Claydol',
+            number: 344,
+            types: ['ground', 'psychic'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 60, phAttack: 70, phDefense: 105, spAttack: 70, spDefense: 120, speed: 75},
+            abilities: {0: 'levitate'},
+            height: 1.5,
+            weight: 108,
+            colors: ['black', 'red', 'white', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['mineral'],
+            prevEvolution: 'baltoy'
+            },
+
         'feebas': {
             order: indexOrder++,
             token: 'feebas',
