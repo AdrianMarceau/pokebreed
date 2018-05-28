@@ -3179,12 +3179,6 @@
                     //console.log('pokeChance = ', pokeChance);
                 }
 
-                // If this is a special pokemon, appearances from other runs should influence appeal
-                if (visitorKind !== 'basic'
-                    && typeof PokemonSpeciesSeen[pokeToken] !== 'undefined'){
-                    pokeChance -= (PokemonSpeciesSeen[pokeToken] / 100);
-                    }
-
                 // Decrease the chance if there is already a colony of this species
                 if (typeof thisZoneData.addedPokemonSpecies[pokeToken] !== 'undefined'){
                     var numAddedAlready = thisZoneData.addedPokemonSpecies[pokeToken];
