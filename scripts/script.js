@@ -475,6 +475,12 @@
 
                 if (false){ return 0; }
 
+                else if (shinyDittoA && !shinyDittoB){ return 1; }
+                else if (!shinyDittoA && shinyDittoB){ return -1; }
+
+                else if (specialA && !specialB){ return 1; }
+                else if (!specialA && specialB){ return -1; }
+
                 else if (baseNumA < baseNumB){ return -1; }
                 else if (baseNumA > baseNumB){ return 1; }
 
@@ -1145,7 +1151,7 @@
 
                 // Insert a break after each new generation
                 var thisGeneration = pokeIndex.gameGeneration;
-                //if (pokemonIsSpecial || pokeToken.match(/(unown|ditto)$/)){ thisGeneration = 'specials'; }
+                if (pokemonIsSpecial || pokeToken === 'shiny-ditto'){ thisGeneration = 'specials'; }
                 if (thisGeneration !== lastGeneration){
                     var addBreak = true;
                     if (pokeIndex.class === 'baby'){ addBreak = false; }
