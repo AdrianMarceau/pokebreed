@@ -2450,7 +2450,7 @@
                                 var appealType = appealTypes[i];
                                 if (pokemonInfo.growthCycles >= (appealLevel * 10)
                                     && currentBaseStats[appealType] >= (appealLevel * 20)){
-                                    returnValue += 1 + ((currentBaseStats[appealType] * 5) * appealLevel);
+                                    returnValue += 1 + (currentBaseStats[appealType] * appealLevel);
                                     }
                                 }
                             if (returnValue > 0){ return returnValue; }
