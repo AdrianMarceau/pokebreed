@@ -1967,14 +1967,13 @@
 
     // Define a function for getting a snapshot of the zone stats
     var mainZoneStats = ['types', 'species', 'eggs'];
-    var subZoneStats = ['colors', 'eggGroups', 'gameGeneration', 'gameRegion'];
+    var subZoneStats = ['colors', 'eggGroups', 'gameGeneration', 'gameRegion', 'baseStats'];
     function recalculateZoneStats(){
 
         // Create the initial object to hold all zone stats
         var currentZoneStats = {};
-        currentZoneStats['types'] = {};
-        currentZoneStats['species'] = {};
-        currentZoneStats['eggs'] = {};
+        for (var i = 0; i < mainZoneStats.length; i++){ currentZoneStats[mainZoneStats[i]] = {}; }
+        for (var i = 0; i < subZoneStats.length; i++){ currentZoneStats[subZoneStats[i]] = {}; }
 
         // Predefine all the types with zero points to start
         if (typeof PokemonTypesIndex !== 'undefined'){
@@ -2070,7 +2069,7 @@
                 }
 
             }
-        //console.log('currentZoneStats = ', currentZoneStats);
+        //console.log('currentZoneStats(Day '+thisZoneData.day+') = ', currentZoneStats);
         //console.log('thisZoneData.currentStats = ', thisZoneData.currentStats);
 
         // Loop through and assign the new zone stat values to the parent array
@@ -2079,6 +2078,10 @@
             var statToken = zoneStatTokens[key];
             thisZoneData.currentStats[statToken] = currentZoneStats[statToken];
             }
+
+        // Recalculate the current wivillon pattern
+        currentVivillonPattern = '';
+        recalculateVivillonPattern();
 
         // Return true on success
         return true;
@@ -2127,9 +2130,6 @@
         //console.log('Math.seed = ', Math.seed);
         //console.log('randomNumber = ', randomNumber);
 
-        // Trigger a recalculation of zone stats
-        recalculateZoneStats();
-
         // Update growth, egg, etc, cycles if allowed
         if (updateCycles){
             updateGrowthCycles();
@@ -2137,6 +2137,7 @@
             updateBreedingCycles();
             updateBattleCycles();
             updateBoxBiome();
+            recalculateZoneStats();
             }
 
         // Trigger a visitor chance if allowed or it's the first day and there's room
@@ -2206,8 +2207,8 @@
 
     // Define a function for calculating the current Vivillon pattern
     var currentVivillonPattern = '';
-    function calculateCurrentVivillonPattern(){
-        //console.log('calculateCurrentVivillonPattern()');
+    function recalculateVivillonPattern(){
+        //console.log('recalculateVivillonPattern()');
 
         // If there the Vivillon line on the field, pre-calculate current colour stats
         if (typeof PokemonSpeciesIndex['vivillon'] !== 'undefined'
@@ -2255,10 +2256,6 @@
 
         // Define a variable to hold (temporary) allowed trade evolutions this cycle
         var allowedTradeEvolutions = {};
-
-        // Predefine a variable for colour stats in case we need them
-        currentVivillonPattern = '';
-        calculateCurrentVivillonPattern();
 
         // First, loop through all the non-egg pokemon and increment growth cycle
         if (thisZoneData.currentPokemon.length){
