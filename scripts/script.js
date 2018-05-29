@@ -333,6 +333,7 @@
         thisZoneHistory = [];
         var defaultZoneJSON = JSON.stringify(defaultZoneData);
         thisZoneData = JSON.parse(defaultZoneJSON);
+        recalculateZoneStats();
     }
 
     // Define a function for looping through indexes and generating helpful values
@@ -1460,15 +1461,6 @@
         // Compensate for missing onComplete function
         if (typeof onComplete !== 'function'){ onComplete = function(){}; }
 
-        // Define a function for generating current zone type stats
-        var currentZoneStats = getCurrentZoneStats();
-        var zoneStatTokens = Object.keys(currentZoneStats);
-        for (var key = 0; key < zoneStatTokens.length; key++){
-            var statToken = zoneStatTokens[key];
-            thisZoneData.currentStats[statToken] = currentZoneStats[statToken];
-            }
-        //console.log('thisZoneData.currentStats = ', thisZoneData.currentStats);
-
         // Loop though and count population by types & species
         var pokeSpeciesActive = {};
         if (thisZoneData.currentPokemon.length){
@@ -1970,6 +1962,12 @@
 
     // Define a function for getting a snapshot of the zone stats
     function getCurrentZoneStats(){
+        var cloned
+        return thisZoneData.currentStats;
+    }
+
+    // Define a function for getting a snapshot of the zone stats
+    function recalculateZoneStats(){
 
         var currentZoneStats = {};
 
@@ -2129,8 +2127,14 @@
                 }
             }
 
-        //console.log('thisZoneData.currentStats = ', currentZoneStats);
-        return currentZoneStats;
+        // Define a function for generating current zone type stats
+        var zoneStatTokens = Object.keys(currentZoneStats);
+        for (var key = 0; key < zoneStatTokens.length; key++){
+            var statToken = zoneStatTokens[key];
+            thisZoneData.currentStats[statToken] = currentZoneStats[statToken];
+            }
+        //console.log('currentZoneStats = ', currentZoneStats);
+        //console.log('thisZoneData.currentStats = ', thisZoneData.currentStats);
 
     }
 
@@ -2146,9 +2150,7 @@
         if (typeof allowVisitors !== 'boolean'){ allowVisitors = updateCycles; }
 
         // Generate a snapshot of the zone stats and add to history
-        var rankedZoneStats = getRankedZoneStats();
-        var currentZoneStats = getCurrentZoneStats();
-        thisZoneHistory.push(currentZoneStats);
+        thisZoneHistory.push(JSON.stringify(thisZoneData.currentStats));
 
         dayTimeoutStarted = true;
         thisZoneData.day++;
@@ -2173,11 +2175,13 @@
                 }
             //console.log('\nSTART SEED = '+Math.seed);
             }
-
         //var randomNumber = Math.seededRandom(0, 100);
         //console.log('Day #'+thisZoneData.day);
         //console.log('Math.seed = ', Math.seed);
         //console.log('randomNumber = ', randomNumber);
+
+        // Trigger a recalculation of zone stats
+        recalculateZoneStats();
 
         // Update growth, egg, etc, cycles if allowed
         if (updateCycles){
