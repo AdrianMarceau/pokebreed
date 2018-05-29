@@ -1255,6 +1255,22 @@
             eggCycles: 120,
             eggGroups: ['undiscovered'],
             },
+        'zekrom': {
+            order: indexOrder++,
+            token: 'zekrom',
+            name: 'Zekrom',
+            class: 'legendary',
+            number: 644,
+            types: ['dragon', 'electric'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 150, phDefense: 120, spAttack: 120, spDefense: 100, speed: 90},
+            abilities: {0: 'teravolt'},
+            height: 2.9,
+            weight: 345,
+            colors: ['black', 'black', 'blue', 'red'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            },
 
         });
     thisIndex.indexOrder = indexOrder;
