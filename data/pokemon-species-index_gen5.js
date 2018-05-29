@@ -276,6 +276,42 @@
             prevEvolution: 'tranquill'
             },
 
+        'woobat': {
+            order: indexOrder++,
+            token: 'woobat',
+            name: 'Woobat',
+            number: 527,
+            types: ['psychic', 'flying'],
+            baseStats: {hp: 65, phAttack: 45, phDefense: 43, spAttack: 55, spDefense: 43, speed: 72},
+            abilities: {0: 'unaware', 1: 'klutz', hidden: 'simple'},
+            height: 0.4,
+            weight: 2.1,
+            colors: ['blue', 'black', 'pink'],
+            eggCycles: 15,
+            eggGroups: ['flying', 'field'],
+            nextEvolutions: [{
+                species: 'swoobat',
+                method: 'happiness',
+                value: 'high'
+                }]
+            },
+        'swoobat': {
+            order: indexOrder++,
+            token: 'swoobat',
+            name: 'Swoobat',
+            number: 528,
+            types: ['psychic', 'flying'],
+            baseStats: {hp: 67, phAttack: 57, phDefense: 55, spAttack: 77, spDefense: 55, speed: 114},
+            abilities: {0: 'unaware', 1: 'klutz', hidden: 'simple'},
+            height: 0.9,
+            weight: 10.5,
+            colors: ['blue', 'pink', 'black'],
+            evoLevel: 2,
+            eggCycles: 15,
+            eggGroups: ['flying', 'field'],
+            prevEvolution: 'woobat'
+            },
+
         'trubbish': {
             order: indexOrder++,
             token: 'trubbish',
