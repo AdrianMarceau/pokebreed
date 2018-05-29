@@ -1127,12 +1127,40 @@
         window.setTimeout(function(){
 
             // Loop through the display order for all the pokemon
+            var lastGeneration = false;
             var pokedexMarkup = [];
             for (var key = 0; key < PokemonSpeciesDexOrder.length; key++){
                 //console.log('pokedex markup ', key);
                 var pokeNum = key + 1;
                 var pokeToken = PokemonSpeciesDexOrder[key];
                 var pokeIndex = PokemonSpeciesIndex[pokeToken];
+
+                // Check to see if this pokemon is special in some way
+                var pokemonIsSpecial = false;
+                if (pokeIndex['class'] === 'legendary'
+                    || pokeIndex['class'] === 'mythical'
+                    || pokeIndex['class'] === 'ultra-beast'){
+                    pokemonIsSpecial = true;
+                    }
+
+                // Insert a break after each new generation
+                var thisGeneration = pokeIndex.gameGeneration;
+                //if (pokemonIsSpecial || pokeToken.match(/(unown|ditto)$/)){ thisGeneration = 'specials'; }
+                if (thisGeneration !== lastGeneration){
+                    var addBreak = true;
+                    if (pokeIndex.class === 'baby'){ addBreak = false; }
+                    else if (pokeIndex.formClass === 'mega-evolution'){ addBreak = false; }
+                    else if (pokeIndex.formClass === 'burst-evolution'){ addBreak = false; }
+                    else if (pokeIndex.formClass === 'regional-variant'){ addBreak = false; }
+                    else if (pokeIndex.formClass === 'gender-variant'){ addBreak = false; }
+                    else if (pokeIndex.formClass === 'shiny-variant'){ addBreak = false; }
+                    else if (typeof pokeIndex.prevEvolution !== 'undefined'){ addBreak = false; }
+                    if (addBreak){
+                        if (lastGeneration !== false){ pokedexMarkup.push('<li class="breaker"><hr class="breaker" /></li>'); }
+                        lastGeneration = thisGeneration;
+                        }
+                }
+
                 var isUnlocked = false;
                 if (typeof PokemonSpeciesSeen[pokeToken] !== 'undefined'
                     && PokemonSpeciesSeen[pokeToken] > 0){

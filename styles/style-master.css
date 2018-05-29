@@ -1572,6 +1572,18 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
 .panel .buttons .info .group.pokedex .list .species.unknown .bubble .name span:last-child {
     display: inline-block;
 }
+.panel .buttons .info .group.pokedex li.breaker {
+    display: block;
+    clear: both;
+    float: none;
+    margin: 0 auto;
+    padding: 10px 5% 15px;
+    width: auto !important;
+}
+.panel .buttons .info .group.pokedex li.breaker hr.breaker {
+    margin: 0 auto;
+    width: 100%;
+}
 
 /*
 .panel .buttons .info .group.pokedex .list li:hover .species:not(.unknown) {
