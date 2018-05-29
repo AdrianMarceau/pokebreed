@@ -1090,6 +1090,7 @@
                 if (action == 'add'){
                     if (kind == 'pokemon'){
                         addPokemonToZone(token, false);
+                        recalculateZoneStats();
                         if (thisZoneData.currentPokemon.length > 0){
                             $('.controls .start', $panelButtons).addClass('ready');
                             } else {
@@ -1931,6 +1932,7 @@
             thisZoneData.currentPokemon.splice(pokeKey, 1);
             PokemonSpeciesSeen[pokeInfo.token]--;
             if (PokemonSpeciesSeen[pokeInfo.token] === 0){ delete PokemonSpeciesSeen[pokeInfo.token]; }
+            recalculateZoneStats();
             updateOverview();
             if (thisZoneData.currentPokemon.length > 0){
                 $('.controls .start', $panelButtons).addClass('ready');
@@ -2044,16 +2046,26 @@
                 // Loop through sub-stats for and increment relevant values
                 for (var subKey = 0; subKey < subZoneStats.length; subKey++){
                     var subStat = subZoneStats[subKey];
-                    if (typeof currentZoneStats[subStat] === 'undefined'){ currentZoneStats[subStat] = {}; }
                     if (typeof pokeIndex[subStat] !== 'undefined'){
                         // Treat arrays differently than other values
                         if (typeof pokeIndex[subStat] === 'object'){
-                            // Loop through and increment for each sub token
-                            if (pokeIndex[subStat].length > 0){
-                                for (key5 = 0; key5 < pokeIndex[subStat].length; key5++){
+                            // If dealing with an array, each value has a value of one
+                            if (Array.isArray(pokeIndex[subStat])
+                                && pokeIndex[subStat].length > 0){
+                                for (var key5 = 0; key5 < pokeIndex[subStat].length; key5++){
                                     var subToken = pokeIndex[subStat][key5];
                                     if (typeof currentZoneStats[subStat][subToken] === 'undefined'){ currentZoneStats[subStat][subToken] = 0; }
                                     currentZoneStats[subStat][subToken] += 1;
+                                    }
+                                }
+                            // Otherwise if object, each property has its own numeric value
+                            else if (!jQuery.isEmptyObject(pokeIndex[subStat])){
+                                var propNames = Object.keys(pokeIndex[subStat]);
+                                for (var key6 = 0; key6 < propNames.length; key6++){
+                                    var subToken = propNames[key6];
+                                    var subValue = pokeIndex[subStat][subToken];
+                                    if (typeof currentZoneStats[subStat][subToken] === 'undefined'){ currentZoneStats[subStat][subToken] = 0; }
+                                    currentZoneStats[subStat][subToken] += subValue;
                                     }
                                 }
                             } else {
@@ -2069,7 +2081,30 @@
                 }
 
             }
-        //console.log('currentZoneStats(Day '+thisZoneData.day+') = ', currentZoneStats);
+
+        //console.log('currentZoneStats(Day '+thisZoneData.day+'A) = ', currentZoneStats);
+
+        // Loop though and re-sort all the zone stats based on their values
+        //console.log('\n-----');
+        var zoneStatTokens = Object.keys(currentZoneStats);
+        for (var key1 = 0; key1 < zoneStatTokens.length; key1++){
+            //console.log('zoneStatTokens['+key1+']', zoneStatTokens[key1]);
+            var statToken = zoneStatTokens[key1];
+            var zoneStats = currentZoneStats[statToken];
+            var sortedStatKeys = getSortedKeys(zoneStats);
+            //console.log('unsortedStatKeys', Object.keys(zoneStats));
+            //console.log('sortedStatKeys', sortedStatKeys);
+            var sortedList = {};
+            for (var key2 = 0; key2 < sortedStatKeys.length; key2++){
+                //console.log('sortedStatKeys['+key2+']', sortedStatKeys[key2]);
+                var statKey = sortedStatKeys[key2];
+                var statValue = zoneStats[statKey];
+                sortedList[statKey] = statValue;
+                }
+            currentZoneStats[statToken] = sortedList;
+            }
+
+        //console.log('currentZoneStats(Day '+thisZoneData.day+'B) = ', currentZoneStats);
         //console.log('thisZoneData.currentStats = ', thisZoneData.currentStats);
 
         // Loop through and assign the new zone stat values to the parent array
@@ -2085,6 +2120,7 @@
 
         // Return true on success
         return true;
+
 
     }
 
@@ -2253,6 +2289,7 @@
         // Collect references to current zone stats
         var currentTypeStats = thisZoneData.currentStats['types'];
         var currentSpeciesStats = thisZoneData.currentStats['species'];
+        var currentBaseStats = thisZoneData.currentStats['baseStats'];
 
         // Define a variable to hold (temporary) allowed trade evolutions this cycle
         var allowedTradeEvolutions = {};
@@ -2403,6 +2440,22 @@
                             if (returnValue > 0){ return returnValue; }
                             }
 
+                        // Stat-appeal evolutions trigger when the relevant base stats are especially high
+                        if (methodToken === 'stat-appeal'
+                            || methodToken === 'stat-surge'){
+                            var appealLevel = methodToken === 'stat-surge' ? 2 : 1;
+                            var appealTypes = typeof methodValue === 'string' ? [methodValue] : methodValue;
+                            var returnValue = 0;
+                            for (var i = 0; i < appealTypes.length; i++){
+                                var appealType = appealTypes[i];
+                                if (pokemonInfo.growthCycles >= (appealLevel * 10)
+                                    && currentBaseStats[appealType] >= (appealLevel * 20)){
+                                    returnValue += 1 + ((currentBaseStats[appealType] * 5) * appealLevel);
+                                    }
+                                }
+                            if (returnValue > 0){ return returnValue; }
+                            }
+
                         // Species-based evolutions trigger if the other species is active on the field
                         if (methodToken === 'evolution-species'
                             && pokemonInfo.growthCycles >= 20
@@ -2490,7 +2543,7 @@
                                 //console.log('|-- methodToken = ', methodToken);
                                 //console.log('|-- methodValue = ', methodValue);
 
-                                var chanceValue = calculateEvolutionChance(pokemonInfo, methodToken, methodValue);
+                                var chanceValue = calculateEvolutionChance(pokemonInfo, methodToken, methodValue, nextEvolution);
                                 //console.log('|-- chanceValue = ', chanceValue);
 
                                 if (chanceValue > 0){
@@ -3054,9 +3107,6 @@
             // Collect a reference to the current type stats
             var currentTypeStats = thisZoneData.currentStats['types'];
 
-            // Collect ranked zone stats for special appeal calc
-            var rankedZoneStats = getRankedZoneStats();
-
             // Create an array of Pokemon that can appear as visitors
             var allowedVisitorTokens = [];
             allowedVisitorTokens = allowedVisitorTokens.concat(BasicPokemonSpeciesIndexTokens);
@@ -3080,8 +3130,8 @@
                 // Increase the chance of this pokemon appearing based on type appeal
                 var pokeTypes = pokeInfo.types;
                 if (pokeTypes.length === 1){
-                    if (rankedZoneStats[0] === pokeTypes[0]
-                        && currentTypeStats[rankedZoneStats[0]] >= (currentTypeStats[rankedZoneStats[1]] * 2)){
+                    if (currentTypeStats[0] === pokeTypes[0]
+                        && currentTypeStats[currentTypeStats[0]] >= (currentTypeStats[currentTypeStats[1]] * 2)){
                         if (currentTypeStats[pokeTypes[0]] !== 0){ pokeChance += currentTypeStats[pokeTypes[0]] * 1; }
                         } else {
                         if (currentTypeStats[pokeTypes[0]] !== 0){ pokeChance += currentTypeStats[pokeTypes[0]] * 0.5; }
@@ -3321,12 +3371,6 @@
         if (typeof includeMega !== 'boolean'){ includeMega = true; }
         var maxEvolution = pokemonGetMaxEvolutions(pokeToken, includeMega);
         return maxEvolution !== false && maxEvolution.length ? true : false;
-    }
-
-    // Define a function for getting zone stats ranked by type
-    function getRankedZoneStats(){
-        var sortedStatKeys = getSortedKeys(thisZoneData.currentStats['types']);
-        return sortedStatKeys;
     }
 
     // Define a function with an index of evo stones by type
@@ -3620,8 +3664,16 @@
 
     // Define a function for sorting an object by value and returning the keys
     function getSortedKeys(obj){
-        var keys = []; for(var key in obj) keys.push(key);
-        return keys.sort(function(a,b){return obj[b]-obj[a]});
+        var keys = [];
+        for (var key in obj){ keys.push(key); }
+        return keys.sort(function(a,b){
+            var av = obj[a], bv = obj[b];
+            if (av > bv){ return -1; }
+            else if (av < bv){ return 1;}
+            else if (a > b){ return -1; }
+            else if (a < b){ return -1; }
+            else { return 0; }
+            });
     }
 
     // Define a function for converting HEX colour to RGB colour
@@ -3695,6 +3747,13 @@
     const numberWithCommas = (x) => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
+
+    // Only implement if no native implementation is available
+    if (typeof Array.isArray === 'undefined') {
+      Array.isArray = function(obj) {
+        return Object.prototype.toString.call(obj) === '[object Array]';
+      }
+    };
 
     // Polyfill for requestAnimationFrame if not exists
     window.requestAnimationFrame = window.requestAnimationFrame
