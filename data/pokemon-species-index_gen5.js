@@ -1239,6 +1239,23 @@
             prevEvolution: 'larvesta'
             },
 
+        'reshiram': {
+            order: indexOrder++,
+            token: 'reshiram',
+            name: 'Reshiram',
+            class: 'legendary',
+            number: 643,
+            types: ['dragon', 'fire'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 120, phDefense: 100, spAttack: 150, spDefense: 120, speed: 90},
+            abilities: {0: 'turboblaze'},
+            height: 3.2,
+            weight: 330,
+            colors: ['white', 'white', 'red', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
