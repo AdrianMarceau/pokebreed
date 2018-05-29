@@ -3149,6 +3149,7 @@
             //console.log('allowedVisitorTokens = ', allowedVisitorTokens);
 
             // Loop through basic pokemon and calculate chances of each
+            var rankedZoneStats = Object.keys(currentTypeStats);
             var basicPokemonChances = [];
             var basicPokemonChanceTokens = [];
             for (var key = 0; key < allowedVisitorTokens.length; key++){
@@ -3161,11 +3162,11 @@
                 else if (visitorKind !== 'basic' && pokeInfo.class !== visitorKind){ continue; }
                 else if (pokeToken === 'ditto' || pokeToken === 'shiny-ditto'){ continue; }
 
-                // Increase the chance of this pokemon appearing based on type appeal
+                // Increase the chance of this pokemon appearing based on type appeal (give monotypes a boost)
                 var pokeTypes = pokeInfo.types;
                 if (pokeTypes.length === 1){
-                    if (currentTypeStats[0] === pokeTypes[0]
-                        && currentTypeStats[currentTypeStats[0]] >= (currentTypeStats[currentTypeStats[1]] * 2)){
+                    if (rankedZoneStats[0] === pokeTypes[0]
+                        && currentTypeStats[rankedZoneStats[0]] >= (currentTypeStats[rankedZoneStats[1]] * 2)){
                         if (currentTypeStats[pokeTypes[0]] !== 0){ pokeChance += currentTypeStats[pokeTypes[0]] * 1; }
                         } else {
                         if (currentTypeStats[pokeTypes[0]] !== 0){ pokeChance += currentTypeStats[pokeTypes[0]] * 0.5; }
