@@ -422,6 +422,41 @@
             prevEvolution: 'krokorok'
             },
 
+        'dwebble': {
+            order: indexOrder++,
+            token: 'dwebble',
+            name: 'Dwebble',
+            number: 557,
+            types: ['bug', 'rock'],
+            baseStats: {hp: 50, phAttack: 65, phDefense: 85, spAttack: 35, spDefense: 35, speed: 55},
+            abilities: {0: 'sturdy', 1: 'shell-armor', hidden: 'weak-armor'},
+            height: 0.3,
+            weight: 14.5,
+            colors: ['orange', 'gray', 'black'],
+            eggCycles: 20,
+            eggGroups: ['bug', 'mineral'],
+            nextEvolutions: [{
+                species: 'crustle',
+                method: 'level-up',
+                value: 34
+                }]
+            },
+        'crustle': {
+            order: indexOrder++,
+            token: 'crustle',
+            name: 'Crustle',
+            number: 558,
+            types: ['bug', 'rock'],
+            baseStats: {hp: 70, phAttack: 105, phDefense: 125, spAttack: 65, spDefense: 75, speed: 45},
+            abilities: {0: 'sturdy', 1: 'shell-armor', hidden: 'weak-armor'},
+            height: 1.4,
+            weight: 200,
+            colors: ['brown', 'red', 'gray', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['bug', 'mineral'],
+            prevEvolution: 'dwebble'
+            },
+
         'trubbish': {
             order: indexOrder++,
             token: 'trubbish',
