@@ -492,6 +492,61 @@
             prevEvolution: 'trubbish'
             },
 
+        'solosis': {
+            order: indexOrder++,
+            token: 'solosis',
+            name: 'Solosis',
+            number: 577,
+            types: ['psychic'],
+            baseStats: {hp: 45, phAttack: 30, phDefense: 40, spAttack: 105, spDefense: 50, speed: 20},
+            abilities: {0: 'overcoat', 1: 'magic-guard', hidden: 'regenerator'},
+            height: 0.3,
+            weight: 1,
+            colors: ['green', 'red', 'yellow', 'black'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            nextEvolutions: [{
+                species: 'duosion',
+                method: 'level-up',
+                value: 32
+                }]
+            },
+        'duosion': {
+            order: indexOrder++,
+            token: 'duosion',
+            name: 'Duosion',
+            number: 578,
+            types: ['psychic'],
+            baseStats: {hp: 65, phAttack: 40, phDefense: 50, spAttack: 125, spDefense: 60, speed: 30},
+            abilities: {0: 'overcoat', 1: 'magic-guard', hidden: 'regenerator'},
+            height: 0.6,
+            weight: 8,
+            colors: ['green', 'red', 'black'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'solosis',
+            nextEvolutions: [{
+                species: 'reuniclus',
+                method: 'level-up',
+                value: 41
+                }]
+            },
+        'reuniclus': {
+            order: indexOrder++,
+            token: 'reuniclus',
+            name: 'Reuniclus',
+            number: 579,
+            types: ['psychic'],
+            baseStats: {hp: 110, phAttack: 65, phDefense: 75, spAttack: 125, spDefense: 85, speed: 30},
+            abilities: {0: 'overcoat', 1: 'magic-guard', hidden: 'regenerator'},
+            height: 1,
+            weight: 20.1,
+            colors: ['green', 'red', 'yellow', 'black'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'duosion'
+            },
+
         'vanillite': {
             order: indexOrder++,
             token: 'vanillite',
