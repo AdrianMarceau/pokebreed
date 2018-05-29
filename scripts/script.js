@@ -40,7 +40,6 @@
         sizeRows: 10,
         capacity: 100,
         diversity: 0,
-        baseStats: {},
         currentStats: {},
         currentPokemon: [],
         faintedPokemon: [],
@@ -1967,38 +1966,17 @@
     }
 
     // Define a function for getting a snapshot of the zone stats
+    var mainZoneStats = ['types', 'species', 'eggs'];
+    var subZoneStats = ['colors', 'eggGroups', 'gameGeneration', 'gameRegion'];
     function recalculateZoneStats(){
 
+        // Create the initial object to hold all zone stats
         var currentZoneStats = {};
-
-        // Loop though and count population by types & species
-        var pokeTypes = {};
-        var pokeSpecies = {};
-        if (thisZoneData.currentPokemon.length){
-            for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
-                var pokemonInfo = thisZoneData.currentPokemon[key];
-                if (pokemonInfo.eggCycles > 0){ continue; }
-                var indexInfo = PokemonSpeciesIndex[pokemonInfo.token];
-                if (typeof pokeSpecies[pokemonInfo.token] == 'undefined'){ pokeSpecies[pokemonInfo.token] = 0; }
-                pokeSpecies[pokemonInfo.token] += 1;
-                for (var key2 = 0; key2 < pokemonInfo.types.length; key2++){
-                    var type = pokemonInfo.types[key2];
-                    if (typeof pokeTypes[type] == 'undefined'){ pokeTypes[type] = 0; }
-                    pokeTypes[type] += 1;
-                    }
-
-                }
-            }
-
-        // Reset current stats so we can recalculate
         currentZoneStats['types'] = {};
         currentZoneStats['species'] = {};
         currentZoneStats['eggs'] = {};
 
-        // Define the sub-stats to calculate
-        var subZoneStats = ['colors', 'eggGroups', 'gameGeneration', 'gameRegion'];
-
-        // Predefine all the types with zero points
+        // Predefine all the types with zero points to start
         if (typeof PokemonTypesIndex !== 'undefined'){
             for (var key = 0; key < PokemonTypesIndexTokens.length; key++){
                 var typeToken = PokemonTypesIndexTokens[key];
@@ -2007,90 +1985,34 @@
             }
 
         // Loop through and count pokemon by species, groups, generations, and regions
-        for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
-            var currentPoke = thisZoneData.currentPokemon[key];
-            var pokeToken = currentPoke.token;
-            var pokeInfo = PokemonSpeciesIndex[pokeToken];
-            if (currentPoke.eggCycles === 0){
-
-                // Growing pokemon count toward stats species stats
-                if (typeof currentZoneStats['species'][pokeToken] === 'undefined'){ currentZoneStats['species'][pokeToken] = 0; }
-                currentZoneStats['species'][pokeToken] += 1;
-
-                // Loop through sub-stats for and increment relevant values
-                for (var subKey = 0; subKey < subZoneStats.length; subKey++){
-                    var subStat = subZoneStats[subKey];
-                    if (typeof currentZoneStats[subStat] === 'undefined'){ currentZoneStats[subStat] = {}; }
-
-                    if (typeof pokeInfo[subStat] !== 'undefined'){
-
-                        // Treat arrays differently than other values
-                        if (typeof pokeInfo[subStat] === 'object'){
-
-                            // Loop through and increment for each sub token
-                            if (pokeInfo[subStat].length > 0){
-                                for (key2 = 0; key2 < pokeInfo[subStat].length; key2++){
-                                    var subToken = pokeInfo[subStat][key2];
-                                    if (typeof currentZoneStats[subStat][subToken] === 'undefined'){ currentZoneStats[subStat][subToken] = 0; }
-                                    currentZoneStats[subStat][subToken] += 1;
-                                    }
-                                }
-
-                            } else {
-
-                            // Collect the sub token or value and increment
-                            var subToken = pokeInfo[subStat];
-                            if (typeof currentZoneStats[subStat][subToken] === 'undefined'){ currentZoneStats[subStat][subToken] = 0; }
-                            currentZoneStats[subStat][subToken] += 1;
-
-                            }
-
-                        }
-
-                    }
-
-                } else {
+        for (var key1 = 0; key1 < thisZoneData.currentPokemon.length; key1++){
+            var pokeInfo = thisZoneData.currentPokemon[key1];
+            var pokeToken = pokeInfo.token;
+            var pokeIndex = PokemonSpeciesIndex[pokeToken];
+            var pokeAbilities = Object.values(pokeIndex.abilities);
+            if (pokeInfo.eggCycles > 0){
 
                 // Egg pokemon do not count toward egg stats
                 if (typeof currentZoneStats['eggs'][pokeToken] === 'undefined'){ currentZoneStats['eggs'][pokeToken] = 0; }
                 currentZoneStats['eggs'][pokeToken] += 1;
 
-                }
-            }
+                } else {
 
-        // Loop through and add base stats for area, if any
-        if (thisZoneData.baseStats){
-            var baseStatsTokens = Object.keys(thisZoneData.baseStats);
-            for (var key = 0; key < baseStatsTokens.length; key++){
-                var typeToken = baseStatsTokens[key];
-                var val = thisZoneData.baseStats[type];
-                if (typeof currentZoneStats['types'][typeToken] == 'undefined'){ currentZoneStats['types'][typeToken] = 0; }
-                currentZoneStats['types'][typeToken] += val;
-                }
-            }
+                // Growing pokemon count toward stats species stats
+                if (typeof currentZoneStats['species'][pokeToken] === 'undefined'){ currentZoneStats['species'][pokeToken] = 0; }
+                currentZoneStats['species'][pokeToken] += 1;
 
-        // Loop through species and add/subtract type appeal points based on type and class
-        if (!jQuery.isEmptyObject(currentZoneStats['species'])){
-            var currentZoneSpecies = Object.keys(currentZoneStats['species']);
-            for (var key = 0; key < currentZoneSpecies.length; key++){
-                var pokeToken = currentZoneSpecies[key];
-                var pokeCount = currentZoneStats['species'][pokeToken];
-                var pokeIndex = PokemonSpeciesIndex[pokeToken];
-                var pokeAbilities = Object.values(pokeIndex.abilities);
+                // Loop through this pokemon's types and tweak relatedtype  multipliers
                 for (var key2 = 0; key2 < pokeIndex.types.length; key2++){
-
                     var typeToken = pokeIndex.types[key2];
                     var typeInfo = PokemonTypesIndex[typeToken];
-
                     // Add +1 appeal point for this pokemon's type
                     if (typeof currentZoneStats['types'][typeToken] === 'undefined'){ currentZoneStats['types'][typeToken] = 0; }
-                    currentZoneStats['types'][typeToken] += pokeCount * pokeIndex.influencePoints * 1.00;
-
+                    currentZoneStats['types'][typeToken] += 1.00 * pokeIndex.influencePoints;
                     // Add +1 appeal point for any type this pokemon is prey to
                     if (typeInfo['matchups']['weaknesses'].length){
                         for (var key3 = 0; key3 < typeInfo['matchups']['weaknesses'].length; key3++){
                             var type = typeInfo['matchups']['weaknesses'][key3];
-
                             // Skip if an ability grants immunity to this type
                             if (type === 'water' && pokeAbilities.indexOf('dry-skin') !== -1){ continue; }
                             if (type === 'fire' && pokeAbilities.indexOf('flash-fire') !== -1){ continue; }
@@ -2101,40 +2023,65 @@
                             if (type === 'water' && pokeAbilities.indexOf('storm-drain') !== -1){ continue; }
                             if (type === 'electric' && pokeAbilities.indexOf('volt-absorb') !== -1){ continue; }
                             if (type === 'water' && pokeAbilities.indexOf('water-absorb') !== -1){ continue; }
-
                             // Tweak the influence value if an ability requires it
                             var modInfluencePoints = pokeIndex.influencePoints;
                             if (pokeAbilities.indexOf('filter') !== -1){ modInfluencePoints -= modInfluencePoints * 0.25; }
                             if ((type === 'ice' || type === 'fire') && pokeAbilities.indexOf('thick-fat') !== -1){ modInfluencePoints -= modInfluencePoints * 0.50; }
-
                             // Otherwise we can add the weakness type stats
                             if (typeof currentZoneStats['types'][type] === 'undefined'){ currentZoneStats['types'][type] = 0; }
-                            currentZoneStats['types'][type] += pokeCount * modInfluencePoints * 0.5;
-
+                            currentZoneStats['types'][type] += 0.50 * modInfluencePoints;
                             }
                         }
-
                     // Add -1 appeal point for any type this pokemon is predator to
                     if (typeInfo['matchups']['strengths'].length){
-                        for (var key3 = 0; key3 < typeInfo['matchups']['strengths'].length; key3++){
-                            var type = typeInfo['matchups']['strengths'][key3];
+                        for (var key4 = 0; key4 < typeInfo['matchups']['strengths'].length; key4++){
+                            var type = typeInfo['matchups']['strengths'][key4];
                             if (typeof currentZoneStats['types'][type] === 'undefined'){ currentZoneStats['types'][type] = 0; }
-                            currentZoneStats['types'][type] -= pokeCount * pokeIndex.influencePoints * 0.5;
+                            currentZoneStats['types'][type] -= 0.50 * pokeIndex.influencePoints;
                             }
                         }
-
                     }
-                }
-            }
 
-        // Define a function for generating current zone type stats
+                // Loop through sub-stats for and increment relevant values
+                for (var subKey = 0; subKey < subZoneStats.length; subKey++){
+                    var subStat = subZoneStats[subKey];
+                    if (typeof currentZoneStats[subStat] === 'undefined'){ currentZoneStats[subStat] = {}; }
+                    if (typeof pokeIndex[subStat] !== 'undefined'){
+                        // Treat arrays differently than other values
+                        if (typeof pokeIndex[subStat] === 'object'){
+                            // Loop through and increment for each sub token
+                            if (pokeIndex[subStat].length > 0){
+                                for (key5 = 0; key5 < pokeIndex[subStat].length; key5++){
+                                    var subToken = pokeIndex[subStat][key5];
+                                    if (typeof currentZoneStats[subStat][subToken] === 'undefined'){ currentZoneStats[subStat][subToken] = 0; }
+                                    currentZoneStats[subStat][subToken] += 1;
+                                    }
+                                }
+                            } else {
+                            // Collect the sub token or value and increment
+                            var subToken = pokeIndex[subStat];
+                            if (typeof currentZoneStats[subStat][subToken] === 'undefined'){ currentZoneStats[subStat][subToken] = 0; }
+                            currentZoneStats[subStat][subToken] += 1;
+                            }
+                        }
+                    }
+
+
+                }
+
+            }
+        //console.log('currentZoneStats = ', currentZoneStats);
+        //console.log('thisZoneData.currentStats = ', thisZoneData.currentStats);
+
+        // Loop through and assign the new zone stat values to the parent array
         var zoneStatTokens = Object.keys(currentZoneStats);
         for (var key = 0; key < zoneStatTokens.length; key++){
             var statToken = zoneStatTokens[key];
             thisZoneData.currentStats[statToken] = currentZoneStats[statToken];
             }
-        //console.log('currentZoneStats = ', currentZoneStats);
-        //console.log('thisZoneData.currentStats = ', thisZoneData.currentStats);
+
+        // Return true on success
+        return true;
 
     }
 
