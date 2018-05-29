@@ -1499,22 +1499,23 @@
                 species: 'hitmontop',
                 method: 'level-up',
                 value: 20,
-                method2: 'chance',
-                value2: 33
+                method2: 'stat-appeal',
+                value2: 'speed'
                 }, {
                 species: 'hitmonlee',
                 method: 'level-up',
                 value: 20,
-                method2: 'chance',
-                value2: 33
+                method2: 'stat-appeal',
+                value2: 'phAttack'
                 }, {
                 species: 'hitmonchan',
                 method: 'level-up',
                 value: 20,
-                method2: 'chance',
-                value2: 33
+                method2: 'stat-appeal',
+                value2: 'phDefense'
                 }]
             },
+
         'hitmontop': {
             order: thisIndex.afterOrder('hitmonchan'),
             token: 'hitmontop',
