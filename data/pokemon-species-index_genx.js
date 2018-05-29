@@ -408,9 +408,9 @@
         {base: 'machamp', species: 'burst-machamp', method: 'burst-evolution', value: 'fighting-spirit', method2: 'type-surge', value2: 'fighting'},
         {base: 'nidoqueen', species: 'estrus-nidoqueen', method: 'burst-evolution', value: 'burning-passion', method2: 'type-surge', value2: 'poison'},
 
-        {base: 'deoxys', species: 'attack-deoxys', method: 'burst-evolution', value: 'attack-surge', method2: 'chance', value2: 33},
-        {base: 'deoxys', species: 'defense-deoxys', method: 'burst-evolution', value: 'defense-surge', method2: 'chance', value2: 33},
-        {base: 'deoxys', species: 'speed-deoxys', method: 'burst-evolution', value: 'speed-surge', method2: 'chance', value2: 33},
+        {base: 'deoxys', species: 'attack-deoxys', method: 'burst-evolution', value: 'attack-surge', method2: 'stat-appeal', value2: 'phAttack'},
+        {base: 'deoxys', species: 'defense-deoxys', method: 'burst-evolution', value: 'defense-surge', method2: 'stat-appeal', value2: 'phDefense'},
+        {base: 'deoxys', species: 'speed-deoxys', method: 'burst-evolution', value: 'speed-surge', method2: 'stat-appeal', value2: 'speed'},
 
         {base: 'rotom', species: 'heat-rotom', method: 'type-appeal', value: 'fire'},
         {base: 'rotom', species: 'wash-rotom', method: 'type-appeal', value: 'water'},
