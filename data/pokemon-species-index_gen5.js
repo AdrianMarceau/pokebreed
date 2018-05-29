@@ -367,6 +367,61 @@
             prevEvolution: 'swadloon'
             },
 
+        'sandile': {
+            order: indexOrder++,
+            token: 'sandile',
+            name: 'Sandile',
+            number: 551,
+            types: ['ground', 'dark'],
+            baseStats: {hp: 50, phAttack: 72, phDefense: 35, spAttack: 35, spDefense: 35, speed: 65},
+            abilities: {0: 'intimidate', 1: 'moxie', hidden: 'anger-point'},
+            height: 0.7,
+            weight: 15.2,
+            colors: ['brown', 'black', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'krokorok',
+                method: 'level-up',
+                value: 29
+                }]
+            },
+        'krokorok': {
+            order: indexOrder++,
+            token: 'krokorok',
+            name: 'Krokorok',
+            number: 552,
+            types: ['ground', 'dark'],
+            baseStats: {hp: 60, phAttack: 82, phDefense: 45, spAttack: 45, spDefense: 45, speed: 74},
+            abilities: {0: 'intimidate', 1: 'moxie', hidden: 'anger-point'},
+            height: 1,
+            weight: 33.4,
+            colors: ['brown', 'pink', 'black'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'sandile',
+            nextEvolutions: [{
+                species: 'krookodile',
+                method: 'level-up',
+                value: 40
+                }]
+            },
+        'krookodile': {
+            order: indexOrder++,
+            token: 'krookodile',
+            name: 'Krookodile',
+            number: 553,
+            types: ['ground', 'dark'],
+            baseStats: {hp: 95, phAttack: 117, phDefense: 80, spAttack: 65, spDefense: 70, speed: 92},
+            abilities: {0: 'intimidate', 1: 'moxie', hidden: 'anger-point'},
+            height: 1.5,
+            weight: 96.3,
+            colors: ['red', 'white', 'black'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'krokorok'
+            },
+
         'trubbish': {
             order: indexOrder++,
             token: 'trubbish',
