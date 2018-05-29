@@ -312,6 +312,61 @@
             prevEvolution: 'woobat'
             },
 
+        'sewaddle': {
+            order: indexOrder++,
+            token: 'sewaddle',
+            name: 'Sewaddle',
+            number: 540,
+            types: ['bug', 'grass'],
+            baseStats: {hp: 45, phAttack: 53, phDefense: 70, spAttack: 40, spDefense: 60, speed: 42},
+            abilities: {0: 'swarm', 1: 'chlorophyll', hidden: 'overcoat'},
+            height: 0.3,
+            weight: 2.5,
+            colors: ['yellow', 'green', 'orange'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            nextEvolutions: [{
+                species: 'swadloon',
+                method: 'level-up',
+                value: 20
+                }]
+            },
+        'swadloon': {
+            order: indexOrder++,
+            token: 'swadloon',
+            name: 'Swadloon',
+            number: 541,
+            types: ['bug', 'grass'],
+            baseStats: {hp: 55, phAttack: 63, phDefense: 90, spAttack: 50, spDefense: 80, speed: 42},
+            abilities: {0: 'leaf-guard', 1: 'chlorophyll', hidden: 'overcoat'},
+            height: 0.5,
+            weight: 7.3,
+            colors: ['green', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            prevEvolution: 'sewaddle',
+            nextEvolutions: [{
+                species: 'leavanny',
+                method: 'happiness',
+                value: 'high'
+                }]
+            },
+        'leavanny': {
+            order: indexOrder++,
+            token: 'leavanny',
+            name: 'Leavanny',
+            number: 542,
+            types: ['bug', 'grass'],
+            baseStats: {hp: 75, phAttack: 103, phDefense: 80, spAttack: 70, spDefense: 80, speed: 92},
+            abilities: {0: 'swarm', 1: 'chlorophyll', hidden: 'overcoat'},
+            height: 1.2,
+            weight: 20.5,
+            colors: ['yellow', 'green', 'red'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            prevEvolution: 'swadloon'
+            },
+
         'trubbish': {
             order: indexOrder++,
             token: 'trubbish',
