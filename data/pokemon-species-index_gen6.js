@@ -1644,6 +1644,25 @@
             prevEvolution: 'altaria'
             },
 
+        'mega-glalie': {
+            order: thisIndex.afterOrder('glalie', 1),
+            token: 'mega-glalie',
+            name: 'Mega Glalie',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'glalie',
+            number: 362,
+            types: ['ice'],
+            baseStats: {hp: 80, phAttack: 120, phDefense: 80, spAttack: 120, spDefense: 80, speed: 100},
+            abilities: {0: 'refrigerate'},
+            height: 2.1,
+            weight: 350.2,
+            colors: ['black', 'gray', 'blue', 'white'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'mineral'],
+            prevEvolution: 'glalie'
+            },
+
         'mega-salamence': {
             order: thisIndex.afterOrder('salamence'),
             token: 'mega-salamence',
@@ -1908,6 +1927,7 @@
         {base: 'sharpedo', species: 'mega-sharpedo', method: 'mega-evolution', value: 'sharpedonite'},
         {base: 'camerupt', species: 'mega-camerupt', method: 'mega-evolution', value: 'cameruptite'},
         {base: 'altaria', species: 'mega-altaria', method: 'mega-evolution', value: 'altarianite'},
+        {base: 'glalie', species: 'mega-glalie', method: 'mega-evolution', value: 'glalie'},
         {base: 'salamence', species: 'mega-salamence', method: 'mega-evolution', value: 'salamencite'},
         {base: 'metagross', species: 'mega-metagross', method: 'mega-evolution', value: 'metagrossite'},
 

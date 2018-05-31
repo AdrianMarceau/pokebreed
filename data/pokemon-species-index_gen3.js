@@ -1783,6 +1783,41 @@
                 }]
             },
 
+        'snorunt': {
+            order: indexOrder++,
+            token: 'snorunt',
+            name: 'Snorunt',
+            number: 361,
+            types: ['ice'],
+            baseStats: {hp: 50, phAttack: 50, phDefense: 50, spAttack: 50, spDefense: 50, speed: 50},
+            abilities: {0: 'inner-focus', 1: 'ice-body', hidden: 'moody'},
+            height: 0.7,
+            weight: 16.8,
+            colors: ['yellow', 'black', 'orange', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'mineral'],
+            nextEvolutions: [{
+                species: 'glalie',
+                method: 'level-up',
+                value: 42
+                }]
+            },
+        'glalie': {
+            order: indexOrder++,
+            token: 'glalie',
+            name: 'Glalie',
+            number: 362,
+            types: ['ice'],
+            baseStats: {hp: 80, phAttack: 80, phDefense: 80, spAttack: 80, spDefense: 80, speed: 80},
+            abilities: {0: 'inner-focus', 1: 'ice-body', hidden: 'moody'},
+            height: 1.5,
+            weight: 256.5,
+            colors: ['gray', 'black', 'blue', 'white'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'mineral'],
+            prevEvolution: 'snorunt'
+            },
+
         'relicanth': {
             order: indexOrder++,
             token: 'relicanth',

@@ -1266,6 +1266,24 @@
             prevEvolution: 'nosepass'
             },
 
+        'froslass': {
+            order: thisIndex.afterOrder('glalie', 2),
+            token: 'froslass',
+            name: 'Froslass',
+            number: 478,
+            types: ['ice', 'ghost'],
+            genderRatio: {female: 1.0000},
+            baseStats: {hp: 70, phAttack: 80, phDefense: 70, spAttack: 80, spDefense: 70, speed: 110},
+            abilities: {0: 'snow-cloak', hidden: 'cursed-body'},
+            height: 1.3,
+            weight: 26.6,
+            colors: ['white', 'blue', 'red', 'purple', 'yellow'],
+            eggCycles: 20,
+            eggPartner: 'glalie',
+            eggGroups: ['fairy', 'mineral'],
+            prevEvolution: 'snorunt'
+            },
+
         'rotom': {
             order: indexOrder++,
             token: 'rotom',
@@ -1523,6 +1541,7 @@
         {base: 'porygon2', species: 'porygon-z', method: 'evolution-item', value: 'dubious-disc', method2: 'type-appeal', value2: ['fire', 'ice', 'electric']},
         {base: 'kirlia', species: 'gallade', method: 'evolution-stone', value: 'dawn-stone', method2: 'level-up', value2: 30, method3: 'type-appeal', value3: 'fighting', method4: 'chance', value4: 50},
         {base: 'nosepass', species: 'probopass', method: 'evolution-location', value: 'magnetic-field', method2: 'type-surge', value2: 'electric'},
+        {base: 'snorunt', species: 'froslass', method: 'evolution-stone', value: 'dawn-stone', method2: 'level-up', value2: 42, method3: 'type-appeal', value3: 'ghost', method4: 'chance', value4: 50},
         ]);
 
 })();
