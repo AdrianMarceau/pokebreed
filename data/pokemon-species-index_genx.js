@@ -498,7 +498,7 @@
         {base: 'seviper', species: 'zangoose'},
         {base: 'pinsir', species: 'vikavolt'},
         {base: 'mimikyu', species: 'pikachu'},
-        {base: 'carvanna', species: 'basculine'},
+        {base: 'carvanha', species: 'basculin'},
 
         // Romantic relationships
         {base: 'tauros', species: 'miltank'},
