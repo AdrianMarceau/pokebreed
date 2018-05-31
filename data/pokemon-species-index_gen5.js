@@ -1062,6 +1062,22 @@
             prevEvolution: 'fraxure'
             },
 
+        'cryogonal': {
+            order: indexOrder++,
+            token: 'cryogonal',
+            name: 'Cryogonal',
+            number: 615,
+            types: ['ice'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 80, phAttack: 50, phDefense: 50, spAttack: 95, spDefense: 135, speed: 105},
+            abilities: {0: 'levitate'},
+            height: 1.1,
+            weight: 148,
+            colors: ['blue', 'white'],
+            eggCycles: 25,
+            eggGroups: ['mineral'],
+            },
+
         'stunfisk': {
             order: indexOrder++,
             token: 'stunfisk',
