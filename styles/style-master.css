@@ -215,9 +215,26 @@ body[data-mode="free"] .panel .banner .counter.pokedex .count .total {
     right: 9px;
 }
 .panel .banner .counter.pokedex {
-    left: 9px;
+    left: 5px;
+    padding: 4px;
+    bottom: 5px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0);
+    transition: background-color 0.4s, box-shadow 0.4s;
 }
-.panel .banner .reset_simulator {
+.panel .banner .counter.pokedex:hover {
+    background-color: rgba(0, 0, 0, 0.11);
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.11);
+}
+.panel .banner .counter.pokedex.active {
+    background-color: rgba(0, 0, 0, 0.33);
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.33);
+}
+
+.panel .banner .delete_savedata {
     display: block;
     width: auto;
     height: auto;
@@ -242,7 +259,7 @@ body[data-mode="free"] .panel .banner .counter.pokedex .count .total {
     background: linear-gradient(to bottom, rgba(171, 58, 58, 1) 0%,rgba(97, 20, 41, 1) 120%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ab3a3a', endColorstr='#611429',GradientType=0 ); /* IE6-9 */
 }
-.panel .banner .reset_simulator:hover {
+.panel .banner .delete_savedata:hover {
     color: #efefef;
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#58585b+0,464649+100 */
     background: rgb(189, 66, 66); /* Old browsers */
@@ -251,7 +268,7 @@ body[data-mode="free"] .panel .banner .counter.pokedex .count .total {
     background: linear-gradient(to bottom, rgba(189, 66, 66, 1) 0%,rgba(97, 20, 41, 1) 120%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bd4242', endColorstr='#611429',GradientType=0 ); /* IE6-9 */
 }
-.panel .banner .reset_simulator i {
+.panel .banner .delete_savedata i {
     display: inline-block;
     font-style: normal;
 }
@@ -1249,7 +1266,7 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
 }
 
 .panel .buttons .controls {
-    text-align: left;
+    text-align: center;
     margin-bottom: 8px;
     padding: 0 5px;
 }
@@ -1353,15 +1370,6 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     cursor: not-allowed;
 }
 
-.panel .buttons .controls .control.reset {
-    background-color: #b73232;
-    float: right;
-    margin: 0;
-}
-.panel .buttons .controls .control.reset:hover {
-    background-color: #c03535;
-}
-
 .panel .buttons .controls .control.play:before,
 .panel .buttons .controls .control.start:before {
     background-image: url(../images/icons/controls/play.png);
@@ -1378,9 +1386,81 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
 .panel .buttons .controls .control.pause:before {
     background-image: url(../images/icons/controls/pause.png);
 }
-.panel .buttons .controls .control.reset:before {
+.panel .buttons .controls .control.restart:before {
     background-image: url(../images/icons/controls/reset.png);
 }
+.panel .buttons .controls .control.new:before {
+    background-image: url(../images/icons/controls/new.png);
+}
+.panel .buttons .controls .control.stop:before {
+    background-image: url(../images/icons/controls/stop.png);
+}
+
+.panel .buttons .controls .control.stop {
+    background-color: #b73232;
+    float: right;
+    margin: 0;
+    transition: width 0.2s;
+}
+.panel .buttons .controls .control.stop:hover {
+    background-color: #c03535;
+}
+.panel .buttons .controls .control.stop span {
+    display: block;
+    margin-left: 0;
+    font-size: 14px;
+    line-height: 32px;
+    padding-left: 0;
+    padding-right: 0;
+    width: 0;
+    overflow: hidden;
+    vertical-align: middle;
+    box-sizing: border-box;
+    transition: margin-left 0.2s, padding-left 0.2s, padding-right 0.2s, width 0.2s;
+}
+.panel .buttons .controls .control.stop.confirm {
+    text-indent: 0;
+    width: 78px;
+}
+.panel .buttons .controls .control.stop.confirm span {
+    margin-left: 4px;
+    width: 76px;
+    padding-left: 26px;
+    padding-right: 9px;
+}
+
+
+.panel .buttons .controls .control.restart,
+.panel .buttons .controls .control.new {
+    float: none;
+    display: inline-block;
+    margin: 0 6px;
+    text-indent: 0;
+    width: auto;
+}
+.panel .buttons .controls .control.restart span,
+.panel .buttons .controls .control.new span {
+    display: block;
+    margin-left: 4px;
+    font-size: 14px;
+    line-height: 32px;
+    padding-left: 26px;
+    padding-right: 9px;
+    vertical-align: middle;
+}
+.panel .buttons .controls .control.restart {
+    background-color: #3263b7;
+}
+.panel .buttons .controls .control.restart:hover {
+    background-color: #396bc0;
+}
+.panel .buttons .controls .control.new {
+    background-color: #2b8441;
+}
+.panel .buttons .controls .control.new:hover {
+    background-color: #318c48;
+}
+
 
 .panel .buttons .info {
     display: block;
@@ -1619,14 +1699,32 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     font-size: 80%;
     color: #cacaca;
 }
-.panel .buttons a.reset_simulator {
+.panel .buttons a.delete_savedata {
     cursor: pointer;
     color: #ce4949;
 }
 
+.panel .buttons .starter-pokemon {
+    padding-top: 10px;
+    padding-bottom: 0;
+    text-align: center;
+    border-top: 1px solid #37373a;
+    border-color: rgba(0, 0, 0, 0.3);
+    margin: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    color: #808080;
+    font-size: 11px;
+    line-height: 1.2;
+    font-family: "Courier New", sans-serif;
+}
+.panel .buttons .starter-pokemon p {
+    padding: 0 20px;
+}
+
 .panel .buttons .info.links {
     padding-bottom: 10px;
-    text-align: right;
+    text-align: center;
     border-top: 1px solid #37373a;
     border-color: rgba(0, 0, 0, 0.3);
     font-size: 12px;
@@ -1661,6 +1759,7 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
 
 .panel .buttons .info.links .link.pokedex {
     float: left;
+    display: none;
 }
 .panel .buttons .info.links .link.chat span,
 .panel .buttons .info.links .link.mode span,
@@ -1720,4 +1819,16 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
 }
 .panel .buttons .info.links .link.mode:hover {
     color: #e2e2e2;
+}
+
+.panel[data-view="pokedex"] {
+
+}
+.panel[data-view="pokedex"] .overview.main,
+.panel[data-view="pokedex"] .midwrap,
+.panel[data-view="pokedex"] .buttons .controls,
+.panel[data-view="pokedex"] .buttons .info.links,
+.panel[data-view="pokedex"] .buttons .new-pokemon,
+.panel[data-view="pokedex"] .buttons .starter-pokemon {
+    display: none;
 }

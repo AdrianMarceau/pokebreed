@@ -65,7 +65,7 @@ if (isset($_GET['gen'])
         <? } ?>
     </head>
     <body data-speed="normal" data-mode="<?= $is_free_mode ? 'free' : 'normal' ?>">
-        <div class="panel">
+        <div class="panel" data-view="simulator">
 
             <div class="banner">
                 <div class="logo"><img src="images/pokebox-logo.png" alt="PokéBox" /></div>
@@ -96,7 +96,7 @@ if (isset($_GET['gen'])
                     <img class="icon" src="images/timer.png" />
                 </div>
                 <? if (!$is_free_mode){ ?>
-                    <a class="reset_simulator" title="Clear Save Data?"><i>&times;</i></a>
+                    <a class="delete_savedata" title="Delete All Save Data?"><i>&times;</i></a>
                 <? } ?>
             </div>
 
@@ -166,11 +166,18 @@ if (isset($_GET['gen'])
                     <a class="control speed fast hidden" data-control="fast" title="Fast">Fast</a>
                     <a class="control speed warp hidden" data-control="warp" title="Warp">Warp</a>
                     <a class="control speed pause hidden" data-control="pause" title="Pause">Pause</a>
-                    <a class="control reset hidden" data-control="reset" title="Reset">Reset</a>
-                    <a class="control start hidden" data-control="start" title="Start">Start</a>
+                    <a class="control restart hidden" data-control="restart"><span>Re-use Same Starters</span></a>
+                    <a class="control new hidden" data-control="new"><span>Use New Starters</span></a>
+                    <a class="control stop hidden" data-control="stop" title="Stop"><span>Stop?</span></a>
+                    <a class="control start hidden" data-control="start" title="Start"><span>Start</span></a>
                 </div>
                 <div class="new-pokemon">
                     <span class="loading">Loading</span>
+                </div>
+                <div class="starter-pokemon hidden">
+                    <div class="wrap">
+                        <p class="seed">&hellip;</p>
+                    </div>
                 </div>
                 <div class="info links">
                     <a class="link" data-tab="about">about</a>

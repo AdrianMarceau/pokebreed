@@ -19,6 +19,9 @@
     var PokemonTypesIndex = {};
     var PokemonTypesIndexTokens = [];
 
+    var StarterPokemonHistory = [];
+    var StarterPokemonSeed = 0;
+
     var PokeboxDaysPassed = 0;
     var PokemonSpeciesSeen = {};
 
@@ -189,28 +192,55 @@
             };
         $linkButtons.bind('click', linkButtonFunction);
 
-        // Add a click event for the pokedex reset button (w/ warning)
-        $('a.reset_simulator', $panelDiv).bind('click', function(e){
+        // Add a click event for the save-data delete button (w/ stern warning)
+        $('a.delete_savedata', $panelDiv).bind('click', function(e){
             e.preventDefault();
             if (confirm('Are you sure you want to clear all save data? \n'
                 + 'This action absolutely can NOT be undone! \n'
                 + 'Continue anyway?')){
-                if (typeof window.localStorage !== 'undefined'){
-                    window.localStorage.removeItem('PokeboxDaysPassed');
-                    window.localStorage.removeItem('PokemonSpeciesSeen');
-                    window.location = window.location.href;
-                    return true;
+                if (confirm('You\'ve been warned!!!')){
+                    if (typeof window.localStorage !== 'undefined'){
+                        window.localStorage.removeItem('PokeboxDaysPassed');
+                        window.localStorage.removeItem('PokemonSpeciesSeen');
+                        window.location = window.location.href;
+                        return true;
+                        }
                     }
                 }
             return false;
             });
 
-        // Add a click event for the pokedex reset button (w/ warning)
-        $('.counter.pokedex', $panelBanner).bind('click', function(e){
+        // Define a click event for any of the pokedex buttons
+        var $pokedexLink = $('.link[data-tab="pokedex"]', $panelButtons);
+        var $pokedexInfo = $('.info[data-tab="pokedex"]', $panelButtons);
+        var prevSpeed = $('body').attr('data-speed');
+        var pokedexClickEvent = function(e){
             e.preventDefault();
-            $linkButtons.filter('.pokedex').click();
+            var $thisLink = $(this);
+            var currentSpeed = $('body').attr('data-speed');
+            $controlButtons.filter('.pause').trigger('click');
+            var isShowing = $panelDiv.attr('data-view') === 'pokedex' ? true : false;
+            if (!isShowing){
+                // Show it
+                $thisLink.addClass('active');
+                $pokedexLink.addClass('active');
+                $pokedexInfo.removeClass('hidden');
+                $panelDiv.attr('data-view', 'pokedex');
+                prevSpeed = currentSpeed;
+                } else {
+                // Hide it
+                $thisLink.removeClass('active');
+                $pokedexLink.removeClass('active');
+                $pokedexInfo.addClass('hidden');
+                $panelDiv.attr('data-view', 'simulator');
+                $controlButtons.filter('.'+prevSpeed).trigger('click');
+                }
             return;
-            });
+            };
+
+        // Add a click event for the pokedex button in the banner and footer
+        $('.counter.pokedex', $panelBanner).bind('click', pokedexClickEvent);
+        $pokedexLink.unbind('click').bind('click', pokedexClickEvent);
 
     });
 
@@ -265,11 +295,13 @@
     }
 
     // Define a function for delegating button events for the edit
+    var stopConfirmTimeout = false;
+    var $controlButtons = false;
     function generateButtonPanelEvents(){
         $pokePanelLoading.append('.'); // append loading dot
 
         // Define the click-event for the speed buttons
-        var $controlButtons = $('.controls .control[data-control]', $panelButtons);
+        $controlButtons = $('.controls .control[data-control]', $panelButtons);
         $controlButtons.bind('click', function(e){
             e.preventDefault();
 
@@ -294,6 +326,10 @@
                 $controlButtons.filter('.speed').removeClass('active');
                 $button.addClass('active');
                 if (control.match(/^(fast|slow|warp)$/)){ $controlButtons.filter('.play').addClass('active'); }
+                if (control !== 'pause'){
+                    $('.link[data-tab="pokedex"]', $panelButtons).removeClass('active');
+                    $('.info[data-tab="pokedex"]', $panelButtons).addClass('hidden');
+                    }
                 if (dayTimeout !== false){
                     var handler = dayTimeout.getHandler();
                     dayTimeout.clear();
@@ -301,9 +337,31 @@
                     }
                 return;
             }
-            // Otherwise if this is the reset button
-            else if (control === 'reset'){
-                resetSimulation();
+            // Otherwise if this is the stop button
+            else if (control === 'stop'){
+                if (stopConfirmTimeout !== false){ clearTimeout(stopConfirmTimeout); }
+                $controlButtons.filter('.pause').trigger('click');
+                if ($button.hasClass('confirm')){
+                    $button.removeClass('confirm');
+                    endCurrentSimulation();
+                    } else {
+                    $button.addClass('confirm');
+                    stopConfirmTimeout = setTimeout(function(){
+                        $button.removeClass('confirm');
+                        }, 3000);
+                    }
+                return;
+                }
+            // Otherwise if this is the restart button
+            else if (control === 'restart'){
+                if (simulationStarted){ return false; }
+                restartCurrentSimulation();
+                return;
+                }
+            // Otherwise if this is the new button
+            else if (control === 'new'){
+                if (simulationStarted){ return false; }
+                resetSimulator();
                 return;
                 }
             // Otherwise if this is the start button
@@ -648,6 +706,7 @@
     // Define a function for actually starting the simulation
     var simulationStarted = false;
     function startSimulation(){
+        //console.log('startSimulation()');
 
         // Set the start flag to true
         simulationStarted = true;
@@ -663,8 +722,10 @@
         $panelSpeciesOverview.removeClass('hidden');
 
         // Unhide the day speed controller, hide the pokemon buttons
-        $('.controls .control:not(.start)', $panelButtons).removeClass('hidden');
+        $('.controls .control', $panelButtons).removeClass('hidden');
         $('.controls .start', $panelButtons).addClass('hidden');
+        $('.controls .restart', $panelButtons).addClass('hidden');
+        $('.controls .new', $panelButtons).addClass('hidden');
 
         // Remove the hidden class from the pokemon wrapper
         $('.new-pokemon', $panelButtons).addClass('hidden');
@@ -677,64 +738,176 @@
         $('.controls .control.speed', $panelButtons).removeClass('active');
         $('.controls .control.speed.play', $panelButtons).addClass('active');
 
+        // Re-sort the starter pokemon by display order for simulation consistency
+        thisZoneData.currentPokemon.sort(function(pokeA, pokeB){
+            var orderA = PokemonSpeciesDisplayOrder.indexOf(pokeA.token);
+            var orderB = PokemonSpeciesDisplayOrder.indexOf(pokeB.token);
+            if (orderA < orderB){ return -1; }
+            else if (orderA > orderB){ return 1; }
+            else { return 0; }
+            });
+
+        // Loop through all the starters again and collect their tokens (also update orders)
+        var starterCounts = {};
+        var starterPokemon = [];
+        var starterSeed = 0;
+        for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
+            var starterInfo = thisZoneData.currentPokemon[key];
+            starterPokemon.push(starterInfo.token);
+            starterInfo.order = key;
+            starterSeed += PokemonSpeciesDexOrder.indexOf(starterInfo.token) + 1;
+            if (typeof starterCounts[starterInfo.token] === 'undefined'){ starterCounts[starterInfo.token] = 0; }
+            starterCounts[starterInfo.token]++;
+            }
+        //console.log('starterPokemon = ', starterPokemon);
+        //console.log('starterSeed = ', starterSeed);
+
+        // Push this list of starters into the history array
+        StarterPokemonHistory.push(starterPokemon);
+        StarterPokemonSeed = starterSeed;
+        //console.log('StarterPokemonHistory = ', StarterPokemonHistory);
+        //console.log('StarterPokemonSeed = ', StarterPokemonSeed);
+
+        // Generate the seed text to add to the footer for copy/paste
+        var starterList = [];
+        var starterTokens = Object.keys(starterCounts);
+        for (var key = 0; key < starterTokens.length; key++){
+            var starterToken = starterTokens[key];
+            var starterInfo = PokemonSpeciesIndex[starterToken];
+            var starterCount = starterCounts[starterToken];
+            starterList.push(starterInfo.name + ' x' + starterCount);
+            }
+        var starterText = '[PBS | '+ starterList.join(' / ') +' | v'+ appVersionNumber +']';
+        $('.starter-pokemon .seed', $panelButtons).text(starterText);
+        $('.starter-pokemon', $panelButtons).removeClass('hidden');
+
     }
 
-    // Define a function for resetting the simulation
-    function resetSimulation(){
-        if (confirm('Are you sure you want to reset? \n'
-            + 'The current simulation will end! \n'
-            + 'Continue anyway?')){
+    // Define a function for ending the current simulation and doing cleanup
+    function endCurrentSimulation(){
+        //console.log('endCurrentSimulation()');
 
-            // Set the start flag to false
-            simulationStarted = false;
+        // Set the start flag to false
+        simulationStarted = false;
 
-            // Remove the started class from the main overview
-            $panelMainOverview.removeClass('started');
+        // Remove the started class from the main overview
+        $panelMainOverview.removeClass('started');
 
-            // Add "waiting" classes to pokemon slots
-            $('.details.pokemon .list.slots li:lt(11)', $panelMainOverview).addClass('waiting');
+        // Add "waiting" classes to pokemon slots
+        $('.details.pokemon .list.slots li:lt(11)', $panelMainOverview).addClass('waiting');
 
-            // Remove all list items from the sprite wrapper
-            $('li', $panelPokemonSpriteWrapper).remove();
+        // Remove all list items from the sprite wrapper
+        $('li', $panelPokemonSpriteWrapper).remove();
 
-            // Hide the type and species overview panels
-            $panelTypesOverview.addClass('hidden');
-            $panelSpeciesOverview.addClass('hidden');
+        // Hide the type and species overview panels
+        $panelTypesOverview.addClass('hidden');
+        $panelSpeciesOverview.addClass('hidden');
 
-            // Update the button controls with the appropriate classes
-            $('.controls .control', $panelButtons).addClass('hidden');
+        // Update the button controls with the appropriate classes
+        $('.controls .control', $panelButtons).addClass('hidden');
+        $('.controls .restart', $panelButtons).removeClass('hidden');
+        $('.controls .new', $panelButtons).removeClass('hidden');
 
-            // Clear and reset all the zone variables and history
-            resetZoneData();
+        // Reset the field background to the default plain one
+        var newImage = 'images/fields/none-fullsize.png';
+        $('.details.pokemon .field .bg', $panelMainOverview).css({backgroundImage:'url('+ newImage +')'});
 
-            // Reset the day timeout so we can start fresh
-            if (dayTimeout !== false){ dayTimeout.clear(); }
-            dayTimeout = false;
-            dayTimeoutStarted = false;
-            dayTimeoutDuration = 1200;
-            dayTimeoutDurationMultiplier = 1;
+        // Clear and reset all the zone variables and history
+        resetZoneData();
 
-            // Regenerate the pokemon buttons
-            generatePokemonButtons();
+        // Reset the day timeout so we can start fresh
+        if (dayTimeout !== false){ dayTimeout.clear(); }
+        dayTimeout = false;
+        dayTimeoutStarted = false;
+        dayTimeoutDuration = 1200;
+        dayTimeoutDurationMultiplier = 1;
 
-            // Show the pokemon buttons
-            $('.new-pokemon', $panelButtons).removeClass('hidden');
-            $('.controls .start', $panelButtons).removeClass('hidden').removeClass('ready');
+        // Update the overiew with cleared data
+        updateOverview();
 
-            // Hide the details info bar
-            $('.details.zone .title', $panelMainOverview).html('&nbsp;');
-            $('.details.zone .list', $panelMainOverview).addClass('hidden');
+    }
 
-            // Autoscroll to the box details header
-            $panelMainOverview.find('.details.zone .title').trigger('click');
+    // Define a function for restarting the current simulation (with same seeds)
+    function restartCurrentSimulation(){
+        //console.log('restartCurrentSimulation()');
 
-            // Update the header to indicate the next action (Select Pokemon)
-            $('.details.zone .title', $panelMainOverview).html('Select Starter Pokémon');
+        // First end the current simulation
+        endCurrentSimulation();
 
-            // Update the overiew with cleared data
-            updateOverview();
+        // Hide any control buttons that were still showning
+        $('.controls .control', $panelButtons).addClass('hidden');
 
+        // Hide the starter pokemon from last time, they're visible
+        $('.starter-pokemon', $panelButtons).addClass('hidden');
+
+        // Regenerate the pokemon buttons
+        generatePokemonButtons();
+
+        // Show the pokemon buttons
+        $('.new-pokemon', $panelButtons).removeClass('hidden');
+        $('.controls .start', $panelButtons).removeClass('hidden').removeClass('ready');
+
+        // Hide the details info bar
+        $('.details.zone .title', $panelMainOverview).html('&nbsp;');
+        $('.details.zone .list', $panelMainOverview).addClass('hidden');
+
+        // Autoscroll to the box details header
+        $panelMainOverview.find('.details.zone .title').trigger('click');
+
+        // Update the header to indicate the next action (Select Pokemon)
+        $('.details.zone .title', $panelMainOverview).html('Select Starter Pokémon');
+
+        // Update the overiew with cleared data
+        updateOverview();
+
+        // Collect the last set of starters used and then use them again
+        var prevStarters = StarterPokemonHistory[StarterPokemonHistory.length - 1];
+        if (typeof prevStarters !== 'undefined'){
+            for (var key = 0; key < prevStarters.length; key++){
+                var starterToken = prevStarters[key];
+                addPokemonToZone(starterToken, false);
+                }
             }
+
+        // Recalculate zone stats then show the start button
+        recalculateZoneStats();
+        $('.controls .start', $panelButtons).addClass('ready');
+
+    }
+
+    // Define a function for resetting the simulator (so we can select different seeds)
+    function resetSimulator(){
+        //console.log('resetSimulator()');
+
+        // First end the current simulation
+        endCurrentSimulation();
+
+        // Hide any control buttons that were still showning
+        $('.controls .control', $panelButtons).addClass('hidden');
+
+        // Regenerate the pokemon buttons
+        generatePokemonButtons();
+
+        // Show the pokemon buttons
+        $('.new-pokemon', $panelButtons).removeClass('hidden');
+        $('.controls .start', $panelButtons).removeClass('hidden').removeClass('ready');
+
+        // Hide the starter pokemon from last time, we're starting fresh
+        $('.starter-pokemon', $panelButtons).addClass('hidden');
+
+        // Hide the details info bar
+        $('.details.zone .title', $panelMainOverview).html('&nbsp;');
+        $('.details.zone .list', $panelMainOverview).addClass('hidden');
+
+        // Autoscroll to the box details header
+        $panelMainOverview.find('.details.zone .title').trigger('click');
+
+        // Update the header to indicate the next action (Select Pokemon)
+        $('.details.zone .title', $panelMainOverview).html('Select Starter Pokémon');
+
+        // Update the overiew with cleared data
+        updateOverview();
+
     }
 
 
@@ -2201,7 +2374,8 @@
         //console.log('randomNumber = ', randomNumber);
 
         // Update growth, egg, etc, cycles if allowed
-        if (updateCycles){
+        if (simulationStarted
+            && updateCycles){
             updateGrowthCycles();
             updateEggCycles();
             updateBreedingCycles();
