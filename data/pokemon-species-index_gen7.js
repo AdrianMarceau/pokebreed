@@ -568,6 +568,21 @@
             prevEvolution: 'sandygast'
             },
 
+        'pyukumuku': {
+            order: indexOrder++,
+            token: 'pyukumuku',
+            name: 'Pyukumuku',
+            number: 771,
+            types: ['water'],
+            baseStats: {hp: 55, phAttack: 60, phDefense: 130, spAttack: 30, spDefense: 130, speed: 5},
+            abilities: {0: 'innards-out', hidden: 'unaware'},
+            height: 0.3,
+            weight: 1.2,
+            colors: ['black', 'pink', 'white'],
+            eggCycles: 15,
+            eggGroups: ['water-1']
+            },
+
         'minior': {
             order: indexOrder++,
             token: 'minior',
