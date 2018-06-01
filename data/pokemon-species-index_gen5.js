@@ -276,6 +276,41 @@
             prevEvolution: 'tranquill'
             },
 
+        'blitzle': {
+            order: indexOrder++,
+            token: 'blitzle',
+            name: 'Blitzle',
+            number: 522,
+            types: ['electric'],
+            baseStats: {hp: 45, phAttack: 60, phDefense: 32, spAttack: 50, spDefense: 32, speed: 76},
+            abilities: {0: 'lightning-rod', 1: 'motor-drive', hidden: 'sap-sipper'},
+            height: 0.8,
+            weight: 29.8,
+            colors: ['black', 'white', 'blue', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'zebstrika',
+                method: 'level-up',
+                value: 27
+                }]
+            },
+        'zebstrika': {
+            order: indexOrder++,
+            token: 'zebstrika',
+            name: 'Zebstrika',
+            number: 523,
+            types: ['electric'],
+            baseStats: {hp: 75, phAttack: 100, phDefense: 63, spAttack: 80, spDefense: 63, speed: 116},
+            abilities: {0: 'lightning-rod', 1: 'motor-drive', hidden: 'sap-sipper'},
+            height: 1.6,
+            weight: 79.5,
+            colors: ['black', 'white', 'blue', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'blitzle'
+            },
+
         'woobat': {
             order: indexOrder++,
             token: 'woobat',
