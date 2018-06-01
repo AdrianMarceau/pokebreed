@@ -1762,6 +1762,21 @@
             eggGroups: ['monster', 'grass']
             },
 
+        'absol': {
+            order: indexOrder++,
+            token: 'absol',
+            name: 'Absol',
+            number: 359,
+            types: ['dark'],
+            baseStats: {hp: 65, phAttack: 130, phDefense: 60, spAttack: 75, spDefense: 60, speed: 75},
+            abilities: {0: 'pressure', 1: 'super-luck', hidden: 'justified'},
+            height: 1.2,
+            weight: 47,
+            colors: ['white', 'black', 'red'],
+            eggCycles: 25,
+            eggGroups: ['field']
+            },
+
         'wynaut': {
             order: thisIndex.beforeOrder('wobbuffet'),
             token: 'wynaut',

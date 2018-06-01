@@ -1644,6 +1644,25 @@
             prevEvolution: 'altaria'
             },
 
+        'mega-absol': {
+            order: thisIndex.afterOrder('absol'),
+            token: 'mega-absol',
+            name: 'Mega Absol',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'absol',
+            number: 359,
+            types: ['dark'],
+            baseStats: {hp: 65, phAttack: 150, phDefense: 60, spAttack: 115, spDefense: 60, speed: 115},
+            abilities: {0: 'magic-bounce'},
+            height: 1.2,
+            weight: 49,
+            colors: ['white', 'black', 'red'],
+            eggCycles: 25,
+            eggGroups: ['field'],
+            prevEvolution: 'absol'
+            },
+
         'mega-glalie': {
             order: thisIndex.afterOrder('glalie', 1),
             token: 'mega-glalie',
@@ -1927,6 +1946,7 @@
         {base: 'sharpedo', species: 'mega-sharpedo', method: 'mega-evolution', value: 'sharpedonite'},
         {base: 'camerupt', species: 'mega-camerupt', method: 'mega-evolution', value: 'cameruptite'},
         {base: 'altaria', species: 'mega-altaria', method: 'mega-evolution', value: 'altarianite'},
+        {base: 'absol', species: 'mega-absol', method: 'mega-evolution', value: 'absolite'},
         {base: 'glalie', species: 'mega-glalie', method: 'mega-evolution', value: 'glalie'},
         {base: 'salamence', species: 'mega-salamence', method: 'mega-evolution', value: 'salamencite'},
         {base: 'metagross', species: 'mega-metagross', method: 'mega-evolution', value: 'metagrossite'},
