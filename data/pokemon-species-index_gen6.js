@@ -440,6 +440,41 @@
             prevEvolution: 'spewpa'
             },
 
+        'skiddo': {
+            order: indexOrder++,
+            token: 'skiddo',
+            name: 'Skiddo',
+            number: 672,
+            types: ['grass'],
+            baseStats: {hp: 66, phAttack: 65, phDefense: 48, spAttack: 62, spDefense: 57, speed: 52},
+            abilities: {0: 'sap-sipper', hidden: 'grass-pelt'},
+            height: 0.9,
+            weight: 31,
+            colors: ['brown', 'green', 'white', 'black', 'orange'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'gogoat',
+                method: 'level-up',
+                value: 32
+                }]
+            },
+        'gogoat': {
+            order: indexOrder++,
+            token: 'gogoat',
+            name: 'Gogoat',
+            number: 673,
+            types: ['grass'],
+            baseStats: {hp: 123, phAttack: 100, phDefense: 62, spAttack: 97, spDefense: 81, speed: 68},
+            abilities: {0: 'sap-sipper', hidden: 'grass-pelt'},
+            height: 1.7,
+            weight: 91,
+            colors: ['brown', 'green', 'white', 'black', 'orange', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'skiddo'
+            },
+
         'pancham': {
             order: indexOrder++,
             token: 'pancham',
