@@ -517,6 +517,22 @@
             prevEvolution: 'stufful'
             },
 
+        'comfey': {
+            order: indexOrder++,
+            token: 'comfey',
+            name: 'Comfey',
+            number: 764,
+            types: ['fairy'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 51, phAttack: 52, phDefense: 90, spAttack: 82, spDefense: 110, speed: 100},
+            abilities: {0: 'flower-veil', 1: 'triage', hidden: 'natural-cure'},
+            height: 0.1,
+            weight: 0.3,
+            colors: ['green', 'yellow', 'red', 'pink', 'orange', 'white'],
+            eggCycles: 20,
+            eggGroups: ['grass']
+            },
+
         'sandygast': {
             order: indexOrder++,
             token: 'sandygast',
