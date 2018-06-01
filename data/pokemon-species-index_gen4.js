@@ -373,6 +373,41 @@
             prevEvolution: 'roselia'
             },
 
+        'buizel': {
+            order: indexOrder++,
+            token: 'buizel',
+            name: 'Buizel',
+            number: 418,
+            types: ['water'],
+            baseStats: {hp: 55, phAttack: 65, phDefense: 35, spAttack: 60, spDefense: 30, speed: 85},
+            abilities: {0: 'swift-swim', hidden: 'water-veil'},
+            height: 0.7,
+            weight: 29.5,
+            colors: ['orange', 'yellow', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'field'],
+            nextEvolutions: [{
+                species: 'floatzel',
+                method: 'level-up',
+                value: 26
+                }]
+            },
+        'floatzel': {
+            order: indexOrder++,
+            token: 'floatzel',
+            name: 'Floatzel',
+            number: 419,
+            types: ['water'],
+            baseStats: {hp: 85, phAttack: 105, phDefense: 55, spAttack: 85, spDefense: 50, speed: 115},
+            abilities: {0: 'swift-swim', hidden: 'water-veil'},
+            height: 1.1,
+            weight: 33.5,
+            colors: ['orange', 'yellow', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'field'],
+            prevEvolution: 'buizel'
+            },
+
         'drifloon': {
             order: indexOrder++,
             token: 'drifloon',
