@@ -176,7 +176,7 @@ body[data-mode="free"] .panel .banner .version {
     position: relative;
 }
 .panel .banner .counter.pokedex:hover .icon {
-    bottom: 1px;
+    /* bottom: 1px; */
 }
 .panel .banner .counter.timer .icon {
     margin-left: 3px;
@@ -225,13 +225,10 @@ body[data-mode="free"] .panel .banner .counter.pokedex .count .total {
     box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0);
     transition: background-color 0.4s, box-shadow 0.4s;
 }
-body:not([data-mode="free"]) .panel .banner .counter.pokedex:hover {
+body:not([data-mode="free"]) .panel .banner .counter.pokedex:hover,
+body:not([data-mode="free"]) .panel .banner .counter.pokedex.active {
     background-color: rgba(0, 0, 0, 0.11);
     box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.11);
-}
-body:not([data-mode="free"]) .panel .banner .counter.pokedex.active {
-    background-color: rgba(0, 0, 0, 0.33);
-    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.33);
 }
 
 .panel .banner .delete_savedata {
@@ -1724,7 +1721,7 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
 
 .panel .buttons .info.links {
     padding-bottom: 10px;
-    text-align: center;
+    text-align: right;
     border-top: 1px solid #37373a;
     border-color: rgba(0, 0, 0, 0.3);
     font-size: 12px;
@@ -1759,7 +1756,6 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
 
 .panel .buttons .info.links .link.pokedex {
     float: left;
-    display: none;
 }
 .panel .buttons .info.links .link.chat span,
 .panel .buttons .info.links .link.mode span,
@@ -1819,16 +1815,4 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
 }
 .panel .buttons .info.links .link.mode:hover {
     color: #e2e2e2;
-}
-
-.panel[data-view="pokedex"] {
-
-}
-.panel[data-view="pokedex"] .overview.main,
-.panel[data-view="pokedex"] .midwrap,
-.panel[data-view="pokedex"] .buttons .controls,
-.panel[data-view="pokedex"] .buttons .info.links,
-.panel[data-view="pokedex"] .buttons .new-pokemon,
-.panel[data-view="pokedex"] .buttons .starter-pokemon {
-    display: none;
 }

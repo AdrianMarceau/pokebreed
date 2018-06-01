@@ -213,12 +213,12 @@
         // Define a click event for any of the pokedex buttons
         var $pokedexLink = $('.link[data-tab="pokedex"]', $panelButtons);
         var $pokedexInfo = $('.info[data-tab="pokedex"]', $panelButtons);
-        var prevSpeed = $('body').attr('data-speed');
+        //var prevSpeed = $('body').attr('data-speed');
         var pokedexClickEvent = function(e){
             e.preventDefault();
             if (appFreeMode){ return false; }
             var $thisLink = $(this);
-            var currentSpeed = $('body').attr('data-speed');
+            //var currentSpeed = $('body').attr('data-speed');
             $controlButtons.filter('.pause').trigger('click');
             var isShowing = $panelDiv.attr('data-view') === 'pokedex' ? true : false;
             if (!isShowing){
@@ -227,14 +227,15 @@
                 $pokedexLink.addClass('active');
                 $pokedexInfo.removeClass('hidden');
                 $panelDiv.attr('data-view', 'pokedex');
-                prevSpeed = currentSpeed;
+                //prevSpeed = currentSpeed;
+                $('html, body').animate({scrollTop: $pokedexLink.offset().top}, Math.ceil(600));
                 } else {
                 // Hide it
                 $thisLink.removeClass('active');
                 $pokedexLink.removeClass('active');
                 $pokedexInfo.addClass('hidden');
                 $panelDiv.attr('data-view', 'simulator');
-                $controlButtons.filter('.'+prevSpeed).trigger('click');
+                $//controlButtons.filter('.'+prevSpeed).trigger('click');
                 }
             return;
             };
@@ -327,10 +328,6 @@
                 $controlButtons.filter('.speed').removeClass('active');
                 $button.addClass('active');
                 if (control.match(/^(fast|slow|warp)$/)){ $controlButtons.filter('.play').addClass('active'); }
-                if (control !== 'pause'){
-                    $('.link[data-tab="pokedex"]', $panelButtons).removeClass('active');
-                    $('.info[data-tab="pokedex"]', $panelButtons).addClass('hidden');
-                    }
                 if (dayTimeout !== false){
                     var handler = dayTimeout.getHandler();
                     dayTimeout.clear();
