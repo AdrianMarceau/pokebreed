@@ -1719,7 +1719,15 @@
         $('.pokedex .count .percent', $panelBanner).html(pokedexPercent+'%');
 
         // Update the zone details
-        $('.zone .name .data', $panelMainOverview).text(thisZoneData.name);
+        var biomeName = thisZoneData.name;
+        if (typeof thisZoneData.currentStats['gameRegion'] !== 'undefined'){
+            var regionTokens = Object.keys(thisZoneData.currentStats['gameRegion']);
+            if (regionTokens.length > 0){
+                var regionToken = regionTokens[0];
+                biomeName += ' ('+ (regionToken.charAt(0).toUpperCase() + regionToken.slice(1)) +')';
+                }
+            }
+        $('.zone .name .data', $panelMainOverview).text(biomeName);
         $('.zone .capacity .data', $panelMainOverview).text(thisZoneData.currentPokemon.length + ' / ' + thisZoneData.capacity);
         $('.zone .day .data', $panelMainOverview).text(numberWithCommas(thisZoneData.day));
         $('.zone .diversity .data', $panelMainOverview).text(' Active: '+totalSpeciesCurrent+' | Overall: '+totalSpeciesSeen+'');
