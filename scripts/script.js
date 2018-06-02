@@ -439,6 +439,9 @@
                 indexInfo.baseEvolution = pokemonGetBaseEvolution(indexInfo.token, true, false);
                 indexInfo.basicEvolution = pokemonGetBasicEvolution(indexInfo.token, false, false);
 
+                // Collect tokens for all related pokemon and add here
+                indexInfo.relatedSpecies = getRelatedSpeciesTokens(indexInfo.token);
+
                 // If this pokemon is in a special class, incremeent appropriate counters
                 var isSpecial = false;
                 if (indexInfo.token === 'unown'
@@ -3338,10 +3341,10 @@
                 var pokeTypes = pokeInfo.types;
                 if (pokeTypes.length === 1){
                     if (rankedZoneStats[0] === pokeTypes[0]
-                        && currentTypeStats[rankedZoneStats[0]] >= (currentTypeStats[rankedZoneStats[1]] * 2)){
-                        if (currentTypeStats[pokeTypes[0]] !== 0){ pokeChance += currentTypeStats[pokeTypes[0]] * 1; }
+                        && currentTypeStats[rankedZoneStats[0]] >= (currentTypeStats[rankedZoneStats[1]] * 1.5)){
+                        if (currentTypeStats[pokeTypes[0]] !== 0){ pokeChance += currentTypeStats[pokeTypes[0]] * 1.25; }
                         } else {
-                        if (currentTypeStats[pokeTypes[0]] !== 0){ pokeChance += currentTypeStats[pokeTypes[0]] * 0.5; }
+                        if (currentTypeStats[pokeTypes[0]] !== 0){ pokeChance += currentTypeStats[pokeTypes[0]] * 0.75; }
                         }
                     } else {
                     if (currentTypeStats[pokeTypes[0]] !== 0){ pokeChance += currentTypeStats[pokeTypes[0]] * 0.5; }
@@ -3349,7 +3352,7 @@
                     }
 
                 // Increase the chance of this pokemon appearing based on group appeal
-                var groupVal = 0.01 / pokeInfo.eggGroups.length;
+                var groupVal = 0.03 / pokeInfo.eggGroups.length;
                 for (var key2 = 0; key2 < pokeInfo.eggGroups.length; key2++){
                     var groupToken = pokeInfo.eggGroups[key2];
                     if (typeof thisZoneData.currentStats['eggGroups'][groupToken] !== 'undefined'
@@ -3359,7 +3362,7 @@
                     }
 
                 // Increase the chance of this pokemon appearing based on region appeal
-                var regionVal = 0.01;
+                var regionVal = 0.02;
                 if (typeof thisZoneData.currentStats['gameRegion'][pokeInfo.gameRegion] !== 'undefined'
                     && thisZoneData.currentStats['gameRegion'][pokeInfo.gameRegion] !== 0){
                     pokeChance += thisZoneData.currentStats['gameRegion'][pokeInfo.gameRegion] * regionVal;
@@ -3377,17 +3380,35 @@
                         }
                     }
 
+                // Count the times this species has appear ever and right now
+                var numAddedAlready = 0;
+                var numAddedCurrently = 0;
+                for (var key2 = 0; key2 < pokeInfo.relatedSpecies.length; key2++){
+                    var relToken = pokeInfo.relatedSpecies[key2];
+                    if (typeof thisZoneData.addedPokemonSpecies[relToken] !== 'undefined'){
+                        numAddedAlready += thisZoneData.addedPokemonSpecies[relToken];
+                        }
+                    if (typeof thisZoneData.currentStats['species'][relToken] !== 'undefined'){
+                        numAddedCurrently += thisZoneData.currentStats['species'][relToken];
+                        }
+                    }
+                //var numAddedAlready = thisZoneData.addedPokemonSpecies[pokeToken];
+                //var numAddedCurrently = thisZoneData.currentStats['species'][pokeToken];
+                //console.log('relatedSpecies = ', pokeInfo.relatedSpecies);
+                //console.log('numAddedAlready = ', numAddedAlready);
+                //console.log('numAddedCurrently = ', numAddedCurrently);
+
                 // Increase the chance of this pokemon appearing based on species appeal
                 if (typeof speciesAppealIndex[pokeToken] !== 'undefined'){
                     //console.log('speciesAppealIndex['+pokeToken+'] = ', speciesAppealIndex[pokeToken]);
-                    pokeChance += 1 + (speciesAppealIndex[pokeToken] * 2);
+                    if (pokeChance < 0){ pokeChance = 0; }
+                    pokeChance += 2;
+                    pokeChance *= speciesAppealIndex[pokeToken];
                     //console.log('pokeChance = ', pokeChance);
                 }
 
                 // Decrease the chance if there is already a colony of this species
                 if (typeof thisZoneData.addedPokemonSpecies[pokeToken] !== 'undefined'){
-                    var numAddedAlready = thisZoneData.addedPokemonSpecies[pokeToken];
-                    var numAddedCurrently = thisZoneData.currentStats['species'][pokeToken];
                     //console.log('numAddedAlready ', pokeToken, numAddedAlready);
                     if (numAddedAlready === 1){ pokeChance *= 2; }
                     else { pokeChance -= numAddedAlready; }
@@ -3745,8 +3766,7 @@
 
     // Define a function for counting all zone pokemon related to a given token
     function countRelatedZonePokemon(startToken){
-        var relatedSpeciesTokens = getRelatedSpeciesTokens(startToken);
-        //console.log('getRelatedSpeciesTokens('+startToken+') = ', relatedSpeciesTokens);
+        var relatedSpeciesTokens = PokemonSpeciesIndex[startToken]['relatedSpecies'];
         var relatedSpeciesUnits = 0;
         for (var key = 0; key < relatedSpeciesTokens.length; key++){
             var relatedToken = relatedSpeciesTokens[key];
