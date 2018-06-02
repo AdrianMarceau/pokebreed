@@ -143,7 +143,7 @@ body[data-mode="free"] .panel .banner .version {
     right: 9px;
 }
 .panel .banner .version .bp {
-    display: inline-block;
+    display: none;
     color: magenta;
 }
 .panel .banner .version .bp:before,

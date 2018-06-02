@@ -222,7 +222,7 @@
             if (appFreeMode){ return false; }
             var $thisLink = $(this);
             //var currentSpeed = $('body').attr('data-speed');
-            $controlButtons.filter('.pause').trigger('click');
+            //$controlButtons.filter('.pause').trigger('click');
             var isShowing = $panelDiv.attr('data-view') === 'pokedex' ? true : false;
             if (!isShowing){
                 // Show it
