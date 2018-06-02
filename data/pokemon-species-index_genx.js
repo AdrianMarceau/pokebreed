@@ -531,7 +531,7 @@
 
         // Mistaken identify relationships
         {base: 'illumise', species: 'lanturn'},
-        {base: 'kricketot ', species: 'chatot'},
+        {base: 'kricketot', species: 'chatot'},
 
         // Legendary trigger relationships
         {base: 'mew', species: 'mewtwo'},
