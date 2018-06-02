@@ -13,6 +13,9 @@
         float: none;
         padding: 0;
     }
+    .panel .overview.visitors {
+        width: calc((100% - 500px) / 2);
+    }
     .panel .overview.types {
         right: 23px;
         left: auto;
@@ -156,7 +159,7 @@
     .panel .overview.types .wrap,
     .panel .overview.species .wrap {
         height: 215px;
-        min-height: calc(100vh - 900px);
+        min-height: calc(100vh - 950px);
     }
     .panel .overview.main .details.pokemon .list.slots li,
     .panel .overview.main .details.pokemon .list.pokemon li,
@@ -219,7 +222,7 @@
     .panel .overview.main .details.pokemon .list.pokemon li,
     .panel .overview.main .details.pokemon .list.slots li.slot:before {
         width: 54px;
-        height: 54px;
+        height: 44px;
         margin-right: 4px;
         margin-bottom: 4px;
     }
@@ -461,7 +464,6 @@
 
 /* -- Overview Panels -- */
 
-/* @media (max-width: 1365px) and (min-height: 647px){ */
 @media (max-width: 1124px) and (min-height: 647px){
     .bp3:after { content: "d1";  }
     .panel .overview.types,
@@ -470,13 +472,22 @@
         width: calc(50% - 2px);
         padding: 3px 5px 6px;
     }
+    .panel .overview.visitors {
+        width: auto;
+        box-sizing: border-box;
+        position: static;
+        clear: both;
+        float: none;
+        transform: none;
+        margin: 0 2px 5px;
+    }
     .panel .overview.types {
         float: right;
-        padding-right: 0;
+        padding-right: 5px;
     }
     .panel .overview.species {
         float: left;
-        padding-left: 0;
+        padding-left: 5px;
     }
 }
 @media (min-width: 1125px) and (max-width: 1365px) and (min-height: 647px){
@@ -484,6 +495,9 @@
     .panel .overview.types,
     .panel .overview.species {
         top: 154px;
+        width: calc((100% - 728px) / 2);
+    }
+    .panel .overview.visitors {
         width: calc((100% - 728px) / 2);
     }
     .panel .overview.species .list.current li.species .name,
@@ -505,11 +519,17 @@
         top: 154px;
         width: calc((100% - 728px) / 2);
     }
+    .panel .overview.visitors {
+        width: calc((100% - 728px) / 2);
+    }
 }
 @media (min-width: 1366px) and (min-height: 769px){
     .bp3:after { content: "d4";  }
     .panel .overview.types,
     .panel .overview.species {
+        width: calc((100% - 746px) / 2);
+    }
+    .panel .overview.visitors {
         width: calc((100% - 746px) / 2);
     }
 }

@@ -127,6 +127,23 @@ if (isset($_GET['gen'])
 
             <div class="midwrap">
 
+                <div class="overview sublist visitors hidden">
+                    <div class="details stats">
+                        <div class="title">
+                            <strong class="main">Lured Visitors</strong>
+                        </div>
+                        <div class="wrap">
+                            <ul class="list">
+                                <li class="species"><div class="bubble"></div></li>
+                                <li class="species"><div class="bubble"></div></li>
+                                <li class="species"><div class="bubble"></div></li>
+                                <li class="species"><div class="bubble"></div></li>
+                                <li class="species"><div class="bubble"></div></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="overview floatlist species hidden">
                     <div class="title">
                         <strong class="main">Pokémon List</strong>

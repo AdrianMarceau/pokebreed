@@ -67,6 +67,7 @@
     var $panelMainOverview = false;
     var $panelTypesOverview = false;
     var $panelSpeciesOverview = false;
+    var $panelVisitorsOverview = false;
     var $panelOverviewFloatLists = false;
     var $panelPokemonSpriteWrapper = false;
     var $panelButtons = false;
@@ -142,6 +143,7 @@
         $panelMainOverview = $('.overview.main', $panelDiv);
         $panelTypesOverview = $('.overview.types', $panelDiv);
         $panelSpeciesOverview = $('.overview.species', $panelDiv);
+        $panelVisitorsOverview = $('.overview.visitors', $panelDiv);
         $panelOverviewFloatLists = $('.overview.floatlist', $panelDiv);
         $panelPokemonSpriteWrapper = $('.details.pokemon .list.pokemon', $panelMainOverview);
         $panelButtons = $('> .buttons', $panelDiv);
@@ -803,6 +805,7 @@
         // Hide the type and species overview panels
         $panelTypesOverview.addClass('hidden');
         $panelSpeciesOverview.addClass('hidden');
+        $panelVisitorsOverview.addClass('hidden');
 
         // Update the button controls with the appropriate classes
         $('.controls .control', $panelButtons).addClass('hidden');
@@ -2068,6 +2071,90 @@
         $alltimeSpeciesCounter.html(numAllTimeSpecies);
         $alltimeSpeciesList.append(speciesListMarkup);
 
+        // Update the visitor appeal list with most likely species
+        if (typeof thisZoneData.currentStats['visitorAppeal'] !== 'undefined'
+            && (thisZoneData.day === 1
+                || thisZoneData.day % 10 === 0)){
+
+            // Sort the visitor appeal
+            var visitorAppeal = thisZoneData.currentStats['visitorAppeal'];
+            var sortedVisitors = {};
+            for (var key = 0; key < visitorAppeal.length; key++){
+                var pokeInfo = visitorAppeal[key];
+                var pokeIndex = PokemonSpeciesIndex[pokeInfo.token];
+                var visitorKind = pokeIndex.class !== '' ? pokeIndex.class : 'basic';
+                if (typeof sortedVisitors[visitorKind] === 'undefined'){ sortedVisitors[visitorKind] = []; }
+                sortedVisitors[visitorKind].push(pokeInfo);
+                }
+            //console.log('sortedVisitors = ', sortedVisitors);
+
+            // Collect a short list of the visitors with the highest appeal
+            var nextVisitors = [];
+            var totalVisitorChance = 0;
+            if (typeof sortedVisitors['basic'] !== 'undefined'){
+                for (var i = 0; i < 5; i++){
+                    if (typeof sortedVisitors['basic'][i] === 'undefined'){ break; }
+                    var visitor = sortedVisitors['basic'][i];
+                    var visitorInfo = {token: visitor.token, chance: visitor.chance};
+                    totalVisitorChance += visitorInfo.chance;
+                    nextVisitors.push(visitorInfo);
+                    }
+                if (typeof sortedVisitors['legendary'][0] !== 'undefined'){
+                    var visitor = sortedVisitors['legendary'][0];
+                    var visitorInfo = {token: visitor.token, chance: (visitor.chance / 100)};
+                    nextVisitors.pop();
+                    nextVisitors.push(visitorInfo);
+                    }
+                }
+            //console.log('nextVisitors = ', nextVisitors);
+
+
+            // Update the visitor appeal area with new sprites
+            if (nextVisitors.length > 0){
+
+                // Generate new species markup for the overview panel
+                var visitorListMarkup = '';
+                var usedPercent = 0;
+                for (var key = 0; key < nextVisitors.length; key++){
+                    var visitor = nextVisitors[key];
+                    var pokeInfo = PokemonSpeciesIndex[visitor.token];
+                    var pokePercent = Math.ceil((visitor.chance / totalVisitorChance) * 100);
+                    usedPercent += pokePercent;
+                    if (usedPercent > 100){ pokePercent -= (usedPercent - 100); }
+                    //console.log('visitor = ', visitor);
+                    //console.log('pokeInfo = ', pokeInfo);
+                    //console.log('pokePercent = ', pokePercent);
+                    var liClass = 'species ';
+                    liClass += 'type '+pokeInfo['types'][0]+' ';
+                    if (typeof pokeInfo['types'][1] !== 'undefined'){ liClass += pokeInfo['types'][1]+'2 '; }
+                    if (!appFreeMode
+                        && (typeof PokemonSpeciesSeen[pokeInfo.token] === 'undefined'
+                            || PokemonSpeciesSeen[pokeInfo.token] === 0)){
+                        liClass += 'unknown ';
+                        }
+                    pokeIcon = getPokemonIcon(pokeInfo.token);
+                    visitorListMarkup += '<li class="'+liClass+'">'+
+                            '<div class="bubble">'+
+                                '<span class="icon">'+ pokeIcon +'</span> '+
+                                '<span class="name">'+ pokeInfo['name'] +'</span> '+
+                                '<span class="val">'+ (pokePercent < 1 ? '&lt 1' : (pokePercent)) +'%</span>'+
+                            '</div>'+
+                        '</li>';
+                    }
+
+                // Append generated visitor list markup to the panel (fade in if necessary)
+                var $visitorList = $('.list', $panelVisitorsOverview);
+                $visitorList.empty().append(visitorListMarkup);
+                if ($panelVisitorsOverview.hasClass('hidden')){
+                    $panelVisitorsOverview.css({opacity:0,maxHeight:0}).removeClass('hidden');
+                    $panelVisitorsOverview.animate({opacity:1,maxHeight:'74px'},{duration:600,easing:'linear',queue:false});
+                    }
+
+                }
+
+
+            }
+
         // If the simulation has started, make sure we update the scroll wrappers
         if (simulationStarted){
             $('.wrap', $panelOverviewFloatLists).perfectScrollbar('update');
@@ -2322,19 +2409,18 @@
             thisZoneData.currentStats[statToken] = currentZoneStats[statToken];
             }
 
-        // Recalculate the current vivillon pattern at set day intervals
+        // Recalculate some things only at set day intervals
         if (simulationStarted
             && (thisZoneData.day === 1
                 || thisZoneData.day % 10 === 0)){
+
+            // Recalculate the current vivillon pattern
             currentVivillonPattern = '';
             recalculateVivillonPattern();
-            }
 
-        // Recalculate the current visitor appeal at set day intervals
-        if (simulationStarted
-            && (thisZoneData.day === 1
-                || thisZoneData.day % 15 === 0)){
+            // Recalculate the current visitor appeal values
             recalculateVisitorAppeal();
+
             }
 
         // Return true on success
