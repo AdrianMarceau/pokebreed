@@ -2472,16 +2472,16 @@
         PokeboxDaysPassed++;
 
         // Recalculate the current date parameters for this day
-        var zoneDate = {year:0,month:0,day:0};
-        var zoneDays = thisZoneData.day;
-        if (zoneDays > 360){ zoneDate.year = Math.floor(zoneDays / 360); zoneDays = zoneDays % 360; }
-        if (zoneDays > 30){ zoneDate.month = Math.floor(zoneDays / 30); zoneDays = zoneDays % 30; }
-        zoneDate.day = zoneDays;
-        if (zoneDate.month > 0){ zoneDate.day += 1; }
-        if (zoneDate.year > 0){ zoneDate.month += 1; }
+        var zoneDate = {year:1,month:1,day:1};
+        var zoneDays = thisZoneData.day - 1;
+        if (zoneDays >= 360){ zoneDate.year += Math.floor(zoneDays / 360); zoneDays = zoneDays % 360; }
+        if (zoneDays >= 30){ zoneDate.month += Math.floor(zoneDays / 30); zoneDays = zoneDays % 30; }
+        zoneDate.day = zoneDays + 1;
+        //if (zoneDate.month > 0){ zoneDate.day += 1; }
+        //if (zoneDate.year > 0){ zoneDate.month += 1; }
         thisZoneData.date = zoneDate;
 
-        //console.log('Day #'+thisZoneData.day);
+        //console.log('Day #'+thisZoneData.day, zoneDate);
         //console.log('PokeboxDaysPassed = ', PokeboxDaysPassed);
         //console.log('zoneDate = ', zoneDate);
 
