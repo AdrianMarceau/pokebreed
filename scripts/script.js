@@ -50,7 +50,8 @@
         addedPokemonSpecies: {},
         evolvedPokemonSpecies: {},
         faintedPokemonSpecies: {},
-        day: 0
+        day: 0,
+        date: {}
         };
 
     var thisZoneData = {};
@@ -1718,18 +1719,30 @@
         $('.pokedex .count .current', $panelBanner).html(pokedexCurrent);
         $('.pokedex .count .percent', $panelBanner).html(pokedexPercent+'%');
 
-        // Update the zone details
+        // Generate the biome name using the field and the region
         var biomeName = thisZoneData.name;
-        if (typeof thisZoneData.currentStats['gameRegion'] !== 'undefined'){
+        if (biomeName !== 'Pending'
+            && typeof thisZoneData.currentStats['gameRegion'] !== 'undefined'){
             var regionTokens = Object.keys(thisZoneData.currentStats['gameRegion']);
             if (regionTokens.length > 0){
                 var regionToken = regionTokens[0];
                 biomeName += ' ('+ (regionToken.charAt(0).toUpperCase() + regionToken.slice(1)) +')';
                 }
             }
+
+        // Generate the date string using the preset values and padding
+        var dateString = [];
+        if (thisZoneData.date.year > 0){ dateString.push(strPad('0000', thisZoneData.date.year, true)); }
+        dateString.push(strPad('00', thisZoneData.date.month, true));
+        dateString.push(strPad('00', thisZoneData.date.day, true));
+        dateString = dateString.join(' / ');
+        //console.log('dateString = ', dateString);
+
+        // Update the zone details
         $('.zone .name .data', $panelMainOverview).text(biomeName);
         $('.zone .capacity .data', $panelMainOverview).text(thisZoneData.currentPokemon.length + ' / ' + thisZoneData.capacity);
         $('.zone .day .data', $panelMainOverview).text(numberWithCommas(thisZoneData.day));
+        $('.zone .date .data', $panelMainOverview).text(dateString);
         $('.zone .diversity .data', $panelMainOverview).text(' Active: '+totalSpeciesCurrent+' | Overall: '+totalSpeciesSeen+'');
 
         // Loop though and count population by types & species
@@ -2451,11 +2464,26 @@
         // Generate a snapshot of the zone stats and add to history
         thisZoneHistory.push(JSON.stringify(thisZoneData.currentStats));
 
+        // Update the day timeout flag
         dayTimeoutStarted = true;
+
+        // Increment the current day and total days passed
         thisZoneData.day++;
         PokeboxDaysPassed++;
+
+        // Recalculate the current date parameters for this day
+        var zoneDate = {year:0,month:0,day:0};
+        var zoneDays = thisZoneData.day;
+        if (zoneDays > 360){ zoneDate.year = Math.floor(zoneDays / 360); zoneDays = zoneDays % 360; }
+        if (zoneDays > 30){ zoneDate.month = Math.floor(zoneDays / 30); zoneDays = zoneDays % 30; }
+        zoneDate.day = zoneDays;
+        if (zoneDate.month > 0){ zoneDate.day += 1; }
+        if (zoneDate.year > 0){ zoneDate.month += 1; }
+        thisZoneData.date = zoneDate;
+
         //console.log('Day #'+thisZoneData.day);
         //console.log('PokeboxDaysPassed = ', PokeboxDaysPassed);
+        //console.log('zoneDate = ', zoneDate);
 
         // Update the odd/even class on the pokemon sprite wrapper
         var isEven = thisZoneData.day % 2 === 0 ? true : false;

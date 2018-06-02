@@ -107,6 +107,7 @@ if (isset($_GET['gen'])
                     <ul class="list hidden">
                         <li class="name"><strong>Biome</strong> <span class="data"></span></li>
                         <li class="day"><strong>Day</strong> <span class="data"></span></li>
+                        <li class="date"><strong>Date</strong> <span class="data"></span></li>
                         <li class="capacity"><strong>Capacity</strong> <span class="data"></span></li>
                     </ul>
                 </div>
