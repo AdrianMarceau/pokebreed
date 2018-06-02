@@ -2322,9 +2322,20 @@
             thisZoneData.currentStats[statToken] = currentZoneStats[statToken];
             }
 
-        // Recalculate the current wivillon pattern
-        currentVivillonPattern = '';
-        recalculateVivillonPattern();
+        // Recalculate the current vivillon pattern at set day intervals
+        if (simulationStarted
+            && (thisZoneData.day === 1
+                || thisZoneData.day % 10 === 0)){
+            currentVivillonPattern = '';
+            recalculateVivillonPattern();
+            }
+
+        // Recalculate the current visitor appeal at set day intervals
+        if (simulationStarted
+            && (thisZoneData.day === 1
+                || thisZoneData.day % 15 === 0)){
+            recalculateVisitorAppeal();
+            }
 
         // Return true on success
         return true;
@@ -3279,6 +3290,183 @@
 
     }
 
+    // Define a function for calculating visitor appeal values
+    function recalculateVisitorAppeal(){
+        //console.log('recalculateVisitorAppeal()');
+
+        // Loop through every pokemon and see what they like to eat, then check if that species is currently active
+        var speciesAppealIndex = {};
+        for (var key = 0; key < PokemonSpeciesIndexTokens.length; key++){
+            var pokeToken = PokemonSpeciesIndexTokens[key];
+            var pokeInfo = PokemonSpeciesIndex[pokeToken];
+            if (typeof pokeInfo.speciesAppeal !== 'undefined'){
+                for (var key2 = 0; key2 < pokeInfo.speciesAppeal.length; key2++){
+                    var speciesToken = pokeInfo.speciesAppeal[key2];
+                    if ((typeof thisZoneData.currentStats['species'][speciesToken] !== 'undefined'
+                        && thisZoneData.currentStats['species'][speciesToken] > 0)
+                        && (typeof thisZoneData.currentStats['species'][pokeToken] === 'undefined'
+                        || thisZoneData.currentStats['species'][pokeToken] < 3)){
+                        //console.log('pokeToken = '+pokeToken+' | speciesToken = '+speciesToken+'');
+                        //console.log('thisZoneData.currentStats[\'species\']['+speciesToken+'] = ', thisZoneData.currentStats['species'][speciesToken]);
+                        //console.log('thisZoneData.currentStats[\'species\']['+pokeToken+'] = ', thisZoneData.currentStats['species'][pokeToken]);
+                        speciesAppealIndex[pokeToken] = thisZoneData.currentStats['species'][speciesToken];
+                        }
+                    }
+                }
+
+        }
+        //console.log('speciesAppealIndex = ', speciesAppealIndex);
+
+        // Collect a reference to the current type stats
+        var currentTypeStats = thisZoneData.currentStats['types'];
+
+        // Create an array of Pokemon that can appear as visitors
+        var allowedVisitorTokens = [];
+        allowedVisitorTokens = allowedVisitorTokens.concat(BasicPokemonSpeciesIndexTokens);
+        if (!jQuery.isEmptyObject(speciesAppealIndex)){ allowedVisitorTokens = allowedVisitorTokens.concat(Object.keys(speciesAppealIndex)); }
+        allowedVisitorTokens = Array.from(new Set(allowedVisitorTokens));
+        //console.log('allowedVisitorTokens = ', allowedVisitorTokens);
+
+        // Loop through basic pokemon and calculate chances of each
+        var rankedZoneStats = Object.keys(currentTypeStats);
+        var pokemonVisitorChances = [];
+        var pokemonVisitorChanceTokens = [];
+        for (var key = 0; key < allowedVisitorTokens.length; key++){
+            var pokeToken = allowedVisitorTokens[key];
+            var pokeInfo = PokemonSpeciesIndex[pokeToken];
+            var pokeChance = 0;
+
+            // Check to see if this is a basic or a special pokemon
+            var isBasicPokemon = pokeInfo.class === '' ? true : false;
+            var isSpecialPokemon = false;
+            if (pokeInfo.class !== ''
+                && (pokeInfo.class === 'legendary'
+                    || pokeInfo.class === 'mythical'
+                    || pokeInfo.class === 'ultra-beast'
+                    || pokeInfo.class === 'shiny-variant')){
+                    isSpecialPokemon = true;
+                }
+
+            // If this isn't the right class of pokemon, continue to next
+            //if (visitorKind === 'basic' && pokeInfo.class !== ''){ continue; }
+            //else if (visitorKind !== 'basic' && pokeInfo.class !== visitorKind){ continue; }
+            //else if (pokeToken === 'ditto' || pokeToken === 'shiny-ditto'){ continue; }
+
+            // Increase the chance of this pokemon appearing based on type appeal (give monotypes a boost)
+            var pokeTypes = pokeInfo.types;
+            if (pokeTypes.length === 1){
+                if (rankedZoneStats[0] === pokeTypes[0]
+                    && currentTypeStats[rankedZoneStats[0]] >= (currentTypeStats[rankedZoneStats[1]] * 1.5)){
+                    if (currentTypeStats[pokeTypes[0]] !== 0){ pokeChance += currentTypeStats[pokeTypes[0]] * 1.25; }
+                    } else {
+                    if (currentTypeStats[pokeTypes[0]] !== 0){ pokeChance += currentTypeStats[pokeTypes[0]] * 0.75; }
+                    }
+                } else {
+                if (currentTypeStats[pokeTypes[0]] !== 0){ pokeChance += currentTypeStats[pokeTypes[0]] * 0.5; }
+                if (currentTypeStats[pokeTypes[1]] !== 0){ pokeChance += currentTypeStats[pokeTypes[1]] * 0.5; }
+                }
+
+            // Increase the chance of this pokemon appearing based on group appeal
+            var groupVal = 0.03 / pokeInfo.eggGroups.length;
+            for (var key2 = 0; key2 < pokeInfo.eggGroups.length; key2++){
+                var groupToken = pokeInfo.eggGroups[key2];
+                if (typeof thisZoneData.currentStats['eggGroups'][groupToken] !== 'undefined'
+                    && thisZoneData.currentStats['eggGroups'][groupToken] !== 0){
+                    pokeChance += thisZoneData.currentStats['eggGroups'][groupToken] * groupVal;
+                    }
+                }
+
+            // Increase the chance of this pokemon appearing based on region appeal
+            var regionVal = 0.02;
+            if (typeof thisZoneData.currentStats['gameRegion'][pokeInfo.gameRegion] !== 'undefined'
+                && thisZoneData.currentStats['gameRegion'][pokeInfo.gameRegion] !== 0){
+                pokeChance += thisZoneData.currentStats['gameRegion'][pokeInfo.gameRegion] * regionVal;
+                }
+
+            // Increase the chance of this pokemon appearing based on colour appeal
+            if (typeof pokeInfo.colors !== 'undefined'){
+                var colourVal = 0.001;
+                for (var key2 = 0; key2 < pokeInfo.colors.length; key2++){
+                    var colourToken = pokeInfo.colors[key2];
+                    if (typeof thisZoneData.currentStats['colors'][colourToken] !== 'undefined'
+                        && thisZoneData.currentStats['colors'][colourToken] !== 0){
+                        pokeChance += thisZoneData.currentStats['colors'][colourToken] * colourVal;
+                        colourVal *= 0.5;
+                        }
+                    }
+                }
+
+            // Count the times this species has appear ever and right now
+            var numAddedAlready = 0;
+            var numAddedCurrently = 0;
+            for (var key2 = 0; key2 < pokeInfo.relatedSpecies.length; key2++){
+                var relToken = pokeInfo.relatedSpecies[key2];
+                if (typeof thisZoneData.addedPokemonSpecies[relToken] !== 'undefined'){
+                    numAddedAlready += thisZoneData.addedPokemonSpecies[relToken];
+                    }
+                if (typeof thisZoneData.currentStats['species'][relToken] !== 'undefined'){
+                    numAddedCurrently += thisZoneData.currentStats['species'][relToken];
+                    }
+                }
+            //var numAddedAlready = thisZoneData.addedPokemonSpecies[pokeToken];
+            //var numAddedCurrently = thisZoneData.currentStats['species'][pokeToken];
+            //console.log('relatedSpecies = ', pokeInfo.relatedSpecies);
+            //console.log('numAddedAlready = ', numAddedAlready);
+            //console.log('numAddedCurrently = ', numAddedCurrently);
+
+            // Increase the chance of this pokemon appearing based on species appeal
+            if (typeof speciesAppealIndex[pokeToken] !== 'undefined'){
+                //console.log('speciesAppealIndex['+pokeToken+'] = ', speciesAppealIndex[pokeToken]);
+                if (pokeChance < 0){ pokeChance = 0; }
+                pokeChance += 2;
+                pokeChance *= speciesAppealIndex[pokeToken];
+                //console.log('pokeChance = ', pokeChance);
+            }
+
+            // Decrease the chance if there is already a colony of this species
+            if (typeof thisZoneData.addedPokemonSpecies[pokeToken] !== 'undefined'){
+                //console.log('numAddedAlready ', pokeToken, numAddedAlready);
+                if (numAddedAlready === 1){ pokeChance *= 2; }
+                else { pokeChance -= numAddedAlready; }
+                //console.log('pokeChance ', pokeToken, pokeChance);
+                if (!isBasicPokemon
+                    || numAddedCurrently >= 3){
+                    pokeChance *= -1;
+                    pokeChance -= numAddedAlready;
+                    //console.log('pokeChance ', pokeToken, pokeChance);
+                    }
+                }
+
+            // If the chance was more than zero, push into the queue
+            if ((pokeChance > 0 || isSpecialPokemon)
+                && pokemonVisitorChanceTokens.indexOf(pokeToken) === -1){
+                pokemonVisitorChanceTokens.push(pokeToken);
+                pokemonVisitorChances.push({
+                    token: pokeToken,
+                    chance: pokeChance
+                    });
+                }
+
+            }
+
+        // If basic pokemon were queued, sort them by chance and pick most likely
+        if (pokemonVisitorChances.length){
+            pokemonVisitorChances.sort(function (pokeA, pokeB){
+                if (pokeA.chance > pokeB.chance){ return -1; }
+                else if (pokeA.chance < pokeB.chance){ return 1; }
+                else { return 0; }
+                });
+            }
+        //console.log('pokemonVisitorChances = ', pokemonVisitorChances);
+        //console.log('pokemonVisitorChances(top20) = ', pokemonVisitorChances[0], pokemonVisitorChances[1], pokemonVisitorChances[2], pokemonVisitorChances.slice(0, 20));
+        //console.log('pokemonVisitorChances(top100) = ', pokemonVisitorChances[0], pokemonVisitorChances[1], pokemonVisitorChances[2], pokemonVisitorChances.slice(0, 100));
+
+        // Update the parent appeal index with the current sorted chances
+        thisZoneData.currentStats['visitorAppeal'] = pokemonVisitorChances;
+        //console.log('thisZoneData.currentStats[\'visitorAppeal\'] = ', thisZoneData.currentStats['visitorAppeal']);
+
+    }
+
     // Define a function for triggering a zone visitor
     function triggerZoneVisitor(visitorKind){
         //console.log('triggerZoneVisitor(visitorKind)', visitorKind);
@@ -3288,166 +3476,21 @@
         var visitorToken = false;
         if (visitorKind === 'basic'
             || visitorKind === 'legendary'
-            || visitorKind === 'mythical'){
-
-            // Loop through every pokemon and see what they like to eat, then check if that species is currently active
-            var speciesAppealIndex = {};
-            for (var key = 0; key < PokemonSpeciesIndexTokens.length; key++){
-                var pokeToken = PokemonSpeciesIndexTokens[key];
-                var pokeInfo = PokemonSpeciesIndex[pokeToken];
-                if (typeof pokeInfo.speciesAppeal !== 'undefined'){
-                    for (var key2 = 0; key2 < pokeInfo.speciesAppeal.length; key2++){
-                        var speciesToken = pokeInfo.speciesAppeal[key2];
-                        if ((typeof thisZoneData.currentStats['species'][speciesToken] !== 'undefined'
-                            && thisZoneData.currentStats['species'][speciesToken] > 0)
-                            && (typeof thisZoneData.currentStats['species'][pokeToken] === 'undefined'
-                            || thisZoneData.currentStats['species'][pokeToken] < 3)){
-                            //console.log('pokeToken = '+pokeToken+' | speciesToken = '+speciesToken+'');
-                            //console.log('thisZoneData.currentStats[\'species\']['+speciesToken+'] = ', thisZoneData.currentStats['species'][speciesToken]);
-                            //console.log('thisZoneData.currentStats[\'species\']['+pokeToken+'] = ', thisZoneData.currentStats['species'][pokeToken]);
-                            speciesAppealIndex[pokeToken] = thisZoneData.currentStats['species'][speciesToken];
-                            }
-                        }
-                    }
-
-            }
-            //console.log('speciesAppealIndex = ', speciesAppealIndex);
-
-            // Collect a reference to the current type stats
-            var currentTypeStats = thisZoneData.currentStats['types'];
-
-            // Create an array of Pokemon that can appear as visitors
-            var allowedVisitorTokens = [];
-            allowedVisitorTokens = allowedVisitorTokens.concat(BasicPokemonSpeciesIndexTokens);
-            if (!jQuery.isEmptyObject(speciesAppealIndex)){ allowedVisitorTokens = allowedVisitorTokens.concat(Object.keys(speciesAppealIndex)); }
-            allowedVisitorTokens = Array.from(new Set(allowedVisitorTokens));
-            //console.log('allowedVisitorTokens = ', allowedVisitorTokens);
+            || visitorKind === 'mythical'
+            || visitorKind === 'ultra-beast'){
 
             // Loop through basic pokemon and calculate chances of each
-            var rankedZoneStats = Object.keys(currentTypeStats);
-            var basicPokemonChances = [];
-            var basicPokemonChanceTokens = [];
-            for (var key = 0; key < allowedVisitorTokens.length; key++){
-                var pokeToken = allowedVisitorTokens[key];
-                var pokeInfo = PokemonSpeciesIndex[pokeToken];
-                var pokeChance = 0;
-
-                // If this isn't the right class of pokemon, continue to next
-                if (visitorKind === 'basic' && pokeInfo.class !== ''){ continue; }
-                else if (visitorKind !== 'basic' && pokeInfo.class !== visitorKind){ continue; }
-                else if (pokeToken === 'ditto' || pokeToken === 'shiny-ditto'){ continue; }
-
-                // Increase the chance of this pokemon appearing based on type appeal (give monotypes a boost)
-                var pokeTypes = pokeInfo.types;
-                if (pokeTypes.length === 1){
-                    if (rankedZoneStats[0] === pokeTypes[0]
-                        && currentTypeStats[rankedZoneStats[0]] >= (currentTypeStats[rankedZoneStats[1]] * 1.5)){
-                        if (currentTypeStats[pokeTypes[0]] !== 0){ pokeChance += currentTypeStats[pokeTypes[0]] * 1.25; }
-                        } else {
-                        if (currentTypeStats[pokeTypes[0]] !== 0){ pokeChance += currentTypeStats[pokeTypes[0]] * 0.75; }
-                        }
-                    } else {
-                    if (currentTypeStats[pokeTypes[0]] !== 0){ pokeChance += currentTypeStats[pokeTypes[0]] * 0.5; }
-                    if (currentTypeStats[pokeTypes[1]] !== 0){ pokeChance += currentTypeStats[pokeTypes[1]] * 0.5; }
-                    }
-
-                // Increase the chance of this pokemon appearing based on group appeal
-                var groupVal = 0.03 / pokeInfo.eggGroups.length;
-                for (var key2 = 0; key2 < pokeInfo.eggGroups.length; key2++){
-                    var groupToken = pokeInfo.eggGroups[key2];
-                    if (typeof thisZoneData.currentStats['eggGroups'][groupToken] !== 'undefined'
-                        && thisZoneData.currentStats['eggGroups'][groupToken] !== 0){
-                        pokeChance += thisZoneData.currentStats['eggGroups'][groupToken] * groupVal;
-                        }
-                    }
-
-                // Increase the chance of this pokemon appearing based on region appeal
-                var regionVal = 0.02;
-                if (typeof thisZoneData.currentStats['gameRegion'][pokeInfo.gameRegion] !== 'undefined'
-                    && thisZoneData.currentStats['gameRegion'][pokeInfo.gameRegion] !== 0){
-                    pokeChance += thisZoneData.currentStats['gameRegion'][pokeInfo.gameRegion] * regionVal;
-                    }
-
-                // Increase the chance of this pokemon appearing based on colour appeal
-                if (typeof pokeInfo.colors !== 'undefined'){
-                    var colourVal = 0.001 / pokeInfo.colors.length;
-                    for (var key2 = 0; key2 < pokeInfo.colors.length; key2++){
-                        var colourToken = pokeInfo.colors[key2];
-                        if (typeof thisZoneData.currentStats['colors'][colourToken] !== 'undefined'
-                            && thisZoneData.currentStats['colors'][colourToken] !== 0){
-                            pokeChance += thisZoneData.currentStats['colors'][colourToken] * colourVal;
-                            }
-                        }
-                    }
-
-                // Count the times this species has appear ever and right now
-                var numAddedAlready = 0;
-                var numAddedCurrently = 0;
-                for (var key2 = 0; key2 < pokeInfo.relatedSpecies.length; key2++){
-                    var relToken = pokeInfo.relatedSpecies[key2];
-                    if (typeof thisZoneData.addedPokemonSpecies[relToken] !== 'undefined'){
-                        numAddedAlready += thisZoneData.addedPokemonSpecies[relToken];
-                        }
-                    if (typeof thisZoneData.currentStats['species'][relToken] !== 'undefined'){
-                        numAddedCurrently += thisZoneData.currentStats['species'][relToken];
-                        }
-                    }
-                //var numAddedAlready = thisZoneData.addedPokemonSpecies[pokeToken];
-                //var numAddedCurrently = thisZoneData.currentStats['species'][pokeToken];
-                //console.log('relatedSpecies = ', pokeInfo.relatedSpecies);
-                //console.log('numAddedAlready = ', numAddedAlready);
-                //console.log('numAddedCurrently = ', numAddedCurrently);
-
-                // Increase the chance of this pokemon appearing based on species appeal
-                if (typeof speciesAppealIndex[pokeToken] !== 'undefined'){
-                    //console.log('speciesAppealIndex['+pokeToken+'] = ', speciesAppealIndex[pokeToken]);
-                    if (pokeChance < 0){ pokeChance = 0; }
-                    pokeChance += 2;
-                    pokeChance *= speciesAppealIndex[pokeToken];
-                    //console.log('pokeChance = ', pokeChance);
+            var currentVisitorAppeal = thisZoneData.currentStats['visitorAppeal'];
+            //console.log('currentVisitorAppeal = ', currentVisitorAppeal);
+            for (var key = 0; key < currentVisitorAppeal.length; key++){
+                var pokeInfo = currentVisitorAppeal[key];
+                var pokeIndex = PokemonSpeciesIndex[pokeInfo.token];
+                if (visitorKind === 'basic' && pokeIndex.class !== ''){ continue; }
+                else if (visitorKind !== 'basic' && pokeIndex.class !== visitorKind){ continue; }
+                else if (pokeIndex.token === 'ditto' || pokeIndex.token === 'shiny-ditto'){ continue; }
+                visitorToken = pokeIndex.token;
+                break;
                 }
-
-                // Decrease the chance if there is already a colony of this species
-                if (typeof thisZoneData.addedPokemonSpecies[pokeToken] !== 'undefined'){
-                    //console.log('numAddedAlready ', pokeToken, numAddedAlready);
-                    if (numAddedAlready === 1){ pokeChance *= 2; }
-                    else { pokeChance -= numAddedAlready; }
-                    //console.log('pokeChance ', pokeToken, pokeChance);
-                    if (visitorKind !== 'basic'
-                        || numAddedCurrently >= 3){
-                        pokeChance *= -1;
-                        pokeChance -= numAddedAlready;
-                        //console.log('pokeChance ', pokeToken, pokeChance);
-                        }
-                    }
-
-                // If the chance was more than zero, push into the queue
-                if ((pokeChance > 0 || visitorKind !== 'basic')
-                    && basicPokemonChanceTokens.indexOf(pokeToken) === -1){
-                    basicPokemonChanceTokens.push(pokeToken);
-                    basicPokemonChances.push({
-                        token: pokeToken,
-                        chance: pokeChance
-                        });
-                    }
-
-                }
-
-            // If basic pokemon were queued, sort them by chance and pick most likely
-            if (basicPokemonChances.length){
-                basicPokemonChances.sort(function (pokeA, pokeB){
-                    if (pokeA.chance > pokeB.chance){ return -1; }
-                    else if (pokeA.chance < pokeB.chance){ return 1; }
-                    else { return 0; }
-                    });
-                if (basicPokemonChances[0].chance > 0
-                    || visitorKind !== 'basic'){
-                    visitorToken = basicPokemonChances[0].token;
-                    }
-                }
-            //console.log('basicPokemonChances = ', basicPokemonChances);
-            //console.log('basicPokemonChances(top20) = ', basicPokemonChances[0], basicPokemonChances[1], basicPokemonChances[2], basicPokemonChances.slice(0, 20));
-            //console.log('basicPokemonChances(top100) = ', basicPokemonChances[0], basicPokemonChances[1], basicPokemonChances[2], basicPokemonChances.slice(0, 100));
 
             } else if (typeof PokemonSpeciesIndex[visitorKind] !== 'undefined'){
 
