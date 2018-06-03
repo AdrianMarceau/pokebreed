@@ -402,8 +402,8 @@
     // Update previous gen pokemon with new next evolution data
     thisIndex.addNextEvolutions([
 
-        {base: 'mime-jr', species: 'mr-mime', method: 'affection', value: 'high', method2: 'chance', value2: 50},
-        {base: 'mime-jr', species: 'ms-mime', method: 'affection', value: 'high', method2: 'chance', value2: 50},
+        {base: 'mime-jr', species: 'mr-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'male'},
+        {base: 'mime-jr', species: 'ms-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'female'},
 
         {base: 'machamp', species: 'burst-machamp', method: 'burst-evolution', value: 'fighting-spirit', method2: 'type-surge', value2: 'fighting'},
         {base: 'nidoqueen', species: 'estrus-nidoqueen', method: 'burst-evolution', value: 'burning-passion', method2: 'type-surge', value2: 'poison'},

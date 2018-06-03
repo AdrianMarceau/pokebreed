@@ -1574,9 +1574,9 @@
         {base: 'gligar', species: 'gliscor', method: 'evolution-item', value: 'razor-fang', method2: 'type-surge', value2: ['ground', 'flying']},
         {base: 'piloswine', species: 'mamoswine', method: 'evolution-move', value: 'ancient-power', method2: 'type-surge', value2: ['ice', 'ground', 'rock']},
         {base: 'porygon2', species: 'porygon-z', method: 'evolution-item', value: 'dubious-disc', method2: 'type-appeal', value2: ['fire', 'ice', 'electric']},
-        {base: 'kirlia', species: 'gallade', method: 'evolution-stone', value: 'dawn-stone', method2: 'level-up', value2: 30, method3: 'type-appeal', value3: 'fighting', method4: 'chance', value4: 50},
+        {base: 'kirlia', species: 'gallade', method: 'evolution-stone', value: 'dawn-stone', method2: 'level-up', value2: 30, method3: 'type-appeal', value3: 'fighting', method4: 'gender', value4: 'male'},
         {base: 'nosepass', species: 'probopass', method: 'evolution-location', value: 'magnetic-field', method2: 'type-surge', value2: 'electric'},
-        {base: 'snorunt', species: 'froslass', method: 'evolution-stone', value: 'dawn-stone', method2: 'level-up', value2: 42, method3: 'type-appeal', value3: 'ghost', method4: 'chance', value4: 50},
+        {base: 'snorunt', species: 'froslass', method: 'evolution-stone', value: 'dawn-stone', method2: 'level-up', value2: 42, method3: 'type-appeal', value3: 'ghost', method4: 'gender', value4: 'female'},
         ]);
 
 })();

@@ -229,14 +229,14 @@
                 species: 'unfezant-m',
                 method: 'level-up',
                 value: 32,
-                method2: 'chance',
-                value2: 50
+                method2: 'gender',
+                value2: 'male'
                 }, {
                 species: 'unfezant-f',
                 method: 'level-up',
                 value: 32,
-                method2: 'chance',
-                value2: 50
+                method2: 'gender',
+                value2: 'female'
                 }]
             },
         'unfezant-m': {

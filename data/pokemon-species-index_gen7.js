@@ -532,15 +532,14 @@
             height: 0.6,
             weight: 4.8,
             colors: ['black', 'gray', 'red', 'purple'],
-            evos: ['salazzle'],
             eggCycles: 20,
             eggGroups: ['monster', 'dragon'],
             nextEvolutions: [{
                 species: 'salazzle',
                 method: 'level-up',
                 value: 33,
-                method2: 'chance',
-                value2: 12.5
+                method2: 'gender',
+                value2: 'female'
                 }]
             },
         'salazzle': {
@@ -549,13 +548,14 @@
             name: 'Salazzle',
             number: 758,
             types: ['poison', 'fire'],
-            gender: 'F',
+            genderRatio: {female: 1.000},
             baseStats: {hp: 68, phAttack: 64, phDefense: 60, spAttack: 111, spDefense: 60, speed: 117},
             abilities: {0: 'corrosion', hidden: 'oblivious'},
             height: 1.2,
             weight: 22.2,
             colors: ['gray', 'purple', 'pink'],
             eggCycles: 20,
+            eggPartner: 'salandit',
             eggGroups: ['monster', 'dragon'],
             prevEvolution: 'salandit'
             },
