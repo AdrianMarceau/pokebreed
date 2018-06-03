@@ -1682,7 +1682,7 @@
         'mega-banette': {
             order: thisIndex.afterOrder('banette'),
             token: 'mega-banette',
-            species: 'Mega Banette',
+            name: 'Mega Banette',
             formClass: 'mega-evolution',
             formToken: 'mega',
             baseSpecies: 'banette',
