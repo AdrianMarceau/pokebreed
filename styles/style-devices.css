@@ -62,8 +62,7 @@
         image-rendering: pixelated;                 /* CSS3 Proposed?       */
         -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
     }
-    .panel .overview.main .details.pokemon .list.odd li.odd .sprite,
-    .panel .overview.main .details.pokemon .list.even li.even .sprite {
+    .panel .overview.main .details.pokemon .list li.jump .sprite {
         transform: translate3d(0, -2px, 0);
     }
 
@@ -183,8 +182,7 @@
         image-rendering: pixelated;                 /* CSS3 Proposed?       */
         -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
     }
-    .panel .overview.main .details.pokemon .list.odd li.odd .sprite,
-    .panel .overview.main .details.pokemon .list.even li.even .sprite {
+    .panel .overview.main .details.pokemon .list li.jump .sprite {
         transform: translate3d(0, -2px, 0);
     }
     .panel .buttons .controls .control.start {
@@ -224,8 +222,7 @@
         width: 40px;
         height: 30px;
     }
-    .panel .overview.main .details.pokemon .list.odd li.odd .sprite,
-    .panel .overview.main .details.pokemon .list.even li.even .sprite {
+    .panel .overview.main .details.pokemon .list li.jump .sprite {
         transform: translate3d(0, -1px, 0);
     }
 

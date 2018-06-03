@@ -623,20 +623,7 @@ body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li.
     -webkit-animation: none;
     animation: none;
 }
-
-/*
-.panel .overview.main .details.pokemon .list.pokemon li[data-dnote="3"] > div .swrap { filter: brightness(0.6); opacity: 0.6; }
-.panel .overview.main .details.pokemon .list.pokemon li[data-dnote="2"] > div .swrap { filter: brightness(0.4); opacity: 0.4; }
-.panel .overview.main .details.pokemon .list.pokemon li[data-dnote="1"] > div .swrap { filter: brightness(0.2); opacity: 0.2; }
-.panel .overview.main .details.pokemon .list.pokemon li[data-dnote="0"] > div .swrap { filter: brightness(0.0); opacity: 0.0; }
-*/
-
-/*
-body:not[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li[data-dnote="2"] > div .swrap { filter: brightness(0.50); opacity: 0.50; }
-body:not[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li[data-dnote="1"] > div .swrap { filter: brightness(0.25); opacity: 0.25; }
-*/
-
-.panel .overview.main .details.pokemon .list.pokemon li.fainted {
+.panel .overview.main .details.pokemon .list.pokemon li[data-dnote="0"] {
     -webkit-animation: SpriteFadeOut 0.6s linear;
     -webkit-animation-iteration-count: 1;
     -webkit-animation-fill-mode: forwards;
@@ -644,11 +631,10 @@ body:not[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }
-body[data-speed="pause"] .panel .overview.main .details.pokemon .list.pokemon li.fainted,
-body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li.fainted {
+body[data-speed="pause"] .panel .overview.main .details.pokemon .list.pokemon li[data-dnote="0"],
+body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li[data-dnote="0"] {
     -webkit-animation: none;
     animation: none;
-    display: none;
 }
 
 .panel img.sprite {
@@ -723,8 +709,7 @@ body[data-speed="warp"] .panel .overview.main .details.pokemon .list .sprite {
     -webkit-transition: background-image 0;
     transition: background-image 0;
 }
-.panel .overview.main .details.pokemon .list.odd li.odd .sprite,
-.panel .overview.main .details.pokemon .list.even li.even .sprite {
+.panel .overview.main .details.pokemon .list li.jump .sprite {
     transform: translate3d(0, -1px, 0);
 }
 .panel .overview.main .details.pokemon .list .sprite.overlay {
@@ -1051,6 +1036,7 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
 
 
 .panel .overview.visitors {
+    display: block;
     float: none;
     clear: both;
     margin: 0 auto;
@@ -1064,6 +1050,19 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     position: absolute;
     right: 20px;
     transform: translate(0, calc(-100% - 5px));
+}
+body[data-speed="pause"] .panel .overview.visitors,
+body[data-speed="warp"] .panel .overview.visitors {  transition: max-height 0; }
+body[data-speed="fast"] .panel .overview.visitors { transition: max-height 0.25s; }
+body[data-speed="normal"] .panel .overview.visitors { transition: max-height 0.50s;  }
+body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s;  }
+.panel .overview.visitors.hidden {
+    opacity: 0;
+    max-height: 0;
+}
+.panel .overview.visitors:not(.hidden) {
+    opacity: 1;
+    max-height: 75px;
 }
 .panel .overview.visitors .title {
     margin: 0 auto;

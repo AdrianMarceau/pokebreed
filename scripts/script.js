@@ -157,7 +157,7 @@
         $panelMainOverview.find('.details.zone .title').bind('click', function(e){
             e.preventDefault();
             var $title = $(this);
-            $('html, body').animate({scrollTop: $title.offset().top}, Math.ceil(300 * dayTimeoutDurationMultiplier));
+            $('html, body').animate({scrollTop: $title.offset().top}, 300);
             });
 
         // Update any scroll wrappers when the window resizes
@@ -316,16 +316,13 @@
 
             // If this is a play-speed related button
             if (control.match(/^(play|pause|fast|slow|warp)$/)){
-                var speedValue = 1200; //
+                var speedValue = 1200;
                 var speedToken = 'normal';
                 if (control === 'pause'){ speedValue = 99999999999; speedToken = 'pause'; }
                 else if (control === 'warp'){ speedValue = 100; speedToken = 'warp'; } // 0.1s
                 else if (control === 'fast'){ speedValue = 600; speedToken = 'fast'; } // 0.6s
                 else if (control === 'slow'){ speedValue = 2400; speedToken = 'slow'; } // 2.4s
-                //else if (control === 'play'){ speedValue = 1200; speedToken = 'normal'; } // 1.2s
                 dayTimeoutDuration = speedValue;
-                dayTimeoutDurationMultiplier = dayTimeoutDuration / dayTimeoutDurationBase;
-                if (control.match(/^(pause|warp)$/)){ dayTimeoutDurationMultiplier = 0; }
                 $('body').attr('data-speed', speedToken);
                 dayTimeoutDurationToken = speedToken;
                 $controlButtons.filter('.speed').removeClass('active');
@@ -825,7 +822,6 @@
         dayTimeout = false;
         dayTimeoutStarted = false;
         dayTimeoutDuration = 1200;
-        dayTimeoutDurationMultiplier = 1;
 
         // Update the overiew with cleared data
         updateOverview();
@@ -1592,11 +1588,11 @@
     }
 
     // Define a function for getting an array of zone pokemon matching a filter
-    function getZonePokemonByFilter(filterParams, matchMode){
-
+    function getZonePokemonByFilter(filterParams, sortResults, matchMode){
         //console.log('getZonePokemonByFilter(filterParams, matchMode):before', filterParams, matchMode);
         if (typeof filterParams !== 'object'){ return false; }
         else if (jQuery.isEmptyObject(filterParams)){ return false; }
+        if (typeof sortResults === 'undefined'){ sortResults = true; }
         if (typeof matchMode !== 'string'){ matchMode = 'and'; }
         matchMode = matchMode.toLowerCase();
         if (matchMode !== 'and' && matchMode !== 'or'){ matchMode = 'and'; }
@@ -1627,19 +1623,21 @@
                         }
                 }
             }
-        pokemonMatches.sort(function(pokeA, pokeB){
-            var eggA = pokeA.eggCycles > 0 ? true : false;
-            var eggB = pokeB.eggCycles > 0 ? true : false;
-            var orderA = PokemonSpeciesDisplayOrder.indexOf(pokeA.token);
-            var orderB = PokemonSpeciesDisplayOrder.indexOf(pokeB.token);
-            if (!eggA && eggB){ return -1; }
-            else if (eggA && !eggB){ return 1; }
-            else if (orderA < orderB){ return -1; }
-            else if (orderA > orderB){ return 1; }
-            else if (pokeA.order < pokeB.order){ return -1; }
-            else if (pokeA.order > pokeB.order){ return 1; }
-            else { return 0; }
-            });
+        if (sortResults){
+            pokemonMatches.sort(function(pokeA, pokeB){
+                var eggA = pokeA.eggCycles > 0 ? true : false;
+                var eggB = pokeB.eggCycles > 0 ? true : false;
+                var orderA = PokemonSpeciesDisplayOrder.indexOf(pokeA.token);
+                var orderB = PokemonSpeciesDisplayOrder.indexOf(pokeB.token);
+                if (!eggA && eggB){ return -1; }
+                else if (eggA && !eggB){ return 1; }
+                else if (orderA < orderB){ return -1; }
+                else if (orderA > orderB){ return 1; }
+                else if (pokeA.order < pokeB.order){ return -1; }
+                else if (pokeA.order > pokeB.order){ return 1; }
+                else { return 0; }
+                });
+            }
 
         // Return collected and sorted matches
         return pokemonMatches;
@@ -1650,19 +1648,19 @@
     function getZonePokemonByID(pokemonID){
         //console.log('getZonePokemonByID(pokemonID)', pokemonID);
         if (typeof pokemonID !== 'number'){ return false; }
-        var pokemonMatches = getZonePokemonByFilter({id:pokemonID});
+        var pokemonMatches = getZonePokemonByFilter({id:pokemonID}, false);
         return pokemonMatches;
     }
     function getZonePokemonByToken(pokemonToken){
         //console.log('getZonePokemonByToken(pokemonToken)', pokemonToken);
         if (typeof pokemonToken !== 'string'){ return false; }
-        var pokemonMatches = getZonePokemonByFilter({token:pokemonToken});
+        var pokemonMatches = getZonePokemonByFilter({token:pokemonToken}, false);
         return pokemonMatches;
     }
     function getZonePokemonByType(pokemonType){
         //console.log('getZonePokemonByType(pokemonType)', pokemonType);
         if (typeof pokemonType1 !== 'string'){ return false; }
-        var pokemonMatches = getZonePokemonByFilter({type:pokemonType}, 'or');
+        var pokemonMatches = getZonePokemonByFilter({type:pokemonType}, false, 'or');
         return pokemonMatches;
     }
 
@@ -1769,6 +1767,9 @@
 
         // -- POKEMON CANVAS SPRITES
 
+        // Remove any previously fainted pokemon from the canvas now
+        $pokeList.find('li.fainted').remove();
+
         // Sort collected species tokens to keep things together
         var sortedSpeciesTokens = sortSpeciesTokensByOrder(Object.keys(pokeSpecies));
         //if (simulationStarted){ var sortedSpeciesTokens = sortSpeciesTokensByOrder(Object.keys(pokeSpecies), true); }
@@ -1800,7 +1801,7 @@
         var numRepelsShown = 0;
 
         // Update the stats list for the elemental type appeals
-        $('.stats .list', $panelTypesOverview).empty();
+        //$('.stats .list', $panelTypesOverview).empty();
         if (!jQuery.isEmptyObject(thisZoneData.currentStats['types'])){
             var attractTypes = {};
             var repelTypes = {};
@@ -1830,7 +1831,8 @@
                         '</li>';
                     numAttractsShown++;
                     }
-                $('.stats .list.attract', $panelTypesOverview).append(statListMarkup);
+                //$('.stats .list.attract', $panelTypesOverview).append(statListMarkup);
+                $('.stats .list.attract', $panelTypesOverview).html(statListMarkup);
                 }
             if (!jQuery.isEmptyObject(repelTypes)){
                 var sortedKeys = getSortedKeys(repelTypes);
@@ -1852,7 +1854,8 @@
                         '</li>';
                     numRepelsShown++;
                     }
-                $('.stats .list.repel', $panelTypesOverview).append(statListMarkup);
+                //$('.stats .list.repel', $panelTypesOverview).append(statListMarkup);
+                $('.stats .list.repel', $panelTypesOverview).html(statListMarkup);
                 }
             }
 
@@ -1888,7 +1891,7 @@
         // Update the current species list with current numbers
         var $currentSpeciesCounter = $('.sub.current .count', $panelSpeciesOverview);
         var $currentSpeciesList = $('.list.current', $panelSpeciesOverview);
-        $currentSpeciesList.empty();
+        //$currentSpeciesList.empty();
         var speciesListMarkup = '';
         var totalEggCount = 0;
         if (!jQuery.isEmptyObject(currentPokemonSpecies)){
@@ -1936,12 +1939,13 @@
                 '</li>';
             }
         $currentSpeciesCounter.html(numCurrentSpecies);
-        $currentSpeciesList.append(speciesListMarkup);
+        //$currentSpeciesList.append(speciesListMarkup);
+        $currentSpeciesList.html(speciesListMarkup);
 
         // Update the alltime species list with past numbers
         var $alltimeSpeciesCounter = $('.sub.alltime .count', $panelSpeciesOverview);
         var $alltimeSpeciesList = $('.list.alltime', $panelSpeciesOverview);
-        $alltimeSpeciesList.empty();
+        //$alltimeSpeciesList.empty();
         var speciesListMarkup = '';
         if (!jQuery.isEmptyObject(addedPokemonSpecies)){
 
@@ -1989,7 +1993,8 @@
                 '</li>';
             }
         $alltimeSpeciesCounter.html(numAllTimeSpecies);
-        $alltimeSpeciesList.append(speciesListMarkup);
+        //$alltimeSpeciesList.append(speciesListMarkup);
+        $alltimeSpeciesList.html(speciesListMarkup);
 
         // Update the visitor appeal list with most likely species
         if (typeof thisZoneData.currentStats['visitorAppeal'] !== 'undefined'
@@ -2064,11 +2069,8 @@
 
                 // Append generated visitor list markup to the panel (fade in if necessary)
                 var $visitorList = $('.list', $panelVisitorsOverview);
-                $visitorList.empty().append(visitorListMarkup);
-                if ($panelVisitorsOverview.hasClass('hidden')){
-                    $panelVisitorsOverview.css({opacity:0,maxHeight:0}).removeClass('hidden');
-                    $panelVisitorsOverview.animate({opacity:1,maxHeight:'74px'},{duration:600,easing:'linear',queue:false});
-                    }
+                $visitorList.html(visitorListMarkup);
+                $panelVisitorsOverview.removeClass('hidden');
 
                 }
 
@@ -2093,15 +2095,21 @@
         // Collect a reference to this pokemon's cell
         var $pokeCell = $('li[data-id="'+pokeInfo.id+'"]', $panelPokemonSpriteWrapper);
 
+        // Check to see if pokemon should have jumping animation
+        var jumpUp = false;
+        if (cellKey % 2 === 0 && thisZoneData.day % 2 === 0){ jumpUp = true; }
+        else if (cellKey % 2 !== 0 && thisZoneData.day % 2 !== 0){ jumpUp = true; }
+        if (jumpUp){ $pokeCell.addClass('jump'); }
+        else { $pokeCell.removeClass('jump'); }
+
         // Update the odd/even class on this pokemon's cell
-        var isEven = cellKey % 2 === 0 ? true : false;
-        if (isEven){ $pokeCell.removeClass('odd').addClass('even'); }
-        else { $pokeCell.removeClass('even').addClass('odd'); }
+        //var isEven = cellKey % 2 === 0 ? true : false;
+        //if (isEven){ $pokeCell.removeClass('odd').addClass('even'); }
+        //else { $pokeCell.removeClass('even').addClass('odd'); }
 
         // Change the sprite class based on egg or not
-        var justHatched = false;
-        if (!isEgg && $pokeCell.hasClass('egg')){ justHatched = true; $pokeCell.removeClass('egg').addClass('pokemon'); }
-        else if (isEgg && !$pokeCell.hasClass('egg')){ $pokeCell.removeClass('pokemon').addClass('egg'); }
+        var justHatched = pokeInfo.eggCycles === 0 && pokeInfo.growthCycles === 0 ? true : false;
+        if (justHatched){ $pokeCell.removeClass('egg').addClass('pokemon'); }
 
         // Update the position of this pokemon based on cell key
         var colPercent = 100 / thisZoneData.sizeCols;
@@ -2115,18 +2123,16 @@
         // Collect image data for this pokemon's icon sprite
         var $spriteImage = $pokeCell.find('.sprite:not(.overlay)').first();
         var spriteData = getPokemonIcon(pokeInfo.token, isEgg, pokeInfo, true);
+        var newImage = spriteData.image;
 
         // Check if this pokemon has just evolved or changed forms
         var imageChanged = false;
-        var currentImage = $spriteImage.css('background-image');
-        if (typeof currentImage !== 'undefined'){
-            currentImage = currentImage.replace(/^url\(\"?(.*?)\"?\)$/i, '$1');
-            currentImage = currentImage.replace(appBaseHref, '');
-            }
+        var currentImage = pokeInfo.currentImage || false;
+        if (currentImage !== spriteData.image){ imageChanged = true; }
+        pokeInfo.currentImage = newImage;
         //console.log('pokeInfo = ', pokeInfo.id, pokeInfo.token);
         //console.log('currentImage = ', currentImage);
-        //console.log('spriteData.image = ', spriteData.image);
-        if (currentImage !== spriteData.image){ imageChanged = true; }
+        //console.log('newImage = ', newImage);
 
         // If this Pokemon has just hatched, remove overlay and replace sprite
         if (justHatched){ $pokeCell.find('.sprite.overlay').remove(); }
@@ -2134,7 +2140,7 @@
         // If this pokemon's current image doesn't match what it should be, change it now
         if (!isEgg && imageChanged){
 
-            $spriteImage.css({backgroundImage:'url("'+ spriteData.image +'")'});
+            $spriteImage.css({backgroundImage:'url("'+ newImage +'")'});
             $spriteImage.attr('data-token', pokeInfo.token);
 
             }
@@ -2150,12 +2156,6 @@
                 var hasAdultTag = $pokeCell.find('.tag.adult').length;
                 if (!hasAdultTag){ $pokeCell.find('> div').append('<span class="tag adult"></span>'); }
                 $pokeCell.attr('data-dnote', Math.ceil((pokeInfo.growthCycles / pokeIndex.lifePoints) * 10));
-                }
-
-            // Add the fainted class to this cell if applicable and not already there
-            if (hasFainted
-                && !$pokeCell.hasClass('fainted')){
-                $pokeCell.addClass('fainted');
                 }
 
             }
@@ -2174,26 +2174,24 @@
         var $pokeWrap = $('.pokemon .wrap', $panelMainOverview);
         var $pokeList = $('.list.pokemon', $pokeWrap);
         var $pokeItem = $('li[data-id="'+ id +'"]', $pokeList);
+
         // Loop through list of current pokemon looking for ID
         for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
             var pokeInfo = thisZoneData.currentPokemon[key];
             if (pokeInfo.id === id){
-                // Move this pokemon's data to the fainted array and remove from display
+
+                // Move this pokemon's data to the fainted array and update display class
                 thisZoneData.faintedPokemon.push(thisZoneData.currentPokemon.splice(key, 1));
-                $pokeItem.css({opacity:1}).stop().animate({opacity:0},{
-                    duration: Math.ceil(600 * dayTimeoutDurationMultiplier),
-                    easing: 'linear',
-                    queue: false,
-                    complete: function(){
-                        $(this).remove();
-                        }
-                    });
+                $pokeItem.addClass('fainted');
+
                 // Create an entry for this species in the global count if not exists
                 var faintedPokemonSpecies = thisZoneData.faintedPokemonSpecies;
                 if (typeof faintedPokemonSpecies[pokeInfo.token] === 'undefined'){ faintedPokemonSpecies[pokeInfo.token] = 0; }
                 faintedPokemonSpecies[pokeInfo.token]++;
+
                 // Update the overview now that it's been removed
                 updateOverview();
+
                 // Push an event to the analytics
                 if (typeof ga !== 'undefined'){
                     ga('send', {
@@ -2203,6 +2201,7 @@
                         eventLabel: pokeInfo.token + ' removed from zone'
                         });
                     }
+
                 }
             }
     }
@@ -2437,8 +2436,6 @@
     var dayTimeout = false;
     var dayTimeoutStarted = false;
     var dayTimeoutDuration = 1200;
-    var dayTimeoutDurationBase = 1200;
-    var dayTimeoutDurationMultiplier = 1;
     var dayTimeoutDurationToken = 'normal';
     function updateDay(updateCycles, allowVisitors){
         if (typeof updateCycles !== 'boolean'){ updateCycles = true; }
@@ -2469,9 +2466,9 @@
         //console.log('zoneDate = ', zoneDate);
 
         // Update the odd/even class on the pokemon sprite wrapper
-        var isEven = thisZoneData.day % 2 === 0 ? true : false;
-        if (isEven){ $panelPokemonSpriteWrapper.removeClass('odd').addClass('even'); }
-        else { $panelPokemonSpriteWrapper.removeClass('even').addClass('odd'); }
+        //var isEven = thisZoneData.day % 2 === 0 ? true : false;
+        //if (isEven){ $panelPokemonSpriteWrapper.removeClass('odd').addClass('even'); }
+        //else { $panelPokemonSpriteWrapper.removeClass('even').addClass('odd'); }
 
         // Send an analytics event for the amount of time that has passed
         if (typeof ga !== 'undefined'){ sendSessionAnalytics(thisZoneData.day); }
