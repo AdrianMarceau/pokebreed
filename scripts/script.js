@@ -751,35 +751,43 @@
         // Loop through all the starters again and collect their tokens (also update orders)
         var starterCounts = {};
         var starterPokemon = [];
+        var starterPokemonTokens = [];
         var starterSeed = 0;
         for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
             var starterInfo = thisZoneData.currentPokemon[key];
-            starterPokemon.push(starterInfo.token);
+            starterPokemon.push([starterInfo.token, starterInfo.gender]);
             starterInfo.order = key;
             starterSeed += PokemonSpeciesDexOrder.indexOf(starterInfo.token) + 1;
-            if (typeof starterCounts[starterInfo.token] === 'undefined'){ starterCounts[starterInfo.token] = 0; }
-            starterCounts[starterInfo.token]++;
+            var countToken = starterInfo.token+'/'+starterInfo.gender;
+            if (typeof starterCounts[countToken] === 'undefined'){ starterCounts[countToken] = 0; }
+            if (starterPokemonTokens.indexOf(starterInfo.token) === -1){ starterPokemonTokens.push(starterInfo.token); }
+            starterCounts[countToken]++;
             }
-        //console.log('starterPokemon = ', starterPokemon);
-        //console.log('starterSeed = ', starterSeed);
+        console.log('starterPokemon = ', starterPokemon);
+        console.log('starterSeed = ', starterSeed);
 
         // Push this list of starters into the history array
         StarterPokemonHistory.push(starterPokemon);
         StarterPokemonSeed = starterSeed;
-        //console.log('StarterPokemonHistory = ', StarterPokemonHistory);
-        //console.log('StarterPokemonSeed = ', StarterPokemonSeed);
+        console.log('StarterPokemonHistory = ', StarterPokemonHistory);
+        console.log('StarterPokemonSeed = ', StarterPokemonSeed);
 
         // Generate the seed text to add to the footer for copy/paste
         var starterList = [];
-        var starterTokens = Object.keys(starterCounts);
-        for (var key = 0; key < starterTokens.length; key++){
-            var starterToken = starterTokens[key];
+        for (var key = 0; key < starterPokemonTokens.length; key++){
+            var starterToken = starterPokemonTokens[key];
             var starterInfo = PokemonSpeciesIndex[starterToken];
-            var starterCount = starterCounts[starterToken];
-            starterList.push(starterInfo.name + ' x' + starterCount);
+            var starterName = starterInfo.name;
+            var countStrings = [];
+            if (typeof starterCounts[starterToken+'/male'] !== 'undefined'){ countStrings.push(starterCounts[starterToken+'/male']+'m'); }
+            if (typeof starterCounts[starterToken+'/female'] !== 'undefined'){ countStrings.push(starterCounts[starterToken+'/female']+'f'); }
+            if (typeof starterCounts[starterToken+'/none'] !== 'undefined'){ countStrings.push(starterCounts[starterToken+'/none']); }
+            countStrings = countStrings.sort(function(a,b){ return a > b ? 1 : (a < b ? -1 : 0); });
+            starterName += ' &times;'+countStrings.join('/');
+            starterList.push(starterName);
             }
         var starterText = '[PBS | '+ starterList.join(' / ') +' | v'+ appVersionNumber +']';
-        $('.starter-pokemon .seed', $panelButtons).text(starterText);
+        $('.starter-pokemon .seed', $panelButtons).html(starterText);
         $('.starter-pokemon', $panelButtons).removeClass('hidden');
 
     }
@@ -868,8 +876,10 @@
         var prevStarters = StarterPokemonHistory[StarterPokemonHistory.length - 1];
         if (typeof prevStarters !== 'undefined'){
             for (var key = 0; key < prevStarters.length; key++){
-                var starterToken = prevStarters[key];
-                addPokemonToZone(starterToken, false);
+                var starterInfo = prevStarters[key];
+                var starterToken = starterInfo[0];
+                var starterGender = starterInfo[1];
+                addPokemonToZone(starterToken, false, false, {gender:starterGender});
                 }
             }
 
