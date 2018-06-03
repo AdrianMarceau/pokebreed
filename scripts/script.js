@@ -883,6 +883,9 @@
         // First end the current simulation
         endCurrentSimulation();
 
+        // Reset the global randomization seed
+        Math.seed = 1;
+
         // Hide any control buttons that were still showning
         $('.controls .control', $panelButtons).addClass('hidden');
 
@@ -1021,7 +1024,7 @@
         var filter = '';
         if (typeof info.variantHueOffset !== 'undefined'){ filter += 'hue-rotate('+ info.variantHueOffset +'deg) '; }
         if (typeof info.variantSatOffset !== 'undefined'){ filter += 'saturate('+ info.variantSatOffset +'%) '; }
-        filter = filter.length ? '-webkit-filter: '+ filter +'; filter: '+ filter +'; ' : '';
+        iconStyle += filter.length ? '-webkit-filter: '+ filter +'; filter: '+ filter +'; ' : '';
 
         var markup = '';
         if (egg){
@@ -1077,6 +1080,8 @@
             var extraMarkup = '';
             if (pokeInfo.watchFlag === true){ extraMarkup += '<span class="tag watched"></span> '; }
             if (pokeInfo.isVisitor === true){ extraMarkup += '<span class="tag visitor"></span> '; }
+            if (pokeInfo.gender === 'male'){ extraMarkup += '<span class="gender male"></span> '; }
+            else if (pokeInfo.gender === 'female'){ extraMarkup += '<span class="gender female"></span> '; }
             if (pokeInfo.reachedAdulthood === true){ extraMarkup += '<span class="tag adult"></span> '; }
             if (pokeInfo.isVisitor === true && pokeInfo.daysOld == 0){ itemClass += 'new '; }
             if (pokeInfo.reachedAdulthood === true && pokeInfo.growthCycles <= 0){ itemClass += 'fainted '; }
@@ -1103,6 +1108,8 @@
             var extraMarkup = '';
             if (pokeInfo.watchFlag === true){ extraMarkup += '<span class="tag watched"></span> '; }
             if (pokeInfo.isVisitor === true){ extraMarkup += '<span class="tag visitor"></span> '; }
+            if (pokeInfo.gender === 'male'){ extraMarkup += '<span class="gender male"></span> '; }
+            else if (pokeInfo.gender === 'female'){ extraMarkup += '<span class="gender female"></span> '; }
             if (pokeInfo.daysOld == 0){ itemClass += 'new '; }
             cellMarkup += '<li ' +
                 'class="'+ itemClass +'" ' +
@@ -1468,6 +1475,29 @@
             eggCycles = Math.ceil(eggCycles);
             }
 
+        // Calculate this pokemon's gender based on ratios
+        var pokeGender = 'none';
+        if (!indexData.hasNoGender){
+            if (indexData.genderRatio.male === 0.5
+                && indexData.genderRatio.female === 0.5){
+                pokeGender = addedPokemonSpecies[pokemonToken] % 2 !== 0 ? 'female' : 'male';
+                } else if (indexData.genderRatio.male === 1){
+                pokeGender = 'male';
+                } else if (indexData.genderRatio.female === 1){
+                pokeGender = 'female';
+                } else {
+                var chanceValue = Math.seededRandomChance();
+                var rareGender = indexData.genderRatio.female < indexData.genderRatio.male ? 'female' : 'male';
+                if (addedPokemonSpecies[pokemonToken] > 1){
+                    pokeGender = chanceValue <= (indexData.genderRatio[rareGender] * 100) ? rareGender : (rareGender != 'female' ? 'female' : 'male');
+                    } else {
+                    pokeGender = rareGender;
+                    }
+
+                }
+            }
+        //console.log('pokemonToken / pokeGender = ', pokemonToken, pokeGender);
+
         // Generate new pokemon data with required parameters
         var newPokemon = {
             order: thisZoneData.currentPokemon.length,
@@ -1475,6 +1505,7 @@
             token: pokemonToken,
             types: indexData.types,
             eggCycles: eggCycles,
+            gender: pokeGender,
             daysOld: 0,
             growthCycles: 0,
             growthCooldown: 0,
@@ -2474,7 +2505,7 @@
         if (typeof ga !== 'undefined'){ sendSessionAnalytics(thisZoneData.day); }
 
         // If this is the very first day, let's update our random seed
-        if (thisZoneData.day ===  1){
+        if (thisZoneData.day === 1){
             Math.seed = 1;
             for (var i = 0; i < thisZoneData.currentPokemon.length; i++){
                 var pokeToken = thisZoneData.currentPokemon[i].token;
@@ -2814,6 +2845,12 @@
                             return 1 + ((thisZoneData.currentPokemon.length - 1) * 10);
                             }
 
+                        // Gender-based evolutions are triggered immediately if the pokemon is of a specific sex
+                        if (methodToken === 'gender'
+                            && pokemonInfo.gender === methodValue){
+                            return 100;
+                            }
+
                         // Burst and mega evolutions trigger automatically when this pokemon reaches adulthood
                         if ((methodToken === 'burst-evolution'
                             || methodToken === 'mega-evolution')
@@ -3079,8 +3116,8 @@
                 var pokemonInfo = thisZoneData.currentPokemon[key];
                 // Add to species of egg array based on remaining cycles
                 if (pokemonInfo.eggCycles === 0){
-                    if (typeof pokeSpecies[pokemonInfo.token] == 'undefined'){ pokeSpecies[pokemonInfo.token] = 0; }
-                    pokeSpecies[pokemonInfo.token] += 1;
+                    if (typeof pokeSpecies[pokemonInfo.token] == 'undefined'){ pokeSpecies[pokemonInfo.token] = {male:0,female:0,none:0}; }
+                    pokeSpecies[pokemonInfo.token][pokemonInfo.gender] += 1;
                     } else if (pokemonInfo.eggCycles >= 1){
                     if (typeof pokeEggs[pokemonInfo.token] == 'undefined'){ pokeEggs[pokemonInfo.token] = 0; }
                     pokeEggs[pokemonInfo.token] += 1;
@@ -3093,6 +3130,7 @@
                     }
                 }
             }
+        //console.log('pokeSpecies = ', pokeSpecies);
 
         // Loop through species and check to see if any should breed
         if (!jQuery.isEmptyObject(pokeSpecies)){
@@ -3103,11 +3141,11 @@
            //console.log('----------\nChecking breeding options for sortedSpeciesTokens', sortedSpeciesTokens);
 
             // Pre-count the number of Ditto on the field
-            var existingDitto = typeof pokeSpecies['ditto'] !== 'undefined' ? pokeSpecies['ditto'] : 0;
+            var existingDitto = typeof pokeSpecies['ditto'] !== 'undefined' ? pokeSpecies['ditto']['none'] : 0;
             var existingShinyDitto = 0;
             if (typeof pokeSpecies['shiny-ditto'] !== 'undefined'){
-                existingDitto += pokeSpecies['shiny-ditto'];
-                existingShinyDitto += pokeSpecies['shiny-ditto'];
+                existingDitto += pokeSpecies['shiny-ditto']['none'];
+                existingShinyDitto += pokeSpecies['shiny-ditto']['none'];
                 }
 
             // First generate an array of eggs to add (by species) with counts
@@ -3133,7 +3171,7 @@
                 var baseEvolution = pokemonGetBaseEvolution(pokeToken, true, false);
                 var baseEvolutionInfo = PokemonSpeciesIndex[baseEvolution];
 
-                //console.log('pokeToken('+pokeToken+')A | baseEvolution('+baseEvolution+')');
+                //console.log('pokeToken('+pokeToken+') | baseEvolution('+baseEvolution+')');
 
                 // Define new unit count at zero with an empty token
                 var newUnits = 0;
@@ -3157,22 +3195,51 @@
                     // No egg partner exists so we can proceed normally
                     //console.log('|- '+baseEvolution+' has no egg partner, proceed normally');
 
-                    var existingUnits = pokeSpecies[pokeToken];
-                    var currentEggs = typeof pokeEggs[baseEvolution] !== 'undefined' ? pokeEggs[baseEvolution] : 0;
-                    //console.log('|- existingUnits('+pokeToken+'/'+existingUnits+') | currentEggs('+baseEvolution+'/'+currentEggs+')');
+                    // Not legendary and not single-gender so we can proceed normally
+                    //console.log('|- '+baseEvolution+' is not legendary & not single-gendered, proceed normally');
 
-                    // Only breed if there are enough pairs to do so (including Ditto)
-                    if ((existingUnits + existingDitto) >= 2){
-                        newUnits = Math.floor((existingUnits + existingDitto) / 2);
-                        //console.log('|- newUnits('+newUnits+') | currentEggs('+currentEggs+')');
-                        // Ensure we do not create more units then there already are eggs
-                        if (newUnits > currentEggs){
-                            newUnits -= currentEggs;
-                            //console.log('(!) newUnits -= currentEggs = newUnits('+newUnits+')');
+                    // Count existing eggs for this species
+                    var currentEggs = typeof pokeEggs[baseEvolution] !== 'undefined' ? pokeEggs[baseEvolution] : 0;
+                    //console.log('|- currentEggs('+baseEvolution+'/'+currentEggs+')');
+
+                    // Genderless pokemon breed with any other and ditto, otherwise pairs are required
+                    if (indexInfo.speciesGender === 'none'){
+
+                        // NONE gendered pokemon can make exactly half their total number plus ditto
+                        var eggGenerators = pokeSpecies[pokeToken]['none'] + existingDitto;
+                        var newUnits = Math.floor(eggGenerators / 2);
+                        //console.log('|- NONE | eggGenerators('+pokeToken+'/'+eggGenerators+') | newUnits('+newUnits+')');
+
+                        } else {
+
+                        // MALE / FEMALE gendered pokemon can make as many as there are females or dittos
+                        if (pokeSpecies[pokeToken]['female'] === pokeSpecies[pokeToken]['male']){
+                            var eggGenerators = pokeSpecies[pokeToken]['female'] + pokeSpecies[pokeToken]['male'] + existingDitto;
+                            var newUnits = Math.floor(eggGenerators / 2);
+                            //console.log('|- F=M | eggGenerators('+pokeToken+'/'+eggGenerators+') | newUnits('+newUnits+')');
+                        } else if (pokeSpecies[pokeToken]['female'] < pokeSpecies[pokeToken]['male']){
+                            var eggGenerators = pokeSpecies[pokeToken]['female'] + existingDitto;
+                            var newUnits = Math.min(eggGenerators, pokeSpecies[pokeToken]['male']);
+                            //console.log('|- F<M | eggGenerators('+pokeToken+'/'+eggGenerators+') | newUnits('+newUnits+')');
+                            //console.log('|- pokeSpecies['+pokeToken+'] = ', pokeSpecies[pokeToken]);
+                            //console.log('|- existingDitto = ', existingDitto);
+                            //console.log('|- eggGenerators = ', eggGenerators);
+                            //console.log('|- newUnits = ', newUnits);
                             } else {
-                            newUnits = 0;
-                            //console.log('(!) eggLimit reached | newUnits = 0');
+                            var eggGenerators = pokeSpecies[pokeToken]['female'];
+                            var newUnits = Math.min(eggGenerators, pokeSpecies[pokeToken]['male'] + existingDitto);
+                            //console.log('|- F>M | eggGenerators('+pokeToken+'/'+eggGenerators+') | newUnits('+newUnits+')');
                             }
+
+                        }
+
+                    // Ensure we do not create more units then there already are eggs
+                    if (newUnits > currentEggs){
+                        newUnits -= currentEggs;
+                        //console.log('(!) newUnits -= currentEggs = newUnits('+newUnits+')');
+                        } else {
+                        newUnits = 0;
+                        //console.log('(!) eggLimit reached | newUnits = 0');
                         }
 
                     }
@@ -3188,12 +3255,14 @@
                         //console.log('|- '+baseEvolution+' has an egg partner in '+eggPartner+', check pairs');
                         }
 
-                    var baseUnits = pokeSpecies[pokeToken];
+                    var baseUnits = pokeSpecies[pokeToken][indexInfo.speciesGender];
                     var baseEggs = typeof pokeEggs[baseEvolution] !== 'undefined' ? pokeEggs[baseEvolution] : 0;
                     //console.log('|- baseUnits('+pokeToken+'/'+baseUnits+') | baseEggs('+baseEvolution+'/'+baseEggs+')');
 
-                    var partnerUnits = typeof pokeSpecies[eggPartner] !== 'undefined' ? pokeSpecies[eggPartner] : 0;
-                    var partnerEggs = typeof pokeEggs[eggPartner] !== 'undefined' ? pokeEggs[eggPartner] : 0;
+                    var oppositeGender = indexInfo.speciesGender !== 'female' ? 'female' : 'male';
+                    var partnerInfo = typeof pokeSpecies[eggPartner] !== 'undefined' ? pokeSpecies[eggPartner] : false;
+                    var partnerUnits = partnerInfo && typeof partnerInfo[oppositeGender] !== 'undefined' ? partnerInfo[oppositeGender] : 0;
+                    var partnerEggs = partnerInfo && typeof pokeEggs[eggPartner] !== 'undefined' ? pokeEggs[eggPartner] : 0;
                     //console.log('|- partnerUnits('+eggPartner+'/'+partnerUnits+') | partnerEggs('+eggPartner+'/'+partnerEggs+')');
 
                     var baseToPartnerPairs = Math.min(baseUnits, partnerUnits);
@@ -3228,16 +3297,16 @@
                 // This single-gendered pokemon has no defined egg partner so we can only hook up with ditto
                 else if ((isLegendary || indexInfo.hasOneGender) && !indexInfo.hasEggPartner){
 
-                    var baseUnits = pokeSpecies[pokeToken];
+                    var baseUnits = pokeSpecies[pokeToken][indexInfo.speciesGender];
                     var currentEggs = typeof pokeEggs[baseEvolution] !== 'undefined' ? pokeEggs[baseEvolution] : 0;
                     if (typeof indexInfo.eggSpecies !== 'undefined'
                         && typeof pokeEggs[indexInfo.eggSpecies] !== 'undefined'){
                         currentEggs += pokeEggs[indexInfo.eggSpecies];
-                        baseUnits += typeof pokeSpecies[indexInfo.eggSpecies] !== 'undefined' ? pokeSpecies[indexInfo.eggSpecies] : 0;
+                        baseUnits += pokeSpecies[indexInfo.eggSpecies] !== 'undefined' ? sumValues(pokeSpecies[indexInfo.eggSpecies]) : 0;
                         } else if (typeof indexInfo.eggParent !== 'undefined'
                         && typeof pokeEggs[indexInfo.eggParent] !== 'undefined'){
                         currentEggs += pokeEggs[indexInfo.eggParent];
-                        baseUnits += typeof pokeSpecies[indexInfo.eggParent] !== 'undefined' ? pokeSpecies[indexInfo.eggParent] : 0;
+                        baseUnits += typeof pokeSpecies[indexInfo.eggParent] !== 'undefined' ? sumValues(pokeSpecies[indexInfo.eggParent]) : 0;
                         }
                     var newUnits = existingDitto > 0 ? Math.max(baseUnits, existingDitto) : 0;
                     //console.log('|- baseUnits('+pokeToken+'/'+baseUnits+') | currentEggs('+baseEvolution+'/'+currentEggs+') | newUnits('+newUnits+')');
@@ -3410,7 +3479,7 @@
                     if ((typeof thisZoneData.currentStats['species'][speciesToken] !== 'undefined'
                         && thisZoneData.currentStats['species'][speciesToken] > 0)
                         && (typeof thisZoneData.currentStats['species'][pokeToken] === 'undefined'
-                        || thisZoneData.currentStats['species'][pokeToken] < 3)){
+                        || thisZoneData.currentStats['species'][pokeToken] <= 3)){
                         //console.log('pokeToken = '+pokeToken+' | speciesToken = '+speciesToken+'');
                         //console.log('thisZoneData.currentStats[\'species\']['+speciesToken+'] = ', thisZoneData.currentStats['species'][speciesToken]);
                         //console.log('thisZoneData.currentStats[\'species\']['+pokeToken+'] = ', thisZoneData.currentStats['species'][pokeToken]);
@@ -3535,7 +3604,7 @@
                 else { pokeChance -= numAddedAlready; }
                 //console.log('pokeChance ', pokeToken, pokeChance);
                 if (!isBasicPokemon
-                    || numAddedCurrently >= 3){
+                    || numAddedCurrently > 3){
                     pokeChance *= -1;
                     pokeChance -= numAddedAlready;
                     //console.log('pokeChance ', pokeToken, pokeChance);
@@ -4121,6 +4190,11 @@
     // Define a constant function for printing whole bumbers with commas
     const numberWithCommas = (x) => {
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    // Define a constant function for summing the values of an object
+    const sumValues = obj => {
+        Object.values(obj).reduce((a, b) => a + b);
     }
 
     // Only implement if no native implementation is available

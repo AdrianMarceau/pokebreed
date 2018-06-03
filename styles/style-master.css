@@ -551,7 +551,8 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.pokemon li 
     width: 100%;
     height: 100%;
 }
-.panel .overview.main .details.pokemon .list.pokemon li .tag {
+.panel .overview.main .details.pokemon .list.pokemon li .tag,
+.panel .overview.main .details.pokemon .list.pokemon li .gender {
     content: "";
     display: block;
     position: absolute;
@@ -571,12 +572,29 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.pokemon li 
     top: 8%;
     right: 2px;
 }
+.panel .overview.main .details.pokemon .list.pokemon li .gender {
+    top: auto;
+    right: auto;
+    left: 6px;
+    bottom: 8%;
+}
+.panel .overview.main .details.pokemon .list.pokemon li.egg .gender {
+    display: none;
+}
 /*
 .panel .overview.main .details.pokemon .list.pokemon li .watched {
     background-color: #ceff94;
     border: 1px solid #7cc57e;
 }
 */
+.panel .overview.main .details.pokemon .list.pokemon li .male {
+    background-color: #86abd8;
+    border: 1px solid #6191cc;
+}
+.panel .overview.main .details.pokemon .list.pokemon li .female {
+    background-color: #ff94c6;
+    border: 1px solid #ff61ab;
+}
 .panel .overview.main .details.pokemon .list.pokemon li .visitor {
     background-color: #efefef;
     border: 1px solid #dedede;
