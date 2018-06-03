@@ -763,14 +763,14 @@
             if (starterPokemonTokens.indexOf(starterInfo.token) === -1){ starterPokemonTokens.push(starterInfo.token); }
             starterCounts[countToken]++;
             }
-        console.log('starterPokemon = ', starterPokemon);
-        console.log('starterSeed = ', starterSeed);
+        //console.log('starterPokemon = ', starterPokemon);
+        //console.log('starterSeed = ', starterSeed);
 
         // Push this list of starters into the history array
         StarterPokemonHistory.push(starterPokemon);
         StarterPokemonSeed = starterSeed;
-        console.log('StarterPokemonHistory = ', StarterPokemonHistory);
-        console.log('StarterPokemonSeed = ', StarterPokemonSeed);
+        //console.log('StarterPokemonHistory = ', StarterPokemonHistory);
+        //console.log('StarterPokemonSeed = ', StarterPokemonSeed);
 
         // Generate the seed text to add to the footer for copy/paste
         var starterList = [];
