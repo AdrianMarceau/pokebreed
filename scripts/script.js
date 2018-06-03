@@ -2529,6 +2529,11 @@
             recalculateZoneStats();
             }
 
+        // If the simulation has started, make sure we update the scroll wrappers
+        if (simulationStarted){
+            $('.wrap', $panelOverviewFloatLists).perfectScrollbar('update');
+            }
+
         // Trigger a visitor chance if allowed or it's the first day and there's room
         var remainingSlots = thisZoneData.capacity - thisZoneData.currentPokemon.length;
         var remainingPercent = (remainingSlots / thisZoneData.capacity) * 100;
