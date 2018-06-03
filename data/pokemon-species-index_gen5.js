@@ -492,6 +492,43 @@
             prevEvolution: 'dwebble'
             },
 
+        'tirtouga': {
+            order: indexOrder++,
+            token: 'tirtouga',
+            name: 'Tirtouga',
+            number: 564,
+            types: ['water', 'rock'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 54, phAttack: 78, phDefense: 103, spAttack: 53, spDefense: 45, speed: 22},
+            abilities: {0: 'solid-rock', 1: 'sturdy', hidden: 'swift-swim'},
+            height: 0.7,
+            weight: 16.5,
+            colors: ['blue', 'gray'],
+            eggCycles: 30,
+            eggGroups: ['water-1', 'water-3'],
+            nextEvolutions: [{
+                species: 'carracosta',
+                method: 'level-up',
+                value: 37
+                }]
+            },
+        'carracosta': {
+            order: indexOrder++,
+            token: 'carracosta',
+            name: 'Carracosta',
+            number: 565,
+            types: ['water', 'rock'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 74, phAttack: 108, phDefense: 133, spAttack: 83, spDefense: 65, speed: 32},
+            abilities: {0: 'solid-rock', 1: 'sturdy', hidden: 'swift-swim'},
+            height: 1.2,
+            weight: 81,
+            colors: ['blue', 'gray'],
+            eggCycles: 30,
+            eggGroups: ['water-1', 'water-3'],
+            prevEvolution: 'tirtouga'
+            },
+
         'trubbish': {
             order: indexOrder++,
             token: 'trubbish',
