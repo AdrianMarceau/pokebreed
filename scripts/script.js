@@ -1377,10 +1377,11 @@
                 if (typeof pokeIndex.formToken === 'string' && pokeIndex.formToken.length > 0){
                     customData.formToken = pokeIndex.formToken; // Preset form
                     } else if ((pokeIndex.randomizeForms === true
-                        || pokeIndex.seasonalForms === true)
+                        || pokeIndex.seasonalForms === true
+                        || pokeIndex.colorizedForms === true)
                             && typeof pokeIndex.baseForm !== 'undefined'
                             && pokeIndex.baseForm.length > 0){
-                    customData.formToken = pokeIndex.baseForm; // Random/seasonal form with base
+                    customData.formToken = pokeIndex.baseForm; // Random/seasonal/color form with base
                     }
                 var pokeIcon = getPokemonIcon(pokeToken, false, customData);
                 pokedexMarkup.push('<li><div class="'+ liClass +'" data-token="' + pokeToken + '" title="'+ titleText +'"><div class="bubble">' +
@@ -1560,13 +1561,15 @@
             var maxOffset = 30;
             if (pokemonToken === 'smeargle'){
                 maxOffset = 360;
+                } else if (pokemonToken === 'kecleon'){
+                maxOffset = 0;
                 } else {
                 if (randNum >= 75){ maxOffset += 20; }
                 if (randNum >= 85){ maxOffset += 20; }
                 if (randNum >= 95){ maxOffset += 20; }
                 if (randNum2 >= 90){ minOffset += 180; maxOffset += 180; }
                 }
-            var variantHueOffset = Math.ceil(((randNum3 / 100) * (maxOffset - minOffset)) + minOffset);
+            var variantHueOffset = maxOffset > minOffset ? Math.ceil(((randNum3 / 100) * (maxOffset - minOffset)) + minOffset) : 0;
             newPokemon.variantHueOffset = variantHueOffset * -1;
             if (randNum4 >= 90){ newPokemon.variantHueOffset *= -1; }
 
@@ -1597,6 +1600,19 @@
             && typeof indexData['possibleForms'] !== 'undefined'){
             if (thisZoneData.season.length){ newPokemon.formToken = thisZoneData.season; }
             else { newPokemon.formToken = indexData['baseForm']; }
+            }
+
+        // If this pokemon has a colorized form, decide it now
+        if (typeof indexData['colorizedForms'] !== 'undefined'
+            && indexData['colorizedForms'] === true){
+            var colorStats = thisZoneData.currentStats['colors'];
+            if (typeof colorStats !== 'undefined'
+                && !jQuery.isEmptyObject(colorStats)){
+                var topColor = Object.keys(colorStats)[0];
+                newPokemon.formToken = topColor;
+                } else {
+                newPokemon.formToken = indexData['baseForm'];
+                }
             }
 
         // Push the new pokemon to the list and collect its key
@@ -2406,6 +2422,12 @@
                 // Loop through sub-stats for and increment relevant values
                 for (var subKey = 0; subKey < subZoneStats.length; subKey++){
                     var subStat = subZoneStats[subKey];
+                    //console.log('pokeToken('+ pokeToken +') / subStat('+ subStat +')');
+                    if (subStat === 'colors'
+                        && (pokeToken === 'vivillon'
+                            || pokeToken === 'kecleon')){
+                        continue;
+                        }
                     if (typeof pokeIndex[subStat] !== 'undefined'){
                         // Treat arrays differently than other values
                         if (typeof pokeIndex[subStat] === 'object'){
@@ -2683,6 +2705,14 @@
         // Define a variable to hold (temporary) allowed trade evolutions this cycle
         var allowedTradeEvolutions = {};
 
+        // Quickly calculate the top color value on the field
+        var topColor = '';
+        var colorStats = thisZoneData.currentStats['colors'];
+        if (typeof colorStats !== 'undefined'
+            && !jQuery.isEmptyObject(colorStats)){
+            topColor = Object.keys(colorStats)[0];
+            }
+
         // First, loop through all the non-egg pokemon and increment growth cycle
         if (thisZoneData.currentPokemon.length){
             for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
@@ -2719,6 +2749,12 @@
                     if (indexInfo.formClass === 'seasonal-variant'
                         && thisZoneData.season.length){
                         pokemonInfo.formToken = thisZoneData.season;
+                        }
+
+                    // If colorized variant, change the form based on the current top color
+                    if (indexInfo.formClass === 'color-variant'
+                        && topColor.length){
+                        pokemonInfo.formToken = topColor;
                         }
 
                     }
