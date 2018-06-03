@@ -1730,6 +1730,43 @@
             prevEvolution: 'lileep'
             },
 
+        'anorith': {
+            order: indexOrder++,
+            token: 'anorith',
+            name: 'Anorith',
+            number: 347,
+            types: ['rock', 'bug'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 45, phAttack: 95, phDefense: 50, spAttack: 40, spDefense: 50, speed: 75},
+            abilities: {0: 'battle-armor', hidden: 'swift-swim'},
+            height: 0.7,
+            weight: 12.5,
+            colors: ['green', 'gray', 'black', 'white', 'red'],
+            eggCycles: 30,
+            eggGroups: ['water-3'],
+            nextEvolutions: [{
+                species: 'armaldo',
+                method: 'level-up',
+                value: 40
+                }]
+            },
+        'armaldo': {
+            order: indexOrder++,
+            token: 'armaldo',
+            name: 'Armaldo',
+            number: 348,
+            types: ['rock', 'bug'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 75, phAttack: 125, phDefense: 100, spAttack: 70, spDefense: 80, speed: 45},
+            abilities: {0: 'battle-armor', hidden: 'swift-swim'},
+            height: 1.5,
+            weight: 68.2,
+            colors: ['blue', 'gray', 'yellow', 'white', 'red'],
+            eggCycles: 30,
+            eggGroups: ['water-3'],
+            prevEvolution: 'anorith'
+            },
+
         'feebas': {
             order: indexOrder++,
             token: 'feebas',
