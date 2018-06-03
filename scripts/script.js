@@ -823,6 +823,9 @@
         dayTimeoutStarted = false;
         dayTimeoutDuration = 1200;
 
+        // Reset the global randomization seed
+        Math.seed = 1;
+
         // Update the overiew with cleared data
         updateOverview();
 
@@ -882,9 +885,6 @@
 
         // First end the current simulation
         endCurrentSimulation();
-
-        // Reset the global randomization seed
-        Math.seed = 1;
 
         // Hide any control buttons that were still showning
         $('.controls .control', $panelButtons).addClass('hidden');
