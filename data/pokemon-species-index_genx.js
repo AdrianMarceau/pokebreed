@@ -369,7 +369,7 @@
             formClass2: 'random-variant',
             possibleForms: ['orange', 'yellow', 'green', 'blue', 'indigo', 'violet'],
             randomizeForms: true,
-            baseForme: 'orange',
+            baseForm: 'orange',
             types: ['rock', 'flying'],
             genderRatio: {none: 1.000},
             baseStats: {hp: 60, phAttack: 100, phDefense: 60, spAttack: 100, spDefense: 60, speed: 120},

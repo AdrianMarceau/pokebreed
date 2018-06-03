@@ -1389,7 +1389,7 @@
             formClass: 'random-variant',
             possibleForms: ['p1', 'p2', 'p3', 'p4', 'p5', 'p6'],
             randomizeForms: true,
-            baseForme: 'p1',
+            baseForm: 'p1',
             types: ['normal'],
             baseStats: {hp: 60, phAttack: 60, phDefense: 60, spAttack: 60, spDefense: 60, speed: 60},
             abilities: {0: 'own-tempo', 1: 'tangled-feet', hidden: 'contrary'},

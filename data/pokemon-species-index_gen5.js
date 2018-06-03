@@ -711,6 +711,125 @@
             prevEvolution: 'vanillish'
             },
 
+        'deerling': {
+            order: indexOrder++,
+            token: 'deerling',
+            name: 'Deerling',
+            number: 585,
+            formClass: 'seasonal-variant',
+            dynamicForms: true,
+            seasonalForms: true,
+            possibleForms: ['spring', 'summer', 'autumn', 'winter'],
+            possibleFormsColors: {
+                'spring': ['pink', 'white', 'yellow'],
+                'summer': ['green', 'white', 'yellow'],
+                'autumn': ['orange', 'white', 'yellow'],
+                'winter': ['brown', 'white', 'yellow']
+                },
+            baseForm: 'spring',
+            types: ['normal', 'grass'],
+            baseStats: {hp: 60, phAttack: 60, phDefense: 50, spAttack: 40, spDefense: 50, speed: 75},
+            abilities: {0: 'chlorophyll', 1: 'sap-sipper', hidden: 'serene-grace'},
+            height: 0.6,
+            weight: 19.5,
+            colors: ['pink', 'white', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'spring-sawsbuck',
+                method: 'level-up',
+                value: 34,
+                method2: 'form',
+                value2: 'spring'
+                },{
+                species: 'summer-sawsbuck',
+                method: 'level-up',
+                value: 34,
+                method2: 'form',
+                value2: 'summer'
+                },{
+                species: 'autumn-sawsbuck',
+                method: 'level-up',
+                value: 34,
+                method2: 'form',
+                value2: 'autumn'
+                },{
+                species: 'winter-sawsbuck',
+                method: 'level-up',
+                value: 34,
+                method2: 'form',
+                value2: 'winter'
+                }]
+            },
+        'spring-sawsbuck': {
+            order: indexOrder++,
+            token: 'spring-sawsbuck',
+            name: 'Spring Sawsbuck',
+            formClass: 'seasonal-variant',
+            formToken: 'spring',
+            number: 586,
+            types: ['normal', 'grass'],
+            baseStats: {hp: 80, phAttack: 100, phDefense: 70, spAttack: 60, spDefense: 70, speed: 95},
+            abilities: {0: 'chlorophyll', 1: 'sap-sipper', hidden: 'serene-grace'},
+            height: 1.9,
+            weight: 92.5,
+            colors: ['brown', 'yellow', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'deerling'
+            },
+        'summer-sawsbuck': {
+            order: indexOrder++,
+            token: 'summer-sawsbuck',
+            name: 'Summer Sawsbuck',
+            formClass: 'seasonal-variant',
+            formToken: 'summer',
+            number: 586,
+            types: ['normal', 'grass'],
+            baseStats: {hp: 80, phAttack: 100, phDefense: 70, spAttack: 60, spDefense: 70, speed: 95},
+            abilities: {0: 'chlorophyll', 1: 'sap-sipper', hidden: 'serene-grace'},
+            height: 1.9,
+            weight: 92.5,
+            colors: ['brown', 'green', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'deerling'
+            },
+        'autumn-sawsbuck': {
+            order: indexOrder++,
+            token: 'autumn-sawsbuck',
+            name: 'Autumn Sawsbuck',
+            formClass: 'seasonal-variant',
+            formToken: 'autumn',
+            number: 586,
+            types: ['normal', 'grass'],
+            baseStats: {hp: 80, phAttack: 100, phDefense: 70, spAttack: 60, spDefense: 70, speed: 95},
+            abilities: {0: 'chlorophyll', 1: 'sap-sipper', hidden: 'serene-grace'},
+            height: 1.9,
+            weight: 92.5,
+            colors: ['brown', 'red', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'deerling'
+            },
+        'winter-sawsbuck': {
+            order: indexOrder++,
+            token: 'winter-sawsbuck',
+            name: 'Winter Sawsbuck',
+            formClass: 'seasonal-variant',
+            formToken: 'winter',
+            number: 586,
+            types: ['normal', 'grass'],
+            baseStats: {hp: 80, phAttack: 100, phDefense: 70, spAttack: 60, spDefense: 70, speed: 95},
+            abilities: {0: 'chlorophyll', 1: 'sap-sipper', hidden: 'serene-grace'},
+            height: 1.9,
+            weight: 92.5,
+            colors: ['brown', 'white', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'deerling'
+            },
+
         'emolga': {
             order: indexOrder++,
             token: 'emolga',
