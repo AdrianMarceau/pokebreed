@@ -342,6 +342,44 @@
             prevEvolution: 'charjabug'
             },
 
+        'crabrawler': {
+            order: indexOrder++,
+            token: 'crabrawler',
+            name: 'Crabrawler',
+            number: 739,
+            types: ['fighting'],
+            baseStats: {hp: 47, phAttack: 82, phDefense: 57, spAttack: 42, spDefense: 47, speed: 63},
+            abilities: {0: 'hyper-cutter', 1: 'iron-fist', hidden: 'anger-point'},
+            height: 0.6,
+            weight: 7,
+            colors: ['purple', 'blue', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['water-3'],
+            nextEvolutions: [{
+                species: 'crabominable',
+                method: 'evolution-location',
+                value: 'icy-rock',
+                method2: 'type-appeal',
+                value2: 'ice'
+                }]
+            },
+        'crabominable': {
+            order: indexOrder++,
+            token: 'crabominable',
+            name: 'Crabominable',
+            number: 740,
+            types: ['fighting', 'ice'],
+            baseStats: {hp: 97, phAttack: 132, phDefense: 77, spAttack: 62, spDefense: 67, speed: 43},
+            abilities: {0: 'hyper-cutter', 1: 'iron-fist', hidden: 'anger-point'},
+            height: 1.7,
+            weight: 180,
+            colors: ['white', 'purple', 'blue', 'yellow'],
+            evoLevel: 2,
+            eggCycles: 20,
+            eggGroups: ['water-3'],
+            prevEvolution: 'crabrawler'
+            },
+
         'cutiefly': {
             order: indexOrder++,
             token: 'cutiefly',
