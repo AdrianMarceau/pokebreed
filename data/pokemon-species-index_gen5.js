@@ -529,6 +529,43 @@
             prevEvolution: 'tirtouga'
             },
 
+        'archen': {
+            order: indexOrder++,
+            token: 'archen',
+            name: 'Archen',
+            number: 566,
+            types: ['rock', 'flying'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 55, phAttack: 112, phDefense: 45, spAttack: 74, spDefense: 45, speed: 70},
+            abilities: {0: 'defeatist'},
+            height: 0.5,
+            weight: 9.5,
+            colors: ['yellow', 'red', 'blue'],
+            eggCycles: 30,
+            eggGroups: ['flying', 'water-3'],
+            nextEvolutions: [{
+                species: 'archeops',
+                method: 'level-up',
+                value: 37
+                }]
+            },
+        'archeops': {
+            order: indexOrder++,
+            token: 'archeops',
+            name: 'Archeops',
+            number: 567,
+            types: ['rock', 'flying'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 75, phAttack: 140, phDefense: 65, spAttack: 112, spDefense: 65, speed: 110},
+            abilities: {0: 'defeatist'},
+            height: 1.4,
+            weight: 32,
+            colors: ['yellow', 'blue', 'red', 'green'],
+            eggCycles: 30,
+            eggGroups: ['flying', 'water-3'],
+            prevEvolution: 'archen'
+            },
+
         'trubbish': {
             order: indexOrder++,
             token: 'trubbish',
