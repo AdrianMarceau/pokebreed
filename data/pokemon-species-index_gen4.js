@@ -410,6 +410,43 @@
             prevEvolution: 'cranidos'
             },
 
+        'shieldon': {
+            order: indexOrder++,
+            token: 'shieldon',
+            name: 'Shieldon',
+            number: 410,
+            types: ['rock', 'steel'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 30, phAttack: 42, phDefense: 118, spAttack: 42, spDefense: 88, speed: 30},
+            abilities: {0: 'sturdy', hidden: 'soundproof'},
+            height: 0.5,
+            weight: 57,
+            color: ['gray', 'white', 'yellow'],
+            eggCycles: 30,
+            eggGroups: ['monster'],
+            nextEvolutions: [{
+                species: 'bastiodon',
+                method: 'level-up',
+                value: 30
+                }]
+            },
+        'bastiodon': {
+            order: indexOrder++,
+            token: 'bastiodon',
+            name: 'Bastiodon',
+            number: 411,
+            types: ['rock', 'steel'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 60, phAttack: 52, phDefense: 168, spAttack: 47, spDefense: 138, speed: 30},
+            abilities: {0: 'sturdy', hidden: 'soundproof'},
+            height: 1.3,
+            weight: 149.5,
+            color: ['gray', 'white', 'yellow', 'black'],
+            eggCycles: 30,
+            eggGroups: ['monster'],
+            prevEvolution: 'shieldon'
+            },
+
         'buizel': {
             order: indexOrder++,
             token: 'buizel',
