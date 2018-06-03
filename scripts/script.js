@@ -3663,7 +3663,7 @@
             if (typeof thisZoneData.addedPokemonSpecies[pokeToken] !== 'undefined'){
                 //console.log('numAddedAlready ', pokeToken, numAddedAlready);
                 if (numAddedAlready === 1){ pokeChance *= 2; }
-                else { pokeChance -= numAddedAlready; }
+                else if (numAddedAlready > 3) { pokeChance -= numAddedAlready; }
                 //console.log('pokeChance ', pokeToken, pokeChance);
                 if (!isBasicPokemon
                     || numAddedCurrently > 3){
