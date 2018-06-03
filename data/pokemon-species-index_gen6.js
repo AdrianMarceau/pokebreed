@@ -1679,6 +1679,25 @@
             prevEvolution: 'altaria'
             },
 
+        'mega-banette': {
+            order: thisIndex.afterOrder('banette'),
+            token: 'mega-banette',
+            species: 'Mega Banette',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'banette',
+            number: 354,
+            types: ['ghost'],
+            baseStats: {hp: 64, phAttack: 165, phDefense: 75, spAttack: 93, spDefense: 83, speed: 75},
+            abilities: {0: 'prankster'},
+            height: 1.2,
+            weight: 13,
+            colors: ['black', 'yellow', 'red'],
+            eggCycles: 25,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'banette'
+            },
+
         'mega-absol': {
             order: thisIndex.afterOrder('absol'),
             token: 'mega-absol',
@@ -1981,6 +2000,7 @@
         {base: 'sharpedo', species: 'mega-sharpedo', method: 'mega-evolution', value: 'sharpedonite'},
         {base: 'camerupt', species: 'mega-camerupt', method: 'mega-evolution', value: 'cameruptite'},
         {base: 'altaria', species: 'mega-altaria', method: 'mega-evolution', value: 'altarianite'},
+        {base: 'banette', species: 'mega-banette', method: 'mega-evolution', value: 'banettite'},
         {base: 'absol', species: 'mega-absol', method: 'mega-evolution', value: 'absolite'},
         {base: 'glalie', species: 'mega-glalie', method: 'mega-evolution', value: 'glalie'},
         {base: 'salamence', species: 'mega-salamence', method: 'mega-evolution', value: 'salamencite'},

@@ -1747,6 +1747,41 @@
             eggGroups: ['field']
             },
 
+        'shuppet': {
+            order: indexOrder++,
+            token: 'shuppet',
+            name: 'Shuppet',
+            number: 353,
+            types: ['ghost'],
+            baseStats: {hp: 44, phAttack: 75, phDefense: 35, spAttack: 63, spDefense: 33, speed: 45},
+            abilities: {0: 'insomnia', 1: 'frisk', hidden: 'cursed-body'},
+            height: 0.6,
+            weight: 2.3,
+            colors: ['gray', 'black', 'blue', 'yellow'],
+            eggCycles: 25,
+            eggGroups: ['amorphous'],
+            nextEvolutions: [{
+                species: 'banette',
+                method: 'level-up',
+                value: 37
+                }]
+            },
+        'banette': {
+            order: indexOrder++,
+            token: 'banette',
+            name: 'Banette',
+            number: 354,
+            types: ['ghost'],
+            baseStats: {hp: 64, phAttack: 115, phDefense: 65, spAttack: 83, spDefense: 63, speed: 65},
+            abilities: {0: 'insomnia', 1: 'frisk', hidden: 'cursed-body'},
+            height: 1.1,
+            weight: 12.5,
+            colors: ['gray', 'yellow', 'red'],
+            eggCycles: 25,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'shuppet'
+            },
+
         'tropius': {  // TODO: Make a few different berry patterns
             order: indexOrder++,
             token: 'tropius',
