@@ -2039,6 +2039,7 @@
                 var pokeInfo = visitorAppeal[key];
                 var pokeIndex = PokemonSpeciesIndex[pokeInfo.token];
                 var visitorKind = pokeIndex.class !== '' ? pokeIndex.class : 'basic';
+                if (pokeInfo.token.match(/ditto$/)){ visitorKind = pokeInfo.token; }
                 if (typeof sortedVisitors[visitorKind] === 'undefined'){ sortedVisitors[visitorKind] = []; }
                 sortedVisitors[visitorKind].push(pokeInfo);
                 }
