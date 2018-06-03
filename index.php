@@ -240,6 +240,7 @@ if (isset($_GET['gen'])
             window.PokemonAppVersionNumber = '<?= $version_number ?>';
             window.PokemonAppDebugMode = <?= POKEBS_DEBUG_MODE === true ? 'true' : 'false' ?>;
             window.PokemonAppFreeMode = <?= isset($_GET['freeMode']) && $_GET['freeMode'] === 'true' ? 'true' : 'false' ?>;
+            window.PokemonAppBaseHref = '<?= POKEBS_ROOT_URL ?>';
             window.PokemonAllowedGenerationsMax = <?= $allowed_generations ?>;
 
         </script>

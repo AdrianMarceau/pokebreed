@@ -496,7 +496,7 @@ body:not([data-mode="free"]) .panel .banner .counter.pokedex.active {
     z-index: 1;
 }
 body[data-speed="pause"] .panel .overview.main .details.pokemon .field .bg,
-body[data-speed="warp"] .panel .overview.main .details.pokemon .field .bg { transition: none; }
+body[data-speed="warp"] .panel .overview.main .details.pokemon .field .bg { transition: background-image 0; }
 body[data-speed="fast"] .panel .overview.main .details.pokemon .field .bg { transition: background-image 0.30s; }
 body[data-speed="normal"] .panel .overview.main .details.pokemon .field .bg { transition: background-image 0.60s; }
 body[data-speed="slow"] .panel .overview.main .details.pokemon .field .bg { transition: background-image 1.20s; }
@@ -541,7 +541,7 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .field .bg { tran
     margin-right: 0;
 }
 body[data-speed="pause"] .panel .overview.main .details.pokemon .list.pokemon li,
-body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li { transition: none; }
+body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li { transition: top 0, left 0, opacity 0, transform 0; }
 body[data-speed="fast"] .panel .overview.main .details.pokemon .list.pokemon li { transition: top 0.20s, left 0.20s, opacity 0.20s, transform 0.20s; }
 body[data-speed="normal"] .panel .overview.main .details.pokemon .list.pokemon li { transition: top 0.40s, left 0.40s, opacity 0.40s, transform 0.40s; }
 body[data-speed="slow"] .panel .overview.main .details.pokemon .list.pokemon li { transition: top 0.80s, left 0.80s, opacity 0.80s, transform 0.80s; }
@@ -651,6 +651,42 @@ body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li.
     display: none;
 }
 
+.panel img.sprite {
+    display: inline-block;
+}
+.panel span.sprite {
+    display: inline-block;
+    background-color: transparent;
+    background-image: none;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-size: contain;
+    position: relative;
+}
+.panel .species span.sprite,
+.panel .pokemon span.sprite {
+    width: 40px;
+    height: 30px;
+}
+body[data-speed="pause"] .panel span.sprite,
+body[data-speed="warp"] .panel span.sprite {
+    -webkit-transition: background-image 0;
+    transition: background-image 0;
+}
+body[data-speed="normal"] .panel span.sprite {
+    -webkit-transition: background-image 1s;
+    transition: background-image 1s;
+}
+body[data-speed="slow"] .panel span.sprite {
+    -webkit-transition: background-image 1.5s;
+    transition: background-image 1.5s;
+}
+body[data-speed="fast"] .panel span.sprite {
+    -webkit-transition: background-image 0.5s;
+    transition: background-image 0.5s;
+}
+
 .panel .overview.main .details.pokemon .list .sprite {
     position: relative;
     z-index: 2;
@@ -660,14 +696,32 @@ body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li.
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     pointer-events: none;
+    width: 40px;
+    height: 30px;
 }
-body[data-speed="slower"] .panel .overview.main .details.pokemon .list .sprite {
+body[data-speed="normal"] .panel .overview.main .details.pokemon .list .sprite {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-transition: background-image 1s;
+    transition: background-image 1s;
+}
+body[data-speed="slow"] .panel .overview.main .details.pokemon .list .sprite {
     -webkit-animation-duration: 1.5s;
     animation-duration: 1.5s;
+    -webkit-transition: background-image 1.5s;
+    transition: background-image 1.5s;
 }
-body[data-speed="faster"] .panel .overview.main .details.pokemon .list .sprite {
+body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     -webkit-animation-duration: 0.5s;
     animation-duration: 0.5s;
+    -webkit-transition: background-image 0.5s;
+    transition: background-image 0.5s;
+}
+body[data-speed="warp"] .panel .overview.main .details.pokemon .list .sprite {
+    -webkit-animation-duration: 0;
+    animation-duration: 0;
+    -webkit-transition: background-image 0;
+    transition: background-image 0;
 }
 .panel .overview.main .details.pokemon .list.odd li.odd .sprite,
 .panel .overview.main .details.pokemon .list.even li.even .sprite {
@@ -733,7 +787,7 @@ body[data-speed="faster"] .panel .overview.main .details.pokemon .list .sprite {
     overflow: hidden;
 }
 body[data-speed="pause"] .panel .overview.main .details.pokemon .list.slots li.slot:before,
-body[data-speed="warp"] .panel .overview.main .details.pokemon .list.slots li.slot:before { transition: none;  }
+body[data-speed="warp"] .panel .overview.main .details.pokemon .list.slots li.slot:before { transition: background-color 0, box-shadow 0;  }
 body[data-speed="fast"] .panel .overview.main .details.pokemon .list.slots li.slot:before { transition: background-color 0.50s, box-shadow 0.50s; }
 body[data-speed="normal"] .panel .overview.main .details.pokemon .list.slots li.slot:before { transition: background-color 1.00s, box-shadow 1s;  }
 body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.slot:before { transition: background-color 2.00s, box-shadow 2.00s;  }
@@ -1209,13 +1263,15 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     z-index: 10;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
 }
-.panel .buttons button img,
+.panel .buttons button .sprite,
 .panel .buttons button strong {
     display: block;
     clear: both;
     outline: none;
 }
-.panel .buttons button img {
+.panel .buttons button .sprite {
+    width: 40px;
+    height: 30px;
     margin: 0 auto;
     position: relative;
     top: -4px;
@@ -1226,7 +1282,7 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     transform: translate(0, 0);
     outline: none;
 }
-.panel .buttons button:hover img {
+.panel .buttons button:hover .sprite {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     -webkit-animation: SpriteBounce 0.3s steps(1) infinite;

@@ -7,6 +7,7 @@
     var appVersionNumber = '0.1.0'; // first version
     var appDebugMode = false; // debug mode
     var appFreeMode = false; // free-mode (show all pokemon)
+    var appBaseHref = '';
 
     var requiredPokemonIndexes = ['', 1, 2, 3, 4, 5, 6, 7, 'x'];
     var maxIndexKeyToLoad = 8;
@@ -100,6 +101,7 @@
         if (typeof window.PokemonAppVersionNumber !== 'undefined'){ appVersionNumber = window.PokemonAppVersionNumber; }
         if (typeof window.PokemonAppDebugMode !== 'undefined'){ appDebugMode = window.PokemonAppDebugMode; }
         if (typeof window.PokemonAppFreeMode !== 'undefined'){ appFreeMode = window.PokemonAppFreeMode; }
+        if (typeof window.PokemonAppBaseHref !== 'undefined'){ appBaseHref = window.PokemonAppBaseHref; }
 
         // Do not update LOCAL STORAGE records if we're in free mode
         if (!appFreeMode){
@@ -159,13 +161,11 @@
             });
 
         // Update any scroll wrappers when the window resizes
-        var updateScrollWrappers = function(){
-            $pokePanelButtons.find('.buttonwrap').perfectScrollbar('update');
-            };
+        var updateScrollWrappers = function(){ $pokePanelButtons.find('.buttonwrap').perfectScrollbar('update'); };
         $(window).resize(updateScrollWrappers);
         updateScrollWrappers();
 
-        // Add the scrollbar to any wrapper that need
+        // Add the scrollbar to any wrappers that need it
         $('.wrap', $panelOverviewFloatLists).perfectScrollbar({suppressScrollX: true});
 
         // Preload the type and pokemon indexes
@@ -1025,17 +1025,18 @@
         var filter = '';
         if (typeof info.variantHueOffset !== 'undefined'){ filter += 'hue-rotate('+ info.variantHueOffset +'deg) '; }
         if (typeof info.variantSatOffset !== 'undefined'){ filter += 'saturate('+ info.variantSatOffset +'%) '; }
-        var iconStyle = filter.length ? ' style="-webkit-filter: '+ filter +'; filter: '+ filter +';"' : '';
+        filter = filter.length ? '-webkit-filter: '+ filter +'; filter: '+ filter +'; ' : '';
 
         var markup = '';
-
         if (egg){
 
             iconImage += 'eggs/'+indexInfo['types'][0]+'.png';
-            markup += '<img class="'+ iconClass +'"'+ iconStyle +' src="'+ iconImage +'" data-token="'+ token +'" />';
+            //markup += '<img class="'+ iconClass +'"'+ iconStyle +' src="'+ iconImage +'" data-token="'+ token +'" />';
+            markup += '<span class="'+ iconClass +'" style="background-image: url('+ iconImage +'); '+ iconStyle +'" data-token="'+ token +'"></span>';
             if (typeof indexInfo['types'][1] === 'string'){
                 iconImage = 'images/icons/eggs/'+indexInfo['types'][1]+'2.png';
-                markup += '<img class="'+ iconClass +' overlay"'+ iconStyle +' src="'+ iconImage +'" data-token="'+ token +'" />';
+                //markup += '<img class="'+ iconClass +' overlay"'+ iconStyle +' src="'+ iconImage +'" data-token="'+ token +'" />';
+                markup += '<span class="'+ iconClass +' overlay" style="background-image: url('+ iconImage +'); '+ iconStyle +'" data-token="'+ token +'"></span>';
                 }
 
             } else {
@@ -1044,7 +1045,8 @@
             if (typeof info['formToken'] !== 'undefined'){ iconImage += indexInfo['number']+'-'+info['formToken']+'.png'; }
             else if (typeof indexInfo['formToken'] !== 'undefined'){ iconImage += indexInfo['number']+'-'+indexInfo['formToken']+'.png'; }
             else { iconImage += indexInfo['number']+'.png'; }
-            markup += '<img class="'+ iconClass +'"'+ iconStyle +' src="'+ iconImage +'" data-token="'+ token +'" />';
+            //markup += '<img class="'+ iconClass +'"'+ iconStyle +' src="'+ iconImage +'" data-token="'+ token +'" />';
+            markup += '<span class="'+ iconClass +'"'+ iconStyle +' style="background-image: url('+ iconImage +'); '+ iconStyle +'" data-token="'+ token +'"></span>';
 
             }
 
@@ -1559,7 +1561,7 @@
         $panelPokemonSpriteWrapper.append(cellMarkup);
 
         // Update the overview with changes
-        updateOverview();
+        if (!simulationStarted){ updateOverview(); }
 
         // Push an event to Google Analytics
         if (typeof ga !== 'undefined'){
@@ -1763,109 +1765,6 @@
         var $pokeList = $('.list.pokemon', $pokeWrap);
         //var zoneMaxWidth = (thisZoneData.capacity / 10) * (40 + 5);
         //$pokeWrap.css({width:zoneMaxWidth+'px'});
-
-        // Define a function for updating a pokemon's cell
-        function updatePokemonCell(pokeInfo, cellKey){
-
-            // Collect index info for this pokemon
-            var pokeIndex = PokemonSpeciesIndex[pokeInfo.token];
-
-            // Check if this pokemon is still in its egg
-            var isEgg = pokeInfo.eggCycles > 0 ? true : false;
-            var hasFainted = pokeInfo.reachedAdulthood === true && pokeInfo.growthCycles <= 0 ? true : false;
-
-            // Collect a reference to this pokemon's cell
-            var $pokeCell = $('li[data-id="'+pokeInfo.id+'"]', $panelPokemonSpriteWrapper);
-
-            // Update the odd/even class on this pokemon's cell
-            var isEven = cellKey % 2 === 0 ? true : false;
-            if (isEven){ $pokeCell.removeClass('odd').addClass('even'); }
-            else { $pokeCell.removeClass('even').addClass('odd'); }
-
-            // Change the sprite class based on egg or not
-            var justHatched = false;
-            if (!isEgg && $pokeCell.hasClass('egg')){ justHatched = true; $pokeCell.removeClass('egg').addClass('pokemon'); }
-            else if (isEgg && !$pokeCell.hasClass('egg')){ $pokeCell.removeClass('pokemon').addClass('egg'); }
-
-            // Update the position of this pokemon based on cell key
-            var colPercent = 100 / thisZoneData.sizeCols;
-            var cellPosition = convertKeyToTableCell(cellKey, thisZoneData.sizeCols);
-            var cellTop = ((cellPosition.row - 1) * colPercent)+'%';
-            var cellLeft = ((cellPosition.col - 1) * colPercent)+'%';
-            $pokeCell.attr('data-key', cellKey);
-            if (!hasFainted){ $pokeCell.css({zIndex: cellKey, top: cellTop, left: cellLeft}); }
-            else { $pokeCell.css({zIndex: cellKey}); }
-
-            // Collect image data for this pokemon's icon sprite
-            var $spriteImage = $pokeCell.find('.sprite:not(.overlay)').first();
-            var spriteData = getPokemonIcon(pokeInfo.token, isEgg, pokeInfo, true);
-
-            // Check if this pokemon has just evolved or changed forms
-            var imageChanged = false;
-            var currentImage = $spriteImage.attr('src');
-            if (currentImage !== spriteData.image){ imageChanged = true; }
-
-            // If this Pokemon has just hatched, remove overlay and replace sprite
-            if (justHatched){ $pokeCell.find('.sprite.overlay').remove(); }
-
-            // If this pokemon's current image doesn't match what it should be, change it now
-            if (!isEgg && imageChanged){
-
-                var $prevImage = $spriteImage.clone();
-                $prevImage.css({opacity:1});
-                $prevImage.addClass('overlay');
-                $prevImage.insertAfter($spriteImage);
-
-                $spriteImage.css({opacity:0});
-                $spriteImage.removeClass('overlay');
-                $spriteImage.attr('src', spriteData.image);
-                $spriteImage.attr('data-token', pokeInfo.token);
-
-                $prevImage.stop().animate({opacity: 0}, {
-                    duration: Math.ceil(500 * dayTimeoutDurationMultiplier),
-                    easing: 'linear',
-                    queue: false,
-                    complete: function(){
-                        $pokeCell.find('.sprite.overlay').remove();
-                        }
-                    });
-                $spriteImage.stop().animate({opacity:1}, {
-                    duration: Math.ceil(500 * dayTimeoutDurationMultiplier),
-                    easing: 'linear',
-                    queue: false
-                    });
-
-                }
-
-            // If this is a HATCHED and growing pokemon, display normal sprite
-            if (!isEgg){
-
-                // Update the growth cycle for this pokemon
-                $pokeCell.find('.count').html('+' + pokeInfo.growthCycles);
-
-                // Add the adult class to this cell if applicable and not already there
-                if (pokeInfo.reachedAdulthood === true){
-                    var hasAdultTag = $pokeCell.find('.tag.adult').length;
-                    if (!hasAdultTag){ $pokeCell.find('> div').append('<span class="tag adult"></span>'); }
-                    $pokeCell.attr('data-dnote', Math.ceil((pokeInfo.growthCycles / pokeIndex.lifePoints) * 10));
-                    }
-
-                // Add the fainted class to this cell if applicable and not already there
-                if (hasFainted
-                    && !$pokeCell.hasClass('fainted')){
-                    $pokeCell.addClass('fainted');
-                    }
-
-                }
-            // Else if this is still an EGG and the pokemon is not ready
-            else {
-
-                // Update the egg cycle for this pokemon
-                $pokeCell.find('.count').html('-' + pokeInfo.eggCycles);
-
-                }
-
-        }
 
 
         // -- POKEMON CANVAS SPRITES
@@ -2176,13 +2075,97 @@
 
             }
 
-        // If the simulation has started, make sure we update the scroll wrappers
-        if (simulationStarted){
-            $('.wrap', $panelOverviewFloatLists).perfectScrollbar('update');
-            }
-
         // Run the onComplete function now
         onComplete();
+
+    }
+
+    // Define a function for updating a pokemon's cell
+    function updatePokemonCell(pokeInfo, cellKey){
+
+        // Collect index info for this pokemon
+        var pokeIndex = PokemonSpeciesIndex[pokeInfo.token];
+
+        // Check if this pokemon is still in its egg
+        var isEgg = pokeInfo.eggCycles > 0 ? true : false;
+        var hasFainted = pokeInfo.reachedAdulthood === true && pokeInfo.growthCycles <= 0 ? true : false;
+
+        // Collect a reference to this pokemon's cell
+        var $pokeCell = $('li[data-id="'+pokeInfo.id+'"]', $panelPokemonSpriteWrapper);
+
+        // Update the odd/even class on this pokemon's cell
+        var isEven = cellKey % 2 === 0 ? true : false;
+        if (isEven){ $pokeCell.removeClass('odd').addClass('even'); }
+        else { $pokeCell.removeClass('even').addClass('odd'); }
+
+        // Change the sprite class based on egg or not
+        var justHatched = false;
+        if (!isEgg && $pokeCell.hasClass('egg')){ justHatched = true; $pokeCell.removeClass('egg').addClass('pokemon'); }
+        else if (isEgg && !$pokeCell.hasClass('egg')){ $pokeCell.removeClass('pokemon').addClass('egg'); }
+
+        // Update the position of this pokemon based on cell key
+        var colPercent = 100 / thisZoneData.sizeCols;
+        var cellPosition = convertKeyToTableCell(cellKey, thisZoneData.sizeCols);
+        var cellTop = ((cellPosition.row - 1) * colPercent)+'%';
+        var cellLeft = ((cellPosition.col - 1) * colPercent)+'%';
+        $pokeCell.attr('data-key', cellKey);
+        if (!hasFainted){ $pokeCell.css({zIndex: cellKey, top: cellTop, left: cellLeft}); }
+        else { $pokeCell.css({zIndex: cellKey}); }
+
+        // Collect image data for this pokemon's icon sprite
+        var $spriteImage = $pokeCell.find('.sprite:not(.overlay)').first();
+        var spriteData = getPokemonIcon(pokeInfo.token, isEgg, pokeInfo, true);
+
+        // Check if this pokemon has just evolved or changed forms
+        var imageChanged = false;
+        var currentImage = $spriteImage.css('background-image');
+        if (typeof currentImage !== 'undefined'){
+            currentImage = currentImage.replace(/^url\(\"?(.*?)\"?\)$/i, '$1');
+            currentImage = currentImage.replace(appBaseHref, '');
+            }
+        //console.log('pokeInfo = ', pokeInfo.id, pokeInfo.token);
+        //console.log('currentImage = ', currentImage);
+        //console.log('spriteData.image = ', spriteData.image);
+        if (currentImage !== spriteData.image){ imageChanged = true; }
+
+        // If this Pokemon has just hatched, remove overlay and replace sprite
+        if (justHatched){ $pokeCell.find('.sprite.overlay').remove(); }
+
+        // If this pokemon's current image doesn't match what it should be, change it now
+        if (!isEgg && imageChanged){
+
+            $spriteImage.css({backgroundImage:'url("'+ spriteData.image +'")'});
+            $spriteImage.attr('data-token', pokeInfo.token);
+
+            }
+
+        // If this is a HATCHED and growing pokemon, display normal sprite
+        if (!isEgg){
+
+            // Update the growth cycle for this pokemon
+            $pokeCell.find('.count').html('+' + pokeInfo.growthCycles);
+
+            // Add the adult class to this cell if applicable and not already there
+            if (pokeInfo.reachedAdulthood === true){
+                var hasAdultTag = $pokeCell.find('.tag.adult').length;
+                if (!hasAdultTag){ $pokeCell.find('> div').append('<span class="tag adult"></span>'); }
+                $pokeCell.attr('data-dnote', Math.ceil((pokeInfo.growthCycles / pokeIndex.lifePoints) * 10));
+                }
+
+            // Add the fainted class to this cell if applicable and not already there
+            if (hasFainted
+                && !$pokeCell.hasClass('fainted')){
+                $pokeCell.addClass('fainted');
+                }
+
+            }
+        // Else if this is still an EGG and the pokemon is not ready
+        else {
+
+            // Update the egg cycle for this pokemon
+            $pokeCell.find('.count').html('-' + pokeInfo.eggCycles);
+
+            }
 
     }
 
@@ -2656,15 +2639,14 @@
                     }
 
                 // Check to see to see if this pokemon is in growth cooldown, else no evolution
-                var allowEvolution = true;
+                var onlyLevelUpEvolutions = false;
                 if (pokemonInfo.growthCooldown > 0){
                     pokemonInfo.growthCooldown -= 1;
-                    allowEvolution = false;
+                    onlyLevelUpEvolutions = true;
                     }
 
                 // If this Pokemon has any evolutions, check to see if should be triggered
-                if (allowEvolution
-                    && typeof indexInfo.nextEvolutions !== 'undefined'
+                if (typeof indexInfo.nextEvolutions !== 'undefined'
                     && indexInfo.nextEvolutions.length){
 
                     // Count the number of active species related to this pokemon
@@ -2885,7 +2867,11 @@
                                 //console.log('|-- methodToken = ', methodToken);
                                 //console.log('|-- methodValue = ', methodValue);
 
-                                var chanceValue = calculateEvolutionChance(pokemonInfo, methodToken, methodValue, nextEvolution);
+                                var chanceValue = 0;
+                                if (methodToken === 'level-up'
+                                    || !onlyLevelUpEvolutions){
+                                    var chanceValue = calculateEvolutionChance(pokemonInfo, methodToken, methodValue, nextEvolution);
+                                    }
                                 //console.log('|-- chanceValue = ', chanceValue);
 
                                 if (chanceValue > 0){
