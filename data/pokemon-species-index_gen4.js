@@ -373,6 +373,43 @@
             prevEvolution: 'roselia'
             },
 
+        'cranidos': {
+            order: indexOrder++,
+            token: 'cranidos',
+            name: 'Cranidos',
+            number: 408,
+            types: ['rock'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 67, phAttack: 125, phDefense: 40, spAttack: 30, spDefense: 30, speed: 58},
+            abilities: {0: 'mold-breaker', hidden: 'sheer-force'},
+            height: 0.9,
+            weight: 31.5,
+            colors: ['gray', 'blue', 'white', 'red'],
+            eggCycles: 30,
+            eggGroups: ['monster'],
+            nextEvolutions: [{
+                species: 'rampardos',
+                method: 'level-up',
+                value: 30
+                }]
+            },
+        'rampardos': {
+            order: indexOrder++,
+            token: 'rampardos',
+            name: 'Rampardos',
+            number: 409,
+            types: ['rock'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 97, phAttack: 165, phDefense: 60, spAttack: 65, spDefense: 50, speed: 58},
+            abilities: {0: 'mold-breaker', hidden: 'sheer-force'},
+            height: 1.6,
+            weight: 102.5,
+            colors: ['gray', 'blue', 'white', 'black', 'red'],
+            eggCycles: 30,
+            eggGroups: ['monster'],
+            prevEvolution: 'cranidos'
+            },
+
         'buizel': {
             order: indexOrder++,
             token: 'buizel',
