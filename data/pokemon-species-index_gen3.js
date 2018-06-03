@@ -1693,6 +1693,43 @@
             prevEvolution: 'baltoy'
             },
 
+        'lileep': {
+            order: indexOrder++,
+            token: 'lileep',
+            name: 'Lileep',
+            number: 345,
+            types: ['rock', 'grass'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 66, phAttack: 41, phDefense: 77, spAttack: 61, spDefense: 87, speed: 23},
+            abilities: {0: 'suction-cups', hidden: 'storm-drain'},
+            height: 1,
+            weight: 23.8,
+            colors: ['purple', 'pink', 'yellow', 'black'],
+            eggCycles: 30,
+            eggGroups: ['water-3'],
+            nextEvolutions: [{
+                species: 'cradily',
+                method: 'level-up',
+                value: 40
+                }]
+            },
+        'cradily': {
+            order: indexOrder++,
+            token: 'cradily',
+            name: 'Cradily',
+            number: 346,
+            types: ['rock', 'grass'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 86, phAttack: 81, phDefense: 97, spAttack: 81, spDefense: 107, speed: 43},
+            abilities: {0: 'suction-cups', hidden: 'storm-drain'},
+            height: 1.5,
+            weight: 60.4,
+            colors: ['green', 'pink', 'yellow', 'black'],
+            eggCycles: 30,
+            eggGroups: ['water-3'],
+            prevEvolution: 'lileep'
+            },
+
         'feebas': {
             order: indexOrder++,
             token: 'feebas',
