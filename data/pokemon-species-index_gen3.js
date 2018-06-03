@@ -1806,11 +1806,16 @@
             prevEvolution: 'feebas'
             },
 
-        'kecleon': {  // TODO: Make appearance based on current colour (dynamic, tie to ability)
+        'kecleon': {
             order: indexOrder++,
             token: 'kecleon',
             name: 'Kecleon',
             number: 352,
+            formClass: 'color-variant',
+            dynamicForms: true,
+            colorizedForms: true,
+            possibleForms: ['red', 'blue', 'yellow', 'green', 'purple', 'orange', 'grey', 'black', 'white', 'brown', 'pink'],
+            baseForm: 'green',
             types: ['normal'],
             baseStats: {hp: 60, phAttack: 90, phDefense: 70, spAttack: 60, spDefense: 120, speed: 40},
             abilities: {0: 'color-change', hidden: 'protean'},
