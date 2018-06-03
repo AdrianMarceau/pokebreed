@@ -644,6 +644,21 @@
             eggGroups: ['field', 'fairy']
             },
 
+        'mimikyu': { // TODO: Add busted form as a non-burst end-of-life form change
+            order: indexOrder++,
+            token: 'mimikyu',
+            name: 'Mimikyu',
+            number: 778,
+            types: ['ghost', 'fairy'],
+            baseStats: {hp: 55, phAttack: 90, phDefense: 80, spAttack: 50, spDefense: 105, speed: 96},
+            abilities: {0: 'disguise'},
+            height: 0.2,
+            weight: 0.7,
+            colors: ['yellow', 'black', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['amorphous']
+            },
+
         'bruxish': {
             order: indexOrder++,
             token: 'bruxish',
