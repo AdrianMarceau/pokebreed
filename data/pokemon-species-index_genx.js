@@ -68,7 +68,7 @@
             formToken: 'baby',
             number: 115,
             types: ['normal'],
-            genderRatio: {none: 1.0000},
+            genderRatio: {female: 1.0000},
             baseStats: {hp: 26, phAttack: 24, phDefense: 20, spAttack: 10, spDefense: 20, speed: 23},
             abilities: {0: 'early-bird', 1: 'scrappy', hidden: 'inner-focus'},
             height: 0.55,
