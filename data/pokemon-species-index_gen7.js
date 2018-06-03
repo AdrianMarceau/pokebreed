@@ -590,7 +590,7 @@
             number: 774,
             types: ['rock', 'flying'],
             genderRatio: {none: 1.000},
-            baseStats: {hp: 60, phAttack: 100, phDefense: 60, spAttack: 100, spDefense: 60, speed: 120},
+            baseStats: {hp: 60, phAttack: 60, phDefense: 100, spAttack: 60, spDefense: 100, speed: 60},
             abilities: {0: 'shields-down'},
             height: 0.3,
             weight: 0.3,
