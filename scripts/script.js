@@ -52,7 +52,8 @@
         evolvedPokemonSpecies: {},
         faintedPokemonSpecies: {},
         day: 0,
-        date: {}
+        date: {},
+        season: ''
         };
 
     var thisZoneData = {};
@@ -786,7 +787,7 @@
             starterName += ' &times;'+countStrings.join('/');
             starterList.push(starterName);
             }
-        var starterText = '[PBS | '+ starterList.join(' / ') +' | v'+ appVersionNumber +']';
+        var starterText = '``[PBS | '+ starterList.join(' / ') +' | v'+ appVersionNumber +']``';
         $('.starter-pokemon .seed', $panelButtons).html(starterText);
         $('.starter-pokemon', $panelButtons).removeClass('hidden');
 
@@ -1375,10 +1376,11 @@
                 var customData = {};
                 if (typeof pokeIndex.formToken === 'string' && pokeIndex.formToken.length > 0){
                     customData.formToken = pokeIndex.formToken; // Preset form
-                    } else if (pokeIndex.randomizeForms === true
-                        && typeof pokeIndex.baseForme !== 'undefined'
-                        && pokeIndex.baseForme.length > 0){
-                    customData.formToken = pokeIndex.baseForme; // Random form with base
+                    } else if ((pokeIndex.randomizeForms === true
+                        || pokeIndex.seasonalForms === true)
+                            && typeof pokeIndex.baseForm !== 'undefined'
+                            && pokeIndex.baseForm.length > 0){
+                    customData.formToken = pokeIndex.baseForm; // Random/seasonal form with base
                     }
                 var pokeIcon = getPokemonIcon(pokeToken, false, customData);
                 pokedexMarkup.push('<li><div class="'+ liClass +'" data-token="' + pokeToken + '" title="'+ titleText +'"><div class="bubble">' +
@@ -1579,7 +1581,7 @@
 
             }
 
-        // If this pokemon has a randomized forme, decide it now
+        // If this pokemon has a randomized form, decide it now
         if (typeof indexData['randomizeForms'] !== 'undefined'
             && indexData['randomizeForms'] === true
             && typeof indexData['possibleForms'] !== 'undefined'){
@@ -1587,6 +1589,14 @@
             var randomKey = Math.floor((Math.seededRandomChance() / 100) * possibleForms.length);
             var randomForm = possibleForms[randomKey];
             newPokemon.formToken = randomForm;
+            }
+
+        // If this pokemon has a seasonal form, decide it now
+        if (typeof indexData['seasonalForms'] !== 'undefined'
+            && indexData['seasonalForms'] === true
+            && typeof indexData['possibleForms'] !== 'undefined'){
+            if (thisZoneData.season.length){ newPokemon.formToken = thisZoneData.season; }
+            else { newPokemon.formToken = indexData['baseForm']; }
             }
 
         // Push the new pokemon to the list and collect its key
@@ -1778,6 +1788,13 @@
         dateString.push(strPad('00', thisZoneData.date.day, true));
         dateString = dateString.join(' / ');
         //console.log('dateString = ', dateString);
+        switch (thisZoneData.date.month){
+            case 12: case 1: case 2: { { thisZoneData.season = 'winter'; break; } }
+            case 3: case 4: case 5: { { thisZoneData.season = 'spring'; break; } }
+            case 6: case 7: case 8: { { thisZoneData.season = 'summer'; break; } }
+            case 9: case 10: case 11: { { thisZoneData.season = 'autumn'; break; } }
+            }
+        //console.log('thisZoneData.season = ', thisZoneData.season);
 
         // Update the zone details
         $('.zone .name .data', $panelMainOverview).text(biomeName);
@@ -2680,6 +2697,7 @@
                 // If pokemon is still an egg, skip growth cycles for now
                 if (pokemonInfo.eggCycles > 0){ continue; }
 
+
                 // Only increment growth cycles if still growing, else start decrementing
                 if (pokemonInfo.reachedAdulthood === false){
                     pokemonInfo.growthCycles += 1;
@@ -2690,6 +2708,19 @@
                 if (pokemonInfo.growthCooldown > 0){
                     pokemonInfo.growthCooldown -= 1;
                     onlyLevelUpEvolutions = true;
+                    }
+
+                // Check to see if this pokemon should have dynamic form changes
+                if (typeof indexInfo.formClass !== 'undefined'
+                    &&typeof indexInfo.dynamicForms !== 'undefined'
+                    && indexInfo.dynamicForms === true){
+
+                    // If seasonal variant, change the form based on the current season
+                    if (indexInfo.formClass === 'seasonal-variant'
+                        && thisZoneData.season.length){
+                        pokemonInfo.formToken = thisZoneData.season;
+                        }
+
                     }
 
                 // If this Pokemon has any evolutions, check to see if should be triggered
@@ -2867,6 +2898,18 @@
                         // Gender-based evolutions are triggered immediately if the pokemon is of a specific sex
                         if (methodToken === 'gender'
                             && pokemonInfo.gender === methodValue){
+                            return 100;
+                            }
+
+                        // Form-based evolutions are triggered immediately if the pokemon is in that form
+                        if (methodToken === 'form'
+                            && pokemonInfo.formToken === methodValue){
+                            return 100;
+                            }
+
+                        // Season-based evolutions are triggered immediately if the current season is a match
+                        if (methodToken === 'season'
+                            && thisZoneData.season === methodValue){
                             return 100;
                             }
 
