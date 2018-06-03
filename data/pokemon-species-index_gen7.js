@@ -520,6 +520,46 @@
             prevEvolution: 'morelull'
             },
 
+        'salandit': {
+            order: indexOrder++,
+            token: 'salandit',
+            name: 'Salandit',
+            number: 757,
+            types: ['poison', 'fire'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 48, phAttack: 44, phDefense: 40, spAttack: 71, spDefense: 40, speed: 77},
+            abilities: {0: 'corrosion', hidden: 'oblivious'},
+            height: 0.6,
+            weight: 4.8,
+            colors: ['black', 'gray', 'red', 'purple'],
+            evos: ['salazzle'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'dragon'],
+            nextEvolutions: [{
+                species: 'salazzle',
+                method: 'level-up',
+                value: 33,
+                method2: 'chance',
+                value2: 12.5
+                }]
+            },
+        'salazzle': {
+            order: indexOrder++,
+            token: 'salazzle',
+            name: 'Salazzle',
+            number: 758,
+            types: ['poison', 'fire'],
+            gender: 'F',
+            baseStats: {hp: 68, phAttack: 64, phDefense: 60, spAttack: 111, spDefense: 60, speed: 117},
+            abilities: {0: 'corrosion', hidden: 'oblivious'},
+            height: 1.2,
+            weight: 22.2,
+            colors: ['gray', 'purple', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'dragon'],
+            prevEvolution: 'salandit'
+            },
+
         'stufful': {
             order: indexOrder++,
             token: 'stufful',
