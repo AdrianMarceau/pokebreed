@@ -1811,6 +1811,9 @@
         // Remove any previously fainted pokemon from the canvas now
         $pokeList.find('li.fainted').remove();
 
+        // Remove the "new" class from any canvas pokemon that still have it
+        $pokeList.find('li.new').removeClass('new');
+
         // Sort collected species tokens to keep things together
         var sortedSpeciesTokens = sortSpeciesTokensByOrder(Object.keys(pokeSpecies));
         //if (simulationStarted){ var sortedSpeciesTokens = sortSpeciesTokensByOrder(Object.keys(pokeSpecies), true); }
