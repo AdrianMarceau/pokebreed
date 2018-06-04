@@ -400,7 +400,6 @@
                     && !simulationStarted
                     && !dayTimeoutStarted){
                     startSimulation();
-                    updateDay(false);
                     }
                 return;
                 }
@@ -843,6 +842,9 @@
         $('.starter-pokemon .seed', $panelButtons).html(starterText);
         $('.starter-pokemon', $panelButtons).removeClass('hidden');
 
+        // Start the day timeout so the sim can actually start
+        dayTimeoutID = setTimeout(dayTimeoutHandler, dayTimeoutDuration);
+
     }
 
     // Define a function for ending the current simulation and doing cleanup
@@ -851,6 +853,12 @@
 
         // Set the start flag to false
         simulationStarted = false;
+
+        // Reset the day timeout so we can start fresh
+        if (dayTimeoutID !== false){ clearTimeout(dayTimeoutID); }
+        dayTimeoutID = false;
+        dayTimeoutStarted = false;
+        dayTimeoutDuration = 1200;
 
         // Remove the started class from the main overview
         $panelMainOverview.removeClass('started');
@@ -877,13 +885,6 @@
 
         // Clear and reset all the zone variables and history
         resetZoneData();
-
-        // Reset the day timeout so we can start fresh
-        if (dayTimeoutID !== false){ clearTimeout(dayTimeoutID); }
-        dayTimeoutID = false;
-        dayTimeoutStarted = false;
-        dayTimeoutDuration = 1200;
-        dayTimeoutHandler = function(){ updateDay(); };
 
         // Reset the global randomization seed
         Math.seed = 1;
@@ -2687,11 +2688,9 @@
 
             }
 
-        //var $timer = $('.details.zone .timer .complete', $panelMainOverview);
+        // Clear the previous timeout, request next animation frame, and then create a new one
         if (dayTimeoutID !== false){ clearTimeout(dayTimeoutID); }
         dayTimeoutID = false;
-
-        //$timer.css({width:'0%'});
         requestAnimationFrame(function(){
             updateOverview(function(){
                 if (thisZoneData.currentPokemon.length > 0
@@ -3451,7 +3450,7 @@
                     if (typeof indexInfo.eggSpecies !== 'undefined'
                         && typeof pokeEggs[indexInfo.eggSpecies] !== 'undefined'){
                         currentEggs += pokeEggs[indexInfo.eggSpecies];
-                        baseUnits += pokeSpecies[indexInfo.eggSpecies] !== 'undefined' ? sumValues(pokeSpecies[indexInfo.eggSpecies]) : 0;
+                        baseUnits += typeof pokeSpecies[indexInfo.eggSpecies] !== 'undefined' ? sumValues(pokeSpecies[indexInfo.eggSpecies]) : 0;
                         } else if (typeof indexInfo.eggParent !== 'undefined'
                         && typeof pokeEggs[indexInfo.eggParent] !== 'undefined'){
                         currentEggs += pokeEggs[indexInfo.eggParent];
