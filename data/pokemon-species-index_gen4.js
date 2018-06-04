@@ -640,6 +640,46 @@
             prevEvolution: 'burmy'
             },
 
+        'combee': {
+            order: indexOrder++,
+            token: 'combee',
+            name: 'Combee',
+            number: 415,
+            types: ['bug', 'flying'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 30, phAttack: 30, phDefense: 42, spAttack: 30, spDefense: 42, speed: 70},
+            abilities: {0: 'honey-gather', hidden: 'hustle'},
+            height: 0.3,
+            weight: 5.5,
+            colors: ['yellow', 'black', 'white'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            nextEvolutions: [{
+                species: 'vespiquen',
+                method: 'level-up',
+                value: 21,
+                method2: 'gender',
+                value2: 'female'
+                }]
+            },
+        'vespiquen': {
+            order: indexOrder++,
+            token: 'vespiquen',
+            name: 'Vespiquen',
+            number: 416,
+            types: ['bug', 'flying'],
+            genderRatio: {female: 1.000},
+            baseStats: {hp: 70, phAttack: 80, phDefense: 102, spAttack: 80, spDefense: 102, speed: 40},
+            abilities: {0: 'pressure', hidden: 'unnerve'},
+            height: 1.2,
+            weight: 38.5,
+            colors: ['yellow', 'black', 'red', 'white'],
+            eggPartner: 'combee',
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            prevEvolution: 'combee'
+            },
+
         'buizel': {
             order: indexOrder++,
             token: 'buizel',
