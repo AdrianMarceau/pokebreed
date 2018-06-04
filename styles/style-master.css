@@ -988,6 +988,16 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     position: relative;
     z-index: 2;
 }
+.panel .overview.types .list li.type .bubble .name,
+.panel .overview.species .list li.species .bubble .name,
+.panel .overview.visitors .list li.species .bubble .name {
+    display: inline-block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 85px;
+    max-width: calc(100% - 50px);
+}
 
 .panel .overview.types .list li.type .val,
 .panel .overview.species .list li.species .val,

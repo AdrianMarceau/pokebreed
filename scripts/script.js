@@ -1438,7 +1438,8 @@
                     customData.formToken = pokeIndex.formToken; // Preset form
                     } else if ((pokeIndex.randomizeForms === true
                         || pokeIndex.seasonalForms === true
-                        || pokeIndex.colorizedForms === true)
+                        || pokeIndex.colorizedForms === true
+                        || pokeIndex.fieldForms === true)
                             && typeof pokeIndex.baseForm !== 'undefined'
                             && pokeIndex.baseForm.length > 0){
                     customData.formToken = pokeIndex.baseForm; // Random/seasonal/color form with base
@@ -1670,6 +1671,24 @@
                 && !jQuery.isEmptyObject(colorStats)){
                 var topColor = Object.keys(colorStats)[0];
                 newPokemon.formToken = topColor;
+                } else {
+                newPokemon.formToken = indexData['baseForm'];
+                }
+            }
+
+        // If field variant, change the form based on the current biome
+        if (typeof indexData['fieldForms'] !== 'undefined'
+            && indexData['fieldForms'] === true){
+            if (thisZoneData.field.length){
+                var triggerTokens = Object.keys(indexData['possibleFormsTriggers']);
+                for (var i = 0; i < triggerTokens.length; i++){
+                    var triggerToken = triggerTokens[i];
+                    var triggerFields = indexData['possibleFormsTriggers'][triggerToken];
+                    if (triggerFields.indexOf(thisZoneData.field) !== -1){
+                        newPokemon.formToken = triggerToken;
+                        break;
+                        }
+                    }
                 } else {
                 newPokemon.formToken = indexData['baseForm'];
                 }
@@ -2813,6 +2832,21 @@
                         pokemonInfo.formToken = topColor;
                         }
 
+                    // If field variant, change the form based on the current biome
+                    if (indexInfo.formClass === 'field-variant'
+                        && typeof indexInfo.possibleFormsTriggers !== 'undefined'
+                        && thisZoneData.field.length){
+                        var triggerTokens = Object.keys(indexInfo.possibleFormsTriggers);
+                        for (var i = 0; i < triggerTokens.length; i++){
+                            var triggerToken = triggerTokens[i];
+                            var triggerFields = indexInfo.possibleFormsTriggers[triggerToken];
+                            if (triggerFields.indexOf(thisZoneData.field) !== -1){
+                                pokemonInfo.formToken = triggerToken;
+                                break;
+                                }
+                            }
+                        }
+
                     }
 
                 // If this Pokemon has any evolutions, check to see if should be triggered
@@ -3133,6 +3167,12 @@
                             var randomKey = Math.floor((Math.seededRandomChance() / 100) * possibleForms.length);
                             var randomForm = possibleForms[randomKey];
                             pokemonInfo.formToken = randomForm;
+                            }
+
+                        // If this pokemon has a form defined when it really shouldn't, remove it
+                        if (typeof selectedEvolutionData.possibleForms === 'undefined'
+                            && typeof pokemonInfo.formToken !== 'undefined'){
+                            delete pokemonInfo.formToken;
                             }
 
                         // Create an entry for this species in the global count if not exists
