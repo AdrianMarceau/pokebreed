@@ -1557,6 +1557,10 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     background-image: url(../images/icons/controls/stop.png);
 }
 
+.panel .buttons .controls .control.pause {
+    margin-right: 18px;
+}
+
 .panel .buttons .controls .control.stop {
     background-color: #b73232;
     float: right;

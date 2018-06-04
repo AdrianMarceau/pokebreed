@@ -180,10 +180,10 @@ if (isset($_GET['gen'])
             <div class="buttons">
                 <div class="controls">
                     <a class="control speed play hidden" data-control="play" title="Play">Play</a>
+                    <a class="control speed pause hidden" data-control="pause" title="Pause">Pause</a>
                     <a class="control speed slow hidden" data-control="slow" title="Slow">Slow</a>
                     <a class="control speed fast hidden" data-control="fast" title="Fast">Fast</a>
                     <a class="control speed warp hidden" data-control="warp" title="Warp">Warp</a>
-                    <a class="control speed pause hidden" data-control="pause" title="Pause">Pause</a>
                     <a class="control restart hidden" data-control="restart"><span>Re-use Same Starters</span></a>
                     <a class="control new hidden" data-control="new"><span>Use New Starters</span></a>
                     <a class="control stop hidden" data-control="stop" title="Stop"><span>Stop?</span></a>

@@ -307,6 +307,10 @@
         $pokePanelLoading.append('.'); // append loading dot
 
         // Define the click-event for the speed buttons
+        var defaultTimeout = function(){ updateDay(); };
+        var speedValues = {normal:1200,warp:100,fast:600,slow:2400};
+        var prevSpeedToken = false;
+        var prevSpeedDuration = false;
         $controlButtons = $('.controls .control[data-control]', $panelButtons);
         $controlButtons.bind('click', function(e){
             e.preventDefault();
@@ -315,28 +319,55 @@
             var $button = $(this);
             var control = $button.attr('data-control');
 
-            // If this is a play-speed related button
-            if (control.match(/^(play|pause|fast|slow|warp)$/)){
-                var speedValue = 1200;
-                var speedToken = 'normal';
-                if (control === 'pause'){ speedValue = 99999999999; speedToken = 'pause'; }
-                else if (control === 'warp'){ speedValue = 100; speedToken = 'warp'; } // 0.1s
-                else if (control === 'fast'){ speedValue = 600; speedToken = 'fast'; } // 0.6s
-                else if (control === 'slow'){ speedValue = 2400; speedToken = 'slow'; } // 2.4s
-                dayTimeoutDuration = speedValue;
-                $('body').attr('data-speed', speedToken);
-                dayTimeoutDurationToken = speedToken;
+            // If this is the PAUSE button
+            if (control === 'pause'){
+                //console.log('trigger a PAUSE action', typeof dayTimeoutID, dayTimeoutID);
+                if (dayTimeoutSpeed === 'pause' && dayTimeoutID === false){ return false; }
+                prevSpeedToken = dayTimeoutSpeed;
+                prevSpeedDuration = dayTimeoutDuration;
+                if (dayTimeoutID !== false){ clearTimeout(dayTimeoutID); }
+                dayTimeoutID = false;
+                dayTimeoutSpeed = 'pause';
+                dayTimeoutDuration = 0;
+                $('body').attr('data-speed', control);
                 $controlButtons.filter('.speed').removeClass('active');
+                $controlButtons.filter('.speed:not(.play):not(.pause)').addClass('hidden');
                 $button.addClass('active');
-                if (control.match(/^(fast|slow|warp)$/)){ $controlButtons.filter('.play').addClass('active'); }
-                if (dayTimeout !== false){
-                    var handler = dayTimeout.getHandler();
-                    dayTimeout.clear();
-                    dayTimeout = createDynamicTimeout(handler, speedValue);
+                return;
+                }
+            // Else if this is the PLAY button
+            else if (control === 'play'){
+                //console.log('trigger a PLAY action');
+                if (dayTimeoutSpeed !== 'pause'){ return false; }
+                dayTimeoutSpeed = prevSpeedToken !== false ? prevSpeedToken : 'normal';
+                dayTimeoutDuration = prevSpeedDuration !== false ? prevSpeedDuration : speedValues[dayTimeoutSpeed];
+                dayTimeoutID = setTimeout(dayTimeoutHandler, dayTimeoutDuration);
+                $('body').attr('data-speed', dayTimeoutSpeed);
+                $controlButtons.filter('.speed').removeClass('active');
+                $controlButtons.filter('.'+ dayTimeoutSpeed).addClass('active');
+                $controlButtons.filter('.speed:not(.play):not(.pause)').removeClass('hidden');
+                $button.addClass('active');
+                return;
+                }
+            // Else if this is the SPEED button
+            else if (control.match(/^(slow|fast|warp)$/)){
+                //console.log('trigger a SPEED action', control);
+                // If the speed has NOT been selected, switch now (else revert to normal)
+                if (dayTimeoutSpeed !== control){
+                    dayTimeoutSpeed = control;
+                    dayTimeoutDuration = speedValues[dayTimeoutSpeed];
+                    $('body').attr('data-speed', dayTimeoutSpeed);
+                    $controlButtons.filter('.speed:not(.play)').removeClass('active');
+                    $button.addClass('active');
+                    } else {
+                    dayTimeoutSpeed = 'normal';
+                    dayTimeoutDuration = speedValues[dayTimeoutSpeed];
+                    $('body').attr('data-speed', dayTimeoutSpeed);
+                    $controlButtons.filter('.speed:not(.play)').removeClass('active');
                     }
                 return;
-            }
-            // Otherwise if this is the stop button
+                }
+            // Else if this is the STOP button
             else if (control === 'stop'){
                 if (stopConfirmTimeout !== false){ clearTimeout(stopConfirmTimeout); }
                 $controlButtons.filter('.pause').trigger('click');
@@ -351,19 +382,19 @@
                     }
                 return;
                 }
-            // Otherwise if this is the restart button
+            // Else if this is the RESTART button
             else if (control === 'restart'){
                 if (simulationStarted){ return false; }
                 restartCurrentSimulation();
                 return;
                 }
-            // Otherwise if this is the new button
+            // Else if this is the NEW button
             else if (control === 'new'){
                 if (simulationStarted){ return false; }
                 resetSimulator();
                 return;
                 }
-            // Otherwise if this is the start button
+            // Else if this is the START button
             else if (control === 'start'){
                 if (thisZoneData.currentPokemon.length > 0
                     && !simulationStarted
@@ -848,10 +879,11 @@
         resetZoneData();
 
         // Reset the day timeout so we can start fresh
-        if (dayTimeout !== false){ dayTimeout.clear(); }
-        dayTimeout = false;
+        if (dayTimeoutID !== false){ clearTimeout(dayTimeoutID); }
+        dayTimeoutID = false;
         dayTimeoutStarted = false;
         dayTimeoutDuration = 1200;
+        dayTimeoutHandler = function(){ updateDay(); };
 
         // Reset the global randomization seed
         Math.seed = 1;
@@ -2538,10 +2570,11 @@
     }
 
     // Define a timeout function for incrementing the day counter
-    var dayTimeout = false;
+    var dayTimeoutID = false;
     var dayTimeoutStarted = false;
     var dayTimeoutDuration = 1200;
-    var dayTimeoutDurationToken = 'normal';
+    var dayTimeoutSpeed = 'normal';
+    var dayTimeoutHandler = function(){ updateDay(); };
     function updateDay(updateCycles, allowVisitors){
         if (typeof updateCycles !== 'boolean'){ updateCycles = true; }
         if (typeof allowVisitors !== 'boolean'){ allowVisitors = updateCycles; }
@@ -2655,18 +2688,15 @@
             }
 
         //var $timer = $('.details.zone .timer .complete', $panelMainOverview);
-        if (dayTimeout !== false){ clearTimeout(dayTimeout); }
+        if (dayTimeoutID !== false){ clearTimeout(dayTimeoutID); }
+        dayTimeoutID = false;
+
         //$timer.css({width:'0%'});
-        updateOverview(function(){
-            requestAnimationFrame(function(){
-                //console.log('updateOverview(function(){...})');
-                //console.log('|- thisZoneData.currentPokemon.length = ', thisZoneData.currentPokemon.length);
-                //console.log('|- thisZoneData.all = ', thisZoneData);
-                if (thisZoneData.currentPokemon.length > 0){
-                    dayTimeout = createDynamicTimeout(function(){ updateDay(); }, dayTimeoutDuration);
-                    //$timer.animate({width:'100%'},dayTimeoutDuration,'linear',function(){ $(this).css({width:'0%'}); });
-                    } else {
-                    updateOverview();
+        requestAnimationFrame(function(){
+            updateOverview(function(){
+                if (thisZoneData.currentPokemon.length > 0
+                    && dayTimeoutSpeed !== 'pause'){
+                    dayTimeoutID = setTimeout(dayTimeoutHandler, dayTimeoutDuration);
                     }
                 });
             });
@@ -4254,24 +4284,6 @@
         return (function(h){
             return new Array(7-h.length).join("0")+h
         })(bin.toString(16).toUpperCase())
-    }
-
-    // Define a function for creating timeouts that can be cancelled, triggerered early, etc.
-    function createDynamicTimeout(timeoutHandler, delay){
-        var timeoutId;
-        timeoutId = setTimeout(timeoutHandler, delay);
-        return {
-            clear: function(){
-                clearTimeout(timeoutId);
-                },
-            trigger: function(){
-                clearTimeout(timeoutId);
-                return timeoutHandler();
-                },
-            getHandler: function(){
-                return timeoutHandler;
-                }
-            };
     }
 
     // Define function for calculating table cell co-ordinates (col, row) given a key
