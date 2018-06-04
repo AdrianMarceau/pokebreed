@@ -2894,46 +2894,30 @@
 
                         // Happiness-based evolutions are triggered by attract type appeal values
                         if (methodToken === 'happiness'){
-
                             if (methodValue === 'high'
-                                && pokemonInfo.growthCycles >= 10
                                 && pokemonHappiness >= 2){
                                 return 1 + (pokemonHappiness * 10);
-
                                 } else if (methodValue === 'max'
-                                && pokemonInfo.growthCycles >= 20
                                 && pokemonHappiness >= 4){
                                 return 2 + (pokemonHappiness * 10);
-
                                 } else if (methodValue === 'low'
-                                && pokemonInfo.growthCycles >= 30
                                 && pokemonHappiness < 0){
                                 return 3 + ((pokemonHappiness * -1) * 10);
-
                                 }
-
                             }
 
                         // Affection-based evolutions trigger when this pokemon is surrounded by related species
                         if (methodToken === 'affection'){
-
                             if (methodValue === 'high'
-                                && pokemonInfo.growthCycles >= 10
                                 && numRelatedPokemon >= 5){
                                 return 1 + (numRelatedPokemon * 10);
-
                                 } else if (methodValue === 'max'
-                                && pokemonInfo.growthCycles >= 20
                                 && numRelatedPokemon >= 10){
                                 return 2 + (numRelatedPokemon * 10);
-
                                 } else if (methodValue === 'low'
-                                && pokemonInfo.growthCycles >= 30
                                 && numRelatedPokemon < 5){
                                 return 3 + ((10 - numRelatedPokemon) * 10);
-
                                 }
-
                             }
 
                         // Type-appeal/crisis evolutions trigger when the relevant field stats are especially high
@@ -2944,8 +2928,7 @@
                             var returnValue = 0;
                             for (var i = 0; i < appealTypes.length; i++){
                                 var appealType = appealTypes[i];
-                                if (pokemonInfo.growthCycles >= (appealLevel * 10)
-                                    && currentTypeStats[appealType] >= (appealLevel * 20)){
+                                if (currentTypeStats[appealType] >= (appealLevel * 20)){
                                     returnValue += 1 + ((currentTypeStats[appealType] * 5) * appealLevel);
                                     }
                                 }
@@ -2960,8 +2943,7 @@
                             var returnValue = 0;
                             for (var i = 0; i < appealTypes.length; i++){
                                 var appealType = appealTypes[i];
-                                if (pokemonInfo.growthCycles >= (appealLevel * 10)
-                                    && currentTypeStats[appealType] <= ((appealLevel * 5) * -1)){
+                                if (currentTypeStats[appealType] <= ((appealLevel * 5) * -1)){
                                     returnValue += 1 + (((currentTypeStats[appealType] * -1) * 10) * appealLevel);
                                     }
                                 }
@@ -2976,8 +2958,7 @@
                             var returnValue = 0;
                             for (var i = 0; i < appealTypes.length; i++){
                                 var appealType = appealTypes[i];
-                                if (pokemonInfo.growthCycles >= (appealLevel * 10)
-                                    && currentBaseStats[appealType] >= (appealLevel * 20)){
+                                if (currentBaseStats[appealType] >= (appealLevel * 20)){
                                     returnValue += 1 + (currentBaseStats[appealType] * appealLevel);
                                     }
                                 }
@@ -2986,24 +2967,13 @@
 
                         // Species-based evolutions trigger if the other species is active on the field
                         if (methodToken === 'evolution-species'
-                            && pokemonInfo.growthCycles >= 20
                             && typeof thisZoneData.currentStats['species'][methodValue] !== 'undefined'
                             && thisZoneData.currentStats['species'][methodValue] > 0){
                             return 1 + thisZoneData.currentStats['species'][methodValue];
                             }
 
-                        // Item, stone, and location-based evolutions trigger based on growth cycles alone
-                        if ((methodToken === 'evolution-item'
-                                || methodToken === 'evolution-stone'
-                                || methodToken === 'evolution-move'
-                                || methodToken === 'evolution-location')
-                            && pokemonInfo.growthCycles >= 20){
-                            return 1 + Math.min(19, (pokemonInfo.growthCycles - 20));
-                            }
-
                         // Trade-based evolutions trigger only when there's an even number of this exact species active
                         if (methodToken === 'trade'
-                            && pokemonInfo.growthCycles >= 30
                             && allowTradeEvolution){
                             return 1 + Math.min(29, (pokemonInfo.growthCycles - 20));
                             }
@@ -3016,7 +2986,6 @@
 
                         // Extinction-based evolutions trigger when this pokemon is the last  of its species
                         if ((methodToken === 'extinction')
-                            && pokemonInfo.growthCycles >= 30
                             && numRelatedPokemon == 1){
                             return 1 + ((thisZoneData.currentPokemon.length - 1) * 10);
                             }
