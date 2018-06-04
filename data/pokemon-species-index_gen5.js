@@ -492,6 +492,41 @@
             prevEvolution: 'dwebble'
             },
 
+        'scraggy': {
+            order: indexOrder++,
+            token: 'scraggy',
+            name: 'Scraggy',
+            number: 559,
+            types: ['dark', 'fighting'],
+            baseStats: {hp: 50, phAttack: 75, phDefense: 70, spAttack: 35, spDefense: 70, speed: 48},
+            abilities: {0: 'shed-skin', 1: 'moxie', hidden: 'intimidate'},
+            height: 0.6,
+            weight: 11.8,
+            colors: ['yellow', 'red', 'white'],
+            eggCycles: 15,
+            eggGroups: ['field', 'dragon'],
+            nextEvolutions: [{
+                species: 'scrafty',
+                method: 'level-up',
+                value: 39
+                }]
+            },
+        'scrafty': {
+            order: indexOrder++,
+            token: 'scrafty',
+            name: 'Scrafty',
+            number: 560,
+            types: ['dark', 'fighting'],
+            baseStats: {hp: 65, phAttack: 90, phDefense: 115, spAttack: 45, spDefense: 115, speed: 58},
+            abilities: {0: 'shed-skin', 1: 'moxie', hidden: 'intimidate'},
+            height: 1.1,
+            weight: 30,
+            colors: ['orange', 'yellow', 'red', 'gray', 'white'],
+            eggCycles: 15,
+            eggGroups: ['field', 'dragon'],
+            prevEvolution: 'scraggy'
+            },
+
         'yamask': {
             order: indexOrder++,
             token: 'yamask',
