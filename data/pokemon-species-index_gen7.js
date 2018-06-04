@@ -822,6 +822,23 @@
             prevEvolution: 'hakamo-o',
             },
 
+        'zeraora': {
+            order: indexOrder++,
+            token: 'zeraora',
+            name: 'Zeraora',
+            class: 'mythical',
+            number: 807,
+            types: ['electric'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 88, phAttack: 112, phDefense: 75, spAttack: 102, spDefense: 80, speed: 143},
+            abilities: {0: 'volt-absorb'},
+            height: 1.5,
+            weight: 44.5,
+            colors: ['yellow', 'black', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            },
+
         // Alolan Variants
 
         'alolan-rattata': {
