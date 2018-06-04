@@ -492,6 +492,41 @@
             prevEvolution: 'dwebble'
             },
 
+        'yamask': {
+            order: indexOrder++,
+            token: 'yamask',
+            name: 'Yamask',
+            number: 562,
+            types: ['ghost'],
+            baseStats: {hp: 38, phAttack: 30, phDefense: 85, spAttack: 55, spDefense: 65, speed: 30},
+            abilities: {0: 'mummy'},
+            height: 0.5,
+            weight: 1.5,
+            colors: ['black', 'yellow', 'red'],
+            eggCycles: 25,
+            eggGroups: ['mineral', 'amorphous'],
+            nextEvolutions: [{
+                species: 'cofagrigus',
+                method: 'level-up',
+                value: 34
+                }]
+            },
+        'cofagrigus': {
+            order: indexOrder++,
+            token: 'cofagrigus',
+            name: 'Cofagrigus',
+            number: 563,
+            types: ['ghost'],
+            baseStats: {hp: 58, phAttack: 50, phDefense: 145, spAttack: 95, spDefense: 105, speed: 30},
+            abilities: {0: 'mummy'},
+            height: 1.7,
+            weight: 76.5,
+            colors: ['yellow' , 'blue', 'black', 'red'],
+            eggCycles: 25,
+            eggGroups: ['mineral', 'amorphous'],
+            prevEvolution: 'yamask'
+            },
+
         'tirtouga': {
             order: indexOrder++,
             token: 'tirtouga',
