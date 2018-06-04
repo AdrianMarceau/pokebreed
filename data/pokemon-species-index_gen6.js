@@ -201,7 +201,7 @@
             formClass: 'random-variant',
             possibleForms: ['red', 'blue', 'yellow', 'orange', 'white'],
             randomizeForms: true,
-            baseForme: 'red',
+            baseForm: 'red',
             types: ['fairy'],
             genderRatio: {female: 1.000},
             baseStats: {hp: 44, phAttack: 38, phDefense: 39, spAttack: 61, spDefense: 79, speed: 42},
@@ -225,7 +225,7 @@
             formClass: 'random-variant',
             possibleForms: ['red', 'blue', 'yellow', 'orange', 'white'],
             randomizeForms: true,
-            baseForme: 'red',
+            baseForm: 'red',
             types: ['fairy'],
             genderRatio: {female: 1.000},
             baseStats: {hp: 54, phAttack: 45, phDefense: 47, spAttack: 75, spDefense: 98, speed: 52},
@@ -252,7 +252,7 @@
             formClass: 'random-variant',
             possibleForms: ['red', 'blue', 'yellow', 'orange', 'white'],
             randomizeForms: true,
-            baseForme: 'red',
+            baseForm: 'red',
             types: ['fairy'],
             genderRatio: {female: 1.000},
             baseStats: {hp: 78, phAttack: 65, phDefense: 68, spAttack: 112, spDefense: 154, speed: 75},
@@ -428,7 +428,7 @@
                 'fancy': ['pink', 'green', 'red'],
                 'poke-ball': ['red', 'white', 'black']
                 },
-            baseForme: 'meadow',
+            baseForm: 'meadow',
             types: ['bug', 'flying'],
             baseStats: {hp: 80, phAttack: 52, phDefense: 50, spAttack: 90, spDefense: 50, speed: 89},
             abilities: {0: 'shield-dust', 1: 'compound-eyes', hidden: 'friend-guard'},
@@ -438,6 +438,41 @@
             eggCycles: 15,
             eggGroups: ['bug'],
             prevEvolution: 'spewpa'
+            },
+
+        'skiddo': {
+            order: indexOrder++,
+            token: 'skiddo',
+            name: 'Skiddo',
+            number: 672,
+            types: ['grass'],
+            baseStats: {hp: 66, phAttack: 65, phDefense: 48, spAttack: 62, spDefense: 57, speed: 52},
+            abilities: {0: 'sap-sipper', hidden: 'grass-pelt'},
+            height: 0.9,
+            weight: 31,
+            colors: ['brown', 'green', 'white', 'black', 'orange'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'gogoat',
+                method: 'level-up',
+                value: 32
+                }]
+            },
+        'gogoat': {
+            order: indexOrder++,
+            token: 'gogoat',
+            name: 'Gogoat',
+            number: 673,
+            types: ['grass'],
+            baseStats: {hp: 123, phAttack: 100, phDefense: 62, spAttack: 97, spDefense: 81, speed: 68},
+            abilities: {0: 'sap-sipper', hidden: 'grass-pelt'},
+            height: 1.7,
+            weight: 91,
+            colors: ['brown', 'green', 'white', 'black', 'orange', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'skiddo'
             },
 
         'pancham': {
@@ -1644,6 +1679,63 @@
             prevEvolution: 'altaria'
             },
 
+        'mega-banette': {
+            order: thisIndex.afterOrder('banette'),
+            token: 'mega-banette',
+            name: 'Mega Banette',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'banette',
+            number: 354,
+            types: ['ghost'],
+            baseStats: {hp: 64, phAttack: 165, phDefense: 75, spAttack: 93, spDefense: 83, speed: 75},
+            abilities: {0: 'prankster'},
+            height: 1.2,
+            weight: 13,
+            colors: ['black', 'yellow', 'red'],
+            eggCycles: 25,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'banette'
+            },
+
+        'mega-absol': {
+            order: thisIndex.afterOrder('absol'),
+            token: 'mega-absol',
+            name: 'Mega Absol',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'absol',
+            number: 359,
+            types: ['dark'],
+            baseStats: {hp: 65, phAttack: 150, phDefense: 60, spAttack: 115, spDefense: 60, speed: 115},
+            abilities: {0: 'magic-bounce'},
+            height: 1.2,
+            weight: 49,
+            colors: ['white', 'black', 'red'],
+            eggCycles: 25,
+            eggGroups: ['field'],
+            prevEvolution: 'absol'
+            },
+
+        'mega-glalie': {
+            order: thisIndex.afterOrder('glalie', 1),
+            token: 'mega-glalie',
+            name: 'Mega Glalie',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'glalie',
+            number: 362,
+            types: ['ice'],
+            baseStats: {hp: 80, phAttack: 120, phDefense: 80, spAttack: 120, spDefense: 80, speed: 100},
+            abilities: {0: 'refrigerate'},
+            height: 2.1,
+            weight: 350.2,
+            colors: ['black', 'gray', 'blue', 'white'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'mineral'],
+            prevEvolution: 'glalie'
+            },
+
         'mega-salamence': {
             order: thisIndex.afterOrder('salamence'),
             token: 'mega-salamence',
@@ -1908,6 +2000,9 @@
         {base: 'sharpedo', species: 'mega-sharpedo', method: 'mega-evolution', value: 'sharpedonite'},
         {base: 'camerupt', species: 'mega-camerupt', method: 'mega-evolution', value: 'cameruptite'},
         {base: 'altaria', species: 'mega-altaria', method: 'mega-evolution', value: 'altarianite'},
+        {base: 'banette', species: 'mega-banette', method: 'mega-evolution', value: 'banettite'},
+        {base: 'absol', species: 'mega-absol', method: 'mega-evolution', value: 'absolite'},
+        {base: 'glalie', species: 'mega-glalie', method: 'mega-evolution', value: 'glalie'},
         {base: 'salamence', species: 'mega-salamence', method: 'mega-evolution', value: 'salamencite'},
         {base: 'metagross', species: 'mega-metagross', method: 'mega-evolution', value: 'metagrossite'},
 

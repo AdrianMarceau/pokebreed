@@ -65,7 +65,7 @@ if (isset($_GET['gen'])
         <? } ?>
     </head>
     <body data-speed="normal" data-mode="<?= $is_free_mode ? 'free' : 'normal' ?>">
-        <div class="panel">
+        <div class="panel" data-view="simulator">
 
             <div class="banner">
                 <div class="logo"><img src="images/pokebox-logo.png" alt="PokéBox" /></div>
@@ -96,7 +96,7 @@ if (isset($_GET['gen'])
                     <img class="icon" src="images/timer.png" />
                 </div>
                 <? if (!$is_free_mode){ ?>
-                    <a class="reset_simulator" title="Clear Save Data?"><i>&times;</i></a>
+                    <a class="delete_savedata" title="Delete All Save Data?"><i>&times;</i></a>
                 <? } ?>
             </div>
 
@@ -107,6 +107,7 @@ if (isset($_GET['gen'])
                     <ul class="list hidden">
                         <li class="name"><strong>Biome</strong> <span class="data"></span></li>
                         <li class="day"><strong>Day</strong> <span class="data"></span></li>
+                        <li class="date"><strong>Date</strong> <span class="data"></span></li>
                         <li class="capacity"><strong>Capacity</strong> <span class="data"></span></li>
                     </ul>
                 </div>
@@ -115,7 +116,7 @@ if (isset($_GET['gen'])
                     <strong class="title">Current Pokémon</strong>
                     <div class="wrap">
                         <ul class="list slots"></ul>
-                        <ul class="list pokemon even"></ul>
+                        <ul class="list pokemon"></ul>
                     </div>
                     <div class="field">
                         <span class="bg"></span>
@@ -126,6 +127,23 @@ if (isset($_GET['gen'])
             </div>
 
             <div class="midwrap">
+
+                <div class="overview sublist visitors hidden">
+                    <div class="details stats">
+                        <div class="title">
+                            <strong class="main">Lured Visitors</strong>
+                        </div>
+                        <div class="wrap">
+                            <ul class="list">
+                                <li class="species"><div class="bubble"></div></li>
+                                <li class="species"><div class="bubble"></div></li>
+                                <li class="species"><div class="bubble"></div></li>
+                                <li class="species"><div class="bubble"></div></li>
+                                <li class="species"><div class="bubble"></div></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="overview floatlist species hidden">
                     <div class="title">
@@ -162,15 +180,22 @@ if (isset($_GET['gen'])
             <div class="buttons">
                 <div class="controls">
                     <a class="control speed play hidden" data-control="play" title="Play">Play</a>
+                    <a class="control speed pause hidden" data-control="pause" title="Pause">Pause</a>
                     <a class="control speed slow hidden" data-control="slow" title="Slow">Slow</a>
                     <a class="control speed fast hidden" data-control="fast" title="Fast">Fast</a>
                     <a class="control speed warp hidden" data-control="warp" title="Warp">Warp</a>
-                    <a class="control speed pause hidden" data-control="pause" title="Pause">Pause</a>
-                    <a class="control reset hidden" data-control="reset" title="Reset">Reset</a>
-                    <a class="control start hidden" data-control="start" title="Start">Start</a>
+                    <a class="control restart hidden" data-control="restart"><span>Re-use Same Starters</span></a>
+                    <a class="control new hidden" data-control="new"><span>Use New Starters</span></a>
+                    <a class="control stop hidden" data-control="stop" title="Stop"><span>Stop?</span></a>
+                    <a class="control start hidden" data-control="start" title="Start"><span>Start</span></a>
                 </div>
                 <div class="new-pokemon">
                     <span class="loading">Loading</span>
+                </div>
+                <div class="starter-pokemon hidden">
+                    <div class="wrap">
+                        <p class="seed">&hellip;</p>
+                    </div>
                 </div>
                 <div class="info links">
                     <a class="link" data-tab="about">about</a>
@@ -215,6 +240,7 @@ if (isset($_GET['gen'])
             window.PokemonAppVersionNumber = '<?= $version_number ?>';
             window.PokemonAppDebugMode = <?= POKEBS_DEBUG_MODE === true ? 'true' : 'false' ?>;
             window.PokemonAppFreeMode = <?= isset($_GET['freeMode']) && $_GET['freeMode'] === 'true' ? 'true' : 'false' ?>;
+            window.PokemonAppBaseHref = '<?= POKEBS_ROOT_URL ?>';
             window.PokemonAllowedGenerationsMax = <?= $allowed_generations ?>;
 
         </script>

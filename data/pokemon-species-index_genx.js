@@ -68,7 +68,7 @@
             formToken: 'baby',
             number: 115,
             types: ['normal'],
-            genderRatio: {none: 1.0000},
+            genderRatio: {female: 1.0000},
             baseStats: {hp: 26, phAttack: 24, phDefense: 20, spAttack: 10, spDefense: 20, speed: 23},
             abilities: {0: 'early-bird', 1: 'scrappy', hidden: 'inner-focus'},
             height: 0.55,
@@ -369,10 +369,10 @@
             formClass2: 'random-variant',
             possibleForms: ['orange', 'yellow', 'green', 'blue', 'indigo', 'violet'],
             randomizeForms: true,
-            baseForme: 'orange',
+            baseForm: 'orange',
             types: ['rock', 'flying'],
             genderRatio: {none: 1.000},
-            baseStats: {hp: 60, phAttack: 60, phDefense: 100, spAttack: 60, spDefense: 100, speed: 60},
+            baseStats: {hp: 60, phAttack: 100, phDefense: 60, spAttack: 100, spDefense: 60, speed: 120},
             abilities: {0: 'shields-down'},
             height: 0.3,
             weight: 40,
@@ -402,8 +402,8 @@
     // Update previous gen pokemon with new next evolution data
     thisIndex.addNextEvolutions([
 
-        {base: 'mime-jr', species: 'mr-mime', method: 'affection', value: 'high', method2: 'chance', value2: 50},
-        {base: 'mime-jr', species: 'ms-mime', method: 'affection', value: 'high', method2: 'chance', value2: 50},
+        {base: 'mime-jr', species: 'mr-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'male'},
+        {base: 'mime-jr', species: 'ms-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'female'},
 
         {base: 'machamp', species: 'burst-machamp', method: 'burst-evolution', value: 'fighting-spirit', method2: 'type-surge', value2: 'fighting'},
         {base: 'nidoqueen', species: 'estrus-nidoqueen', method: 'burst-evolution', value: 'burning-passion', method2: 'type-surge', value2: 'poison'},
@@ -498,7 +498,7 @@
         {base: 'seviper', species: 'zangoose'},
         {base: 'pinsir', species: 'vikavolt'},
         {base: 'mimikyu', species: 'pikachu'},
-        {base: 'carvanna', species: 'basculine'},
+        {base: 'carvanha', species: 'basculin'},
 
         // Romantic relationships
         {base: 'tauros', species: 'miltank'},
@@ -531,7 +531,7 @@
 
         // Mistaken identify relationships
         {base: 'illumise', species: 'lanturn'},
-        {base: 'kricketot ', species: 'chatot'},
+        {base: 'kricketot', species: 'chatot'},
 
         // Legendary trigger relationships
         {base: 'mew', species: 'mewtwo'},

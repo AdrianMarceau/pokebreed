@@ -1389,7 +1389,7 @@
             formClass: 'random-variant',
             possibleForms: ['p1', 'p2', 'p3', 'p4', 'p5', 'p6'],
             randomizeForms: true,
-            baseForme: 'p1',
+            baseForm: 'p1',
             types: ['normal'],
             baseStats: {hp: 60, phAttack: 60, phDefense: 60, spAttack: 60, spDefense: 60, speed: 60},
             abilities: {0: 'own-tempo', 1: 'tangled-feet', hidden: 'contrary'},
@@ -1693,6 +1693,80 @@
             prevEvolution: 'baltoy'
             },
 
+        'lileep': {
+            order: indexOrder++,
+            token: 'lileep',
+            name: 'Lileep',
+            number: 345,
+            types: ['rock', 'grass'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 66, phAttack: 41, phDefense: 77, spAttack: 61, spDefense: 87, speed: 23},
+            abilities: {0: 'suction-cups', hidden: 'storm-drain'},
+            height: 1,
+            weight: 23.8,
+            colors: ['purple', 'pink', 'yellow', 'black'],
+            eggCycles: 30,
+            eggGroups: ['water-3'],
+            nextEvolutions: [{
+                species: 'cradily',
+                method: 'level-up',
+                value: 40
+                }]
+            },
+        'cradily': {
+            order: indexOrder++,
+            token: 'cradily',
+            name: 'Cradily',
+            number: 346,
+            types: ['rock', 'grass'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 86, phAttack: 81, phDefense: 97, spAttack: 81, spDefense: 107, speed: 43},
+            abilities: {0: 'suction-cups', hidden: 'storm-drain'},
+            height: 1.5,
+            weight: 60.4,
+            colors: ['green', 'pink', 'yellow', 'black'],
+            eggCycles: 30,
+            eggGroups: ['water-3'],
+            prevEvolution: 'lileep'
+            },
+
+        'anorith': {
+            order: indexOrder++,
+            token: 'anorith',
+            name: 'Anorith',
+            number: 347,
+            types: ['rock', 'bug'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 45, phAttack: 95, phDefense: 50, spAttack: 40, spDefense: 50, speed: 75},
+            abilities: {0: 'battle-armor', hidden: 'swift-swim'},
+            height: 0.7,
+            weight: 12.5,
+            colors: ['green', 'gray', 'black', 'white', 'red'],
+            eggCycles: 30,
+            eggGroups: ['water-3'],
+            nextEvolutions: [{
+                species: 'armaldo',
+                method: 'level-up',
+                value: 40
+                }]
+            },
+        'armaldo': {
+            order: indexOrder++,
+            token: 'armaldo',
+            name: 'Armaldo',
+            number: 348,
+            types: ['rock', 'bug'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 75, phAttack: 125, phDefense: 100, spAttack: 70, spDefense: 80, speed: 45},
+            abilities: {0: 'battle-armor', hidden: 'swift-swim'},
+            height: 1.5,
+            weight: 68.2,
+            colors: ['blue', 'gray', 'yellow', 'white', 'red'],
+            eggCycles: 30,
+            eggGroups: ['water-3'],
+            prevEvolution: 'anorith'
+            },
+
         'feebas': {
             order: indexOrder++,
             token: 'feebas',
@@ -1732,11 +1806,16 @@
             prevEvolution: 'feebas'
             },
 
-        'kecleon': {  // TODO: Make appearance based on current colour (dynamic, tie to ability)
+        'kecleon': {
             order: indexOrder++,
             token: 'kecleon',
             name: 'Kecleon',
             number: 352,
+            formClass: 'color-variant',
+            dynamicForms: true,
+            colorizedForms: true,
+            possibleForms: ['red', 'blue', 'yellow', 'green', 'purple', 'orange', 'grey', 'black', 'white', 'brown', 'pink'],
+            baseForm: 'green',
             types: ['normal'],
             baseStats: {hp: 60, phAttack: 90, phDefense: 70, spAttack: 60, spDefense: 120, speed: 40},
             abilities: {0: 'color-change', hidden: 'protean'},
@@ -1745,6 +1824,41 @@
             colors: ['green', 'yellow'],
             eggCycles: 20,
             eggGroups: ['field']
+            },
+
+        'shuppet': {
+            order: indexOrder++,
+            token: 'shuppet',
+            name: 'Shuppet',
+            number: 353,
+            types: ['ghost'],
+            baseStats: {hp: 44, phAttack: 75, phDefense: 35, spAttack: 63, spDefense: 33, speed: 45},
+            abilities: {0: 'insomnia', 1: 'frisk', hidden: 'cursed-body'},
+            height: 0.6,
+            weight: 2.3,
+            colors: ['gray', 'black', 'blue', 'yellow'],
+            eggCycles: 25,
+            eggGroups: ['amorphous'],
+            nextEvolutions: [{
+                species: 'banette',
+                method: 'level-up',
+                value: 37
+                }]
+            },
+        'banette': {
+            order: indexOrder++,
+            token: 'banette',
+            name: 'Banette',
+            number: 354,
+            types: ['ghost'],
+            baseStats: {hp: 64, phAttack: 115, phDefense: 65, spAttack: 83, spDefense: 63, speed: 65},
+            abilities: {0: 'insomnia', 1: 'frisk', hidden: 'cursed-body'},
+            height: 1.1,
+            weight: 12.5,
+            colors: ['gray', 'yellow', 'red'],
+            eggCycles: 25,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'shuppet'
             },
 
         'tropius': {  // TODO: Make a few different berry patterns
@@ -1760,6 +1874,21 @@
             colors: ['green', 'brown', 'yellow'],
             eggCycles: 25,
             eggGroups: ['monster', 'grass']
+            },
+
+        'absol': {
+            order: indexOrder++,
+            token: 'absol',
+            name: 'Absol',
+            number: 359,
+            types: ['dark'],
+            baseStats: {hp: 65, phAttack: 130, phDefense: 60, spAttack: 75, spDefense: 60, speed: 75},
+            abilities: {0: 'pressure', 1: 'super-luck', hidden: 'justified'},
+            height: 1.2,
+            weight: 47,
+            colors: ['white', 'black', 'red'],
+            eggCycles: 25,
+            eggGroups: ['field']
             },
 
         'wynaut': {
@@ -1781,6 +1910,41 @@
                 method: 'level-up',
                 value: 15
                 }]
+            },
+
+        'snorunt': {
+            order: indexOrder++,
+            token: 'snorunt',
+            name: 'Snorunt',
+            number: 361,
+            types: ['ice'],
+            baseStats: {hp: 50, phAttack: 50, phDefense: 50, spAttack: 50, spDefense: 50, speed: 50},
+            abilities: {0: 'inner-focus', 1: 'ice-body', hidden: 'moody'},
+            height: 0.7,
+            weight: 16.8,
+            colors: ['yellow', 'black', 'orange', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'mineral'],
+            nextEvolutions: [{
+                species: 'glalie',
+                method: 'level-up',
+                value: 42
+                }]
+            },
+        'glalie': {
+            order: indexOrder++,
+            token: 'glalie',
+            name: 'Glalie',
+            number: 362,
+            types: ['ice'],
+            baseStats: {hp: 80, phAttack: 80, phDefense: 80, spAttack: 80, spDefense: 80, speed: 80},
+            abilities: {0: 'inner-focus', 1: 'ice-body', hidden: 'moody'},
+            height: 1.5,
+            weight: 256.5,
+            colors: ['gray', 'black', 'blue', 'white'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'mineral'],
+            prevEvolution: 'snorunt'
             },
 
         'relicanth': {

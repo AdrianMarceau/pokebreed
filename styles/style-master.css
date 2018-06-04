@@ -176,7 +176,7 @@ body[data-mode="free"] .panel .banner .version {
     position: relative;
 }
 .panel .banner .counter.pokedex:hover .icon {
-    bottom: 1px;
+    /* bottom: 1px; */
 }
 .panel .banner .counter.timer .icon {
     margin-left: 3px;
@@ -215,9 +215,23 @@ body[data-mode="free"] .panel .banner .counter.pokedex .count .total {
     right: 9px;
 }
 .panel .banner .counter.pokedex {
-    left: 9px;
+    left: 5px;
+    padding: 4px;
+    bottom: 5px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0);
+    transition: background-color 0.4s, box-shadow 0.4s;
 }
-.panel .banner .reset_simulator {
+body:not([data-mode="free"]) .panel .banner .counter.pokedex:hover,
+body:not([data-mode="free"]) .panel .banner .counter.pokedex.active {
+    background-color: rgba(0, 0, 0, 0.11);
+    box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.11);
+}
+
+.panel .banner .delete_savedata {
     display: block;
     width: auto;
     height: auto;
@@ -242,7 +256,7 @@ body[data-mode="free"] .panel .banner .counter.pokedex .count .total {
     background: linear-gradient(to bottom, rgba(171, 58, 58, 1) 0%,rgba(97, 20, 41, 1) 120%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ab3a3a', endColorstr='#611429',GradientType=0 ); /* IE6-9 */
 }
-.panel .banner .reset_simulator:hover {
+.panel .banner .delete_savedata:hover {
     color: #efefef;
     /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#58585b+0,464649+100 */
     background: rgb(189, 66, 66); /* Old browsers */
@@ -251,7 +265,7 @@ body[data-mode="free"] .panel .banner .counter.pokedex .count .total {
     background: linear-gradient(to bottom, rgba(189, 66, 66, 1) 0%,rgba(97, 20, 41, 1) 120%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bd4242', endColorstr='#611429',GradientType=0 ); /* IE6-9 */
 }
-.panel .banner .reset_simulator i {
+.panel .banner .delete_savedata i {
     display: inline-block;
     font-style: normal;
 }
@@ -376,27 +390,32 @@ body[data-mode="free"] .panel .banner .counter.pokedex .count .total {
     border: 0 none transparent;
     margin: 0 auto 0 0;
     padding: 5px;
-    width: 20%;
+    width: 25%;
     text-align: center;
     line-height: 1.3;
 }
 .panel .overview.main .details.zone .list li.name {
-    width: 33%;
+
 }
 .panel .overview.main .details.zone .list li.day {
-    width: 33%;
+    background-color: #3e3e41;
+}
+.panel .overview.main .details.zone .list li.date {
+
 }
 .panel .overview.main .details.zone .list li.capacity {
-    width: 33%;
+    background-color: #3e3e41;
 }
 .panel .overview.main .details.zone .list li strong,
 .panel .overview.main .details.zone .list li span {
     display: block;
     text-align: center;
+    font-weight: normal;
 }
 .panel .overview.main .details.zone .list li .data {
     font-size: 11px;
     color: #e0e0e0;
+    font-weight: bold;
 }
 .panel .overview.main .details.zone .timer {
     display: none;
@@ -477,7 +496,7 @@ body[data-mode="free"] .panel .banner .counter.pokedex .count .total {
     z-index: 1;
 }
 body[data-speed="pause"] .panel .overview.main .details.pokemon .field .bg,
-body[data-speed="warp"] .panel .overview.main .details.pokemon .field .bg { transition: none; }
+body[data-speed="warp"] .panel .overview.main .details.pokemon .field .bg { transition: background-image 0; }
 body[data-speed="fast"] .panel .overview.main .details.pokemon .field .bg { transition: background-image 0.30s; }
 body[data-speed="normal"] .panel .overview.main .details.pokemon .field .bg { transition: background-image 0.60s; }
 body[data-speed="slow"] .panel .overview.main .details.pokemon .field .bg { transition: background-image 1.20s; }
@@ -522,7 +541,7 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .field .bg { tran
     margin-right: 0;
 }
 body[data-speed="pause"] .panel .overview.main .details.pokemon .list.pokemon li,
-body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li { transition: none; }
+body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li { transition: top 0, left 0, opacity 0, transform 0; }
 body[data-speed="fast"] .panel .overview.main .details.pokemon .list.pokemon li { transition: top 0.20s, left 0.20s, opacity 0.20s, transform 0.20s; }
 body[data-speed="normal"] .panel .overview.main .details.pokemon .list.pokemon li { transition: top 0.40s, left 0.40s, opacity 0.40s, transform 0.40s; }
 body[data-speed="slow"] .panel .overview.main .details.pokemon .list.pokemon li { transition: top 0.80s, left 0.80s, opacity 0.80s, transform 0.80s; }
@@ -532,7 +551,8 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.pokemon li 
     width: 100%;
     height: 100%;
 }
-.panel .overview.main .details.pokemon .list.pokemon li .tag {
+.panel .overview.main .details.pokemon .list.pokemon li .tag,
+.panel .overview.main .details.pokemon .list.pokemon li .gender {
     content: "";
     display: block;
     position: absolute;
@@ -552,12 +572,29 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.pokemon li 
     top: 8%;
     right: 2px;
 }
+.panel .overview.main .details.pokemon .list.pokemon li .gender {
+    top: auto;
+    right: auto;
+    left: 6px;
+    bottom: 8%;
+}
+.panel .overview.main .details.pokemon .list.pokemon li.egg .gender {
+    display: none;
+}
 /*
 .panel .overview.main .details.pokemon .list.pokemon li .watched {
     background-color: #ceff94;
     border: 1px solid #7cc57e;
 }
 */
+.panel .overview.main .details.pokemon .list.pokemon li .male {
+    background-color: #86abd8;
+    border: 1px solid #6191cc;
+}
+.panel .overview.main .details.pokemon .list.pokemon li .female {
+    background-color: #ff94c6;
+    border: 1px solid #ff61ab;
+}
 .panel .overview.main .details.pokemon .list.pokemon li .visitor {
     background-color: #efefef;
     border: 1px solid #dedede;
@@ -604,20 +641,7 @@ body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li.
     -webkit-animation: none;
     animation: none;
 }
-
-/*
-.panel .overview.main .details.pokemon .list.pokemon li[data-dnote="3"] > div .swrap { filter: brightness(0.6); opacity: 0.6; }
-.panel .overview.main .details.pokemon .list.pokemon li[data-dnote="2"] > div .swrap { filter: brightness(0.4); opacity: 0.4; }
-.panel .overview.main .details.pokemon .list.pokemon li[data-dnote="1"] > div .swrap { filter: brightness(0.2); opacity: 0.2; }
-.panel .overview.main .details.pokemon .list.pokemon li[data-dnote="0"] > div .swrap { filter: brightness(0.0); opacity: 0.0; }
-*/
-
-/*
-body:not[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li[data-dnote="2"] > div .swrap { filter: brightness(0.50); opacity: 0.50; }
-body:not[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li[data-dnote="1"] > div .swrap { filter: brightness(0.25); opacity: 0.25; }
-*/
-
-.panel .overview.main .details.pokemon .list.pokemon li.fainted {
+.panel .overview.main .details.pokemon .list.pokemon li[data-dnote="0"] {
     -webkit-animation: SpriteFadeOut 0.6s linear;
     -webkit-animation-iteration-count: 1;
     -webkit-animation-fill-mode: forwards;
@@ -625,11 +649,46 @@ body:not[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon
     animation-iteration-count: 1;
     animation-fill-mode: forwards;
 }
-body[data-speed="pause"] .panel .overview.main .details.pokemon .list.pokemon li.fainted,
-body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li.fainted {
+body[data-speed="pause"] .panel .overview.main .details.pokemon .list.pokemon li[data-dnote="0"],
+body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li[data-dnote="0"] {
     -webkit-animation: none;
     animation: none;
-    display: none;
+}
+
+.panel img.sprite {
+    display: inline-block;
+}
+.panel span.sprite {
+    display: inline-block;
+    background-color: transparent;
+    background-image: none;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-size: contain;
+    position: relative;
+}
+.panel .species span.sprite,
+.panel .pokemon span.sprite {
+    width: 40px;
+    height: 30px;
+}
+body[data-speed="pause"] .panel span.sprite,
+body[data-speed="warp"] .panel span.sprite {
+    -webkit-transition: background-image 0;
+    transition: background-image 0;
+}
+body[data-speed="normal"] .panel span.sprite {
+    -webkit-transition: background-image 1s;
+    transition: background-image 1s;
+}
+body[data-speed="slow"] .panel span.sprite {
+    -webkit-transition: background-image 1.5s;
+    transition: background-image 1.5s;
+}
+body[data-speed="fast"] .panel span.sprite {
+    -webkit-transition: background-image 0.5s;
+    transition: background-image 0.5s;
 }
 
 .panel .overview.main .details.pokemon .list .sprite {
@@ -641,17 +700,34 @@ body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li.
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     pointer-events: none;
+    width: 40px;
+    height: 30px;
 }
-body[data-speed="slower"] .panel .overview.main .details.pokemon .list .sprite {
+body[data-speed="normal"] .panel .overview.main .details.pokemon .list .sprite {
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-transition: background-image 1s;
+    transition: background-image 1s;
+}
+body[data-speed="slow"] .panel .overview.main .details.pokemon .list .sprite {
     -webkit-animation-duration: 1.5s;
     animation-duration: 1.5s;
+    -webkit-transition: background-image 1.5s;
+    transition: background-image 1.5s;
 }
-body[data-speed="faster"] .panel .overview.main .details.pokemon .list .sprite {
+body[data-speed="fast"] .panel .overview.main .details.pokemon .list .sprite {
     -webkit-animation-duration: 0.5s;
     animation-duration: 0.5s;
+    -webkit-transition: background-image 0.5s;
+    transition: background-image 0.5s;
 }
-.panel .overview.main .details.pokemon .list.odd li.odd .sprite,
-.panel .overview.main .details.pokemon .list.even li.even .sprite {
+body[data-speed="warp"] .panel .overview.main .details.pokemon .list .sprite {
+    -webkit-animation-duration: 0;
+    animation-duration: 0;
+    -webkit-transition: background-image 0;
+    transition: background-image 0;
+}
+.panel .overview.main .details.pokemon .list li.jump .sprite {
     transform: translate3d(0, -1px, 0);
 }
 .panel .overview.main .details.pokemon .list .sprite.overlay {
@@ -714,7 +790,7 @@ body[data-speed="faster"] .panel .overview.main .details.pokemon .list .sprite {
     overflow: hidden;
 }
 body[data-speed="pause"] .panel .overview.main .details.pokemon .list.slots li.slot:before,
-body[data-speed="warp"] .panel .overview.main .details.pokemon .list.slots li.slot:before { transition: none;  }
+body[data-speed="warp"] .panel .overview.main .details.pokemon .list.slots li.slot:before { transition: background-color 0, box-shadow 0;  }
 body[data-speed="fast"] .panel .overview.main .details.pokemon .list.slots li.slot:before { transition: background-color 0.50s, box-shadow 0.50s; }
 body[data-speed="normal"] .panel .overview.main .details.pokemon .list.slots li.slot:before { transition: background-color 1.00s, box-shadow 1s;  }
 body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.slot:before { transition: background-color 2.00s, box-shadow 2.00s;  }
@@ -754,7 +830,8 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
 }
 
 .panel .overview.types,
-.panel .overview.species {
+.panel .overview.species,
+.panel .overview.visitors {
     display: block;
     clear: none;
     width: 50%;
@@ -776,13 +853,15 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     padding-left: 5px;
 }
 .panel .overview.types .title,
-.panel .overview.species .title {
+.panel .overview.species .title,
+.panel .overview.visitors .title {
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
 }
 .panel .overview.types .title .subs,
-.panel .overview.species .title .subs {
+.panel .overview.species .title .subs,
+.panel .overview.visitors .title .subs {
     display: block;
     margin: 0 auto;
     font-size: 11px;
@@ -790,7 +869,8 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     padding-top: 4px;
 }
 .panel .overview.types .title .subs .sub,
-.panel .overview.species .title .subs .sub {
+.panel .overview.species .title .subs .sub,
+.panel .overview.visitors .title .subs .sub {
     display: block;
     box-sizing: border-box;
     float: left;
@@ -813,10 +893,11 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     padding-left: 1px;
 }
 .panel .overview.types .wrap,
-.panel .overview.species .wrap {
+.panel .overview.species .wrap,
+.panel .overview.visitors .wrap {
     padding: 4px 0 10px;
     height: auto;
-    max-height: 400px;
+    max-height: 75px;
     overflow: hidden;
     position: relative;
     /* background-color: rgba(255, 50, 0, 0.3); */
@@ -827,15 +908,18 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
 }
 .panel .overview.types .wrap:after,
 .panel .overview.species .wrap:after,
+.panel .overview.visitors .wrap:after,
 .panel .overview.types .title .subs:after,
-.panel .overview.species .title .subs:after {
+.panel .overview.species .title .subs:after,
+.panel .overview.visitors .title .subs:after {
     content: "";
     display: block;
     clear: both;
     height: 0;
 }
 .panel .overview.types .list,
-.panel .overview.species .list {
+.panel .overview.species .list,
+.panel .overview.visitors .list {
     display: block;
     float: left;
     width: 50%;
@@ -851,31 +935,13 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     width: 50%;
 }
 .panel .overview.types .list:empty,
-.panel .overview.species .list:empty {
+.panel .overview.species .list:empty,
+.panel .overview.visitors .list:empty {
     min-height: 1px;
 }
-.panel .overview.types .list.attract,
-.panel .overview.species .list.active {
-
-}
-.panel .overview.types .list.repel,
-.panel .overview.species .list.alltime {
-
-}
-.panel .overview.types .list.attract {
-
-}
-.panel .overview.types .list.repel {
-
-}
-.panel .overview.species .list.active {
-
-}
-.panel .overview.species .list.alltime {
-
-}
 .panel .overview.types .list li.type,
-.panel .overview.species .list li.species {
+.panel .overview.species .list li.species,
+.panel .overview.visitors .list li.species {
     display: block;
     float: none;
     clear: both;
@@ -890,12 +956,14 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     position: relative;
 }
 .panel .overview.types .list li.type.spacer,
-.panel .overview.species .list li.species.spacer {
+.panel .overview.species .list li.species.spacer,
+.panel .overview.visitors .list li.species.spacer {
     opacity: 0.3;
     padding: 0;
 }
 .panel .overview.types .list li.type:after,
-.panel .overview.species .list li.species:after {
+.panel .overview.species .list li.species:after,
+.panel .overview.visitors .list li.species:after {
     content: "";
     position: absolute;
     display: block;
@@ -908,7 +976,8 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     background-color: transparent;
 }
 .panel .overview.types .list li.type .bubble,
-.panel .overview.species .list li.species .bubble {
+.panel .overview.species .list li.species .bubble,
+.panel .overview.visitors .list li.species .bubble {
     display: block;
     padding: 3px;
     -moz-border-radius: 3px;
@@ -919,9 +988,19 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     position: relative;
     z-index: 2;
 }
+.panel .overview.types .list li.type .bubble .name,
+.panel .overview.species .list li.species .bubble .name {
+    display: inline-block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-width: 85px;
+    max-width: calc(100% - 50px);
+}
 
 .panel .overview.types .list li.type .val,
-.panel .overview.species .list li.species .val {
+.panel .overview.species .list li.species .val,
+.panel .overview.visitors .list li.species .val {
     float: right;
 }
 
@@ -936,27 +1015,28 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     color: #db9494;
 }
 
-.panel .overview.species .list li.species .name {
+.panel .overview.species .list li.species .name
+.panel .overview.visitors .list li.species .name {
     display: inline-block;
     max-width: calc(100% - 50px);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.panel .overview.species .list.current li.species .name,
-.panel .overview.species .list.alltime li.species .name {
+.panel .overview.species .list li.species .name,
+.panel .overview.visitors .list li.species .name {
     color: #ffffff;
 }
-.panel .overview.species .list.current li.species .val,
-.panel .overview.species .list.alltime li.species .val {
+.panel .overview.species .list li.species .val,
+.panel .overview.visitors .list li.species .val {
     color: #b3b3b3;
 }
-
 
 .panel .overview.types .list.attract li.type .icon,
 .panel .overview.types .list.repel li.type .icon,
 .panel .overview.species .list.current li.species .icon,
-.panel .overview.species .list.alltime li.species .icon {
+.panel .overview.species .list.alltime li.species .icon,
+.panel .overview.visitors .list li.species .icon {
     display: inline-block;
     position: relative;
     width: 11px;
@@ -967,7 +1047,8 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
 .panel .overview.types .list.attract li.type .icon .sprite,
 .panel .overview.types .list.repel li.type .icon .sprite,
 .panel .overview.species .list.current li.species .icon .sprite,
-.panel .overview.species .list.alltime li.species .icon .sprite {
+.panel .overview.species .list.alltime li.species .icon .sprite,
+.panel .overview.visitors .list li.species .icon .sprite {
     position: absolute;
     top: -30%;
     left: 50%;
@@ -978,6 +1059,110 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     top: 48%;
     width: 16px;
     height: 16px;
+}
+
+
+.panel .overview.visitors {
+    display: block;
+    float: none;
+    clear: both;
+    margin: 0 auto;
+    width: 250px;
+    background-color: transparent;
+    padding: 3px;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow: hidden;
+    position: absolute;
+    right: 20px;
+    transform: translate(0, calc(-100% - 5px));
+}
+body[data-speed="pause"] .panel .overview.visitors,
+body[data-speed="warp"] .panel .overview.visitors {  transition: max-height 0; }
+body[data-speed="fast"] .panel .overview.visitors { transition: max-height 0.25s; }
+body[data-speed="normal"] .panel .overview.visitors { transition: max-height 0.50s;  }
+body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s;  }
+.panel .overview.visitors.hidden {
+    opacity: 0;
+    max-height: 0;
+}
+.panel .overview.visitors:not(.hidden) {
+    opacity: 1;
+    max-height: 75px;
+}
+.panel .overview.visitors .title {
+    margin: 0 auto;
+    padding: 4px;
+    font-weight: normal;
+    font-size: 11px;
+    line-height: 1.2;
+}
+.panel .overview.visitors .wrap {
+    overflow: visible;
+    padding-bottom: 0;
+}
+.panel .overview.visitors .details .wrap .list {
+    width: auto;
+    float: none;
+    clear: both;
+    margin: 0;
+}
+.panel .overview.visitors .list li.species {
+    display: block;
+    box-sizing: border-box;
+    float: left;
+    width: 19%;
+    width: calc(20% - 4px);
+    margin: 0 2px;
+    clear: none;
+}
+.panel .overview.visitors .list li.species .bubble {
+    min-height: 29px;
+}
+.panel .overview.visitors .list li.species .icon {
+    display: block;
+    margin: 0 auto 2px;
+}
+.panel .overview.visitors .list li.species .name {
+    display: none;
+}
+.panel .overview.visitors .list li.species .val {
+    display: block;
+    float: none;
+    clear: both;
+    text-align: center;
+    font-size: 10px;
+}
+
+.panel .overview.visitors .list li.species.unknown {
+
+}
+.panel .overview.visitors .list li.species.unknown .icon {
+
+}
+.panel .overview.visitors .list li:nth-child(1) .bubble .icon .sprite {
+
+}
+.panel .overview.visitors .list li:nth-child(2) .bubble .icon .sprite {
+    -webkit-filter: grayscale(20%) brightness(0.8);
+    filter: grayscale(20%) brightness(0.8);
+}
+.panel .overview.visitors .list li:nth-child(3) .bubble .icon .sprite {
+    -webkit-filter: grayscale(30%) brightness(0.7);
+    filter: grayscale(30%) brightness(0.7);
+}
+.panel .overview.visitors .list li:nth-child(4) .bubble .icon .sprite {
+    -webkit-filter: grayscale(40%) brightness(0.6);
+    filter: grayscale(40%) brightness(0.6);
+}
+.panel .overview.visitors .list li:nth-child(5) .bubble .icon .sprite {
+    -webkit-filter: grayscale(50%) brightness(0.5);
+    filter: grayscale(50%) brightness(0.5);
+}
+.panel .overview.visitors .list li.species.unknown .bubble .icon .sprite {
+    -webkit-filter: grayscale(100%) brightness(0.1);
+    filter: grayscale(100%) brightness(0.1);
 }
 
 .panel .overview .ps-container {
@@ -1104,13 +1289,15 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     z-index: 10;
     text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
 }
-.panel .buttons button img,
+.panel .buttons button .sprite,
 .panel .buttons button strong {
     display: block;
     clear: both;
     outline: none;
 }
-.panel .buttons button img {
+.panel .buttons button .sprite {
+    width: 40px;
+    height: 30px;
     margin: 0 auto;
     position: relative;
     top: -4px;
@@ -1121,7 +1308,7 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     transform: translate(0, 0);
     outline: none;
 }
-.panel .buttons button:hover img {
+.panel .buttons button:hover .sprite {
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     -webkit-animation: SpriteBounce 0.3s steps(1) infinite;
@@ -1249,7 +1436,7 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
 }
 
 .panel .buttons .controls {
-    text-align: left;
+    text-align: center;
     margin-bottom: 8px;
     padding: 0 5px;
 }
@@ -1353,15 +1540,6 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     cursor: not-allowed;
 }
 
-.panel .buttons .controls .control.reset {
-    background-color: #b73232;
-    float: right;
-    margin: 0;
-}
-.panel .buttons .controls .control.reset:hover {
-    background-color: #c03535;
-}
-
 .panel .buttons .controls .control.play:before,
 .panel .buttons .controls .control.start:before {
     background-image: url(../images/icons/controls/play.png);
@@ -1378,9 +1556,85 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
 .panel .buttons .controls .control.pause:before {
     background-image: url(../images/icons/controls/pause.png);
 }
-.panel .buttons .controls .control.reset:before {
+.panel .buttons .controls .control.restart:before {
     background-image: url(../images/icons/controls/reset.png);
 }
+.panel .buttons .controls .control.new:before {
+    background-image: url(../images/icons/controls/new.png);
+}
+.panel .buttons .controls .control.stop:before {
+    background-image: url(../images/icons/controls/stop.png);
+}
+
+.panel .buttons .controls .control.pause {
+    margin-right: 18px;
+}
+
+.panel .buttons .controls .control.stop {
+    background-color: #b73232;
+    float: right;
+    margin: 0;
+    transition: width 0.2s;
+}
+.panel .buttons .controls .control.stop:hover {
+    background-color: #c03535;
+}
+.panel .buttons .controls .control.stop span {
+    display: block;
+    margin-left: 0;
+    font-size: 14px;
+    line-height: 32px;
+    padding-left: 0;
+    padding-right: 0;
+    width: 0;
+    overflow: hidden;
+    vertical-align: middle;
+    box-sizing: border-box;
+    transition: margin-left 0.2s, padding-left 0.2s, padding-right 0.2s, width 0.2s;
+}
+.panel .buttons .controls .control.stop.confirm {
+    text-indent: 0;
+    width: 78px;
+}
+.panel .buttons .controls .control.stop.confirm span {
+    margin-left: 4px;
+    width: 76px;
+    padding-left: 26px;
+    padding-right: 9px;
+}
+
+
+.panel .buttons .controls .control.restart,
+.panel .buttons .controls .control.new {
+    float: none;
+    display: inline-block;
+    margin: 0 6px;
+    text-indent: 0;
+    width: auto;
+}
+.panel .buttons .controls .control.restart span,
+.panel .buttons .controls .control.new span {
+    display: block;
+    margin-left: 4px;
+    font-size: 14px;
+    line-height: 32px;
+    padding-left: 26px;
+    padding-right: 9px;
+    vertical-align: middle;
+}
+.panel .buttons .controls .control.restart {
+    background-color: #3263b7;
+}
+.panel .buttons .controls .control.restart:hover {
+    background-color: #396bc0;
+}
+.panel .buttons .controls .control.new {
+    background-color: #2b8441;
+}
+.panel .buttons .controls .control.new:hover {
+    background-color: #318c48;
+}
+
 
 .panel .buttons .info {
     display: block;
@@ -1619,9 +1873,27 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     font-size: 80%;
     color: #cacaca;
 }
-.panel .buttons a.reset_simulator {
+.panel .buttons a.delete_savedata {
     cursor: pointer;
     color: #ce4949;
+}
+
+.panel .buttons .starter-pokemon {
+    padding-top: 10px;
+    padding-bottom: 0;
+    text-align: center;
+    border-top: 1px solid #37373a;
+    border-color: rgba(0, 0, 0, 0.3);
+    margin: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+    color: #808080;
+    font-size: 11px;
+    line-height: 1.2;
+    font-family: "Courier New", sans-serif;
+}
+.panel .buttons .starter-pokemon p {
+    padding: 0 20px;
 }
 
 .panel .buttons .info.links {

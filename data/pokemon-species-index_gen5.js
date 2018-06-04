@@ -229,14 +229,14 @@
                 species: 'unfezant-m',
                 method: 'level-up',
                 value: 32,
-                method2: 'chance',
-                value2: 50
+                method2: 'gender',
+                value2: 'male'
                 }, {
                 species: 'unfezant-f',
                 method: 'level-up',
                 value: 32,
-                method2: 'chance',
-                value2: 50
+                method2: 'gender',
+                value2: 'female'
                 }]
             },
         'unfezant-m': {
@@ -274,6 +274,41 @@
             eggCycles: 15,
             eggGroups: ['flying'],
             prevEvolution: 'tranquill'
+            },
+
+        'blitzle': {
+            order: indexOrder++,
+            token: 'blitzle',
+            name: 'Blitzle',
+            number: 522,
+            types: ['electric'],
+            baseStats: {hp: 45, phAttack: 60, phDefense: 32, spAttack: 50, spDefense: 32, speed: 76},
+            abilities: {0: 'lightning-rod', 1: 'motor-drive', hidden: 'sap-sipper'},
+            height: 0.8,
+            weight: 29.8,
+            colors: ['black', 'white', 'blue', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'zebstrika',
+                method: 'level-up',
+                value: 27
+                }]
+            },
+        'zebstrika': {
+            order: indexOrder++,
+            token: 'zebstrika',
+            name: 'Zebstrika',
+            number: 523,
+            types: ['electric'],
+            baseStats: {hp: 75, phAttack: 100, phDefense: 63, spAttack: 80, spDefense: 63, speed: 116},
+            abilities: {0: 'lightning-rod', 1: 'motor-drive', hidden: 'sap-sipper'},
+            height: 1.6,
+            weight: 79.5,
+            colors: ['black', 'white', 'blue', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'blitzle'
             },
 
         'woobat': {
@@ -457,6 +492,150 @@
             prevEvolution: 'dwebble'
             },
 
+        'scraggy': {
+            order: indexOrder++,
+            token: 'scraggy',
+            name: 'Scraggy',
+            number: 559,
+            types: ['dark', 'fighting'],
+            baseStats: {hp: 50, phAttack: 75, phDefense: 70, spAttack: 35, spDefense: 70, speed: 48},
+            abilities: {0: 'shed-skin', 1: 'moxie', hidden: 'intimidate'},
+            height: 0.6,
+            weight: 11.8,
+            colors: ['yellow', 'red', 'white'],
+            eggCycles: 15,
+            eggGroups: ['field', 'dragon'],
+            nextEvolutions: [{
+                species: 'scrafty',
+                method: 'level-up',
+                value: 39
+                }]
+            },
+        'scrafty': {
+            order: indexOrder++,
+            token: 'scrafty',
+            name: 'Scrafty',
+            number: 560,
+            types: ['dark', 'fighting'],
+            baseStats: {hp: 65, phAttack: 90, phDefense: 115, spAttack: 45, spDefense: 115, speed: 58},
+            abilities: {0: 'shed-skin', 1: 'moxie', hidden: 'intimidate'},
+            height: 1.1,
+            weight: 30,
+            colors: ['orange', 'yellow', 'red', 'gray', 'white'],
+            eggCycles: 15,
+            eggGroups: ['field', 'dragon'],
+            prevEvolution: 'scraggy'
+            },
+
+        'yamask': {
+            order: indexOrder++,
+            token: 'yamask',
+            name: 'Yamask',
+            number: 562,
+            types: ['ghost'],
+            baseStats: {hp: 38, phAttack: 30, phDefense: 85, spAttack: 55, spDefense: 65, speed: 30},
+            abilities: {0: 'mummy'},
+            height: 0.5,
+            weight: 1.5,
+            colors: ['black', 'yellow', 'red'],
+            eggCycles: 25,
+            eggGroups: ['mineral', 'amorphous'],
+            nextEvolutions: [{
+                species: 'cofagrigus',
+                method: 'level-up',
+                value: 34
+                }]
+            },
+        'cofagrigus': {
+            order: indexOrder++,
+            token: 'cofagrigus',
+            name: 'Cofagrigus',
+            number: 563,
+            types: ['ghost'],
+            baseStats: {hp: 58, phAttack: 50, phDefense: 145, spAttack: 95, spDefense: 105, speed: 30},
+            abilities: {0: 'mummy'},
+            height: 1.7,
+            weight: 76.5,
+            colors: ['yellow' , 'blue', 'black', 'red'],
+            eggCycles: 25,
+            eggGroups: ['mineral', 'amorphous'],
+            prevEvolution: 'yamask'
+            },
+
+        'tirtouga': {
+            order: indexOrder++,
+            token: 'tirtouga',
+            name: 'Tirtouga',
+            number: 564,
+            types: ['water', 'rock'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 54, phAttack: 78, phDefense: 103, spAttack: 53, spDefense: 45, speed: 22},
+            abilities: {0: 'solid-rock', 1: 'sturdy', hidden: 'swift-swim'},
+            height: 0.7,
+            weight: 16.5,
+            colors: ['blue', 'gray'],
+            eggCycles: 30,
+            eggGroups: ['water-1', 'water-3'],
+            nextEvolutions: [{
+                species: 'carracosta',
+                method: 'level-up',
+                value: 37
+                }]
+            },
+        'carracosta': {
+            order: indexOrder++,
+            token: 'carracosta',
+            name: 'Carracosta',
+            number: 565,
+            types: ['water', 'rock'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 74, phAttack: 108, phDefense: 133, spAttack: 83, spDefense: 65, speed: 32},
+            abilities: {0: 'solid-rock', 1: 'sturdy', hidden: 'swift-swim'},
+            height: 1.2,
+            weight: 81,
+            colors: ['blue', 'gray'],
+            eggCycles: 30,
+            eggGroups: ['water-1', 'water-3'],
+            prevEvolution: 'tirtouga'
+            },
+
+        'archen': {
+            order: indexOrder++,
+            token: 'archen',
+            name: 'Archen',
+            number: 566,
+            types: ['rock', 'flying'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 55, phAttack: 112, phDefense: 45, spAttack: 74, spDefense: 45, speed: 70},
+            abilities: {0: 'defeatist'},
+            height: 0.5,
+            weight: 9.5,
+            colors: ['yellow', 'red', 'blue'],
+            eggCycles: 30,
+            eggGroups: ['flying', 'water-3'],
+            nextEvolutions: [{
+                species: 'archeops',
+                method: 'level-up',
+                value: 37
+                }]
+            },
+        'archeops': {
+            order: indexOrder++,
+            token: 'archeops',
+            name: 'Archeops',
+            number: 567,
+            types: ['rock', 'flying'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 75, phAttack: 140, phDefense: 65, spAttack: 112, spDefense: 65, speed: 110},
+            abilities: {0: 'defeatist'},
+            height: 1.4,
+            weight: 32,
+            colors: ['yellow', 'blue', 'red', 'green'],
+            eggCycles: 30,
+            eggGroups: ['flying', 'water-3'],
+            prevEvolution: 'archen'
+            },
+
         'trubbish': {
             order: indexOrder++,
             token: 'trubbish',
@@ -600,6 +779,125 @@
             eggCycles: 20,
             eggGroups: ['mineral'],
             prevEvolution: 'vanillish'
+            },
+
+        'deerling': {
+            order: indexOrder++,
+            token: 'deerling',
+            name: 'Deerling',
+            number: 585,
+            formClass: 'seasonal-variant',
+            dynamicForms: true,
+            seasonalForms: true,
+            possibleForms: ['spring', 'summer', 'autumn', 'winter'],
+            possibleFormsColors: {
+                'spring': ['pink', 'white', 'yellow'],
+                'summer': ['green', 'white', 'yellow'],
+                'autumn': ['orange', 'white', 'yellow'],
+                'winter': ['brown', 'white', 'yellow']
+                },
+            baseForm: 'spring',
+            types: ['normal', 'grass'],
+            baseStats: {hp: 60, phAttack: 60, phDefense: 50, spAttack: 40, spDefense: 50, speed: 75},
+            abilities: {0: 'chlorophyll', 1: 'sap-sipper', hidden: 'serene-grace'},
+            height: 0.6,
+            weight: 19.5,
+            colors: ['pink', 'white', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'spring-sawsbuck',
+                method: 'level-up',
+                value: 34,
+                method2: 'form',
+                value2: 'spring'
+                },{
+                species: 'summer-sawsbuck',
+                method: 'level-up',
+                value: 34,
+                method2: 'form',
+                value2: 'summer'
+                },{
+                species: 'autumn-sawsbuck',
+                method: 'level-up',
+                value: 34,
+                method2: 'form',
+                value2: 'autumn'
+                },{
+                species: 'winter-sawsbuck',
+                method: 'level-up',
+                value: 34,
+                method2: 'form',
+                value2: 'winter'
+                }]
+            },
+        'spring-sawsbuck': {
+            order: indexOrder++,
+            token: 'spring-sawsbuck',
+            name: 'Spring Sawsbuck',
+            formClass: 'seasonal-variant',
+            formToken: 'spring',
+            number: 586,
+            types: ['normal', 'grass'],
+            baseStats: {hp: 80, phAttack: 100, phDefense: 70, spAttack: 60, spDefense: 70, speed: 95},
+            abilities: {0: 'chlorophyll', 1: 'sap-sipper', hidden: 'serene-grace'},
+            height: 1.9,
+            weight: 92.5,
+            colors: ['brown', 'yellow', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'deerling'
+            },
+        'summer-sawsbuck': {
+            order: indexOrder++,
+            token: 'summer-sawsbuck',
+            name: 'Summer Sawsbuck',
+            formClass: 'seasonal-variant',
+            formToken: 'summer',
+            number: 586,
+            types: ['normal', 'grass'],
+            baseStats: {hp: 80, phAttack: 100, phDefense: 70, spAttack: 60, spDefense: 70, speed: 95},
+            abilities: {0: 'chlorophyll', 1: 'sap-sipper', hidden: 'serene-grace'},
+            height: 1.9,
+            weight: 92.5,
+            colors: ['brown', 'green', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'deerling'
+            },
+        'autumn-sawsbuck': {
+            order: indexOrder++,
+            token: 'autumn-sawsbuck',
+            name: 'Autumn Sawsbuck',
+            formClass: 'seasonal-variant',
+            formToken: 'autumn',
+            number: 586,
+            types: ['normal', 'grass'],
+            baseStats: {hp: 80, phAttack: 100, phDefense: 70, spAttack: 60, spDefense: 70, speed: 95},
+            abilities: {0: 'chlorophyll', 1: 'sap-sipper', hidden: 'serene-grace'},
+            height: 1.9,
+            weight: 92.5,
+            colors: ['brown', 'red', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'deerling'
+            },
+        'winter-sawsbuck': {
+            order: indexOrder++,
+            token: 'winter-sawsbuck',
+            name: 'Winter Sawsbuck',
+            formClass: 'seasonal-variant',
+            formToken: 'winter',
+            number: 586,
+            types: ['normal', 'grass'],
+            baseStats: {hp: 80, phAttack: 100, phDefense: 70, spAttack: 60, spDefense: 70, speed: 95},
+            abilities: {0: 'chlorophyll', 1: 'sap-sipper', hidden: 'serene-grace'},
+            height: 1.9,
+            weight: 92.5,
+            colors: ['brown', 'white', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'deerling'
             },
 
         'emolga': {
@@ -1060,6 +1358,22 @@
             eggCycles: 40,
             eggGroups: ['monster', 'dragon'],
             prevEvolution: 'fraxure'
+            },
+
+        'cryogonal': {
+            order: indexOrder++,
+            token: 'cryogonal',
+            name: 'Cryogonal',
+            number: 615,
+            types: ['ice'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 80, phAttack: 50, phDefense: 50, spAttack: 95, spDefense: 135, speed: 105},
+            abilities: {0: 'levitate'},
+            height: 1.1,
+            weight: 148,
+            colors: ['blue', 'white'],
+            eggCycles: 25,
+            eggGroups: ['mineral'],
             },
 
         'stunfisk': {

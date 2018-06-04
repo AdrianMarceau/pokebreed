@@ -342,6 +342,44 @@
             prevEvolution: 'charjabug'
             },
 
+        'crabrawler': {
+            order: indexOrder++,
+            token: 'crabrawler',
+            name: 'Crabrawler',
+            number: 739,
+            types: ['fighting'],
+            baseStats: {hp: 47, phAttack: 82, phDefense: 57, spAttack: 42, spDefense: 47, speed: 63},
+            abilities: {0: 'hyper-cutter', 1: 'iron-fist', hidden: 'anger-point'},
+            height: 0.6,
+            weight: 7,
+            colors: ['purple', 'blue', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['water-3'],
+            nextEvolutions: [{
+                species: 'crabominable',
+                method: 'evolution-location',
+                value: 'icy-rock',
+                method2: 'type-appeal',
+                value2: 'ice'
+                }]
+            },
+        'crabominable': {
+            order: indexOrder++,
+            token: 'crabominable',
+            name: 'Crabominable',
+            number: 740,
+            types: ['fighting', 'ice'],
+            baseStats: {hp: 97, phAttack: 132, phDefense: 77, spAttack: 62, spDefense: 67, speed: 43},
+            abilities: {0: 'hyper-cutter', 1: 'iron-fist', hidden: 'anger-point'},
+            height: 1.7,
+            weight: 180,
+            colors: ['white', 'purple', 'blue', 'yellow'],
+            evoLevel: 2,
+            eggCycles: 20,
+            eggGroups: ['water-3'],
+            prevEvolution: 'crabrawler'
+            },
+
         'cutiefly': {
             order: indexOrder++,
             token: 'cutiefly',
@@ -482,6 +520,46 @@
             prevEvolution: 'morelull'
             },
 
+        'salandit': {
+            order: indexOrder++,
+            token: 'salandit',
+            name: 'Salandit',
+            number: 757,
+            types: ['poison', 'fire'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 48, phAttack: 44, phDefense: 40, spAttack: 71, spDefense: 40, speed: 77},
+            abilities: {0: 'corrosion', hidden: 'oblivious'},
+            height: 0.6,
+            weight: 4.8,
+            colors: ['black', 'gray', 'red', 'purple'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'dragon'],
+            nextEvolutions: [{
+                species: 'salazzle',
+                method: 'level-up',
+                value: 33,
+                method2: 'gender',
+                value2: 'female'
+                }]
+            },
+        'salazzle': {
+            order: indexOrder++,
+            token: 'salazzle',
+            name: 'Salazzle',
+            number: 758,
+            types: ['poison', 'fire'],
+            genderRatio: {female: 1.000},
+            baseStats: {hp: 68, phAttack: 64, phDefense: 60, spAttack: 111, spDefense: 60, speed: 117},
+            abilities: {0: 'corrosion', hidden: 'oblivious'},
+            height: 1.2,
+            weight: 22.2,
+            colors: ['gray', 'purple', 'pink'],
+            eggCycles: 20,
+            eggPartner: 'salandit',
+            eggGroups: ['monster', 'dragon'],
+            prevEvolution: 'salandit'
+            },
+
         'stufful': {
             order: indexOrder++,
             token: 'stufful',
@@ -515,6 +593,22 @@
             eggCycles: 15,
             eggGroups: ['field'],
             prevEvolution: 'stufful'
+            },
+
+        'comfey': {
+            order: indexOrder++,
+            token: 'comfey',
+            name: 'Comfey',
+            number: 764,
+            types: ['fairy'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 51, phAttack: 52, phDefense: 90, spAttack: 82, spDefense: 110, speed: 100},
+            abilities: {0: 'flower-veil', 1: 'triage', hidden: 'natural-cure'},
+            height: 0.1,
+            weight: 0.3,
+            colors: ['green', 'yellow', 'red', 'pink', 'orange', 'white'],
+            eggCycles: 20,
+            eggGroups: ['grass']
             },
 
         'sandygast': {
@@ -552,6 +646,21 @@
             prevEvolution: 'sandygast'
             },
 
+        'pyukumuku': {
+            order: indexOrder++,
+            token: 'pyukumuku',
+            name: 'Pyukumuku',
+            number: 771,
+            types: ['water'],
+            baseStats: {hp: 55, phAttack: 60, phDefense: 130, spAttack: 30, spDefense: 130, speed: 5},
+            abilities: {0: 'innards-out', hidden: 'unaware'},
+            height: 0.3,
+            weight: 1.2,
+            colors: ['black', 'pink', 'white'],
+            eggCycles: 15,
+            eggGroups: ['water-1']
+            },
+
         'minior': {
             order: indexOrder++,
             token: 'minior',
@@ -559,7 +668,7 @@
             number: 774,
             types: ['rock', 'flying'],
             genderRatio: {none: 1.000},
-            baseStats: {hp: 60, phAttack: 100, phDefense: 60, spAttack: 100, spDefense: 60, speed: 120},
+            baseStats: {hp: 60, phAttack: 60, phDefense: 100, spAttack: 60, spDefense: 100, speed: 60},
             abilities: {0: 'shields-down'},
             height: 0.3,
             weight: 0.3,
@@ -611,6 +720,21 @@
             colors: ['gray', 'white', 'yellow'],
             eggCycles: 10,
             eggGroups: ['field', 'fairy']
+            },
+
+        'mimikyu': { // TODO: Add busted form as a non-burst end-of-life form change
+            order: indexOrder++,
+            token: 'mimikyu',
+            name: 'Mimikyu',
+            number: 778,
+            types: ['ghost', 'fairy'],
+            baseStats: {hp: 55, phAttack: 90, phDefense: 80, spAttack: 50, spDefense: 105, speed: 96},
+            abilities: {0: 'disguise'},
+            height: 0.2,
+            weight: 0.7,
+            colors: ['yellow', 'black', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['amorphous']
             },
 
         'bruxish': {
@@ -696,6 +820,23 @@
             eggCycles: 40,
             eggGroups: ['dragon'],
             prevEvolution: 'hakamo-o',
+            },
+
+        'zeraora': {
+            order: indexOrder++,
+            token: 'zeraora',
+            name: 'Zeraora',
+            class: 'mythical',
+            number: 807,
+            types: ['electric'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 88, phAttack: 112, phDefense: 75, spAttack: 102, spDefense: 80, speed: 143},
+            abilities: {0: 'volt-absorb'},
+            height: 1.5,
+            weight: 44.5,
+            colors: ['yellow', 'black', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
             },
 
         // Alolan Variants
