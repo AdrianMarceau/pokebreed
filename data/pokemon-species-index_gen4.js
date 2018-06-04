@@ -680,6 +680,21 @@
             prevEvolution: 'combee'
             },
 
+        'pachirisu': {
+            order: indexOrder++,
+            token: 'pachirisu',
+            name: 'Pachirisu',
+            number: 417,
+            types: ['electric'],
+            baseStats: {hp: 60, phAttack: 45, phDefense: 70, spAttack: 45, spDefense: 90, speed: 95},
+            abilities: {0: 'run-away', 1: 'pickup', hidden: 'volt-absorb'},
+            height: 0.4,
+            weight: 3.9,
+            colors: ['white', 'blue', 'yellow'],
+            eggCycles: 10,
+            eggGroups: ['field', 'fairy']
+            },
+
         'buizel': {
             order: indexOrder++,
             token: 'buizel',
