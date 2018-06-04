@@ -80,16 +80,18 @@
                 basePokemon.nextEvolutions = [];
                 basePokemon.nextEvolutions.push(nextEvolution);
                 } else {
-                var currKey = false;
-                for (var key = 0; key < basePokemon.nextEvolutions.length; key++){
-                    var nextData = basePokemon.nextEvolutions[key];
-                    if (nextData.species === nextEvolution.species){
-                        currKey = key;
-                        break;
+                if (typeof nextEvolution.replace !== 'undefined'
+                    && nextEvolution.replace === true){
+                    var currKey = false;
+                    for (var key = 0; key < basePokemon.nextEvolutions.length; key++){
+                        var nextData = basePokemon.nextEvolutions[key];
+                        if (nextData.species === nextEvolution.species){
+                            currKey = key;
+                            break;
+                            }
                         }
-                    }
-                if (currKey !== false){
-                    basePokemon.nextEvolutions[currKey] = nextEvolution;
+                    if (currKey !== false){ basePokemon.nextEvolutions[currKey] = nextEvolution; }
+                    else { basePokemon.nextEvolutions.push(nextEvolution); }
                     } else {
                     basePokemon.nextEvolutions.push(nextEvolution);
                     }
