@@ -400,6 +400,9 @@
             // Define possible genders to loop through
             var possibleGenders = ['male', 'female', 'none'];
 
+            // Define an array to hold all nation dex numbers added so far
+            var nationDexNumbers = [];
+
             // Loop through individual species and pre-generate certain attributes
             for (var key = 0; key < PokemonSpeciesIndexTokens.length; key++){
                 var token = PokemonSpeciesIndexTokens[key];
@@ -409,6 +412,12 @@
                 indexInfo.lifePoints = calculateLifePoints(indexInfo['baseStats']);
                 indexInfo.breedPoints = calculateBreedPoints(indexInfo['baseStats']);
                 indexInfo.influencePoints = calculateInfluencePoints(indexInfo);
+
+                // If the number has been defined, add it to the above list
+                if (typeof indexInfo.number !== 'undefined'
+                    && nationDexNumbers.indexOf(indexInfo.number) === -1){
+                    nationDexNumbers.push(indexInfo.number);
+                    }
 
                 // If class or formClass are not set, create them as empty strings
                 if (typeof indexInfo.class === 'undefined'){ indexInfo.class = ''; }
@@ -701,6 +710,18 @@
                 else if (orderA > orderB){ return 1; }
                 else { return 0; }
                 });
+
+            // DEBUG INFO ONLY!
+            // Calculate how many nation dex numbers are accounted for vs how many remain
+            if (false){
+                nationDexNumbers.sort(function(a,b){ a = parseInt(a); b = parseInt(b); return a < b ? -1 : (a > b ? 1 : 0); });
+                var missingDexNumbers = [];
+                var maxDexNumber = nationDexNumbers[nationDexNumbers.length - 1];
+                for (var num = 1; num <= maxDexNumber; num++){ if (nationDexNumbers.indexOf(num) === -1){ missingDexNumbers.push(num); } }
+                //console.log('maxDexNumber = ', maxDexNumber);
+                //console.log('nationDexNumbers = ', nationDexNumbers.length, nationDexNumbers.join(','));
+                //console.log('missingDexNumbers = ', missingDexNumbers.length, missingDexNumbers.join(','));
+                }
 
             }
     }
