@@ -476,11 +476,11 @@
             eggCycles: 10,
             eggGroups: ['field', 'fairy'],
             nextEvolutions: [{
-                species: 'raichu',
-                method: 'evolution-stone',
-                value: 'thunder-stone',
-                method2: 'type-appeal',
-                value2: 'electric'
+                species: 'raichu', // thunder-stone,
+                method: 'type-appeal',
+                value: 'electric',
+                method2: 'level-up',
+                value2: 20
                 }]
             },
         raichu: {
@@ -579,11 +579,11 @@
             eggGroups: ['undiscovered'],
             prevEvolution: 'nidoran-f',
             nextEvolutions: [{
-                species: 'nidoqueen',
-                method: 'evolution-stone',
-                value: 'moon-stone',
-                method2: 'type-appeal',
-                value2: ['poison', 'ground']
+                species: 'nidoqueen', // moon-stone
+                method: 'type-appeal',
+                value: ['poison', 'ground'],
+                method2: 'level-up',
+                value2: 30
                 }]
             },
         'nidoqueen': {
@@ -646,11 +646,11 @@
             eggPartner: 'nidoran-f',
             prevEvolution: 'nidoran-m',
             nextEvolutions: [{
-                species: 'nidoking',
-                method: 'evolution-stone',
-                value: 'moon-stone',
-                method2: 'type-appeal',
-                value2: ['poison', 'ground']
+                species: 'nidoking', // moon-stone
+                method: 'type-appeal',
+                value: ['poison', 'ground'],
+                method2: 'level-up',
+                value2: 30
                 }]
             },
         'nidoking': {
@@ -686,11 +686,11 @@
             eggCycles: 10,
             eggGroups: ['fairy'],
             nextEvolutions: [{
-                species: 'clefable',
-                method: 'evolution-stone',
-                value: 'moon-stone',
-                method2: 'type-appeal',
-                value2: 'fairy'
+                species: 'clefable', // moon-stone
+                method: 'type-appeal',
+                value: 'fairy',
+                method2: 'level-up',
+                value2: 20
                 }]
             },
         'clefable': {
@@ -725,11 +725,11 @@
             eggCycles: 20,
             eggGroups: ['field'],
             nextEvolutions: [{
-                species: 'ninetales',
-                method: 'evolution-stone',
-                value: 'fire-stone',
-                method2: 'type-appeal',
-                value2: 'fire'
+                species: 'ninetales', // fire-stone
+                method: 'type-appeal',
+                value: 'fire',
+                method2: 'level-up',
+                value2: 20
                 }]
             },
         'ninetales': {
@@ -764,11 +764,11 @@
             eggCycles: 10,
             eggGroups: ['fairy'],
             nextEvolutions: [{
-                species: 'wigglytuff',
-                method: 'evolution-stone',
-                value: 'moon-stone',
-                method2: 'type-appeal',
-                value2: ['normal', 'fairy']
+                species: 'wigglytuff', // moon-stone
+                method: 'type-appeal',
+                value: ['normal', 'fairy'],
+                method2: 'level-up',
+                value2: 20
                 }]
             },
         'wigglytuff': {
@@ -862,11 +862,11 @@
             eggGroups: ['grass'],
             prevEvolution: 'oddish',
             nextEvolutions: [{
-                species: 'vileplume',
-                method: 'evolution-stone',
-                value: 'leaf-stone',
-                method2: 'type-appeal',
-                value2: ['grass', 'poison']
+                species: 'vileplume', // leaf-stone
+                method: 'type-appeal',
+                value: ['grass', 'poison'],
+                method2: 'level-up',
+                value2: 30
                 }]
             },
         'vileplume': {
@@ -1118,11 +1118,11 @@
             eggCycles: 20,
             eggGroups: ['field'],
             nextEvolutions: [{
-                species: 'arcanine',
-                method: 'evolution-stone',
-                value: 'fire-stone',
-                method2: 'type-appeal',
-                value2: 'fire'
+                species: 'arcanine', // fire-stone
+                method: 'type-appeal',
+                value: 'fire',
+                method2: 'level-up',
+                value2: 20
                 }]
             },
         'arcanine': {
@@ -1176,11 +1176,11 @@
             eggGroups: ['water-1'],
             prevEvolution: 'poliwag',
             nextEvolutions: [{
-                species: 'poliwrath',
-                method: 'evolution-stone',
-                value: 'water-stone',
-                method2: 'type-appeal',
-                value2: ['water', 'fighting']
+                species: 'poliwrath', // water-stone
+                method: 'type-appeal',
+                value: ['water', 'fighting'],
+                method2: 'level-up',
+                value2: 30
                 }]
             },
         'poliwrath': {
@@ -1347,14 +1347,14 @@
             colors: ['yellow', 'green', 'pink'],
             eggCycles: 20,
             eggGroups: ['grass'],
+            prevEvolution: 'bellsprout',
             nextEvolutions: [{
-                species: 'victreebel',
-                method: 'evolution-stone',
-                value: 'leaf-stone',
-                method2: 'type-appeal',
-                value2: ['grass', 'poison']
-                }],
-            prevEvolution: 'bellsprout'
+                species: 'victreebel', // leaf-stone
+                method: 'type-appeal',
+                value: ['grass', 'poison'],
+                method2: 'level-up',
+                value2: 30
+                }]
             },
         'victreebel': {
             order: indexOrder++,
@@ -1704,11 +1704,11 @@
             eggCycles: 20,
             eggGroups: ['water-3'],
             nextEvolutions: [{
-                species: 'cloyster',
-                method: 'evolution-stone',
-                value: 'water-stone',
-                method2: 'type-appeal',
-                value2: ['water', 'ice']
+                species: 'cloyster', // water-stone
+                method: 'type-appeal',
+                value: ['water', 'ice'],
+                method2: 'level-up',
+                value2: 20
                 }]
             },
         'cloyster': {
@@ -1915,15 +1915,14 @@
             height: 0.4,
             weight: 2.5,
             colors: ['pink', 'yellow'],
-            evos: ['exeggutor', 'exeggutoralola'],
             eggCycles: 20,
             eggGroups: ['grass'],
             nextEvolutions: [{
-                species: 'exeggutor',
-                method: 'evolution-stone',
-                value: 'leaf-stone',
-                method2: 'type-appeal',
-                value2: ['grass', 'psychic']
+                species: 'exeggutor', // leaf-stone
+                method: 'type-appeal',
+                value: ['grass', 'psychic'],
+                method2: 'level-up',
+                value2: 20
                 }]
             },
         'exeggutor': {
@@ -2228,11 +2227,11 @@
             eggCycles: 20,
             eggGroups: ['water-3'],
             nextEvolutions: [{
-                species: 'starmie',
-                method: 'evolution-stone',
-                value: 'water-stone',
+                species: 'starmie', // water-stone
                 method2: 'type-appeal',
-                value2: ['water', 'psychic']
+                value2: ['water', 'psychic'],
+                method2: 'level-up',
+                value2: 20
                 }]
             },
         'starmie': {
@@ -2443,23 +2442,23 @@
             eggCycles: 35,
             eggGroups: ['field'],
             nextEvolutions: [{
-                species: 'vaporeon',
-                method: 'evolution-stone',
-                value: 'water-stone',
-                method2: 'type-appeal',
-                value2: 'water'
+                species: 'vaporeon', // water-stone
+                method: 'type-appeal',
+                value: 'water',
+                method2: 'level-up',
+                value2: 20
                 }, {
-                species: 'jolteon',
-                method: 'evolution-stone',
-                value: 'thunder-stone',
-                method2: 'type-appeal',
-                value2: 'electric'
+                species: 'jolteon', // thunder-stone
+                method: 'type-appeal',
+                value: 'electric',
+                method2: 'level-up',
+                value2: 20
                 }, {
-                species: 'flareon',
-                method: 'evolution-stone',
-                value: 'fire-stone',
-                method2: 'type-appeal',
-                value2: 'fire'
+                species: 'flareon', // fire-stone
+                method: 'type-appeal',
+                value: 'fire',
+                method2: 'level-up',
+                value2: 20
                 }],
             },
         'vaporeon': {
