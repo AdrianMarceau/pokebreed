@@ -577,12 +577,14 @@
             colors: ['green', 'white', 'red'],
             eggCycles: 20,
             eggGroups: ['amorphous'],
-            prevEvolution: 'ralts' /* ,
+            prevEvolution: 'ralts',
             nextEvolutions: [{
                 species: 'gardevoir',
                 method: 'level-up',
-                value: 30
-                }]*/
+                value: 30,
+                method2: 'type-appeal',
+                value2: 'fairy'
+                }]
             },
         'gardevoir': {
             order: indexOrder++,
@@ -2272,8 +2274,8 @@
         {base: 'wobbuffet', species: 'wynaut'},
         ]);
     // Add appeal evolutions for  Gardevoir, because Gallade  would be impossible
-    thisIndex.addNextEvolutions([
+    /*thisIndex.addNextEvolutions([
         {base: 'kirlia', species: 'gardevoir', method: 'level-up', value: 30, method2: 'type-appeal', value2: 'fairy'},
-        ]);
+        ]);*/
 
 })();
