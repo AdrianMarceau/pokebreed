@@ -301,16 +301,15 @@
     }
 
     // Define a function for delegating button events for the edit
+    var speedValues = {normal:1200,warp:100,fast:600,slow:2400};
     var stopConfirmTimeout = false;
     var $controlButtons = false;
+    var prevSpeedToken = false;
+    var prevSpeedDuration = false;
     function generateButtonPanelEvents(){
         $pokePanelLoading.append('.'); // append loading dot
 
         // Define the click-event for the speed buttons
-        var defaultTimeout = function(){ updateDay(); };
-        var speedValues = {normal:1200,warp:100,fast:600,slow:2400};
-        var prevSpeedToken = false;
-        var prevSpeedDuration = false;
         $controlButtons = $('.controls .control[data-control]', $panelButtons);
         $controlButtons.bind('click', function(e){
             e.preventDefault();
@@ -843,7 +842,14 @@
         $('.starter-pokemon', $panelButtons).removeClass('hidden');
 
         // Start the day timeout so the sim can actually start
+        dayTimeoutSpeed = prevSpeedToken !== false ? prevSpeedToken : 'normal';
+        dayTimeoutDuration = prevSpeedDuration !== false ? prevSpeedDuration : speedValues[dayTimeoutSpeed];
         dayTimeoutID = setTimeout(dayTimeoutHandler, dayTimeoutDuration);
+        $('body').attr('data-speed', dayTimeoutSpeed);
+        $controlButtons.filter('.speed').removeClass('active');
+        $controlButtons.filter('.'+ dayTimeoutSpeed).addClass('active');
+        $controlButtons.filter('.speed:not(.play):not(.pause)').removeClass('hidden');
+        $controlButtons.filter('.play').addClass('active');
 
     }
 
