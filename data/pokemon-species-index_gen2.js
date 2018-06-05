@@ -400,7 +400,9 @@
             nextEvolutions: [{
                 species: 'pikachu',
                 method: 'happiness',
-                value: 'high'
+                value: 'high',
+                method2: 'level-up',
+                value2: 15
                 }]
             },
 
@@ -422,7 +424,9 @@
             nextEvolutions: [{
                 species: 'clefairy',
                 method: 'happiness',
-                value: 'high'
+                value: 'high',
+                method2: 'level-up',
+                value2: 15
                 }]
             },
 
@@ -444,7 +448,9 @@
             nextEvolutions: [{
                 species: 'jigglypuff',
                 method: 'happiness',
-                value: 'high'
+                value: 'high',
+                method2: 'level-up',
+                value2: 15
                 }]
             },
 
@@ -466,7 +472,9 @@
             nextEvolutions: [{
                 species: 'togetic',
                 method: 'happiness',
-                value: 'high'
+                value: 'high',
+                method2: 'level-up',
+                value2: 15
                 }]
             },
         'togetic': {
@@ -742,11 +750,11 @@
             eggCycles: 20,
             eggGroups: ['grass'],
             nextEvolutions: [{
-                species: 'sunflora',
-                method: 'evolution-stone',
-                value: 'sun-stone',
-                method2: 'type-appeal',
-                value2: ['grass', 'fire']
+                species: 'sunflora', // sun-stone
+                method: 'type-appeal',
+                value: ['grass'],
+                method2: 'level-up',
+                value2: 20
                 }]
             },
         'sunflora': {
@@ -1497,22 +1505,22 @@
             eggGroups: ['undiscovered'],
             nextEvolutions: [{
                 species: 'hitmontop',
-                method: 'level-up',
-                value: 20,
-                method2: 'stat-appeal',
-                value2: 'speed'
+                method: 'stat-appeal',
+                value: 'speed',
+                method2: 'level-up',
+                value2: 20
                 }, {
                 species: 'hitmonlee',
-                method: 'level-up',
-                value: 20,
-                method2: 'stat-appeal',
-                value2: 'phAttack'
+                method: 'stat-appeal',
+                value: 'phAttack',
+                method2: 'level-up',
+                value2: 20
                 }, {
                 species: 'hitmonchan',
-                method: 'level-up',
-                value: 20,
-                method2: 'stat-appeal',
-                value2: 'phDefense'
+                method: 'stat-appeal',
+                value: 'phDefense',
+                method2: 'level-up',
+                value2: 20
                 }]
             },
 
@@ -1810,17 +1818,29 @@
 
     // Update previous gen pokemon with new next evolution data
     thisIndex.addNextEvolutions([
-        {base: 'golbat', species: 'crobat', method: 'happiness', value: 'max'},
-        {base: 'poliwhirl', species: 'politoed', method: 'evolution-item', value: 'kings-rock', method2: 'type-surge', value2: 'water'},
-        {base: 'slowpoke', species: 'slowking', method: 'evolution-item', value: 'kings-rock', method2: 'type-surge', value2: 'psychic'},
-        {base: 'onix', species: 'steelix', method: 'evolution-item', value: 'metal-coat', method2: 'type-appeal', value2: 'steel'},
-        {base: 'seadra', species: 'kingdra', method: 'evolution-item', value: 'dragon-scale', method2: 'type-appeal', value2: 'dragon'},
-        {base: 'porygon', species: 'porygon2', method: 'evolution-item', value: 'upgrade', method2: 'type-appeal', value2: 'normal'},
-        {base: 'eevee', species: 'espeon', method: 'happiness', value: 'high', method2: 'type-appeal', value2: 'psychic'},
-        {base: 'eevee', species: 'umbreon', method: 'happiness', value: 'high', method2: 'type-appeal', value2: 'dark'},
-        {base: 'gloom', species: 'bellossom', method: 'evolution-stone', value: 'sun-stone', method2: 'type-warning', value2: 'poison'},
-        {base: 'chansey', species: 'blissey', method: 'happiness', value: 'max'},
-        {base: 'scyther', species: 'scizor', method: 'evolution-item', value: 'metal-coat', method2: 'type-appeal', value2: 'steel'},
+
+        {base: 'seadra', species: 'kingdra', method: 'type-appeal', value: 'dragon', method2: 'level-up', value2: 42}, // dragon-scale
+
+        {base: 'eevee', species: 'espeon', method: 'type-appeal', value: 'psychic', method2: 'level-up', value2: 20}, // happiness + morning
+        {base: 'eevee', species: 'umbreon', method: 'type-appeal', value: 'dark', method2: 'level-up', value2: 20}, // happiness + night
+
+        {base: 'slowpoke', species: 'slowbro', method: 'type-appeal', value: 'water', method2: 'level-up', value2: 37, replace: true}, // level-up
+        {base: 'slowpoke', species: 'slowking', method: 'type-appeal', value: 'psychic', method2: 'level-up', value2: 37}, // kings-rock
+
+        {base: 'poliwhirl', species: 'poliwrath', method: 'type-appeal', value: 'fighting', method2: 'level-up', value2: 45, replace: true}, // trade
+        {base: 'poliwhirl', species: 'politoed', method: 'type-appeal', value: 'water', method2: 'level-up', value2: 45}, // kings-rock
+
+        {base: 'gloom', species: 'vileplume', method: 'type-appeal', value: 'poison', method2: 'level-up', value2: 41, replace: true}, // leaf-stone
+        {base: 'gloom', species: 'bellossom', method: 'type-appeal', value: 'grass', method2: 'level-up', value2: 41}, // sun-stone
+
+        {base: 'onix', species: 'steelix', method: 'type-appeal', value: 'steel', method2: 'level-up', value2: 30}, // metal-coat
+        {base: 'scyther', species: 'scizor', method: 'type-appeal', value: 'steel', method2: 'level-up', value2: 30}, // metal-coat
+
+        {base: 'porygon', species: 'porygon2', method: 'type-appeal', value: 'normal', method2: 'level-up', value2: 27}, // upgrade
+
+        {base: 'golbat', species: 'crobat', method: 'happiness', value: 'max', method2: 'level-up', value2: 42},
+        {base: 'chansey', species: 'blissey', method: 'happiness', value: 'max', method2: 'level-up', value2: 45},
+
         ]);
 
     // Update previous gen pokemon with new egg partner data
