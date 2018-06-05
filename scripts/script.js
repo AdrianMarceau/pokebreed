@@ -2180,6 +2180,8 @@
             var nextVisitors = [];
             var totalVisitorChance = 0;
             if (typeof sortedVisitors['basic'] !== 'undefined'){
+
+                // Loop through and add the top 5 basic pokemon by default
                 for (var i = 0; i < 5; i++){
                     if (typeof sortedVisitors['basic'][i] === 'undefined'){ break; }
                     var visitor = sortedVisitors['basic'][i];
@@ -2187,14 +2189,32 @@
                     totalVisitorChance += visitorInfo.chance;
                     nextVisitors.push(visitorInfo);
                     }
-                if (typeof sortedVisitors['legendary'][0] !== 'undefined'){
-                    var visitor = sortedVisitors['legendary'][0];
+
+                // Check to see if a special pokemon should be visiting soon
+                var specialVisitor = false;
+                if (thisZoneData.date.year % 3 === 0
+                    && (thisZoneData.date.month === 8
+                        || thisZoneData.date.month >= 12)
+                    && typeof sortedVisitors['mythical'][0] !== 'undefined'){
+                    specialVisitor = 'mythical';
+                    } else if ((thisZoneData.date.month === 3
+                        || thisZoneData.date.month === 6
+                        || thisZoneData.date.month >= 9)
+                    && typeof sortedVisitors['legendary'][0] !== 'undefined'){
+                    specialVisitor = 'legendary';
+                    }
+
+                // If there's a special visitor coming, replace the final slot
+                if (specialVisitor !== false){
+                    var visitor = sortedVisitors[specialVisitor][0];
                     var visitorInfo = {token: visitor.token, chance: (visitor.chance / 100)};
                     nextVisitors.pop();
                     nextVisitors.push(visitorInfo);
                     }
+
+                //console.log('nextVisitors = ', nextVisitors);
+
                 }
-            //console.log('nextVisitors = ', nextVisitors);
 
 
             // Update the visitor appeal area with new sprites
