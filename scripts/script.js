@@ -4387,8 +4387,8 @@
             var pokeList = [];
             var genderTrans = {m:'male',f:'female',n:'none'};
             for (var i = 0; i < rawList.length; i++){
-                var rawInfo = rawList[i].match(/^([a-z0-9]+)\s(?:×|x)?\s?([0-9mf×x\/]+)$/i);
-                var pokeToken = rawInfo[1].toLowerCase();
+                var rawInfo = rawList[i].match(/^([a-z0-9\s]+)\s(?:×|x)?\s?([0-9mf×x\/]+)$/i);
+                var pokeToken = rawInfo[1].toLowerCase().replace(' ', '-');
                 var pokeCounts = rawInfo[2].toLowerCase().replace(/(×|x)+/, '').split(/\//);
                 var pokeIndex = PokemonSpeciesIndex[pokeToken];
                 //console.log('rawInfo['+ i +'] = ', rawInfo);
