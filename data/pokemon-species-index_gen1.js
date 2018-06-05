@@ -480,7 +480,7 @@
                 method: 'type-appeal',
                 value: 'electric',
                 method2: 'level-up',
-                value2: 20
+                value2: 25
                 }]
             },
         raichu: {
@@ -583,7 +583,7 @@
                 method: 'type-appeal',
                 value: ['poison', 'ground'],
                 method2: 'level-up',
-                value2: 30
+                value2: 36
                 }]
             },
         'nidoqueen': {
@@ -650,7 +650,7 @@
                 method: 'type-appeal',
                 value: ['poison', 'ground'],
                 method2: 'level-up',
-                value2: 30
+                value2: 36
                 }]
             },
         'nidoking': {
@@ -690,7 +690,7 @@
                 method: 'type-appeal',
                 value: 'fairy',
                 method2: 'level-up',
-                value2: 20
+                value2: 25
                 }]
             },
         'clefable': {
@@ -768,7 +768,7 @@
                 method: 'type-appeal',
                 value: ['normal', 'fairy'],
                 method2: 'level-up',
-                value2: 20
+                value2: 25
                 }]
             },
         'wigglytuff': {
@@ -835,7 +835,6 @@
             height: 0.5,
             weight: 5.4,
             colors: ['blue', 'green'],
-            evos: ['gloom'],
             eggCycles: 20,
             eggGroups: ['grass'],
             nextEvolutions: [{
@@ -855,9 +854,6 @@
             height: 0.8,
             weight: 8.6,
             colors: ['blue', 'red', 'orange'],
-            prevo: 'oddish',
-            evos: ['vileplume', 'bellossom'],
-            evoLevel: 21,
             eggCycles: 20,
             eggGroups: ['grass'],
             prevEvolution: 'oddish',
@@ -866,7 +862,7 @@
                 method: 'type-appeal',
                 value: ['grass', 'poison'],
                 method2: 'level-up',
-                value2: 30
+                value2: 41
                 }]
             },
         'vileplume': {
@@ -880,8 +876,6 @@
             height: 1.2,
             weight: 18.6,
             colors: ['blue', 'red', 'yellow'],
-            prevo: 'gloom',
-            evoLevel: 21,
             eggCycles: 20,
             eggGroups: ['grass'],
             prevEvolution: 'gloom',
@@ -1180,7 +1174,7 @@
                 method: 'type-appeal',
                 value: ['water', 'fighting'],
                 method2: 'level-up',
-                value2: 30
+                value2: 45
                 }]
             },
         'poliwrath': {
@@ -1236,8 +1230,10 @@
             prevEvolution: 'abra',
             nextEvolutions: [{
                 species: 'alakazam',
-                method: 'trade',
-                value: 'auto'
+                method: 'trade-partner',
+                value: 'auto',
+                method2: 'level-up',
+                value2: 36
                 }]
             },
         'alakazam': {
@@ -1294,8 +1290,10 @@
             prevEvolution: 'machop',
             nextEvolutions: [{
                 species: 'machamp',
-                method: 'trade',
-                value: 'auto'
+                method: 'trade-partner',
+                value: 'auto',
+                method2: 'level-up',
+                value2: 48
                 }]
             },
         'machamp': {
@@ -1353,7 +1351,7 @@
                 method: 'type-appeal',
                 value: ['grass', 'poison'],
                 method2: 'level-up',
-                value2: 30
+                value2: 41
                 }]
             },
         'victreebel': {
@@ -1441,8 +1439,10 @@
             eggGroups: ['mineral'],
             nextEvolutions: [{
                 species: 'golem',
-                method: 'trade',
-                value: 'auto'
+                method: 'trade-partner',
+                value: 'auto',
+                method2: 'level-up',
+                value2: 45
                 }],
             prevEvolution: 'geodude'
             },
@@ -1761,8 +1761,10 @@
             eggGroups: ['amorphous'],
             nextEvolutions: [{
                 species: 'gengar',
-                method: 'trade',
-                value: 'auto'
+                method: 'trade-partner',
+                value: 'auto',
+                method2: 'level-up',
+                value2: 45
                 }],
             prevEvolution: 'gastly'
             },
