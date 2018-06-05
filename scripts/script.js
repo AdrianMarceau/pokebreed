@@ -407,7 +407,8 @@
 
                     // If the user has clicked enough, open the secret seed sharing dialogue
                     secretClicks++;
-                    if (secretClicks >= 5){
+                    if (secretClicks >= 5
+                        && thisZoneData.currentPokemon.length === 0){
 
                         // Collect and parse the seed if it's given, else do nothing
                         var rawSeed = prompt('Please enter you starter seed below:');
