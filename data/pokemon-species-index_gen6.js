@@ -907,6 +907,21 @@
             prevEvolution: 'sliggoo'
             },
 
+        'klefki': {
+            order: indexOrder++,
+            token: 'klefki',
+            name: 'Klefki',
+            number: 707,
+            types: ['steel', 'fairy'],
+            baseStats: {hp: 57, phAttack: 80, phDefense: 91, spAttack: 80, spDefense: 87, speed: 75},
+            abilities: {0: 'prankster', hidden: 'magician'},
+            height: 0.2,
+            weight: 3,
+            color: ['gray', 'pink', 'black', 'gold', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['mineral'],
+            },
+
         'bergmite': {
             order: indexOrder++,
             token: 'bergmite',
