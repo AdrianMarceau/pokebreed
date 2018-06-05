@@ -2896,13 +2896,13 @@
                         if (methodToken === 'happiness'){
                             if (methodValue === 'high'
                                 && pokemonHappiness >= 2){
-                                return 1 + (pokemonHappiness * 10);
+                                return 1;
                                 } else if (methodValue === 'max'
                                 && pokemonHappiness >= 4){
-                                return 2 + (pokemonHappiness * 10);
+                                return 1;
                                 } else if (methodValue === 'low'
                                 && pokemonHappiness < 0){
-                                return 3 + ((pokemonHappiness * -1) * 10);
+                                return 1;
                                 }
                             }
 
@@ -2910,13 +2910,13 @@
                         if (methodToken === 'affection'){
                             if (methodValue === 'high'
                                 && numRelatedPokemon >= 5){
-                                return 1 + (numRelatedPokemon * 10);
+                                return 1;
                                 } else if (methodValue === 'max'
                                 && numRelatedPokemon >= 10){
-                                return 2 + (numRelatedPokemon * 10);
+                                return 1;
                                 } else if (methodValue === 'low'
                                 && numRelatedPokemon < 5){
-                                return 3 + ((10 - numRelatedPokemon) * 10);
+                                return 1;
                                 }
                             }
 
@@ -2969,57 +2969,57 @@
                         if (methodToken === 'trade-partner'
                             && typeof thisZoneData.currentStats['species'][pokemonInfo.token] !== 'undefined'
                             && thisZoneData.currentStats['species'][pokemonInfo.token] > 0){
-                            return 100 + thisZoneData.currentStats['species'][partnerToken];
+                            return 1;
                             }
 
                         // Species-based evolutions trigger if the other species is active on the field
                         if (methodToken === 'evolution-species'
                             && typeof thisZoneData.currentStats['species'][methodValue] !== 'undefined'
                             && thisZoneData.currentStats['species'][methodValue] > 0){
-                            return 100 + thisZoneData.currentStats['species'][methodValue];
+                            return 1;
                             }
 
                         // Extinction-based evolutions trigger when this pokemon is the last  of its species
                         if ((methodToken === 'extinction')
                             && numRelatedPokemon == 1){
-                            return 100;
+                            return 1;
                             }
 
                         // Gender-based evolutions are triggered immediately if the pokemon is of a specific sex
                         if (methodToken === 'gender'
                             && pokemonInfo.gender === methodValue){
-                            return 100;
+                            return 1;
                             }
 
                         // Form-based evolutions are triggered immediately if the pokemon is in that form
                         if (methodToken === 'form'
                             && pokemonInfo.formToken === methodValue){
-                            return 100;
+                            return 1;
                             }
 
                         // Season-based evolutions are triggered immediately if the current season is a match
                         if (methodToken === 'season'
                             && thisZoneData.season === methodValue){
-                            return 100;
+                            return 1;
                             }
 
                         // Chance-based evolutions are triggered by random simulator values
                         if (methodToken === 'chance'
                             && (chanceValue < methodValue)){
-                            return 100;
+                            return 1;
                             }
 
                         // Burst and mega evolutions trigger automatically when this pokemon reaches adulthood
                         if ((methodToken === 'burst-evolution'
                             || methodToken === 'mega-evolution')
                             && pokemonInfo.reachedAdulthood === true){
-                            return 100;
+                            return 1;
                             }
 
                         // Primary reversions trigger automatically when this pokemon reaches adulthood
                         if (methodToken === 'primal-reversion'
                             && pokemonInfo.reachedAdulthood === true){
-                            return 100;
+                            return 1;
                             }
 
                         // Otherwise, return zero as nothing was triggered
