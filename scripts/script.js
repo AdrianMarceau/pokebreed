@@ -310,6 +310,7 @@
         $pokePanelLoading.append('.'); // append loading dot
 
         // Define the click-event for the speed buttons
+        var secretClicks = 0;
         $controlButtons = $('.controls .control[data-control]', $panelButtons);
         $controlButtons.bind('click', function(e){
             e.preventDefault();
@@ -398,7 +399,49 @@
                 if (thisZoneData.currentPokemon.length > 0
                     && !simulationStarted
                     && !dayTimeoutStarted){
+
+                    // We have enough pokemon to start, so let's do it!
                     startSimulation();
+
+                    } else {
+
+                    // If the user has clicked enough, open the secret seed sharing dialogue
+                    secretClicks++;
+                    if (secretClicks >= 5){
+
+                        // Collect and parse the seed if it's given, else do nothing
+                        var rawSeed = prompt('Please enter you starter seed below:');
+                        if (rawSeed && rawSeed.length > 0){
+                            //console.log('rawSeed = ', rawSeed);
+                            var seedPokemon = parsePokeBoxSeed(rawSeed);
+                            //console.log('seedPokemon = ', seedPokemon);
+                            if (seedPokemon
+                                || seedPokemon.length){
+                                for (var key = 0; key < seedPokemon.length; key++){
+                                    if (thisZoneData.currentPokemon.length >= 10){ break; }
+                                    var starterInfo = seedPokemon[key];
+                                    var starterToken = starterInfo[0];
+                                    var starterGender = starterInfo[1];
+                                    addPokemonToZone(starterToken, false, false, false, {gender:starterGender});
+                                    }
+                                } else {
+                                alert('The provided seed was invalid.\n ' +
+                                    'Please check the formatting and try again.'
+                                    );
+                                return;
+                                }
+                            } else {
+                            return;
+                            }
+
+                         // Recalculate zone stats then show the start button if ready
+                        if (thisZoneData.currentPokemon.length > 0){
+                            recalculateZoneStats();
+                            $('.controls .start', $panelButtons).addClass('ready');
+                            }
+
+                        }
+
                     }
                 return;
                 }
@@ -4321,6 +4364,49 @@
             return (str + pad).substring(0, pad.length);
             }
     }
+
+    // Define a function for parsing a starter pokemon seed (string to array)
+    function parsePokeBoxSeed(seedString){
+        //console.log('seedString = ', seedString);
+        var rawString = seedString;
+        var seedData = rawString.match(/^`?`?\[\s?PBS\s+\|\s+(.*)?\s+\|\s+(.*)?\s?\]`?`?$/i);
+        //console.log('seedData = ', seedData);
+        if (seedData !== null){
+            //console.log('seed string was okay!');
+            var rawList = seedData[1].match(/\s+\/\s+/) ? seedData[1].split(/\s+\/\s+/) : [seedData[1]];
+            var rawVersion = seedData[2];
+            //console.log('rawList = ', rawList);
+            //console.log('rawVersion = ', rawVersion);
+            var pokeList = [];
+            var genderTrans = {m:'male',f:'female',n:'none'};
+            for (var i = 0; i < rawList.length; i++){
+                var rawInfo = rawList[i].match(/^([a-z0-9]+)\s(?:×|x)?\s?([0-9mf×x\/]+)$/i);
+                var pokeToken = rawInfo[1].toLowerCase();
+                var pokeCounts = rawInfo[2].toLowerCase().replace(/(×|x)+/, '').split(/\//);
+                var pokeIndex = PokemonSpeciesIndex[pokeToken];
+                //console.log('rawInfo['+ i +'] = ', rawInfo);
+                //console.log('pokeToken = ', pokeToken);
+                //console.log('pokeCounts = ', pokeCounts);
+                //console.log('pokeIndex = ', pokeIndex);
+                if (typeof pokeIndex === 'undefined'){ continue; }
+                for (var j = 0; j < pokeCounts.length; j++){
+                    var raw = pokeCounts[j].match(/^([0-9]+)(f|m)?$/);
+                    var count = parseInt(raw[1]);
+                    var gender = genderTrans[raw[2] || 'n'];
+                    //console.log('count / gender = ', count, gender);
+                    if (pokeIndex.hasNoGender && gender !== 'none'){ gender = 'none'; }
+                    else if (pokeIndex.hasOneGender && gender !== pokeIndex.speciesGender){ gender = 'none'; }
+                    for (var k = 0; k < count; k++){ pokeList.push(gender !== 'none' ? [pokeToken, gender] : [pokeToken]); }
+                    }
+                }
+            //console.log('pokeList ', pokeList);
+            return pokeList;
+            } else {
+            //console.log('seed string was invalid');
+            return false;
+            }
+
+        };
 
     // Update the math object with a seeded random functon
     Math.seed = 1;

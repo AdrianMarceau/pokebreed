@@ -1536,8 +1536,7 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 }
 
 .panel .buttons .controls .control.start:not(.ready) {
-    pointer-events: none;
-    cursor: not-allowed;
+    cursor: default;
 }
 
 .panel .buttons .controls .control.play:before,
