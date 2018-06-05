@@ -581,9 +581,7 @@
             nextEvolutions: [{
                 species: 'gardevoir',
                 method: 'level-up',
-                value: 30,
-                method2: 'type-appeal',
-                value2: 'fairy'
+                value: 30
                 }]
             },
         'gardevoir': {
@@ -2275,9 +2273,6 @@
         {base: 'marill', species: 'azurill'},
         {base: 'wobbuffet', species: 'wynaut'},
         ]);
-    // Add appeal evolutions for  Gardevoir, because Gallade  would be impossible
-    /*thisIndex.addNextEvolutions([
-        {base: 'kirlia', species: 'gardevoir', method: 'level-up', value: 30, method2: 'type-appeal', value2: 'fairy'},
-        ]);*/
+  
 
 })();
