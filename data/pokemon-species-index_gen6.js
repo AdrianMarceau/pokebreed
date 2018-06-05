@@ -237,11 +237,11 @@
             eggGroups: ['fairy'],
             prevEvolution: 'flabebe',
             nextEvolutions: [{
-                species: 'florges',
-                method: 'evolution-stone',
-                value: 'shiny-stone',
+                species: 'florges', // shiny-stone
                 method2: 'type-appeal',
-                value2: 'fairy'
+                value2: 'fairy',
+                method2: 'level-up',
+                value2: 39
                 }]
             },
         'florges': {
@@ -544,11 +544,11 @@
             eggGroups: ['mineral'],
             prevEvolution: 'honedge',
             nextEvolutions: [{
-                species: 'aegislash',
-                method: 'evolution-stone',
-                value: 'dusk-stone',
+                species: 'aegislash', // dusk-stone
                 method2: 'type-surge',
-                value2: ['steel', 'ghost']
+                value2: ['steel', 'ghost'],
+                method2: 'level-up',
+                value2: 55
                 }]
             },
         'aegislash': {
@@ -581,11 +581,11 @@
             eggCycles: 20,
             eggGroups: ['fairy'],
             nextEvolutions: [{
-                species: 'aromatisse',
-                method: 'trade',
-                value: 'sachet',
+                species: 'aromatisse', // sachet
                 method2: 'type-appeal',
-                value2: 'fairy'
+                value2: 'fairy',
+                method2: 'level-up',
+                value2: 30
                 }]
             },
         'aromatisse': {
@@ -618,11 +618,11 @@
             eggCycles: 20,
             eggGroups: ['fairy'],
             nextEvolutions: [{
-                species: 'slurpuff',
-                method: 'trade',
-                value: 'whipped-dream',
+                species: 'slurpuff', // whipped-dream
                 method2: 'type-appeal',
-                value2: 'fairy'
+                value2: 'fairy',
+                method2: 'level-up',
+                value2: 30
                 }]
             },
         'slurpuff': {
@@ -905,6 +905,21 @@
             eggCycles: 40,
             eggGroups: ['dragon'],
             prevEvolution: 'sliggoo'
+            },
+
+        'klefki': {
+            order: indexOrder++,
+            token: 'klefki',
+            name: 'Klefki',
+            number: 707,
+            types: ['steel', 'fairy'],
+            baseStats: {hp: 57, phAttack: 80, phDefense: 91, spAttack: 80, spDefense: 87, speed: 75},
+            abilities: {0: 'prankster', hidden: 'magician'},
+            height: 0.2,
+            weight: 3,
+            color: ['gray', 'pink', 'black', 'gold', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['mineral'],
             },
 
         'bergmite': {
@@ -1960,7 +1975,7 @@
     // Update previous gen pokemon with new next evolution data
     thisIndex.addNextEvolutions([
 
-        {base: 'eevee', species: 'sylveon', method: 'affection', value: 'max', method2: 'type-appeal', value2: 'fairy'},
+        {base: 'eevee', species: 'sylveon', method: 'type-appeal', value: 'fairy', method2: 'level-up', value2: 20}, // affection
 
         {base: 'venusaur', species: 'mega-venusaur', method: 'mega-evolution', value: 'venusaurite'},
         {base: 'charizard', species: 'mega-charizard-x', method: 'mega-evolution', value: 'charizardite-x', method2: 'type-appeal', value2: 'dragon'},

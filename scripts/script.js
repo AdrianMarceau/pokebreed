@@ -310,6 +310,7 @@
         $pokePanelLoading.append('.'); // append loading dot
 
         // Define the click-event for the speed buttons
+        var secretClicks = 0;
         $controlButtons = $('.controls .control[data-control]', $panelButtons);
         $controlButtons.bind('click', function(e){
             e.preventDefault();
@@ -398,7 +399,56 @@
                 if (thisZoneData.currentPokemon.length > 0
                     && !simulationStarted
                     && !dayTimeoutStarted){
+
+                    // We have enough pokemon to start, so let's do it!
                     startSimulation();
+
+                    } else {
+
+                    // If the user has clicked enough, open the secret seed sharing dialogue
+                    secretClicks++;
+                    if (secretClicks >= 5
+                        && thisZoneData.currentPokemon.length === 0){
+
+                        // Collect and parse the seed if it's given, else do nothing
+                        var rawSeed = prompt('Please enter you starter seed below:');
+                        if (rawSeed && rawSeed.length > 0){
+                            //console.log('rawSeed = ', rawSeed);
+                            var seedPokemon = parsePokeBoxSeed(rawSeed);
+                            //console.log('seedPokemon = ', seedPokemon);
+                            if (seedPokemon
+                                || seedPokemon.length){
+                                for (var key = 0; key < seedPokemon.length; key++){
+                                    if (thisZoneData.currentPokemon.length >= 10){ break; }
+                                    var starterInfo = seedPokemon[key];
+                                    var starterToken = starterInfo[0];
+                                    var starterGender = starterInfo[1];
+                                    if (appFreeMode
+                                        || freeStarterPokemon.indexOf(starterToken) !== -1
+                                        || (BasicPokemonSpeciesIndexTokens.indexOf(starterToken) !== -1
+                                        && typeof PokemonSpeciesSeen[starterToken] !== 'undefined'
+                                        && PokemonSpeciesSeen[starterToken].length > 0)){
+                                        addPokemonToZone(starterToken, false, false, false, {gender:starterGender});
+                                        }
+                                    }
+                                } else {
+                                alert('The provided seed was invalid.\n ' +
+                                    'Please check the formatting and try again.'
+                                    );
+                                return;
+                                }
+                            } else {
+                            return;
+                            }
+
+                         // Recalculate zone stats then show the start button if ready
+                        if (thisZoneData.currentPokemon.length > 0){
+                            recalculateZoneStats();
+                            $('.controls .start', $panelButtons).addClass('ready');
+                            }
+
+                        }
+
                     }
                 return;
                 }
@@ -894,6 +944,7 @@
 
         // Reset the global randomization seed
         Math.seed = 1;
+        //console.log('\n Math.seed reset to ', Math.seed);
 
         // Update the overiew with cleared data
         updateOverview();
@@ -935,12 +986,16 @@
 
         // Collect the last set of starters used and then use them again
         var prevStarters = StarterPokemonHistory[StarterPokemonHistory.length - 1];
+        //console.log('prevStarters = ', prevStarters);
         if (typeof prevStarters !== 'undefined'){
             for (var key = 0; key < prevStarters.length; key++){
                 var starterInfo = prevStarters[key];
                 var starterToken = starterInfo[0];
                 var starterGender = starterInfo[1];
-                addPokemonToZone(starterToken, false, false, {gender:starterGender});
+                //console.log('starterInfo = ', starterInfo);
+                //console.log('starterToken = ', starterInfo);
+                //console.log('starterGender = ', starterInfo);
+                addPokemonToZone(starterToken, false, false, false, {gender:starterGender});
                 }
             }
 
@@ -1205,6 +1260,7 @@
     }
 
     // Define a function for generating the simulator buttons for each Pokemon
+    var freeStarterPokemon = [];
     function generatePokemonButtons(){
 
         //console.log('generatePokemonButtons()');
@@ -1214,7 +1270,7 @@
         var seenSpeciesTokens = Object.keys(PokemonSpeciesSeen);
 
         // Define the pokemon allowed regardless of seen status, (starters for each gen)
-        var freeStarterPokemon = [];
+        freeStarterPokemon = [];
         freeStarterPokemon.push('bulbasaur', 'charmander', 'squirtle'); // gen 1 starters
         freeStarterPokemon.push('pikachu', 'eevee'); // special edition starters
         if (seenSpeciesTokens.length >= 151){ freeStarterPokemon.push('chikorita', 'cyndaquil', 'totodile'); } // gen 2 starters
@@ -1551,7 +1607,8 @@
 
         // Calculate this pokemon's gender based on ratios
         var pokeGender = 'none';
-        if (!indexData.hasNoGender){
+        if (typeof customData.gender === 'undefined'
+            && !indexData.hasNoGender){
             if (indexData.genderRatio.male === 0.5
                 && indexData.genderRatio.female === 0.5){
                 pokeGender = addedPokemonSpecies[pokemonToken] % 2 !== 0 ? 'female' : 'male';
@@ -2174,6 +2231,8 @@
             var nextVisitors = [];
             var totalVisitorChance = 0;
             if (typeof sortedVisitors['basic'] !== 'undefined'){
+
+                // Loop through and add the top 5 basic pokemon by default
                 for (var i = 0; i < 5; i++){
                     if (typeof sortedVisitors['basic'][i] === 'undefined'){ break; }
                     var visitor = sortedVisitors['basic'][i];
@@ -2181,14 +2240,32 @@
                     totalVisitorChance += visitorInfo.chance;
                     nextVisitors.push(visitorInfo);
                     }
-                if (typeof sortedVisitors['legendary'][0] !== 'undefined'){
-                    var visitor = sortedVisitors['legendary'][0];
+
+                // Check to see if a special pokemon should be visiting soon
+                var specialVisitor = false;
+                if (thisZoneData.date.year % 3 === 0
+                    && (thisZoneData.date.month === 8
+                        || thisZoneData.date.month >= 12)
+                    && typeof sortedVisitors['mythical'][0] !== 'undefined'){
+                    specialVisitor = 'mythical';
+                    } else if ((thisZoneData.date.month === 3
+                        || thisZoneData.date.month === 6
+                        || thisZoneData.date.month >= 9)
+                    && typeof sortedVisitors['legendary'][0] !== 'undefined'){
+                    specialVisitor = 'legendary';
+                    }
+
+                // If there's a special visitor coming, replace the final slot
+                if (specialVisitor !== false){
+                    var visitor = sortedVisitors[specialVisitor][0];
                     var visitorInfo = {token: visitor.token, chance: (visitor.chance / 100)};
                     nextVisitors.pop();
                     nextVisitors.push(visitorInfo);
                     }
+
+                //console.log('nextVisitors = ', nextVisitors);
+
                 }
-            //console.log('nextVisitors = ', nextVisitors);
 
 
             // Update the visitor appeal area with new sprites
@@ -2640,11 +2717,12 @@
         // If this is the very first day, let's update our random seed
         if (thisZoneData.day === 1){
             Math.seed = 1;
+            //console.log('\n Math.seed reset to ', Math.seed);
             for (var i = 0; i < thisZoneData.currentPokemon.length; i++){
                 var pokeToken = thisZoneData.currentPokemon[i].token;
                 Math.seed += PokemonSpeciesIndex[pokeToken].number;
                 }
-            //console.log('\nSTART SEED = '+Math.seed);
+            //console.log('|- Starter-adjusted Math.seed is ', Math.seed);
             }
         //var randomNumber = Math.seededRandom(0, 100);
         //console.log('Day #'+thisZoneData.day);
@@ -2894,46 +2972,30 @@
 
                         // Happiness-based evolutions are triggered by attract type appeal values
                         if (methodToken === 'happiness'){
-
                             if (methodValue === 'high'
-                                && pokemonInfo.growthCycles >= 10
                                 && pokemonHappiness >= 2){
-                                return 1 + (pokemonHappiness * 10);
-
+                                return 1;
                                 } else if (methodValue === 'max'
-                                && pokemonInfo.growthCycles >= 20
                                 && pokemonHappiness >= 4){
-                                return 2 + (pokemonHappiness * 10);
-
+                                return 1;
                                 } else if (methodValue === 'low'
-                                && pokemonInfo.growthCycles >= 30
                                 && pokemonHappiness < 0){
-                                return 3 + ((pokemonHappiness * -1) * 10);
-
+                                return 1;
                                 }
-
                             }
 
                         // Affection-based evolutions trigger when this pokemon is surrounded by related species
                         if (methodToken === 'affection'){
-
                             if (methodValue === 'high'
-                                && pokemonInfo.growthCycles >= 10
                                 && numRelatedPokemon >= 5){
-                                return 1 + (numRelatedPokemon * 10);
-
+                                return 1;
                                 } else if (methodValue === 'max'
-                                && pokemonInfo.growthCycles >= 20
                                 && numRelatedPokemon >= 10){
-                                return 2 + (numRelatedPokemon * 10);
-
+                                return 1;
                                 } else if (methodValue === 'low'
-                                && pokemonInfo.growthCycles >= 30
                                 && numRelatedPokemon < 5){
-                                return 3 + ((10 - numRelatedPokemon) * 10);
-
+                                return 1;
                                 }
-
                             }
 
                         // Type-appeal/crisis evolutions trigger when the relevant field stats are especially high
@@ -2944,8 +3006,7 @@
                             var returnValue = 0;
                             for (var i = 0; i < appealTypes.length; i++){
                                 var appealType = appealTypes[i];
-                                if (pokemonInfo.growthCycles >= (appealLevel * 10)
-                                    && currentTypeStats[appealType] >= (appealLevel * 20)){
+                                if (currentTypeStats[appealType] >= (appealLevel * 20)){
                                     returnValue += 1 + ((currentTypeStats[appealType] * 5) * appealLevel);
                                     }
                                 }
@@ -2960,8 +3021,7 @@
                             var returnValue = 0;
                             for (var i = 0; i < appealTypes.length; i++){
                                 var appealType = appealTypes[i];
-                                if (pokemonInfo.growthCycles >= (appealLevel * 10)
-                                    && currentTypeStats[appealType] <= ((appealLevel * 5) * -1)){
+                                if (currentTypeStats[appealType] <= ((appealLevel * 5) * -1)){
                                     returnValue += 1 + (((currentTypeStats[appealType] * -1) * 10) * appealLevel);
                                     }
                                 }
@@ -2976,80 +3036,68 @@
                             var returnValue = 0;
                             for (var i = 0; i < appealTypes.length; i++){
                                 var appealType = appealTypes[i];
-                                if (pokemonInfo.growthCycles >= (appealLevel * 10)
-                                    && currentBaseStats[appealType] >= (appealLevel * 20)){
+                                if (currentBaseStats[appealType] >= (appealLevel * 20)){
                                     returnValue += 1 + (currentBaseStats[appealType] * appealLevel);
                                     }
                                 }
                             if (returnValue > 0){ return returnValue; }
                             }
 
+                        // Trade-based evolutions trigger if this there's a same-species partner on field
+                        if (methodToken === 'trade-partner'
+                            && typeof thisZoneData.currentStats['species'][pokemonInfo.token] !== 'undefined'
+                            && thisZoneData.currentStats['species'][pokemonInfo.token] > 0){
+                            return 1;
+                            }
+
                         // Species-based evolutions trigger if the other species is active on the field
                         if (methodToken === 'evolution-species'
-                            && pokemonInfo.growthCycles >= 20
                             && typeof thisZoneData.currentStats['species'][methodValue] !== 'undefined'
                             && thisZoneData.currentStats['species'][methodValue] > 0){
-                            return 1 + thisZoneData.currentStats['species'][methodValue];
-                            }
-
-                        // Item, stone, and location-based evolutions trigger based on growth cycles alone
-                        if ((methodToken === 'evolution-item'
-                                || methodToken === 'evolution-stone'
-                                || methodToken === 'evolution-move'
-                                || methodToken === 'evolution-location')
-                            && pokemonInfo.growthCycles >= 20){
-                            return 1 + Math.min(19, (pokemonInfo.growthCycles - 20));
-                            }
-
-                        // Trade-based evolutions trigger only when there's an even number of this exact species active
-                        if (methodToken === 'trade'
-                            && pokemonInfo.growthCycles >= 30
-                            && allowTradeEvolution){
-                            return 1 + Math.min(29, (pokemonInfo.growthCycles - 20));
-                            }
-
-                        // Chance-based evolutions are triggered by random simulator values
-                        if (methodToken === 'chance'
-                            && (chanceValue < methodValue)){
-                            return 1 + Math.ceil(100 - chanceValue);
+                            return 1;
                             }
 
                         // Extinction-based evolutions trigger when this pokemon is the last  of its species
                         if ((methodToken === 'extinction')
-                            && pokemonInfo.growthCycles >= 30
                             && numRelatedPokemon == 1){
-                            return 1 + ((thisZoneData.currentPokemon.length - 1) * 10);
+                            return 1;
                             }
 
                         // Gender-based evolutions are triggered immediately if the pokemon is of a specific sex
                         if (methodToken === 'gender'
                             && pokemonInfo.gender === methodValue){
-                            return 100;
+                            return 1;
                             }
 
                         // Form-based evolutions are triggered immediately if the pokemon is in that form
                         if (methodToken === 'form'
                             && pokemonInfo.formToken === methodValue){
-                            return 100;
+                            return 1;
                             }
 
                         // Season-based evolutions are triggered immediately if the current season is a match
                         if (methodToken === 'season'
                             && thisZoneData.season === methodValue){
-                            return 100;
+                            return 1;
+                            }
+
+                        // Chance-based evolutions are triggered by random simulator values
+                        if (methodToken === 'chance'
+                            && (chanceValue < methodValue)){
+                            return 1;
                             }
 
                         // Burst and mega evolutions trigger automatically when this pokemon reaches adulthood
                         if ((methodToken === 'burst-evolution'
                             || methodToken === 'mega-evolution')
                             && pokemonInfo.reachedAdulthood === true){
-                            return 100;
+                            return 1;
                             }
 
                         // Primary reversions trigger automatically when this pokemon reaches adulthood
                         if (methodToken === 'primal-reversion'
                             && pokemonInfo.reachedAdulthood === true){
-                            return 100;
+                            return 1;
                             }
 
                         // Otherwise, return zero as nothing was triggered
@@ -4012,31 +4060,6 @@
         return maxEvolution !== false && maxEvolution.length ? true : false;
     }
 
-    // Define a function with an index of evo stones by type
-    function getEvoStoneType(evoStone){
-
-        if (evoStone === 'fire-stone'){ return 'fire'; }
-        else if (evoStone === 'water-stone'){ return 'water'; }
-        else if (evoStone === 'thunder-stone'){ return 'electric'; }
-        else if (evoStone === 'leaf-stone'){ return 'grass'; }
-        else if (evoStone === 'ice-stone'){ return 'ice'; }
-
-        else if (evoStone === 'moss-rock'){ return 'grass'; }
-        else if (evoStone === 'icy-rock'){ return 'ice'; }
-
-            else if (evoStone === 'sun-stone'){ return 'fire'; }
-            else if (evoStone === 'moon-stone'){ return 'normal'; }
-
-            else if (evoStone === 'dawn-stone'){ return 'psychic'; }
-            else if (evoStone === 'dusk-stone'){ return 'dark'; }
-
-            else if (evoStone === 'shiny-stone'){ return 'fairy'; }
-
-            else if (evoStone === 'magnetic-field'){ return 'electric'; }
-
-        else { return false; }
-    }
-
     // Define a function for sorting species token by index order
     function sortSpeciesTokensByOrder(speciesTokens, reverseOrder){
         speciesTokens.sort(function(tokenA, tokenB){
@@ -4350,8 +4373,52 @@
             }
     }
 
+    // Define a function for parsing a starter pokemon seed (string to array)
+    function parsePokeBoxSeed(seedString){
+        //console.log('seedString = ', seedString);
+        var rawString = seedString;
+        var seedData = rawString.match(/^`?`?\[\s?PBS\s+\|\s+(.*)?\s+\|\s+(.*)?\s?\]`?`?$/i);
+        //console.log('seedData = ', seedData);
+        if (seedData !== null){
+            //console.log('seed string was okay!');
+            var rawList = seedData[1].match(/\s+\/\s+/) ? seedData[1].split(/\s+\/\s+/) : [seedData[1]];
+            var rawVersion = seedData[2];
+            //console.log('rawList = ', rawList);
+            //console.log('rawVersion = ', rawVersion);
+            var pokeList = [];
+            var genderTrans = {m:'male',f:'female',n:'none'};
+            for (var i = 0; i < rawList.length; i++){
+                var rawInfo = rawList[i].match(/^([a-z0-9\s]+)\s(?:×|x)?\s?([0-9mf×x\/]+)$/i);
+                var pokeToken = rawInfo[1].toLowerCase().replace(' ', '-');
+                var pokeCounts = rawInfo[2].toLowerCase().replace(/(×|x)+/, '').split(/\//);
+                var pokeIndex = PokemonSpeciesIndex[pokeToken];
+                //console.log('rawInfo['+ i +'] = ', rawInfo);
+                //console.log('pokeToken = ', pokeToken);
+                //console.log('pokeCounts = ', pokeCounts);
+                //console.log('pokeIndex = ', pokeIndex);
+                if (typeof pokeIndex === 'undefined'){ continue; }
+                for (var j = 0; j < pokeCounts.length; j++){
+                    var raw = pokeCounts[j].match(/^([0-9]+)(f|m)?$/);
+                    var count = parseInt(raw[1]);
+                    var gender = genderTrans[raw[2] || 'n'];
+                    //console.log('count / gender = ', count, gender);
+                    if (pokeIndex.hasNoGender && gender !== 'none'){ gender = 'none'; }
+                    else if (pokeIndex.hasOneGender && gender !== pokeIndex.speciesGender){ gender = 'none'; }
+                    for (var k = 0; k < count; k++){ pokeList.push(gender !== 'none' ? [pokeToken, gender] : [pokeToken]); }
+                    }
+                }
+            //console.log('pokeList ', pokeList);
+            return pokeList;
+            } else {
+            //console.log('seed string was invalid');
+            return false;
+            }
+
+        };
+
     // Update the math object with a seeded random functon
     Math.seed = 1;
+    //console.log('\n Math.seed set to ', Math.seed);
     Math.seededRandom = function(min, max){
         min = min || 0;
         max = max || 1;

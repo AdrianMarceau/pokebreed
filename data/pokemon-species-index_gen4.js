@@ -354,7 +354,9 @@
             nextEvolutions: [{
                 species: 'roselia',
                 method: 'happiness',
-                value: 'high'
+                value: 'high',
+                method2: 'level-up',
+                value2: 15
                 }]
             },
         'roserade': {
@@ -781,7 +783,9 @@
             nextEvolutions: [{
                 species: 'lopunny',
                 method: 'happiness',
-                value: 'high'
+                value: 'high',
+                method2: 'level-up',
+                value2: 15
                 }]
             },
         'lopunny': {
@@ -883,11 +887,11 @@
             eggCycles: 20,
             eggGroups: ['undiscovered'],
             nextEvolutions: [{
-                species: 'sudowoodo',
-                method: 'evolution-move',
-                value: 'mimic',
-                method2: 'happiness',
-                value2: 'high'
+                species: 'sudowoodo', // mimic
+                method: 'happiness',
+                value: 'high',
+                method2: 'level-up',
+                value2: 25
                 }]
             },
 
@@ -906,11 +910,11 @@
             eggCycles: 25,
             eggGroups: ['undiscovered'],
             nextEvolutions: [{
-                species: 'mr-mime',
-                method: 'evolution-move',
-                value: 'mimic',
-                method2: 'affection',
-                value2: 'high'
+                species: 'mr-mime', // mimic
+                method: 'affection',
+                value: 'high',
+                method2: 'level-up',
+                value2: 25
                 }]
             },
 
@@ -930,11 +934,11 @@
             eggCycles: 40,
             eggGroups: ['undiscovered'],
             nextEvolutions: [{
-                species: 'chansey',
-                method: 'evolution-item',
-                value: 'oval-stone',
-                method2: 'affection',
-                value2: 'high'
+                species: 'chansey', // oval-stone
+                method: 'affection',
+                value: 'high',
+                method2: 'level-up',
+                value2: 25
                 }]
             },
 
@@ -1041,7 +1045,9 @@
             nextEvolutions: [{
                 species: 'snorlax',
                 method: 'happiness',
-                value: 'high'
+                value: 'high',
+                method2: 'level-up',
+                value2: 25
                 }]
             },
 
@@ -1063,7 +1069,9 @@
             nextEvolutions: [{
                 species: 'lucario',
                 method: 'happiness',
-                value: 'high'
+                value: 'high',
+                method2: 'level-up',
+                value2: 25
                 }]
             },
         'lucario': {
@@ -1316,7 +1324,9 @@
             nextEvolutions: [{
                 species: 'mantine',
                 method: 'evolution-species',
-                value: 'remoraid'
+                value: 'remoraid',
+                method2: 'level-up',
+                value2: 25
                 }]
             },
 
@@ -1878,27 +1888,43 @@
 
     // Update previous gen pokemon with new next evolution data
     thisIndex.addNextEvolutions([
-        {base: 'aipom', species: 'ambipom', method: 'evolution-move', value: 'double-hit', method2: 'type-surge', value2: 'normal'},
-        {base: 'roselia', species: 'roserade', method: 'evolution-move', value: 'shiny-stone', method2: 'type-surge', value2: ['grass', 'poison']},
-        {base: 'misdreavus', species: 'mismagius', method: 'evolution-stone', value: 'dusk-stone', method2: 'type-appeal', value2: ['ghost']},
-        {base: 'murkrow', species: 'honchkrow', method: 'evolution-stone', value: 'dusk-stone', method2: 'type-appeal', value2: ['dark', 'flying']},
-        {base: 'sneasel', species: 'weavile', method: 'evolution-item', value: 'razor-claw', method2: 'type-surge', value2: ['dark', 'ice']},
-        {base: 'magneton', species: 'magnezone', method: 'evolution-location', value: 'magnetic-field', method2: 'type-surge', value2: 'electric'},
-        {base: 'lickitung', species: 'lickilicky', method: 'evolution-move', value: 'rollout', method2: 'type-surge', value2: ['normal', 'rock']},
-        {base: 'rhydon', species: 'rhyperior', method: 'evolution-item', value: 'protector', method2: 'type-surge', value2: ['rock', 'ground']},
-        {base: 'tangela', species: 'tangrowth', method: 'evolution-move', value: 'ancient-power', method2: 'type-surge', value2: ['grass', 'rock']},
-        {base: 'electabuzz', species: 'electivire', method: 'evolution-item', value: 'electirizer', method2: 'type-surge', value2: 'electric'},
-        {base: 'magmar', species: 'magmortar', method: 'evolution-item', value: 'magmarizer', method2: 'type-surge', value2: 'fire'},
-        {base: 'togetic', species: 'togekiss', method: 'evolution-stone', value: 'shiny-stone', method2: 'type-surge', value2: ['fairy', 'flying']},
-        {base: 'yanma', species: 'yanmega', method: 'evolution-move', value: 'ancient-power', method2: 'type-surge', value2: ['bug', 'rock']},
-        {base: 'eevee', species: 'leafeon', method: 'evolution-location', value: 'moss-rock', method2: 'type-appeal', value2: 'grass'},
-        {base: 'eevee', species: 'glaceon', method: 'evolution-location', value: 'icy-rock', method2: 'type-appeal', value2: 'ice'},
-        {base: 'gligar', species: 'gliscor', method: 'evolution-item', value: 'razor-fang', method2: 'type-surge', value2: ['ground', 'flying']},
-        {base: 'piloswine', species: 'mamoswine', method: 'evolution-move', value: 'ancient-power', method2: 'type-surge', value2: ['ice', 'ground', 'rock']},
-        {base: 'porygon2', species: 'porygon-z', method: 'evolution-item', value: 'dubious-disc', method2: 'type-appeal', value2: ['fire', 'ice', 'electric']},
-        {base: 'kirlia', species: 'gallade', method: 'evolution-stone', value: 'dawn-stone', method2: 'level-up', value2: 30, method3: 'type-appeal', value3: 'fighting', method4: 'gender', value4: 'male'},
-        {base: 'nosepass', species: 'probopass', method: 'evolution-location', value: 'magnetic-field', method2: 'type-surge', value2: 'electric'},
-        {base: 'snorunt', species: 'froslass', method: 'evolution-stone', value: 'dawn-stone', method2: 'level-up', value2: 42, method3: 'type-appeal', value3: 'ghost', method4: 'gender', value4: 'female'},
+
+        {base: 'aipom', species: 'ambipom', method: 'type-surge', value: 'normal', method2: 'level-up', value2: 22}, // double-hit
+
+        {base: 'lickitung', species: 'lickilicky', method: 'type-surge', value: ['normal', 'rock'], method2: 'level-up', value2: 35}, // rollout
+        {base: 'tangela', species: 'tangrowth', method: 'type-surge', value: ['grass', 'rock'], method2: 'level-up', value2: 35}, // ancient-power
+        {base: 'yanma', species: 'yanmega', method: 'type-surge', value: ['bug', 'rock'], method2: 'level-up', value2: 35}, // ancient-power
+
+        {base: 'piloswine', species: 'mamoswine', method: 'type-surge', value: ['ice', 'ground', 'rock'], method2: 'level-up', value2: 53}, // ancient-power
+
+        {base: 'roselia', species: 'roserade', method: 'type-surge', value: ['grass', 'poison'], method2: 'level-up', value2: 35}, // shiny-stone
+        {base: 'togetic', species: 'togekiss', method: 'type-surge', value: ['fairy', 'flying'], method2: 'level-up', value2: 35}, // shiny-stone
+
+        {base: 'kirlia', species: 'gardevoir', method: 'level-up', value: 30, method2: 'type-appeal', value2: 'fairy', replace: true}, // natural
+        {base: 'kirlia', species: 'gallade', method: 'level-up', value: 30, method2: 'type-appeal', value2: 'fighting', method3: 'gender', value3: 'male'}, // dawn-stone
+
+        {base: 'snorunt', species: 'glalie', method: 'level-up', value: 42, method2: 'type-appeal', value2: 'ghost', replace: true}, // natural
+        {base: 'snorunt', species: 'froslass', method: 'level-up', value: 42, method2: 'type-appeal', value2: 'ghost', method3: 'gender', value3: 'female'}, // dawn-stone
+
+        {base: 'misdreavus', species: 'mismagius', method: 'type-appeal', value: ['ghost'], method2: 'level-up', value2: 20}, // dusk-stone
+        {base: 'murkrow', species: 'honchkrow', method: 'type-appeal', value: ['dark', 'flying'], method2: 'level-up', value2: 20}, // dusk-stone
+
+        {base: 'magneton', species: 'magnezone', method: 'type-surge', value: 'electric', method2: 'level-up', value2: 50}, // magnetic-field
+        {base: 'nosepass', species: 'probopass', method: 'type-surge', value: 'electric', method2: 'level-up', value2: 30}, // magnetic-field
+
+        {base: 'eevee', species: 'leafeon', method: 'type-appeal', value: 'grass', method2: 'level-up', value2: 20}, // moss-stone
+        {base: 'eevee', species: 'glaceon', method: 'type-appeal', value: 'ice', method2: 'level-up', value2: 20}, // icy-rock
+
+        {base: 'sneasel', species: 'weavile', method: 'type-surge', value: ['dark', 'ice'], method2: 'level-up', value2: 30}, // razor-claw
+        {base: 'gligar', species: 'gliscor', method: 'type-surge', value: ['ground', 'flying'], method2: 'level-up', value2: 30}, // razor-fang
+
+        {base: 'rhydon', species: 'rhyperior', method: 'type-surge', value: ['rock', 'ground'], method2: 'level-up', value2: 62}, // protector
+
+        {base: 'electabuzz', species: 'electivire', method: 'type-surge', value: 'electric', method2: 'level-up', value2: 50}, // electrizer
+        {base: 'magmar', species: 'magmortar', method: 'type-surge', value: 'fire', method2: 'level-up', value2: 50}, // magmarizer
+
+        {base: 'porygon2', species: 'porygon-z', method: 'type-surge', value: ['fire', 'ice', 'electric'], method2: 'level-up', value2: 64}, // dubious-disc
+
         ]);
 
 })();
