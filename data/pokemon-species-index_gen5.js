@@ -327,7 +327,9 @@
             nextEvolutions: [{
                 species: 'swoobat',
                 method: 'happiness',
-                value: 'high'
+                value: 'high',
+                method2: 'level-up',
+                value2: 25
                 }]
             },
         'swoobat': {
@@ -383,7 +385,9 @@
             nextEvolutions: [{
                 species: 'leavanny',
                 method: 'happiness',
-                value: 'high'
+                value: 'high',
+                method2: 'level-up',
+                value2: 40
                 }]
             },
         'leavanny': {
@@ -1190,11 +1194,11 @@
             eggGroups: ['amorphous'],
             prevEvolution: 'tynamo',
             nextEvolutions: [{
-                species: 'eelektross',
-                method: 'evolution-stone',
-                value: 'thunder-stone',
-                method2: 'type-surge',
-                value2: 'electric'
+                species: 'eelektross', // thunder-stone
+                method: 'type-surge',
+                value: 'electric',
+                method2: 'level-up',
+                value2: 59
                 }]
             },
         'eelektross': {
@@ -1282,11 +1286,11 @@
             eggGroups: ['amorphous'],
             prevEvolution: 'litwick',
             nextEvolutions: [{
-                species: 'chandelure',
-                method: 'evolution-stone',
-                value: 'dusk-stone',
+                species: 'chandelure', // dusk-stone
                 method2: 'type-surge',
-                value2: ['ghost', 'fire']
+                value2: ['ghost', 'fire'],
+                method2: 'level-up',
+                value2: 61
                 }]
             },
         'chandelure': {

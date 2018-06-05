@@ -1838,8 +1838,8 @@
 
         {base: 'porygon', species: 'porygon2', method: 'type-appeal', value: ['fire', 'ice', 'electric'], method2: 'level-up', value2: 27}, // upgrade
 
-        {base: 'golbat', species: 'crobat', method: 'happiness', value: 'max', method2: 'level-up', value2: 42},
-        {base: 'chansey', species: 'blissey', method: 'happiness', value: 'max', method2: 'level-up', value2: 45},
+        {base: 'golbat', species: 'crobat', method: 'happiness', value: 'max', method2: 'level-up', value2: 42}, // happiness
+        {base: 'chansey', species: 'blissey', method: 'happiness', value: 'max', method2: 'level-up', value2: 45}, // happiness
 
         ]);
 
