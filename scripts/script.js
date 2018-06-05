@@ -425,7 +425,8 @@
                                     var starterGender = starterInfo[1];
                                     if (appFreeMode
                                         || freeStarterPokemon.indexOf(starterToken) !== -1
-                                        || (typeof PokemonSpeciesSeen[starterToken] !== 'undefined'
+                                        || (BasicPokemonSpeciesIndexTokens.indexOf(starterToken) !== -1
+                                        && typeof PokemonSpeciesSeen[starterToken] !== 'undefined'
                                         && PokemonSpeciesSeen[starterToken].length > 0)){
                                         addPokemonToZone(starterToken, false, false, false, {gender:starterGender});
                                         }
