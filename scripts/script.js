@@ -423,7 +423,12 @@
                                     var starterInfo = seedPokemon[key];
                                     var starterToken = starterInfo[0];
                                     var starterGender = starterInfo[1];
-                                    addPokemonToZone(starterToken, false, false, false, {gender:starterGender});
+                                    if (appFreeMode
+                                        || freeStarterPokemon.indexOf(starterToken) !== -1
+                                        || (typeof PokemonSpeciesSeen[starterToken] !== 'undefined'
+                                        && PokemonSpeciesSeen[starterToken].length > 0)){
+                                        addPokemonToZone(starterToken, false, false, false, {gender:starterGender});
+                                        }
                                     }
                                 } else {
                                 alert('The provided seed was invalid.\n ' +
@@ -1254,6 +1259,7 @@
     }
 
     // Define a function for generating the simulator buttons for each Pokemon
+    var freeStarterPokemon = [];
     function generatePokemonButtons(){
 
         //console.log('generatePokemonButtons()');
@@ -1263,7 +1269,7 @@
         var seenSpeciesTokens = Object.keys(PokemonSpeciesSeen);
 
         // Define the pokemon allowed regardless of seen status, (starters for each gen)
-        var freeStarterPokemon = [];
+        freeStarterPokemon = [];
         freeStarterPokemon.push('bulbasaur', 'charmander', 'squirtle'); // gen 1 starters
         freeStarterPokemon.push('pikachu', 'eevee'); // special edition starters
         if (seenSpeciesTokens.length >= 151){ freeStarterPokemon.push('chikorita', 'cyndaquil', 'totodile'); } // gen 2 starters
