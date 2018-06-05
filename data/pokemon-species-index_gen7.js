@@ -319,11 +319,11 @@
             eggGroups: ['bug'],
             prevEvolution: 'grubbin',
             nextEvolutions: [{
-                species: 'vikavolt',
-                method: 'evolution-location',
-                value: 'magnetic-field',
-                method2: 'type-surge',
-                value2: 'electric'
+                species: 'vikavolt', // magnetic-laugh
+                method: 'type-surge',
+                value: 'electric',
+                method2: 'level-up',
+                value2: 40
                 }]
             },
         'vikavolt': {
@@ -356,11 +356,11 @@
             eggCycles: 20,
             eggGroups: ['water-3'],
             nextEvolutions: [{
-                species: 'crabominable',
-                method: 'evolution-location',
-                value: 'icy-rock',
-                method2: 'type-appeal',
-                value2: 'ice'
+                species: 'crabominable', // icy-rock
+                method: 'type-appeal',
+                value: 'ice',
+                method2: 'level-up',
+                value: 30
                 }]
             },
         'crabominable': {
@@ -927,16 +927,24 @@
             eggCycles: 20,
             eggGroups: ['field'],
             nextEvolutions: [{
-                species: 'alolan-sandslash',
-                method: 'evolution-stone',
-                value: 'ice-stone',
-                method2: 'type-appeal',
-                value2: ['ice', 'steel']
+                species: 'alolan-sandslash', // ice-stone
+                method: 'type-appeal',
+                value: ['ice', 'steel'],
+                method2: 'level-up',
+                value2: 20
                 }],
             altBaseEvolutions: [{
                 species: 'sandshrew',
                 method: 'type-warning',
                 value: 'ice'
+                },{
+                species: 'sandshrew',
+                method: 'type-warning',
+                value: 'steel'
+                },{
+                species: 'sandshrew',
+                method: 'type-appeal',
+                value: 'ground'
                 }]
             },
         'alolan-sandslash': {
@@ -976,16 +984,20 @@
             eggCycles: 20,
             eggGroups: ['field'],
             nextEvolutions: [{
-                species: 'alolan-ninetales',
-                method: 'evolution-stone',
-                value: 'ice-stone',
+                species: 'alolan-ninetales', // ice-stone
                 method2: 'type-appeal',
-                value2: ['ice', 'fairy']
+                value2: ['ice', 'fairy'],
+                method2: 'level-up',
+                value2: 20
                 }],
             altBaseEvolutions: [{
                 species: 'vulpix',
                 method: 'type-warning',
                 value: 'ice'
+                },{
+                species: 'vulpix',
+                method: 'type-appeal',
+                value: 'fire'
                 }]
             },
         'alolan-ninetales': {
@@ -1075,12 +1087,18 @@
             nextEvolutions: [{
                 species: 'alolan-persian',
                 method: 'happiness',
-                value: 'high'
+                value: 'high',
+                method2: 'level-up',
+                value2: 28
                 }],
             altBaseEvolutions: [{
                 species: 'meowth',
                 method: 'type-warning',
                 value: 'dark'
+                },{
+                species: 'meowth',
+                method: 'type-appeal',
+                value: 'normal'
                 }]
             },
         'alolan-persian': {
@@ -1127,6 +1145,10 @@
                 species: 'geodude',
                 method: 'type-warning',
                 value: 'electric'
+                },{
+                species: 'geodude',
+                method: 'type-appeal',
+                value: 'ground'
                 }]
             },
         'alolan-graveler': {
@@ -1147,8 +1169,10 @@
             eggGroups: ['mineral'],
             nextEvolutions: [{
                 species: 'alolan-golem',
-                method: 'trade',
-                value: 'auto'
+                method: 'trade-partner',
+                value: 'auto',
+                method2: 'level-up',
+                value2: 45
                 }],
             prevEvolution: 'alolan-geodude'
             },
@@ -1260,20 +1284,40 @@
 
     // Update previous gen pokemon with new next evolution data
     thisIndex.addNextEvolutions([
-        {base: 'pikachu', species: 'alolan-raichu', method: 'evolution-stone', value: 'thunder-stone', method2: 'type-appeal', value2: 'psychic'},
-        {base: 'exeggcute', species: 'alolan-exeggutor', method: 'evolution-stone', value: 'leaf-stone', method2: 'type-appeal', value2: ['grass', 'dragon']},
-        {base: 'cubone', species: 'alolan-marowak', method: 'level-up', value: 28, method2: 'type-appeal', value2: ['fire', 'ghost']},
+
+        {base: 'pikachu', species: 'raichu', method: 'type-appeal', value: 'electric', method2: 'level-up', value2: 20, replace: true}, // thunder-stone
+        {base: 'pikachu', species: 'alolan-raichu', method: 'type-appeal', value: 'psychic', method2: 'level-up', value2: 20}, // thunder-stone + alola-region
+
+        {base: 'exeggcute', species: 'exeggutor', method: 'type-appeal', value: 'psychic', method2: 'level-up', value2: 20, replace: true}, // leaf-stone
+        {base: 'exeggcute', species: 'alolan-exeggutor', method: 'type-appeal', value: 'dragon', method2: 'level-up', value2: 20}, // leaf-stone + alola-region
+
+        {base: 'cubone', species: 'alolan-marowak', method: 'level-up', value: 28, method2: 'type-appeal', value2: 'ground', replace: true}, // level-up
+        {base: 'cubone', species: 'alolan-marowak', method: 'level-up', value: 28, method2: 'type-appeal', value2: 'fire'}, // level-up + alola-region
+
         ]);
 
     // Update previous gen pokemon with alt base evolution data
     thisIndex.addAltBaseEvolutions([
+
         {base: 'rattata', species: 'alolan-rattata', method: 'type-appeal', value: 'dark'},
+
         {base: 'sandshrew', species: 'alolan-sandshrew', method: 'type-warning', value: 'ground'},
+        {base: 'sandshrew', species: 'alolan-sandshrew', method: 'type-appeal', value: 'ice'},
+        {base: 'sandshrew', species: 'alolan-sandshrew', method: 'type-appeal', value: 'steel'},
+
         {base: 'vulpix', species: 'alolan-vulpix', method: 'type-warning', value: 'fire'},
+        {base: 'vulpix', species: 'alolan-vulpix', method: 'type-appeal', value: 'ice'},
+
         {base: 'diglett', species: 'alolan-diglett', method: 'type-appeal', value: 'steel'},
+
+        {base: 'meowth', species: 'alolan-meowth', method: 'type-warning', value: 'normal'},
         {base: 'meowth', species: 'alolan-meowth', method: 'type-appeal', value: 'dark'},
+
         {base: 'geodude', species: 'alolan-geodude', method: 'type-warning', value: 'ground'},
+        {base: 'geodude', species: 'alolan-geodude', method: 'type-appeal', value: 'electric'},
+
         {base: 'grimer', species: 'alolan-grimer', method: 'type-appeal', value: 'dark'},
+
         ]);
 
 })();
