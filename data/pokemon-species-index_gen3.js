@@ -2273,5 +2273,6 @@
         {base: 'marill', species: 'azurill'},
         {base: 'wobbuffet', species: 'wynaut'},
         ]);
+  
 
 })();
