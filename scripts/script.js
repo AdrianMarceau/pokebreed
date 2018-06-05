@@ -894,6 +894,7 @@
 
         // Reset the global randomization seed
         Math.seed = 1;
+        //console.log('\n Math.seed reset to ', Math.seed);
 
         // Update the overiew with cleared data
         updateOverview();
@@ -935,12 +936,16 @@
 
         // Collect the last set of starters used and then use them again
         var prevStarters = StarterPokemonHistory[StarterPokemonHistory.length - 1];
+        //console.log('prevStarters = ', prevStarters);
         if (typeof prevStarters !== 'undefined'){
             for (var key = 0; key < prevStarters.length; key++){
                 var starterInfo = prevStarters[key];
                 var starterToken = starterInfo[0];
                 var starterGender = starterInfo[1];
-                addPokemonToZone(starterToken, false, false, {gender:starterGender});
+                //console.log('starterInfo = ', starterInfo);
+                //console.log('starterToken = ', starterInfo);
+                //console.log('starterGender = ', starterInfo);
+                addPokemonToZone(starterToken, false, false, false, {gender:starterGender});
                 }
             }
 
@@ -1551,7 +1556,8 @@
 
         // Calculate this pokemon's gender based on ratios
         var pokeGender = 'none';
-        if (!indexData.hasNoGender){
+        if (typeof customData.gender === 'undefined'
+            && !indexData.hasNoGender){
             if (indexData.genderRatio.male === 0.5
                 && indexData.genderRatio.female === 0.5){
                 pokeGender = addedPokemonSpecies[pokemonToken] % 2 !== 0 ? 'female' : 'male';
@@ -2640,11 +2646,12 @@
         // If this is the very first day, let's update our random seed
         if (thisZoneData.day === 1){
             Math.seed = 1;
+            //console.log('\n Math.seed reset to ', Math.seed);
             for (var i = 0; i < thisZoneData.currentPokemon.length; i++){
                 var pokeToken = thisZoneData.currentPokemon[i].token;
                 Math.seed += PokemonSpeciesIndex[pokeToken].number;
                 }
-            //console.log('\nSTART SEED = '+Math.seed);
+            //console.log('|- Starter-adjusted Math.seed is ', Math.seed);
             }
         //var randomNumber = Math.seededRandom(0, 100);
         //console.log('Day #'+thisZoneData.day);
@@ -4297,6 +4304,7 @@
 
     // Update the math object with a seeded random functon
     Math.seed = 1;
+    //console.log('\n Math.seed set to ', Math.seed);
     Math.seededRandom = function(min, max){
         min = min || 0;
         max = max || 1;
