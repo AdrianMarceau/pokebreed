@@ -2091,7 +2091,6 @@
             colors: ['gray', 'yellow'],
             prevo: 'rhyhorn',
             evos: ['rhyperior'],
-            evoLevel: 42,
             eggCycles: 20,
             eggGroups: ['monster', 'field'],
             prevEvolution: 'rhyhorn',

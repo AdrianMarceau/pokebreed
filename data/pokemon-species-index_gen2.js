@@ -1836,7 +1836,7 @@
         {base: 'onix', species: 'steelix', method: 'type-appeal', value: 'steel', method2: 'level-up', value2: 30}, // metal-coat
         {base: 'scyther', species: 'scizor', method: 'type-appeal', value: 'steel', method2: 'level-up', value2: 30}, // metal-coat
 
-        {base: 'porygon', species: 'porygon2', method: 'type-appeal', value: 'normal', method2: 'level-up', value2: 27}, // upgrade
+        {base: 'porygon', species: 'porygon2', method: 'type-appeal', value: ['fire', 'ice', 'electric'], method2: 'level-up', value2: 27}, // upgrade
 
         {base: 'golbat', species: 'crobat', method: 'happiness', value: 'max', method2: 'level-up', value2: 42},
         {base: 'chansey', species: 'blissey', method: 'happiness', value: 'max', method2: 'level-up', value2: 45},
