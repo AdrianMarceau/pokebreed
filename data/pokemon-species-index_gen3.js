@@ -394,11 +394,11 @@
             eggGroups: ['water-1', 'grass'],
             prevEvolution: 'lotad',
             nextEvolutions: [{
-                species: 'ludicolo',
-                method: 'evolution-stone',
-                value: 'water-stone',
-                method2: 'type-appeal',
-                value2: ['water', 'grass']
+                species: 'ludicolo', // water-stone
+                method: 'type-appeal',
+                value: ['water', 'grass'],
+                method2: 'level-up',
+                value2: 34
                 }]
             },
         'ludicolo': {
@@ -451,11 +451,11 @@
             eggGroups: ['field', 'grass'],
             prevEvolution: 'seedot',
             nextEvolutions: [{
-                species: 'shiftry',
-                method: 'evolution-stone',
-                value: 'leaf-stone',
-                method2: 'type-appeal',
-                value2: ['grass', 'dark']
+                species: 'shiftry', // leaf-stone
+                method: 'type-appeal',
+                value: ['grass', 'dark'],
+                method2: 'level-up',
+                value2: 34
                 }]
             },
         'shiftry': {
@@ -890,7 +890,9 @@
             nextEvolutions: [{
                 species: 'marill',
                 method: 'happiness',
-                value: 'high'
+                value: 'high',
+                method2: 'level-up',
+                value2: 15
                 }]
             },
 
@@ -924,11 +926,11 @@
             eggCycles: 15,
             eggGroups: ['field', 'fairy'],
             nextEvolutions: [{
-                species: 'delcatty',
-                method: 'evolution-stone',
-                value: 'moon-stone',
-                method2: 'type-appeal',
-                value2: 'normal'
+                species: 'delcatty', // moon-stone
+                method: 'type-appeal',
+                value: 'normal',
+                method2: 'level-up',
+                value2: 20
                 }]
             },
         'delcatty': {
