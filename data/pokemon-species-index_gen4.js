@@ -423,7 +423,7 @@
             abilities: {0: 'sturdy', hidden: 'soundproof'},
             height: 0.5,
             weight: 57,
-            color: ['gray', 'white', 'yellow'],
+            colors: ['gray', 'white', 'yellow'],
             eggCycles: 30,
             eggGroups: ['monster'],
             nextEvolutions: [{
@@ -443,7 +443,7 @@
             abilities: {0: 'sturdy', hidden: 'soundproof'},
             height: 1.3,
             weight: 149.5,
-            color: ['gray', 'white', 'yellow', 'black'],
+            colors: ['gray', 'white', 'yellow', 'black'],
             eggCycles: 30,
             eggGroups: ['monster'],
             prevEvolution: 'shieldon'
