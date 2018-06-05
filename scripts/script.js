@@ -3982,31 +3982,6 @@
         return maxEvolution !== false && maxEvolution.length ? true : false;
     }
 
-    // Define a function with an index of evo stones by type
-    function getEvoStoneType(evoStone){
-
-        if (evoStone === 'fire-stone'){ return 'fire'; }
-        else if (evoStone === 'water-stone'){ return 'water'; }
-        else if (evoStone === 'thunder-stone'){ return 'electric'; }
-        else if (evoStone === 'leaf-stone'){ return 'grass'; }
-        else if (evoStone === 'ice-stone'){ return 'ice'; }
-
-        else if (evoStone === 'moss-rock'){ return 'grass'; }
-        else if (evoStone === 'icy-rock'){ return 'ice'; }
-
-            else if (evoStone === 'sun-stone'){ return 'fire'; }
-            else if (evoStone === 'moon-stone'){ return 'normal'; }
-
-            else if (evoStone === 'dawn-stone'){ return 'psychic'; }
-            else if (evoStone === 'dusk-stone'){ return 'dark'; }
-
-            else if (evoStone === 'shiny-stone'){ return 'fairy'; }
-
-            else if (evoStone === 'magnetic-field'){ return 'electric'; }
-
-        else { return false; }
-    }
-
     // Define a function for sorting species token by index order
     function sortSpeciesTokensByOrder(speciesTokens, reverseOrder){
         speciesTokens.sort(function(tokenA, tokenB){
