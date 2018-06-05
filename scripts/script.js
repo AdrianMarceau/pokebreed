@@ -2965,29 +2965,24 @@
                             if (returnValue > 0){ return returnValue; }
                             }
 
+                        // Trade-based evolutions trigger if this there's a same-species partner on field
+                        if (methodToken === 'trade-partner'
+                            && typeof thisZoneData.currentStats['species'][pokemonInfo.token] !== 'undefined'
+                            && thisZoneData.currentStats['species'][pokemonInfo.token] > 0){
+                            return 100 + thisZoneData.currentStats['species'][partnerToken];
+                            }
+
                         // Species-based evolutions trigger if the other species is active on the field
                         if (methodToken === 'evolution-species'
                             && typeof thisZoneData.currentStats['species'][methodValue] !== 'undefined'
                             && thisZoneData.currentStats['species'][methodValue] > 0){
-                            return 1 + thisZoneData.currentStats['species'][methodValue];
-                            }
-
-                        // Trade-based evolutions trigger only when there's an even number of this exact species active
-                        if (methodToken === 'trade'
-                            && allowTradeEvolution){
-                            return 1 + Math.min(29, (pokemonInfo.growthCycles - 20));
-                            }
-
-                        // Chance-based evolutions are triggered by random simulator values
-                        if (methodToken === 'chance'
-                            && (chanceValue < methodValue)){
-                            return 1 + Math.ceil(100 - chanceValue);
+                            return 100 + thisZoneData.currentStats['species'][methodValue];
                             }
 
                         // Extinction-based evolutions trigger when this pokemon is the last  of its species
                         if ((methodToken === 'extinction')
                             && numRelatedPokemon == 1){
-                            return 1 + ((thisZoneData.currentPokemon.length - 1) * 10);
+                            return 100;
                             }
 
                         // Gender-based evolutions are triggered immediately if the pokemon is of a specific sex
@@ -3005,6 +3000,12 @@
                         // Season-based evolutions are triggered immediately if the current season is a match
                         if (methodToken === 'season'
                             && thisZoneData.season === methodValue){
+                            return 100;
+                            }
+
+                        // Chance-based evolutions are triggered by random simulator values
+                        if (methodToken === 'chance'
+                            && (chanceValue < methodValue)){
                             return 100;
                             }
 
