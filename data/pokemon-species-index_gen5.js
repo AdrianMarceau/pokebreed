@@ -555,6 +555,63 @@
             prevEvolution: 'krokorok'
             },
 
+        'darumaka': {
+            order: indexOrder++,
+            token: 'darumaka',
+            name: 'Darumaka',
+            number: 554,
+            types: ['fire'],
+            baseStats: {hp: 70, phAttack: 90, phDefense: 45, spAttack: 15, spDefense: 45, speed: 50},
+            abilities: {0: 'hustle', hidden: 'inner-focus'},
+            height: 0.6,
+            weight: 37.5,
+            colors: ['red', 'yellow', 'orange', 'white'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'darmanitan',
+                method: 'level-up',
+                value: 35
+                }]
+            },
+        'darmanitan': {
+            order: indexOrder++,
+            token: 'darmanitan',
+            name: 'Darmanitan',
+            number: 555,
+            types: ['fire'],
+            baseStats: {hp: 105, phAttack: 140, phDefense: 55, spAttack: 30, spDefense: 55, speed: 95},
+            abilities: {0: 'sheer-force', hidden: 'zen-mode'},
+            height: 1.3,
+            weight: 92.9,
+            colors: ['red', 'orange', 'white', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'darumaka',
+            nextEvolutions: [{
+                species: 'zen-darmanitan',
+                method: 'burst-evolution',
+                value: 'zen-mode'
+                }]
+            },
+        'zen-darmanitan': {
+            order: indexOrder++,
+            token: 'zen-darmanitan',
+            name: 'Zen Darmanitan',
+            formClass: 'burst-evolution',
+            formToken: 'zen',
+            number: 555,
+            types: ['fire', 'psychic'],
+            baseStats: {hp: 105, phAttack: 30, phDefense: 105, spAttack: 140, spDefense: 105, speed: 55},
+            abilities: {0: 'zen-mode'},
+            height: 1.3,
+            weight: 92.9,
+            colors: ['blue', 'yellow', 'white'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'darmanitan'
+            },
+
         'dwebble': {
             order: indexOrder++,
             token: 'dwebble',
