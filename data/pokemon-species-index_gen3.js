@@ -1808,6 +1808,91 @@
             prevEvolution: 'feebas'
             },
 
+        'castform': {
+            order: indexOrder++,
+            token: 'castform',
+            name: 'Castform',
+            number: 351,
+            types: ['normal'],
+            baseStats: {hp: 70, phAttack: 70, phDefense: 70, spAttack: 70, spDefense: 70, speed: 70},
+            abilities: {0: 'forecast'},
+            height: 0.3,
+            weight: 0.8,
+            colors: ['gray', 'white', 'black'],
+            eggCycles: 25,
+            eggGroups: ['fairy', 'amorphous'],
+            nextEvolutions: [{
+                species: 'sunny-castform',
+                method: 'type-appeal',
+                value: 'fire'
+                }, {
+                species: 'rainy-castform',
+                method: 'type-appeal',
+                value: 'water'
+                }, {
+                species: 'snowy-castform',
+                method: 'type-appeal',
+                value: 'ice'
+                }]
+            },
+        'sunny-castform': {
+            order: indexOrder++,
+            token: 'sunny-castform',
+            name: 'Sunny Castform',
+            formClass: 'type-variant',
+            formToken: 'sunny',
+            baseForm: 'castform',
+            number: 351,
+            types: ['fire'],
+            baseStats: {hp: 70, phAttack: 70, phDefense: 70, spAttack: 70, spDefense: 70, speed: 70},
+            abilities: {0: 'forecast'},
+            height: 0.3,
+            weight: 0.8,
+            colors: ['red', 'orange', 'yellow', 'white', 'black'],
+            eggCycles: 25,
+            eggGroups: ['fairy', 'amorphous'],
+            prevEvolution: 'castform',
+            cloneEvolutions: 'castform'
+            },
+        'rainy-castform': {
+            order: indexOrder++,
+            token: 'rainy-castform',
+            name: 'Rainy Castform',
+            formClass: 'type-variant',
+            formToken: 'rainy',
+            baseForm: 'castform',
+            number: 351,
+            types: ['water'],
+            baseStats: {hp: 70, phAttack: 70, phDefense: 70, spAttack: 70, spDefense: 70, speed: 70},
+            abilities: {0: 'forecast'},
+            height: 0.3,
+            weight: 0.8,
+            colors: ['blue', 'gray', 'black'],
+            eggCycles: 25,
+            eggGroups: ['fairy', 'amorphous'],
+            prevEvolution: 'castform',
+            cloneEvolutions: 'castform'
+            },
+        'snowy-castform': {
+            order: indexOrder++,
+            token: 'snowy-castform',
+            name: 'Snowy Castform',
+            formClass: 'type-variant',
+            formToken: 'snowy',
+            baseForm: 'castform',
+            number: 351,
+            types: ['ice'],
+            baseStats: {hp: 70, phAttack: 70, phDefense: 70, spAttack: 70, spDefense: 70, speed: 70},
+            abilities: {0: 'forecast'},
+            height: 0.3,
+            weight: 0.8,
+            colors: ['purple', 'green', 'black'],
+            eggCycles: 25,
+            eggGroups: ['fairy', 'amorphous'],
+            prevEvolution: 'castform',
+            cloneEvolutions: 'castform'
+            },
+
         'kecleon': {
             order: indexOrder++,
             token: 'kecleon',
@@ -2355,6 +2440,6 @@
         {base: 'marill', species: 'azurill'},
         {base: 'wobbuffet', species: 'wynaut'},
         ]);
-  
+
 
 })();
