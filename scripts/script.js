@@ -593,6 +593,13 @@
                 indexInfo.baseEvolution = pokemonGetBaseEvolution(indexInfo.token, true, false);
                 indexInfo.basicEvolution = pokemonGetBasicEvolution(indexInfo.token, false, false);
 
+                // If this pokemon's evolutions are a clone of another, reference that here
+                if (typeof indexInfo.cloneEvolutions !== 'undefined'
+                    && typeof PokemonSpeciesIndex[indexInfo.cloneEvolutions] !== 'undefined'
+                    && typeof PokemonSpeciesIndex[indexInfo.cloneEvolutions].nextEvolutions !== 'undefined'){
+                        indexInfo.nextEvolutions = PokemonSpeciesIndex[indexInfo.cloneEvolutions].nextEvolutions;
+                    }
+
                 // Collect tokens for all related pokemon and add here
                 indexInfo.relatedSpecies = getRelatedSpeciesTokens(indexInfo.token);
 
