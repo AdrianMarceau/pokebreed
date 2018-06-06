@@ -919,6 +919,41 @@
             eggGroups: ['field']
             },
 
+        'foongus': {
+            order: indexOrder++,
+            token: 'foongus',
+            name: 'Foongus',
+            number: 590,
+            types: ['grass', 'poison'],
+            baseStats: {hp: 69, phAttack: 55, phDefense: 45, spAttack: 55, spDefense: 55, speed: 15},
+            abilities: {0: 'effect-spore', hidden: 'regenerator'},
+            height: 0.2,
+            weight: 1,
+            colors: ['white', 'red', 'black', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['grass'],
+            nextEvolutions: [{
+                species: 'amoonguss',
+                method: 'level-up',
+                value: 39
+                }]
+            },
+        'amoonguss': {
+            order: indexOrder++,
+            token: 'amoonguss',
+            name: 'Amoonguss',
+            number: 591,
+            types: ['grass', 'poison'],
+            baseStats: {hp: 114, phAttack: 85, phDefense: 70, spAttack: 85, spDefense: 80, speed: 30},
+            abilities: {0: 'effect-spore', hidden: 'regenerator'},
+            height: 0.6,
+            weight: 10.5,
+            colors: ['gray', 'pink', 'black', 'white'],
+            eggCycles: 20,
+            eggGroups: ['grass'],
+            prevEvolution: 'foongus'
+            },
+
         'frillish-m': {
             order: indexOrder++,
             token: 'frillish-m',
