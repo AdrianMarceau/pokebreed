@@ -416,7 +416,6 @@
         {base: 'dusknoir', species: 'yamask'},
         {base: 'dusknoir', species: 'froslass'},
         {base: 'luvdisc', species: 'corsola'},
-        {base: 'luvdisc', species: 'alomomola'},
         {base: 'alomomola', species: 'luvdisc'},
         {base: 'plusle', species: 'minun'},
         {base: 'minun', species: 'plusle'},
