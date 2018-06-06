@@ -1473,8 +1473,8 @@
             prevEvolution: 'litwick',
             nextEvolutions: [{
                 species: 'chandelure', // dusk-stone
-                method2: 'type-surge',
-                value2: ['ghost', 'fire'],
+                method: 'type-surge',
+                value: ['ghost', 'fire'],
                 method2: 'level-up',
                 value2: 61
                 }]

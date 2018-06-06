@@ -238,8 +238,8 @@
             prevEvolution: 'flabebe',
             nextEvolutions: [{
                 species: 'florges', // shiny-stone
-                method2: 'type-appeal',
-                value2: 'fairy',
+                method: 'type-appeal',
+                value: 'fairy',
                 method2: 'level-up',
                 value2: 39
                 }]
@@ -545,8 +545,8 @@
             prevEvolution: 'honedge',
             nextEvolutions: [{
                 species: 'aegislash', // dusk-stone
-                method2: 'type-surge',
-                value2: ['steel', 'ghost'],
+                method: 'type-surge',
+                value: ['steel', 'ghost'],
                 method2: 'level-up',
                 value2: 55
                 }]
@@ -582,8 +582,8 @@
             eggGroups: ['fairy'],
             nextEvolutions: [{
                 species: 'aromatisse', // sachet
-                method2: 'type-appeal',
-                value2: 'fairy',
+                method: 'type-appeal',
+                value: 'fairy',
                 method2: 'level-up',
                 value2: 30
                 }]
@@ -619,8 +619,8 @@
             eggGroups: ['fairy'],
             nextEvolutions: [{
                 species: 'slurpuff', // whipped-dream
-                method2: 'type-appeal',
-                value2: 'fairy',
+                method: 'type-appeal',
+                value: 'fairy',
                 method2: 'level-up',
                 value2: 30
                 }]

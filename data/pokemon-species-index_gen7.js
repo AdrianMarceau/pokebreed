@@ -985,8 +985,8 @@
             eggGroups: ['field'],
             nextEvolutions: [{
                 species: 'alolan-ninetales', // ice-stone
-                method2: 'type-appeal',
-                value2: ['ice', 'fairy'],
+                method: 'type-appeal',
+                value: ['ice', 'fairy'],
                 method2: 'level-up',
                 value2: 20
                 }],

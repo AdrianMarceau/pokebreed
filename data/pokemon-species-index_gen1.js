@@ -2229,8 +2229,8 @@
             eggGroups: ['water-3'],
             nextEvolutions: [{
                 species: 'starmie', // water-stone
-                method2: 'type-appeal',
-                value2: ['water', 'psychic'],
+                method: 'type-appeal',
+                value: ['water', 'psychic'],
                 method2: 'level-up',
                 value2: 20
                 }]
