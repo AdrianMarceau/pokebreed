@@ -1415,7 +1415,7 @@
                 // Update the shown gens and types lists
                 if (shownGens.indexOf(pokemonData.gameGeneration) === -1){ shownGens.push(pokemonData.gameGeneration); }
                 if (shownTypes.indexOf(pokemonData.types[0]) === -1){ shownTypes.push(pokemonData.types[0]); }
-                if (typeof pokemonTypes[1] !== 'undefined' && shownTypes.indexOf(pokemonData.types[0]) === -1){ shownTypes.push(pokemonData.types[0]); }
+                if (typeof pokemonTypes[1] !== 'undefined' && shownTypes.indexOf(pokemonData.types[1]) === -1){ shownTypes.push(pokemonData.types[1]); }
 
                 // Generate the markup for the pokemon button
                 var buttonMarkup = '';
@@ -1494,8 +1494,8 @@
                 return false;
                 });
 
-            //console.log('shownGens = ', shownGens);
-            //console.log('shownTypes = ', shownTypes);
+            console.log('shownGens = ', shownGens);
+            console.log('shownTypes = ', shownTypes);
 
             // Reset the button panel selections to "all" values
             $pokePanelFilters.find('.filter .option.active').removeClass('active');
