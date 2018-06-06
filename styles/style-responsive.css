@@ -86,6 +86,11 @@
         width: calc((100% / 14) - 5px);
     }
 
+    .panel .buttons .filter-pokemon .filter {
+        clear: left;
+        margin-top: 5px;
+    }
+
 }
 @media (max-width: 800px){
     .bp1:before { content: "a6";  }
@@ -142,6 +147,42 @@
 
     .panel .buttons .info .group.pokedex .list li {
         width: calc((100% / 10) - 5px);
+    }
+
+    .panel .buttons .filter-pokemon .filter .label {
+        float: none;
+        clear: both;
+        text-align: center;
+        width: auto;
+    }
+    .panel .buttons .filter-pokemon .title {
+        display: none;
+    }
+    .panel .buttons .filter-pokemon .filter.generations,
+    .panel .buttons .filter-pokemon .filter.types {
+        text-align: center;
+        width: 100%;
+    }
+    .panel .buttons .filter-pokemon .filter.generations .options .option,
+    .panel .buttons .filter-pokemon .filter.generations .options .option[data-gen="all"] {
+        width: calc(100% / 8);
+    }
+    .panel .buttons .filter-pokemon .filter.types .options .option {
+        width: calc(100% / 10);
+        border-bottom-width: 1px;
+    }
+    .panel .buttons .filter-pokemon .filter.types .options .option[data-type="all"] {
+        width: calc((100% / 10) * 2);
+    }
+    .panel .buttons .filter-pokemon .filter .options .option:first-child {
+        -moz-border-radius: 0 0 0 3px;
+        -webkit-border-radius: 0 0 0 3px;
+        border-radius: 0 0 0 3px;
+    }
+    .panel .buttons .filter-pokemon .filter .options .option:last-child {
+        -moz-border-radius: 0 0 3px 0;
+        -webkit-border-radius: 0 0 3px 0;
+        border-radius: 0 0 3px 0;
     }
 
 }

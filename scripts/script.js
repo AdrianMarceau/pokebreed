@@ -60,6 +60,8 @@
 
     var thisZoneHistory = [];
 
+    var currentButtonFilters = {};
+
     var thisDeviceWidth = 0;
 
 
@@ -151,6 +153,7 @@
         $panelOverviewFloatLists = $('.overview.floatlist', $panelDiv);
         $panelPokemonSpriteWrapper = $('.details.pokemon .list.pokemon', $panelMainOverview);
         $panelButtons = $('> .buttons', $panelDiv);
+        $pokePanelFilters = $panelButtons.find('.filter-pokemon');
         $pokePanelButtons = $panelButtons.find('.select-pokemon');
         $pokePanelLoading = $pokePanelButtons.find('.loading');
 
@@ -462,6 +465,67 @@
         // Generate a live button event for any pokemon added to the zone
         var $pokeList = $('.details.pokemon .wrap .list.pokemon', $panelMainOverview);
         $pokeList.on('click', 'li[data-id]', zonePokemonClickEvent);
+
+        // Generate events for the select-pokemon filters
+        //$pokePanelFilters
+        //$pokePanelButtons
+        var $filterDivs = $('.filter[data-filter]', $pokePanelFilters);
+        //console.log('$filterDivs.length = ', $filterDivs.length);
+        $filterDivs.each(function(){
+            var $filterDiv = $(this);
+            var filterKind = $filterDiv.attr('data-filter');
+            var $filterOptions = $filterDiv.find('.option[data-'+ filterKind +']');
+            var $activeFilter = $filterOptions.find('.option.active');
+            currentButtonFilters[filterKind] = $activeFilter.length ? $activeFilter.attr('data-data-'+ filterKind) : 'all';
+            //console.log('filterKind = ', filterKind);
+            //console.log('$filterOptions.length = ', $filterOptions.length);
+            //console.log('currentButtonFilters['+ filterKind +'] = ', currentButtonFilters[filterKind]);
+            $filterOptions.bind('click', function(){
+                var $optionLink = $(this);
+                var optionValue = $optionLink.attr('data-'+ filterKind);
+                if (filterKind === 'gen' && optionValue !== 'all'){ optionValue = parseInt(optionValue); }
+                currentButtonFilters[filterKind] = optionValue;
+                //console.log('filterKind = ', filterKind);
+                //console.log('optionValue = ', optionValue);
+                //console.log('currentButtonFilters = ', currentButtonFilters);
+                $filterOptions.removeClass('active');
+                $optionLink.addClass('active');
+                if (currentButtonFilters['gen'] === 'all'
+                    && currentButtonFilters['type'] === 'all'){
+                    $pokePanelButtons.find('.breaker').removeClass('hidden');
+                    } else {
+                    $pokePanelButtons.find('.breaker').addClass('hidden');
+                    }
+                $pokePanelButtons.find('.button[data-'+ filterKind +']').addClass('hidden');
+                var currentButtonFiltersKeys = Object.keys(currentButtonFilters);
+                $pokePanelButtons.find('.button[data-'+ filterKind +']').each(function(){
+                    var $button = $(this);
+                    //console.log('\nCheck ' + $button.attr('data-token') + ' for matches...', currentButtonFilters);
+                    var isMatch = true;
+                    for (var i = 0; i < currentButtonFiltersKeys.length; i++){
+                        var filterKey = currentButtonFiltersKeys[i];
+                        var currentValue = currentButtonFilters[filterKey];
+                        if (currentValue === 'all'){ continue; }
+                        var thisValue = $button.attr('data-'+filterKey);
+                        //console.log('|- Does ' + filterKey + ' match current value ' + currentValue + ' ? thisValue = ', thisValue);
+                        if (filterKey === 'gen'){
+                            thisValue = parseInt(thisValue);
+                            if (thisValue !== currentValue){ isMatch = false; break; }
+                            } else if (filterKey === 'type'){
+                            thisValue = thisValue.split(',');
+                            if (thisValue.indexOf(currentValue) === -1){ isMatch = false; break; }
+                            }
+                        }
+                    if (isMatch){ $button.removeClass('hidden'); }
+                    });
+                $pokePanelButtons.find('.buttonwrap').perfectScrollbar('update');
+                });
+
+
+            });
+
+
+
 
     }
 
@@ -825,6 +889,11 @@
 
         // Remove the hidden class from the pokemon wrapper
         $('.select-pokemon', $panelButtons).addClass('hidden');
+        $('.filter-pokemon', $panelButtons).addClass('hidden');
+
+        // Reset any filters back to the "all" option
+        $('.filter-pokemon .option', $panelButtons).removeClass('.active');
+        $('.filter-pokemon .option:first-child', $panelButtons).addClass('.active');
 
         // Update the box details header, unhide the details info bar
         $('.details.zone .title', $panelMainOverview).html('Box Details');
@@ -963,6 +1032,7 @@
 
         // Show the pokemon buttons
         $('.select-pokemon', $panelButtons).removeClass('hidden');
+        $('.filter-pokemon', $panelButtons).removeClass('hidden');
         $('.controls .start', $panelButtons).removeClass('hidden').removeClass('ready');
 
         // Hide the details info bar
@@ -1014,6 +1084,7 @@
 
         // Show the pokemon buttons
         $('.select-pokemon', $panelButtons).removeClass('hidden');
+        $('.filter-pokemon', $panelButtons).removeClass('hidden');
         $('.controls .start', $panelButtons).removeClass('hidden').removeClass('ready');
 
         // Hide the starter pokemon from last time, we're starting fresh
@@ -1285,6 +1356,10 @@
         // Wrap execution in timeout to prevent render-blocking
         window.setTimeout(function(){
 
+            // Define variables to hold gens and types being shown
+            var shownGens = [];
+            var shownTypes = [];
+
             // Loop through and generate buttons for each Pokemon
             var lastGeneration = false;
             var pokePanelMarkup = '';
@@ -1337,6 +1412,11 @@
                 if (typeof pokemonTypes[0] === 'string'){ buttonClass += pokemonTypes[0]+' '; }
                 if (typeof pokemonTypes[1] === 'string'){ buttonClass += pokemonTypes[1]+'2 '; }
 
+                // Update the shown gens and types lists
+                if (shownGens.indexOf(pokemonData.gameGeneration) === -1){ shownGens.push(pokemonData.gameGeneration); }
+                if (shownTypes.indexOf(pokemonData.types[0]) === -1){ shownTypes.push(pokemonData.types[0]); }
+                if (typeof pokemonTypes[1] !== 'undefined' && shownTypes.indexOf(pokemonData.types[0]) === -1){ shownTypes.push(pokemonData.types[0]); }
+
                 // Generate the markup for the pokemon button
                 var buttonMarkup = '';
                 buttonMarkup += '<button '+
@@ -1344,6 +1424,8 @@
                     'data-action="add" '+
                     'data-kind="pokemon" '+
                     'data-token="'+ pokemonToken +'" '+
+                    'data-gen="'+ pokemonData.gameGeneration +'" '+
+                    'data-type="'+ pokemonData.types.join(',') +'" '+
                     'title="'+ pokemonName +'" '+
                     '>';
                     buttonMarkup += '<span class="gloss"></span>';
@@ -1411,6 +1493,31 @@
                     }
                 return false;
                 });
+
+            //console.log('shownGens = ', shownGens);
+            //console.log('shownTypes = ', shownTypes);
+
+            // Reset the button panel selections to "all" values
+            $pokePanelFilters.find('.filter .option.active').removeClass('active');
+            $pokePanelFilters.find('.filter .option:first-child').addClass('active');
+            currentButtonFilters['gen'] = 'all';
+            currentButtonFilters['type'] = 'all';
+
+            // Hide any options were are not currently represented
+            $pokePanelFilters.find('.filter .option.disabled').removeClass('disabled');
+            $pokePanelFilters.find('.filter.generations .option:not([data-gen="all"])').each(function(){
+                $option = $(this);
+                var thisGen = parseInt($option.attr('data-gen'));
+                if (shownGens.indexOf(thisGen) === -1){ $option.addClass('disabled'); }
+                });
+            $pokePanelFilters.find('.filter.types .option:not([data-type="all"])').each(function(){
+                $option = $(this);
+                var thisType = $option.attr('data-type');
+                if (shownTypes.indexOf(thisType) === -1){ $option.addClass('disabled'); }
+                });
+
+            // We're ready to show the filter panel now too
+            $pokePanelFilters.removeClass('hidden');
 
 
             }, 0);

@@ -1435,6 +1435,160 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     opacity: 0;
 }
 
+
+.panel .buttons .filter-pokemon {
+    display: block;
+    margin: 5px auto;
+    padding: 5px;
+    overflow: visible;
+    color: #FFFFFF;
+    font-size: 12px;
+    line-height: 20px;
+
+    height: 0;
+    height: auto;
+}
+.panel .buttons .filter-pokemon * {
+    box-sizing: border-box;
+}
+
+.panel .buttons .filter-pokemon .wrap {
+    display: block;
+    width: 100%;
+    height: ;
+}
+.panel .buttons .filter-pokemon .title {
+    display: block;
+    float: left;
+    text-align: left;
+    width: 65px;
+    padding: 3px 3px 3px 12px;
+    font-weight: bold;
+    margin: 0 6px 0 0;
+    background-color: #2f2f32;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+.panel .buttons .filter-pokemon .filter {
+    display: block;
+    float: left;
+    text-align: center;
+    width: auto;
+    margin: 0 6px 0 0;
+    padding: 0;
+    background-color: #37373a;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    overflow: hidden;
+    -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+.panel .buttons .filter-pokemon .filter .label {
+    display: block;
+    float: left;
+    text-align: left;
+    background-color: #2c2c30;
+    width: 45px;
+    padding: 3px 3px 3px 9px;
+    font-weight: bold;
+}
+.panel .buttons .filter-pokemon .filter .options {
+    margin: 0 auto;
+}
+.panel .buttons .filter-pokemon .filter .options .option {
+    display: block;
+    float: left;
+    text-align: center;
+    width: auto;
+    padding: 3px;
+    font-weight: normal;
+    background-color: #313135;
+    border-color: #37373a;
+    border-style: solid;
+    border-width: 0 0 0 1px;
+    color: #EFEFEF;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+.panel .buttons .filter-pokemon .filter .options .label:first-child {
+    -moz-border-radius: 3px 0 0 3px;
+    -webkit-border-radius: 3px 0 0 3px;
+    border-radius: 3px 0 0 3px;
+}
+.panel .buttons .filter-pokemon .filter .options .option:last-child {
+    -moz-border-radius: 0 3px 3px 0;
+    -webkit-border-radius: 0 3px 3px 0;
+    border-radius: 0 3px 3px 0;
+}
+.panel .buttons .filter-pokemon .filter .options .option img {
+    display: block;
+    margin: 0 auto;
+    height: 20px;
+    width: 20px;
+    opacity: 0.9;
+    filter: brightness(0.6);
+    transition: opacity 0.2s, filter 0.2s;
+}
+.panel .buttons .filter-pokemon .filter .options .option:hover,
+.panel .buttons .filter-pokemon .filter .options .option.active {
+    background-color: #4F4F4F;
+    color: #FFFFFF;
+}
+.panel .buttons .filter-pokemon .filter .options .option:hover img,
+.panel .buttons .filter-pokemon .filter .options .option.active img {
+    opacity: 1.0;
+    filter: brightness(1.0);
+}
+.panel .buttons .filter-pokemon .filter .options .option.disabled {
+    pointer-events: none;
+    background-color: #313135;
+    color: #3f4246;
+    text-shadow: none;
+}
+.panel .buttons .filter-pokemon .filter .options .option.disabled img {
+    opacity: 0.3;
+    filter: brightness(0.2);
+}
+
+.panel .buttons .filter-pokemon .filter.generations {
+    width: 260px;
+    margin-right: 10px;
+}
+.panel .buttons .filter-pokemon .filter.generations .options .option {
+    width: calc((100% - 75px) / 7);
+}
+
+.panel .buttons .filter-pokemon .filter.types {
+    width: 560px;
+}
+.panel .buttons .filter-pokemon .filter.types .options .option {
+    width: calc((100% - 75px) / 18);
+
+}
+
+.panel .buttons .filter-pokemon .filter.generations .options .option[data-gen="all"],
+.panel .buttons .filter-pokemon .filter.types .options .option[data-type="all"] {
+    width: 30px;
+}
+
+
+.panel .buttons .filter-pokemon:after,
+.panel .buttons .filter-pokemon .wrap:after,
+.panel .buttons .filter-pokemon .filter:after,
+.panel .buttons .filter-pokemon .filter .options:after {
+    content: '';
+    display: block;
+    clear: both;
+    height: 0;
+}
+
+
 .panel .buttons .controls {
     text-align: center;
     margin-bottom: 8px;
