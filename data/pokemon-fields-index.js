@@ -66,7 +66,7 @@
             order: indexOrder++,
             token: 'volcano',
             name: 'Volcano',
-            baseTypes: ['fire', 'rock', 'dragon']
+            baseTypes: ['fire', '', 'rock']
             },
         'snow': {
             order: indexOrder++,
@@ -108,7 +108,7 @@
             order: indexOrder++,
             token: 'cliffside',
             name: 'Cliffside',
-            baseTypes: ['rock', '', 'ground']
+            baseTypes: ['rock', '', 'ground', 'dragon']
             },
         };
 

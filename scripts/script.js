@@ -1494,8 +1494,8 @@
                 return false;
                 });
 
-            console.log('shownGens = ', shownGens);
-            console.log('shownTypes = ', shownTypes);
+            //console.log('shownGens = ', shownGens);
+            //console.log('shownTypes = ', shownTypes);
 
             // Reset the button panel selections to "all" values
             $pokePanelFilters.find('.filter .option.active').removeClass('active');
