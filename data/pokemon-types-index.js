@@ -93,7 +93,7 @@
                 strengths: ['bug', 'fire', 'flying', 'ice'],
                 handicaps: ['fighting', 'ground'],
                 futilities: [],
-                weaknesses: ['fighting', 'grass', 'ground', 'water'],
+                weaknesses: ['fighting', 'grass', 'ground', 'water', 'steel'],
                 resistances: ['fire', 'flying', 'normal', 'poison'],
                 immunities: []
                 }
