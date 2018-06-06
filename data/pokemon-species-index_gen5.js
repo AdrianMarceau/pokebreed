@@ -383,6 +383,66 @@
             prevEvolution: 'drilbur'
             },
 
+        'timburr': {
+            order: indexOrder++,
+            token: 'timburr',
+            name: 'Timburr',
+            number: 532,
+            types: ['fighting'],
+            genderRatio: {male: 0.75, female: 0.25},
+            baseStats: {hp: 75, phAttack: 80, phDefense: 55, spAttack: 25, spDefense: 35, speed: 35},
+            abilities: {0: 'guts', 1: 'sheer-force', hidden: 'iron-fist'},
+            height: 0.6,
+            weight: 12.5,
+            colors: ['gray', 'pink', 'brown', 'black'],
+            eggCycles: 20,
+            eggGroups: ['human-like'],
+            nextEvolutions: [{
+                species: 'gurdurr',
+                method: 'level-up',
+                value: 25
+                }]
+            },
+        'gurdurr': {
+            order: indexOrder++,
+            token: 'gurdurr',
+            name: 'Gurdurr',
+            number: 533,
+            types: ['fighting'],
+            genderRatio: {male: 0.75, female: 0.25},
+            baseStats: {hp: 85, phAttack: 105, phDefense: 85, spAttack: 40, spDefense: 50, speed: 40},
+            abilities: {0: 'guts', 1: 'sheer-force', hidden: 'iron-fist'},
+            height: 1.2,
+            weight: 40,
+            colors: ['gray', 'pink', 'red'],
+            eggCycles: 20,
+            eggGroups: ['human-like'],
+            prevEvolution: 'timburr',
+            nextEvolutions: [{
+                species: 'conkeldurr',
+                method: 'trade-partner',
+                value: 'auto',
+                method2: 'level-up',
+                value2: 45
+                }]
+            },
+        'conkeldurr': {
+            order: indexOrder++,
+            token: 'conkeldurr',
+            name: 'Conkeldurr',
+            number: 534,
+            types: ['fighting'],
+            genderRatio: {male: 0.75, female: 0.25},
+            baseStats: {hp: 105, phAttack: 140, phDefense: 95, spAttack: 55, spDefense: 65, speed: 45},
+            abilities: {0: 'guts', 1: 'sheer-force', hidden: 'iron-fist'},
+            height: 1.4,
+            weight: 87,
+            colors: ['brown', 'pink', 'gray', 'red', 'black'],
+            eggCycles: 20,
+            eggGroups: ['human-like'],
+            prevEvolution: 'gurdurr'
+            },
+
         'sewaddle': {
             order: indexOrder++,
             token: 'sewaddle',
