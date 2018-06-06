@@ -351,7 +351,7 @@
         'drilbur': {
             order: indexOrder++,
             token: 'drilbur',
-            species: 'Drilbur',
+            name: 'Drilbur',
             number: 529,
             types: ['ground'],
             baseStats: {hp: 60, phAttack: 85, phDefense: 40, spAttack: 30, spDefense: 45, speed: 68},
