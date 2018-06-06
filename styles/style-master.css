@@ -1360,37 +1360,37 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     -webkit-box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.2);
     box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.2);
 }
-.panel .buttons .new-pokemon,
+.panel .buttons .select-pokemon,
 .panel .buttons .controls {
     display: block;
     clear: both;
     text-align: center;
 }
-.panel .buttons .new-pokemon:after,
+.panel .buttons .select-pokemon:after,
 .panel .buttons .controls:after {
     content: "";
     display: block;
     clear: both;
     height: 0;
 }
-.panel .buttons .new-pokemon {
+.panel .buttons .select-pokemon {
     overflow: hidden;
     margin: 0 auto;
 }
-.panel .buttons .new-pokemon.loaded {
+.panel .buttons .select-pokemon.loaded {
     overflow: hidden;
     margin-left: 0;
     margin-right: 80px;
 }
-.panel .buttons .new-pokemon.loaded {
+.panel .buttons .select-pokemon.loaded {
     text-align: left;
 }
-.panel .buttons .new-pokemon > strong {
+.panel .buttons .select-pokemon > strong {
     font-size: 12px;
     line-height: 2;
     display: none;
 }
-.panel .buttons .new-pokemon .loading {
+.panel .buttons .select-pokemon .loading {
     display: inline-block;
     margin: 10px auto;
     padding: 5px 10px;
@@ -1400,13 +1400,13 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     border-radius: 3px;
 }
 
-.panel .buttons .new-pokemon .buttonwrap {
+.panel .buttons .select-pokemon .buttonwrap {
     height: 200px;
     overflow: hidden;
     position: relative;
     padding-top: 5px;
 }
-.panel .buttons .new-pokemon .ps-container {
+.panel .buttons .select-pokemon .ps-container {
     position: relative;
     overflow: hidden;
     margin-right: 0;
@@ -1416,22 +1416,22 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     -webkit-border-radius: 3px;
     border-radius: 3px;
 }
-.panel .buttons .new-pokemon .ps-container > .ps-scrollbar-y-rail {
+.panel .buttons .select-pokemon .ps-container > .ps-scrollbar-y-rail {
     width: 6px;
     top: 3px;
     bottom: auto;
     background-color: rgba(0, 0, 0, 0.3);
     opacity: 0.6;
 }
-.panel .buttons .new-pokemon .ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+.panel .buttons .select-pokemon .ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
     background-color: #646468;
     width: 6px;
 }
-.panel .buttons .new-pokemon .ps-container:hover > .ps-scrollbar-x-rail,
-.panel .buttons .new-pokemon .ps-container:hover > .ps-scrollbar-y-rail {
+.panel .buttons .select-pokemon .ps-container:hover > .ps-scrollbar-x-rail,
+.panel .buttons .select-pokemon .ps-container:hover > .ps-scrollbar-y-rail {
     opacity: 0.9;
 }
-.panel .buttons .new-pokemon .ps-container:not(.ps-active-y) > .ps-scrollbar-y-rail {
+.panel .buttons .select-pokemon .ps-container:not(.ps-active-y) > .ps-scrollbar-y-rail {
     opacity: 0;
 }
 

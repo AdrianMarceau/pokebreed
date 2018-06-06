@@ -189,7 +189,7 @@ if (isset($_GET['gen'])
                     <a class="control stop hidden" data-control="stop" title="Stop"><span>Stop?</span></a>
                     <a class="control start hidden" data-control="start" title="Start"><span>Start</span></a>
                 </div>
-                <div class="new-pokemon">
+                <div class="select-pokemon">
                     <span class="loading">Loading</span>
                 </div>
                 <div class="starter-pokemon hidden">

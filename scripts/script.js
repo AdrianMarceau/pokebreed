@@ -151,7 +151,7 @@
         $panelOverviewFloatLists = $('.overview.floatlist', $panelDiv);
         $panelPokemonSpriteWrapper = $('.details.pokemon .list.pokemon', $panelMainOverview);
         $panelButtons = $('> .buttons', $panelDiv);
-        $pokePanelButtons = $panelButtons.find('.new-pokemon');
+        $pokePanelButtons = $panelButtons.find('.select-pokemon');
         $pokePanelLoading = $pokePanelButtons.find('.loading');
 
         // Add a click event for the box details title
@@ -824,7 +824,7 @@
         $('.controls .new', $panelButtons).addClass('hidden');
 
         // Remove the hidden class from the pokemon wrapper
-        $('.new-pokemon', $panelButtons).addClass('hidden');
+        $('.select-pokemon', $panelButtons).addClass('hidden');
 
         // Update the box details header, unhide the details info bar
         $('.details.zone .title', $panelMainOverview).html('Box Details');
@@ -962,7 +962,7 @@
         generatePokemonButtons();
 
         // Show the pokemon buttons
-        $('.new-pokemon', $panelButtons).removeClass('hidden');
+        $('.select-pokemon', $panelButtons).removeClass('hidden');
         $('.controls .start', $panelButtons).removeClass('hidden').removeClass('ready');
 
         // Hide the details info bar
@@ -1013,7 +1013,7 @@
         generatePokemonButtons();
 
         // Show the pokemon buttons
-        $('.new-pokemon', $panelButtons).removeClass('hidden');
+        $('.select-pokemon', $panelButtons).removeClass('hidden');
         $('.controls .start', $panelButtons).removeClass('hidden').removeClass('ready');
 
         // Hide the starter pokemon from last time, we're starting fresh
