@@ -485,7 +485,6 @@
         {base: 'alomomola', species: 'luvdisc'},
         {base: 'plusle', species: 'minun'},
         {base: 'minun', species: 'plusle'},
-        {base: 'heracross', species: 'bulbasaur'},
         {base: 'heracross', species: 'pinsir'},
         {base: 'pinsir', species: 'heracross'},
         {base: 'karrablast', species: 'shelmet'},
@@ -499,6 +498,8 @@
         {base: 'pinsir', species: 'vikavolt'},
         {base: 'mimikyu', species: 'pikachu'},
         {base: 'carvanha', species: 'basculin'},
+        {base: 'parasect', species: 'shiinotic'},
+        {base: 'shiinotic', species: 'parasect'},
 
         // Romantic relationships
         {base: 'tauros', species: 'miltank'},
@@ -523,6 +524,7 @@
         {base: 'yanma', species: 'cacnea'},
 
         // One-sided (theft) relationships
+        {base: 'heracross', species: 'bulbasaur'},
         {base: 'heracross', species: 'vespiquen'},
         {base: 'dewpider', species: 'surskit'},
         {base: 'murkrow', species: 'wimpod'},
