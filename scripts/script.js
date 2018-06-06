@@ -472,15 +472,13 @@
     }
 
     // Define a function for looping through indexes and generating helpful values
+    var possibleGenders = ['male', 'female', 'none'];
+    var nationalDexNumbers = [];
+    var missingDexNumbers = [];
+    var maxDexNumber = 0;
     function optimizeIndexes(){
         $pokePanelLoading.append('.'); // append loading dot
         if (PokemonSpeciesIndexTokens.length){
-
-            // Define possible genders to loop through
-            var possibleGenders = ['male', 'female', 'none'];
-
-            // Define an array to hold all nation dex numbers added so far
-            var nationDexNumbers = [];
 
             // Loop through individual species and pre-generate certain attributes
             for (var key = 0; key < PokemonSpeciesIndexTokens.length; key++){
@@ -494,8 +492,8 @@
 
                 // If the number has been defined, add it to the above list
                 if (typeof indexInfo.number !== 'undefined'
-                    && nationDexNumbers.indexOf(indexInfo.number) === -1){
-                    nationDexNumbers.push(indexInfo.number);
+                    && nationalDexNumbers.indexOf(indexInfo.number) === -1){
+                    nationalDexNumbers.push(indexInfo.number);
                     }
 
                 // If class or formClass are not set, create them as empty strings
@@ -790,17 +788,10 @@
                 else { return 0; }
                 });
 
-            // DEBUG INFO ONLY!
             // Calculate how many nation dex numbers are accounted for vs how many remain
-            if (false){
-                nationDexNumbers.sort(function(a,b){ a = parseInt(a); b = parseInt(b); return a < b ? -1 : (a > b ? 1 : 0); });
-                var missingDexNumbers = [];
-                var maxDexNumber = nationDexNumbers[nationDexNumbers.length - 1];
-                for (var num = 1; num <= maxDexNumber; num++){ if (nationDexNumbers.indexOf(num) === -1){ missingDexNumbers.push(num); } }
-                //console.log('maxDexNumber = ', maxDexNumber);
-                //console.log('nationDexNumbers = ', nationDexNumbers.length, nationDexNumbers.join(','));
-                //console.log('missingDexNumbers = ', missingDexNumbers.length, missingDexNumbers.join(','));
-                }
+            nationalDexNumbers.sort(function(a,b){ a = parseInt(a); b = parseInt(b); return a < b ? -1 : (a > b ? 1 : 0); });
+            maxDexNumber = nationalDexNumbers[nationalDexNumbers.length - 1];
+            for (var num = 1; num <= maxDexNumber; num++){ if (nationalDexNumbers.indexOf(num) === -1){ missingDexNumbers.push(num); } }
 
             }
     }
@@ -4468,12 +4459,17 @@
         getPokemonSpeciesDexOrder: function(){ return JSON.parse(JSON.stringify(PokemonSpeciesDexOrder)); },
         getPokemonTypesIndex: function(){ return JSON.parse(JSON.stringify(PokemonTypesIndex)); },
         getPokemonTypesIndexTokens: function(){ return JSON.parse(JSON.stringify(PokemonTypesIndexTokens)); },
+        getNationalDexNumbers: function(){ return JSON.parse(JSON.stringify(nationalDexNumbers)); },
+        getMissingDexNumbers: function(){ return JSON.parse(JSON.stringify(missingDexNumbers)); },
         getPokemonTotals: function(){ return {
             specialPokemon: totalSpecialPokemon,
             legendaryPokemon: totalLegendaryPokemon,
             mythicalPokemon: totalMythicalPokemon,
             ultraBeasts: totalUltraBeasts,
-            miscBeasts: totalMiscBeasts
+            miscBeasts: totalMiscBeasts,
+            maxDexNumber: maxDexNumber,
+            nationalDexNumbers: nationalDexNumbers.length,
+            missingDexNumbers: missingDexNumbers.length
             }; }
         };
 
