@@ -1948,7 +1948,42 @@
             prevEvolution: 'shuppet'
             },
 
-        'tropius': {  // TODO: Make a few different berry patterns
+        'duskull': {
+            order: indexOrder++,
+            token: 'duskull',
+            name: 'Duskull',
+            number: 355,
+            types: ['ghost'],
+            baseStats: {hp: 20, phAttack: 40, phDefense: 90, spAttack: 30, spDefense: 90, speed: 25},
+            abilities: {0: 'levitate', hidden: 'frisk'},
+            height: 0.8,
+            weight: 15,
+            colors: ['black', 'white', 'red'],
+            eggCycles: 25,
+            eggGroups: ['amorphous'],
+            nextEvolutions: [{
+                species: 'dusclops',
+                method: 'level-up',
+                value: 37
+                }]
+            },
+        'dusclops': {
+            order: indexOrder++,
+            token: 'dusclops',
+            name: 'Dusclops',
+            number: 356,
+            types: ['ghost'],
+            baseStats: {hp: 40, phAttack: 70, phDefense: 130, spAttack: 60, spDefense: 130, speed: 25},
+            abilities: {0: 'pressure', hidden: 'frisk'},
+            height: 1.6,
+            weight: 30.6,
+            colors: ['gray', 'white', 'red'],
+            eggCycles: 25,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'duskull'
+            },
+
+        'tropius': {  // TODO: Make the Nanab Berries ripen over time
             order: indexOrder++,
             token: 'tropius',
             name: 'Tropius',

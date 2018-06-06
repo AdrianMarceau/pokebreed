@@ -1633,6 +1633,22 @@
             prevEvolution: 'nosepass'
             },
 
+        'dusknoir': {
+            order: thisIndex.afterOrder('dusclops'),
+            token: 'dusknoir',
+            name: 'Dusknoir',
+            number: 477,
+            types: ['ghost'],
+            baseStats: {hp: 45, phAttack: 100, phDefense: 135, spAttack: 65, spDefense: 135, speed: 45},
+            abilities: {0: 'pressure', hidden: 'frisk'},
+            height: 2.2,
+            weight: 106.6,
+            colors: ['gray', 'black', 'white', 'red'],
+            eggCycles: 25,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'dusclops'
+            },
+
         'froslass': {
             order: thisIndex.afterOrder('glalie', 2),
             token: 'froslass',
@@ -1890,11 +1906,9 @@
     thisIndex.addNextEvolutions([
 
         {base: 'aipom', species: 'ambipom', method: 'type-surge', value: 'normal', method2: 'level-up', value2: 22}, // double-hit
-
         {base: 'lickitung', species: 'lickilicky', method: 'type-surge', value: ['normal', 'rock'], method2: 'level-up', value2: 35}, // rollout
         {base: 'tangela', species: 'tangrowth', method: 'type-surge', value: ['grass', 'rock'], method2: 'level-up', value2: 35}, // ancient-power
         {base: 'yanma', species: 'yanmega', method: 'type-surge', value: ['bug', 'rock'], method2: 'level-up', value2: 35}, // ancient-power
-
         {base: 'piloswine', species: 'mamoswine', method: 'type-surge', value: ['ice', 'ground', 'rock'], method2: 'level-up', value2: 53}, // ancient-power
 
         {base: 'roselia', species: 'roserade', method: 'type-surge', value: ['grass', 'poison'], method2: 'level-up', value2: 35}, // shiny-stone
@@ -1917,12 +1931,10 @@
 
         {base: 'sneasel', species: 'weavile', method: 'type-surge', value: ['dark', 'ice'], method2: 'level-up', value2: 30}, // razor-claw
         {base: 'gligar', species: 'gliscor', method: 'type-surge', value: ['ground', 'flying'], method2: 'level-up', value2: 30}, // razor-fang
-
         {base: 'rhydon', species: 'rhyperior', method: 'type-surge', value: ['rock', 'ground'], method2: 'level-up', value2: 62}, // protector
-
+        {base: 'dusclops', species: 'dusknoir', method: 'type-surge', value: 'ghost', method2: 'level-up', value2: 57}, // repeat-cloth
         {base: 'electabuzz', species: 'electivire', method: 'type-surge', value: 'electric', method2: 'level-up', value2: 50}, // electrizer
         {base: 'magmar', species: 'magmortar', method: 'type-surge', value: 'fire', method2: 'level-up', value2: 50}, // magmarizer
-
         {base: 'porygon2', species: 'porygon-z', method: 'type-surge', value: ['fire', 'ice', 'electric'], method2: 'level-up', value2: 64}, // dubious-disc
 
         ]);
