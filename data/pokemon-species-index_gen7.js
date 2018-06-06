@@ -360,7 +360,7 @@
                 method: 'type-appeal',
                 value: 'ice',
                 method2: 'level-up',
-                value: 30
+                value2: 30
                 }]
             },
         'crabominable': {
