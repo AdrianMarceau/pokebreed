@@ -391,7 +391,7 @@
             number: 172,
             types: ['electric'],
             baseStats: {hp: 20, phAttack: 40, phDefense: 15, spAttack: 35, spDefense: 35, speed: 60},
-            abilities: {0: 'static', H: 'lightning-rod'},
+            abilities: {0: 'static', hidden: 'lightning-rod'},
             height: 0.3,
             weight: 2,
             colors: ['yellow', 'black', 'red'],

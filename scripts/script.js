@@ -423,11 +423,14 @@
                                     var starterInfo = seedPokemon[key];
                                     var starterToken = starterInfo[0];
                                     var starterGender = starterInfo[1];
-                                    if (appFreeMode
-                                        || freeStarterPokemon.indexOf(starterToken) !== -1
-                                        || (BasicPokemonSpeciesIndexTokens.indexOf(starterToken) !== -1
-                                        && typeof PokemonSpeciesSeen[starterToken] !== 'undefined'
-                                        && PokemonSpeciesSeen[starterToken].length > 0)){
+                                    var isBasic = BasicPokemonSpeciesIndexTokens.indexOf(starterToken) !== -1 ? true : false;
+                                    var isFree = freeStarterPokemon.indexOf(starterToken) !== -1 ? true : false;
+                                    var isSeen = typeof PokemonSpeciesSeen[starterToken] !== 'undefined' && PokemonSpeciesSeen[starterToken] > 0 ? true : false;
+                                    //console.log('starterToken = ', starterToken);
+                                    //console.log('isFree = ', isFree);
+                                    //console.log('isBasic = ', isBasic);
+                                    //console.log('isSeen = ', isSeen);
+                                    if (appFreeMode || isFree || (isBasic && isSeen)){
                                         addPokemonToZone(starterToken, false, false, false, {gender:starterGender});
                                         }
                                     }

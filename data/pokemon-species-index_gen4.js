@@ -423,7 +423,7 @@
             abilities: {0: 'sturdy', hidden: 'soundproof'},
             height: 0.5,
             weight: 57,
-            color: ['gray', 'white', 'yellow'],
+            colors: ['gray', 'white', 'yellow'],
             eggCycles: 30,
             eggGroups: ['monster'],
             nextEvolutions: [{
@@ -443,7 +443,7 @@
             abilities: {0: 'sturdy', hidden: 'soundproof'},
             height: 1.3,
             weight: 149.5,
-            color: ['gray', 'white', 'yellow', 'black'],
+            colors: ['gray', 'white', 'yellow', 'black'],
             eggCycles: 30,
             eggGroups: ['monster'],
             prevEvolution: 'shieldon'
@@ -1903,7 +1903,7 @@
         {base: 'kirlia', species: 'gardevoir', method: 'level-up', value: 30, method2: 'type-appeal', value2: 'fairy', replace: true}, // natural
         {base: 'kirlia', species: 'gallade', method: 'level-up', value: 30, method2: 'type-appeal', value2: 'fighting', method3: 'gender', value3: 'male'}, // dawn-stone
 
-        {base: 'snorunt', species: 'glalie', method: 'level-up', value: 42, method2: 'type-appeal', value2: 'ghost', replace: true}, // natural
+        {base: 'snorunt', species: 'glalie', method: 'level-up', value: 42, method2: 'type-appeal', value2: 'ice', replace: true}, // natural
         {base: 'snorunt', species: 'froslass', method: 'level-up', value: 42, method2: 'type-appeal', value2: 'ghost', method3: 'gender', value3: 'female'}, // dawn-stone
 
         {base: 'misdreavus', species: 'mismagius', method: 'type-appeal', value: ['ghost'], method2: 'level-up', value2: 20}, // dusk-stone
