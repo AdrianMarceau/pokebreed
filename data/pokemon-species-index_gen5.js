@@ -343,10 +343,44 @@
             height: 0.9,
             weight: 10.5,
             colors: ['blue', 'pink', 'black'],
-            evoLevel: 2,
             eggCycles: 15,
             eggGroups: ['flying', 'field'],
             prevEvolution: 'woobat'
+            },
+
+        'drilbur': {
+            order: indexOrder++,
+            token: 'drilbur',
+            species: 'Drilbur',
+            number: 529,
+            types: ['ground'],
+            baseStats: {hp: 60, phAttack: 85, phDefense: 40, spAttack: 30, spDefense: 45, speed: 68},
+            abilities: {0: 'sand-rush', 1: 'sand-force', hidden: 'mold-breaker'},
+            height: 0.3,
+            weight: 8.5,
+            colorss: ['black', 'blue', 'white', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'excadrill',
+                method: 'level-up',
+                value: 31
+                }]
+            },
+        'excadrill': {
+            order: indexOrder++,
+            token: 'excadrill',
+            name: 'Excadrill',
+            number: 530,
+            types: ['ground', 'steel'],
+            baseStats: {hp: 110, phAttack: 135, phDefense: 60, spAttack: 50, spDefense: 65, speed: 88},
+            abilities: {0: 'sand-rush', 1: 'sand-force', hidden: 'mold-breaker'},
+            height: 0.7,
+            weight: 40.4,
+            colorss: ['brown', 'red', 'gray', 'white', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'drilbur'
             },
 
         'sewaddle': {
