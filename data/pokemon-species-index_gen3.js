@@ -2140,6 +2140,7 @@
             },
 
         'clamperl': {
+            order: indexOrder++,
             token: 'clamperl',
             name: 'Clamperl',
             number: 366,
@@ -2166,6 +2167,7 @@
                 }]
             },
         'huntail': {
+            order: indexOrder++,
             token: 'huntail',
             name: 'Huntail',
             number: 367,
@@ -2180,6 +2182,7 @@
             prevEvolution: 'clamperl'
             },
         'gorebyss': {
+            order: indexOrder++,
             token: 'gorebyss',
             name: 'Gorebyss',
             number: 368,

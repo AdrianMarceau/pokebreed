@@ -321,6 +321,61 @@
             prevEvolution: 'kricketot'
             },
 
+        'shinx': {
+            order: indexOrder++,
+            token: 'shinx',
+            name: 'Shinx',
+            number: 403,
+            types: ['electric'],
+            baseStats: {hp: 45, phAttack: 65, phDefense: 34, spAttack: 40, spDefense: 34, speed: 45},
+            abilities: {0: 'rivalry', 1: 'intimidate', hidden: 'guts'},
+            height: 0.5,
+            weight: 9.5,
+            colors: ['blue', 'black', 'yellow', 'white'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'luxio',
+                method: 'level-up',
+                value: 15
+                }]
+            },
+        'luxio': {
+            order: indexOrder++,
+            token: 'luxio',
+            name: 'Luxio',
+            number: 404,
+            types: ['electric'],
+            baseStats: {hp: 60, phAttack: 85, phDefense: 49, spAttack: 60, spDefense: 49, speed: 60},
+            abilities: {0: 'rivalry', 1: 'intimidate', hidden: 'guts'},
+            height: 0.9,
+            weight: 30.5,
+            colors: ['black', 'blue', 'yellow', 'white'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'shinx',
+            nextEvolutions: [{
+                species: 'luxray',
+                method: 'level-up',
+                value: 30
+                }]
+            },
+        'luxray': {
+            order: indexOrder++,
+            token: 'luxray',
+            name: 'Luxray',
+            number: 405,
+            types: ['electric'],
+            baseStats: {hp: 80, phAttack: 120, phDefense: 79, spAttack: 95, spDefense: 79, speed: 70},
+            abilities: {0: 'rivalry', 1: 'intimidate', hidden: 'guts'},
+            height: 1.4,
+            weight: 42,
+            colors: ['black', 'blue', 'yellow', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'luxio'
+            },
+
         'ambipom': {
             order: thisIndex.afterOrder('aipom'),
             token: 'ambipom',
