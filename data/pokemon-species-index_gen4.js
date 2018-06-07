@@ -835,6 +835,29 @@
             prevEvolution: 'murkrow'
             },
 
+        'chingling': {
+            order: thisIndex.beforeOrder('chimecho'),
+            token: 'chingling',
+            name: 'Chingling',
+            class: 'baby',
+            number: 433,
+            types: ['psychic'],
+            baseStats: {hp: 45, phAttack: 30, phDefense: 50, spAttack: 65, spDefense: 50, speed: 45},
+            abilities: {0: 'levitate'},
+            height: 0.2,
+            weight: 0.6,
+            colors: ['yellow', 'red', 'white', 'black'],
+            eggCycles: 25,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'chimecho',
+                method: 'happiness',
+                value: 'high',
+                method2: 'level-up',
+                value2: 15
+                }]
+            },
+
         'bronzor': {
             order: indexOrder++,
             token: 'bronzor',
@@ -1894,6 +1917,7 @@
 
     // Update previous gen pokemon with new prev evolution data
     thisIndex.addPrevEvolutions([
+        {base: 'chimecho', species: 'chingling'},
         {base: 'roselia', species: 'budew'},
         {base: 'sudowoodo', species: 'bonsly'},
         {base: 'mr-mime', species: 'mime-jr'},

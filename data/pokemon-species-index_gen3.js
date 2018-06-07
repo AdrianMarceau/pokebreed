@@ -1998,6 +1998,21 @@
             eggGroups: ['monster', 'grass']
             },
 
+        'chimecho': {
+            order: indexOrder++,
+            token: 'chimecho',
+            name: 'Chimecho',
+            number: 358,
+            types: ['psychic'],
+            baseStats: {hp: 75, phAttack: 50, phDefense: 80, spAttack: 95, spDefense: 90, speed: 65},
+            abilities: {0: 'levitate'},
+            height: 0.6,
+            weight: 1,
+            colors: ['white', 'blue', 'red', 'yellow'],
+            eggCycles: 25,
+            eggGroups: ['amorphous']
+            },
+
         'absol': {
             order: indexOrder++,
             token: 'absol',
