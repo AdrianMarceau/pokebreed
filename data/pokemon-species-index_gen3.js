@@ -2139,6 +2139,61 @@
             prevEvolution: 'sealeo'
             },
 
+        'clamperl': {
+            token: 'clamperl',
+            name: 'Clamperl',
+            number: 366,
+            types: ['water'],
+            baseStats: {hp: 35, phAttack: 64, phDefense: 85, spAttack: 74, spDefense: 55, speed: 32},
+            abilities: {0: 'shell-armor', hidden: 'rattled'},
+            height: 0.4,
+            weight: 52.5,
+            colors: ['blue', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['water-1'],
+            nextEvolutions: [{
+                species: 'huntail',
+                method: 'stat-appeal',
+                value: 'phAttack',
+                method2: 'level-up',
+                value2: 30
+                }, {
+                species: 'gorebyss',
+                method: 'stat-appeal',
+                value: 'spAttack',
+                method2: 'level-up',
+                value2: 30
+                }]
+            },
+        'huntail': {
+            token: 'huntail',
+            name: 'Huntail',
+            number: 367,
+            types: ['water'],
+            baseStats: {hp: 55, phAttack: 104, phDefense: 105, spAttack: 94, spDefense: 75, speed: 52},
+            abilities: {0: 'swift-swim', hidden: 'water-veil'},
+            height: 1.7,
+            weight: 27,
+            colors: ['blue', 'orange', 'white', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['water-1'],
+            prevEvolution: 'clamperl'
+            },
+        'gorebyss': {
+            token: 'gorebyss',
+            name: 'Gorebyss',
+            number: 368,
+            types: ['water'],
+            baseStats: {hp: 55, phAttack: 84, phDefense: 105, spAttack: 114, spDefense: 75, speed: 52},
+            abilities: {0: 'swift-swim', hidden: 'hydration'},
+            height: 1.8,
+            weight: 22.6,
+            colors: ['pink', 'purple', 'white'],
+            eggCycles: 20,
+            eggGroups: ['water-1'],
+            prevEvolution: 'clamperl'
+            },
+
         'relicanth': {
             order: indexOrder++,
             token: 'relicanth',
