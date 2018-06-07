@@ -1808,7 +1808,7 @@
             prevEvolution: 'feebas'
             },
 
-        'castform': {
+        'castform': {  // TODO: Add addition form for sandstorm weather
             order: indexOrder++,
             token: 'castform',
             name: 'Castform',
@@ -1839,7 +1839,7 @@
             order: indexOrder++,
             token: 'sunny-castform',
             name: 'Sunny Castform',
-            formClass: 'type-variant',
+            formClass: 'weather-variant',
             formToken: 'sunny',
             baseForm: 'castform',
             number: 351,

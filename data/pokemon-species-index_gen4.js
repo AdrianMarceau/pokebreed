@@ -376,22 +376,6 @@
             prevEvolution: 'luxio'
             },
 
-        'ambipom': {
-            order: thisIndex.afterOrder('aipom'),
-            token: 'ambipom',
-            name: 'Ambipom',
-            number: 424,
-            types: ['normal'],
-            baseStats: {hp: 75, phAttack: 100, phDefense: 66, spAttack: 60, spDefense: 66, speed: 115},
-            abilities: {0: 'technician', 1: 'pickup', hidden: 'skill-link'},
-            height: 1.2,
-            weight: 20.3,
-            colors: ['purple', 'brown', 'pink'],
-            eggCycles: 20,
-            eggGroups: ['field'],
-            prevEvolution: 'aipom'
-            },
-
         'budew': {
             order: thisIndex.beforeOrder('roselia'),
             token: 'budew',
@@ -785,6 +769,92 @@
             eggCycles: 20,
             eggGroups: ['water-1', 'field'],
             prevEvolution: 'buizel'
+            },
+
+        'cherubi': {
+            order: indexOrder++,
+            token: 'cherubi',
+            name: 'Cherubi',
+            number: 420,
+            types: ['grass'],
+            baseStats: {hp: 45, phAttack: 35, phDefense: 45, spAttack: 62, spDefense: 53, speed: 35},
+            abilities: {0: 'chlorophyll'},
+            height: 0.4,
+            weight: 3.3,
+            colors: ['pink', 'green', 'purple'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'grass'],
+            nextEvolutions: [{
+                species: 'sunshine-cherrim',
+                method: 'level-up',
+                value: 25,
+                method2: 'type-surge',
+                value2: 'grass'
+                }, {
+                species: 'overcast-cherrim',
+                method: 'level-up',
+                value: 25
+                }]
+            },
+        'overcast-cherrim': {
+            order: indexOrder++,
+            token: 'overcast-cherrim',
+            name: 'Overcast Cherrim',
+            formClass: 'weather-variarion',
+            formToken: 'overcast',
+            number: 421,
+            types: ['grass'],
+            baseStats: {hp: 70, phAttack: 60, phDefense: 70, spAttack: 87, spDefense: 78, speed: 85},
+            abilities: {0: 'flower-gift'},
+            height: 0.5,
+            weight: 9.3,
+            colors: ['purple', 'pink', 'green'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'grass'],
+            prevEvolution: 'cherubi',
+            nextEvolutions: [{
+                species: 'sunshine-cherrim',
+                method: 'type-surge',
+                value: 'grass'
+                }]
+            },
+        'sunshine-cherrim': {
+            order: indexOrder++,
+            token: 'sunshine-cherrim',
+            name: 'Sunshine Cherrim',
+            formClass: 'weather-variarion',
+            formToken: 'sunshine',
+            number: 421,
+            types: ['grass'],
+            baseStats: {hp: 70, phAttack: 90, phDefense: 70, spAttack: 87, spDefense: 117, speed: 85},
+            abilities: {0: 'flower-gift'},
+            height: 0.5,
+            weight: 9.3,
+            colors: ['pink', 'yellow', 'red'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'grass'],
+            prevEvolution: 'cherubi',
+            nextEvolutions: [{
+                species: 'overcast-cherrim',
+                method: 'type-warning',
+                value: 'grass'
+                }]
+            },
+
+        'ambipom': {
+            order: thisIndex.afterOrder('aipom'),
+            token: 'ambipom',
+            name: 'Ambipom',
+            number: 424,
+            types: ['normal'],
+            baseStats: {hp: 75, phAttack: 100, phDefense: 66, spAttack: 60, spDefense: 66, speed: 115},
+            abilities: {0: 'technician', 1: 'pickup', hidden: 'skill-link'},
+            height: 1.2,
+            weight: 20.3,
+            colors: ['purple', 'brown', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'aipom'
             },
 
         'drifloon': {
