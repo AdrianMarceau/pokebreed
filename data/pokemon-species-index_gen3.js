@@ -2084,6 +2084,61 @@
             prevEvolution: 'snorunt'
             },
 
+        'spheal': {
+            order: indexOrder++,
+            token: 'spheal',
+            name: 'Spheal',
+            number: 363,
+            types: ['ice', 'water'],
+            baseStats: {hp: 70, phAttack: 40, phDefense: 50, spAttack: 55, spDefense: 50, speed: 25},
+            abilities: {0: 'thick-fat', 1: 'ice-body', hidden: 'oblivious'},
+            height: 0.8,
+            weight: 39.5,
+            colors: ['blue', 'yellow', 'white', 'black'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'field'],
+            nextEvolutions: [{
+                species: 'sealeo',
+                method: 'level-up',
+                value: 32
+                }]
+            },
+        'sealeo': {
+            order: indexOrder++,
+            token: 'sealeo',
+            name: 'Sealeo',
+            number: 364,
+            types: ['ice', 'water'],
+            baseStats: {hp: 90, phAttack: 60, phDefense: 70, spAttack: 75, spDefense: 70, speed: 45},
+            abilities: {0: 'thick-fat', 1: 'ice-body', hidden: 'oblivious'},
+            height: 1.1,
+            weight: 87.6,
+            colors: ['blue', 'yellow', 'white', 'black'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'field'],
+            prevEvolution: 'spheal',
+            nextEvolutions: [{
+                species: 'walrein',
+                method: 'level-up',
+                value: 44
+                }]
+            },
+        'walrein': {
+            order: indexOrder++,
+            token: 'walrein',
+            name: 'Walrein',
+            number: 365,
+            types: ['ice', 'water'],
+            baseStats: {hp: 110, phAttack: 80, phDefense: 90, spAttack: 95, spDefense: 90, speed: 65},
+            abilities: {0: 'thick-fat', 1: 'ice-body', hidden: 'oblivious'},
+            height: 1.4,
+            weight: 150.6,
+            colors: ['blue', 'yellow', 'white'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'field'],
+            prevEvolution: 'sealeo'
+            },
+
         'relicanth': {
             order: indexOrder++,
             token: 'relicanth',
