@@ -2339,6 +2339,47 @@
             eggGroups: ['undiscovered']
             },
 
+        'shaymin': {
+            order: indexOrder++,
+            token: 'shaymin',
+            name: 'Shaymin',
+            class: 'mythical',
+            number: 492,
+            types: ['grass'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 100, phDefense: 100, spAttack: 100, spDefense: 100, speed: 100},
+            abilities: {0: 'natural-cure'},
+            height: 0.2,
+            weight: 2.1,
+            colors: ['green', 'pink', 'white'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'sky-shaymin',
+                method: 'burst-evolution',
+                value: 'gracidea-flower'
+                }]
+            },
+        'sky-shaymin': {
+            order: indexOrder++,
+            token: 'sky-shaymin',
+            name: 'Sky Shaymin',
+            class: 'mythical',
+            formClass: 'burst-evolution',
+            formToken: 'sky',
+            number: 492,
+            types: ['grass', 'flying'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 103, phDefense: 75, spAttack: 120, spDefense: 75, speed: 127},
+            abilities: {0: 'serene-grace'},
+            height: 0.4,
+            weight: 5.2,
+            colors: ['white', 'green', 'red'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'shaymin'
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
