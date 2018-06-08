@@ -590,7 +590,30 @@
             colors: ['yellow', 'brown', 'purple', 'black', 'white'],
             eggCycles: 20,
             eggGroups: ['mineral'],
-            prevEvolution: 'doublade'
+            prevEvolution: 'doublade',
+            nextEvolutions: [{
+                species: 'blade-aegislash',
+                method: 'burst-evolution',
+                value: 'stance-change'
+                }]
+            },
+        'blade-aegislash': {
+            order: indexOrder++,
+            token: 'blade-aegislash',
+            name: 'Blade Aegislash',
+            formClass: 'burst-evolution',
+            formToken: 'blade',
+            baseSpecies: 'aegislash',
+            number: 681,
+            types: ['steel', 'ghost'],
+            baseStats: {hp: 60, phAttack: 150, phDefense: 50, spAttack: 150, spDefense: 50, speed: 60},
+            abilities: {0: 'stance-change'},
+            height: 1.7,
+            weight: 53,
+            colors: ['yellow', 'brown', 'purple', 'black', 'white'],
+            eggCycles: 20,
+            eggGroups: ['mineral'],
+            prevEvolution: 'aegislash'
             },
 
         'spritzee': {

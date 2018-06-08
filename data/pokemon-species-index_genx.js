@@ -148,25 +148,6 @@
             prevEvolution: 'floette',
             },
 
-        'blade-aegislash': {
-            order: thisIndex.afterOrder('aegislash'),
-            token: 'blade-aegislash',
-            name: 'Blade Aegislash',
-            formClass: 'burst-evolution',
-            formToken: 'blade',
-            baseSpecies: 'aegislash',
-            number: 681,
-            types: ['steel', 'ghost'],
-            baseStats: {hp: 60, phAttack: 150, phDefense: 50, spAttack: 150, spDefense: 50, speed: 60},
-            abilities: {0: 'stance-change'},
-            height: 1.7,
-            weight: 53,
-            colors: ['yellow', 'brown', 'purple', 'black', 'white'],
-            eggCycles: 20,
-            eggGroups: ['mineral'],
-            prevEvolution: 'aegislash'
-            },
-
 
         });
     thisIndex.indexOrder = indexOrder;
@@ -196,7 +177,7 @@
         {base: 'nidoqueen', species: 'estrus-nidoqueen', method: 'burst-evolution', value: 'burning-passion', method2: 'type-surge', value2: 'poison'},
 
         {base: 'floette', species: 'eternal-floette', method: 'burst-evolution', value: 'ultimate-weapon', method2: 'extinction', value2: true},
-        {base: 'aegislash', species: 'blade-aegislash', method: 'burst-evolution', value: 'stance-change'},
+
 
         ]);
 
