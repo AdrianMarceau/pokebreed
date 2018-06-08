@@ -190,7 +190,33 @@
             evoLevel: 36,
             eggCycles: 20,
             eggGroups: ['water-1'],
-            prevEvolution: 'frogadier'
+            prevEvolution: 'frogadier',
+            nextEvolutions: [{
+                species: 'ash-greninja',
+                method: 'burst-evolution',
+                value: 'battle-bond',
+                method2: 'type-surge',
+                value2: 'water'
+                }]
+            },
+        'ash-greninja': {
+            order: indexOrder++,
+            token: 'ash-greninja',
+            name: 'Ash Greninja',
+            formClass: 'burst-evolution',
+            formToken: 'ash',
+            baseSpecies: 'greninja',
+            number: 658,
+            types: ['water', 'dark'],
+            genderRatio: {male: 1.000},
+            baseStats: {hp: 72, phAttack: 145, phDefense: 67, spAttack: 153, spDefense: 71, speed: 132},
+            abilities: {0: 'battle-bond'},
+            height: 1.5,
+            weight: 40,
+            colors: ['blue', 'pink', 'black', 'white', 'red'],
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'greninja'
             },
 
         'flabebe': {  // TODO: Make appearance based on current colour (permanent, decided at birth)

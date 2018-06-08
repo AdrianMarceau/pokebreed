@@ -128,26 +128,6 @@
             prevEvolution: 'mime-jr'
             },
 
-        'ash-greninja': {
-            order: thisIndex.afterOrder('greninja'),
-            token: 'ash-greninja',
-            name: 'Ash Greninja',
-            formClass: 'burst-evolution',
-            formToken: 'ash',
-            baseSpecies: 'greninja',
-            number: 658,
-            types: ['water', 'dark'],
-            genderRatio: {male: 1.000},
-            baseStats: {hp: 72, phAttack: 145, phDefense: 67, spAttack: 153, spDefense: 71, speed: 132},
-            abilities: {0: 'battle-bond'},
-            height: 1.5,
-            weight: 40,
-            colors: ['blue', 'pink', 'black', 'white', 'red'],
-            eggCycles: 20,
-            eggGroups: ['undiscovered'],
-            prevEvolution: 'greninja'
-            },
-
         'eternal-floette': {
             order: thisIndex.afterOrder('floette'),
             token: 'eternal-floette',
@@ -215,11 +195,8 @@
         {base: 'machamp', species: 'burst-machamp', method: 'burst-evolution', value: 'fighting-spirit', method2: 'type-surge', value2: 'fighting'},
         {base: 'nidoqueen', species: 'estrus-nidoqueen', method: 'burst-evolution', value: 'burning-passion', method2: 'type-surge', value2: 'poison'},
 
-        {base: 'greninja', species: 'ash-greninja', method: 'burst-evolution', value: 'battle-bond', method2: 'type-surge', value2: 'water'},
         {base: 'floette', species: 'eternal-floette', method: 'burst-evolution', value: 'ultimate-weapon', method2: 'extinction', value2: true},
         {base: 'aegislash', species: 'blade-aegislash', method: 'burst-evolution', value: 'stance-change'},
-
-        ,
 
         ]);
 
