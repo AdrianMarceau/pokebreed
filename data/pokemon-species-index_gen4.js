@@ -1989,7 +1989,123 @@
             weight: 0.3,
             colors: ['orange', 'white', 'blue'],
             eggCycles: 20,
-            eggGroups: ['amorphous']
+            eggGroups: ['amorphous'],
+            nextEvolutions: [{
+                species: 'heat-rotom',
+                method: 'type-appeal',
+                value: 'fire'
+                }, {
+                species: 'wash-rotom',
+                method: 'type-appeal',
+                value: 'water'
+                }, {
+                species: 'frost-rotom',
+                method: 'type-appeal',
+                value: 'ice'
+                }, {
+                species: 'fan-rotom',
+                method: 'type-appeal',
+                value: 'flying'
+                }, {
+                species: 'mow-rotom',
+                method: 'type-appeal',
+                value: 'grass'
+                }]
+            },
+        'heat-rotom': {
+            order: indexOrder++,
+            token: 'heat-rotom',
+            name: 'Heat Rotom',
+            formToken: 'heat',
+            baseSpecies: 'rotom',
+            number: 479,
+            types: ['electric', 'fire'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 50, phAttack: 65, phDefense: 107, spAttack: 105, spDefense: 107, speed: 86},
+            abilities: {0: 'levitate'},
+            height: 0.3,
+            weight: 0.3,
+            colors: ['orange', 'red', 'black'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'rotom',
+            cloneEvolutions: 'rotom'
+            },
+        'wash-rotom': {
+            order: indexOrder++,
+            token: 'wash-rotom',
+            name: 'Wash Rotom',
+            formToken: 'wash',
+            baseSpecies: 'rotom',
+            number: 479,
+            types: ['electric', 'water'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 50, phAttack: 65, phDefense: 107, spAttack: 105, spDefense: 107, speed: 86},
+            abilities: {0: 'levitate'},
+            height: 0.3,
+            weight: 0.3,
+            colors: ['orange', 'blue', 'black'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'rotom',
+            cloneEvolutions: 'rotom'
+            },
+        'frost-rotom': {
+            order: indexOrder++,
+            token: 'frost-rotom',
+            name: 'Frost Rotom',
+            formToken: 'frost',
+            baseSpecies: 'rotom',
+            number: 479,
+            types: ['electric', 'ice'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 50, phAttack: 65, phDefense: 107, spAttack: 105, spDefense: 107, speed: 86},
+            abilities: {0: 'levitate'},
+            height: 0.3,
+            weight: 0.3,
+            colors: ['orange', 'purple', 'black'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'rotom',
+            cloneEvolutions: 'rotom'
+            },
+        'fan-rotom': {
+            order: indexOrder++,
+            token: 'fan-rotom',
+            name: 'Fan Rotom',
+            formToken: 'fan',
+            baseSpecies: 'rotom',
+            number: 479,
+            types: ['electric', 'flying'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 50, phAttack: 65, phDefense: 107, spAttack: 105, spDefense: 107, speed: 86},
+            abilities: {0: 'levitate'},
+            height: 0.3,
+            weight: 0.3,
+            colors: ['orange', 'yellow', 'black'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'rotom',
+            cloneEvolutions: 'rotom'
+            },
+        'mow-rotom': {
+            order: indexOrder++,
+            token: 'mow-rotom',
+            name: 'Mow Rotom',
+            formToken: 'mow',
+            baseSpecies: 'rotom',
+            number: 479,
+            types: ['electric', 'grass'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 50, phAttack: 65, phDefense: 107, spAttack: 105, spDefense: 107, speed: 86},
+            abilities: {0: 'levitate'},
+            height: 0.3,
+            weight: 0.3,
+            colors: ['orange', 'green', 'black'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'rotom',
+            cloneEvolutions: 'rotom'
             },
 
         'uxie': {
