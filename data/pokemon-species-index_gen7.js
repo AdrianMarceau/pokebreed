@@ -674,7 +674,32 @@
             weight: 0.3,
             colors: ['brown', 'black', 'gray'],
             eggCycles: 25,
-            eggGroups: ['mineral']
+            eggGroups: ['mineral'],
+            nextEvolutions: [{
+                species: 'meteor-minior',
+                method: 'burst-evolution',
+                value: 'shields-down'
+                }]
+            },
+        'meteor-minior': {
+            order: indexOrder++,
+            token: 'meteor-minior',
+            name: 'Meteor Minior',
+            number: 774,
+            formClass: 'burst-evolution',
+            formClass2: 'random-variant',
+            possibleForms: ['orange', 'yellow', 'green', 'blue', 'indigo', 'violet'],
+            randomizeForms: true,
+            baseForm: 'orange',
+            types: ['rock', 'flying'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 60, phAttack: 100, phDefense: 60, spAttack: 100, spDefense: 60, speed: 120},
+            abilities: {0: 'shields-down'},
+            height: 0.3,
+            weight: 40,
+            colors: ['white'],
+            eggGroups: ['mineral'],
+            prevEvolution: 'minior'
             },
 
         'komala': {

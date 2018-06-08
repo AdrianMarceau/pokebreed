@@ -18,6 +18,24 @@
 
         // Base Pokedex
 
+        'shiny-ditto': {
+            order: thisIndex.afterOrder('ditto'),
+            token: 'shiny-ditto',
+            name: 'Shiny Ditto',
+            formClass: 'shiny-variant',
+            formToken: 'shiny',
+            number: 132,
+            types: ['normal'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 189, phAttack: 1, phDefense: 48, spAttack: 1, spDefense: 48, speed: 1},
+            abilities: {0: 'limber', hidden: 'imposter'},
+            height: 0.3,
+            weight: 4,
+            colors: ['blue', 'purple'],
+            eggCycles: 20,
+            eggGroups: ['ditto']
+            },
+
         'estrus-nidoqueen': {
             order: thisIndex.afterOrder('nidoqueen'),
             token: 'estrus-nidoqueen',
@@ -110,24 +128,6 @@
             prevEvolution: 'mime-jr'
             },
 
-        'shiny-ditto': {
-            order: thisIndex.afterOrder('ditto'),
-            token: 'shiny-ditto',
-            name: 'Shiny Ditto',
-            formClass: 'shiny-variant',
-            formToken: 'shiny',
-            number: 132,
-            types: ['normal'],
-            genderRatio: {none: 1.000},
-            baseStats: {hp: 189, phAttack: 1, phDefense: 48, spAttack: 1, spDefense: 48, speed: 1},
-            abilities: {0: 'limber', hidden: 'imposter'},
-            height: 0.3,
-            weight: 4,
-            colors: ['blue', 'purple'],
-            eggCycles: 20,
-            eggGroups: ['ditto']
-            },
-
         'ash-greninja': {
             order: thisIndex.afterOrder('greninja'),
             token: 'ash-greninja',
@@ -187,26 +187,6 @@
             prevEvolution: 'aegislash'
             },
 
-        'meteor-minior': {
-            order: thisIndex.afterOrder('minior'),
-            token: 'meteor-minior',
-            name: 'Meteor Minior',
-            number: 774,
-            formClass: 'burst-evolution',
-            formClass2: 'random-variant',
-            possibleForms: ['orange', 'yellow', 'green', 'blue', 'indigo', 'violet'],
-            randomizeForms: true,
-            baseForm: 'orange',
-            types: ['rock', 'flying'],
-            genderRatio: {none: 1.000},
-            baseStats: {hp: 60, phAttack: 100, phDefense: 60, spAttack: 100, spDefense: 60, speed: 120},
-            abilities: {0: 'shields-down'},
-            height: 0.3,
-            weight: 40,
-            colors: ['white'],
-            eggGroups: ['mineral'],
-            prevEvolution: 'minior'
-            },
 
         });
     thisIndex.indexOrder = indexOrder;
@@ -239,7 +219,7 @@
         {base: 'floette', species: 'eternal-floette', method: 'burst-evolution', value: 'ultimate-weapon', method2: 'extinction', value2: true},
         {base: 'aegislash', species: 'blade-aegislash', method: 'burst-evolution', value: 'stance-change'},
 
-        {base: 'minior', species: 'meteor-minior', method: 'burst-evolution', value: 'shields-down'},
+        ,
 
         ]);
 
