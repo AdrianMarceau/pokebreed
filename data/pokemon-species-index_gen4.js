@@ -1048,6 +1048,43 @@
             prevEvolution: 'murkrow'
             },
 
+        'glameow': {
+            order: indexOrder++,
+            token: 'glameow',
+            name: 'Glameow',
+            number: 431,
+            types: ['normal'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 49, phAttack: 55, phDefense: 42, spAttack: 42, spDefense: 37, speed: 85},
+            abilities: {0: 'limber', 1: 'own-tempo', hidden: 'keen-eye'},
+            height: 0.5,
+            weight: 3.9,
+            colors: ['gray', 'pink', 'white', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'purugly',
+                method: 'level-up',
+                value: 38
+                }]
+            },
+        'purugly': {
+            order: indexOrder++,
+            token: 'purugly',
+            name: 'Purugly',
+            number: 432,
+            types: ['normal'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 71, phAttack: 82, phDefense: 64, spAttack: 64, spDefense: 59, speed: 112},
+            abilities: {0: 'thick-fat', 1: 'own-tempo', hidden: 'defiant'},
+            height: 1,
+            weight: 43.8,
+            colors: ['gray', 'white', 'purple', 'pink', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'glameow'
+            },
+
         'chingling': {
             order: thisIndex.beforeOrder('chimecho'),
             token: 'chingling',
