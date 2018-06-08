@@ -18,24 +18,6 @@
 
         // Base Pokedex
 
-        'shiny-ditto': {
-            order: thisIndex.afterOrder('ditto'),
-            token: 'shiny-ditto',
-            name: 'Shiny Ditto',
-            formClass: 'shiny-variant',
-            formToken: 'shiny',
-            number: 132,
-            types: ['normal'],
-            genderRatio: {none: 1.000},
-            baseStats: {hp: 189, phAttack: 1, phDefense: 48, spAttack: 1, spDefense: 48, speed: 1},
-            abilities: {0: 'limber', hidden: 'imposter'},
-            height: 0.3,
-            weight: 4,
-            colors: ['blue', 'purple'],
-            eggCycles: 20,
-            eggGroups: ['ditto']
-            },
-
         'estrus-nidoqueen': {
             order: thisIndex.afterOrder('nidoqueen'),
             token: 'estrus-nidoqueen',
@@ -128,7 +110,23 @@
             prevEvolution: 'mime-jr'
             },
 
-
+        'shiny-ditto': {
+            order: thisIndex.afterOrder('ditto'),
+            token: 'shiny-ditto',
+            name: 'Shiny Ditto',
+            formClass: 'shiny-variant',
+            formToken: 'shiny',
+            number: 132,
+            types: ['normal'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 189, phAttack: 1, phDefense: 48, spAttack: 1, spDefense: 48, speed: 1},
+            abilities: {0: 'limber', hidden: 'imposter'},
+            height: 0.3,
+            weight: 4,
+            colors: ['blue', 'purple'],
+            eggCycles: 20,
+            eggGroups: ['ditto']
+            },
 
         });
     thisIndex.indexOrder = indexOrder;
@@ -151,11 +149,11 @@
     // Update previous gen pokemon with new next evolution data
     thisIndex.addNextEvolutions([
 
-        {base: 'mime-jr', species: 'mr-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'male', replace: true},
-        {base: 'mime-jr', species: 'ms-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'female'},
-
         {base: 'machamp', species: 'burst-machamp', method: 'burst-evolution', value: 'fighting-spirit', method2: 'type-surge', value2: 'fighting'},
         {base: 'nidoqueen', species: 'estrus-nidoqueen', method: 'burst-evolution', value: 'burning-passion', method2: 'type-surge', value2: 'poison'},
+
+        {base: 'mime-jr', species: 'mr-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'male', replace: true},
+        {base: 'mime-jr', species: 'ms-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'female'},
 
         ]);
 
