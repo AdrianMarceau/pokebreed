@@ -4496,23 +4496,25 @@
             var pokeList = [];
             var genderTrans = {m:'male',f:'female',n:'none'};
             for (var i = 0; i < rawList.length; i++){
-                var rawInfo = rawList[i].match(/^([a-z0-9\s]+)\s(?:×|x)?\s?([0-9mf×x\/]+)$/i);
-                var pokeToken = rawInfo[1].toLowerCase().replace(' ', '-');
-                var pokeCounts = rawInfo[2].toLowerCase().replace(/(×|x)+/, '').split(/\//);
-                var pokeIndex = PokemonSpeciesIndex[pokeToken];
+                var rawInfo = rawList[i].match(/^([-_a-z0-9é\s\.\']+)\s(?:×|x)?\s?([0-9mf×x\/]+)$/i);
                 //console.log('rawInfo['+ i +'] = ', rawInfo);
-                //console.log('pokeToken = ', pokeToken);
-                //console.log('pokeCounts = ', pokeCounts);
-                //console.log('pokeIndex = ', pokeIndex);
-                if (typeof pokeIndex === 'undefined'){ continue; }
-                for (var j = 0; j < pokeCounts.length; j++){
-                    var raw = pokeCounts[j].match(/^([0-9]+)(f|m)?$/);
-                    var count = parseInt(raw[1]);
-                    var gender = genderTrans[raw[2] || 'n'];
-                    //console.log('count / gender = ', count, gender);
-                    if (pokeIndex.hasNoGender && gender !== 'none'){ gender = 'none'; }
-                    else if (pokeIndex.hasOneGender && gender !== pokeIndex.speciesGender){ gender = 'none'; }
-                    for (var k = 0; k < count; k++){ pokeList.push(gender !== 'none' ? [pokeToken, gender] : [pokeToken]); }
+                if (typeof rawInfo[1] !== 'undefined'){
+                    var pokeToken = rawInfo[1].toLowerCase().replace(/é/g, 'e').replace(/\s+/g, '-').replace(/[^-a-z0-9]+/g, '');
+                    var pokeCounts = rawInfo[2].toLowerCase().replace(/(×|x)+/, '').split(/\//);
+                    var pokeIndex = PokemonSpeciesIndex[pokeToken];
+                    //console.log('pokeToken = ', pokeToken);
+                    //console.log('pokeCounts = ', pokeCounts);
+                    //console.log('pokeIndex = ', pokeIndex);
+                    if (typeof pokeIndex === 'undefined'){ continue; }
+                    for (var j = 0; j < pokeCounts.length; j++){
+                        var raw = pokeCounts[j].match(/^([0-9]+)(f|m)?$/);
+                        var count = parseInt(raw[1]);
+                        var gender = genderTrans[raw[2] || 'n'];
+                        //console.log('count / gender = ', count, gender);
+                        if (pokeIndex.hasNoGender && gender !== 'none'){ gender = 'none'; }
+                        else if (pokeIndex.hasOneGender && gender !== pokeIndex.speciesGender){ gender = 'none'; }
+                        for (var k = 0; k < count; k++){ pokeList.push(gender !== 'none' ? [pokeToken, gender] : [pokeToken]); }
+                        }
                     }
                 }
             //console.log('pokeList ', pokeList);
