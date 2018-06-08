@@ -1345,4 +1345,57 @@
 
         ]);
 
+    // Update previous gen pokemon with known species appeal data
+    thisIndex.addSpeciesAppealValues([
+
+        // Predator/prey relationships
+        {base: 'crabrawler', species: 'exeggcute'},
+        {base: 'alolan-grimer', species: 'trubbish'},
+        {base: 'alolan-muk', species: 'garbodor'},
+        {base: 'wingull', species: 'wishiwashi'},
+        {base: 'pelipper', species: 'wishiwashi'},
+        {base: 'wailmer', species: 'wishiwashi'},
+        {base: 'wailord', species: 'wishiwashi'},
+        {base: 'toucannon', species: 'bounsweet'},
+        {base: 'mareanie', species: 'corsola'},
+        {base: 'toxapex', species: 'corsola'},
+        {base: 'fearow', species: 'bounsweet'},
+        {base: 'lurantis', species: 'caterpie'},
+        {base: 'yungoos', species: 'rattata'},
+        {base: 'gumshoos', species: 'raticate'},
+        {base: 'spinarak', species: 'cutiefly'},
+        {base: 'pineco', species: 'cutiefly'},
+        {base: 'sneasel', species: 'alolan-vulpix'},
+        {base: 'weavile', species: 'alolan-sandshew'},
+        {base: 'pikipek', species: 'metapod'},
+
+        // Symbiotic relationships
+        // ---
+
+        // Rival relationships
+        {base: 'pinsir', species: 'vikavolt'},
+        {base: 'mimikyu', species: 'pikachu'},
+        {base: 'parasect', species: 'shiinotic'},
+        {base: 'shiinotic', species: 'parasect'},
+
+        // Romantic relationships
+        // ---
+
+        // Feeding/pollination relationships
+        {base: 'vivillon', species: 'comfey'},
+        {base: 'cutiefly', species: 'roselia'},
+
+        // One-sided (theft) relationships
+        {base: 'dewpider', species: 'surskit'},
+        {base: 'murkrow', species: 'wimpod'},
+        {base: 'meowth', species: 'wimpod'},
+
+        // Mistaken identify relationships
+        // ---
+
+        // Legendary trigger relationships
+        // ---
+
+        ]);
+
 })();

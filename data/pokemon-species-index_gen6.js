@@ -2113,4 +2113,39 @@
 
         ]);
 
+    // Update previous gen pokemon with known species appeal data
+    thisIndex.addSpeciesAppealValues([
+
+        // Predator/prey relationships
+        {base: 'fletchling', species: 'scatterbug'},
+        {base: 'fletchinder', species: 'spewpa'},
+        {base: 'gabite', species: 'carbink'},
+        {base: 'sableye', species: 'carbink'},
+        {base: 'sableye', species: 'diancie'},
+        {base: 'garchomp', species: 'diancie'},
+
+        // Symbiotic relationships
+        // ---
+
+        // Rival relationships
+        // ---
+
+        // Romantic relationships
+        // ---
+
+        // Feeding/pollination relationships
+        {base: 'vivillon', species: 'florges'},
+        {base: 'vivillon', species: 'comfey'},
+
+        // One-sided (theft) relationships
+        // ---
+
+        // Mistaken identify relationships
+        // ---
+
+        // Legendary trigger relationships
+        {base: 'diancie', species: 'carbink'},
+
+        ]);
+
 })();

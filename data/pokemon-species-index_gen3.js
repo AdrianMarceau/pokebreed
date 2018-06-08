@@ -2604,5 +2604,46 @@
         {base: 'wobbuffet', species: 'wynaut'},
         ]);
 
+    // Update previous gen pokemon with known species appeal data
+    thisIndex.addSpeciesAppealValues([
+
+        // Predator/prey relationships
+        {base: 'taillow', species: 'wurmple'},
+        {base: 'swellow', species: 'wurmple'},
+        {base: 'scyther', species: 'wurmple'},
+
+        // Symbiotic relationships
+        {base: 'luvdisc', species: 'corsola'},
+        {base: 'plusle', species: 'minun'},
+        {base: 'minun', species: 'plusle'},
+        {base: 'solrock', species: 'lunatone'},
+        {base: 'lunatone', species: 'solrock'},
+
+        // Rival relationships
+        {base: 'zangoose', species: 'seviper'},
+        {base: 'seviper', species: 'zangoose'},
+
+        // Romantic relationships
+        {base: 'volbeat', species: 'illumise'},
+
+        // Feeding/pollination relationships
+        {base: 'beautifly', species: 'victreebel'},
+        {base: 'beautifly', species: 'lilligant'},
+        {base: 'dustox', species: 'gloom'},
+        {base: 'yanma', species: 'cacnea'},
+
+        // One-sided (theft) relationships
+        {base: 'spoink', species: 'clamperl'},
+
+        // Mistaken identify relationships
+        {base: 'illumise', species: 'lanturn'},
+
+        // Legendary trigger relationships
+        {base: 'regirock', species: 'relicanth'},
+        {base: 'regice', species: 'relicanth'},
+        {base: 'registeel', species: 'relicanth'},
+
+        ]);
+
 
 })();

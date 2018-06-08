@@ -1779,4 +1779,40 @@
         });
     thisIndex.indexOrder = indexOrder;
 
+    // Update previous gen pokemon with known species appeal data
+    thisIndex.addSpeciesAppealValues([
+
+        // Predator/prey relationships
+        {base: 'archeops', species: 'omanyte'},
+        {base: 'mandibuzz', species: 'cubone'},
+        {base: 'heatmor', species: 'durant'},
+        {base: 'pineco', species: 'dwebble'},
+
+        // Symbiotic relationships
+        {base: 'dusknoir', species: 'yamask'},
+        {base: 'alomomola', species: 'luvdisc'},
+        {base: 'karrablast', species: 'shelmet'},
+        {base: 'shelmet', species: 'karrablast'},
+
+        // Rival relationships
+        {base: 'carvanha', species: 'basculin'},
+
+        // Romantic relationships
+        // ---
+
+        // Feeding/pollination relationships
+        {base: 'beautifly', species: 'lilligant'},
+        {base: 'vibrava', species: 'maractus'},
+
+        // One-sided (theft) relationships
+        // --
+
+        // Mistaken identify relationships
+        // ---
+
+        // Legendary trigger relationships
+        // ---
+
+        ]);
+
 })();

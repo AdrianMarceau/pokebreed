@@ -2778,4 +2778,39 @@
         });
     thisIndex.indexOrder = indexOrder;
 
+    // Update previous gen pokemon with known species appeal data
+    thisIndex.addSpeciesAppealValues([
+
+        // Predator/prey relationships
+        {base: 'pidgeotto', species: 'exeggcute'},
+        {base: 'pidgeot', species: 'magikarp'},
+        {base: 'ekans', species: 'pidgey'},
+        {base: 'ekans', species: 'spearow'},
+        {base: 'kingler', species: 'cloyster'},
+        {base: 'omastar', species: 'shellder'},
+
+        // Symbiotic relationships
+        {base: 'shellder', species: 'slowpoke'},
+
+        // Rival relationships
+        // ---
+
+        // Romantic relationships
+        // ---
+
+        // Feeding/pollination relationships
+        {base: 'butterfree', species: 'venusaur'},
+        {base: 'venomoth', species: 'vileplume'},
+
+        // One-sided (theft) relationships
+        // ---
+
+        // Mistaken identify relationships
+        // ---
+
+        // Legendary trigger relationships
+        {base: 'mew', species: 'mewtwo'},
+
+        ]);
+
 })();

@@ -2390,4 +2390,38 @@
 
         ]);
 
+    // Update previous gen pokemon with known species appeal data
+    thisIndex.addSpeciesAppealValues([
+
+        // Predator/prey relationships
+        {base: 'starly', species: 'wurmple'},
+        {base: 'starly', species: 'cherubi'},
+        {base: 'pinsir', species: 'cherubi'},
+
+        // Symbiotic relationships
+        {base: 'remoraid', species: 'mantyke'},
+        {base: 'dusknoir', species: 'froslass'},
+
+        // Rival relationships
+        // ---
+
+        // Romantic relationships
+        // ---
+
+        // Feeding/pollination relationships
+        {base: 'mothim', species: 'roserade'},
+        {base: 'mothim', species: 'combee'},
+        {base: 'combee', species: 'bellossom'},
+
+        // One-sided (theft) relationships
+        {base: 'heracross', species: 'vespiquen'},
+
+        // Mistaken identify relationships
+        {base: 'kricketot', species: 'chatot'},
+
+        // Legendary trigger relationships
+        // ---
+
+        ]);
+
 })();

@@ -1853,4 +1853,36 @@
         {base: 'tauros', species: 'miltank', 'method': 'chance', 'value': 50},
         ]);
 
+    // Update previous gen pokemon with known species appeal data
+    thisIndex.addSpeciesAppealValues([
+
+        // Predator/prey relationships
+        // ---
+
+        // Symbiotic relationships
+        {base: 'heracross', species: 'pinsir'},
+        {base: 'pinsir', species: 'heracross'},
+
+        // Rival relationships
+        // ---
+
+        // Romantic relationships
+        {base: 'tauros', species: 'miltank'},
+
+        // Feeding/pollination relationships
+        {base: 'butterfree', species: 'meganium'},
+        {base: 'beedrill', species: 'bayleef'},
+        {base: 'ledyba', species: 'sunflora'},
+
+        // One-sided (theft) relationships
+        {base: 'heracross', species: 'bulbasaur'},
+
+        // Mistaken identify relationships
+        // ---
+
+        // Legendary trigger relationships
+        // ---
+
+        ]);
+
 })();
