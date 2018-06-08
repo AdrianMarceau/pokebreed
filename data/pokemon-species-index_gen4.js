@@ -1108,6 +1108,42 @@
                 }]
             },
 
+        'stunky': {
+            order: indexOrder++,
+            token: 'stunky',
+            name: 'Stunky',
+            number: 434,
+            types: ['poison', 'dark'],
+            baseStats: {hp: 63, phAttack: 63, phDefense: 47, spAttack: 41, spDefense: 41, speed: 74},
+            abilities: {0: 'stench', 1: 'aftermath', hidden: 'keen-eye'},
+            height: 0.4,
+            weight: 19.2,
+            colors: ['purple', 'white', 'red'],
+            evos: ['skuntank'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'skuntank',
+                method: 'level-up',
+                value: 34
+                }]
+            },
+        'skuntank': {
+            order: indexOrder++,
+            token: 'skuntank',
+            name: 'Skuntank',
+            number: 435,
+            types: ['poison', 'dark'],
+            baseStats: {hp: 103, phAttack: 93, phDefense: 67, spAttack: 71, spDefense: 61, speed: 84},
+            abilities: {0: 'stench', 1: 'aftermath', hidden: 'keen-eye'},
+            height: 1,
+            weight: 38,
+            colors: ['purple', 'white', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'stunky'
+            },
+
         'bronzor': {
             order: indexOrder++,
             token: 'bronzor',
