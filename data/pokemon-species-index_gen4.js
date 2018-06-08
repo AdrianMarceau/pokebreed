@@ -841,6 +841,94 @@
                 }]
             },
 
+        'western-shellos': { // TODO: Add north and south versions
+            order: indexOrder++,
+            token: 'western-shellos',
+            name: 'Western Shellos',
+            formClass: 'regional-variant',
+            formToken: 'west',
+            number: 422,
+            types: ['water'],
+            baseStats: {hp: 76, phAttack: 48, phDefense: 48, spAttack: 57, spDefense: 62, speed: 34},
+            abilities: {0: 'sticky-hold', 1: 'storm-drain', hidden: 'sand-force'},
+            height: 0.3,
+            weight: 6.3,
+            colors: ['pink', 'white', 'yellow', 'black'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'amorphous'],
+            nextEvolutions: [{
+                species: 'western-gastrodon',
+                method: 'level-up',
+                value: 30
+                }],
+            altBaseEvolutions: [{
+                'species': 'eastern-shellos',
+                'method': 'type-appeal',
+                'value': 'ice'
+                }]
+            },
+        'western-gastrodon': {
+            order: indexOrder++,
+            token: 'western-gastrodon',
+            name: 'Western Gastrodon',
+            formClass: 'regional-variant',
+            formToken: 'west',
+            number: 423,
+            types: ['water', 'ground'],
+            baseStats: {hp: 111, phAttack: 83, phDefense: 68, spAttack: 92, spDefense: 82, speed: 39},
+            abilities: {0: 'sticky-hold', 1: 'storm-drain', hidden: 'sand-force'},
+            height: 0.9,
+            weight: 29.9,
+            colors: ['brown', 'pink', 'yellow', 'black', 'white'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'amorphous'],
+            prevEvolution: 'western-shellos'
+            },
+
+        'eastern-shellos': {
+            order: indexOrder++,
+            token: 'eastern-shellos',
+            name: 'Eastern Shellos',
+            formClass: 'regional-variant',
+            formToken: 'east',
+            number: 422,
+            types: ['water'],
+            baseStats: {hp: 76, phAttack: 48, phDefense: 48, spAttack: 57, spDefense: 62, speed: 34},
+            abilities: {0: 'sticky-hold', 1: 'storm-drain', hidden: 'sand-force'},
+            height: 0.3,
+            weight: 6.3,
+            colors: ['blue', 'yellow', 'white', 'black'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'amorphous'],
+            nextEvolutions: [{
+                species: 'eastern-gastrodon',
+                method: 'level-up',
+                value: 30
+                }],
+            altBaseEvolutions: [{
+                'species': 'western-shellos',
+                'method': 'type-appeal',
+                'value': 'fire'
+                }]
+            },
+        'eastern-gastrodon': {
+            order: indexOrder++,
+            token: 'eastern-gastrodon',
+            name: 'Eastern Gastrodon',
+            formClass: 'regional-variant',
+            formToken: 'east',
+            number: 423,
+            types: ['water', 'ground'],
+            baseStats: {hp: 111, phAttack: 83, phDefense: 68, spAttack: 92, spDefense: 82, speed: 39},
+            abilities: {0: 'sticky-hold', 1: 'storm-drain', hidden: 'sand-force'},
+            height: 0.9,
+            weight: 29.9,
+            colors: ['green', 'blue', 'yellow', 'black', 'white'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'amorphous'],
+            prevEvolution: 'eastern-shellos'
+            },
+
         'ambipom': {
             order: thisIndex.afterOrder('aipom'),
             token: 'ambipom',
