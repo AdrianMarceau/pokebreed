@@ -2121,7 +2121,32 @@
             weight: 750,
             colors: ['gray', 'black', 'yellow', 'red'],
             eggCycles: 120,
-            eggGroups: ['undiscovered']
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'origin-giratina',
+                method: 'burst-evolution',
+                value: 'griseous-orb'
+                }]
+            },
+        'origin-giratina': {
+            order: indexOrder++,
+            token: 'origin-giratina',
+            name: 'Origin Giratina',
+            class: 'legendary',
+            formClass: 'burst-evolution',
+            formToken: 'origin',
+            baseSpecies: 'giratina',
+            number: 487,
+            types: ['ghost', 'dragon'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 150, phAttack: 120, phDefense: 100, spAttack: 120, spDefense: 100, speed: 90},
+            abilities: {0: 'levitate'},
+            height: 6.9,
+            weight: 650,
+            colors: ['black', 'gray', 'yellow', 'red'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'giratina'
             },
 
         'cresselia': {
