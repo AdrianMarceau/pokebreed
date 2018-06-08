@@ -268,7 +268,32 @@
                 value: 'fairy',
                 method2: 'level-up',
                 value2: 39
+                }, {
+                species: 'eternal-floette',
+                method: 'burst-evolution',
+                value: 'ultimate-weapon',
+                method2: 'extinction',
+                value2: true
                 }]
+            },
+        'eternal-floette': {
+            order: indexOrder++,
+            token: 'eternal-floette',
+            name: 'Eternal Floette',
+            formClass: 'burst-evolution',
+            formToken: 'eternal',
+            baseSpecies: 'floette',
+            number: 670,
+            types: ['fairy'],
+            genderRatio: {female: 1.000},
+            baseStats: {hp: 74, phAttack: 65, phDefense: 67, spAttack: 125, spDefense: 128, speed: 92},
+            abilities: {0: 'flower-veil'},
+            height: 0.2,
+            weight: 0.9,
+            colors: ['white', 'red', 'black'],
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'floette'
             },
         'florges': {
             order: indexOrder++,
