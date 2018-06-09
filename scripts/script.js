@@ -764,8 +764,8 @@
                 var regVariantA = false;
                 var regVariantB = false;
                 if (infoA['gameGeneration'] !== infoB['gameGeneration']){
-                    if (infoA['formClass'] === 'regional-variant'){ regVariantA = true; }
-                    if (infoB['formClass'] === 'regional-variant'){ regVariantB = true; }
+                    //if (infoA['formClass'] === 'regional-variant' || infoA['formClass2'] === 'regional-variant'){ regVariantA = true; }
+                    //if (infoB['formClass'] === 'regional-variant' || infoB['formClass2'] === 'regional-variant'){ regVariantB = true; }
                     }
 
                 var genderVariantA = false;
@@ -859,8 +859,8 @@
 
             // Sort allowed pokemon by a few criteria
             BasicPokemonSpeciesIndexTokens.sort(function(tokenA, tokenB){
-                var orderA = PokemonSpeciesDisplayOrder.indexOf(tokenA);
-                var orderB = PokemonSpeciesDisplayOrder.indexOf(tokenB);
+                var orderA = PokemonSpeciesDexOrder.indexOf(tokenA);
+                var orderB = PokemonSpeciesDexOrder.indexOf(tokenB);
                 if (orderA < orderB){ return -1; }
                 else if (orderA > orderB){ return 1; }
                 else { return 0; }
@@ -1691,6 +1691,9 @@
         if (typeof isVisitor !== 'boolean'){ isVisitor = false; }
         if (typeof customData !== 'object'){ customData = {}; }
 
+        // Collect index data for pokemon
+        var indexData = PokemonSpeciesIndex[pokemonToken];
+
         // Create an entry for this species in the global count if not exists
         var addedPokemonSpecies = thisZoneData.addedPokemonSpecies;
         if (typeof addedPokemonSpecies[pokemonToken] === 'undefined'){ addedPokemonSpecies[pokemonToken] = 0; }
@@ -1707,14 +1710,20 @@
             addedPokemonEggs[pokemonToken]++;
             }
 
-        // Collect index data for pokemon and its egg cycles
+        // If this is a baby evolution, reduce egg cycles by half
+        if (indexData.class === 'baby'
+            && indexData.formClass === 'baby-evolution'){
+            reduceCycles += 1;
+            }
+
+        // Define the egg cycles for this pokemon and reduce if necessary
         var indexData = PokemonSpeciesIndex[pokemonToken];
         var baseStats = indexData['baseStats'];
-        //var eggCycles = isEgg ? Math.floor(indexData.eggCycles / 5) + 1 : 0;
         var eggCycles = isEgg ? indexData.eggCycles : 0;
         if (reduceCycles > 0){
             for (var i = 0; i < reduceCycles; i++){ eggCycles = (eggCycles / 2); }
             eggCycles = Math.ceil(eggCycles);
+            if (eggCycles < 1){ eggCycles = 1; }
             }
 
         // Calculate this pokemon's gender based on ratios
