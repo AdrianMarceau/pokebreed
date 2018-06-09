@@ -33,17 +33,17 @@
         </p>
         <ul>
             <li>
+                <strong>Baby Ponyta</strong> by <strong>Corvos</strong>
+            </li>
+            <li>
                 <strong>Baby Paras</strong> by <strong>MegaBossMan</strong>
             </li>
             <li>
                 <strong>Baby Tangela</strong> by <strong>PTGigi</strong>
             </li>
             <li>
-                <strong>Baby Kangaskhan</strong> by <strong>Ageman20XX</strong> (<a href="http://plutolighthouse.net/" target="_blank">http://plutolighthouse.net/</a>)
+                <strong>Baby Kangaskhan</strong> by <strong>Ageman20XX</strong>
             </li>
         </ul>
-        <p style="margin-top: 0; font-size: 80%;">
-            * Edits to the final sprites are sometimes made by Ageman20XX but are otherwise as-stated above
-        </p>
     </div>
 </div>
