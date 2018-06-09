@@ -1813,6 +1813,10 @@
         // Legendary trigger relationships
         // ---
 
+        // Miscellaneous appeal
+        {base: 'porygon2', species: 'elgyem'},
+        {base: 'porygon2', species: 'beheeyem'},
+
         ]);
 
 })();

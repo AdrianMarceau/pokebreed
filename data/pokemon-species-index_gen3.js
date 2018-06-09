@@ -2643,6 +2643,9 @@
         {base: 'regice', species: 'relicanth'},
         {base: 'registeel', species: 'relicanth'},
 
+        // Miscellaneous appeal
+        {base: 'porygon2', species: 'deoxys'},
+
         ]);
 
 
