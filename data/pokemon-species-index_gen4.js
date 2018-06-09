@@ -506,10 +506,10 @@
                 },
             possibleFormsTriggers: {
                 'plant': ['forest', 'savanna', 'graveyard'],
-                'sandy': ['desert', 'beach', 'cliffside'],
+                'sandy': ['desert', 'beach', 'cliffside', 'volcano'],
                 'trash': ['city', 'factory', 'crag'],
                 'snow': ['snow', 'sky', 'space'],
-                'bubble': ['river', 'seafloor', 'volcano'],
+                'bubble': ['river', 'seafloor'],
                 },
             baseForm: 'plant',
             types: ['bug'],
@@ -532,40 +532,40 @@
                 value: 20,
                 method2: 'gender',
                 value2: 'female',
-                method2: 'form',
-                value2: 'plant'
+                method3: 'form',
+                value3: 'plant'
                 },{
                 species: 'sandy-wormadam',
                 method: 'level-up',
                 value: 20,
                 method2: 'gender',
                 value2: 'female',
-                method2: 'form',
-                value2: 'sandy'
+                method3: 'form',
+                value3: 'sandy'
                 },{
                 species: 'trash-wormadam',
                 method: 'level-up',
                 value: 20,
                 method2: 'gender',
                 value2: 'female',
-                method2: 'form',
-                value2: 'trash'
+                method3: 'form',
+                value3: 'trash'
                 },{
                 species: 'snow-wormadam',
                 method: 'level-up',
                 value: 20,
                 method2: 'gender',
                 value2: 'female',
-                method2: 'form',
-                value2: 'snow'
+                method3: 'form',
+                value3: 'snow'
                 },{
                 species: 'bubble-wormadam',
                 method: 'level-up',
                 value: 20,
                 method2: 'gender',
                 value2: 'female',
-                method2: 'form',
-                value2: 'bubble'
+                method3: 'form',
+                value3: 'bubble'
                 },]
             },
         'plant-wormadam': {
