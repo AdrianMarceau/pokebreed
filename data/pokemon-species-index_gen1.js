@@ -1105,7 +1105,7 @@
             types: ['fire'],
             genderRatio: {male: 0.75, female: 0.25},
             baseStats: {hp: 55, phAttack: 70, phDefense: 45, spAttack: 70, spDefense: 50, speed: 60},
-            abilities: {0: 'intimidate', 1: 'flash-fire', hidden: 'jJustified'},
+            abilities: {0: 'intimidate', 1: 'flash-fire', hidden: 'justified'},
             height: 0.7,
             weight: 19,
             colors: ['orange', 'black', 'brown'],

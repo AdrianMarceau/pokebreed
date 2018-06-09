@@ -81,6 +81,29 @@
                 value: 6
                 }]
             },
+        'baby-growlithe': {
+            order: thisIndex.beforeOrder('growlithe'),
+            token: 'baby-growlithe',
+            name: 'Baby Growlithe',
+            class: 'baby',
+            formClass: 'baby-evolution',
+            formToken: 'baby',
+            number: 58,
+            types: ['fire'],
+            genderRatio: {male: 0.75, female: 0.25},
+            baseStats: {hp: 27, phAttack: 35, phDefense: 22, spAttack: 35, spDefense: 25, speed: 30},
+            abilities: {0: 'intimidate', 1: 'flash-fire', hidden: 'justified'},
+            height: 0.7,
+            weight: 19,
+            colors: ['orange', 'black', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'growlithe',
+                method: 'level-up',
+                value: 20
+                }]
+            },
         'baby-ponyta': {
             order: thisIndex.beforeOrder('ponyta'),
             token: 'baby-ponyta',
@@ -200,6 +223,7 @@
     // Update previous gen pokemon with alt base evolution data
     thisIndex.addAltBaseEvolutions([
         {base: 'paras', species: 'baby-paras', method: 'type-surge', value: 'bug'},
+        {base: 'growlithe', species: 'baby-growlithe', method: 'type-surge', value: 'fire'},
         {base: 'ponyta', species: 'baby-ponyta', method: 'type-surge', value: 'fire'},
         {base: 'tangela', species: 'baby-tangela', method: 'type-surge', value: 'grass'},
         ]);
