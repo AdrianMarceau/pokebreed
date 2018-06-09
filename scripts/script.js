@@ -4072,7 +4072,7 @@
 
     // Define a function for getting the base evolution of a pokemon
     function pokemonGetBaseEvolution(pokeToken, includeBaby, includeAlts){
-        //console.log('pokemonGetBaseEvolution('+pokeToken+', '+includeBaby+')');
+        //console.log('pokemonGetBaseEvolution('+pokeToken+', '+includeBaby+', '+includeAlts+')');
         if (typeof pokeToken === 'undefined'){ return false; }
         if (typeof includeBaby !== 'boolean'){ includeBaby = true; }
         if (typeof includeAlts !== 'boolean'){ includeAlts = true; }
@@ -4091,6 +4091,8 @@
             } else {
             //console.log('return indexInfo.altBaseEvolutions', indexInfo.altBaseEvolutions);
             if (includeAlts && typeof indexInfo.altBaseEvolutions !== 'undefined'){
+                //console.log('\npokemonGetBaseEvolution('+pokeToken+', '+includeBaby+', '+includeAlts+')');
+                //console.log('includeAlts && typeof indexInfo.altBaseEvolutions !== \'undefined\' = ', indexInfo.altBaseEvolutions);
                 var queuedBaseEvolutions = [];
                 queuedBaseEvolutions.push({
                     token: indexInfo.token,
@@ -4099,17 +4101,23 @@
                 for (var i = 0; i < indexInfo.altBaseEvolutions.length; i++){
                     var baseEvolution = indexInfo.altBaseEvolutions[i];
                     var baseEvolutionInfo = PokemonSpeciesIndex[baseEvolution.species];
-                    if (baseEvolution.method === 'type-appeal'
-                        && thisZoneData.currentStats['types'][baseEvolution.value] >= 20){
+                    //console.log('baseEvolution['+ i +'] = ', baseEvolution);
+                    //console.log('thisZoneData.currentStats[\'types\'][baseEvolution.value] = ', thisZoneData.currentStats['types'][baseEvolution.value]);
+                    if ((baseEvolution.method === 'type-appeal'
+                        && thisZoneData.currentStats['types'][baseEvolution.value] >= 20)
+                        || (baseEvolution.method === 'type-surge'
+                        && thisZoneData.currentStats['types'][baseEvolution.value] >= 40)){
                         queuedBaseEvolutions.push({
                             token: baseEvolution.species,
-                            chance: 1 + thisZoneData.currentStats['types'][baseEvolution.value]
+                            chance: (baseEvolution.method === 'type-appeal' ? 2 : 3) + thisZoneData.currentStats['types'][baseEvolution.value]
                             });
-                        } else if (baseEvolution.method === 'type-warning'
-                        && thisZoneData.currentStats['types'][baseEvolution.value] <= -5){
+                        } else if ((baseEvolution.method === 'type-warning'
+                        && thisZoneData.currentStats['types'][baseEvolution.value] <= -5)
+                        || baseEvolution.method === 'type-crisis'
+                        && thisZoneData.currentStats['types'][baseEvolution.value] <= -10){
                         queuedBaseEvolutions.push({
                             token: baseEvolution.species,
-                            chance: (2 + (thisZoneData.currentStats['types'][baseEvolution.value] * -1)) * 2
+                            chance: (baseEvolution.method === 'type-warning' ? 2 : 3) + ((sZoneData.currentStats['types'][baseEvolution.value] * -1)  * 2)
                             });
                         } else if (baseEvolution.method === 'chance'
                         && (Math.seededRandomChance() < baseEvolution.value)){
@@ -4125,7 +4133,7 @@
                         }
                     }
                 if (queuedBaseEvolutions.length > 0){
-                    //console.log('queuedBaseEvolutions for '+pokemonInfo.token+' = ', queuedEvolutions);
+                    //console.log('queuedBaseEvolutions for '+indexInfo.token+' = ', queuedBaseEvolutions);
                     queuedBaseEvolutions.sort(function(a, b){
                         if (a.chance > b.chance){ return -1; }
                         else if (a.chance < b.chance){ return 1; }

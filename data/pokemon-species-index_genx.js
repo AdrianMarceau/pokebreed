@@ -197,11 +197,18 @@
         });
     thisIndex.indexOrder = indexOrder;
 
+    // Update previous gen pokemon with alt base evolution data
+    thisIndex.addAltBaseEvolutions([
+        {base: 'paras', species: 'baby-paras', method: 'type-surge', value: 'bug'},
+        {base: 'ponyta', species: 'baby-ponyta', method: 'type-surge', value: 'fire'},
+        {base: 'tangela', species: 'baby-tangela', method: 'type-surge', value: 'grass'},
+        ]);
+
     // Update previous gen pokemon with new prev evolution data
     thisIndex.addPrevEvolutions([
-        {base: 'paras', species: 'baby-paras'},
-        {base: 'ponyta', species: 'baby-ponyta'},
-        {base: 'tangela', species: 'baby-tangela'},
+        //{base: 'paras', species: 'baby-paras'},
+        //{base: 'ponyta', species: 'baby-ponyta'},
+        //{base: 'tangela', species: 'baby-tangela'},
         {base: 'kangaskhan', species: 'baby-kangaskhan'},
         ]);
 
