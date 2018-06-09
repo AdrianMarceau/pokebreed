@@ -97,7 +97,7 @@
             weight: 19,
             colors: ['orange', 'black', 'brown'],
             eggCycles: 20,
-            eggGroups: ['field'],
+            eggGroups: ['undiscovered'],
             nextEvolutions: [{
                 species: 'growlithe',
                 method: 'level-up',
@@ -119,11 +119,57 @@
             weight: 30,
             colors: ['white', 'orange', 'red', 'yellow'],
             eggCycles: 20,
-            eggGroups: ['field'],
+            eggGroups: ['undiscovered'],
             nextEvolutions: [{
                 species: 'ponyta',
                 method: 'level-up',
                 value: 20
+                }]
+            },
+        'baby-grimer': {
+            order: thisIndex.beforeOrder('grimer'),
+            token: 'baby-grimer',
+            name: 'Baby Grimer',
+            class: 'baby',
+            formClass: 'baby-evolution',
+            formToken: 'baby',
+            number: 88,
+            types: ['poison'],
+            baseStats: {hp: 40, phAttack: 40, phDefense: 25, spAttack: 20, spDefense: 25, speed: 12},
+            abilities: {0: 'stench', 1: 'sticky-hold', hidden: 'poison-touch'},
+            height: 0.9,
+            weight: 30,
+            colors: ['purple'],
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'grimer',
+                method: 'level-up',
+                value: 19
+                }]
+            },
+        'baby-alolan-grimer': {
+            order: thisIndex.afterOrder('muk', 1),
+            token: 'baby-alolan-grimer',
+            name: 'Baby Alolan Grimer',
+            class: 'baby',
+            formClass: 'baby-evolution',
+            formClass2: 'regional-variant',
+            formToken: 'baby-alolan',
+            baseSpecies: 'grimer',
+            number: 88,
+            types: ['poison', 'dark'],
+            baseStats: {hp: 40, phAttack: 40, phDefense: 25, spAttack: 20, spDefense: 25, speed: 12},
+            abilities: {0: 'poison-touch', 1: 'gluttony', hidden: 'power-of-alchemy'},
+            height: 0.7,
+            weight: 42,
+            colors: ['green'],
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'alolan-grimer',
+                method: 'level-up',
+                value: 19
                 }]
             },
         'baby-tangela': {
@@ -225,14 +271,13 @@
         {base: 'paras', species: 'baby-paras', method: 'type-surge', value: 'bug'},
         {base: 'growlithe', species: 'baby-growlithe', method: 'type-surge', value: 'fire'},
         {base: 'ponyta', species: 'baby-ponyta', method: 'type-surge', value: 'fire'},
+        {base: 'grimer', species: 'baby-grimer', method: 'type-surge', value: 'poison'},
+        {base: 'alolan-grimer', species: 'baby-alolan-grimer', method: 'type-surge', value: 'poison'},
         {base: 'tangela', species: 'baby-tangela', method: 'type-surge', value: 'grass'},
         ]);
 
     // Update previous gen pokemon with new prev evolution data
     thisIndex.addPrevEvolutions([
-        //{base: 'paras', species: 'baby-paras'},
-        //{base: 'ponyta', species: 'baby-ponyta'},
-        //{base: 'tangela', species: 'baby-tangela'},
         {base: 'kangaskhan', species: 'baby-kangaskhan'},
         ]);
 

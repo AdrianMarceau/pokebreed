@@ -1221,7 +1221,7 @@
             },
 
         'alolan-grimer': {
-            order: thisIndex.afterOrder('muk', 1),
+            order: thisIndex.afterOrder('muk', 2),
             token: 'alolan-grimer',
             name: 'Alolan Grimer',
             formClass: 'regional-variant',
@@ -1248,7 +1248,7 @@
                 }]
             },
         'alolan-muk': {
-            order: thisIndex.afterOrder('muk', 2),
+            order: thisIndex.afterOrder('muk', 3),
             token: 'alolan-muk',
             name: 'Alolan Muk',
             formClass: 'regional-variant',
