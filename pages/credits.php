@@ -42,7 +42,7 @@
                 <strong>Baby Paras</strong> by <strong>@MBM / MegaBossMan</strong>
             </li>
             <li>
-                <strong>Baby Kangaskhan, Baby Grimer</strong> by <strong>@Ageman20XX / Adrian Marceau</strong> (<a href="http://plutolighthouse.net/" target="_blank">http://plutolighthouse.net/</a>)
+                <strong>Baby Kangaskhan, Baby Grimer, Baby Meowth</strong> by <strong>@Ageman20XX / Adrian Marceau</strong> (<a href="http://plutolighthouse.net/" target="_blank">http://plutolighthouse.net/</a>)
             </li>
         </ul>
     </div>
