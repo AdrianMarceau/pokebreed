@@ -685,8 +685,10 @@
 
                 var regVariantA = false;
                 var regVariantB = false;
-                if (infoA['formClass'] === 'regional-variant'){ regVariantA = true; }
-                if (infoB['formClass'] === 'regional-variant'){ regVariantB = true; }
+                if (infoA['gameGeneration'] !== infoB['gameGeneration']){
+                    if (infoA['formClass'] === 'regional-variant'){ regVariantA = true; }
+                    if (infoB['formClass'] === 'regional-variant'){ regVariantB = true; }
+                    }
 
                 var genderVariantA = false;
                 var genderVariantB = false;
@@ -761,8 +763,10 @@
 
                 var regVariantA = false;
                 var regVariantB = false;
-                if (infoA['formClass'] === 'regional-variant'){ regVariantA = true; }
-                if (infoB['formClass'] === 'regional-variant'){ regVariantB = true; }
+                if (infoA['gameGeneration'] !== infoB['gameGeneration']){
+                    if (infoA['formClass'] === 'regional-variant'){ regVariantA = true; }
+                    if (infoB['formClass'] === 'regional-variant'){ regVariantB = true; }
+                    }
 
                 var genderVariantA = false;
                 var genderVariantB = false;
