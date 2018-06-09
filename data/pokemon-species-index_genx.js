@@ -78,9 +78,57 @@
             nextEvolutions: [{
                 species: 'paras',
                 method: 'level-up',
-                value: 6
+                value: 12
                 }]
             },
+
+        'baby-meowth': {
+            order: thisIndex.beforeOrder('meowth'),
+            token: 'baby-meowth',
+            name: 'Baby Meowth',
+            class: 'baby',
+            formClass: 'baby-evolution',
+            formToken: 'baby',
+            number: 52,
+            types: ['normal'],
+            baseStats: {hp: 20, phAttack: 22, phDefense: 17, spAttack: 20, spDefense: 20, speed: 45},
+            abilities: {0: 'pickup', 1: 'technician', hidden: 'unnerve'},
+            height: 0.4,
+            weight: 4.2,
+            colors: ['white', 'yellow', 'black', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'meowth',
+                method: 'level-up',
+                value: 14
+                }]
+            },
+        'baby-alolan-meowth': {
+            order: thisIndex.afterOrder('persian', 1),
+            token: 'baby-alolan-meowth',
+            name: 'Baby Alolan Meowth',
+            class: 'baby',
+            formClass: 'baby-evolution',
+            formClass2: 'regional-variant',
+            formToken: 'baby-alolan',
+            baseSpecies: 'meowth',
+            number: 52,
+            types: ['dark'],
+            baseStats: {hp: 20, phAttack: 17, phDefense: 17, spAttack: 25, spDefense: 20, speed: 45},
+            abilities: {0: 'pickup', 1: 'technician', hidden: 'rattled'},
+            height: 0.4,
+            weight: 4.2,
+            colors: ['gray', 'black', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'alolan-meowth',
+                method: 'level-up',
+                value: 14
+                }]
+            },
+
         'baby-growlithe': {
             order: thisIndex.beforeOrder('growlithe'),
             token: 'baby-growlithe',
@@ -101,9 +149,10 @@
             nextEvolutions: [{
                 species: 'growlithe',
                 method: 'level-up',
-                value: 20
+                value: 10
                 }]
             },
+
         'baby-ponyta': {
             order: thisIndex.beforeOrder('ponyta'),
             token: 'baby-ponyta',
@@ -126,6 +175,7 @@
                 value: 20
                 }]
             },
+
         'baby-grimer': {
             order: thisIndex.beforeOrder('grimer'),
             token: 'baby-grimer',
@@ -158,7 +208,7 @@
             formToken: 'baby-alolan',
             baseSpecies: 'grimer',
             number: 88,
-            types: ['poison', 'dark'],
+            types: ['poison'],
             baseStats: {hp: 40, phAttack: 40, phDefense: 25, spAttack: 20, spDefense: 25, speed: 12},
             abilities: {0: 'poison-touch', 1: 'gluttony', hidden: 'power-of-alchemy'},
             height: 0.7,
@@ -172,6 +222,7 @@
                 value: 19
                 }]
             },
+
         'baby-tangela': {
             order: thisIndex.beforeOrder('tangela'),
             token: 'baby-tangela',
@@ -191,9 +242,10 @@
             nextEvolutions: [{
                 species: 'tangela',
                 method: 'level-up',
-                value: 20
+                value: 17
                 }]
             },
+
         'baby-kangaskhan': {
             order: thisIndex.beforeOrder('kangaskhan'),
             token: 'baby-kangaskhan',
@@ -269,6 +321,8 @@
     // Update previous gen pokemon with alt base evolution data
     thisIndex.addAltBaseEvolutions([
         {base: 'paras', species: 'baby-paras', method: 'type-surge', value: 'bug'},
+        {base: 'meowth', species: 'baby-meowth', method: 'type-surge', value: 'normal'},
+        {base: 'alolan-meowth', species: 'baby-alolan-meowth', method: 'type-surge', value: 'dark'},
         {base: 'growlithe', species: 'baby-growlithe', method: 'type-surge', value: 'fire'},
         {base: 'ponyta', species: 'baby-ponyta', method: 'type-surge', value: 'fire'},
         {base: 'grimer', species: 'baby-grimer', method: 'type-surge', value: 'poison'},

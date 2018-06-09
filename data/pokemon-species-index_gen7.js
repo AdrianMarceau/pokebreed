@@ -1092,15 +1092,13 @@
             },
 
         'alolan-meowth': {
-            order: thisIndex.afterOrder('persian', 1),
+            order: thisIndex.afterOrder('persian', 2),
             token: 'alolan-meowth',
             name: 'Alolan Meowth',
             formClass: 'regional-variant',
             formToken: 'alolan',
             baseSpecies: 'meowth',
             number: 52,
-            forme: 'Alola',
-            formeLetter: 'A',
             types: ['dark'],
             baseStats: {hp: 40, phAttack: 35, phDefense: 35, spAttack: 50, spDefense: 40, speed: 90},
             abilities: {0: 'pickup', 1: 'technician', hidden: 'rattled'},
@@ -1127,7 +1125,7 @@
                 }]
             },
         'alolan-persian': {
-            order: thisIndex.afterOrder('persian', 2),
+            order: thisIndex.afterOrder('persian', 3),
             token: 'alolan-persian',
             name: 'Alolan Persian',
             formClass: 'regional-variant',
