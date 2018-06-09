@@ -90,6 +90,29 @@
                 }]
             },
 
+        'baby-tangela': {
+            order: thisIndex.beforeOrder('tangela'),
+            token: 'baby-tangela',
+            name: 'Baby Tangela',
+            class: 'baby',
+            formClass: 'baby-evolution',
+            formToken: 'baby',
+            number: 114,
+            types: ['grass'],
+            baseStats: {hp: 32, phAttack: 27, phDefense: 57, spAttack: 50, spDefense: 20, speed: 30},
+            abilities: {0: 'chlorophyll', 1: 'leaf-guard', hidden: 'regenerator'},
+            height: 1,
+            weight: 35,
+            colors: ['blue', 'red', 'black'],
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'tangela',
+                method: 'level-up',
+                value: 20
+                }]
+            },
+
         'ms-mime': {
             order: thisIndex.afterOrder('mr-mime'),
             token: 'ms-mime',
@@ -134,6 +157,7 @@
     // Update previous gen pokemon with new prev evolution data
     thisIndex.addPrevEvolutions([
         {base: 'kangaskhan', species: 'baby-kangaskhan'},
+        {base: 'tangela', species: 'baby-tangela'},
         ]);
 
     // Update previous gen pokemon with new gender ratio data
