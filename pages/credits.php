@@ -33,16 +33,16 @@
         </p>
         <ul>
             <li>
-                <strong>Baby Ponyta & Baby Growlithe</strong> by <strong>C. Tyler Corbett</strong>
+                <strong>Baby Ponyta & Baby Growlithe</strong> by <strong>@Corvos / C. Tyler Corbett</strong>
             </li>
             <li>
-                <strong>Baby Tangela</strong> by <strong>PTGigi</strong> (<a href="http://ptgigi.com/" target="_blank">http://ptgigi.com/</a>)
+                <strong>Baby Tangela</strong> by <strong>@PTGigi</strong> (<a href="http://ptgigi.com/" target="_blank">http://ptgigi.com/</a>)
             </li>
             <li>
-                <strong>Baby Paras</strong> by <strong>MegaBossMan</strong>
+                <strong>Baby Paras</strong> by <strong>@MBM / MegaBossMan</strong>
             </li>
             <li>
-                <strong>Baby Kangaskhan</strong> by <strong>Adrian Marceau</strong> (<a href="http://plutolighthouse.net/" target="_blank">http://plutolighthouse.net/</a>)
+                <strong>Baby Kangaskhan, Baby Grimer</strong> by <strong>@Ageman20XX / Adrian Marceau</strong> (<a href="http://plutolighthouse.net/" target="_blank">http://plutolighthouse.net/</a>)
             </li>
         </ul>
     </div>
