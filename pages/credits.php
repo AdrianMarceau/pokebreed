@@ -13,12 +13,8 @@
             Feel free to send me a message and let me know what you think.  :)
         </p>
         <p>
-            Most of the Pokémon data was collected from Zarel's Pokémon Showdown repo <br />
+            Most of the Pokémon data was collected from Zarel's Pokémon Showdown repo: <br />
             <a class="link" target="_blank" href="https://github.com/Zarel/Pokémon-Showdown/blob/master/data/pokedex.js">https://github.com/Zarel/Pokémon-Showdown/blob/master/data/pokedex.js</a>
-        </p>
-        <p>
-            Most of the Pokémon sprites were collected from Veekun's sprite pack page <br />
-            <a class="link" target="_blank" href="https://veekun.com/dex/downloads">https://veekun.com/dex/downloads</a>
         </p>
         <p>
             The back-end script and stylesheet compression uses the minify classes by Mattias Mullie <br />
@@ -27,6 +23,21 @@
         <p>
             The front-end code is fully custom but makes heavy use of the ever-popular jQuery library <br />
             <a class="link" target="_blank" href="http://jquery.com/">http://jquery.com/</a>
+        </p>
+        <p>
+            All of the official Pokémon sprites were collected from Veekun's sprite pack page: <br />
+            <a class="link" target="_blank" href="https://veekun.com/dex/downloads">https://veekun.com/dex/downloads</a> <br />
+        </p>
+        <p>
+            All of the custom sprites were created by the artists below and provided with permission to use in PokéBox: <br />
+            <ul>
+                <li>
+                    <strong>Baby Tangela</strong> by <strong>PTGigi</strong>
+                </li>
+                <li>
+                    <strong>Baby Kangaskhan</strong> by <strong>Ageman20XX</strong>
+                </li>
+            </ul>
         </p>
     </div>
 </div>
