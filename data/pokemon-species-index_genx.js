@@ -67,7 +67,7 @@
             formClass: 'baby-evolution',
             formToken: 'baby',
             number: 46,
-            types: ['bug', 'grass'],
+            types: ['bug'],
             baseStats: {hp: 17, phAttack: 35, phDefense: 27, spAttack: 22, spDefense: 27, speed: 12},
             abilities: {0: 'effect-spore', 1: 'dry-skin', hidden: 'damp'},
             height: 0.3,
@@ -79,6 +79,28 @@
                 species: 'paras',
                 method: 'level-up',
                 value: 6
+                }]
+            },
+        'baby-ponyta': {
+            order: thisIndex.beforeOrder('ponyta'),
+            token: 'baby-ponyta',
+            name: 'Baby Ponyta',
+            class: 'baby',
+            formClass: 'baby-evolution',
+            formToken: 'baby',
+            number: 77,
+            types: ['fire'],
+            baseStats: {hp: 25, phAttack: 42, phDefense: 27, spAttack: 32, spDefense: 32, speed: 45},
+            abilities: {0: 'run-away', 1: 'flash-fire', hidden: 'flame-body'},
+            height: 1,
+            weight: 30,
+            colors: ['white', 'orange', 'red', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'ponyta',
+                method: 'level-up',
+                value: 20
                 }]
             },
         'baby-tangela': {
@@ -178,6 +200,7 @@
     // Update previous gen pokemon with new prev evolution data
     thisIndex.addPrevEvolutions([
         {base: 'paras', species: 'baby-paras'},
+        {base: 'ponyta', species: 'baby-ponyta'},
         {base: 'tangela', species: 'baby-tangela'},
         {base: 'kangaskhan', species: 'baby-kangaskhan'},
         ]);

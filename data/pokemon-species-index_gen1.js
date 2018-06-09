@@ -1462,7 +1462,7 @@
             prevEvolution: 'graveler'
             },
 
-        ponyta: {
+        'ponyta': {
             order: indexOrder++,
             token: 'ponyta',
             name: 'Ponyta',
@@ -1481,7 +1481,7 @@
                 value: 40
                 }]
             },
-        rapidash: {
+        'rapidash': {
             order: indexOrder++,
             token: 'rapidash',
             name: 'Rapidash',
