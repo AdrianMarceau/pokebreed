@@ -59,6 +59,50 @@
             prevEvolution: 'machamp'
             },
 
+        'baby-paras': {
+            order: thisIndex.beforeOrder('paras'),
+            token: 'baby-paras',
+            name: 'Baby Paras',
+            class: 'baby',
+            formClass: 'baby-evolution',
+            formToken: 'baby',
+            number: 46,
+            types: ['bug', 'grass'],
+            baseStats: {hp: 17, phAttack: 35, phDefense: 27, spAttack: 22, spDefense: 27, speed: 12},
+            abilities: {0: 'effect-spore', 1: 'dry-skin', hidden: 'damp'},
+            height: 0.3,
+            weight: 5.4,
+            colors: ['orange', 'red', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'paras',
+                method: 'level-up',
+                value: 6
+                }]
+            },
+        'baby-tangela': {
+            order: thisIndex.beforeOrder('tangela'),
+            token: 'baby-tangela',
+            name: 'Baby Tangela',
+            class: 'baby',
+            formClass: 'baby-evolution',
+            formToken: 'baby',
+            number: 114,
+            types: ['grass'],
+            baseStats: {hp: 32, phAttack: 27, phDefense: 57, spAttack: 50, spDefense: 20, speed: 30},
+            abilities: {0: 'chlorophyll', 1: 'leaf-guard', hidden: 'regenerator'},
+            height: 1,
+            weight: 35,
+            colors: ['blue', 'red', 'black'],
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'tangela',
+                method: 'level-up',
+                value: 20
+                }]
+            },
         'baby-kangaskhan': {
             order: thisIndex.beforeOrder('kangaskhan'),
             token: 'baby-kangaskhan',
@@ -87,29 +131,6 @@
                 species: 'cubone',
                 method: 'extinction',
                 value: true
-                }]
-            },
-
-        'baby-tangela': {
-            order: thisIndex.beforeOrder('tangela'),
-            token: 'baby-tangela',
-            name: 'Baby Tangela',
-            class: 'baby',
-            formClass: 'baby-evolution',
-            formToken: 'baby',
-            number: 114,
-            types: ['grass'],
-            baseStats: {hp: 32, phAttack: 27, phDefense: 57, spAttack: 50, spDefense: 20, speed: 30},
-            abilities: {0: 'chlorophyll', 1: 'leaf-guard', hidden: 'regenerator'},
-            height: 1,
-            weight: 35,
-            colors: ['blue', 'red', 'black'],
-            eggCycles: 20,
-            eggGroups: ['undiscovered'],
-            nextEvolutions: [{
-                species: 'tangela',
-                method: 'level-up',
-                value: 20
                 }]
             },
 
@@ -156,8 +177,9 @@
 
     // Update previous gen pokemon with new prev evolution data
     thisIndex.addPrevEvolutions([
-        {base: 'kangaskhan', species: 'baby-kangaskhan'},
+        {base: 'paras', species: 'baby-paras'},
         {base: 'tangela', species: 'baby-tangela'},
+        {base: 'kangaskhan', species: 'baby-kangaskhan'},
         ]);
 
     // Update previous gen pokemon with new gender ratio data
