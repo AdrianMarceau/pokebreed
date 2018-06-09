@@ -33,13 +33,13 @@
         </p>
         <ul>
             <li>
-                <strong>Baby Ponyta</strong> by <strong>Corvos</strong>
-            </li>
-            <li>
-                <strong>Baby Paras</strong> by <strong>MegaBossMan</strong>
+                <strong>Baby Ponyta & Baby Growlithe</strong> by <strong>Corvos</strong>
             </li>
             <li>
                 <strong>Baby Tangela</strong> by <strong>PTGigi</strong> (<a href="http://ptgigi.com/" target="_blank">http://ptgigi.com/</a>)
+            </li>
+            <li>
+                <strong>Baby Paras</strong> by <strong>MegaBossMan</strong>
             </li>
             <li>
                 <strong>Baby Kangaskhan</strong> by <strong>Ageman20XX</strong> (<a href="http://plutolighthouse.net/" target="_blank">http://plutolighthouse.net/</a>)
