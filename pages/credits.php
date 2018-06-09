@@ -29,15 +29,21 @@
             <a class="link" target="_blank" href="https://veekun.com/dex/downloads">https://veekun.com/dex/downloads</a> <br />
         </p>
         <p>
-            All of the custom sprites were created by the artists below and provided with permission to use in PokéBox: <br />
-            <ul>
-                <li>
-                    <strong>Baby Tangela</strong> by <strong>PTGigi</strong>
-                </li>
-                <li>
-                    <strong>Baby Kangaskhan</strong> by <strong>Ageman20XX</strong>
-                </li>
-            </ul>
+            All of the custom sprites were created by the artists below and provided with permission to use in PokéBox:
+        </p>
+        <ul>
+            <li>
+                <strong>Baby Paras</strong> by <strong>MegaBossMan</strong>
+            </li>
+            <li>
+                <strong>Baby Tangela</strong> by <strong>PTGigi</strong>
+            </li>
+            <li>
+                <strong>Baby Kangaskhan</strong> by <strong>Ageman20XX</strong> (<a href="http://plutolighthouse.net/" target="_blank">http://plutolighthouse.net/</a>)
+            </li>
+        </ul>
+        <p style="margin-top: 0; font-size: 80%;">
+            * Edits to the final sprites are sometimes made by Ageman20XX but are otherwise as-stated above
         </p>
     </div>
 </div>
