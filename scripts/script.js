@@ -2708,16 +2708,18 @@
                     if (typeof pokeIndex[subStat] !== 'undefined'){
                         // Treat arrays differently than other values
                         if (typeof pokeIndex[subStat] === 'object'){
-                            // If dealing with an array, each value has a value of one
+                            // If dealing with an array, each value has a value of one by default ['red', 'blue', 'yellow']
                             if (Array.isArray(pokeIndex[subStat])
                                 && pokeIndex[subStat].length > 0){
+                                var statVal = 1;
                                 for (var key5 = 0; key5 < pokeIndex[subStat].length; key5++){
                                     var subToken = pokeIndex[subStat][key5];
                                     if (typeof currentZoneStats[subStat][subToken] === 'undefined'){ currentZoneStats[subStat][subToken] = 0; }
-                                    currentZoneStats[subStat][subToken] += 1;
+                                    currentZoneStats[subStat][subToken] += statVal;
+                                    if (subStat === 'colors'){ statVal *= 0.5; }
                                     }
                                 }
-                            // Otherwise if object, each property has its own numeric value
+                            // Otherwise if object, each property has its own numeric value [{attack: 10, defense: 9, speed: 8}]
                             else if (!jQuery.isEmptyObject(pokeIndex[subStat])){
                                 var propNames = Object.keys(pokeIndex[subStat]);
                                 for (var key6 = 0; key6 < propNames.length; key6++){
@@ -2979,13 +2981,38 @@
         // Define a variable to hold (temporary) allowed trade evolutions this cycle
         var allowedTradeEvolutions = {};
 
-        // Quickly calculate the top color value on the field
+        // Define variables nessary for calculating color forms and collect data
+        var colorKey = 0;
         var topColor = '';
+        var topColors = [];
         var colorStats = thisZoneData.currentStats['colors'];
+        var colorStatsRounded = {};
+        var maxValue = 0;
         if (typeof colorStats !== 'undefined'
             && !jQuery.isEmptyObject(colorStats)){
-            topColor = Object.keys(colorStats)[0];
+            var colorStatsTokens = Object.keys(colorStats);
+            topColor = colorStatsTokens[0];
+            for (var i = 0; i < colorStatsTokens.length; i++){
+                var colorToken = colorStatsTokens[i];
+                //var colorValue = Math.ceil(colorStats[colorToken] / 10);
+                var colorValue = Math.round(colorStats[colorToken] / 10) * 10;
+                colorStatsRounded[colorToken] = colorValue;
+                if (colorValue >= maxValue){
+                    maxValue = colorValue;
+                    topColors.push(colorToken);
+                    } else {
+                    break;
+                    }
+                }
             }
+        var topColorsCount = topColors.length;
+        var maxTopColorsKey = topColorsCount - 1;
+        //console.log('colorStats = ', colorStats);
+        //console.log('colorStatsRounded = ', colorStatsRounded);
+        //console.log('topColor = ', topColor);
+        //console.log('topColors = ', topColors);
+        //console.log('topColorsCount = ', topColorsCount);
+        //console.log('maxTopColorsKey = ', maxTopColorsKey);
 
         // First, loop through all the non-egg pokemon and increment growth cycle
         if (thisZoneData.currentPokemon.length){
@@ -3028,7 +3055,14 @@
                     // If colorized variant, change the form based on the current top color
                     if (indexInfo.formClass === 'color-variant'
                         && topColor.length){
-                        pokemonInfo.formToken = topColor;
+                        colorKey++;
+                        if (topColors.length > 1){
+                            var keyMod = colorKey % topColorsCount;
+                            //console.log('colorKey = '+ colorKey +' | topColorsCount = '+ topColorsCount +' | keyMod = '+ keyMod);
+                            pokemonInfo.formToken = topColors[keyMod];
+                            } else {
+                            pokemonInfo.formToken = topColor;
+                            }
                         }
 
                     // If field variant, change the form based on the current biome
