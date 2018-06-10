@@ -232,6 +232,9 @@ if (isset($_GET['gen'])
                                 <a class="option" data-type="fairy"><img src="images/icons/types/fairy.png" alt="Fairy" /></a>
                             </div>
                         </div>
+                        <div class="more">
+                            <a class="button enter-seed" title="Enter Starter Seed"><span>Enter Seed</span></a>
+                        </div>
                     </div>
                 </div>
                 <div class="starter-pokemon hidden">

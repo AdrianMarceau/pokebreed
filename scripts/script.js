@@ -406,55 +406,6 @@
                     // We have enough pokemon to start, so let's do it!
                     startSimulation();
 
-                    } else {
-
-                    // If the user has clicked enough, open the secret seed sharing dialogue
-                    secretClicks++;
-                    if (secretClicks >= 5
-                        && thisZoneData.currentPokemon.length === 0){
-
-                        // Collect and parse the seed if it's given, else do nothing
-                        var rawSeed = prompt('Please enter you starter seed below:');
-                        if (rawSeed && rawSeed.length > 0){
-                            //console.log('rawSeed = ', rawSeed);
-                            var seedPokemon = parsePokeBoxSeed(rawSeed);
-                            //console.log('seedPokemon = ', seedPokemon);
-                            if (seedPokemon
-                                || seedPokemon.length){
-                                for (var key = 0; key < seedPokemon.length; key++){
-                                    if (thisZoneData.currentPokemon.length >= 10){ break; }
-                                    var starterInfo = seedPokemon[key];
-                                    var starterToken = starterInfo[0];
-                                    var starterGender = starterInfo[1];
-                                    var isBasic = BasicPokemonSpeciesIndexTokens.indexOf(starterToken) !== -1 ? true : false;
-                                    var isFree = freeStarterPokemon.indexOf(starterToken) !== -1 ? true : false;
-                                    var isSeen = typeof PokemonSpeciesSeen[starterToken] !== 'undefined' && PokemonSpeciesSeen[starterToken] > 0 ? true : false;
-                                    //console.log('starterToken = ', starterToken);
-                                    //console.log('isFree = ', isFree);
-                                    //console.log('isBasic = ', isBasic);
-                                    //console.log('isSeen = ', isSeen);
-                                    if (appFreeMode || isFree || (isBasic && isSeen)){
-                                        addPokemonToZone(starterToken, false, false, false, {gender:starterGender});
-                                        }
-                                    }
-                                } else {
-                                alert('The provided seed was invalid.\n ' +
-                                    'Please check the formatting and try again.'
-                                    );
-                                return;
-                                }
-                            } else {
-                            return;
-                            }
-
-                         // Recalculate zone stats then show the start button if ready
-                        if (thisZoneData.currentPokemon.length > 0){
-                            recalculateZoneStats();
-                            $('.controls .start', $panelButtons).addClass('ready');
-                            }
-
-                        }
-
                     }
                 return;
                 }
@@ -524,8 +475,14 @@
 
             });
 
-
-
+        // Define a click event for the starter seed entry button
+        $('.button.enter-seed', $pokePanelFilters).bind('click', function(e){
+            e.preventDefault();
+            // If the box is empty, allow starter seed entry
+            if (thisZoneData.currentPokemon.length === 0){
+                triggerStarterSeedPrompt();
+                }
+            });
 
     }
 
@@ -1496,8 +1453,10 @@
                         recalculateZoneStats();
                         if (thisZoneData.currentPokemon.length > 0){
                             $('.controls .start', $panelButtons).addClass('ready');
+                            $('.button.enter-seed', $pokePanelFilters).addClass('disabled');
                             } else {
                             $('.controls .start', $panelButtons).removeClass('ready');
+                            $('.button.enter-seed', $pokePanelFilters).removeClass('disabled');
                             }
                         return true;
                         }
@@ -1527,9 +1486,9 @@
                 if (shownTypes.indexOf(thisType) === -1){ $option.addClass('disabled'); }
                 });
 
-            // We're ready to show the filter panel now too
+            // We're ready to show the filter panel now too (and reset more buttons)
             $pokePanelFilters.removeClass('hidden');
-
+            $('.button.enter-seed', $pokePanelFilters).removeClass('disabled');
 
             }, 0);
 
@@ -2589,8 +2548,10 @@
             updateOverview();
             if (thisZoneData.currentPokemon.length > 0){
                 $('.controls .start', $panelButtons).addClass('ready');
+                $('.button.enter-seed', $pokePanelFilters).addClass('disabled');
                 } else {
                 $('.controls .start', $panelButtons).removeClass('ready');
+                $('.button.enter-seed', $pokePanelFilters).removeClass('disabled');
                 }
             }
         // Otherwise, clicking simply places a "watched" indicator on the pokemon
@@ -2611,6 +2572,66 @@
 
         // Update the overview with changes
         updateOverview();
+
+    }
+
+    // Define a function for triggering the starter seed prompt
+    function triggerStarterSeedPrompt(){
+
+        // Collect and parse the seed if it's given, else do nothing
+        var rawSeed = prompt(
+            'Starter seeds can be found in the footer of an active PokéBox. \n'
+            + 'Please enter a starter seed below (include all special characters):');
+        if (rawSeed && rawSeed.length > 0){
+            //console.log('rawSeed = ', rawSeed);
+            var seedPokemon = parsePokeBoxSeed(rawSeed);
+            //console.log('seedPokemon = ', seedPokemon);
+            if (seedPokemon
+                || seedPokemon.length){
+                var blockedPokemon = [];
+                for (var key = 0; key < seedPokemon.length; key++){
+                    if (thisZoneData.currentPokemon.length >= 10){ break; }
+                    var starterInfo = seedPokemon[key];
+                    var starterToken = starterInfo[0];
+                    var starterGender = starterInfo[1];
+                    var indexInfo = PokemonSpeciesIndex[starterToken];
+                    var isBasic = BasicPokemonSpeciesIndexTokens.indexOf(starterToken) !== -1 ? true : false;
+                    var isFree = freeStarterPokemon.indexOf(starterToken) !== -1 ? true : false;
+                    var isSeen = typeof PokemonSpeciesSeen[starterToken] !== 'undefined' && PokemonSpeciesSeen[starterToken] > 0 ? true : false;
+                    //console.log('starterToken = ', starterToken);
+                    //console.log('isFree = ', isFree);
+                    //console.log('isBasic = ', isBasic);
+                    //console.log('isSeen = ', isSeen);
+                    //console.log('indexInfo = ', indexInfo);
+                    if (appFreeMode || isFree || (isBasic && isSeen)){
+                        addPokemonToZone(starterToken, false, false, false, {gender:starterGender});
+                        } else if (blockedPokemon.indexOf(indexInfo['name']) === -1){
+                        blockedPokemon.push(indexInfo['name']);
+                        }
+                    }
+                    if (blockedPokemon.length > 0){
+                        alert(
+                            'Uh oh. It looks like you tried to use Pokémon that haven\'t  \n'
+                            + 'been unlocked yet.  Sorry, but these ones had to be removed: \n'
+                            + '- ' + blockedPokemon.join(' \n- ')
+                            );
+                        }
+                } else {
+                alert('The provided seed was invalid.\n ' +
+                    'Please check the formatting and try again.'
+                    );
+                return;
+                }
+            } else {
+            return;
+            }
+
+         // Recalculate zone stats then show the start button if ready
+        if (thisZoneData.currentPokemon.length > 0){
+            recalculateZoneStats();
+            $('.controls .start', $panelButtons).addClass('ready');
+            $('.button.enter-seed', $pokePanelFilters).addClass('disabled');
+            }
 
     }
 
@@ -4540,14 +4561,15 @@
     function parsePokeBoxSeed(seedString){
         //console.log('seedString = ', seedString);
         var rawString = seedString;
-        var seedData = rawString.match(/^`?`?\[\s?PBS\s+\|\s+(.*)?\s+\|\s+(.*)?\s?\]`?`?$/i);
+        //var seedData = rawString.match(/^`?`?\[\s?PBS\s+\|\s+(.*)?\s+\|\s+(.*)?\s?\]`?`?$/i);
+        var seedData = rawString.match(/^[`]{0,}\[?(?:PBS\s+\|\s+)?([^|]+)?(?:\s+\|\s+(?:v[0-9]+\.[0-9]+\.[0-9]+[a-z]?))?\]?[`]{0,}$/i);
+        //var seedString = rawString.replace(/^[`]{0,}\[?(?:PBS\s+\|\s+)?([^|]+)?(?:\s+\|\s+(?:v[0-9]+\.[0-9]+\.[0-9]+[a-z]?))?\]?[`]{0,}$/i, '$1');
         //console.log('seedData = ', seedData);
+        //console.log('seedString = ', seedString);
         if (seedData !== null){
             //console.log('seed string was okay!');
             var rawList = seedData[1].match(/\s+\/\s+/) ? seedData[1].split(/\s+\/\s+/) : [seedData[1]];
-            var rawVersion = seedData[2];
             //console.log('rawList = ', rawList);
-            //console.log('rawVersion = ', rawVersion);
             var pokeList = [];
             var genderTrans = {m:'male',f:'female',n:'none'};
             for (var i = 0; i < rawList.length; i++){

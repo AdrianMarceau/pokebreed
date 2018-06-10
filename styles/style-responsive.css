@@ -86,7 +86,8 @@
         width: calc((100% / 14) - 5px);
     }
 
-    .panel .buttons .filter-pokemon .filter {
+    .panel .buttons .filter-pokemon .filter,
+    .panel .buttons .filter-pokemon .more {
         clear: left;
         margin-top: 5px;
     }

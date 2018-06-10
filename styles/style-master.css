@@ -1457,7 +1457,8 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     width: 100%;
     height: ;
 }
-.panel .buttons .filter-pokemon .title {
+.panel .buttons .filter-pokemon .title,
+.panel .buttons .filter-pokemon .more {
     display: block;
     float: left;
     text-align: left;
@@ -1472,6 +1473,12 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
     -webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
     box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+}
+.panel .buttons .filter-pokemon .more {
+    padding: 0;
+    width: auto;
+    background-color: transparent;
+    box-shadow: none;
 }
 .panel .buttons .filter-pokemon .filter {
     display: block;
@@ -1545,13 +1552,15 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     opacity: 1.0;
     filter: brightness(1.0);
 }
-.panel .buttons .filter-pokemon .filter .options .option.disabled {
+.panel .buttons .filter-pokemon .filter .options .option.disabled,
+.panel .buttons .filter-pokemon .more .button.disabled {
     pointer-events: none;
     background-color: #313135;
     color: #3f4246;
     text-shadow: none;
 }
-.panel .buttons .filter-pokemon .filter .options .option.disabled img {
+.panel .buttons .filter-pokemon .filter .options .option.disabled img,
+.panel .buttons .filter-pokemon .more .button.disabled:before {
     opacity: 0.3;
     filter: brightness(0.2);
 }
@@ -1600,7 +1609,8 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     clear: both;
     height: 0;
 }
-.panel .buttons .controls .control {
+.panel .buttons .controls .control,
+.panel .buttons .filter-pokemon .button {
     display: block;
     float: left;
     margin: 0 6px 3px 0;
@@ -1621,7 +1631,8 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     -webkit-border-radius: 6px;
     border-radius: 6px;
 }
-.panel .buttons .controls .control:before {
+.panel .buttons .controls .control:before,
+.panel .buttons .filter-pokemon .button:before {
     content: "";
     display: block;
     vertical-align: middle;
@@ -1642,6 +1653,19 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 }
 .panel .buttons .controls .control.active {
     background-color: #757575;
+}
+
+.panel .buttons .filter-pokemon .button {
+    width: 26px;
+    height: 26px;
+    background-color: #2d2d30;
+}
+.panel .buttons .filter-pokemon .button:hover {
+    background-color: #4e4e4e;
+}
+.panel .buttons .filter-pokemon .button:before {
+    width: 20px;
+    height: 20px;
 }
 
 .panel .buttons .controls .control.start {
@@ -1717,6 +1741,9 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 }
 .panel .buttons .controls .control.stop:before {
     background-image: url(../images/icons/controls/stop.png);
+}
+.panel .buttons .filter-pokemon .button.enter-seed:before {
+    background-image: url(../images/icons/controls/link.png);
 }
 
 .panel .buttons .controls .control.pause {
