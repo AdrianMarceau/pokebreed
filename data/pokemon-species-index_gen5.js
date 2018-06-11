@@ -1776,6 +1776,23 @@
             eggGroups: ['undiscovered'],
             },
 
+        'victini': {
+            order: indexOrder++,
+            token: 'victini',
+            name: 'Victini',
+            class: 'mythical',
+            number: 494,
+            types: ['psychic', 'fire'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 100, phDefense: 100, spAttack: 100, spDefense: 100, speed: 100},
+            abilities: {0: 'victory-star'},
+            height: 0.4,
+            weight: 4,
+            colors: ['yellow', 'orange', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
