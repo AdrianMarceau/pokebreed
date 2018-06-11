@@ -312,7 +312,8 @@
             weight: 4,
             colors: ['blue'],
             eggCycles: 20,
-            eggGroups: ['ditto']
+            eggGroups: ['ditto'],
+            gameGeneration: 1
             },
 
         });

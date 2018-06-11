@@ -620,20 +620,20 @@
                 if (typeof baseInfoA['subNumber'] !== 'undefined'){ baseNumA += (baseInfoA['subNumber'] / 10); }
                 if (typeof baseInfoB['subNumber'] !== 'undefined'){ baseNumB += (baseInfoB['subNumber'] / 10); }
 
-                var dittoA = false;
-                var dittoB = false;
-                if (tokenA === 'ditto'){ dittoA = true; }
-                if (tokenB === 'ditto'){ dittoB = true; }
+                //var dittoA = false;
+                //var dittoB = false;
+                //if (tokenA === 'ditto'){ dittoA = true; }
+                //if (tokenB === 'ditto'){ dittoB = true; }
 
-                var shinyDittoA = false;
-                var shinyDittoB = false;
-                if (tokenA === 'shiny-ditto'){ shinyDittoA = true; }
-                if (tokenB === 'shiny-ditto'){ shinyDittoB = true; }
+                //var shinyDittoA = false;
+                //var shinyDittoB = false;
+                //if (tokenA === 'shiny-ditto'){ shinyDittoA = true; }
+                //if (tokenB === 'shiny-ditto'){ shinyDittoB = true; }
 
-                var unownA = false;
-                var unownB = false;
-                if (tokenA === 'unown'){ unownA = true; }
-                if (tokenB === 'unown'){ unownB = true; }
+                //var unownA = false;
+                //var unownB = false;
+                //if (tokenA === 'unown'){ unownA = true; }
+                //if (tokenB === 'unown'){ unownB = true; }
 
                 var specialA = false;
                 var specialB = false;
@@ -653,9 +653,6 @@
                 //if (infoB['formClass'] === 'gender-variant' && typeof infoB['prevEvolution'] === 'undefined'){ genderVariantB = true; }
 
                 if (false){ return 0; }
-
-                else if (shinyDittoA && !shinyDittoB){ return 1; }
-                else if (!shinyDittoA && shinyDittoB){ return -1; }
 
                 else if (specialA && !specialB){ return 1; }
                 else if (!specialA && specialB){ return -1; }
@@ -1360,7 +1357,7 @@
 
                 // Insert a break after each new generation
                 var thisGeneration = pokemonData.gameGeneration;
-                if (pokemonIsSpecial || pokemonToken.match(/(unown|ditto)$/)){ thisGeneration = 'specials'; }
+                if (pokemonIsSpecial){ thisGeneration = 'specials'; }
                 if (thisGeneration !== lastGeneration
                     && pokemonData.formClass !== 'gender-variant'
                     && pokemonData.formClass !== 'regional-variant'){
