@@ -4178,7 +4178,7 @@
                         && thisZoneData.currentStats['types'][baseEvolution.value] <= -10){
                         queuedBaseEvolutions.push({
                             token: baseEvolution.species,
-                            chance: (baseEvolution.method === 'type-warning' ? 2 : 3) + ((sZoneData.currentStats['types'][baseEvolution.value] * -1)  * 2)
+                            chance: (baseEvolution.method === 'type-warning' ? 2 : 3) + ((thisZoneData.currentStats['types'][baseEvolution.value] * -1)  * 2)
                             });
                         } else if (baseEvolution.method === 'chance'
                         && (Math.seededRandomChance() < baseEvolution.value)){
