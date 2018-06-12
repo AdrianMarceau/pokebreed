@@ -299,6 +299,41 @@
             prevEvolution: 'herdier',
             },
 
+        'purrloin': {
+            order: indexOrder++,
+            token: 'purrloin',
+            name: 'Purrloin',
+            number: 509,
+            types: ['dark'],
+            baseStats: {hp: 41, phAttack: 50, phDefense: 37, spAttack: 50, spDefense: 37, speed: 66},
+            abilities: {0: 'limber', 1: 'unburden', hidden: 'prankster'},
+            height: 0.4,
+            weight: 10.1,
+            colors: ['purple', 'white', 'pink', 'green'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'liepard',
+                method: 'level-up',
+                value: 20
+                }]
+            },
+        'liepard': {
+            order: indexOrder++,
+            token: 'liepard',
+            name: 'Liepard',
+            number: 510,
+            types: ['dark'],
+            baseStats: {hp: 64, phAttack: 88, phDefense: 50, spAttack: 88, spDefense: 50, speed: 106},
+            abilities: {0: 'limber', 1: 'unburden', hidden: 'prankster'},
+            height: 1.1,
+            weight: 37.5,
+            colors: ['purple', 'yellow', 'pink', 'green'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'purrloin'
+            },
+
         'pidove': {
             order: indexOrder++,
             token: 'pidove',
