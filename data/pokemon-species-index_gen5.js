@@ -412,6 +412,45 @@
             prevEvolution: 'pansear'
             },
 
+        'panpour': {
+            order: indexOrder++,
+            token: 'panpour',
+            name: 'Panpour',
+            number: 515,
+            types: ['water'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 50, phAttack: 53, phDefense: 48, spAttack: 53, spDefense: 48, speed: 64},
+            abilities: {0: 'gluttony', hidden: 'torrent'},
+            height: 0.6,
+            weight: 13.5,
+            colors: ['blue', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'simipour', // water-stone
+                method: 'type-appeal',
+                value: 'water',
+                method2: 'level-up',
+                value2: 20
+                }]
+            },
+        'simipour': {
+            order: indexOrder++,
+            token: 'simipour',
+            name: 'Simipour',
+            number: 516,
+            types: ['water'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 75, phAttack: 98, phDefense: 63, spAttack: 98, spDefense: 63, speed: 101},
+            abilities: {0: 'gluttony', hidden: 'torrent'},
+            height: 1,
+            weight: 29,
+            colors: ['blue', 'yellow', 'white'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'panpour'
+            },
+
         'pidove': {
             order: indexOrder++,
             token: 'pidove',
