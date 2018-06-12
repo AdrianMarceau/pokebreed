@@ -18,6 +18,23 @@
 
         // Base Pokedex
 
+        'victini': {
+            order: indexOrder++,
+            token: 'victini',
+            name: 'Victini',
+            class: 'mythical',
+            number: 494,
+            types: ['psychic', 'fire'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 100, phDefense: 100, spAttack: 100, spDefense: 100, speed: 100},
+            abilities: {0: 'victory-star'},
+            height: 0.4,
+            weight: 4,
+            colors: ['yellow', 'orange', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            },
+
         'snivy': {
             order: indexOrder++,
             token: 'snivy',
@@ -190,6 +207,41 @@
             eggCycles: 20,
             eggGroups: ['field'],
             prevEvolution: 'dewott'
+            },
+
+        'patrat': {
+            order: indexOrder++,
+            token: 'patrat',
+            name: 'Patrat',
+            number: 504,
+            types: ['normal'],
+            baseStats: {hp: 45, phAttack: 55, phDefense: 39, spAttack: 35, spDefense: 39, speed: 42},
+            abilities: {0: 'run-away', 1: 'keen-eye', hidden: 'analytic'},
+            height: 0.5,
+            weight: 11.6,
+            colors: ['brown', 'white', 'red', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'watchog',
+                method: 'level-up',
+                value: 20
+                }]
+            },
+        'watchog': {
+            order: indexOrder++,
+            token: 'watchog',
+            name: 'Watchog',
+            number: 505,
+            types: ['normal'],
+            baseStats: {hp: 60, phAttack: 85, phDefense: 69, spAttack: 60, spDefense: 69, speed: 77},
+            abilities: {0: 'illuminate', 1: 'keen-eye', hidden: 'analytic'},
+            height: 1.1,
+            weight: 27,
+            colors: ['brown', 'yellow', 'red', 'white'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'patrat'
             },
 
         'pidove': {
@@ -1772,23 +1824,6 @@
             height: 2.9,
             weight: 345,
             colors: ['black', 'black', 'blue', 'red'],
-            eggCycles: 120,
-            eggGroups: ['undiscovered'],
-            },
-
-        'victini': {
-            order: indexOrder++,
-            token: 'victini',
-            name: 'Victini',
-            class: 'mythical',
-            number: 494,
-            types: ['psychic', 'fire'],
-            genderRatio: {none: 1.0000},
-            baseStats: {hp: 100, phAttack: 100, phDefense: 100, spAttack: 100, spDefense: 100, speed: 100},
-            abilities: {0: 'victory-star'},
-            height: 0.4,
-            weight: 4,
-            colors: ['yellow', 'orange', 'blue'],
             eggCycles: 120,
             eggGroups: ['undiscovered'],
             },
