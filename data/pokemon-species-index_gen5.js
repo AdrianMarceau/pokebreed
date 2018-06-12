@@ -334,6 +334,45 @@
             prevEvolution: 'purrloin'
             },
 
+        'pansage': {
+            order: indexOrder++,
+            token: 'pansage',
+            name: 'Pansage',
+            number: 511,
+            types: ['grass'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 50, phAttack: 53, phDefense: 48, spAttack: 53, spDefense: 48, speed: 64},
+            abilities: {0: 'gluttony', hidden: 'overgrow'},
+            height: 0.6,
+            weight: 10.5,
+            colors: ['green', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'simisage', // leaf-stone
+                method: 'type-appeal',
+                value: 'grass',
+                method2: 'level-up',
+                value2: 20
+                }]
+            },
+        'simisage': {
+            order: indexOrder++,
+            token: 'simisage',
+            name: 'Simisage',
+            number: 512,
+            types: ['grass'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 75, phAttack: 98, phDefense: 63, spAttack: 98, spDefense: 63, speed: 101},
+            abilities: {0: 'gluttony', hidden: 'overgrow'},
+            height: 1.1,
+            weight: 30.5,
+            colors: ['green', 'yellow', 'white'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'pansage'
+            },
+
         'pidove': {
             order: indexOrder++,
             token: 'pidove',
