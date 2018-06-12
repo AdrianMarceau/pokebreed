@@ -373,6 +373,45 @@
             prevEvolution: 'pansage'
             },
 
+        'pansear': {
+            order: indexOrder++,
+            token: 'pansear',
+            name: 'Pansear',
+            number: 513,
+            types: ['fire'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 50, phAttack: 53, phDefense: 48, spAttack: 53, spDefense: 48, speed: 64},
+            abilities: {0: 'gluttony', hidden: 'blaze'},
+            height: 0.6,
+            weight: 11,
+            colors: ['red', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'simisear', // fire-stone
+                method: 'type-appeal',
+                value: 'fire',
+                method2: 'level-up',
+                value2: 20
+                }]
+            },
+        'simisear': {
+            order: indexOrder++,
+            token: 'simisear',
+            name: 'Simisear',
+            number: 514,
+            types: ['fire'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 75, phAttack: 98, phDefense: 63, spAttack: 98, spDefense: 63, speed: 101},
+            abilities: {0: 'gluttony', hidden: 'blaze'},
+            height: 1,
+            weight: 28,
+            colors: ['red', 'yellow', 'white'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'pansear'
+            },
+
         'pidove': {
             order: indexOrder++,
             token: 'pidove',
