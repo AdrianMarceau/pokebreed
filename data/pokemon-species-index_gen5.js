@@ -244,6 +244,61 @@
             prevEvolution: 'patrat'
             },
 
+        'lillipup': {
+            order: indexOrder++,
+            token: 'lillipup',
+            name: 'Lillipup',
+            number: 506,
+            types: ['normal'],
+            baseStats: {hp: 45, phAttack: 60, phDefense: 45, spAttack: 25, spDefense: 45, speed: 55},
+            abilities: {0: 'vital-spirit', 1: 'pickup', hidden: 'run-away'},
+            height: 0.4,
+            weight: 4.1,
+            colors: ['white', 'brown', 'black', 'pink'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'herdier',
+                method: 'level-up',
+                value: 16
+                }]
+            },
+        'herdier': {
+            order: indexOrder++,
+            token: 'herdier',
+            name: 'Herdier',
+            number: 507,
+            types: ['normal'],
+            baseStats: {hp: 65, phAttack: 80, phDefense: 65, spAttack: 35, spDefense: 65, speed: 60},
+            abilities: {0: 'intimidate', 1: 'sand-rush', hidden: 'scrappy'},
+            height: 0.9,
+            weight: 14.7,
+            colors: ['black', 'brown', 'white'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            prevEvolution: 'lillipup',
+            nextEvolutions: [{
+                species: 'stoutland',
+                method: 'level-up',
+                value: 32
+                }]
+            },
+        'stoutland': {
+            order: indexOrder++,
+            token: 'stoutland',
+            name: 'Stoutland',
+            number: 508,
+            types: ['normal'],
+            baseStats: {hp: 85, phAttack: 110, phDefense: 90, spAttack: 45, spDefense: 90, speed: 80},
+            abilities: {0: 'intimidate', 1: 'sand-rush', hidden: 'scrappy'},
+            height: 1.2,
+            weight: 61,
+            colors: ['white', 'black', 'gray', 'brown'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            prevEvolution: 'herdier',
+            },
+
         'pidove': {
             order: indexOrder++,
             token: 'pidove',
