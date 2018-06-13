@@ -607,6 +607,63 @@
             prevEvolution: 'blitzle'
             },
 
+        'roggenrola': {
+            order: indexOrder++,
+            token: 'roggenrola',
+            name: 'Roggenrola',
+            number: 524,
+            types: ['rock'],
+            baseStats: {hp: 55, phAttack: 75, phDefense: 85, spAttack: 25, spDefense: 25, speed: 15},
+            abilities: {0: 'sturdy', 1: 'weak-armor', hidden: 'sand-force'},
+            height: 0.4,
+            weight: 18,
+            colors: ['blue', 'brown', 'yellow', 'black'],
+            eggCycles: 15,
+            eggGroups: ['mineral'],
+            nextEvolutions: [{
+                species: 'boldore',
+                method: 'level-up',
+                value: 25
+                }]
+            },
+        'boldore': {
+            order: indexOrder++,
+            token: 'boldore',
+            name: 'Boldore',
+            number: 525,
+            types: ['rock'],
+            baseStats: {hp: 70, phAttack: 105, phDefense: 105, spAttack: 50, spDefense: 40, speed: 20},
+            abilities: {0: 'sturdy', 1: 'weak-armor', hidden: 'sand-force'},
+            height: 0.9,
+            weight: 102,
+            colors: ['blue', 'red', 'yellow', 'black'],
+            eggCycles: 15,
+            eggGroups: ['mineral'],
+            prevEvolution: 'roggenrola',
+            nextEvolutions: [{
+                species: 'gigalith',
+                method: 'trade-partner',
+                value: 'auto',
+                method2: 'level-up',
+                value2: 45
+                }]
+            },
+        'gigalith': {
+            order: indexOrder++,
+            token: 'gigalith',
+            name: 'Gigalith',
+            number: 526,
+            types: ['rock'],
+            baseStats: {hp: 85, phAttack: 135, phDefense: 130, spAttack: 60, spDefense: 80, speed: 25},
+            abilities: {0: 'sturdy', 1: 'sand-stream', hidden: 'sand-force'},
+            height: 1.7,
+            weight: 260,
+            colors: ['red', 'blue', 'gray', 'yellow', 'black'],
+            eggCycles: 15,
+            eggGroups: ['mineral'],
+            prevEvolution: 'boldore',
+            },
+
         'woobat': {
             order: indexOrder++,
             token: 'woobat',
