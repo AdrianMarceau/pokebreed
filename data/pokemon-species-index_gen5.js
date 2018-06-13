@@ -736,6 +736,21 @@
             prevEvolution: 'drilbur'
             },
 
+        'audino': {
+            order: indexOrder++,
+            token: 'audino',
+            name: 'Audino',
+            number: 531,
+            types: ['normal'],
+            baseStats: {hp: 103, phAttack: 60, phDefense: 86, spAttack: 60, spDefense: 86, speed: 50},
+            abilities: {0: 'healer', 1: 'regenerator', hidden: 'klutz'},
+            height: 1.1,
+            weight: 31,
+            colors: ['pink', 'yellow', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['fairy']
+            },
+
         'timburr': {
             order: indexOrder++,
             token: 'timburr',

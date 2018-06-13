@@ -2043,6 +2043,24 @@
             prevEvolution: 'abomasnow'
             },
 
+        'mega-audino': {
+            order: thisIndex.afterOrder('audino'),
+            token: 'mega-audino',
+            name: 'Mega Audino',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'audino',
+            number: 531,
+            types: ['normal', 'fairy'],
+            baseStats: {hp: 103, phAttack: 60, phDefense: 126, spAttack: 80, spDefense: 126, speed: 50},
+            abilities: {0: 'healer'},
+            height: 1.5,
+            weight: 32,
+            colors: ['white', 'pink', 'yellow'],
+            eggGroups: ['fairy'],
+            prevEvolution: 'audino'
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
@@ -2110,6 +2128,8 @@
         {base: 'garchomp', species: 'mega-garchomp', method: 'mega-evolution', value: 'garchompite'},
         {base: 'lucario', species: 'mega-lucario', method: 'mega-evolution', value: 'lucarionite'},
         {base: 'abomasnow', species: 'mega-abomasnow', method: 'mega-evolution', value: 'abomasite'},
+
+        {base: 'audino', species: 'mega-audino', method: 'mega-evolution', value: 'audinite'},
 
         ]);
 
