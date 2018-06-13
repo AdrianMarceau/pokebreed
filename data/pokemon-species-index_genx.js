@@ -9,7 +9,7 @@
 
     // Collect a reference to the global species index
     var thisIndex = window.PokemonSpeciesIndex;
-    thisIndex.setGeneration(8);
+    thisIndex.setGeneration('x');
     thisIndex.setRegion('custom');
 
     // Add the generation's list of base species to the index
@@ -294,7 +294,8 @@
             eggCycles: 25,
             eggPartner: 'mr-mime',
             eggGroups: ['human-like'],
-            prevEvolution: 'mime-jr'
+            prevEvolution: 'mime-jr',
+            gameGeneration: 1
             },
 
         'shiny-ditto': {
