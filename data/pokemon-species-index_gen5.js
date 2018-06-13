@@ -811,6 +811,61 @@
             prevEvolution: 'gurdurr'
             },
 
+        'tympole': {
+            order: indexOrder++,
+            token: 'tympole',
+            name: 'Tympole',
+            number: 535,
+            types: ['water'],
+            baseStats: {hp: 50, phAttack: 50, phDefense: 40, spAttack: 50, spDefense: 40, speed: 64},
+            abilities: {0: 'swift-swim', 1: 'hydration', hidden: 'water-absorb'},
+            height: 0.5,
+            weight: 4.5,
+            colors: ['black', 'blue', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['water-1'],
+            nextEvolutions: [{
+                species: 'palpitoad',
+                method: 'level-up',
+                value: 25
+                }]
+            },
+        'palpitoad': {
+            order: indexOrder++,
+            token: 'palpitoad',
+            name: 'Palpitoad',
+            number: 536,
+            types: ['water', 'ground'],
+            baseStats: {hp: 75, phAttack: 65, phDefense: 55, spAttack: 65, spDefense: 55, speed: 69},
+            abilities: {0: 'swift-swim', 1: 'hydration', hidden: 'water-absorb'},
+            height: 0.8,
+            weight: 17,
+            colors: ['blue', 'black', 'yellow', 'white'],
+            eggCycles: 20,
+            eggGroups: ['water-1'],
+            prevEvolution: 'tympole',
+            nextEvolutions: [{
+                species: 'seismitoad',
+                method: 'level-up',
+                value: 36
+                }]
+            },
+        'seismitoad': {
+            order: indexOrder++,
+            token: 'seismitoad',
+            name: 'Seismitoad',
+            number: 537,
+            types: ['water', 'ground'],
+            baseStats: {hp: 105, phAttack: 95, phDefense: 75, spAttack: 85, spDefense: 75, speed: 74},
+            abilities: {0: 'swift-swim', 1: 'poison-touch', hidden: 'water-absorb'},
+            height: 1.5,
+            weight: 62,
+            colors: ['blue', 'black', 'red'],
+            eggCycles: 20,
+            eggGroups: ['water-1'],
+            prevEvolution: 'palpitoad'
+            },
+
         'sewaddle': {
             order: indexOrder++,
             token: 'sewaddle',
