@@ -451,6 +451,43 @@
             prevEvolution: 'panpour'
             },
 
+        'munna': {
+            order: indexOrder++,
+            token: 'munna',
+            name: 'Munna',
+            number: 517,
+            types: ['psychic'],
+            baseStats: {hp: 76, phAttack: 25, phDefense: 45, spAttack: 67, spDefense: 55, speed: 24},
+            abilities: {0: 'forewarn', 1: 'synchronize', hidden: 'telepathy'},
+            height: 0.6,
+            weight: 23.3,
+            colors: ['pink', 'purple', 'red'],
+            eggCycles: 10,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'musharna', // moon-stone
+                method: 'type-appeal',
+                value: 'psychic',
+                method2: 'level-up',
+                value2: 20
+                }]
+            },
+        'musharna': {
+            order: indexOrder++,
+            token: 'musharna',
+            name: 'Musharna',
+            number: 518,
+            types: ['psychic'],
+            baseStats: {hp: 116, phAttack: 55, phDefense: 85, spAttack: 107, spDefense: 95, speed: 29},
+            abilities: {0: 'forewarn', 1: 'synchronize', hidden: 'telepathy'},
+            height: 1.1,
+            weight: 60.5,
+            colors: ['pink', 'purple'],
+            eggCycles: 10,
+            eggGroups: ['field'],
+            prevEvolution: 'munna'
+            },
+
         'pidove': {
             order: indexOrder++,
             token: 'pidove',
