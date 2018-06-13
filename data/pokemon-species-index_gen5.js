@@ -866,6 +866,38 @@
             prevEvolution: 'palpitoad'
             },
 
+        'throh': {
+            order: indexOrder++,
+            token: 'throh',
+            name: 'Throh',
+            number: 538,
+            types: ['fighting'],
+            genderRatio: {male: 1.000},
+            baseStats: {hp: 120, phAttack: 100, phDefense: 85, spAttack: 30, spDefense: 85, speed: 45},
+            abilities: {0: 'guts', 1: 'inner-focus', hidden: 'mold-breaker'},
+            height: 1.3,
+            weight: 55.5,
+            colors: ['red', 'white', 'black'],
+            eggCycles: 20,
+            eggGroups: ['human-like']
+            },
+
+        'sawk': {
+            order: indexOrder++,
+            token: 'sawk',
+            name: 'Sawk',
+            number: 539,
+            types: ['fighting'],
+            genderRatio: {male: 1.000},
+            baseStats: {hp: 75, phAttack: 125, phDefense: 75, spAttack: 30, spDefense: 75, speed: 85},
+            abilities: {0: 'sturdy', 1: 'inner-focus', hidden: 'mold-breaker'},
+            height: 1.4,
+            weight: 51,
+            colors: ['blue', 'white', 'black'],
+            eggCycles: 20,
+            eggGroups: ['human-like']
+            },
+
         'sewaddle': {
             order: indexOrder++,
             token: 'sewaddle',
