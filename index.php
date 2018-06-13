@@ -198,7 +198,7 @@ if (isset($_GET['gen'])
                         <div class="filter generations" data-filter="gen">
                             <label class="label">Gen</label>
                             <div class="options">
-                                <a class="option active" data-gen="all">All</a>
+                                <a class="option" data-gen="all">All</a>
                                 <a class="option" data-gen="1">1</a>
                                 <a class="option" data-gen="2">2</a>
                                 <a class="option" data-gen="3">3</a>
@@ -211,7 +211,7 @@ if (isset($_GET['gen'])
                         <div class="filter types" data-filter="type">
                             <label class="label">Type</label>
                             <div class="options">
-                                <a class="option active" data-type="all">All</a>
+                                <a class="option" data-type="all">All</a>
                                 <a class="option" data-type="normal"><img src="images/icons/types/normal.png" alt="Normal" /></a>
                                 <a class="option" data-type="fighting"><img src="images/icons/types/fighting.png" alt="Fighting" /></a>
                                 <a class="option" data-type="flying"><img src="images/icons/types/flying.png" alt="Flying" /></a>
