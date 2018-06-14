@@ -752,7 +752,7 @@
             nextEvolutions: [{
                 species: 'sunflora', // sun-stone
                 method: 'type-appeal',
-                value: ['grass'],
+                value: 'grass',
                 method2: 'level-up',
                 value2: 20
                 }]

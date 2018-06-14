@@ -1010,6 +1010,43 @@
             prevEvolution: 'whirlipede'
             },
 
+        'cottonee': {
+            order: indexOrder++,
+            token: 'cottonee',
+            name: 'Cottonee',
+            number: 546,
+            types: ['grass', 'fairy'],
+            baseStats: {hp: 40, phAttack: 27, phDefense: 60, spAttack: 37, spDefense: 50, speed: 66},
+            abilities: {0: 'prankster', 1: 'infiltrator', hidden: 'chlorophyll'},
+            height: 0.3,
+            weight: 0.6,
+            colors: ['white', 'green', 'orange'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'grass'],
+            nextEvolutions: [{
+                species: 'whimsicott', // sun-stone
+                method: 'type-appeal',
+                value: ['grass', 'fairy'],
+                method2: 'level-up',
+                value2: 20
+                }]
+            },
+        'whimsicott': {
+            order: indexOrder++,
+            token: 'whimsicott',
+            name: 'Whimsicott',
+            number: 547,
+            types: ['grass', 'fairy'],
+            baseStats: {hp: 60, phAttack: 67, phDefense: 85, spAttack: 77, spDefense: 75, speed: 116},
+            abilities: {0: 'prankster', 1: 'infiltrator', hidden: 'chlorophyll'},
+            height: 0.7,
+            weight: 6.6,
+            colors: ['yellow', 'brown', 'green', 'orange'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'grass'],
+            prevEvolution: 'cottonee'
+            },
+
         'sandile': {
             order: indexOrder++,
             token: 'sandile',
