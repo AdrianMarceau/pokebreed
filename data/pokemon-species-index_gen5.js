@@ -1086,6 +1086,39 @@
             prevEvolution: 'petilil'
             },
 
+        'red-striped-basculin': {
+            order: indexOrder++,
+            token: 'red-striped-basculin',
+            name: 'Red-Striped Basculin',
+            formClass: 'color-variant',
+            formToken: 'red-striped',
+            number: 550,
+            types: ['water'],
+            baseStats: {hp: 70, phAttack: 92, phDefense: 65, spAttack: 80, spDefense: 55, speed: 98},
+            abilities: {0: 'reckless', 1: 'adaptability', hidden: 'mold-breaker'},
+            height: 1,
+            weight: 18,
+            colors: ['green', 'white', 'black', 'red'],
+            eggCycles: 40,
+            eggGroups: ['water-2']
+            },
+        'blue-striped-basculin': {
+            order: indexOrder++,
+            token: 'blue-striped-basculin',
+            name: 'Blue-Striped Basculin',
+            formClass: 'color-variant',
+            formToken: 'blue-striped',
+            number: 550,
+            types: ['water'],
+            baseStats: {hp: 70, phAttack: 92, phDefense: 65, spAttack: 80, spDefense: 55, speed: 98},
+            abilities: {0: 'rock-head', 1: 'adaptability', hidden: 'mold-breaker'},
+            height: 1,
+            weight: 18,
+            colors: ['green', 'white', 'black', 'blue'],
+            eggCycles: 40,
+            eggGroups: ['water-2']
+            },
+
         'sandile': {
             order: indexOrder++,
             token: 'sandile',
