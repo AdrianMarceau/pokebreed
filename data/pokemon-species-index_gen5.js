@@ -1231,6 +1231,21 @@
             prevEvolution: 'darmanitan'
             },
 
+        'maractus': {
+            order: indexOrder++,
+            token: 'maractus',
+            name: 'Maractus',
+            number: 556,
+            types: ['grass'],
+            baseStats: {hp: 75, phAttack: 86, phDefense: 67, spAttack: 106, spDefense: 67, speed: 60},
+            abilities: {0: 'water-absorb', 1: 'chlorophyll', hidden: 'storm-drain'},
+            height: 1,
+            weight: 28,
+            colors: ['green', 'pink', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['grass']
+            },
+
         'dwebble': {
             order: indexOrder++,
             token: 'dwebble',
