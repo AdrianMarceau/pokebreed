@@ -64,6 +64,10 @@
 
     var thisDeviceWidth = 0;
 
+    var addedPokemonSpeciesTokens = [];
+    var evolvedPokemonSpeciesTokens = [];
+    var faintedPokemonSpeciesTokens = [];
+
 
     // GLOBAL ELEMENT REFERENCES
 
@@ -1190,9 +1194,31 @@
             } else {
 
             iconImage += 'pokemon/';
-            if (typeof info['formToken'] !== 'undefined'){ iconImage += indexInfo['number']+'-'+info['formToken']+'.png'; }
-            else if (typeof indexInfo['formToken'] !== 'undefined'){ iconImage += indexInfo['number']+'-'+indexInfo['formToken']+'.png'; }
-            else { iconImage += indexInfo['number']+'.png'; }
+
+            // Check if the pokemon has the ILLUSION ability, else generate it's token normally
+            var abilityTokens = Object.values(indexInfo['abilities']);
+            if (simulationStarted
+                && addedPokemonSpeciesTokens.length > 1
+                && abilityTokens.indexOf('illusion') !== -1
+                && (info['growthCycles'] >= 10 || info['isVisitor'] === true)
+                && info['reachedAdulthood'] === false){
+
+                // The pokemon has an active illusion of another on the field
+                var lastToken = addedPokemonSpeciesTokens[addedPokemonSpeciesTokens.length - 1];
+                if (lastToken === indexInfo['token']){ lastToken = addedPokemonSpeciesTokens[addedPokemonSpeciesTokens.length - 2]; }
+                var cloneIndexInfo = PokemonSpeciesIndex[lastToken];
+                if (typeof cloneIndexInfo['formToken'] !== 'undefined'){ iconImage += cloneIndexInfo['number']+'-'+cloneIndexInfo['formToken']+'.png'; }
+                else { iconImage += cloneIndexInfo['number']+'.png'; }
+
+                } else {
+
+                // The pokemon is appearing normally without any image mods
+                if (typeof info['formToken'] !== 'undefined'){ iconImage += indexInfo['number']+'-'+info['formToken']+'.png'; }
+                else if (typeof indexInfo['formToken'] !== 'undefined'){ iconImage += indexInfo['number']+'-'+indexInfo['formToken']+'.png'; }
+                else { iconImage += indexInfo['number']+'.png'; }
+
+                }
+
             //markup += '<img class="'+ iconClass +'"'+ iconStyle +' src="'+ iconImage +'" data-token="'+ token +'" />';
             markup += '<span class="'+ iconClass +'"'+ iconStyle +' style="background-image: url('+ iconImage +'); '+ iconStyle +'" data-token="'+ token +'"></span>';
 
@@ -2026,7 +2052,9 @@
                 }
             }
         if (!jQuery.isEmptyObject(thisZoneData.addedPokemonSpecies)){
-            var addedPokemonSpeciesTokens = Object.keys(thisZoneData.addedPokemonSpecies);
+            addedPokemonSpeciesTokens = Object.keys(thisZoneData.addedPokemonSpecies);
+            evolvedPokemonSpeciesTokens = Object.keys(thisZoneData.evolvedPokemonSpecies);
+            faintedPokemonSpeciesTokens = Object.keys(thisZoneData.faintedPokemonSpecies);
             for (var key = 0; key < addedPokemonSpeciesTokens.length; key++){
                 var token = addedPokemonSpeciesTokens[key];
                 var addedCount = thisZoneData.addedPokemonSpecies[token];
