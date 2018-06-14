@@ -1664,6 +1664,41 @@
             prevEvolution: 'duosion'
             },
 
+        'ducklett': {
+            order: indexOrder++,
+            token: 'ducklett',
+            name: 'Ducklett',
+            number: 580,
+            types: ['water', 'flying'],
+            baseStats: {hp: 62, phAttack: 44, phDefense: 50, spAttack: 44, spDefense: 50, speed: 55},
+            abilities: {0: 'keen-eye', 1: 'big-pecks', hidden: 'hydration'},
+            height: 0.5,
+            weight: 5.5,
+            colors: ['blue', 'white', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'flying'],
+            nextEvolutions: [{
+                species: 'swanna',
+                method: 'level-up',
+                value: 35
+                }]
+            },
+        'swanna': {
+            order: indexOrder++,
+            token: 'swanna',
+            name: 'Swanna',
+            number: 581,
+            types: ['water', 'flying'],
+            baseStats: {hp: 75, phAttack: 87, phDefense: 63, spAttack: 87, spDefense: 63, speed: 98},
+            abilities: {0: 'keen-eye', 1: 'big-pecks', hidden: 'hydration'},
+            height: 1.3,
+            weight: 24.2,
+            colors: ['white', 'blue', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'flying'],
+            prevEvolution: 'ducklett'
+            },
+
         'vanillite': {
             order: indexOrder++,
             token: 'vanillite',
