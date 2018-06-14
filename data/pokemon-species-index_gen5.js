@@ -1551,6 +1551,64 @@
             prevEvolution: 'minccino'
             },
 
+        'gothita': {
+            order: indexOrder++,
+            token: 'gothita',
+            name: 'Gothita',
+            number: 574,
+            types: ['psychic'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 45, phAttack: 30, phDefense: 50, spAttack: 55, spDefense: 65, speed: 45},
+            abilities: {0: 'frisk', 1: 'competitive', hidden: 'shadow-tag'},
+            height: 0.4,
+            weight: 5.8,
+            colors: ['purple', 'white', 'black', 'blue', 'red'],
+            eggCycles: 20,
+            eggGroups: ['human-like'],
+            nextEvolutions: [{
+                species: 'gothorita',
+                method: 'level-up',
+                value: 32
+                }]
+            },
+        'gothorita': {
+            order: indexOrder++,
+            token: 'gothorita',
+            name: 'Gothorita',
+            number: 575,
+            types: ['psychic'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 60, phAttack: 45, phDefense: 70, spAttack: 75, spDefense: 85, speed: 55},
+            abilities: {0: 'frisk', 1: 'competitive', hidden: 'shadow-tag'},
+            height: 0.7,
+            weight: 18,
+            colors: ['black', 'white', 'purple', 'blue', 'red'],
+            eggCycles: 20,
+            eggGroups: ['human-like'],
+            prevEvolution: 'gothita',
+            nextEvolutions: [{
+                species: 'gothitelle',
+                method: 'level-up',
+                value: 41
+                }]
+            },
+        'gothitelle': {
+            order: indexOrder++,
+            token: 'gothitelle',
+            name: 'Gothitelle',
+            number: 576,
+            types: ['psychic'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 70, phAttack: 55, phDefense: 95, spAttack: 95, spDefense: 110, speed: 65},
+            abilities: {0: 'frisk', 1: 'competitive', hidden: 'shadow-tag'},
+            height: 1.5,
+            weight: 44,
+            colors: ['black', 'white', 'purple', 'blue', 'red'],
+            eggCycles: 20,
+            eggGroups: ['human-like'],
+            prevEvolution: 'gothorita'
+            },
+
         'solosis': {
             order: indexOrder++,
             token: 'solosis',
