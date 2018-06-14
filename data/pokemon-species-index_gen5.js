@@ -1316,6 +1316,21 @@
             prevEvolution: 'scraggy'
             },
 
+        'sigilyph': {
+            order: indexOrder++,
+            token: 'sigilyph',
+            name: 'Sigilyph',
+            number: 561,
+            types: ['psychic', 'flying'],
+            baseStats: {hp: 72, phAttack: 58, phDefense: 80, spAttack: 103, spDefense: 80, speed: 97},
+            abilities: {0: 'wonder-skin', 1: 'magic-guard', hidden: 'tinted-lens'},
+            height: 1.4,
+            weight: 14,
+            colors: ['black', 'yellow', 'blue', 'green', 'red'],
+            eggCycles: 20,
+            eggGroups: ['flying']
+            },
+
         'yamask': {
             order: indexOrder++,
             token: 'yamask',
