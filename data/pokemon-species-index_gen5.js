@@ -1475,6 +1475,82 @@
             prevEvolution: 'trubbish'
             },
 
+        'zorua': {
+            order: indexOrder++,
+            token: 'zorua',
+            name: 'Zorua',
+            number: 570,
+            types: ['dark'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 40, phAttack: 65, phDefense: 40, spAttack: 80, spDefense: 40, speed: 65},
+            abilities: {0: 'illusion'},
+            height: 0.7,
+            weight: 12.5,
+            colors: ['gray', 'black', 'red', 'green'],
+            eggCycles: 25,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'zoroark',
+                method: 'level-up',
+                value: 30
+                }]
+            },
+        'zoroark': {
+            order: indexOrder++,
+            token: 'zoroark',
+            name: 'Zoroark',
+            number: 571,
+            types: ['dark'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 60, phAttack: 105, phDefense: 60, spAttack: 120, spDefense: 60, speed: 105},
+            abilities: {0: 'illusion'},
+            height: 1.6,
+            weight: 81.1,
+            colors: ['gray', 'black', 'red', 'green'],
+            eggCycles: 25,
+            eggGroups: ['field'],
+            prevEvolution: 'zorua'
+            },
+
+        'minccino': {
+            order: indexOrder++,
+            token: 'minccino',
+            name: 'Minccino',
+            number: 572,
+            types: ['normal'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 55, phAttack: 50, phDefense: 40, spAttack: 40, spDefense: 40, speed: 75},
+            abilities: {0: 'cute-charm', 1: 'technician', hidden: 'skill-link'},
+            height: 0.4,
+            weight: 5.8,
+            colors: ['gray', 'white', 'pink', 'brown'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'cinccino', // shiny-stone
+                method: 'type-appeal',
+                value: 'normal',
+                method2: 'level-up',
+                value2: 20
+                }]
+            },
+        'cinccino': {
+            order: indexOrder++,
+            token: 'cinccino',
+            name: 'Cinccino',
+            number: 573,
+            types: ['normal'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 75, phAttack: 95, phDefense: 60, spAttack: 65, spDefense: 60, speed: 115},
+            abilities: {0: 'cute-charm', 1: 'technician', hidden: 'skill-link'},
+            height: 0.5,
+            weight: 7.5,
+            colors: ['white', 'gray', 'pink', 'brown'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            prevEvolution: 'minccino'
+            },
+
         'solosis': {
             order: indexOrder++,
             token: 'solosis',
