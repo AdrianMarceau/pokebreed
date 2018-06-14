@@ -1047,6 +1047,45 @@
             prevEvolution: 'cottonee'
             },
 
+        'petilil': {
+            order: indexOrder++,
+            token: 'petilil',
+            name: 'Petilil',
+            number: 548,
+            types: ['grass'],
+            genderRatio: {female: 1.0000},
+            baseStats: {hp: 45, phAttack: 35, phDefense: 50, spAttack: 70, spDefense: 50, speed: 30},
+            abilities: {0: 'chlorophyll', 1: 'own-tempo', hidden: 'leaf-guard'},
+            height: 0.5,
+            weight: 6.6,
+            colors: ['green', 'white', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['grass'],
+            nextEvolutions: [{
+                species: 'lilligant', // sun-stone
+                method: 'type-appeal',
+                value: 'grass',
+                method2: 'level-up',
+                value2: 20
+                }]
+            },
+        'lilligant': {
+            order: indexOrder++,
+            token: 'lilligant',
+            name: 'Lilligant',
+            number: 549,
+            types: ['grass'],
+            genderRatio: {female: 1.0000},
+            baseStats: {hp: 70, phAttack: 60, phDefense: 75, spAttack: 110, spDefense: 75, speed: 90},
+            abilities: {0: 'chlorophyll', 1: 'own-tempo', hidden: 'leaf-guard'},
+            height: 1.1,
+            weight: 16.3,
+            colors: ['green', 'red', 'white', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['grass'],
+            prevEvolution: 'petilil'
+            },
+
         'sandile': {
             order: indexOrder++,
             token: 'sandile',
