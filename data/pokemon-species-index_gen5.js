@@ -955,6 +955,61 @@
             prevEvolution: 'swadloon'
             },
 
+        'venipede': {
+            order: indexOrder++,
+            token: 'venipede',
+            name: 'Venipede',
+            number: 543,
+            types: ['bug', 'poison'],
+            baseStats: {hp: 30, phAttack: 45, phDefense: 59, spAttack: 30, spDefense: 39, speed: 57},
+            abilities: {0: 'poison-point', 1: 'swarm', hidden: 'speed-boost'},
+            height: 0.4,
+            weight: 5.3,
+            colors: ['pink', 'green', 'black', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            nextEvolutions: [{
+                species: 'whirlipede',
+                method: 'level-up',
+                value: 22
+                }]
+            },
+        'whirlipede': {
+            order: indexOrder++,
+            token: 'whirlipede',
+            name: 'Whirlipede',
+            number: 544,
+            types: ['bug', 'poison'],
+            baseStats: {hp: 40, phAttack: 55, phDefense: 99, spAttack: 40, spDefense: 79, speed: 47},
+            abilities: {0: 'poison-point', 1: 'swarm', hidden: 'speed-boost'},
+            height: 1.2,
+            weight: 58.5,
+            colors: ['purple', 'red', 'black', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            prevEvolution: 'venipede',
+            nextEvolutions: [{
+                species: 'scolipede',
+                method: 'level-up',
+                value: 30
+                }]
+            },
+        'scolipede': {
+            order: indexOrder++,
+            token: 'scolipede',
+            name: 'Scolipede',
+            number: 545,
+            types: ['bug', 'poison'],
+            baseStats: {hp: 60, phAttack: 100, phDefense: 89, spAttack: 55, spDefense: 69, speed: 112},
+            abilities: {0: 'poison-point', 1: 'swarm', hidden: 'speed-boost'},
+            height: 2.5,
+            weight: 200.5,
+            colors: ['pink', 'purple', 'black', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            prevEvolution: 'whirlipede'
+            },
+
         'sandile': {
             order: indexOrder++,
             token: 'sandile',
