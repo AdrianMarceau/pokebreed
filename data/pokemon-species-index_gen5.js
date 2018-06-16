@@ -3216,6 +3216,34 @@
             prevEvolution: 'meloetta'
             },
 
+        'genesect': {
+            order: indexOrder++,
+            token: 'genesect',
+            name: 'Genesect',
+            class: 'mythical',
+            number: 649,
+            formClass: 'random-variant',
+            possibleForms: ['base', 'shock', 'burn', 'chill', 'douse'],
+            randomizeForms: true,
+            baseForm: 'base',
+            types: ['bug', 'steel'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 71, phAttack: 120, phDefense: 95, spAttack: 120, spDefense: 95, speed: 99},
+            abilities: {0: 'download'},
+            height: 1.5,
+            weight: 82.5,
+            colors: ['purple', 'red', 'white'],
+            possibleFormColors: {
+                'base': ['purple', 'red', 'white', 'orange'],
+                'shock': ['purple', 'red', 'white', 'yellow'],
+                'burn': ['purple', 'red', 'white', 'red'],
+                'chill': ['purple', 'red', 'white', 'blue'],
+                'douse': ['purple', 'red', 'white', 'blue']
+                },
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
