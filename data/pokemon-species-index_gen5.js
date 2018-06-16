@@ -2871,6 +2871,23 @@
             eggGroups: ['undiscovered'],
             },
 
+        'terrakion': {
+            order: indexOrder++,
+            token: 'terrakion',
+            name: 'Terrakion',
+            class: 'legendary',
+            number: 639,
+            types: ['rock', 'fighting'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 91, phAttack: 129, phDefense: 90, spAttack: 72, spDefense: 90, speed: 108},
+            abilities: {0: 'justified'},
+            height: 1.9,
+            weight: 260,
+            colors: ['gray', 'brown', 'orange', 'black'],
+            eggCycles: 80,
+            eggGroups: ['undiscovered'],
+            },
+
         'reshiram': {
             order: indexOrder++,
             token: 'reshiram',
