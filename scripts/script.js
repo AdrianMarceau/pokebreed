@@ -3304,66 +3304,38 @@
 
                         // Trade-based evolutions trigger if this there's a same-species partner on field
                         if (methodToken === 'trade-partner'){
-                            //console.log('\n\n-----\nmethodToken = ', methodToken);
-                            //console.log('pokemonInfo = ', pokemonInfo.token, JSON.stringify(pokemonInfo));
                             if (typeof nextEvolution['method2'] !== 'undefined'
                                 && nextEvolution['method2'] === 'level-up'
                                 && nextEvolution['value2'] > pokemonInfo.growthCycles){
-                                //console.log('|- '+ pokemonInfo.token +' isn\'t ready to evolve yet', nextEvolution['value2'], pokemonInfo.growthCycles);
-                                //console.log('return 0;');
                                 return 0;
                                 }
-                            //console.log('|- pendingTradePartnerTokens = ', pendingTradePartnerTokens.length, JSON.stringify(pendingTradePartnerTokens));
-                            //console.log('|- pendingTradePartnerIDs = ', pendingTradePartnerIDs.length, JSON.stringify(pendingTradePartnerIDs));
                             var partnerToken = methodValue === 'auto' ? pokemonInfo.token : methodValue;
                             var pendingTokenKey = pendingTradePartnerTokens.indexOf(pokemonInfo.token);
                             var pendingIDKey = pendingTradePartnerIDs.indexOf(pokemonInfo.id);
-                            //console.log('|- partnerToken = ', partnerToken);
-                            //console.log('|- pendingTokenKey = ', pendingTokenKey);
-                            //console.log('|- pendingIDKey = ', pendingIDKey);
                             if (pendingTokenKey !== -1){
-                                //console.log('|-- thisToken exists in pending, take/remove it pendingTradePartnerTokens from and return 2');
                                 pendingTradePartnerTokens.splice(pendingTokenKey, 1);
                                 pendingTradePartnerIDs.splice(pendingIDKey, 1);
-                                //console.log('|-- pendingTradePartnerTokens = ', pendingTradePartnerTokens.length, JSON.stringify(pendingTradePartnerTokens));
-                                //console.log('|-- pendingTradePartnerIDs = ', pendingTradePartnerIDs.length, JSON.stringify(pendingTradePartnerIDs));
-                                //console.log('return 3;');
                                 return 3;
                                 } else if (typeof thisZoneData.currentStats['species'][partnerToken] !== 'undefined'
                                 && thisZoneData.currentStats['species'][partnerToken] > 0){
-                                //console.log('|-- partnerToken doesn\'t exist in pending, but '+ thisZoneData.currentStats['species'][partnerToken] +' are in the box right now');
                                 if (typeof nextEvolution['method2'] !== 'undefined'
                                     && nextEvolution['method2'] === 'level-up'){
-                                    //console.log('|--- second method was level-up, so collect the min');
                                     var possiblePartners = getZonePokemonByToken(partnerToken);
                                     var minGrowthLevel = nextEvolution['value2'];
-                                    //console.log('|--- possiblePartners = ', possiblePartners.length, JSON.stringify(possiblePartners));
-                                    //console.log('|--- minGrowthLevel = ', minGrowthLevel);
                                     for (var i = 0; i < possiblePartners.length; i++){
                                         var partnerInfo = possiblePartners[i];
-                                        //console.log('|---- checking partnerInfo for min growth levels ', partnerInfo.token, partnerInfo.growthCycles, JSON.stringify(partnerInfo));
                                         if (partnerInfo.growthCycles >= minGrowthLevel
                                             && pendingTradePartnerIDs.indexOf(partnerInfo.id) === -1){
-                                            //console.log('|----- partner ID '+ partnerInfo.id + ' has reached growth level and isn\'t already in the parent array');
                                             pendingTradePartnerTokens.push(partnerInfo.token);
                                             pendingTradePartnerIDs.push(partnerInfo.id);
-                                            //console.log('|----- pendingTradePartnerTokens = ', pendingTradePartnerTokens.length, JSON.stringify(pendingTradePartnerTokens));
-                                            //console.log('|----- pendingTradePartnerIDs = ', pendingTradePartnerIDs.length, JSON.stringify(pendingTradePartnerIDs));
-                                            //console.log('return 2;');
                                             return 2;
                                             }
                                         }
-                                    //console.log('|--- pendingTradePartnerTokens = ', pendingTradePartnerTokens.length, JSON.stringify(pendingTradePartnerTokens));
-                                    //console.log('|--- pendingTradePartnerIDs = ', pendingTradePartnerIDs.length, JSON.stringify(pendingTradePartnerIDs));
                                     } else {
-                                    //console.log('|--- second method doesn\'t exist, so we can return 1');
                                     pendingTradePartnerTokens.push(pokemonInfo.token);
-                                    //console.log('|--- pendingTradePartnerTokens = ', pendingTradePartnerTokens.length, pendingTradePartnerTokens);
-                                    //console.log('return 1;');
                                     return 1;
                                     }
                                 }
-                                //console.log('return 0;');
                             }
 
                         // Species-based evolutions trigger if the other species is active on the field
