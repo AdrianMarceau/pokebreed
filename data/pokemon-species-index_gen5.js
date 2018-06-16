@@ -2888,6 +2888,23 @@
             eggGroups: ['undiscovered'],
             },
 
+        'virizion': {
+            order: indexOrder++,
+            token: 'virizion',
+            name: 'Virizion',
+            class: 'legendary',
+            number: 640,
+            types: ['grass', 'fighting'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 91, phAttack: 90, phDefense: 72, spAttack: 90, spDefense: 129, speed: 108},
+            abilities: {0: 'justified'},
+            height: 2,
+            weight: 200,
+            colors: ['green', 'white', 'pink', 'black'],
+            eggCycles: 80,
+            eggGroups: ['undiscovered'],
+            },
+
         'reshiram': {
             order: indexOrder++,
             token: 'reshiram',
