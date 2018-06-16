@@ -2946,6 +2946,47 @@
             prevEvolution: 'tornadus'
             },
 
+        'thundurus': {
+            order: indexOrder++,
+            token: 'thundurus',
+            name: 'Thundurus',
+            class: 'legendary',
+            number: 642,
+            types: ['electric', 'flying'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 79, phAttack: 115, phDefense: 70, spAttack: 125, spDefense: 80, speed: 111},
+            abilities: {0: 'prankster', hidden: 'defiant'},
+            height: 1.5,
+            weight: 61,
+            colors: ['blue', 'white', 'purple', 'black', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'therian-thundurus',
+                method: 'burst-evolution',
+                value: 'reveal-glass'
+                }]
+            },
+        'therian-thundurus': {
+            order: indexOrder++,
+            token: 'therian-thundurus',
+            name: 'Therian Thundurus',
+            class: 'legendary',
+            formClass: 'burst-evolution',
+            formToken: 'therian',
+            number: 642,
+            types: ['electric', 'flying'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 79, phAttack: 105, phDefense: 70, spAttack: 145, spDefense: 80, speed: 101},
+            abilities: {0: 'volt-absorb'},
+            height: 3,
+            weight: 61,
+            colors: ['blue', 'purple', 'white', 'black', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'thundurus'
+            },
+
         'reshiram': {
             order: indexOrder++,
             token: 'reshiram',
