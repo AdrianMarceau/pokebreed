@@ -2645,6 +2645,50 @@
             eggGroups: ['field']
             },
 
+        'rufflet': {
+            order: indexOrder++,
+            token: 'rufflet',
+            name: 'Rufflet',
+            number: 627,
+            types: ['normal', 'flying'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 70, phAttack: 83, phDefense: 50, spAttack: 37, spDefense: 50, speed: 60},
+            abilities: {0: 'keen-eye', 1: 'sheer-force', hidden: 'hustle'},
+            height: 0.5,
+            weight: 10.5,
+            colors: ['white', 'blue', 'yellow', 'red', 'black'],
+            eggCycles: 20,
+            eggGroups: ['flying'],
+            eggPartner: 'vullaby',
+            nextEvolutions: [{
+                species: 'braviary',
+                method: 'level-up',
+                value: 54
+                }],
+            altBaseEvolutions: [{
+                'species': 'vullaby',
+                'method': 'chance',
+                'value': 50
+                }]
+            },
+        'braviary': {
+            order: indexOrder++,
+            token: 'braviary',
+            name: 'Braviary',
+            number: 628,
+            types: ['normal', 'flying'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 100, phAttack: 123, phDefense: 75, spAttack: 57, spDefense: 75, speed: 80},
+            abilities: {0: 'keen-eye', 1: 'sheer-force', hidden: 'defiant'},
+            height: 1.5,
+            weight: 41,
+            colors: ['red', 'blue', 'white', 'yellow', 'black'],
+            eggCycles: 20,
+            eggGroups: ['flying'],
+            prevEvolution: 'rufflet',
+            eggPartner: 'mandibuzz'
+            },
+
         'deino': {
             order: indexOrder++,
             token: 'deino',
