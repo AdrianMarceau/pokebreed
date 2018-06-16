@@ -3061,6 +3061,78 @@
             prevEvolution: 'landorus'
             },
 
+        'kyurem': {
+            order: indexOrder++,
+            token: 'kyurem',
+            name: 'Kyurem',
+            class: 'legendary',
+            number: 646,
+            types: ['dragon', 'ice'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 125, phAttack: 130, phDefense: 90, spAttack: 130, spDefense: 90, speed: 95},
+            abilities: {0: 'pressure'},
+            height: 3,
+            weight: 325,
+            colors: ['gray', 'blue', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'black-kyurem',
+                method: 'burst-evolution',
+                value: 'dna-splicers',
+                method2: 'fusion-species',
+                value2: 'zekrom',
+                switch: 'and'
+                }, {
+                species: 'white-kyurem',
+                method: 'burst-evolution',
+                value: 'dna-splicers',
+                method2: 'fusion-species',
+                value2: 'reshiram',
+                switch: 'and'
+                }]
+            },
+        'black-kyurem': {
+            order: indexOrder++,
+            token: 'black-kyurem',
+            name: 'Black Kyurem',
+            class: 'legendary',
+            baseSpecies: 'kyurem',
+            formClass: 'burst-evolution',
+            formToken: 'black',
+            number: 646,
+            types: ['dragon', 'ice'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 125, phAttack: 170, phDefense: 100, spAttack: 120, spDefense: 90, speed: 95},
+            abilities: {0: 'teravolt'},
+            height: 3.3,
+            weight: 325,
+            colors: ['gray', 'black', 'blue', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'kyurem'
+            },
+        'white-kyurem': {
+            order: indexOrder++,
+            token: 'white-kyurem',
+            name: 'White Kyurem',
+            class: 'legendary',
+            baseSpecies: 'kyurem',
+            formClass: 'burst-evolution',
+            formToken: 'white',
+            number: 646,
+            types: ['dragon', 'ice'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 125, phAttack: 120, phDefense: 90, spAttack: 170, spDefense: 100, speed: 95},
+            abilities: {0: 'turboblaze'},
+            height: 3.6,
+            weight: 325,
+            colors: ['gray', 'white', 'blue', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'kyurem'
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
