@@ -2734,6 +2734,21 @@
             prevEvolution: 'vullaby'
             },
 
+        'heatmor': {
+            order: indexOrder++,
+            token: 'heatmor',
+            name: 'Heatmor',
+            number: 631,
+            types: ['fire'],
+            baseStats: {hp: 85, phAttack: 97, phDefense: 66, spAttack: 105, spDefense: 66, speed: 65},
+            abilities: {0: 'gluttony', 1: 'flash-fire', hidden: 'white-smoke'},
+            height: 1.4,
+            weight: 58,
+            colors: ['red', 'brown', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field']
+            },
+
         'deino': {
             order: indexOrder++,
             token: 'deino',
