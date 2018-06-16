@@ -2508,6 +2508,41 @@
             eggGroups: ['water-1', 'amorphous']
             },
 
+        'mienfoo': {
+            order: indexOrder++,
+            token: 'mienfoo',
+            name: 'Mienfoo',
+            number: 619,
+            types: ['fighting'],
+            baseStats: {hp: 45, phAttack: 85, phDefense: 50, spAttack: 55, spDefense: 50, speed: 65},
+            abilities: {0: 'inner-focus', 1: 'regenerator', hidden: 'reckless'},
+            height: 0.9,
+            weight: 20,
+            colors: ['yellow', 'red', 'brown'],
+            eggCycles: 25,
+            eggGroups: ['field', 'human-like'],
+            nextEvolutions: [{
+                species: 'mienshao',
+                method: 'level-up',
+                value: 50
+                }]
+            },
+        'mienshao': {
+            order: indexOrder++,
+            token: 'mienshao',
+            name: 'Mienshao',
+            number: 620,
+            types: ['fighting'],
+            baseStats: {hp: 65, phAttack: 125, phDefense: 60, spAttack: 95, spDefense: 60, speed: 105},
+            abilities: {0: 'inner-focus', 1: 'regenerator', hidden: 'reckless'},
+            height: 1.4,
+            weight: 35.5,
+            colors: ['white', 'purple', 'yellow'],
+            eggCycles: 25,
+            eggGroups: ['field', 'human-like'],
+            prevEvolution: 'mienfoo'
+            },
+
         'golett': {
             order: indexOrder++,
             token: 'golett',
