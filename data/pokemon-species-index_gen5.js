@@ -3216,7 +3216,7 @@
             prevEvolution: 'meloetta'
             },
 
-        'genesect': {
+        'genesect': { // TODO : Make forms based on type appeal
             order: indexOrder++,
             token: 'genesect',
             name: 'Genesect',

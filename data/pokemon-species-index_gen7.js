@@ -847,6 +847,23 @@
             prevEvolution: 'hakamo-o',
             },
 
+        'necrozma': {
+            order: indexOrder++,
+            token: 'necrozma',
+            name: 'Necrozma',
+            class: 'legendary',
+            number: 800,
+            types: ['psychic'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 97, phAttack: 107, phDefense: 101, spAttack: 127, spDefense: 89, speed: 79},
+            abilities: {0: 'prism-armor'},
+            height: 2.4,
+            weight: 230,
+            colors: ['black'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
         'zeraora': {
             order: indexOrder++,
             token: 'zeraora',
