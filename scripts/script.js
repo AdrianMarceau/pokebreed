@@ -3403,10 +3403,15 @@
                         //console.log('|- Checking indexInfo.nextEvolutions['+i+'] = ', nextEvolution, nextEvolutionInfo);
 
                         // Define vars to count the number of trigged evos and switch type
-                        var switchKind = typeof nextEvolution.switch !== 'undefined' ? nextEvolution.switch : 'and';
                         var totalMethods = 0;
                         var triggeredMethods = 0;
                         var forceEvo = false;
+                        if (typeof nextEvolution.switch !== 'undefined'){
+                            var switchKind = nextEvolution.switch;
+                            } else {
+                            var switchKind = 'and';
+                            if (methodToken === 'mega-evolution' || methodToken === 'primal-reversion'){ switchKind = 'or'; }
+                            }
 
                         // Define a variable to hold the trigger chance value
                         var triggeredChance = 0;
@@ -3452,13 +3457,6 @@
                                     triggeredChance += chanceValue;
                                     //console.log('|-- totalMethods++; | totalMethods = ', totalMethods);
                                     //console.log('|-- triggeredChance += '+chanceValue+'; | triggeredChance = ', triggeredChance);
-
-                                    // Force this evolution if it's a mega/burst/primal
-                                    if (methodToken === 'mega-evolution'
-                                        || methodToken === 'burst-evolution'
-                                        || methodToken === 'primal-reversion'){
-                                        forceEvo = true;
-                                        }
 
                                     }
 
