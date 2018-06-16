@@ -2689,6 +2689,51 @@
             eggPartner: 'mandibuzz'
             },
 
+        'vullaby': {
+            order: indexOrder++,
+            token: 'vullaby',
+            name: 'Vullaby',
+            number: 629,
+            types: ['dark', 'flying'],
+            genderRatio: {female: 1.0000},
+            baseStats: {hp: 70, phAttack: 55, phDefense: 75, spAttack: 45, spDefense: 65, speed: 60},
+            abilities: {0: 'big-pecks', 1: 'overcoat', hidden: 'weak-armor'},
+            height: 0.5,
+            weight: 9,
+            colors: ['gray', 'pink', 'white'],
+            evos: ['mandibuzz'],
+            eggCycles: 20,
+            eggGroups: ['flying'],
+            eggPartner: 'rufflet',
+            nextEvolutions: [{
+                species: 'mandibuzz',
+                method: 'level-up',
+                value: 54
+                }],
+            altBaseEvolutions: [{
+                'species': 'rufflet',
+                'method': 'chance',
+                'value': 50
+                }]
+            },
+        'mandibuzz': {
+            order: indexOrder++,
+            token: 'mandibuzz',
+            name: 'Mandibuzz',
+            number: 630,
+            types: ['dark', 'flying'],
+            genderRatio: {female: 1.0000},
+            baseStats: {hp: 110, phAttack: 65, phDefense: 105, spAttack: 55, spDefense: 95, speed: 80},
+            abilities: {0: 'big-pecks', 1: 'overcoat', hidden: 'weak-armor'},
+            height: 1.2,
+            weight: 39.5,
+            colors: ['gray', 'pink', 'white', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['flying'],
+            eggPartner: 'braviary',
+            prevEvolution: 'vullaby'
+            },
+
         'deino': {
             order: indexOrder++,
             token: 'deino',
