@@ -2506,21 +2506,18 @@
             eggCycles: 120,
             eggGroups: ['undiscovered'],
             nextEvolutions: [{
-                base: 'deoxys',
                 species: 'attack-deoxys',
                 method: 'burst-evolution',
                 value: 'attack-surge',
                 method2: 'stat-appeal',
                 value2: 'phAttack'
                 }, {
-                base: 'deoxys',
                 species: 'defense-deoxys',
                 method: 'burst-evolution',
                 value: 'defense-surge',
                 method2: 'stat-appeal',
                 value2: 'phDefense'
                 }, {
-                base: 'deoxys',
                 species: 'speed-deoxys',
                 method: 'burst-evolution',
                 value: 'speed-surge',

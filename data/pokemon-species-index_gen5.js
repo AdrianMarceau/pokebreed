@@ -2905,6 +2905,47 @@
             eggGroups: ['undiscovered'],
             },
 
+        'tornadus': {
+            order: indexOrder++,
+            token: 'tornadus',
+            name: 'Tornadus',
+            class: 'legendary',
+            number: 641,
+            types: ['flying'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 79, phAttack: 115, phDefense: 70, spAttack: 125, spDefense: 80, speed: 111},
+            abilities: {0: 'prankster', hidden: 'defiant'},
+            height: 1.5,
+            weight: 63,
+            colors: ['green', 'white', 'purple', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'therian-tornadus',
+                method: 'burst-evolution',
+                value: 'reveal-glass'
+                }]
+            },
+        'therian-tornadus': {
+            order: indexOrder++,
+            token: 'therian-tornadus',
+            name: 'Therian Tornadus',
+            class: 'legendary',
+            formClass: 'burst-evolution',
+            formToken: 'therian',
+            number: 641,
+            types: ['flying'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 79, phAttack: 100, phDefense: 80, spAttack: 110, spDefense: 90, speed: 121},
+            abilities: {0: 'regenerator'},
+            height: 1.4,
+            weight: 63,
+            colors: ['green', 'purple', 'white', 'yellow', 'red'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'tornadus'
+            },
+
         'reshiram': {
             order: indexOrder++,
             token: 'reshiram',
