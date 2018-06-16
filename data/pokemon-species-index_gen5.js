@@ -2749,6 +2749,21 @@
             eggGroups: ['field']
             },
 
+        'durant': {
+            order: indexOrder++,
+            token: 'durant',
+            name: 'Durant',
+            number: 632,
+            types: ['bug', 'steel'],
+            baseStats: {hp: 58, phAttack: 109, phDefense: 112, spAttack: 48, spDefense: 48, speed: 109},
+            abilities: {0: 'swarm', 1: 'hustle', hidden: 'truant'},
+            height: 0.3,
+            weight: 33,
+            colors: ['gray', 'black', 'red'],
+            eggCycles: 20,
+            eggGroups: ['bug']
+            },
+
         'deino': {
             order: indexOrder++,
             token: 'deino',
