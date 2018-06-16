@@ -518,16 +518,16 @@
 
 /* -- Overview Panels -- */
 
-@media (min-width: 768px) and (max-width: 1123px) and (max-height: 647px){
+@media (min-width: 768px) and (max-width: 1125px) and (max-height: 647px){
     .bp3:before { content: "d0";  }
 
     .panel .overview.species .wrap {
-        background-color: pink;
+        /* background-color: pink; */
         height: auto;
         max-height: calc(100vh - 250px);
     }
     .panel .overview.types .wrap {
-        background-color: pink;
+        /* background-color: pink; */
         height: auto;
         max-height: calc(100vh - 320px);
     }
