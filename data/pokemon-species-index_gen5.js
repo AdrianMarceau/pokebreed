@@ -1888,6 +1888,43 @@
             eggGroups: ['field']
             },
 
+        'karrablast': {
+            order: indexOrder++,
+            token: 'karrablast',
+            name: 'Karrablast',
+            number: 588,
+            types: ['bug'],
+            baseStats: {hp: 50, phAttack: 75, phDefense: 45, spAttack: 40, spDefense: 45, speed: 60},
+            abilities: {0: 'swarm', 1: 'shed-skin', hidden: 'no-guard'},
+            height: 0.5,
+            weight: 5.9,
+            colors: ['blue', 'yellow', 'black'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            nextEvolutions: [{
+                species: 'escavalier',
+                method: 'trade-partner',
+                value: 'shelmet',
+                method2: 'level-up',
+                value2: 20
+                }]
+            },
+        'escavalier': {
+            order: indexOrder++,
+            token: 'escavalier',
+            name: 'Escavalier',
+            number: 589,
+            types: ['bug', 'steel'],
+            baseStats: {hp: 70, phAttack: 135, phDefense: 105, spAttack: 60, spDefense: 105, speed: 20},
+            abilities: {0: 'swarm', 1: 'shell-armor', hidden: 'overcoat'},
+            height: 1,
+            weight: 33,
+            colors: ['gray', 'red', 'blue', 'yellow', 'black'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            prevEvolution: 'karrablast'
+            },
+
         'foongus': {
             order: indexOrder++,
             token: 'foongus',
