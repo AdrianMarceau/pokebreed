@@ -3133,6 +3133,47 @@
             prevEvolution: 'kyurem'
             },
 
+        'keldeo': {
+            order: indexOrder++,
+            token: 'keldeo',
+            name: 'Keldeo',
+            class: 'mythical',
+            number: 647,
+            types: ['water', 'fighting'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 91, phAttack: 72, phDefense: 90, spAttack: 129, spDefense: 90, speed: 108},
+            abilities: {0: 'justified'},
+            height: 1.4,
+            weight: 48.5,
+            colors: ['blue', 'yellow', 'red'],
+            eggCycles: 80,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'resolute-keldeo',
+                method: 'burst-evolution',
+                value: 'secret-sword'
+                }]
+            },
+        'resolute-keldeo': {
+            order: indexOrder++,
+            token: 'resolute-keldeo',
+            name: 'Resolute Keldeo',
+            class: 'mythical',
+            formClass: 'burst-evolution',
+            formToken: 'resolute',
+            number: 647,
+            types: ['water', 'fighting'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 91, phAttack: 72, phDefense: 90, spAttack: 129, spDefense: 90, speed: 108},
+            abilities: {0: 'justified'},
+            height: 1.4,
+            weight: 48.5,
+            colors: ['blue', 'red', 'yellow', 'orange', 'green'],
+            eggCycles: 80,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'keldeo'
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
