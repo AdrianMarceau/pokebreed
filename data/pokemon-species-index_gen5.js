@@ -2421,6 +2421,43 @@
             eggGroups: ['mineral'],
             },
 
+        'shelmet': {
+            order: indexOrder++,
+            token: 'shelmet',
+            name: 'Shelmet',
+            number: 616,
+            types: ['bug'],
+            baseStats: {hp: 50, phAttack: 40, phDefense: 85, spAttack: 40, spDefense: 65, speed: 25},
+            abilities: {0: 'hydration', 1: 'shell-armor', hidden: 'overcoat'},
+            height: 0.4,
+            weight: 7.7,
+            colors: ['gray', 'pink', 'green', 'blue'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            nextEvolutions: [{
+                species: 'accelgor',
+                method: 'trade-partner',
+                value: 'karrablast',
+                method2: 'level-up',
+                value2: 20
+                }]
+            },
+        'accelgor': {
+            order: indexOrder++,
+            token: 'accelgor',
+            name: 'Accelgor',
+            number: 617,
+            types: ['bug'],
+            baseStats: {hp: 80, phAttack: 70, phDefense: 40, spAttack: 100, spDefense: 60, speed: 145},
+            abilities: {0: 'hydration', 1: 'sticky-hold', hidden: 'unburden'},
+            height: 0.8,
+            weight: 25.3,
+            colors: ['pink', 'blue', 'green', 'black'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            prevEvolution: 'shelmet'
+            },
+
         'stunfisk': {
             order: indexOrder++,
             token: 'stunfisk',
