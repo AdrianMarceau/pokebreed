@@ -2854,6 +2854,23 @@
             prevEvolution: 'larvesta'
             },
 
+        'cobalion': {
+            order: indexOrder++,
+            token: 'cobalion',
+            name: 'Cobalion',
+            class: 'legendary',
+            number: 638,
+            types: ['steel', 'fighting'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 91, phAttack: 90, phDefense: 129, spAttack: 90, spDefense: 72, speed: 108},
+            abilities: {0: 'justified'},
+            height: 2.1,
+            weight: 250,
+            colors: ['blue', 'yellow', 'white', 'gray', 'black'],
+            eggCycles: 80,
+            eggGroups: ['undiscovered'],
+            },
+
         'reshiram': {
             order: indexOrder++,
             token: 'reshiram',
