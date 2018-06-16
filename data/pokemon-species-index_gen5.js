@@ -3020,6 +3020,47 @@
             eggGroups: ['undiscovered'],
             },
 
+        'landorus': {
+            order: indexOrder++,
+            token: 'landorus',
+            name: 'Landorus',
+            class: 'legendary',
+            number: 645,
+            types: ['ground', 'flying'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 89, phAttack: 125, phDefense: 90, spAttack: 115, spDefense: 80, speed: 101},
+            abilities: {0: 'sand-force', hidden: 'sheer-force'},
+            height: 1.5,
+            weight: 68,
+            colors: ['orange', 'white', 'brown', 'red'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'therian-landorus',
+                method: 'burst-evolution',
+                value: 'reveal-glass'
+                }]
+            },
+        'therian-landorus': {
+            order: indexOrder++,
+            token: 'therian-landorus',
+            name: 'Therian Landorus',
+            class: 'legendary',
+            formClass: 'burst-evolution',
+            formToken: 'therian',
+            number: 645,
+            types: ['ground', 'flying'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 89, phAttack: 145, phDefense: 90, spAttack: 105, spDefense: 80, speed: 91},
+            abilities: {0: 'intimidate'},
+            height: 1.3,
+            weight: 68,
+            colors: ['orange', 'brown', 'white', 'red'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'landorus'
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
