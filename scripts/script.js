@@ -2588,6 +2588,10 @@
 
                 }
             }
+
+        // We removed a pokemon so we should update the stats
+        recalculateZoneStats();
+
     }
 
     // Define a function for the list-item click event
@@ -3217,8 +3221,9 @@
                     //console.log('|- allowTradeEvolution = ', allowTradeEvolution);
 
                     // Define a function for testing if an evolution method is true
-                    function calculateEvolutionChance(pokemonInfo, methodToken, methodValue, nextEvolution){
-                        //console.log('|-- calculateEvolutionChance(pokemonInfo, methodToken, methodValue)', pokemonInfo, methodToken, methodValue);
+                    var fusionPokemonToBeRemoved = false;
+                    function calculateEvolutionChance(pokemonInfo, methodToken, methodValue, methodNum, nextEvolution, prevChanceValue){
+                        //console.log('|-- calculateEvolutionChance(pokemonInfo, methodToken, methodValue, methodNum, nextEvolution, prevChanceValue)', pokemonInfo, methodToken, methodValue, methodNum, nextEvolution, prevChanceValue);
 
                         // Calculate chance value in case we need it
                         var chanceValue = Math.seededRandomChance();
@@ -3345,6 +3350,21 @@
                             return 1;
                             }
 
+                        // Fusion-based evolutions trigger if one of the other species is on the field
+                        if (methodToken === 'fusion-species'
+                            && typeof thisZoneData.currentStats['species'][methodValue] !== 'undefined'
+                            && thisZoneData.currentStats['species'][methodValue] > 0){
+                            // If the previous method was unsuccessful, return now
+                            if (methodNum > 1 && prevChanceValue === 0){ return 0; }
+                            // Find a copy of the other species to merge with, then remove it from play
+                            var possibleFusions = getZonePokemonByToken(methodValue);
+                            possibleFusions.sort(function(a, b){ return a.growthCycles > b.growthCycles ? -1 : (a.growthCycles < b.growthCycles ? 1 : 0); });
+                            var fusionPokemon = possibleFusions[0];
+                            //removePokemonByID(fusionPokemon.id);
+                            fusionPokemonToBeRemoved = fusionPokemon;
+                            return 1 + thisZoneData.currentStats['species'][methodValue];
+                            }
+
                         // Extinction-based evolutions trigger when this pokemon is the last  of its species
                         if ((methodToken === 'extinction')
                             && numRelatedPokemon == 1){
@@ -3437,7 +3457,7 @@
                                 var chanceValue = 0;
                                 if (methodToken === 'level-up'
                                     || !onlyLevelUpEvolutions){
-                                    var chanceValue = calculateEvolutionChance(pokemonInfo, methodToken, methodValue, nextEvolution);
+                                    var chanceValue = calculateEvolutionChance(pokemonInfo, methodToken, methodValue, m, nextEvolution, prevChanceValue);
                                     }
                                 //console.log('|-- chanceValue = ', chanceValue);
 
@@ -3474,6 +3494,7 @@
                             || (switchKind === 'or' && triggeredMethods > 0)
                             || (forceEvo === true)){
                             var queuedEvolution = {token: nextEvolution.species, types: nextEvolutionInfo.types, chance: triggeredChance};
+                            if (fusionPokemonToBeRemoved !== false){ queuedEvolution.fusion = fusionPokemonToBeRemoved.id; }
                             if (typeof nextEvolution.castoff !== 'undefined'){ queuedEvolution.castoff = nextEvolution.castoff; }
                             queuedEvolutions.push(queuedEvolution);
                             }
@@ -3562,6 +3583,24 @@
                                     eventCategory: 'pokemon',
                                     eventAction: 'castoff',
                                     eventLabel: backupToken+' cast off '+selectedEvolution.token
+                                    });
+                                }
+
+                            }
+
+                        // If the selected evolution was a fusion, we must remove the sacrifice
+                        if (typeof selectedEvolution.fusion !== 'undefined'){
+
+                            // Remove the fusion component from the zone
+                            removePokemonByID(selectedEvolution.fusion);
+
+                            // Push an event to the analytics
+                            if (typeof ga !== 'undefined'){
+                                ga('send', {
+                                    hitType: 'event',
+                                    eventCategory: 'pokemon',
+                                    eventAction: 'fusion',
+                                    eventLabel: backupToken+' fused with '+selectedEvolution.token
                                     });
                                 }
 
