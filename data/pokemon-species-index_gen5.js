@@ -3174,6 +3174,48 @@
             prevEvolution: 'keldeo'
             },
 
+        'meloetta': {
+            order: indexOrder++,
+            token: 'meloetta',
+            name: 'Meloetta',
+            class: 'mythical',
+            baseForme: 'Aria',
+            number: 648,
+            types: ['normal', 'psychic'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 77, phDefense: 77, spAttack: 128, spDefense: 128, speed: 90},
+            abilities: {0: 'serene-grace'},
+            height: 0.6,
+            weight: 6.5,
+            colors: ['green', 'black', 'white', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'pirouette-meloetta',
+                method: 'burst-evolution',
+                value: 'relic-song'
+                }]
+            },
+        'pirouette-meloetta': {
+            order: indexOrder++,
+            token: 'pirouette-meloetta',
+            name: 'Pirouette Meloetta',
+            class: 'mythical',
+            formClass: 'burst-evolution',
+            formToken: 'pirouette',
+            number: 648,
+            types: ['normal', 'fighting'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 128, phDefense: 90, spAttack: 77, spDefense: 77, speed: 128},
+            abilities: {0: 'serene-grace'},
+            height: 0.6,
+            weight: 6.5,
+            colors: ['orange', 'black', 'white', 'red'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'meloetta'
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
