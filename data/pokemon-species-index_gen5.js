@@ -2630,6 +2630,21 @@
             prevEvolution: 'pawniard'
             },
 
+        'bouffalant': {
+            order: indexOrder++,
+            token: 'bouffalant',
+            name: 'Bouffalant',
+            number: 626,
+            types: ['normal'],
+            baseStats: {hp: 95, phAttack: 110, phDefense: 95, spAttack: 40, spDefense: 95, speed: 55},
+            abilities: {0: 'reckless', 1: 'sap-sipper', hidden: 'soundproof'},
+            height: 1.6,
+            weight: 94.6,
+            colors: ['brown', 'gray', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field']
+            },
+
         'deino': {
             order: indexOrder++,
             token: 'deino',
