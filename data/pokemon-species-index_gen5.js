@@ -2543,6 +2543,21 @@
             prevEvolution: 'mienfoo'
             },
 
+        'druddigon': {
+            order: indexOrder++,
+            token: 'druddigon',
+            name: 'Druddigon',
+            number: 621,
+            types: ['dragon'],
+            baseStats: {hp: 77, phAttack: 120, phDefense: 90, spAttack: 60, spDefense: 90, speed: 48},
+            abilities: {0: 'rough-skin', 1: 'sheer-force', hidden: 'mold-breaker'},
+            height: 1.6,
+            weight: 139,
+            colors: ['blue', 'red', 'yellow'],
+            eggCycles: 30,
+            eggGroups: ['monster', 'dragon']
+            },
+
         'golett': {
             order: indexOrder++,
             token: 'golett',
