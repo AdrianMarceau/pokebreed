@@ -2405,6 +2405,41 @@
             prevEvolution: 'fraxure'
             },
 
+        'cubchoo': {
+            order: indexOrder++,
+            token: 'cubchoo',
+            name: 'Cubchoo',
+            number: 613,
+            types: ['ice'],
+            baseStats: {hp: 55, phAttack: 70, phDefense: 40, spAttack: 60, spDefense: 40, speed: 40},
+            abilities: {0: 'snow-cloak', 1: 'slush-rush', hidden: 'rattled'},
+            height: 0.5,
+            weight: 8.5,
+            colors: ['blue', 'white', 'black'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'beartic',
+                method: 'level-up',
+                value: 37
+                }]
+            },
+        'beartic': {
+            order: indexOrder++,
+            token: 'beartic',
+            name: 'Beartic',
+            number: 614,
+            types: ['ice'],
+            baseStats: {hp: 95, phAttack: 130, phDefense: 80, spAttack: 70, spDefense: 80, speed: 50},
+            abilities: {0: 'snow-cloak', 1: 'slush-rush', hidden: 'swift-swim'},
+            height: 2.6,
+            weight: 260,
+            colors: ['white', 'blue', 'black'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'cubchoo'
+            },
+
         'cryogonal': {
             order: indexOrder++,
             token: 'cryogonal',
