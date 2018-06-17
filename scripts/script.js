@@ -1363,6 +1363,77 @@
 
     }
 
+    // Define a function for calculating current pokedex totals
+    function calculatePokedexTotals(){
+        //console.log('calculatePokedexTotals()');
+
+        // Define variables for counting certain things
+        var pokedexTotals = {
+            totalPokemon: 0,
+            totalPokemonEncountered: 0,
+            totalCommonPokemon: 0,
+            totalCommonPokemonEncountered: 0,
+            totalLegendaryPokemon: 0,
+            totalLegendaryPokemonEncountered: 0,
+            totalMythicalPokemon: 0,
+            totalMythicalPokemonEncountered: 0,
+            totalUltraBeasts: 0,
+            totalUltraBeastsEncountered: 0,
+            totalsByGeneration: {}
+            };
+
+        // Loop through all pokemon and increment applicable totals
+        for (var i = 0; i < PokemonSpeciesIndexTokens.length; i++){
+
+            // Collect data for this pokemon from the index
+            var pokeToken = PokemonSpeciesIndexTokens[i];
+            var pokeIndex = PokemonSpeciesIndex[pokeToken];
+            //console.log('pokeIndex = ', pokeToken, pokeIndex);
+
+            // Check to see which class of pokemon this is
+            var pokemonKind = 'common';
+            if (pokeIndex.class === 'legendary'
+                || pokeIndex.class === 'mythical'
+                || pokeIndex.class === 'ultra-beast'){
+                pokemonKind = pokeIndex.class;
+                }
+
+            // Check to see if this pokemon has been encountered
+            var pokemonEncountered = typeof PokemonSpeciesSeen[pokeToken] !== 'undefined' && PokemonSpeciesSeen[pokeToken] > 0 ? true : false;
+
+            // Increment overall totals for this pokemon
+            pokedexTotals.totalPokemon++;
+            if (pokemonEncountered){ pokedexTotals.totalPokemonEncountered++; }
+
+            // Incremenet any totals specific to their kind/class
+            if (pokemonKind === 'common'){
+                pokedexTotals.totalCommonPokemon++;
+                if (pokemonEncountered){ pokedexTotals.totalCommonPokemonEncountered++; }
+                } else if (pokemonKind === 'legendary'){
+                pokedexTotals.totalLegendaryPokemon++;
+                if (pokemonEncountered){ pokedexTotals.totalLegendaryPokemonEncountered++; }
+                } else if (pokemonKind === 'mythical'){
+                pokedexTotals.totalMythicalPokemon++;
+                if (pokemonEncountered){ pokedexTotals.totalMythicalPokemonEncountered++; }
+                } else if (pokemonKind === 'ultra-beast'){
+                pokedexTotals.totalUltraBeastPokemon++;
+                if (pokemonEncountered){ pokedexTotals.totalUltraBeastPokemonEncountered++; }
+                }
+
+            // And now increment the generation totals
+            var pokemonGeneration = typeof pokeIndex.dexGeneration !== 'undefined' ? pokeIndex.dexGeneration : pokeIndex.gameGeneration;
+            if (typeof pokedexTotals.totalsByGeneration[pokemonGeneration] === 'undefined'){ pokedexTotals.totalsByGeneration[pokemonGeneration] = {totalPokemon: 0, totalPokemonEncountered: 0}; }
+            pokedexTotals.totalsByGeneration[pokemonGeneration].totalPokemon++;
+            if (pokemonEncountered){ pokedexTotals.totalsByGeneration[pokemonGeneration].totalPokemonEncountered++; }
+
+            }
+
+        // Return the calculated pokedex totals
+        //console.log('pokedexTotals = ', pokedexTotals);
+        return pokedexTotals;
+
+    }
+
     // Define a function for generating the simulator buttons for each Pokemon
     var freeStarterPokemon = [];
     function generatePokemonButtons(){
@@ -1385,12 +1456,23 @@
         if (seenSpeciesTokens.length >= 721){ freeStarterPokemon.push('rowlet', 'litten', 'popplio'); } // gen 7 starters
         //if (seenSpeciesTokens.length >= 807){ freeStarterPokemon.push('?', '?', '?'); }
 
-        // Unlock the shiny ditto to be used if the user has a super-high dex count
-        if (seenSpeciesTokens.length >= (PokemonSpeciesIndexTokens.length - totalSpecialPokemon)){ freeStarterPokemon.push('shiny-ditto'); }
+        // Collect the dex completion totals for unlockables
+        var currentPokedexTotals = calculatePokedexTotals();
+        var totalsByGeneration = currentPokedexTotals.totalsByGeneration;
+
+        // Allow shiny ditto if the user has completed at least one generation's dex
+        for (var gen = 1; gen < 7; gen++){
+            if (typeof totalsByGeneration[gen] === 'undefined'){ break; }
+            var genTotals = totalsByGeneration[gen];
+            if (genTotals.totalPokemonEncountered >= genTotals.totalPokemon){
+                freeStarterPokemon.push('shiny-ditto');
+                break;
+                }
+            }
 
         // Check to see if we can allow special pokemon to be selected yet
         var allowSpecialPokemon = false;
-        if (seenSpeciesTokens.length >= (PokemonSpeciesIndexTokens.length - 1)){ allowSpecialPokemon = true; } // -1 for phione
+        if (currentPokedexTotals.totalCommonPokemonEncountered >= currentPokedexTotals.totalCommonPokemon){ allowSpecialPokemon = true; }
 
         // Wrap execution in timeout to prevent render-blocking
         window.setTimeout(function(){
