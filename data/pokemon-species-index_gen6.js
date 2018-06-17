@@ -626,6 +626,37 @@
             prevEvolution: 'pancham'
             },
 
+        'furfrou': {
+            order: indexOrder++,
+            token: 'furfrou',
+            name: 'Furfrou',
+            number: 676,
+            formClass: 'random-variant',
+            possibleForms: ['natural', 'dandy', 'debutante', 'diamond', 'heart', 'kabuki', 'la-reine', 'matron', 'pharaoh', 'star'],
+            randomizeForms: true,
+            baseForm: 'natural',
+            types: ['normal'],
+            baseStats: {hp: 75, phAttack: 80, phDefense: 60, spAttack: 65, spDefense: 90, speed: 102},
+            abilities: {0: 'fur-coat'},
+            height: 1.2,
+            weight: 28,
+            colors: ['white', 'black'],
+            possibleFormsColors: {
+                'natural': ['white', 'black'],
+                'dandy': ['white', 'black', 'green'],
+                'debutante': ['white', 'black', 'yellow'],
+                'diamond': ['white', 'black', 'orange'],
+                'heart': ['white', 'black', 'pink'],
+                'kabuki': ['white', 'black', 'red'],
+                'la-reine': ['white', 'black', 'blue'],
+                'matron': ['white', 'black', 'purple'],
+                'pharaoh': ['white', 'black', 'blue'],
+                'star': ['white', 'black', 'blue']
+                },
+            eggCycles: 20,
+            eggGroups: ['field']
+            },
+
         'honedge': {
             order: indexOrder++,
             token: 'honedge',
