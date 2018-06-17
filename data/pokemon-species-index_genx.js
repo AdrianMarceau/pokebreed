@@ -295,7 +295,7 @@
             eggPartner: 'mr-mime',
             eggGroups: ['human-like'],
             prevEvolution: 'mime-jr',
-            gameGeneration: 1
+            buttonGeneration: 1
             },
 
         'shiny-ditto': {
@@ -314,7 +314,7 @@
             colors: ['blue'],
             eggCycles: 20,
             eggGroups: ['ditto'],
-            gameGeneration: 1
+            buttonGeneration: 1
             },
 
         });

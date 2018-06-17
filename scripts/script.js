@@ -1446,6 +1446,9 @@
                 var pokemonName = pokemonData.name;
                 pokemonName += ' ('+ (pokemonData.types.join(' / ').toLowerCase().replace(/\b[a-z]/g, function(l) { return l.toUpperCase(); })) +')';
 
+                // Collect the pokemon's gen in terms of buttons
+                var pokemonGen = typeof pokemonData.buttonGeneration !== 'undefined' ? pokemonData.buttonGeneration : pokemonData.gameGeneration;
+
                 // Define the class for the pokemon button
                 var buttonClass = 'button type ';
                 if (typeof pokemonTypes[0] === 'string'){ buttonClass += pokemonTypes[0]+' '; }
@@ -1463,7 +1466,7 @@
                     'data-action="add" '+
                     'data-kind="pokemon" '+
                     'data-token="'+ pokemonToken +'" '+
-                    'data-gen="'+ pokemonData.gameGeneration +'" '+
+                    'data-gen="'+ pokemonGen +'" '+
                     'data-type="'+ pokemonData.types.join(',') +'" '+
                     'title="'+ pokemonName +'" '+
                     '>';
@@ -1650,8 +1653,9 @@
                     customData.formToken = pokeIndex.baseForm; // Random/seasonal/color form with base
                     }
                 var pokeIcon = getPokemonIcon(pokeToken, false, customData);
+                var pokemonGen = typeof pokeIndex.dexGeneration !== 'undefined' ? pokeIndex.dexGeneration : pokeIndex.gameGeneration;
                 pokedexMarkup.push('<li class="entry" ' +
-                    'data-gen="'+ pokeIndex.gameGeneration +'" ' +
+                    'data-gen="'+ pokemonGen +'" ' +
                     'data-type="'+ pokeIndex.types.join(',') +'">' +
                         '<div class="'+ liClass +'" data-token="' + pokeToken + '" title="'+ titleText +'">' +
                             '<div class="bubble">' +

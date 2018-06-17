@@ -4,18 +4,14 @@
         <div class="filter-pokemon hidden" data-target="pokedex">
             <div class="wrap">
                 <div class="title">Filters</div>
-                <div class="filter generations" data-filter="gen">
+                <div class="filter generations" data-filter="gen" data-max="<?= $allowed_generations ?>">
                     <label class="label">Gen</label>
                     <div class="options">
                         <a class="option" data-gen="all">All</a>
-                        <a class="option" data-gen="1">1</a>
-                        <a class="option" data-gen="2">2</a>
-                        <a class="option" data-gen="3">3</a>
-                        <a class="option" data-gen="4">4</a>
-                        <a class="option" data-gen="5">5</a>
-                        <a class="option" data-gen="6">6</a>
-                        <a class="option" data-gen="7">7</a>
-                        <a class="option" data-gen="x">X</a>
+                        <? for ($gen = 1; $gen <= $allowed_generations; $gen++){ ?>
+                            <? $genx = $gen === 8 ? 'x' : $gen; ?>
+                            <a class="option" data-gen="<?= $genx ?>"><?= ucfirst($genx) ?></a>
+                        <? } ?>
                     </div>
                 </div>
                 <div class="filter types" data-filter="type">
