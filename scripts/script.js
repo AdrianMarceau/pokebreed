@@ -210,7 +210,6 @@
         var $linkButtons = $('.info.links .link[data-tab]', $panelButtons);
         var $linkContainers = $('.info[data-tab]', $panelButtons);
         var linkButtonFunction = function(e){
-            //console.log('tab clicked');
             e.preventDefault();
             var $link = $(this);
             var tab = $link.attr('data-tab');
@@ -223,6 +222,18 @@
                 }
             };
         $linkButtons.bind('click', linkButtonFunction);
+
+        // Add a click event for the pokedex button in the banner
+        var clickTimeoutB = false;
+        var $pokedexLink = $('.link[data-tab="pokedex"]', $panelButtons);
+        $('.counter.pokedex', $panelBanner).bind('click', function(e){
+            e.preventDefault();
+            if (appFreeMode){ return false; }
+            if (clickTimeoutB !== false){ clearTimeout(clickTimeoutB); }
+            if (!$pokedexLink.hasClass('active')){ $pokedexLink.trigger('click'); }
+            clickTimeoutB = setTimeout(function(){ $("html, body").scrollTop($pokedexLink.offset().top); }, 0);
+            return;
+            });
 
         // Add a click event for the save-data delete button (w/ stern warning)
         $('a.delete_savedata', $panelDiv).bind('click', function(e){
@@ -241,40 +252,6 @@
                 }
             return false;
             });
-
-        // Define a click event for any of the pokedex buttons
-        var $pokedexLink = $('.link[data-tab="pokedex"]', $panelButtons);
-        var $pokedexInfo = $('.info[data-tab="pokedex"]', $panelButtons);
-        //var prevSpeed = $('body').attr('data-speed');
-        var pokedexClickEvent = function(e){
-            e.preventDefault();
-            if (appFreeMode){ return false; }
-            var $thisLink = $(this);
-            //var currentSpeed = $('body').attr('data-speed');
-            //$controlButtons.filter('.pause').trigger('click');
-            var isShowing = $panelDiv.attr('data-view') === 'pokedex' ? true : false;
-            if (!isShowing){
-                // Show it
-                $thisLink.addClass('active');
-                $pokedexLink.addClass('active');
-                $pokedexInfo.removeClass('hidden');
-                $panelDiv.attr('data-view', 'pokedex');
-                //prevSpeed = currentSpeed;
-                $('html, body').animate({scrollTop: $pokedexLink.offset().top}, Math.ceil(600));
-                } else {
-                // Hide it
-                $thisLink.removeClass('active');
-                $pokedexLink.removeClass('active');
-                $pokedexInfo.addClass('hidden');
-                $panelDiv.attr('data-view', 'simulator');
-                $//controlButtons.filter('.'+prevSpeed).trigger('click');
-                }
-            return;
-            };
-
-        // Add a click event for the pokedex button in the banner and footer
-        $('.counter.pokedex', $panelBanner).bind('click', pokedexClickEvent);
-        $pokedexLink.unbind('click').bind('click', pokedexClickEvent);
 
     });
 
