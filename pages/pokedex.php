@@ -15,6 +15,7 @@
                         <a class="option" data-gen="5">5</a>
                         <a class="option" data-gen="6">6</a>
                         <a class="option" data-gen="7">7</a>
+                        <a class="option" data-gen="x">X</a>
                     </div>
                 </div>
                 <div class="filter types" data-filter="type">
@@ -41,18 +42,6 @@
                         <a class="option" data-type="fairy"><img src="images/icons/types/fairy.png" alt="Fairy" /></a>
                     </div>
                 </div>
-                <? /*
-                <div class="filter pages" data-filter="pages">
-                    <label class="label">Page</label>
-                    <div class="options">
-                        <a class="page prev" data-page="prev">&laquo;</a>
-                        <a class="page" data-page="1">1</a>
-                        <a class="page" data-page="2">2</a>
-                        <a class="page" data-page="3">3</a>
-                        <a class="page next" data-page="next">&raquo;</a>
-                    </div>
-                </div>
-                */ ?>
             </div>
         </div>
         <ul class="list"></ul>

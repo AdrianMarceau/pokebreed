@@ -475,7 +475,11 @@
                 // Collect refs for the option link and value, then update the current filter array
                 var $optionLink = $(this);
                 var optionValue = $optionLink.attr('data-'+ filterKind);
-                if (filterKind === 'gen' && optionValue !== 'all'){ optionValue = parseInt(optionValue); }
+                if (filterKind === 'gen'
+                    && optionValue !== 'all'
+                    && optionValue !== 'x'){
+                    optionValue = parseInt(optionValue);
+                    }
                 //console.log('filterKind = ', filterKind);
                 //console.log('optionValue = ', optionValue);
 
@@ -1474,6 +1478,9 @@
 
                 }
 
+            //console.log('shownGens = ', shownGens);
+            //console.log('shownTypes = ', shownTypes);
+
             // Append generated markup to the panel at once
             if (!$('.buttonwrap', $pokePanelSelectButtons).length){ $pokePanelSelectButtons.append('<div class="buttonwrap"></div>'); }
             else { $('.buttonwrap', $pokePanelSelectButtons).empty(); }
@@ -1538,21 +1545,23 @@
             applyPokemonButtonFilters();
 
             // Hide any options were are not currently represented
-            $pokePanelFilters.find('.filter .option.disabled').removeClass('disabled');
-            $pokePanelFilters.find('.filter.generations .option:not([data-gen="all"])').each(function(){
+            var $thisFilterWrapper = $pokePanelFilters.filter('[data-target="buttons"]');
+            $thisFilterWrapper.find('.filter .option.disabled').removeClass('disabled');
+            $thisFilterWrapper.find('.filter.generations .option:not([data-gen="all"])').each(function(){
                 $option = $(this);
-                var thisGen = parseInt($option.attr('data-gen'));
+                var thisGen = $option.attr('data-gen');
+                if (thisGen !== 'x'){ thisGen = parseInt(thisGen); }
                 if (shownGens.indexOf(thisGen) === -1){ $option.addClass('disabled'); }
                 });
-            $pokePanelFilters.find('.filter.types .option:not([data-type="all"])').each(function(){
+            $thisFilterWrapper.find('.filter.types .option:not([data-type="all"])').each(function(){
                 $option = $(this);
                 var thisType = $option.attr('data-type');
                 if (shownTypes.indexOf(thisType) === -1){ $option.addClass('disabled'); }
                 });
 
             // We're ready to show the filter panel now too (and reset more buttons)
-            $pokePanelFilters.removeClass('hidden');
-            $('.button.enter-seed', $pokePanelFilters).removeClass('disabled');
+            $thisFilterWrapper.removeClass('hidden');
+            $('.button.enter-seed', $thisFilterWrapper).removeClass('disabled');
 
             }, 0);
 
@@ -1576,6 +1585,10 @@
 
         // Wrap execution in timeout to prevent render-blocking
         window.setTimeout(function(){
+
+            // Define variables to hold gens and types being shown
+            var shownGens = [];
+            var shownTypes = [];
 
             // Loop through the display order for all the pokemon
             var lastGeneration = false;
@@ -1623,6 +1636,7 @@
                 if (!isUnlocked){ liClass += 'unknown '; }
                 var numText = '#' + strPad('000', pokeNum, true);
                 var nameText = pokeIndex.name;
+                var pokemonTypes = pokeIndex.types;
                 var titleText = getPokemonTitleText(pokeToken);
                 var customData = {};
                 if (typeof pokeIndex.formToken === 'string' && pokeIndex.formToken.length > 0){
@@ -1647,11 +1661,24 @@
                             '</div>' +
                         '</div>' +
                     '</li>');
+
+                // Update the shown gens and types lists
+                if (shownGens.indexOf(pokeIndex.gameGeneration) === -1){ shownGens.push(pokeIndex.gameGeneration); }
+                if (shownTypes.indexOf(pokeIndex.types[0]) === -1){ shownTypes.push(pokeIndex.types[0]); }
+                if (typeof pokemonTypes[1] !== 'undefined' && shownTypes.indexOf(pokeIndex.types[1]) === -1){ shownTypes.push(pokeIndex.types[1]); }
+
                 }
             $pokedexList.append(pokedexMarkup.join(''));
 
+            //console.log('shownGens = ', shownGens);
+            //console.log('shownTypes = ', shownTypes);
+
             // Re-apply the pokemon pokedex filters now that they've been updated
             applyPokemonPokedexFilters();
+
+            // We're ready to show the filter panel now too
+            var $thisFilterWrapper = $pokePanelFilters.filter('[data-target="pokedex"]');
+            $thisFilterWrapper.removeClass('hidden');
 
             // Remove the hidden class from the pokedex link
             $('.info.links .link[data-tab="pokedex"]', $panelButtons).removeClass('wait');
@@ -1724,7 +1751,7 @@
                 var thisValue = $button.attr('data-'+filterKey);
                 //console.log('|- Does ' + filterKey + ' match current value ' + currentValue + ' ? thisValue = ', thisValue);
                 if (filterKey === 'gen'){
-                    thisValue = parseInt(thisValue);
+                    thisValue = thisValue !== 'x' ? parseInt(thisValue) : thisValue;
                     if (thisValue !== currentValue){ isMatch = false; break; }
                     } else if (filterKey === 'type'){
                     thisValue = thisValue.split(',');
@@ -1783,7 +1810,7 @@
                 var thisValue = $entry.attr('data-'+filterKey);
                 //console.log('|- Does ' + filterKey + ' match current value ' + currentValue + ' ? thisValue = ', thisValue);
                 if (filterKey === 'gen'){
-                    thisValue = parseInt(thisValue);
+                    thisValue = thisValue !== 'x' ? parseInt(thisValue) : thisValue;
                     if (thisValue !== currentValue){ isMatch = false; break; }
                     } else if (filterKey === 'type'){
                     thisValue = thisValue.split(',');
