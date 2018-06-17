@@ -114,7 +114,6 @@
         // Do not load from LOCAL STORAGE records if we're in free mode
         if (!appFreeMode){
             //console.log('NOT in free mode, let us LOAD');
-
             // Check if a localStorage value exsists for total days
             if (typeof window.localStorage !== 'undefined'){
                 var savedPokeboxDaysPassed = window.localStorage.getItem('PokeboxDaysPassed');
@@ -122,15 +121,6 @@
                 //console.log('savedPokeboxDaysPassed = ', savedPokeboxDaysPassed, typeof savedPokeboxDaysPassed);
                 //console.log('PokeboxDaysPassed = ', PokeboxDaysPassed, typeof PokeboxDaysPassed);
                 }
-
-            // Check if a localStorage value exsists for species seen
-            if (typeof window.localStorage !== 'undefined'){
-                var savedPokemonSpeciesSeen = window.localStorage.getItem('PokemonSpeciesSeen');
-                if (typeof savedPokemonSpeciesSeen === 'string'){ PokemonSpeciesSeen = JSON.parse(savedPokemonSpeciesSeen); }
-                //console.log('savedPokemonSpeciesSeen = ', savedPokemonSpeciesSeen);
-                //console.log('PokemonSpeciesSeen = ', PokemonSpeciesSeen);
-                }
-
             }
 
         // But we can still load from LOCAL STORAGE in the case of filter settings
@@ -292,6 +282,33 @@
         PokemonTypesIndexTokens = Object.keys(PokemonTypesIndex);
         PokemonFieldsIndex = window.PokemonFieldsIndex;
         PokemonFieldsIndexTokens = Object.keys(PokemonFieldsIndex);
+
+        // Do not load from LOCAL STORAGE records if we're in free mode
+        if (!appFreeMode){
+            //console.log('NOT in free mode, let us LOAD');
+            // Check if a localStorage value exsists for species seen
+            if (typeof window.localStorage !== 'undefined'){
+                var savedPokemonSpeciesSeen = window.localStorage.getItem('PokemonSpeciesSeen');
+                //console.log('savedPokemonSpeciesSeen = ', savedPokemonSpeciesSeen);
+                if (typeof savedPokemonSpeciesSeen === 'string'){
+                    savedPokemonSpeciesSeen = JSON.parse(savedPokemonSpeciesSeen);
+                    var savedTokens = Object.keys(savedPokemonSpeciesSeen);
+                    //console.log('savedTokens = ', savedTokens);
+                    //console.log('PokemonSpeciesIndexTokens = ', PokemonSpeciesIndexTokens);
+                    for (var i = 0; i < savedTokens.length; i++){
+                        var savedToken = savedTokens[i];
+                        var savedData = savedPokemonSpeciesSeen[savedToken];
+                        //console.log('savedToken = ', savedToken);
+                        //console.log('savedData = ', savedData);
+                        //console.log('PokemonSpeciesIndexTokens.indexOf('+ savedToken +') = ', PokemonSpeciesIndexTokens.indexOf(savedToken));
+                        if (PokemonSpeciesIndexTokens.indexOf(savedToken) !== -1){
+                            PokemonSpeciesSeen[savedToken] = savedData;
+                            }
+                        }
+                    }
+                //console.log('PokemonSpeciesSeen = ', PokemonSpeciesSeen);
+                }
+            }
 
         // Update the banner counters with the total days and current species
         var pokedexCurrent = Object.keys(PokemonSpeciesSeen).length;
@@ -3125,9 +3142,18 @@
 
             // Update local storage with the current seen pokemon index
             if (typeof window.localStorage !== 'undefined'){
-                var savedPokemonSpeciesSeen = JSON.stringify(PokemonSpeciesSeen);
-                window.localStorage.setItem('PokemonSpeciesSeen', savedPokemonSpeciesSeen);
+
+                // Collect saved global array and prepare to merge with local filtered
+                var savedPokemonSpeciesSeen = window.localStorage.getItem('PokemonSpeciesSeen');
+                if (typeof savedPokemonSpeciesSeen === 'string'){ savedPokemonSpeciesSeen = JSON.parse(savedPokemonSpeciesSeen); }
+                else { savedPokemonSpeciesSeen = {}; }
                 //console.log('savedPokemonSpeciesSeen = ', savedPokemonSpeciesSeen);
+
+                // Merge the local array into the saved one, and then re-strinify it
+                var mergedPokemonSpeciesSeen = JSON.stringify(jQuery.extend({}, savedPokemonSpeciesSeen, PokemonSpeciesSeen));
+                window.localStorage.setItem('PokemonSpeciesSeen', mergedPokemonSpeciesSeen);
+                //console.log('mergedPokemonSpeciesSeen = ', mergedPokemonSpeciesSeen);
+
                 }
 
             }
