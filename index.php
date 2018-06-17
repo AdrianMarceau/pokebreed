@@ -192,7 +192,7 @@ if (isset($_GET['gen'])
                 <div class="select-pokemon">
                     <span class="loading">Loading</span>
                 </div>
-                <div class="filter-pokemon hidden">
+                <div class="filter-pokemon hidden" data-target="buttons">
                     <div class="wrap">
                         <div class="title">Filters</div>
                         <div class="filter generations" data-filter="gen">

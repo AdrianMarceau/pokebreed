@@ -61,6 +61,7 @@
     var thisZoneHistory = [];
 
     var currentButtonFilters = {};
+    var currentPokedexFilters = {};
 
     var thisDeviceWidth = 0;
 
@@ -81,7 +82,7 @@
     var $panelPokemonSpriteWrapper = false;
     var $panelButtons = false;
 
-    var $pokePanelButtons = false;
+    var $pokePanelSelectButtons = false;
     var $pokePanelLoading = false;
 
 
@@ -134,11 +135,23 @@
 
         // But we can still load from LOCAL STORAGE in the case of filter settings
         if (typeof window.localStorage !== 'undefined'){
+
+            // Load settings for any BUTTON filters
             var storageName = !appFreeMode ? 'CurrentButtonFilters' : 'FreeButtonFilters';
             var savedCurrentButtonFilters = window.localStorage.getItem(storageName);
             if (typeof savedCurrentButtonFilters === 'string'){ currentButtonFilters = JSON.parse(savedCurrentButtonFilters); }
             //console.log('savedCurrentButtonFilters = ', savedCurrentButtonFilters);
             //console.log('currentButtonFilters = ', currentButtonFilters);
+
+            // Load settings for any POKEDEX filters
+            if (!appFreeMode){
+                var storageName = 'CurrentPokedexFilters';
+                var savedCurrentPokedexFilters = window.localStorage.getItem(storageName);
+                if (typeof savedCurrentPokedexFilters === 'string'){ currentPokedexFilters = JSON.parse(savedCurrentPokedexFilters); }
+                //console.log('savedCurrentPokedexFilters = ', savedCurrentPokedexFilters);
+                //console.log('currentPokedexFilters = ', currentPokedexFilters);
+                }
+
             }
 
         // Request the live version number from the server and wait to compare (refresh if out of date)
@@ -168,8 +181,9 @@
         $panelPokemonSpriteWrapper = $('.details.pokemon .list.pokemon', $panelMainOverview);
         $panelButtons = $('> .buttons', $panelDiv);
         $pokePanelFilters = $panelButtons.find('.filter-pokemon');
-        $pokePanelButtons = $panelButtons.find('.select-pokemon');
-        $pokePanelLoading = $pokePanelButtons.find('.loading');
+        $pokePanelSelectButtons = $panelButtons.find('.select-pokemon');
+        $pokePanelPokedexEntries = $panelButtons.find('.info .group.pokedex');
+        $pokePanelLoading = $pokePanelSelectButtons.find('.loading');
 
         // Add a click event for the box details title
         $panelMainOverview.find('.details.zone .title').bind('click', function(e){
@@ -179,7 +193,7 @@
             });
 
         // Update any scroll wrappers when the window resizes
-        var updateScrollWrappers = function(){ $pokePanelButtons.find('.buttonwrap').perfectScrollbar('update'); };
+        var updateScrollWrappers = function(){ $pokePanelSelectButtons.find('.buttonwrap').perfectScrollbar('update'); };
         $(window).resize(updateScrollWrappers);
         updateScrollWrappers();
 
@@ -432,39 +446,69 @@
         $pokeList.on('click', 'li[data-id]', zonePokemonClickEvent);
 
         // Generate events for the select-pokemon filters
+        var allowedFilterTargets = ['buttons', 'pokedex'];
         var $filterDivs = $('.filter[data-filter]', $pokePanelFilters);
         //console.log('$filterDivs.length = ', $filterDivs.length);
         $filterDivs.each(function(){
 
             // Collect refs to this div and the options inside it
             var $filterDiv = $(this);
+            var $filterParent = $filterDiv.closest('.filter-pokemon[data-target]');
             var filterKind = $filterDiv.attr('data-filter');
             var $filterOptions = $filterDiv.find('.option[data-'+ filterKind +']');
             var $activeFilter = $filterOptions.find('.option.active');
-            if (typeof currentButtonFilters[filterKind] === 'undefined'){ currentButtonFilters[filterKind] = 'all'; }
             //console.log('filterKind = ', filterKind);
             //console.log('$filterOptions.length = ', $filterOptions.length);
-            //console.log('currentButtonFilters['+ filterKind +'] = ', currentButtonFilters[filterKind]);
+            var filterTarget = $filterParent.attr('data-target');
+            //console.log('filterTarget = ', filterTarget);
+            if (allowedFilterTargets.indexOf(filterTarget) === -1){ return true; }
+            if (filterTarget === 'buttons'){
+                if (typeof currentButtonFilters[filterKind] === 'undefined'){ currentButtonFilters[filterKind] = 'all'; }
+                //console.log('currentButtonFilters['+ filterKind +'] = ', currentButtonFilters[filterKind]);
+                } else if (filterTarget === 'pokedex'){
+                if (typeof currentPokedexFilters[filterKind] === 'undefined'){ currentPokedexFilters[filterKind] = 'all'; }
+                //console.log('currentPokedexFilters['+ filterKind +'] = ', currentPokedexFilters[filterKind]);
+                }
             $filterOptions.bind('click', function(){
 
                 // Collect refs for the option link and value, then update the current filter array
                 var $optionLink = $(this);
                 var optionValue = $optionLink.attr('data-'+ filterKind);
                 if (filterKind === 'gen' && optionValue !== 'all'){ optionValue = parseInt(optionValue); }
-                currentButtonFilters[filterKind] = optionValue;
                 //console.log('filterKind = ', filterKind);
                 //console.log('optionValue = ', optionValue);
-                //console.log('currentButtonFilters = ', currentButtonFilters);
 
-                // Apply pokemon button filters now that they've been updated
-                applyPokemonButtonFilters();
+                // Check if we're dealing with button or pokedex filters
+                if (filterTarget === 'buttons'){
 
-                // Update local storage with the the new filter values
-                if (typeof window.localStorage !== 'undefined'){
-                    var storageName = !appFreeMode ? 'CurrentButtonFilters' : 'FreeButtonFilters';
-                    var savedCurrentButtonFilters = JSON.stringify(currentButtonFilters);
-                    window.localStorage.setItem(storageName, savedCurrentButtonFilters);
-                    //console.log('savedCurrentButtonFilters = ', savedCurrentButtonFilters);
+                    // Add and apply pokemon button filters now that they've been updated
+                    currentButtonFilters[filterKind] = optionValue;
+                    applyPokemonButtonFilters();
+                    //console.log('currentButtonFilters = ', currentButtonFilters);
+
+                    // Update local storage with the the new filter values
+                    if (typeof window.localStorage !== 'undefined'){
+                        var storageName = !appFreeMode ? 'CurrentButtonFilters' : 'FreeButtonFilters';
+                        var savedCurrentButtonFilters = JSON.stringify(currentButtonFilters);
+                        window.localStorage.setItem(storageName, savedCurrentButtonFilters);
+                        //console.log('savedCurrentButtonFilters = ', savedCurrentButtonFilters);
+                        }
+
+                    } else if (filterTarget === 'pokedex'){
+
+                    // Add and apply pokemon button filters now that they've been updated
+                    currentPokedexFilters[filterKind] = optionValue;
+                    applyPokemonPokedexFilters();
+                    //console.log('currentPokedexFilters = ', currentPokedexFilters);
+
+                    // Update local storage with the the new filter values
+                    if (typeof window.localStorage !== 'undefined'){
+                        var storageName = 'CurrentPokedexFilters';
+                        var savedCurrentPokedexFilters = JSON.stringify(currentPokedexFilters);
+                        window.localStorage.setItem(storageName, savedCurrentPokedexFilters);
+                        //console.log('savedCurrentPokedexFilters = ', savedCurrentPokedexFilters);
+                        }
+
                     }
 
                 });
@@ -851,11 +895,11 @@
 
         // Remove the hidden class from the pokemon wrapper
         $('.select-pokemon', $panelButtons).addClass('hidden');
-        $('.filter-pokemon', $panelButtons).addClass('hidden');
+        $('.filter-pokemon[data-target="buttons"]', $panelButtons).addClass('hidden');
 
-        // Reset any filters back to the "all" option
-        $('.filter-pokemon .option', $panelButtons).removeClass('.active');
-        $('.filter-pokemon .option:first-child', $panelButtons).addClass('.active');
+        // Reset any button filters back to the "all" option
+        $('.filter-pokemon[data-target="buttons"] .option', $panelButtons).removeClass('.active');
+        $('.filter-pokemon[data-target="buttons"] .option:first-child', $panelButtons).addClass('.active');
 
         // Update the box details header, unhide the details info bar
         $('.details.zone .title', $panelMainOverview).html('Box Details');
@@ -994,7 +1038,7 @@
 
         // Show the pokemon buttons
         $('.select-pokemon', $panelButtons).removeClass('hidden');
-        $('.filter-pokemon', $panelButtons).removeClass('hidden');
+        $('.filter-pokemon[data-target="buttons"]', $panelButtons).removeClass('hidden');
         $('.controls .start', $panelButtons).removeClass('hidden').removeClass('ready');
 
         // Hide the details info bar
@@ -1046,7 +1090,7 @@
 
         // Show the pokemon buttons
         $('.select-pokemon', $panelButtons).removeClass('hidden');
-        $('.filter-pokemon', $panelButtons).removeClass('hidden');
+        $('.filter-pokemon[data-target="buttons"]', $panelButtons).removeClass('hidden');
         $('.controls .start', $panelButtons).removeClass('hidden').removeClass('ready');
 
         // Hide the starter pokemon from last time, we're starting fresh
@@ -1424,9 +1468,9 @@
                 }
 
             // Append generated markup to the panel at once
-            if (!$('.buttonwrap', $pokePanelButtons).length){ $pokePanelButtons.append('<div class="buttonwrap"></div>'); }
-            else { $('.buttonwrap', $pokePanelButtons).empty(); }
-            $('.buttonwrap', $pokePanelButtons).append(pokePanelMarkup);
+            if (!$('.buttonwrap', $pokePanelSelectButtons).length){ $pokePanelSelectButtons.append('<div class="buttonwrap"></div>'); }
+            else { $('.buttonwrap', $pokePanelSelectButtons).empty(); }
+            $('.buttonwrap', $pokePanelSelectButtons).append(pokePanelMarkup);
 
             // Remove the loading dotts
             $pokePanelLoading.parent().addClass('loaded');
@@ -1434,17 +1478,17 @@
             //console.log('JUST removed the loading panel');
 
             // Atach a scrollbar to the markup panel
-            $pokePanelButtons.find('.buttonwrap').perfectScrollbar({suppressScrollX: true});
+            $pokePanelSelectButtons.find('.buttonwrap').perfectScrollbar({suppressScrollX: true});
 
             // Update scrollbar once images have loaded
-            var $buttonImages = $('img', $pokePanelButtons);
+            var $buttonImages = $('img', $pokePanelSelectButtons);
             var loadedImages = 0;
             $buttonImages.each(function(){
                 $(this).on('load', function(){
                     loadedImages++;
                     if (loadedImages === $buttonImages.length){
                         //console.log('update scrollbar');
-                        $pokePanelButtons.find('.buttonwrap').perfectScrollbar('update');
+                        $pokePanelSelectButtons.find('.buttonwrap').perfectScrollbar('update');
                         }
                     });
                 });
@@ -1453,7 +1497,7 @@
             $('.controls .start', $panelButtons).removeClass('hidden');
 
             // Attach a click event to the generated buttons
-            $('button[data-action]', $pokePanelButtons).bind('click', function(e){
+            $('button[data-action]', $pokePanelSelectButtons).bind('click', function(e){
                 e.preventDefault();
                 if (simulationStarted
                     || thisZoneData.currentPokemon.length >= 10){
@@ -1504,61 +1548,6 @@
             $('.button.enter-seed', $pokePanelFilters).removeClass('disabled');
 
             }, 0);
-
-    }
-
-    // Define a function that loops through all pokemon buttons and hides/shows based on current filters
-    function applyPokemonButtonFilters(){
-        //console.log('applyPokemonButtonFilters', currentButtonFilters);
-
-        // Collect keys for different filter kinds
-        var currentButtonFiltersKeys = Object.keys(currentButtonFilters);
-
-        // Collect refs to the filter divs and options
-        var $filterDivs = $('.filter[data-filter]', $pokePanelFilters);
-        var $filterOptions = $filterDivs.find('.option');
-
-        // Loop through and update classes on the filter buttons themselves
-        var showBreaks = true;
-        $filterOptions.removeClass('active');
-        for (var i = 0; i < currentButtonFiltersKeys.length; i++){
-            var filterKind = currentButtonFiltersKeys[i];
-            var filterValue = currentButtonFilters[filterKind];
-            var $optionLink = $filterOptions.filter('.option[data-'+ filterKind +'="'+ filterValue +'"]');
-            $optionLink.addClass('active');
-            if (filterValue !== 'all'){ showBreaks = false; }
-            }
-
-        // Show line breaks if all buttons are currently showing, else hide
-        if (showBreaks){ $pokePanelButtons.find('.breaker').removeClass('hidden'); }
-        else { $pokePanelButtons.find('.breaker').addClass('hidden'); }
-
-        // Hide all pokemon buttons by default then loop through to see which match the filter and can be shown
-        var $pokemonButtons = $pokePanelButtons.find('.button[data-kind="pokemon"]');
-        $pokemonButtons.addClass('hidden');
-        $pokemonButtons.each(function(){
-            var $button = $(this);
-            //console.log('\nCheck ' + $button.attr('data-token') + ' for matches...', currentButtonFilters);
-            var isMatch = true;
-            for (var i = 0; i < currentButtonFiltersKeys.length; i++){
-                var filterKey = currentButtonFiltersKeys[i];
-                var currentValue = currentButtonFilters[filterKey];
-                if (currentValue === 'all'){ continue; }
-                var thisValue = $button.attr('data-'+filterKey);
-                //console.log('|- Does ' + filterKey + ' match current value ' + currentValue + ' ? thisValue = ', thisValue);
-                if (filterKey === 'gen'){
-                    thisValue = parseInt(thisValue);
-                    if (thisValue !== currentValue){ isMatch = false; break; }
-                    } else if (filterKey === 'type'){
-                    thisValue = thisValue.split(',');
-                    if (thisValue.indexOf(currentValue) === -1){ isMatch = false; break; }
-                    }
-                }
-            if (isMatch){ $button.removeClass('hidden'); }
-            });
-
-        // Update the scrollbar wrapper since there have been changes
-        $pokePanelButtons.find('.buttonwrap').perfectScrollbar('update');
 
     }
 
@@ -1640,13 +1629,22 @@
                     customData.formToken = pokeIndex.baseForm; // Random/seasonal/color form with base
                     }
                 var pokeIcon = getPokemonIcon(pokeToken, false, customData);
-                pokedexMarkup.push('<li><div class="'+ liClass +'" data-token="' + pokeToken + '" title="'+ titleText +'"><div class="bubble">' +
-                        '<span class="num">' + numText + '</span> ' +
-                        '<span class="name"><span>' + nameText + '</span><span>- - -</span></span> ' +
-                        '<span class="sprites">' + pokeIcon + '</span>' +
-                    '</div></div></li>');
+                pokedexMarkup.push('<li class="entry" ' +
+                    'data-gen="'+ pokeIndex.gameGeneration +'" ' +
+                    'data-type="'+ pokeIndex.types.join(',') +'">' +
+                        '<div class="'+ liClass +'" data-token="' + pokeToken + '" title="'+ titleText +'">' +
+                            '<div class="bubble">' +
+                                '<span class="num">' + numText + '</span> ' +
+                                '<span class="name"><span>' + nameText + '</span><span>- - -</span></span> ' +
+                                '<span class="sprites">' + pokeIcon + '</span>' +
+                            '</div>' +
+                        '</div>' +
+                    '</li>');
                 }
             $pokedexList.append(pokedexMarkup.join(''));
+
+            // Re-apply the pokemon pokedex filters now that they've been updated
+            applyPokemonPokedexFilters();
 
             // Remove the hidden class from the pokedex link
             $('.info.links .link[data-tab="pokedex"]', $panelButtons).removeClass('wait');
@@ -1676,6 +1674,131 @@
                 $pokeBlock.attr('title', titleText);
                 }
             }
+
+    }
+
+    // Define a function that loops through all pokemon buttons and hides/shows based on current filters
+    function applyPokemonButtonFilters(){
+        //console.log('applyPokemonButtonFilters', currentButtonFilters);
+
+        // Collect keys for different filter kinds
+        var currentButtonFiltersKeys = Object.keys(currentButtonFilters);
+
+        // Collect refs to the filter divs and options
+        var $filterDivs = $pokePanelFilters.filter('[data-target="buttons"]').find('.filter[data-filter]');
+        var $filterOptions = $filterDivs.find('.option');
+
+        // Loop through and update classes on the filter buttons themselves
+        var showBreaks = true;
+        $filterOptions.removeClass('active');
+        for (var i = 0; i < currentButtonFiltersKeys.length; i++){
+            var filterKind = currentButtonFiltersKeys[i];
+            var filterValue = currentButtonFilters[filterKind];
+            var $optionLink = $filterOptions.filter('.option[data-'+ filterKind +'="'+ filterValue +'"]');
+            $optionLink.addClass('active');
+            if (filterValue !== 'all'){ showBreaks = false; }
+            }
+
+        // Show line breaks if all buttons are currently showing, else hide
+        if (showBreaks){ $pokePanelSelectButtons.find('.breaker').removeClass('hidden'); }
+        else { $pokePanelSelectButtons.find('.breaker').addClass('hidden'); }
+
+        // Hide all pokemon buttons by default then loop through to see which match the filter and can be shown
+        var $pokemonButtons = $pokePanelSelectButtons.find('.button[data-kind="pokemon"]');
+        $pokemonButtons.addClass('hidden');
+        $pokemonButtons.each(function(){
+            var $button = $(this);
+            //console.log('\nCheck ' + $button.attr('data-token') + ' for matches...', currentButtonFilters);
+            var isMatch = true;
+            for (var i = 0; i < currentButtonFiltersKeys.length; i++){
+                var filterKey = currentButtonFiltersKeys[i];
+                var currentValue = currentButtonFilters[filterKey];
+                if (currentValue === 'all'){ continue; }
+                var thisValue = $button.attr('data-'+filterKey);
+                //console.log('|- Does ' + filterKey + ' match current value ' + currentValue + ' ? thisValue = ', thisValue);
+                if (filterKey === 'gen'){
+                    thisValue = parseInt(thisValue);
+                    if (thisValue !== currentValue){ isMatch = false; break; }
+                    } else if (filterKey === 'type'){
+                    thisValue = thisValue.split(',');
+                    if (thisValue.indexOf(currentValue) === -1){ isMatch = false; break; }
+                    }
+                }
+            if (isMatch){ $button.removeClass('hidden'); }
+            });
+
+        // Update the scrollbar wrapper since there have been changes
+        $pokePanelSelectButtons.find('.buttonwrap').perfectScrollbar('update');
+
+    }
+
+    // Define a function that loops through all pokemon dex entries and hides/shows based on current filters
+    function applyPokemonPokedexFilters(){
+        //console.log('applyPokemonPokedexFilters', currentPokedexFilters);
+
+        // Collect keys for different filter kinds
+        var currentPokedexFiltersKeys = Object.keys(currentPokedexFilters);
+
+        // Collect refs to the filter divs and options
+        var $filterDivs = $pokePanelFilters.filter('[data-target="pokedex"]').find('.filter[data-filter]');
+        var $filterOptions = $filterDivs.find('.option');
+
+        // Loop through and update classes on the filter entrys themselves
+        var showBreaks = true;
+        $filterOptions.removeClass('active');
+        for (var i = 0; i < currentPokedexFiltersKeys.length; i++){
+            var filterKind = currentPokedexFiltersKeys[i];
+            var filterValue = currentPokedexFilters[filterKind];
+            var $optionLink = $filterOptions.filter('.option[data-'+ filterKind +'="'+ filterValue +'"]');
+            $optionLink.addClass('active');
+            if (filterValue !== 'all'){ showBreaks = false; }
+            }
+
+        // Show line breaks if all entrys are currently showing, else hide
+        if (showBreaks){ $pokePanelPokedexEntries.find('.breaker').removeClass('hidden'); }
+        else { $pokePanelPokedexEntries.find('.breaker').addClass('hidden'); }
+
+        // Define totals variables to increment later during looping
+        var showingTotal = 0;
+        var unlockedTotal = 0;
+
+        // Hide all pokemon entrys by default then loop through to see which match the filter and can be shown
+        var $pokemonEntries = $pokePanelPokedexEntries.find('.entry');
+        $pokemonEntries.addClass('hidden');
+        $pokemonEntries.each(function(){
+            var $entry = $(this);
+            //console.log('\nCheck ' + $entry.attr('data-token') + ' for matches...', currentPokedexFilters);
+            var isMatch = true;
+            for (var i = 0; i < currentPokedexFiltersKeys.length; i++){
+                var filterKey = currentPokedexFiltersKeys[i];
+                var currentValue = currentPokedexFilters[filterKey];
+                if (currentValue === 'all'){ continue; }
+                var thisValue = $entry.attr('data-'+filterKey);
+                //console.log('|- Does ' + filterKey + ' match current value ' + currentValue + ' ? thisValue = ', thisValue);
+                if (filterKey === 'gen'){
+                    thisValue = parseInt(thisValue);
+                    if (thisValue !== currentValue){ isMatch = false; break; }
+                    } else if (filterKey === 'type'){
+                    thisValue = thisValue.split(',');
+                    if (thisValue.indexOf(currentValue) === -1){ isMatch = false; break; }
+                    }
+                }
+            if (isMatch){
+                $entry.removeClass('hidden');
+                if ($entry.find('.species:not(.unknown)').length){ unlockedTotal++; }
+                showingTotal++;
+                }
+            });
+
+        // Update the scrollbar wrapper since there have been changes
+        //$pokePanelPokedexEntries.find('.entrywrap').perfectScrollbar('update');
+
+        // Update the pokedex totals for how many are showing, unlocked, and overall
+        var percentTotal = Math.ceil((unlockedTotal / showingTotal) * 1000) / 10;
+        $dexTotals = $pokePanelPokedexEntries.find('.totals');
+        $dexTotals.find('.unlocked').html(unlockedTotal);
+        $dexTotals.find('.showing').html(showingTotal);
+        $dexTotals.find('.percent').html(percentTotal+'%');
 
     }
 
