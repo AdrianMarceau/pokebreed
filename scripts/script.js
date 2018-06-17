@@ -319,6 +319,7 @@
         generateZonePokemonSlots();
 
         // Generate the actual pokemon buttons for the user to select from
+        recalculatePokedexTotals();
         generatePokemonButtons();
 
         // Generate the pokedex listing for the user to view their progress
@@ -1364,8 +1365,9 @@
     }
 
     // Define a function for calculating current pokedex totals
-    function calculatePokedexTotals(){
-        //console.log('calculatePokedexTotals()');
+    var currentPokedexTotals = {};
+    function recalculatePokedexTotals(){
+        //console.log('recalculatePokedexTotals()');
 
         // Define variables for counting certain things
         var pokedexTotals = {
@@ -1428,10 +1430,38 @@
 
             }
 
-        // Return the calculated pokedex totals
+        // Update the parent array with calculated pokedex totals
         //console.log('pokedexTotals = ', pokedexTotals);
-        return pokedexTotals;
+        currentPokedexTotals = pokedexTotals;
 
+    }
+
+    // Define a function for checking if we've unlocked shiny ditto
+    function hasUnlockedShinyDitto(){
+        // Allow shiny ditto if the user has completed at least one generation's dex
+        var totalsByGeneration = currentPokedexTotals.totalsByGeneration;
+        for (var gen = 1; gen < 7; gen++){
+            if (typeof totalsByGeneration[gen] === 'undefined'){ break; }
+            var genTotals = totalsByGeneration[gen];
+            if (genTotals.totalPokemonEncountered >= genTotals.totalPokemon){
+                return true;
+                }
+            }
+        return false;
+    }
+
+    // Define a function for checking if we've unlocked special pokemon
+    function hasUnlockedSpecialPokemon(){
+        // Check to see if we can allow special pokemon to be selected yet
+        var allowSpecialPokemon = false;
+        if (currentPokedexTotals.totalCommonPokemonEncountered >= currentPokedexTotals.totalCommonPokemon){ allowSpecialPokemon = true; }
+        return allowSpecialPokemon;
+    }
+
+    // Define a function for checking if we've unlocked special pokemon
+    function hasUnlockedAllPokemon(){
+        if (currentPokedexTotals.totalPokemonEncountered >= currentPokedexTotals.totalPokemon){ return true; }
+        return false;
     }
 
     // Define a function for generating the simulator buttons for each Pokemon
@@ -1456,23 +1486,11 @@
         if (seenSpeciesTokens.length >= 721){ freeStarterPokemon.push('rowlet', 'litten', 'popplio'); } // gen 7 starters
         //if (seenSpeciesTokens.length >= 807){ freeStarterPokemon.push('?', '?', '?'); }
 
-        // Collect the dex completion totals for unlockables
-        var currentPokedexTotals = calculatePokedexTotals();
-        var totalsByGeneration = currentPokedexTotals.totalsByGeneration;
-
         // Allow shiny ditto if the user has completed at least one generation's dex
-        for (var gen = 1; gen < 7; gen++){
-            if (typeof totalsByGeneration[gen] === 'undefined'){ break; }
-            var genTotals = totalsByGeneration[gen];
-            if (genTotals.totalPokemonEncountered >= genTotals.totalPokemon){
-                freeStarterPokemon.push('shiny-ditto');
-                break;
-                }
-            }
+        if (hasUnlockedShinyDitto()){ freeStarterPokemon.push('shiny-ditto'); }
 
         // Check to see if we can allow special pokemon to be selected yet
-        var allowSpecialPokemon = false;
-        if (currentPokedexTotals.totalCommonPokemonEncountered >= currentPokedexTotals.totalCommonPokemon){ allowSpecialPokemon = true; }
+        var allowSpecialPokemon = hasUnlockedSpecialPokemon();
 
         // Wrap execution in timeout to prevent render-blocking
         window.setTimeout(function(){
@@ -3232,9 +3250,22 @@
 
         // Update the pokedex with any changes last day
         updatePokemonPokedex();
+        recalculatePokedexTotals();
 
         // Do not update local storage records if we're in free mode
         if (!appFreeMode){
+
+            // Update the pokedex ball icon with special colours if events are reached
+            var $pokeBall = $('.pokedex .icon', $panelBanner);
+            var currentBallKind = $pokeBall.attr('data-kind');
+            var newBallKind = 'base';
+            if (hasUnlockedShinyDitto()){ newBallKind = 'bronze'; }
+            if (hasUnlockedSpecialPokemon()){ newBallKind = 'silver'; }
+            if (hasUnlockedAllPokemon()){ newBallKind = 'gold'; }
+            if (currentBallKind !== newBallKind){
+                var imageName = newBallKind !== 'base' ? 'pokeball_'+ newBallKind +'.png' : 'pokeball.png';
+                $pokeBall.attr('src', 'images/' + imageName);
+                }
 
             // Update local storage with the new day total
             if (typeof window.localStorage !== 'undefined'){

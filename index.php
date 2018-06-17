@@ -81,7 +81,7 @@ if (isset($_GET['gen'])
                     ? 'Current Pokédex Completion'
                     : 'Pokédex data is NOT saved in free mode!'
                     ?>">
-                    <img class="icon" src="images/pokeball.png" />
+                    <img class="icon" src="images/pokeball.png" data-kind="base" />
                     <span class="count">
                         <span class="current">0</span>
                         / <span class="total">0</span>
