@@ -11,6 +11,7 @@
 
     var requiredPokemonIndexes = ['', 1, 2, 3, 4, 5, 6, 7, 'x'];
     var maxIndexKeyToLoad = 8;
+    var maxIndexKeyAllowed = 8;
 
     var PokemonSpeciesIndex = {};
     var PokemonSpeciesIndexTokens = [];
@@ -111,6 +112,10 @@
         if (typeof window.PokemonAppFreeMode !== 'undefined'){ appFreeMode = window.PokemonAppFreeMode; }
         if (typeof window.PokemonAppBaseHref !== 'undefined'){ appBaseHref = window.PokemonAppBaseHref; }
 
+        // Overwrite the default index load value if set
+        if (typeof window.PokemonAllowedGenerationsMax !== 'undefined'){ maxIndexKeyToLoad = window.PokemonAllowedGenerationsMax; }
+        //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
+
         // Do not load from LOCAL STORAGE records if we're in free mode
         if (!appFreeMode){
             //console.log('NOT in free mode, let us LOAD');
@@ -127,17 +132,23 @@
         if (typeof window.localStorage !== 'undefined'){
 
             // Load settings for any BUTTON filters
-            var storageName = !appFreeMode ? 'CurrentButtonFilters' : 'FreeButtonFilters';
+            var storageName = !appFreeMode ? ('CurrentButtonFilters' + (maxIndexKeyToLoad < maxIndexKeyAllowed ? 'Gen' + maxIndexKeyToLoad : '')) : 'FreeButtonFilters';
             var savedCurrentButtonFilters = window.localStorage.getItem(storageName);
             if (typeof savedCurrentButtonFilters === 'string'){ currentButtonFilters = JSON.parse(savedCurrentButtonFilters); }
+            //console.log('storageName = ', storageName);
+            //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
+            //console.log('maxIndexKeyAllowed = ', maxIndexKeyAllowed);
             //console.log('savedCurrentButtonFilters = ', savedCurrentButtonFilters);
             //console.log('currentButtonFilters = ', currentButtonFilters);
 
             // Load settings for any POKEDEX filters
             if (!appFreeMode){
-                var storageName = 'CurrentPokedexFilters';
+                var storageName = ('CurrentPokedexFilters' + (maxIndexKeyToLoad < maxIndexKeyAllowed ? 'Gen' + maxIndexKeyToLoad : ''));
                 var savedCurrentPokedexFilters = window.localStorage.getItem(storageName);
                 if (typeof savedCurrentPokedexFilters === 'string'){ currentPokedexFilters = JSON.parse(savedCurrentPokedexFilters); }
+                //console.log('storageName = ', storageName);
+                //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
+                //console.log('maxIndexKeyAllowed = ', maxIndexKeyAllowed);
                 //console.log('savedCurrentPokedexFilters = ', savedCurrentPokedexFilters);
                 //console.log('currentPokedexFilters = ', currentPokedexFilters);
                 }
@@ -155,10 +166,6 @@
                     }
                 }
             });
-
-        // Overwrite the default index load value if set
-        if (typeof window.PokemonAllowedGenerationsMax !== 'undefined'){ maxIndexKeyToLoad = window.PokemonAllowedGenerationsMax; }
-        //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
 
         // Collect references to key elements
         $panelDiv = $('.panel');
@@ -505,9 +512,12 @@
 
                     // Update local storage with the the new filter values
                     if (typeof window.localStorage !== 'undefined'){
-                        var storageName = !appFreeMode ? 'CurrentButtonFilters' : 'FreeButtonFilters';
+                        var storageName = !appFreeMode ? ('CurrentButtonFilters' + (maxIndexKeyToLoad < maxIndexKeyAllowed ? 'Gen' + maxIndexKeyToLoad : '')) : 'FreeButtonFilters';
                         var savedCurrentButtonFilters = JSON.stringify(currentButtonFilters);
                         window.localStorage.setItem(storageName, savedCurrentButtonFilters);
+                        //console.log('storageName = ', storageName);
+                        //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
+                        //console.log('maxIndexKeyAllowed = ', maxIndexKeyAllowed);
                         //console.log('savedCurrentButtonFilters = ', savedCurrentButtonFilters);
                         }
 
@@ -520,9 +530,12 @@
 
                     // Update local storage with the the new filter values
                     if (typeof window.localStorage !== 'undefined'){
-                        var storageName = 'CurrentPokedexFilters';
+                        var storageName = ('CurrentPokedexFilters' + (maxIndexKeyToLoad < maxIndexKeyAllowed ? 'Gen' + maxIndexKeyToLoad : ''));
                         var savedCurrentPokedexFilters = JSON.stringify(currentPokedexFilters);
                         window.localStorage.setItem(storageName, savedCurrentPokedexFilters);
+                        //console.log('storageName = ', storageName);
+                        //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
+                        //console.log('maxIndexKeyAllowed = ', maxIndexKeyAllowed);
                         //console.log('savedCurrentPokedexFilters = ', savedCurrentPokedexFilters);
                         }
 
