@@ -49,5 +49,6 @@ RewriteRule ^styles/([-_a-z0-9\.]+)\.min\.css$ styles/style.php?file=styles/$1.c
 RewriteRule ^scripts/([-_a-z0-9\.]+)\.min\.js$ scripts/script.php?file=scripts/$1.js [L]
 RewriteRule ^data/([-_a-z0-9\.]+)\.min\.js$ scripts/script.php?file=data/$1.js [L]
 #
+RewriteRule ^g(?:en)?([0-9a-z]+)/$ index.php?gen=$1 [L]
 RewriteRule ^free-mode/$ index.php?freeMode=true [L]
-RewriteRule ^g([0-9a-z]+)/free-mode/$ index.php?freeMode=true&gen=$1 [L]
+RewriteRule ^g(?:en)?([0-9a-z]+)/free-mode/$ index.php?freeMode=true&gen=$1 [L]
