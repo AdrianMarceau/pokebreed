@@ -1538,7 +1538,7 @@
                 if (!allowPokemon){ continue; }
 
                 // Insert a break after each new generation
-                var thisGeneration = pokemonData.gameGeneration;
+                var thisGeneration = typeof pokemonData.buttonGeneration !== 'undefined' ? pokemonData.buttonGeneration : pokemonData.gameGeneration;
                 if (pokemonIsSpecial){ thisGeneration = 'specials'; }
                 if (thisGeneration !== lastGeneration
                     && pokemonData.formClass !== 'gender-variant'
