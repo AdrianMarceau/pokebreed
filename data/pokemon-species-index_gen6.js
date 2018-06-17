@@ -982,6 +982,41 @@
             prevEvolution: 'skrelp'
             },
 
+        'clauncher': {
+            order: indexOrder++,
+            token: 'clauncher',
+            name: 'Clauncher',
+            number: 692,
+            types: ['water'],
+            baseStats: {hp: 50, phAttack: 53, phDefense: 62, spAttack: 58, spDefense: 63, speed: 44},
+            abilities: {0: 'mega-launcher'},
+            height: 0.5,
+            weight: 8.3,
+            colors: ['blue', 'yellow', 'black'],
+            eggCycles: 15,
+            eggGroups: ['water-1', 'water-3'],
+            nextEvolutions: [{
+                species: 'clawitzer',
+                method: 'level-up',
+                value: 37
+                }]
+            },
+        'clawitzer': {
+            order: indexOrder++,
+            token: 'clawitzer',
+            name: 'Clawitzer',
+            number: 693,
+            types: ['water'],
+            baseStats: {hp: 71, phAttack: 73, phDefense: 88, spAttack: 120, spDefense: 89, speed: 59},
+            abilities: {0: 'mega-launcher'},
+            height: 1.3,
+            weight: 35.3,
+            colors: ['blue', 'black', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['water-1', 'water-3'],
+            prevEvolution: 'clauncher'
+            },
+
         'sylveon': {
             order: thisIndex.afterOrder('glaceon'),
             token: 'sylveon',
