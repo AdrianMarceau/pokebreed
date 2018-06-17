@@ -318,8 +318,11 @@
         // Generate visual slots for the zone pokemon to fit into later
         generateZonePokemonSlots();
 
-        // Generate the actual pokemon buttons for the user to select from
+        // Calculate pokedex totals and the current pokeball colour
         recalculatePokedexTotals();
+        recalculatePokedexIconColour();
+
+        // Generate the actual pokemon buttons for the user to select from
         generatePokemonButtons();
 
         // Generate the pokedex listing for the user to view their progress
@@ -1458,10 +1461,15 @@
         return allowSpecialPokemon;
     }
 
-    // Define a function for checking if we've unlocked special pokemon
+    // Define a function for checking if we've unlocked all pokemon
     function hasUnlockedAllPokemon(){
         if (currentPokedexTotals.totalPokemonEncountered >= currentPokedexTotals.totalPokemon){ return true; }
         return false;
+    }
+
+    // Define a function for calculating our completion percent
+    function calculatePokedexCompletion(){
+        return Math.ceil((currentPokedexTotals.totalPokemonEncountered / currentPokedexTotals.totalPokemon) * 1000) / 10;
     }
 
     // Define a function for generating the simulator buttons for each Pokemon
@@ -3255,17 +3263,8 @@
         // Do not update local storage records if we're in free mode
         if (!appFreeMode){
 
-            // Update the pokedex ball icon with special colours if events are reached
-            var $pokeBall = $('.pokedex .icon', $panelBanner);
-            var currentBallKind = $pokeBall.attr('data-kind');
-            var newBallKind = 'base';
-            if (hasUnlockedShinyDitto()){ newBallKind = 'bronze'; }
-            if (hasUnlockedSpecialPokemon()){ newBallKind = 'silver'; }
-            if (hasUnlockedAllPokemon()){ newBallKind = 'gold'; }
-            if (currentBallKind !== newBallKind){
-                var imageName = newBallKind !== 'base' ? 'pokeball_'+ newBallKind +'.png' : 'pokeball.png';
-                $pokeBall.attr('src', 'images/' + imageName);
-                }
+            // Update the pokeball colour if necessary
+            recalculatePokedexIconColour();
 
             // Update local storage with the new day total
             if (typeof window.localStorage !== 'undefined'){
@@ -3303,6 +3302,27 @@
                     }
                 });
             });
+
+    }
+
+    // Define a function for recalculating the pokedex pokeball icon
+    function recalculatePokedexIconColour(){
+
+        // Update the pokedex ball icon with special colours if events are reached
+        var $pokeBall = $('.pokedex .icon', $panelBanner);
+        var currentBallKind = $pokeBall.attr('data-kind');
+        var newBallKind = 'base';
+        var completionPercent = calculatePokedexCompletion();
+        if (completionPercent >= 50){ newBallKind = 'bronze'; }
+        if (completionPercent >= 75){ newBallKind = 'silver'; }
+        if (completionPercent === 100){ newBallKind = 'gold'; }
+        if (currentBallKind !== newBallKind){
+            var imageName = newBallKind !== 'base' ? 'pokeball_'+ newBallKind +'.png' : 'pokeball.png';
+            $pokeBall.attr('src', 'images/' + imageName);
+            }
+        //console.log('currentBallKind', currentBallKind);
+        //console.log('newBallKind', newBallKind);
+        //console.log('completionPercent', completionPercent);
 
     }
 
