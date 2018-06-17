@@ -657,6 +657,70 @@
             eggGroups: ['field']
             },
 
+        'espurr': {
+            order: indexOrder++,
+            token: 'espurr',
+            name: 'Espurr',
+            number: 677,
+            types: ['psychic'],
+            baseStats: {hp: 62, phAttack: 48, phDefense: 54, spAttack: 63, spDefense: 60, speed: 68},
+            abilities: {0: 'keen-eye', 1: 'infiltrator', hidden: 'own-tempo'},
+            height: 0.3,
+            weight: 3.5,
+            colors: ['gray', 'purple'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'meowstic-f',
+                method: 'level-up',
+                value: 25,
+                method2: 'gender',
+                value2: 'female'
+                }, {
+                species: 'meowstic-m',
+                method: 'level-up',
+                value: 25,
+                method2: 'gender',
+                value2: 'male'
+                }]
+            },
+        'meowstic-m': {
+            order: indexOrder++,
+            token: 'meowstic-m',
+            name: 'Meowstic \u2642',
+            formClass: 'gender-variant',
+            formToken: 'male',
+            number: 678,
+            types: ['psychic'],
+            genderRatio: {male: 1.000},
+            baseStats: {hp: 74, phAttack: 48, phDefense: 76, spAttack: 83, spDefense: 81, speed: 104},
+            abilities: {0: 'keen-eye', 1: 'infiltrator', hidden: 'prankster'},
+            height: 0.6,
+            weight: 8.5,
+            colors: ['blue', 'white', 'green'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'espurr'
+            },
+        'meowstic-f': {
+            order: indexOrder++,
+            token: 'meowstic-f',
+            name: 'Meowstic \u2640',
+            formClass: 'gender-variant',
+            formToken: 'female',
+            number: 678,
+            types: ['psychic'],
+            genderRatio: {female: 1.000},
+            baseStats: {hp: 74, phAttack: 48, phDefense: 76, spAttack: 83, spDefense: 81, speed: 104},
+            abilities: {0: 'keen-eye', 1: 'infiltrator', hidden: 'competitive'},
+            height: 0.6,
+            weight: 8.5,
+            colors: ['white', 'blue', 'yellow', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'espurr'
+            },
+
         'honedge': {
             order: indexOrder++,
             token: 'honedge',
