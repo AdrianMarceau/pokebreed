@@ -912,6 +912,41 @@
             prevEvolution: 'inkay'
             },
 
+        'binacle': {
+            order: indexOrder++,
+            token: 'binacle',
+            name: 'Binacle',
+            number: 688,
+            types: ['rock', 'water'],
+            baseStats: {hp: 42, phAttack: 52, phDefense: 67, spAttack: 39, spDefense: 56, speed: 50},
+            abilities: {0: 'tough-claws', 1: 'sniper', hidden: 'pickpocket'},
+            height: 0.5,
+            weight: 31,
+            colors: ['brown', 'orange', 'gray', 'white'],
+            eggCycles: 20,
+            eggGroups: ['water-3'],
+            nextEvolutions: [{
+                species: 'barbaracle',
+                method: 'level-up',
+                value: 39
+                }]
+            },
+        'barbaracle': {
+            order: indexOrder++,
+            token: 'barbaracle',
+            name: 'Barbaracle',
+            number: 689,
+            types: ['rock', 'water'],
+            baseStats: {hp: 72, phAttack: 105, phDefense: 115, spAttack: 54, spDefense: 86, speed: 68},
+            abilities: {0: 'tough-claws', 1: 'sniper', hidden: 'pickpocket'},
+            height: 1.3,
+            weight: 96,
+            colors: ['gray', 'brown', 'orange', 'white'],
+            eggCycles: 20,
+            eggGroups: ['water-3'],
+            prevEvolution: 'binacle'
+            },
+
         'skrelp': {
             order: indexOrder++,
             token: 'skrelp',
