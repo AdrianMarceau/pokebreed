@@ -195,16 +195,18 @@ if (isset($_GET['gen'])
                 <div class="filter-pokemon hidden" data-target="buttons">
                     <div class="wrap">
                         <div class="title">Filters</div>
-                        <div class="filter generations" data-filter="gen" data-max="<?= $allowed_generations === 8 ? 7 : $allowed_generations ?>">
-                            <label class="label">Gen</label>
-                            <div class="options">
-                                <a class="option" data-gen="all">All</a>
-                                <? for ($gen = 1; $gen <= $allowed_generations; $gen++){ ?>
-                                    <? if ($gen === 8){ break; } ?>
-                                    <a class="option" data-gen="<?= $gen ?>"><?= $gen ?></a>
-                                <? } ?>
+                        <? if ($allowed_generations > 1){ ?>
+                            <div class="filter generations" data-filter="gen" data-max="<?= $allowed_generations === 8 ? 7 : $allowed_generations ?>">
+                                <label class="label">Gen</label>
+                                <div class="options">
+                                    <a class="option" data-gen="all">All</a>
+                                    <? for ($gen = 1; $gen <= $allowed_generations; $gen++){ ?>
+                                        <? if ($gen === 8){ break; } ?>
+                                        <a class="option" data-gen="<?= $gen ?>"><?= $gen ?></a>
+                                    <? } ?>
+                                </div>
                             </div>
-                        </div>
+                        <? } ?>
                         <div class="filter types" data-filter="type">
                             <label class="label">Type</label>
                             <div class="options">
