@@ -394,6 +394,71 @@
             prevEvolution: 'spewpa'
             },
 
+        'litleo': {
+            order: indexOrder++,
+            token: 'litleo',
+            name: 'Litleo',
+            number: 667,
+            types: ['fire', 'normal'],
+            genderRatio: {male: 0.125, female: 0.875},
+            baseStats: {hp: 62, phAttack: 50, phDefense: 58, spAttack: 73, spDefense: 54, speed: 72},
+            abilities: {0: 'rivalry', 1: 'unnerve', hidden: 'moxie'},
+            height: 0.6,
+            weight: 13.5,
+            colors: ['brown', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'pyroar-f',
+                method: 'level-up',
+                value: 35,
+                method2: 'gender',
+                value2: 'female'
+                }, {
+                species: 'pyroar-m',
+                method: 'level-up',
+                value: 35,
+                method2: 'gender',
+                value2: 'male'
+                }]
+            },
+        'pyroar-f': {
+            order: indexOrder++,
+            token: 'pyroar-f',
+            name: 'Pyroar \u2640',
+            formClass: 'gender-variant',
+            formToken: 'female',
+            number: 668,
+            types: ['fire', 'normal'],
+            genderRatio: {female: 1.000},
+            baseStats: {hp: 86, phAttack: 68, phDefense: 72, spAttack: 109, spDefense: 66, speed: 106},
+            abilities: {0: 'rivalry', 1: 'unnerve', hidden: 'moxie'},
+            height: 1.5,
+            weight: 81.5,
+            colors: ['yellow', 'red', 'brown', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'litleo'
+            },
+        'pyroar-m': {
+            order: indexOrder++,
+            token: 'pyroar-m',
+            name: 'Pyroar \u2642',
+            formClass: 'gender-variant',
+            formToken: 'male',
+            number: 668,
+            types: ['fire', 'normal'],
+            genderRatio: {male: 1.000},
+            baseStats: {hp: 86, phAttack: 68, phDefense: 72, spAttack: 109, spDefense: 66, speed: 106},
+            abilities: {0: 'rivalry', 1: 'unnerve', hidden: 'moxie'},
+            height: 1.5,
+            weight: 81.5,
+            colors: ['red', 'yellow', 'brown', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'litleo'
+            },
+
         'flabebe': {  // TODO: Make appearance based on current colour (permanent, decided at birth)
             order: indexOrder++,
             token: 'flabebe',
