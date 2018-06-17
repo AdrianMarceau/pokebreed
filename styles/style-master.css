@@ -1920,7 +1920,7 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     color: #f3de91;
     text-decoration: none;
 }
-.panel .buttons .info a:hover,
+.panel .buttons .info a[href]:hover,
 .panel .buttons .info a.active {
     color: #f7e9b6;
     text-decoration: underline;
@@ -2274,4 +2274,34 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 }
 .panel .buttons .info.links .link.mode:hover {
     color: #e2e2e2;
+}
+
+.panel .buttons .info .group.modes {
+
+}
+.panel .buttons .info .group.modes .gen-filters {
+    padding-top: 6px;
+}
+.panel .buttons .info .group.modes .gen-filters ul {
+    font-size: 90%;
+    margin: 4px auto 10px;
+    background-color: #2d2d30;
+    padding: 3px 6px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    float: left;
+    clear: both;
+}
+.panel .buttons .info .group.modes .gen-filters ul li {
+    display: inline-block;
+    margin: 0 5px 0 0;
+}
+.panel .buttons .info .group.modes .gen-filters ul li:after {
+    content: "|";
+    padding: 0 0 0 5px;
+    color: #2d2d30;
+}
+.panel .buttons .info .group.modes .gen-filters ul li:last-child:after {
+    display: none;
 }

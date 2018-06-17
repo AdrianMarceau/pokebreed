@@ -10,11 +10,4 @@
             see how many species you've registered so far!
         </p>
     </div>
-    <div class="group">
-        <h2>Available Modes</h2>
-        <ul>
-            <li><a<?= $is_free_mode ? ' href="/"' : ' class="active"' ?>>Normal Mode</a> - Complete your Pokédex! Use starter Pokémon to attract new species, then chain to find them all!</li>
-            <li><a<?= !$is_free_mode ? ' href="free-mode/"' : ' class="active"' ?>>Free Mode</a> - No Limits! Any basic Pokémon can be added to your box, but records are not saved.</li>
-        </ul>
-    </div>
 </div>
