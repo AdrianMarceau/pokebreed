@@ -1017,6 +1017,67 @@
             prevEvolution: 'clauncher'
             },
 
+        'helioptile': {
+            order: indexOrder++,
+            token: 'helioptile',
+            name: 'Helioptile',
+            number: 694,
+            types: ['electric', 'normal'],
+            baseStats: {hp: 44, phAttack: 38, phDefense: 33, spAttack: 61, spDefense: 43, speed: 70},
+            abilities: {0: 'dry-skin', 1: 'sand-veil', hidden: 'solar-power'},
+            height: 0.5,
+            weight: 6,
+            colors: ['yellow', 'black', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'dragon'],
+            nextEvolutions: [{
+                species: 'heliolisk',
+                method: 'type-appeal',
+                value: ['electric', 'normal'],
+                method2: 'level-up',
+                value2: 20
+                }]
+            },
+        'heliolisk': {
+            order: indexOrder++,
+            token: 'heliolisk',
+            name: 'Heliolisk',
+            number: 695,
+            types: ['electric', 'normal'],
+            baseStats: {hp: 62, phAttack: 55, phDefense: 52, spAttack: 109, spDefense: 94, speed: 109},
+            abilities: {0: 'dry-skin', 1: 'sand-veil', hidden: 'solar-power'},
+            height: 1,
+            weight: 21,
+            colors: ['yellow', 'black', 'orange', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'dragon'],
+            prevEvolution: 'helioptile',
+            nextEvolutions: [{
+                species: 'flared-frill-heliolisk',
+                method: 'burst-evolution',
+                value: 'fully-charged',
+                method2: 'type-surge',
+                value2: 'electric'
+                }]
+            },
+        'flared-frill-heliolisk': {
+            order: indexOrder++,
+            token: 'flared-frill-heliolisk',
+            name: 'Flared-frill Heliolisk',
+            formClass: 'burst-evolution',
+            formToken: 'flared',
+            number: 695,
+            types: ['electric', 'normal'],
+            baseStats: {hp: 62, phAttack: 55, phDefense: 52, spAttack: 109, spDefense: 94, speed: 109},
+            abilities: {0: 'dry-skin', 1: 'sand-veil', hidden: 'solar-power'},
+            height: 1,
+            weight: 21,
+            colors: ['black', 'orange', 'yellow', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'dragon'],
+            prevEvolution: 'heliolisk'
+            },
+
         'sylveon': {
             order: thisIndex.afterOrder('glaceon'),
             token: 'sylveon',
