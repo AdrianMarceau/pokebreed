@@ -1078,69 +1078,6 @@
             prevEvolution: 'heliolisk'
             },
 
-        'sylveon': {
-            order: thisIndex.afterOrder('glaceon'),
-            token: 'sylveon',
-            name: 'Sylveon',
-            number: 700,
-            types: ['fairy'],
-            genderRatio: {male: 0.875, female: 0.125},
-            baseStats: {hp: 95, phAttack: 65, phDefense: 65, spAttack: 110, spDefense: 130, speed: 60},
-            abilities: {0: 'cute-charm', hidden: 'pixilate'},
-            height: 1,
-            weight: 23.5,
-            colors: ['white', 'pink', 'blue'],
-            eggCycles: 35,
-            eggGroups: ['field'],
-            prevEvolution: 'eevee',
-            },
-
-        'hawlucha': {
-            order: indexOrder++,
-            token: 'hawlucha',
-            name: 'Hawlucha',
-            number: 701,
-            types: ['fighting', 'flying'],
-            baseStats: {hp: 78, phAttack: 92, phDefense: 75, spAttack: 74, spDefense: 63, speed: 118},
-            abilities: {0: 'limber', 1: 'unburden', hidden: 'mold-breaker'},
-            height: 0.8,
-            weight: 21.5,
-            colors: ['green', 'orange', 'white', 'yellow'],
-            eggCycles: 20,
-            eggGroups: ['human-like']
-            },
-
-        'dedenne': {
-            order: indexOrder++,
-            token: 'dedenne',
-            name: 'Dedenne',
-            number: 702,
-            types: ['electric', 'fairy'],
-            baseStats: {hp: 67, phAttack: 58, phDefense: 57, spAttack: 81, spDefense: 67, speed: 101},
-            abilities: {0: 'cheek-pouch', 1: 'pickup', hidden: 'plus'},
-            height: 0.2,
-            weight: 2.2,
-            colors: ['orange', 'black', 'yellow', 'red'],
-            eggCycles: 20,
-            eggGroups: ['field', 'fairy']
-            },
-
-        'carbink': {
-            order: indexOrder++,
-            token: 'carbink',
-            name: 'Carbink',
-            number: 703,
-            types: ['rock', 'fairy'],
-            genderRatio: {none: 1.000},
-            baseStats: {hp: 50, phAttack: 50, phDefense: 150, spAttack: 50, spDefense: 150, speed: 50},
-            abilities: {0: 'clear-body', hidden: 'sturdy'},
-            height: 0.3,
-            weight: 5.7,
-            colors: ['gray', 'white', 'blue'],
-            eggCycles: 25,
-            eggGroups: ['fairy', 'mineral']
-            },
-
         'tyrunt': {
             order: indexOrder++,
             token: 'tyrunt',
@@ -1213,6 +1150,69 @@
             eggCycles: 30,
             eggGroups: ['monster'],
             prevEvolution: 'amaura'
+            },
+
+        'sylveon': {
+            order: thisIndex.afterOrder('glaceon'),
+            token: 'sylveon',
+            name: 'Sylveon',
+            number: 700,
+            types: ['fairy'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 95, phAttack: 65, phDefense: 65, spAttack: 110, spDefense: 130, speed: 60},
+            abilities: {0: 'cute-charm', hidden: 'pixilate'},
+            height: 1,
+            weight: 23.5,
+            colors: ['white', 'pink', 'blue'],
+            eggCycles: 35,
+            eggGroups: ['field'],
+            prevEvolution: 'eevee',
+            },
+
+        'hawlucha': {
+            order: indexOrder++,
+            token: 'hawlucha',
+            name: 'Hawlucha',
+            number: 701,
+            types: ['fighting', 'flying'],
+            baseStats: {hp: 78, phAttack: 92, phDefense: 75, spAttack: 74, spDefense: 63, speed: 118},
+            abilities: {0: 'limber', 1: 'unburden', hidden: 'mold-breaker'},
+            height: 0.8,
+            weight: 21.5,
+            colors: ['green', 'orange', 'white', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['human-like']
+            },
+
+        'dedenne': {
+            order: indexOrder++,
+            token: 'dedenne',
+            name: 'Dedenne',
+            number: 702,
+            types: ['electric', 'fairy'],
+            baseStats: {hp: 67, phAttack: 58, phDefense: 57, spAttack: 81, spDefense: 67, speed: 101},
+            abilities: {0: 'cheek-pouch', 1: 'pickup', hidden: 'plus'},
+            height: 0.2,
+            weight: 2.2,
+            colors: ['orange', 'black', 'yellow', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field', 'fairy']
+            },
+
+        'carbink': {
+            order: indexOrder++,
+            token: 'carbink',
+            name: 'Carbink',
+            number: 703,
+            types: ['rock', 'fairy'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 50, phAttack: 50, phDefense: 150, spAttack: 50, spDefense: 150, speed: 50},
+            abilities: {0: 'clear-body', hidden: 'sturdy'},
+            height: 0.3,
+            weight: 5.7,
+            colors: ['gray', 'white', 'blue'],
+            eggCycles: 25,
+            eggGroups: ['fairy', 'mineral']
             },
 
         'goomy': {
