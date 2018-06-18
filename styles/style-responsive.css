@@ -164,9 +164,16 @@
         text-align: center;
         width: 100%;
     }
+    .panel .buttons .filter-pokemon .filter.generations .options {
+        float: none;
+    }
     .panel .buttons .filter-pokemon .filter.generations .options .option,
     .panel .buttons .filter-pokemon .filter.generations .options .option[data-gen="all"] {
         width: calc(100% / 8);
+    }
+    .panel .buttons .filter-pokemon[data-target="pokedex"] .filter.generations .options .option,
+    .panel .buttons .filter-pokemon[data-target="pokedex"] .filter.generations .options .option[data-gen="all"] {
+        width: calc(100% / 9);
     }
     .panel .buttons .filter-pokemon .filter.types .options .option {
         width: calc(100% / 10);
