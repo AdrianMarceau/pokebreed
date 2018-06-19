@@ -1287,6 +1287,43 @@
             eggGroups: ['mineral'],
             },
 
+        'phantump': {
+            order: indexOrder++,
+            token: 'phantump',
+            name: 'Phantump',
+            number: 708,
+            types: ['ghost', 'grass'],
+            baseStats: {hp: 43, phAttack: 70, phDefense: 48, spAttack: 50, spDefense: 60, speed: 38},
+            abilities: {0: 'natural-cure', 1: 'frisk', hidden: 'harvest'},
+            height: 0.4,
+            weight: 7,
+            colors: ['brown', 'black', 'green', 'red'],
+            eggCycles: 20,
+            eggGroups: ['grass', 'amorphous'],
+            nextEvolutions: [{
+                species: 'trevenant',
+                method: 'trade-partner',
+                value: 'auto',
+                method2: 'level-up',
+                value2: 20
+                }]
+            },
+        'trevenant': {
+            order: indexOrder++,
+            token: 'trevenant',
+            name: 'Trevenant',
+            number: 709,
+            types: ['ghost', 'grass'],
+            baseStats: {hp: 85, phAttack: 110, phDefense: 76, spAttack: 65, spDefense: 82, speed: 56},
+            abilities: {0: 'natural-cure', 1: 'frisk', hidden: 'harvest'},
+            height: 1.5,
+            weight: 71,
+            colors: ['brown', 'green', 'black', 'red'],
+            eggCycles: 20,
+            eggGroups: ['grass', 'amorphous'],
+            prevEvolution: 'phantump'
+            },
+
         'bergmite': {
             order: indexOrder++,
             token: 'bergmite',
