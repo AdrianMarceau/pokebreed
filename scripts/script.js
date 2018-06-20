@@ -1957,9 +1957,63 @@
         var numText = '#' + strPad('000', pokeNum, true);
         var nameText = pokeIndex.name;
         var typeText = pokeIndex.types.join(' / ').toLowerCase().replace(/\b[a-z]/g, function(l) { return l.toUpperCase(); }) + ' Type';
-        var titleText = numText;
+
+        var titleText = '';
+
+        // Add the global number and name if unlocked
+        titleText += numText;
         titleText += ' : ' + (isUnlocked ? nameText : '- - -') + ' ';
+
+        // Add text for the types
         titleText += '\n' + '(' + typeText + ') ';
+
+        // Generate text for the exact stage of evolution and/or (form/) class(es) this pokemon has
+        if (typeof pokeIndex.class !== 'undefined'
+            || typeof pokeIndex.formClass !== 'undefined'){
+            var stageText = [];
+            var showEvoStage = true;
+            if (typeof pokeIndex.class !== 'undefined'){
+                if (pokeIndex.class === 'baby'){ stageText.push('Baby Pokémon'); showEvoStage = false; }
+                else if (pokeIndex.class === 'legendary'){ stageText.push('Legendary Pokémon'); showEvoStage = false; }
+                else if (pokeIndex.class === 'mythical'){ stageText.push('Mythical Pokémon'); showEvoStage = false; }
+                else if (pokeIndex.class === 'ultra-beast'){ stageText.push('Ultra Beast'); showEvoStage = false; }
+                }
+            if (typeof pokeIndex.formClass !== 'undefined'){
+                if (pokeIndex.formClass === 'mega-evolution'){ stageText.push('Mega Evolution'); showEvoStage = false; }
+                else if (pokeIndex.formClass === 'burst-evolution'){ stageText.push('Burst Evolution'); showEvoStage = false; }
+                else if (pokeIndex.formClass === 'primal-reversion'){ stageText.push('Primal Reversion'); showEvoStage = false; }
+                }
+            if (showEvoStage){
+                var forceBasic = false;
+                if (pokeIndex.formClass === 'weather-variant'){ forceBasic = true; }
+                if (typeof pokeIndex.prevEvolution !== 'undefined' && PokemonSpeciesIndex[pokeIndex.prevEvolution].class === 'baby'){ forceBasic = true; }
+                if (forceBasic || pokeIndex.token === pokeIndex.baseEvolution){
+                    stageText.push('Basic Pokémon');
+                    } else {
+                    if (typeof pokeIndex.prevEvolution !== 'undefined'
+                        && typeof pokeIndex.nextEvolutions !== 'undefined'
+                        && pokeIndex.nextEvolutions.length > 0
+                        && pokeIndex.nextEvolutions[0]['method'] !== 'mega-evolution'
+                        && pokeIndex.nextEvolutions[0]['method'] !== 'burst-evolution'){
+                        stageText.push('Middle Evolution');
+                        } else if (typeof pokeIndex.prevEvolution !== 'undefined'){
+                        stageText.push('Final Evolution');
+                        }
+                    }
+                }
+            if (stageText.length){
+                stageText = stageText.join(' / ');
+                stageText = stageText.replace('Pokémon / ', ' / ');
+                titleText += '\n' + stageText;
+                }
+            if (typeof pokeIndex.formClass !== 'undefined'){
+                if (pokeIndex.formClass === 'gender-variant'){ titleText += '\n' + 'Gender Variant'; }
+                if (pokeIndex.formClass === 'seasonal-variant'){ titleText += '\n' + 'Seasonal Variant'; }
+                if (pokeIndex.formClass === 'regional-variant'){ titleText += '\n' + 'Regional Variant'; }
+                if (pokeIndex.formClass === 'weather-variant'){ titleText += '\n' + 'Weather Variant'; }
+                if (pokeIndex.formClass === 'shiny-variant'){ titleText += '\n' + 'Shiny Variant'; }
+                }
+            }
         if (isUnlocked){
             titleText += '\n' + 'LP: ' + pokeIndex.lifePoints + ' ';
             if (pokeIndex.class !== 'baby'
