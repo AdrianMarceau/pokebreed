@@ -1475,6 +1475,28 @@
             eggGroups: ['undiscovered']
             },
 
+        'diancie': {
+            order: indexOrder++,
+            token: 'diancie',
+            name: 'Diancie',
+            class: 'mythical',
+            number: 719,
+            types: ['rock', 'fairy'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 50, phAttack: 100, phDefense: 150, spAttack: 100, spDefense: 150, speed: 50},
+            abilities: {0: 'clear-body'},
+            height: 0.7,
+            weight: 8.8,
+            colors: ['pink', 'gray', 'white', 'red', 'yellow'],
+            eggCycles: 25,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'mega-diancie',
+                method: 'mega-evolution',
+                value: 'diancite'
+                }]
+            },
+
         'volcanion': {
             order: indexOrder++,
             token: 'volcanion',
@@ -2433,6 +2455,27 @@
             colors: ['white', 'pink', 'yellow'],
             eggGroups: ['fairy'],
             prevEvolution: 'audino'
+            },
+
+        'mega-diancie': {
+            order: indexOrder++,
+            token: 'mega-diancie',
+            name: 'Mega Diancie',
+            class: 'mythical',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'diancie',
+            number: 719,
+            types: ['rock', 'fairy'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 50, phAttack: 160, phDefense: 110, spAttack: 160, spDefense: 110, speed: 110},
+            abilities: {0: 'magic-bounce'},
+            height: 1.1,
+            weight: 27.8,
+            colors: ['pink', 'white','gray', 'yellow',  'red'],
+            eggCycles: 25,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'diancie'
             },
 
         });
