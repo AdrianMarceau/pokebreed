@@ -1324,6 +1324,52 @@
             prevEvolution: 'phantump'
             },
 
+        'pumpkaboo': {
+            order: indexOrder++,
+            token: 'pumpkaboo',
+            name: 'Pumpkaboo',
+            number: 710,
+            formClass: 'random-variant',
+            possibleForms: ['average', 'small', 'large', 'super'],
+            possibleFormsRatio: [20, 4, 2, 1],
+            randomizeForms: true,
+            baseForm: 'average',
+            types: ['ghost', 'grass'],
+            baseStats: {hp: 49, phAttack: 66, phDefense: 70, spAttack: 44, spDefense: 55, speed: 51},
+            abilities: {0: 'pickup', 1: 'frisk', hidden: 'insomnia'},
+            height: 0.4,
+            weight: 5,
+            colors: ['brown', 'orange', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            nextEvolutions: [{
+                species: 'gourgeist',
+                method: 'trade-partner',
+                value: 'auto',
+                method2: 'level-up',
+                value2: 20
+                }]
+            },
+        'gourgeist': {
+            order: indexOrder++,
+            token: 'gourgeist',
+            name: 'Gourgeist',
+            number: 711,
+            formClass: 'random-variant',
+            possibleForms: ['average', 'small', 'large', 'super'],
+            randomizeForms: true,
+            baseForm: 'average',
+            types: ['ghost', 'grass'],
+            baseStats: {hp: 65, phAttack: 90, phDefense: 122, spAttack: 58, spDefense: 75, speed: 84},
+            abilities: {0: 'pickup', 1: 'frisk', hidden: 'insomnia'},
+            height: 0.9,
+            weight: 12.5,
+            colors: ['brown', 'orange', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'pumpkaboo'
+            },
+
         'bergmite': {
             order: indexOrder++,
             token: 'bergmite',
