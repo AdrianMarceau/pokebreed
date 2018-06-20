@@ -2011,6 +2011,7 @@
                 if (pokeIndex.formClass === 'seasonal-variant'){ titleText += '\n' + 'Seasonal Variant'; }
                 if (pokeIndex.formClass === 'regional-variant'){ titleText += '\n' + 'Regional Variant'; }
                 if (pokeIndex.formClass === 'weather-variant'){ titleText += '\n' + 'Weather Variant'; }
+                if (pokeIndex.formClass === 'field-variant'){ titleText += '\n' + 'Field Variant'; }
                 if (pokeIndex.formClass === 'shiny-variant'){ titleText += '\n' + 'Shiny Variant'; }
                 }
             }
