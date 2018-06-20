@@ -1497,6 +1497,48 @@
                 }]
             },
 
+        'hoopa': {
+            order: indexOrder++,
+            token: 'hoopa',
+            name: 'Hoopa',
+            class: 'mythical',
+            number: 720,
+            types: ['psychic', 'ghost'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 80, phAttack: 110, phDefense: 60, spAttack: 150, spDefense: 130, speed: 70},
+            abilities: {0: 'magician'},
+            height: 0.5,
+            weight: 9,
+            colors: ['purple', 'pink', 'yellow', 'black', 'green'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'hoopa-unbound',
+                method: 'burst-evolution',
+                value: 'prison-bottle'
+                }]
+            },
+        'hoopa-unbound': {
+            order: indexOrder++,
+            token: 'hoopa-unbound',
+            name: 'Hoopa Unbound',
+            class: 'mythical',
+            formClass: 'burst-evolution',
+            formToken: 'unbound',
+            baseSpecies: 'hoopa',
+            number: 720,
+            types: ['psychic', 'dark'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 80, phAttack: 160, phDefense: 60, spAttack: 170, spDefense: 130, speed: 80},
+            abilities: {0: 'magician'},
+            height: 6.5,
+            weight: 490,
+            colors: ['gray', 'pink', 'yellow', 'black', 'red'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'hoopa'
+            },
+
         'volcanion': {
             order: indexOrder++,
             token: 'volcanion',

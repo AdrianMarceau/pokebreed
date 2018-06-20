@@ -571,7 +571,7 @@
         'plant-wormadam': {
             order: indexOrder++,
             token: 'plant-wormadam',
-            name: 'Plant-Wormadam',
+            name: 'Plant Wormadam',
             formClass: 'field-variant',
             formToken: 'plant',
             number: 413,
