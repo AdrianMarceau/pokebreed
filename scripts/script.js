@@ -2124,8 +2124,34 @@
             && indexData['randomizeForms'] === true
             && typeof indexData['possibleForms'] !== 'undefined'){
             var possibleForms = indexData['possibleForms'];
-            var randomKey = Math.floor((Math.seededRandomChance() / 100) * possibleForms.length);
-            var randomForm = possibleForms[randomKey];
+            if (typeof indexData['possibleFormsRatio'] !== 'undefined'
+                && indexData['possibleFormsRatio'].length === possibleForms.length){
+                var formRatios = indexData['possibleFormsRatio'];
+                var ratioTotal = formRatios.reduce(function(a, b) { return a + b; }, 0);
+                var randomKey = Math.floor((Math.seededRandomChance() / 100) * ratioTotal);
+                var keyLimit = 0;
+                //console.log('\n\npossibleForms = ', possibleForms);
+                //console.log('formRatios = ', formRatios);
+                //console.log('ratioTotal = ', ratioTotal);
+                //console.log('randomKey = ', randomKey);
+                //console.log('keyLimit = ', keyLimit);
+                for (var i = 0; i < possibleForms.length; i++){
+                    var formToken = possibleForms[i];
+                    var formChance = indexData['possibleFormsRatio'][i];
+                    keyLimit += formChance;
+                    //console.log('\nformToken('+ i +') = ', formToken);
+                    //console.log('formChance('+ i +') = ', formChance);
+                    //console.log('keyLimit = ', keyLimit);
+                    if ((randomKey + 1) <= keyLimit){
+                        var randomForm = formToken;
+                        //console.log('randomForm = ', randomForm);
+                        break;
+                        }
+                    }
+                } else {
+                var randomKey = Math.floor((Math.seededRandomChance() / 100) * possibleForms.length);
+                var randomForm = possibleForms[randomKey];
+                }
             newPokemon.formToken = randomForm;
             }
 
