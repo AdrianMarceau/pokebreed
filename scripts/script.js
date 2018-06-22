@@ -2081,8 +2081,9 @@
         var pokeGender = 'none';
         if (typeof customData.gender === 'undefined'
             && !indexData.hasNoGender){
-            if (indexData.genderRatio.male === 0.5
-                && indexData.genderRatio.female === 0.5){
+            if (!simulationStarted
+                || (indexData.genderRatio.male === 0.5
+                    && indexData.genderRatio.female === 0.5)){
                 pokeGender = addedPokemonSpecies[pokemonToken] % 2 !== 0 ? 'female' : 'male';
                 } else if (indexData.genderRatio.male === 1){
                 pokeGender = 'male';
