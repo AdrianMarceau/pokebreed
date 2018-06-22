@@ -2081,23 +2081,25 @@
         var pokeGender = 'none';
         if (typeof customData.gender === 'undefined'
             && !indexData.hasNoGender){
-            if (!simulationStarted
-                || (indexData.genderRatio.male === 0.5
-                    && indexData.genderRatio.female === 0.5)){
+            if (indexData.genderRatio.male === 0.5
+                && indexData.genderRatio.female === 0.5){
                 pokeGender = addedPokemonSpecies[pokemonToken] % 2 !== 0 ? 'female' : 'male';
                 } else if (indexData.genderRatio.male === 1){
                 pokeGender = 'male';
                 } else if (indexData.genderRatio.female === 1){
                 pokeGender = 'female';
                 } else {
-                var chanceValue = Math.seededRandomChance();
-                var rareGender = indexData.genderRatio.female < indexData.genderRatio.male ? 'female' : 'male';
-                if (addedPokemonSpecies[pokemonToken] > 1){
-                    pokeGender = chanceValue <= (indexData.genderRatio[rareGender] * 100) ? rareGender : (rareGender != 'female' ? 'female' : 'male');
+                if (!simulationStarted) {
+                    pokeGender = addedPokemonSpecies[pokemonToken] % 2 !== 0 ? 'female' : 'male';
                     } else {
-                    pokeGender = rareGender;
+                    var chanceValue = Math.seededRandomChance();
+                    var rareGender = indexData.genderRatio.female < indexData.genderRatio.male ? 'female' : 'male';
+                    if (addedPokemonSpecies[pokemonToken] > 1){
+                        pokeGender = chanceValue <= (indexData.genderRatio[rareGender] * 100) ? rareGender : (rareGender != 'female' ? 'female' : 'male');
+                        } else {
+                        pokeGender = rareGender;
+                        }
                     }
-
                 }
             }
         //console.log('pokemonToken / pokeGender = ', pokemonToken, pokeGender);
