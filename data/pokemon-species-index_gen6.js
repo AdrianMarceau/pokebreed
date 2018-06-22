@@ -437,6 +437,7 @@
             weight: 81.5,
             colors: ['yellow', 'red', 'brown', 'blue'],
             eggCycles: 20,
+            eggPartner: 'pyroar-m',
             eggGroups: ['field'],
             prevEvolution: 'litleo'
             },
@@ -455,6 +456,7 @@
             weight: 81.5,
             colors: ['red', 'yellow', 'brown', 'blue'],
             eggCycles: 20,
+            eggPartner: 'pyroar-f',
             eggGroups: ['field'],
             prevEvolution: 'litleo'
             },
@@ -699,6 +701,7 @@
             weight: 8.5,
             colors: ['blue', 'white', 'green'],
             eggCycles: 20,
+            eggPartner: 'meowstic-f',
             eggGroups: ['field'],
             prevEvolution: 'espurr'
             },
@@ -717,6 +720,7 @@
             weight: 8.5,
             colors: ['white', 'blue', 'yellow', 'red'],
             eggCycles: 20,
+            eggPartner: 'meowstic-m',
             eggGroups: ['field'],
             prevEvolution: 'espurr'
             },
