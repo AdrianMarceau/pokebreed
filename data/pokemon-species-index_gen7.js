@@ -1498,14 +1498,14 @@
                 species: 'solgaleo',
                 method: 'level-up',
                 value: 53,
-                method3: 'stat-appeal',
-                value3: 'phAttack'
+                method2: 'stat-appeal',
+                value2: 'phAttack'
                 }, {
                 species: 'lunala',
                 method: 'level-up',
                 value: 53,
-                method3: 'stat-appeal',
-                value3: 'spAttack'
+                method2: 'stat-appeal',
+                value2: 'spAttack'
                 }]
             },
         'solgaleo': {
@@ -1557,7 +1557,92 @@
             weight: 230,
             colors: ['black'],
             eggCycles: 120,
-            eggGroups: ['undiscovered']
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'dusk-mane-necrozma',
+                method: 'level-up',
+                value: 70,
+                method2: 'fusion-species',
+                value2: 'solgaleo',
+                switch: 'and'
+                }, {
+                species: 'dawn-wings-necrozma',
+                method: 'level-up',
+                value: 70,
+                method2: 'fusion-species',
+                value2: 'lunala',
+                switch: 'and'
+                }]
+            },
+        'dusk-mane-necrozma': {
+            order: indexOrder++,
+            token: 'dusk-mane-necrozma',
+            name: 'Dusk Mane Necrozma',
+            class: 'legendary',
+            baseSpecies: 'necrozma',
+            formClass: 'fusion-evolution',
+            formToken: 'dusk',
+            number: 800,
+            types: ['psychic', 'steel'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 97, phAttack: 157, phDefense: 127, spAttack: 113, spDefense: 109, speed: 77},
+            abilities: {0: 'prism-armor'},
+            height: 3.8,
+            weight: 460,
+            colors: ['black', 'yellow', 'white'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'necrozma',
+            nextEvolutions: [{
+                species: 'ultra-necrozma',
+                method: 'burst-evolution',
+                value: 'ultra-burst'
+                }]
+            },
+        'dawn-wings-necrozma': {
+            order: indexOrder++,
+            token: 'dawn-wings-necrozma',
+            name: 'Dawn Wings Necrozma',
+            class: 'legendary',
+            baseSpecies: 'necrozma',
+            formClass: 'fusion-evolution',
+            formToken: 'dawn',
+            number: 800,
+            types: ['psychic', 'ghost'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 97, phAttack: 113, phDefense: 109, spAttack: 157, spDefense: 127, speed: 77},
+            abilities: {0: 'prism-armor'},
+            height: 4.2,
+            weight: 350,
+            colors: ['black', 'blue', 'white'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'necrozma',
+            nextEvolutions: [{
+                species: 'ultra-necrozma',
+                method: 'burst-evolution',
+                value: 'ultra-burst'
+                }]
+            },
+        'ultra-necrozma': {
+            order: indexOrder++,
+            token: 'ultra-necrozma',
+            name: 'Ultra Necrozma',
+            class: 'legendary',
+            baseSpecies: 'necrozma',
+            formClass: 'burst-evolution',
+            formToken: 'ultra',
+            number: 800,
+            types: ['psychic', 'dragon'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 97, phAttack: 167, phDefense: 97, spAttack: 167, spDefense: 97, speed: 129},
+            abilities: {0: 'neuroforce'},
+            height: 7.5,
+            weight: 230,
+            colors: ['white', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'necrozma'
             },
 
         'magearna': {
