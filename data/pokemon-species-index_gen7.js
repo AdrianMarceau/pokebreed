@@ -1392,6 +1392,23 @@
             prevEvolution: 'hakamo-o',
             },
 
+        'tapu-koko': {
+            order: indexOrder++,
+            token: 'tapu-koko',
+            name: 'Tapu Koko',
+            class: 'legendary',
+            number: 785,
+            types: ['electric', 'fairy'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 70, phAttack: 115, phDefense: 85, spAttack: 95, spDefense: 75, speed: 130},
+            abilities: {0: 'electric-surge', hidden: 'telepathy'},
+            height: 1.8,
+            weight: 20.5,
+            colors: ['yellow', 'orange', 'black', 'white'],
+            eggCycles: 15,
+            eggGroups: ['undiscovered']
+            },
+
         'necrozma': {
             order: indexOrder++,
             token: 'necrozma',
