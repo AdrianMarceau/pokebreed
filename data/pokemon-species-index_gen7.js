@@ -935,6 +935,64 @@
             prevEvolution: 'stufful'
             },
 
+        'bounsweet': { // TODO: Add "Thwornberry" as egg partner and alt base evo
+            order: indexOrder++,
+            token: 'bounsweet',
+            name: 'Bounsweet',
+            number: 761,
+            types: ['grass'],
+            genderRatio: {female: 1.000},
+            baseStats: {hp: 42, phAttack: 30, phDefense: 38, spAttack: 30, spDefense: 38, speed: 32},
+            abilities: {0: 'leaf-guard', 1: 'oblivious', hidden: 'sweet-veil'},
+            height: 0.3,
+            weight: 3.2,
+            colors: ['pink', 'green', 'white', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['grass'],
+            nextEvolutions: [{
+                species: 'steenee',
+                method: 'level-up',
+                value: 18
+                }]
+            },
+        'steenee': {
+            order: indexOrder++,
+            token: 'steenee',
+            name: 'Steenee',
+            number: 762,
+            types: ['grass'],
+            genderRatio: {female: 1.000},
+            baseStats: {hp: 52, phAttack: 40, phDefense: 48, spAttack: 40, spDefense: 48, speed: 62},
+            abilities: {0: 'leaf-guard', 1: 'oblivious', hidden: 'sweet-veil'},
+            height: 0.7,
+            weight: 8.2,
+            colors: ['green', 'white', 'purple', 'pink', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['grass'],
+            prevEvolution: 'bounsweet',
+            nextEvolutions: [{
+                species: 'tsareena',
+                method: 'level-up',
+                value: 36
+                }]
+            },
+        'tsareena': {
+            order: indexOrder++,
+            token: 'tsareena',
+            name: 'Tsareena',
+            number: 763,
+            types: ['grass'],
+            genderRatio: {female: 1.000},
+            baseStats: {hp: 72, phAttack: 120, phDefense: 98, spAttack: 50, spDefense: 98, speed: 72},
+            abilities: {0: 'leaf-guard', 1: 'queenly-majesty', hidden: 'sweet-veil'},
+            height: 1.2,
+            weight: 21.4,
+            colors: ['green', 'pink', 'white', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['grass'],
+            prevEvolution: 'steenee'
+            },
+
         'comfey': {
             order: indexOrder++,
             token: 'comfey',
