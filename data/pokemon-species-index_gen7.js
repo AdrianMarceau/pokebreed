@@ -1457,6 +1457,92 @@
             eggGroups: ['undiscovered']
             },
 
+        'cosmog': {
+            order: indexOrder++,
+            token: 'cosmog',
+            name: 'Cosmog',
+            class: 'legendary',
+            number: 789,
+            types: ['psychic'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 43, phAttack: 29, phDefense: 31, spAttack: 29, spDefense: 31, speed: 37},
+            abilities: {0: 'unaware'},
+            height: 0.2,
+            weight: 0.1,
+            colors: ['blue', 'purple', 'pink', 'black', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'cosmoem',
+                method: 'level-up',
+                value: 43
+                }]
+            },
+        'cosmoem': {
+            order: indexOrder++,
+            token: 'cosmoem',
+            name: 'Cosmoem',
+            class: 'legendary',
+            number: 790,
+            types: ['psychic'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 43, phAttack: 29, phDefense: 131, spAttack: 29, spDefense: 131, speed: 37},
+            abilities: {0: 'sturdy'},
+            height: 0.1,
+            weight: 999.9,
+            colors: ['yellow', 'blue', 'purple', 'pink', 'black'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'cosmog',
+            nextEvolutions: [{
+                species: 'solgaleo',
+                method: 'level-up',
+                value: 53,
+                method3: 'stat-appeal',
+                value3: 'phAttack'
+                }, {
+                species: 'lunala',
+                method: 'level-up',
+                value: 53,
+                method3: 'stat-appeal',
+                value3: 'spAttack'
+                }]
+            },
+        'solgaleo': {
+            order: indexOrder++,
+            token: 'solgaleo',
+            name: 'Solgaleo',
+            class: 'legendary',
+            number: 791,
+            types: ['psychic', 'steel'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 137, phAttack: 137, phDefense: 107, spAttack: 113, spDefense: 89, speed: 97},
+            abilities: {0: 'full-metal-body'},
+            height: 3.4,
+            weight: 230,
+            colors: ['white', 'yellow', 'red', 'black'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'cosmoem'
+            },
+        'lunala': {
+            order: indexOrder++,
+            token: 'lunala',
+            name: 'Lunala',
+            class: 'legendary',
+            number: 792,
+            types: ['psychic', 'ghost'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 137, phAttack: 113, phDefense: 89, spAttack: 137, spDefense: 107, speed: 97},
+            abilities: {0: 'shadow-shield'},
+            height: 4,
+            weight: 120,
+            colors: ['purple', 'blue', 'yellow', 'white', 'pink'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'cosmoem'
+            },
+
         'necrozma': {
             order: indexOrder++,
             token: 'necrozma',
