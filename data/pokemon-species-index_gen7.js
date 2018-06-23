@@ -790,6 +790,41 @@
             prevEvolution: 'dewpider'
             },
 
+        'fomantis': {
+            order: indexOrder++,
+            token: 'fomantis',
+            name: 'Fomantis',
+            number: 753,
+            types: ['grass'],
+            baseStats: {hp: 40, phAttack: 55, phDefense: 35, spAttack: 50, spDefense: 35, speed: 35},
+            abilities: {0: 'leaf-guard', hidden: 'contrary'},
+            height: 0.3,
+            weight: 1.5,
+            colors: ['green', 'pink', 'white'],
+            eggCycles: 20,
+            eggGroups: ['grass'],
+            nextEvolutions: [{
+                species: 'lurantis',
+                method: 'level-up',
+                value: 34
+                }]
+            },
+        'lurantis': {
+            order: indexOrder++,
+            token: 'lurantis',
+            name: 'Lurantis',
+            number: 754,
+            types: ['grass'],
+            baseStats: {hp: 70, phAttack: 105, phDefense: 90, spAttack: 80, spDefense: 90, speed: 45},
+            abilities: {0: 'leaf-guard', hidden: 'contrary'},
+            height: 0.9,
+            weight: 18.5,
+            colors: ['pink', 'white', 'green'],
+            eggCycles: 20,
+            eggGroups: ['grass'],
+            prevEvolution: 'fomantis'
+            },
+
         'morelull': {
             order: indexOrder++,
             token: 'morelull',
