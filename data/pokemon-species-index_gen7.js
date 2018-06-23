@@ -1440,6 +1440,22 @@
             eggCycles: 15,
             eggGroups: ['undiscovered']
             },
+        'tapu-fini': {
+            order: indexOrder++,
+            token: 'tapu-fini',
+            name: 'Tapu Fini',
+            class: 'legendary',
+            number: 788,
+            types: ['water', 'fairy'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 70, phAttack: 75, phDefense: 115, spAttack: 95, spDefense: 130, speed: 85},
+            abilities: {0: 'misty-surge', hidden: 'telepathy'},
+            height: 1.3,
+            weight: 21.2,
+            colors: ['purple', 'blue', 'black', 'white'],
+            eggCycles: 15,
+            eggGroups: ['undiscovered']
+            },
 
         'necrozma': {
             order: indexOrder++,
