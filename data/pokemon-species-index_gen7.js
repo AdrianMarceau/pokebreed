@@ -552,6 +552,91 @@
             prevEvolution: 'cutiefly'
             },
 
+        'rockruff': {
+            order: indexOrder++,
+            token: 'rockruff',
+            name: 'Rockruff',
+            number: 744,
+            types: ['rock'],
+            baseStats: {hp: 45, phAttack: 65, phDefense: 40, spAttack: 30, spDefense: 40, speed: 60},
+            abilities: {0: 'keen-eye', 1: 'vital-spirit', hidden: 'steadfast', special: 'own-tempo'},
+            height: 0.5,
+            weight: 9.2,
+            colors: ['brown', 'white', 'black', 'blue', 'pink'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'midday-lycanroc',
+                method: 'level-up',
+                value: 25,
+                method2: 'stat-appeal',
+                value2: 'speed'
+                }, {
+                species: 'midnight-lycanroc',
+                method: 'level-up',
+                value: 25,
+                method2: 'stat-appeal',
+                value2: 'phDefense'
+                }, {
+                species: 'dusk-lycanroc',
+                method: 'level-up',
+                value: 25,
+                method2: 'stat-appeal',
+                value2: 'phAttack'
+                }]
+            },
+        'midday-lycanroc': {
+            order: indexOrder++,
+            token: 'midday-lycanroc',
+            name: 'Midday Lycanroc',
+            formClass: 'form-variant',
+            formToken: 'midday',
+            number: 745,
+            types: ['rock'],
+            baseStats: {hp: 75, phAttack: 115, phDefense: 65, spAttack: 55, spDefense: 65, speed: 112},
+            abilities: {0: 'keen-eye', 1: 'sand-rush', hidden: 'steadfast'},
+            height: 0.8,
+            weight: 25,
+            colors: ['brown', 'white', 'black', 'blue', 'pink'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            prevEvolution: 'rockruff'
+            },
+        'midnight-lycanroc': {
+            order: indexOrder++,
+            token: 'midnight-lycanroc',
+            name: 'Midnight Lycanroc',
+            formClass: 'form-variant',
+            formToken: 'midnight',
+            number: 745,
+            types: ['rock'],
+            baseStats: {hp: 85, phAttack: 115, phDefense: 75, spAttack: 55, spDefense: 75, speed: 82},
+            abilities: {0: 'keen-eye', 1: 'vital-spirit', hidden: 'no-guard'},
+            height: 1.1,
+            weight: 25,
+            colors: ['red', 'white', 'black'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            prevEvolution: 'rockruff'
+            },
+        'dusk-lycanroc': {
+            order: indexOrder++,
+            token: 'dusk-lycanroc',
+            name: 'Dusk Lycanroc',
+            formClass: 'form-variant',
+            formToken: 'dusk',
+            number: 745,
+            types: ['rock'],
+            baseStats: {hp: 75, phAttack: 117, phDefense: 65, spAttack: 55, spDefense: 65, speed: 110},
+            abilities: {0: 'tough-claws'},
+            height: 0.8,
+            weight: 25,
+            colors: ['orange', 'white', 'black', 'green'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            prevEvolution: 'rockruff'
+            },
+
         'mareanie': {
             order: indexOrder++,
             token: 'mareanie',
