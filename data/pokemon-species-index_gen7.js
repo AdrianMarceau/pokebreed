@@ -637,6 +637,54 @@
             prevEvolution: 'rockruff'
             },
 
+        'wishiwashi': {
+            order: indexOrder++,
+            token: 'wishiwashi',
+            name: 'Wishiwashi',
+            formClass: 'form-variant',
+            formToken: 'solo',
+            number: 746,
+            types: ['water'],
+            baseStats: {hp: 45, phAttack: 20, phDefense: 20, spAttack: 25, spDefense: 25, speed: 40},
+            abilities: {0: 'schooling'},
+            height: 0.2,
+            weight: 0.3,
+            colors: ['white', 'blue'],
+            eggCycles: 15,
+            eggGroups: ['water-2'],
+            nextEvolutions: [{
+                species: 'school-wishiwashi',
+                method: 'level-up',
+                value: 20,
+                method2: 'horde',
+                value2: 40,
+                method3: 'adulthood',
+                value3: false
+                }]
+            },
+        'school-wishiwashi': {
+            order: indexOrder++,
+            token: 'school-wishiwashi',
+            name: 'School Wishiwashi',
+            formClass: 'form-variant',
+            formToken: 'school',
+            number: 746,
+            types: ['water'],
+            baseStats: {hp: 45, phAttack: 140, phDefense: 130, spAttack: 140, spDefense: 135, speed: 30},
+            abilities: {0: 'schooling'},
+            height: 8.2,
+            weight: 78.6,
+            colors: ['blue', 'black', 'white'],
+            eggCycles: 15,
+            eggGroups: ['water-2'],
+            prevEvolution: 'wishiwashi',
+            nextEvolutions: [{
+                species: 'wishiwashi',
+                method: 'burnout-evolution',
+                value: 'schools-out'
+                }]
+            },
+
         'mareanie': {
             order: indexOrder++,
             token: 'mareanie',
