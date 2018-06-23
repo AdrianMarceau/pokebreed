@@ -3649,6 +3649,23 @@
                                 }
                             }
 
+                        // Horde-based evolutions trigger when this pokemon is surrounded by a specific species
+                        if (methodToken === 'horde'){
+                            if (typeof methodValue === 'number'
+                                && numSamePokemon >= methodValue){
+                                return 1;
+                                } else if (methodValue === 'high'
+                                && numSamePokemon >= 5){
+                                return 1;
+                                } else if (methodValue === 'max'
+                                && numSamePokemon >= 10){
+                                return 1;
+                                } else if (methodValue === 'low'
+                                && numSamePokemon < 5){
+                                return 1;
+                                }
+                            }
+
                         // Type-appeal/crisis evolutions trigger when the relevant field stats are especially high
                         if (methodToken === 'type-appeal'
                             || methodToken === 'type-surge'){
@@ -3776,9 +3793,21 @@
                             return 1;
                             }
 
+                        // Adulthood-based evolutions are triggered immediately if the pokemon is of a specific age
+                        if (methodToken === 'adulthood'
+                            && pokemonInfo.reachedAdulthood === methodValue){
+                            return 1;
+                            }
+
                         // Chance-based evolutions are triggered by random simulator values
                         if (methodToken === 'chance'
                             && (chanceValue < methodValue)){
+                            return 1;
+                            }
+
+                        // Burnout evolutions trigger automatically when this pokemon reaches adulthood
+                        if (methodToken === 'burnout-evolution'
+                            && pokemonInfo.reachedAdulthood === true){
                             return 1;
                             }
 
