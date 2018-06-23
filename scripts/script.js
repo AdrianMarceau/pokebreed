@@ -70,6 +70,8 @@
     var evolvedPokemonSpeciesTokens = [];
     var faintedPokemonSpeciesTokens = [];
 
+    var defaultTypeFormTriggers = {};
+
 
     // GLOBAL ELEMENT REFERENCES
 
@@ -882,6 +884,16 @@
             for (var num = 1; num <= maxDexNumber; num++){ if (nationalDexNumbers.indexOf(num) === -1){ missingDexNumbers.push(num); } }
 
             }
+
+        // Define the default set of type form triggers for pokemon that use them
+        for (var i = 0; i < PokemonTypesIndexTokens.length; i++){
+            var typeToken = PokemonTypesIndexTokens[i];
+            defaultTypeFormTriggers[typeToken] = typeToken;
+            }
+
+        // Return on complete
+        return;
+
     }
 
     // Define a function for actually starting the simulation
@@ -2012,6 +2024,7 @@
                 if (pokeIndex.formClass === 'regional-variant'){ titleText += '\n' + 'Regional Variant'; }
                 if (pokeIndex.formClass === 'weather-variant'){ titleText += '\n' + 'Weather Variant'; }
                 if (pokeIndex.formClass === 'field-variant'){ titleText += '\n' + 'Field Variant'; }
+                if (pokeIndex.formClass === 'type-variant'){ titleText += '\n' + 'Type Variant'; }
                 if (pokeIndex.formClass === 'shiny-variant'){ titleText += '\n' + 'Shiny Variant'; }
                 }
             }
@@ -3105,8 +3118,9 @@
                 currentZoneStats['species'][pokeToken] += 1;
 
                 // Loop through this pokemon's types and tweak relatedtype  multipliers
-                for (var key2 = 0; key2 < pokeIndex.types.length; key2++){
-                    var typeToken = pokeIndex.types[key2];
+                var pokeTypes = typeof pokeInfo.types !== 'undefined' ? pokeInfo.types : pokeIndex.types;
+                for (var key2 = 0; key2 < pokeTypes.length; key2++){
+                    var typeToken = pokeTypes[key2];
                     var typeInfo = PokemonTypesIndex[typeToken];
                     // Add +1 appeal point for this pokemon's type
                     if (typeof currentZoneStats['types'][typeToken] === 'undefined'){ currentZoneStats['types'][typeToken] = 0; }
@@ -3573,6 +3587,43 @@
                                 break;
                                 }
                             }
+                        }
+
+                    // If type variant, change the form based on current type appeal
+                    if (indexInfo.formClass === 'type-variant'){
+                        if (typeof indexInfo.possibleFormsTriggers !== 'undefined'){ var possibleFormsTriggers = indexInfo.possibleFormsTriggers; }
+                        else { var possibleFormsTriggers = defaultTypeFormTriggers; }
+                        var triggerTokens = Object.keys(possibleFormsTriggers);
+                        triggerTokens.sort(function(f1, f2){
+                            var t1 = possibleFormsTriggers[f1];
+                            var t2 = possibleFormsTriggers[f2];
+                            var t1val = thisZoneData.currentStats['types'][t1];
+                            var t2val = thisZoneData.currentStats['types'][t2];
+                            if (t1val > t2val){ return -1; }
+                            else if (t1val < t2val){ return 1; }
+                            else { return 0; }
+                            });
+                        if (pokemonInfo.formToken !== triggerTokens[0]){
+                            var formToken = triggerTokens[0];
+                            var formType = possibleFormsTriggers[formToken];
+                            pokemonInfo.formToken = formToken;
+                            if (indexInfo.syncTypeToForm === true){
+                                if (indexInfo.syncTypeMethod === 'replace'){
+                                    pokemonInfo.types = [formType];
+                                    } else {
+                                    pokemonInfo.types = indexInfo.types.slice(0);
+                                    pokemonInfo.types.push(formType);
+                                    if (pokemonInfo.types.length > 2){
+                                        pokemonInfo.types = pokemonInfo.types.slice(0, 2);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+
+                    if (indexInfo.formClass === 'type-variant'
+                        && typeof indexInfo.possibleFormsTriggers !== 'undefined'
+                        && thisZoneData.field.length){
                         }
 
                     }
