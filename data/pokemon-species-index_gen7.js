@@ -1474,6 +1474,47 @@
             eggGroups: ['undiscovered']
             },
 
+        'magearna': {
+            order: indexOrder++,
+            token: 'magearna',
+            name: 'Magearna',
+            class: 'mythical',
+            number: 801,
+            types: ['steel', 'fairy'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 80, phAttack: 95, phDefense: 115, spAttack: 130, spDefense: 115, speed: 65},
+            abilities: {0: 'soul-heart'},
+            height: 1,
+            weight: 80.5,
+            colors: ['gray', 'white', 'yellow', 'pink', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'original-magearna',
+                method: 'burst-evolution',
+                value: 'soul-heart'
+                }]
+            },
+        'original-magearna': {
+            order: indexOrder++,
+            token: 'original-magearna',
+            name: 'Original Magearna',
+            class: 'mythical',
+            formClass: 'burst-evolution',
+            formToken: 'original',
+            number: 801,
+            types: ['steel', 'fairy'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 80, phAttack: 95, phDefense: 115, spAttack: 130, spDefense: 115, speed: 65},
+            abilities: {0: 'soul-heart'},
+            height: 1,
+            weight: 80.5,
+            colors: ['yellow', 'red', 'white', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'magearna'
+            },
+
         'zeraora': {
             order: indexOrder++,
             token: 'zeraora',
