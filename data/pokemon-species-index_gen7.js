@@ -1515,6 +1515,47 @@
             prevEvolution: 'magearna'
             },
 
+        'marshadow': {
+            order: indexOrder++,
+            token: 'marshadow',
+            name: 'Marshadow',
+            class: 'mythical',
+            number: 802,
+            types: ['fighting', 'ghost'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 90, phAttack: 125, phDefense: 80, spAttack: 90, spDefense: 90, speed: 125},
+            abilities: {0: 'technician'},
+            height: 0.7,
+            weight: 22.2,
+            colors: ['gray', 'black', 'red', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'zenith-marshadow',
+                method: 'burst-evolution',
+                value: 'fighting-spirit'
+                }]
+            },
+        'zenith-marshadow': {
+            order: indexOrder++,
+            token: 'zenith-marshadow',
+            name: 'Zenith Marshadow',
+            class: 'mythical',
+            formClass: 'burst-evolution',
+            formToken: 'zenith',
+            number: 802,
+            types: ['fighting', 'ghost'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 90, phAttack: 125, phDefense: 80, spAttack: 90, spDefense: 90, speed: 125},
+            abilities: {0: 'technician'},
+            height: 0.7,
+            weight: 22.2,
+            colors: ['gray', 'black', 'red', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'marshadow'
+            },
+
         'zeraora': {
             order: indexOrder++,
             token: 'zeraora',
