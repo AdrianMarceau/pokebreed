@@ -3216,15 +3216,18 @@
             prevEvolution: 'meloetta'
             },
 
-        'genesect': { // TODO : Make forms based on type appeal
+        'genesect': {
             order: indexOrder++,
             token: 'genesect',
             name: 'Genesect',
             class: 'mythical',
             number: 649,
-            formClass: 'random-variant',
+            formClass: 'type-variant',
+            dynamicForms: true,
+            typeForms: true,
+            syncTypeToForm: false,
             possibleForms: ['base', 'shock', 'burn', 'chill', 'douse'],
-            randomizeForms: true,
+            possibleFormsTriggers: {'base': 'bug', 'shock': 'electric', 'burn': 'fire', 'chill': 'ice'},
             baseForm: 'base',
             types: ['bug', 'steel'],
             genderRatio: {none: 1.0000},

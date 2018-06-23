@@ -497,13 +497,6 @@
             dynamicForms: true,
             fieldForms: true,
             possibleForms: ['plant', 'sandy', 'trash', 'snow', 'bubble'],
-            possibleFormsColors: {
-                'plant': ['green', 'black', 'brown', 'yellow'],
-                'sandy': ['brown', 'black', 'gray', 'yellow'],
-                'trash': ['pink', 'black', 'gray', 'yellow'],
-                'snow': ['white', 'black', 'blue', 'yellow'],
-                'bubble': ['blue', 'black', 'purple', 'yellow']
-                },
             possibleFormsTriggers: {
                 'plant': ['forest', 'savanna', 'graveyard'],
                 'sandy': ['desert', 'beach', 'cliffside', 'volcano'],
@@ -518,6 +511,13 @@
             height: 0.2,
             weight: 3.4,
             colors: ['green', 'black', 'yellow'],
+            possibleFormsColors: {
+                'plant': ['green', 'black', 'brown', 'yellow'],
+                'sandy': ['brown', 'black', 'gray', 'yellow'],
+                'trash': ['pink', 'black', 'gray', 'yellow'],
+                'snow': ['white', 'black', 'blue', 'yellow'],
+                'bubble': ['blue', 'black', 'purple', 'yellow']
+                },
             eggCycles: 15,
             eggGroups: ['bug'],
             nextEvolutions: [{
