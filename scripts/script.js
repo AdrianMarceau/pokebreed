@@ -3118,7 +3118,7 @@
                 if (typeof currentZoneStats['species'][pokeToken] === 'undefined'){ currentZoneStats['species'][pokeToken] = 0; }
                 currentZoneStats['species'][pokeToken] += 1;
 
-                // Loop through this pokemon's types and tweak relatedtype  multipliers
+                // Loop through this pokemon's types and tweak related type multipliers
                 var pokeTypes = typeof pokeInfo.types !== 'undefined' ? pokeInfo.types : pokeIndex.types;
                 for (var key2 = 0; key2 < pokeTypes.length; key2++){
                     var typeToken = pokeTypes[key2];
@@ -3149,6 +3149,25 @@
                             currentZoneStats['types'][type] += 0.50 * modInfluencePoints;
                             }
                         }
+                    // Add -1 appeal point for any type this pokemon is predator to
+                    if (typeInfo['matchups']['strengths'].length){
+                        for (var key4 = 0; key4 < typeInfo['matchups']['strengths'].length; key4++){
+                            var type = typeInfo['matchups']['strengths'][key4];
+                            if (typeof currentZoneStats['types'][type] === 'undefined'){ currentZoneStats['types'][type] = 0; }
+                            currentZoneStats['types'][type] -= 0.50 * pokeIndex.influencePoints;
+                            }
+                        }
+                    }
+
+                // Check to see if this pokemon has any subtypes from abilities
+                var subTypes = [];
+                if (pokeAbilities.indexOf('steelworker') !== -1){ subTypes.push('steel'); }
+                for (var key2 = 0; key2 < subTypes.length; key2++){
+                    var typeToken = subTypes[key2];
+                    var typeInfo = PokemonTypesIndex[typeToken];
+                    // Add +1 appeal point for this pokemon's type
+                    if (typeof currentZoneStats['types'][typeToken] === 'undefined'){ currentZoneStats['types'][typeToken] = 0; }
+                    currentZoneStats['types'][typeToken] += 1.00 * pokeIndex.influencePoints;
                     // Add -1 appeal point for any type this pokemon is predator to
                     if (typeInfo['matchups']['strengths'].length){
                         for (var key4 = 0; key4 < typeInfo['matchups']['strengths'].length; key4++){

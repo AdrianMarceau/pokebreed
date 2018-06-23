@@ -1321,6 +1321,22 @@
             eggGroups: ['monster', 'dragon']
             },
 
+        'dhelmise': {
+            order: indexOrder++,
+            token: 'dhelmise',
+            name: 'Dhelmise',
+            number: 781,
+            types: ['ghost', 'grass'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 70, phAttack: 131, phDefense: 100, spAttack: 86, spDefense: 90, speed: 40},
+            abilities: {0: 'steelworker'},
+            height: 3.9,
+            weight: 210,
+            colors: ['green', 'brown', 'yellow', 'orange'],
+            eggCycles: 25,
+            eggGroups: ['mineral']
+            },
+
         'jangmo-o': {
             order: indexOrder++,
             token: 'jangmo-o',
