@@ -1408,6 +1408,22 @@
             eggCycles: 15,
             eggGroups: ['undiscovered']
             },
+        'tapu-lele': {
+            order: indexOrder++,
+            token: 'tapu-lele',
+            name: 'Tapu Lele',
+            class: 'legendary',
+            number: 786,
+            types: ['psychic', 'fairy'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 70, phAttack: 85, phDefense: 75, spAttack: 130, spDefense: 115, speed: 95},
+            abilities: {0: 'psychic-surge', hidden: 'telepathy'},
+            height: 1.2,
+            weight: 18.6,
+            colors: ['pink', 'black', 'white'],
+            eggCycles: 15,
+            eggGroups: ['undiscovered']
+            },
 
         'necrozma': {
             order: indexOrder++,
