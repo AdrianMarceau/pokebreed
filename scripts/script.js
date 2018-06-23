@@ -4712,10 +4712,8 @@
                 //console.log('\npokemonGetBaseEvolution('+pokeToken+', '+includeBaby+', '+includeAlts+')');
                 //console.log('includeAlts && typeof indexInfo.altBaseEvolutions !== \'undefined\' = ', indexInfo.altBaseEvolutions);
                 var queuedBaseEvolutions = [];
-                queuedBaseEvolutions.push({
-                    token: indexInfo.token,
-                    chance: 1 + thisZoneData.currentStats['types'][indexInfo.types[0]]
-                    });
+                var queuedBaseEvolutionsTokens = [];
+
                 for (var i = 0; i < indexInfo.altBaseEvolutions.length; i++){
                     var baseEvolution = indexInfo.altBaseEvolutions[i];
                     var baseEvolutionInfo = PokemonSpeciesIndex[baseEvolution.species];
@@ -4725,6 +4723,7 @@
                         && thisZoneData.currentStats['types'][baseEvolution.value] >= 20)
                         || (baseEvolution.method === 'type-surge'
                         && thisZoneData.currentStats['types'][baseEvolution.value] >= 40)){
+                        queuedBaseEvolutionsTokens.push(baseEvolution.species);
                         queuedBaseEvolutions.push({
                             token: baseEvolution.species,
                             chance: (baseEvolution.method === 'type-appeal' ? 2 : 3) + thisZoneData.currentStats['types'][baseEvolution.value]
@@ -4733,22 +4732,32 @@
                         && thisZoneData.currentStats['types'][baseEvolution.value] <= -5)
                         || baseEvolution.method === 'type-crisis'
                         && thisZoneData.currentStats['types'][baseEvolution.value] <= -10){
+                        queuedBaseEvolutionsTokens.push(baseEvolution.species);
                         queuedBaseEvolutions.push({
                             token: baseEvolution.species,
                             chance: (baseEvolution.method === 'type-warning' ? 2 : 3) + ((thisZoneData.currentStats['types'][baseEvolution.value] * -1)  * 2)
                             });
                         } else if (baseEvolution.method === 'chance'
                         && (Math.seededRandomChance() < baseEvolution.value)){
+                        queuedBaseEvolutionsTokens.push(baseEvolution.species);
                         queuedBaseEvolutions.push({
                             token: baseEvolution.species,
                             chance: 2 + thisZoneData.currentStats['types'][indexInfo.types[0]]
                             });
                         } else if (baseEvolution.method === 'always'){
+                        queuedBaseEvolutionsTokens.push(baseEvolution.species);
                         queuedBaseEvolutions.push({
                             token: baseEvolution.species,
                             chance: 100 + i
                             });
                         }
+                    }
+                if (queuedBaseEvolutionsTokens.indexOf(indexInfo.token) === -1){
+                    queuedBaseEvolutionsTokens.push(indexInfo.token);
+                    queuedBaseEvolutions.push({
+                        token: indexInfo.token,
+                        chance: 1 + thisZoneData.currentStats['types'][indexInfo.types[0]]
+                        });
                     }
                 if (queuedBaseEvolutions.length > 0){
                     //console.log('queuedBaseEvolutions for '+indexInfo.token+' = ', queuedBaseEvolutions);

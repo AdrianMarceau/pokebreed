@@ -380,6 +380,143 @@
             prevEvolution: 'crabrawler'
             },
 
+        'baile-oricorio': {
+            order: indexOrder++,
+            token: 'baile-oricorio',
+            name: 'Baile Oricorio',
+            formClass: 'regional-variant',
+            formToken: 'baile',
+            number: 741,
+            types: ['fire', 'flying'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 75, phAttack: 70, phDefense: 70, spAttack: 98, spDefense: 70, speed: 93},
+            abilities: {0: 'dancer'},
+            height: 0.6,
+            weight: 3.4,
+            colors: ['red', 'black', 'white', 'blue', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['flying'],
+            altBaseEvolutions: [{
+                species: 'baile-oricorio',
+                method: 'type-appeal',
+                value: 'fire'
+                }, {
+                species: 'pompom-oricorio',
+                method: 'type-appeal',
+                value: 'electric'
+                }, {
+                species: 'pau-oricorio',
+                method: 'type-appeal',
+                value: 'psychic'
+                }, {
+                species: 'sensu-oricorio',
+                method: 'type-appeal',
+                value: 'ghost'
+                }]
+            },
+        'pompom-oricorio': {
+            order: indexOrder++,
+            token: 'pompom-oricorio',
+            name: 'Pom-Pom Oricorio',
+            formClass: 'regional-variant',
+            formToken: 'pompom',
+            number: 741,
+            types: ['electric', 'flying'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 75, phAttack: 70, phDefense: 70, spAttack: 98, spDefense: 70, speed: 93},
+            abilities: {0: 'dancer'},
+            height: 0.6,
+            weight: 3.4,
+            colors: ['yellow', 'white', 'black', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['flying'],
+            altBaseEvolutions: [{
+                species: 'baile-oricorio',
+                method: 'type-appeal',
+                value: 'fire'
+                }, {
+                species: 'pompom-oricorio',
+                method: 'type-appeal',
+                value: 'electric'
+                }, {
+                species: 'pau-oricorio',
+                method: 'type-appeal',
+                value: 'psychic'
+                }, {
+                species: 'sensu-oricorio',
+                method: 'type-appeal',
+                value: 'ghost'
+                }]
+            },
+        'pau-oricorio': {
+            order: indexOrder++,
+            token: 'pau-oricorio',
+            name: 'Pa\'u Oricorio',
+            formClass: 'regional-variant',
+            formToken: 'pau',
+            number: 741,
+            types: ['psychic', 'flying'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 75, phAttack: 70, phDefense: 70, spAttack: 98, spDefense: 70, speed: 93},
+            abilities: {0: 'dancer'},
+            height: 0.6,
+            weight: 3.4,
+            colors: ['pink', 'white', 'black'],
+            eggCycles: 20,
+            eggGroups: ['flying'],
+            altBaseEvolutions: [{
+                species: 'baile-oricorio',
+                method: 'type-appeal',
+                value: 'fire'
+                }, {
+                species: 'pompom-oricorio',
+                method: 'type-appeal',
+                value: 'electric'
+                }, {
+                species: 'pau-oricorio',
+                method: 'type-appeal',
+                value: 'psychic'
+                }, {
+                species: 'sensu-oricorio',
+                method: 'type-appeal',
+                value: 'ghost'
+                }]
+            },
+        'sensu-oricorio': {
+            order: indexOrder++,
+            token: 'sensu-oricorio',
+            name: 'Sensu Oricorio',
+            formClass: 'regional-variant',
+            formToken: 'sensu',
+            number: 741,
+            types: ['ghost', 'flying'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 75, phAttack: 70, phDefense: 70, spAttack: 98, spDefense: 70, speed: 93},
+            abilities: {0: 'dancer'},
+            height: 0.6,
+            weight: 3.4,
+            colors: ['purple', 'blue', 'black', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['flying'],
+            altBaseEvolutions: [{
+                species: 'baile-oricorio',
+                method: 'type-appeal',
+                value: 'fire'
+                }, {
+                species: 'pompom-oricorio',
+                method: 'type-appeal',
+                value: 'electric'
+                }, {
+                species: 'pau-oricorio',
+                method: 'type-appeal',
+                value: 'psychic'
+                }, {
+                species: 'sensu-oricorio',
+                method: 'type-appeal',
+                value: 'ghost'
+                }]
+            },
+
         'cutiefly': {
             order: indexOrder++,
             token: 'cutiefly',
