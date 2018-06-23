@@ -720,6 +720,41 @@
             prevEvolution: 'mareanie'
             },
 
+        'mudbray': {
+            order: indexOrder++,
+            token: 'mudbray',
+            name: 'Mudbray',
+            number: 749,
+            types: ['ground'],
+            baseStats: {hp: 70, phAttack: 100, phDefense: 70, spAttack: 45, spDefense: 55, speed: 45},
+            abilities: {0: 'own-tempo', 1: 'stamina', hidden: 'inner-focus'},
+            height: 1,
+            weight: 110,
+            colors: ['brown', 'black', 'white'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'mudsdale',
+                method: 'level-up',
+                value: 30
+                }]
+            },
+        'mudsdale': {
+            order: indexOrder++,
+            token: 'mudsdale',
+            name: 'Mudsdale',
+            number: 750,
+            types: ['ground'],
+            baseStats: {hp: 100, phAttack: 125, phDefense: 100, spAttack: 55, spDefense: 85, speed: 35},
+            abilities: {0: 'own-tempo', 1: 'stamina', hidden: 'inner-focus'},
+            height: 2.5,
+            weight: 920,
+            colors: ['brown', 'black', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'mudbray'
+            },
+
         'dewpider': {
             order: indexOrder++,
             token: 'dewpider',
