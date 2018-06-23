@@ -1009,6 +1009,21 @@
             eggGroups: ['grass']
             },
 
+        'oranguru': {
+            order: indexOrder++,
+            token: 'oranguru',
+            name: 'Oranguru',
+            number: 765,
+            types: ['normal', 'psychic'],
+            baseStats: {hp: 90, phAttack: 60, phDefense: 80, spAttack: 90, spDefense: 110, speed: 60},
+            abilities: {0: 'inner-focus', 1: 'telepathy', hidden: 'symbiosis'},
+            height: 1.5,
+            weight: 76,
+            colors: ['white', 'purple', 'gray', 'green', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field']
+            },
+
         'sandygast': {
             order: indexOrder++,
             token: 'sandygast',
