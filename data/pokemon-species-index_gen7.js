@@ -1024,6 +1024,21 @@
             eggGroups: ['field']
             },
 
+        'passimian': {
+            order: indexOrder++,
+            token: 'passimian',
+            name: 'Passimian',
+            number: 766,
+            types: ['fighting'],
+            baseStats: {hp: 100, phAttack: 120, phDefense: 90, spAttack: 40, spDefense: 60, speed: 80},
+            abilities: {0: 'receiver', hidden: 'defiant'},
+            height: 2,
+            weight: 82.8,
+            colors: ['white', 'black', 'green', 'orange'],
+            eggCycles: 20,
+            eggGroups: ['field']
+            },
+
         'sandygast': {
             order: indexOrder++,
             token: 'sandygast',
