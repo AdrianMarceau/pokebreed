@@ -1205,15 +1205,15 @@
             eggCycles: 25,
             eggGroups: ['mineral'],
             nextEvolutions: [{
-                species: 'meteor-minior',
+                species: 'core-minior',
                 method: 'burst-evolution',
                 value: 'shields-down'
                 }]
             },
-        'meteor-minior': {
+        'core-minior': {
             order: indexOrder++,
-            token: 'meteor-minior',
-            name: 'Meteor Minior',
+            token: 'core-minior',
+            name: 'Core Minior',
             number: 774,
             formClass: 'burst-evolution',
             formClass2: 'random-variant',

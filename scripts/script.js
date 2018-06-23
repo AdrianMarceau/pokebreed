@@ -1286,6 +1286,7 @@
                 // The pokemon is appearing normally without any image mods
                 if (typeof info['formToken'] !== 'undefined'){ iconImage += indexInfo['number']+'-'+info['formToken']+'.png'; }
                 else if (typeof indexInfo['formToken'] !== 'undefined'){ iconImage += indexInfo['number']+'-'+indexInfo['formToken']+'.png'; }
+                else if (typeof indexInfo['baseForm'] !== 'undefined'){ iconImage += indexInfo['number']+'-'+indexInfo['baseForm']+'.png'; }
                 else { iconImage += indexInfo['number']+'.png'; }
 
                 }
