@@ -1039,6 +1039,41 @@
             eggGroups: ['field']
             },
 
+        'wimpod': {
+            order: indexOrder++,
+            token: 'wimpod',
+            name: 'Wimpod',
+            number: 767,
+            types: ['bug', 'water'],
+            baseStats: {hp: 25, phAttack: 35, phDefense: 40, spAttack: 20, spDefense: 30, speed: 80},
+            abilities: {0: 'wimp-out'},
+            height: 0.5,
+            weight: 12,
+            colors: ['gray', 'purple', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['bug', 'water-3'],
+            nextEvolutions: [{
+                species: 'golisopod',
+                method: 'level-up',
+                value: 30
+                }]
+            },
+        'golisopod': {
+            order: indexOrder++,
+            token: 'golisopod',
+            name: 'Golisopod',
+            number: 768,
+            types: ['bug', 'water'],
+            baseStats: {hp: 75, phAttack: 125, phDefense: 140, spAttack: 60, spDefense: 90, speed: 40},
+            abilities: {0: 'emergency-exit'},
+            height: 2,
+            weight: 108,
+            colors: ['gray', 'black', 'purple'],
+            eggCycles: 20,
+            eggGroups: ['bug', 'water-3'],
+            prevEvolution: 'wimpod'
+            },
+
         'sandygast': {
             order: indexOrder++,
             token: 'sandygast',
