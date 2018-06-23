@@ -1424,6 +1424,22 @@
             eggCycles: 15,
             eggGroups: ['undiscovered']
             },
+        'tapu-bulu': {
+            order: indexOrder++,
+            token: 'tapu-bulu',
+            name: 'Tapu Bulu',
+            class: 'legendary',
+            number: 787,
+            types: ['grass', 'fairy'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 70, phAttack: 130, phDefense: 115, spAttack: 85, spDefense: 95, speed: 75},
+            abilities: {0: 'grassy-surge', hidden: 'telepathy'},
+            height: 1.9,
+            weight: 45.5,
+            colors: ['red', 'black', 'yellow', 'white'],
+            eggCycles: 15,
+            eggGroups: ['undiscovered']
+            },
 
         'necrozma': {
             order: indexOrder++,
