@@ -2272,7 +2272,10 @@
         // ---
 
         // Legendary trigger relationships
-        // ---
+        {base: 'necrozma', species: 'cosmog'},
+        {base: 'necrozma', species: 'cosmoem'},
+        {base: 'necrozma', species: 'solgaleo'},
+        {base: 'necrozma', species: 'lunala'},
 
         ]);
 
