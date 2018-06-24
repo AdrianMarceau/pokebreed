@@ -1543,6 +1543,23 @@
             prevEvolution: 'cosmoem'
             },
 
+        'nihilego': {
+            order: indexOrder++,
+            token: 'nihilego',
+            name: 'Nihilego',
+            class: 'ultra-beast',
+            number: 793,
+            types: ['rock', 'poison'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 109, phAttack: 53, phDefense: 47, spAttack: 127, spDefense: 131, speed: 103},
+            abilities: {0: 'beast-boost'},
+            height: 1.2,
+            weight: 55.5,
+            colors: ['white', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
         'necrozma': {
             order: indexOrder++,
             token: 'necrozma',
