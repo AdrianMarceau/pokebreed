@@ -3215,6 +3215,26 @@
 
         //console.log('currentZoneStats(Day '+thisZoneData.day+'A) = ', currentZoneStats);
 
+        // (GEN 6+) If Zygarde Complete is on the
+        if (maxIndexKeyToLoad >= 6){
+
+            // If a Zygarde Complete is on the field, invert all stats in the name of balance
+            if (typeof currentZoneStats['species']['zygarde-complete'] !== 'undefined'
+                && currentZoneStats['species']['zygarde-complete'] > 0){
+
+                // Loop through and invert all stats as long as this pokemon is in the box
+                var typeTokens = Object.keys(currentZoneStats['types']);
+                for (var i = 0; i < typeTokens.length; i++){
+                    var typeToken = typeTokens[i];
+                    var typeValue = currentZoneStats['types'][typeToken];
+                    var isNegative = typeValue < 0 ? true : false;
+                    var newTypeValue = (typeValue * -1) * (isNegative ? 2.0 : 0.5);
+                    currentZoneStats['types'][typeToken] = newTypeValue;
+                    }
+                }
+
+            }
+
         // Loop though and re-sort all the zone stats based on their values
         //console.log('\n-----');
         var zoneStatTokens = Object.keys(currentZoneStats);
@@ -3237,6 +3257,29 @@
 
         //console.log('currentZoneStats(Day '+thisZoneData.day+'B) = ', currentZoneStats);
         //console.log('thisZoneData.currentStats = ', thisZoneData.currentStats);
+
+        // (GEN 6+) If we're in the right generation, calculate Zygarde Cell mechanics
+        currentZoneStats['typesDiff'] = 0;
+        if (maxIndexKeyToLoad >= 6){
+
+            // Check to see if Critical or Extreme type appeal are in effect
+            var typeTokens = Object.keys(currentZoneStats['types']);
+            var highTypeValue = currentZoneStats['types'][typeTokens[0]];
+            var lowTypeValue = currentZoneStats['types'][typeTokens[typeTokens.length - 1]];
+            var typeValueDiff = highTypeValue - lowTypeValue;
+            currentZoneStats['typesDiff'] = typeValueDiff;
+            //console.log('Day '+ thisZoneData.day +' | typeValueDiff = ', typeValueDiff);
+            var extremeTypeAppeal = typeValueDiff >= 250 ? true : false;
+            if (extremeTypeAppeal && currentZoneFlags.indexOf('extremeTypeAppeal') === -1){ currentZoneFlags.push('extremeTypeAppeal'); }
+            else if (!extremeTypeAppeal && currentZoneFlags.indexOf('extremeTypeAppeal') !== -1){ arrayRemoveByValue(currentZoneFlags, 'extremeTypeAppeal'); }
+            var criticalTypeAppeal = typeValueDiff >= 300 ? true : false;
+            if (criticalTypeAppeal && currentZoneFlags.indexOf('criticalTypeAppeal') === -1){ currentZoneFlags.push('criticalTypeAppeal'); }
+            else if (!criticalTypeAppeal && currentZoneFlags.indexOf('criticalTypeAppeal') !== -1){ arrayRemoveByValue(currentZoneFlags, 'criticalTypeAppeal'); }
+
+            }
+
+        //console.log('Day '+ thisZoneData.day +' | currentZoneFlags = ', currentZoneFlags);
+        //console.log('currentZoneStats(Day '+thisZoneData.day+'A) = ', currentZoneStats);
 
         // Loop through and assign the new zone stat values to the parent array
         var zoneStatTokens = Object.keys(currentZoneStats);
@@ -4453,6 +4496,15 @@
         var currentZoneStats = thisZoneData.currentStats;
         var useTypeAppeal = false;
 
+        // (GEN 6+) If we're in the right generation, calculate Zygarde Complete mechanics
+        if (maxIndexKeyToLoad >= 6){
+            // Invert the box's biome if zygarde complete is on the field
+            if (typeof currentZoneStats['species']['zygarde-complete'] !== 'undefined'
+                && currentZoneStats['species']['zygarde-complete'] > 0){
+                useTypeAppeal = true;
+                }
+            }
+
         // Count the actual Pokemon's types, not their appeal values
         if (useTypeAppeal){
             var currentTypes = currentZoneStats['types'];
@@ -4583,6 +4635,61 @@
                 && emptySpacePercent >= 90){
                 eventBoost = 80 * (emptySpacePercent / 10);
                 eventPokemonChanceBoosters['ditto'] = eventBoost;
+                }
+
+            // (GEN 6+) ZYGARDE cells and cores are summoned when type appeal conditions are too extreme
+            eventPokemonChanceBoosters['zygarde-core'] = 0;
+            eventPokemonChanceBoosters['zygarde-cell'] = 0;
+            if (maxIndexKeyToLoad >= 6){
+
+                // Check if type appeal is critical or extreme right now
+                var extremeTypeAppeal = zoneFlags.indexOf('extremeTypeAppeal') !== -1 ? true : false;
+                var criticalTypeAppeal = zoneFlags.indexOf('criticalTypeAppeal') !== -1 ? true : false;
+                //console.log('extremeTypeAppeal = ', extremeTypeAppeal);
+                //console.log('criticalTypeAppeal = ', criticalTypeAppeal);
+
+                // Cound the current number of cells and cores (in all their forms) in the box
+                var numZygardeCells = typeof zoneStats['species']['zygarde-cell'] !== 'undefined' ? zoneStats['species']['zygarde-cell'] : 0;
+                var numZygardeCores = typeof zoneStats['species']['zygarde-core'] !== 'undefined' ? zoneStats['species']['zygarde-core'] : 0;
+                if (typeof zoneStats['species']['zygarde-10-percent'] !== 'undefined'
+                    && zoneStats['species']['zygarde-10-percent'] > 0){
+                    numZygardeCores += zoneStats['species']['zygarde-10-percent'];
+                    numZygardeCells += 1 * zoneStats['species']['zygarde-10-percent'];
+                    }
+                if (typeof zoneStats['species']['zygarde-50-percent'] !== 'undefined'
+                    && zoneStats['species']['zygarde-50-percent'] > 0){
+                    numZygardeCores += zoneStats['species']['zygarde-50-percent'];
+                    numZygardeCells += 2 * zoneStats['species']['zygarde-50-percent'];
+                    }
+                if (typeof zoneStats['species']['zygarde-complete'] !== 'undefined'
+                    && zoneStats['species']['zygarde-complete'] > 0){
+                    numZygardeCores += zoneStats['species']['zygarde-complete'];
+                    numZygardeCells += 3 * zoneStats['species']['zygarde-complete'];
+                    }
+                //console.log('numZygardeCells = ', numZygardeCells);
+                //console.log('numZygardeCores = ', numZygardeCores);
+
+                // Summon cells only until there are a max of three in the box
+                if (numZygardeCores < 1
+                    && numZygardeCells < 3
+                    && (extremeTypeAppeal || criticalTypeAppeal)){
+                    //console.log('try to add a cell');
+                    eventBase = 0 + (extremeTypeAppeal ? 100 : 0) + (criticalTypeAppeal ? 100 : 0);
+                    eventBoost = 0 + (extremeTypeAppeal ? 2 : 0) + (criticalTypeAppeal ? 2 : 0);
+                    eventPokemonChanceBases['zygarde-cell'] = eventBase;
+                    eventPokemonChanceBoosters['zygarde-cell'] = eventBoost;
+                    }
+
+                // Summon a single core when at least three cells are currently in the box
+                if (numZygardeCores < 1
+                    && numZygardeCells >= 3){
+                    //console.log('try to add a core');
+                    eventBase = 100 * numZygardeCells;
+                    eventBoost = 2 * numZygardeCells;
+                    eventPokemonChanceBases['zygarde-core'] = eventBase;
+                    eventPokemonChanceBoosters['zygarde-core'] = eventBoost;
+                    }
+
                 }
 
             }
