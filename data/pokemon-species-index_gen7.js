@@ -1607,6 +1607,7 @@
             token: 'necrozma',
             name: 'Necrozma',
             class: 'legendary',
+            visitorClass: '',
             hasUltraEnergy: true,
             number: 800,
             types: ['psychic'],

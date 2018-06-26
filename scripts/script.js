@@ -3281,6 +3281,18 @@
         // (GEN 7+) If we're in the right generation, calculate Ultra Space mechanics
         if (maxIndexKeyToLoad >= 7){
 
+            // Check to see if Necrozma has appeared in the box
+            if (currentZoneFlags.indexOf('necrozmaHasAppeared') === -1){
+                var necrozmaHasAppeared = false;
+                if (typeof currentZoneStats['species']['necrozma'] !== 'undefined'
+                    && currentZoneStats['species']['necrozma'] > 0){
+                    necrozmaHasAppeared = true;
+                    }
+                if (necrozmaHasAppeared){
+                    currentZoneFlags.push('necrozmaHasAppeared');
+                    }
+                }
+
             // Check to see if Silvally has appeared in the box
             if (currentZoneFlags.indexOf('silvallyHasAppeared') === -1){
                 var silvallyHasAppeared = false;
@@ -3293,18 +3305,23 @@
                     }
                 }
 
-            // Check to see if the box has traces of Ultra Energy inside
-            if (currentZoneFlags.indexOf('boxHasUltraEnergy') === -1){
-                var ultraEnergyValue = 0;
-                for (var i = 0; i < ultraEnergySpecies.length; i++){
-                    var token = ultraEnergySpecies[i];
-                    if (typeof addedSpecies[token] !== 'undefined'){
-                        ultraEnergyValue += addedSpecies[token];
-                        }
+            // Check to see if the box has traces of Ultra Energy inside (it stays)
+            var totalUltraEnergy = 0;
+            var currentUltraEnergy = 0;
+            for (var i = 0; i < ultraEnergySpecies.length; i++){
+                var token = ultraEnergySpecies[i];
+                if (typeof addedSpecies[token] !== 'undefined'){
+                    totalUltraEnergy += addedSpecies[token];
                     }
-                if (ultraEnergyValue >= 9){
-                    currentZoneFlags.push('boxHasUltraEnergy');
+                if (typeof currentZoneStats['species'][token] !== 'undefined'){
+                    currentUltraEnergy += currentZoneStats['species'][token];
                     }
+                }
+            currentZoneStats['totalUltraEnergy'] = totalUltraEnergy;
+            currentZoneStats['currentUltraEnergy'] = currentUltraEnergy;
+            if (totalUltraEnergy > 0
+                && currentZoneFlags.indexOf('boxHasUltraEnergy') === -1){
+                currentZoneFlags.push('boxHasUltraEnergy');
                 }
 
             // Check to see if the box has a history of Ultra Beasts inside
@@ -4737,33 +4754,60 @@
 
                 }
 
-            // (GEN 7+) Type: Null are summoned when the box has too many ultra beasts (only once needed)
-            eventPokemonChanceBoosters['type-null'] = 0;
+            // (GEN 7+) Necrozma is summoned to devour the light of Lunala or Solgaleo when they appear
+            eventPokemonChanceBoosters['necrozma'] = 0;
             if (maxIndexKeyToLoad >= 7){
-                if (zoneFlags.indexOf('boxHadUltraBeasts') !== -1
-                    && (typeof addedSpecies['type-null'] === 'undefined'
-                        || addedSpecies['type-null'] < 1)){
-                    eventBoost = (thisZoneData.date.month + 1) / 12;
+                var currentLunala = typeof zoneStats['species']['lunala'] !== 'undefined' ? zoneStats['species']['lunala'] : 0;
+                var currentSolgaleo = typeof zoneStats['species']['solgaleo'] !== 'undefined' ? zoneStats['species']['solgaleo'] : 0;
+                var necrozmaAdded = typeof addedSpecies['necrozma'] !== 'undefined' ? addedSpecies['necrozma'] : 0;
+                //console.log('currentLunala = ', currentLunala);
+                //console.log('currentSolgaleo = ', currentSolgaleo);
+                //console.log('necrozmaAdded = ', necrozmaAdded);
+                if ((currentLunala + currentSolgaleo) > 0
+                    && necrozmaAdded < 1){
+                    eventBoost = ((thisZoneData.date.month + 1) / 12) + currentLunala + currentSolgaleo;
                     eventBase = 100 * eventBoost;
                     if (currentUltraBeastNum > 0){ eventBase *= (currentUltraBeastNum + 1); }
-                    eventPokemonChanceBases['type-null'] = eventBase;
-                    eventPokemonChanceBoosters['type-null'] = eventBoost;
+                    eventPokemonChanceBases['necrozma'] = eventBase;
+                    eventPokemonChanceBoosters['necrozma'] = eventBoost;
+                    //console.log('eventBoost = ', eventBoost);
+                    //console.log('eventBase = ', eventBase);
                     }
                 }
 
             // (GEN 7+) Ultra beasts are summoned when the box has too much ultra energy (and no silvally)
             eventPokemonChanceBoosters['ultra-beast'] = 0;
             if (maxIndexKeyToLoad >= 7){
-                if (currentUltraBeastNum < 1
-                    && thisZoneData.date.year >= 1
-                    && thisZoneData.date.month >= 9
-                    && zoneFlags.indexOf('boxHasUltraEnergy') !== -1
-                    && zoneFlags.indexOf('silvallyHasAppeared') === -1){
-                    eventBoost = (thisZoneData.date.month + 1) / 12;
+                var boxHasUltraEnergy = zoneFlags.indexOf('boxHasUltraEnergy') !== -1;
+                var silvallyHasAppeared = zoneFlags.indexOf('silvallyHasAppeared') !== -1;
+                var totalUltraEnergy = typeof zoneStats['totalUltraEnergy'] !== 'undefined' ? zoneStats['totalUltraEnergy'] : 0;
+                var currentUltraEnergy = typeof zoneStats['currentUltraEnergy'] !== 'undefined' ? zoneStats['currentUltraEnergy'] : 0;
+                //console.log('totalUltraEnergy = ' + totalUltraEnergy + ' | currentUltraEnergy = ' + currentUltraEnergy);
+                if (boxHasUltraEnergy
+                    && !silvallyHasAppeared
+                    && currentUltraBeastNum < 3
+                    && totalUltraEnergy >= 3
+                    && currentUltraEnergy === 0){
+                    eventBoost = ((thisZoneData.date.month + 1) / 12) + totalUltraEnergy;
                     eventBase = 100 * eventBoost;
                     if (currentUltraBeastNum > 0){ eventBoost /= (currentUltraBeastNum + 1);  }
                     eventPokemonChanceBases['ultra-beast'] = eventBase;
                     eventPokemonChanceBoosters['ultra-beast'] = eventBoost;
+                    }
+                }
+
+            // (GEN 7+) Type: Null are summoned when the box has too many ultra beasts (silvally eats them)
+            eventPokemonChanceBoosters['type-null'] = 0;
+            if (maxIndexKeyToLoad >= 7){
+                var boxHadUltraBeasts = zoneFlags.indexOf('boxHadUltraBeasts') !== -1;
+                var typeNullAdded = typeof addedSpecies['type-null'] !== 'undefined' ? addedSpecies['type-null'] : 0;
+                if (boxHadUltraBeasts
+                    && typeNullAdded < 1){
+                    eventBoost = (thisZoneData.date.month + 1) / 12;
+                    eventBase = 100 * eventBoost;
+                    if (currentUltraBeastNum > 0){ eventBase *= (currentUltraBeastNum + 1); }
+                    eventPokemonChanceBases['type-null'] = eventBase;
+                    eventPokemonChanceBoosters['type-null'] = eventBoost;
                     }
                 }
 
