@@ -1584,6 +1584,24 @@
             eggGroups: ['undiscovered']
             },
 
+        'pheromosa': {
+            order: indexOrder++,
+            token: 'pheromosa',
+            name: 'Pheromosa',
+            class: 'ultra-beast',
+            hasUltraEnergy: true,
+            number: 795,
+            types: ['bug', 'fighting'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 71, phAttack: 137, phDefense: 37, spAttack: 137, spDefense: 37, speed: 151},
+            abilities: {0: 'beast-boost'},
+            height: 1.8,
+            weight: 25,
+            colors: ['white', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
         'necrozma': {
             order: indexOrder++,
             token: 'necrozma',
