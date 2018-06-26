@@ -1493,7 +1493,7 @@
             persistentVisitor: true,
             types: ['dragon', 'ground'],
             genderRatio: {none: 1.000},
-            lifePoints: -1,
+            lifePoints: 360,
             baseStats: {hp: 6, phAttack: 10, phDefense: 8, spAttack: 7, spDefense: 9, speed: 12},
             abilities: {0: 'aura-break', hidden: 'power-construct'},
             height: 1.2,
