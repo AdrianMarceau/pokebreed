@@ -1566,6 +1566,24 @@
             eggGroups: ['undiscovered']
             },
 
+        'buzzwole': {
+            order: indexOrder++,
+            token: 'buzzwole',
+            name: 'Buzzwole',
+            class: 'ultra-beast',
+            hasUltraEnergy: true,
+            number: 794,
+            types: ['bug', 'fighting'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 107, phAttack: 139, phDefense: 139, spAttack: 53, spDefense: 53, speed: 79},
+            abilities: {0: 'beast-boost'},
+            height: 2.4,
+            weight: 333.6,
+            colors: ['red', 'black', 'gray'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
         'necrozma': {
             order: indexOrder++,
             token: 'necrozma',
