@@ -858,6 +858,24 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
+    position: relative;
+}
+.panel .overview.types .title .delta {
+    display: block;
+    text-align: center;
+    position: absolute;
+    bottom: 4px;
+    left: 0;
+    right: 0;
+    font-size: 10px;
+    line-height: 10px;
+    font-weight: normal;
+    color: #8bec72;
+}
+.panel .overview.types .title .delta:before {
+    /*content: "\1d6ab";*/
+    content: "Z";
+    content: "\1d419";
 }
 .panel .overview.types .title .subs,
 .panel .overview.species .title .subs,

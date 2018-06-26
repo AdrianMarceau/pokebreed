@@ -163,6 +163,7 @@ if (isset($_GET['gen'])
                     <div class="details stats">
                         <div class="title">
                             <strong class="main">Type Appeal</strong>
+                            <span class="delta"></span>
                         <div class="subs">
                             <strong class="sub attract">Attract</strong>
                             <strong class="sub repel">Repel</strong>
