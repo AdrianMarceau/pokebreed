@@ -3278,6 +3278,51 @@
 
             }
 
+        // (GEN 7+) If we're in the right generation, calculate Ultra Space mechanics
+        if (maxIndexKeyToLoad >= 7){
+
+            // Check to see if Silvally has appeared in the box
+            if (currentZoneFlags.indexOf('silvallyHasAppeared') === -1){
+                var silvallyHasAppeared = false;
+                if (typeof currentZoneStats['species']['silvally'] !== 'undefined'
+                    && currentZoneStats['species']['silvally'] > 0){
+                    silvallyHasAppeared = true;
+                    }
+                if (silvallyHasAppeared){
+                    currentZoneFlags.push('silvallyHasAppeared');
+                    }
+                }
+
+            // Check to see if the box has traces of Ultra Energy inside
+            if (currentZoneFlags.indexOf('boxHasUltraEnergy') === -1){
+                var ultraEnergyValue = 0;
+                for (var i = 0; i < ultraEnergySpecies.length; i++){
+                    var token = ultraEnergySpecies[i];
+                    if (typeof addedSpecies[token] !== 'undefined'){
+                        ultraEnergyValue += addedSpecies[token];
+                        }
+                    }
+                if (ultraEnergyValue >= 9){
+                    currentZoneFlags.push('boxHasUltraEnergy');
+                    }
+                }
+
+            // Check to see if the box has a history of Ultra Beasts inside
+            if (currentZoneFlags.indexOf('boxHadUltraBeasts') === -1){
+                var ultraBeastValue = 0;
+                for (var i = 0; i < ultraBeastSpecies.length; i++){
+                    var token = ultraBeastSpecies[i];
+                    if (typeof addedSpecies[token] !== 'undefined'){
+                        ultraBeastValue += addedSpecies[token];
+                        }
+                    }
+                if (ultraBeastValue >= 3){
+                    currentZoneFlags.push('boxHadUltraBeasts');
+                    }
+                }
+
+            }
+
         //console.log('Day '+ thisZoneData.day +' | currentZoneFlags = ', currentZoneFlags);
         //console.log('currentZoneStats(Day '+thisZoneData.day+'A) = ', currentZoneStats);
 
@@ -4690,6 +4735,36 @@
                     eventPokemonChanceBoosters['zygarde-core'] = eventBoost;
                     }
 
+                }
+
+            // (GEN 7+) Type: Null are summoned when the box has too many ultra beasts (only once needed)
+            eventPokemonChanceBoosters['type-null'] = 0;
+            if (maxIndexKeyToLoad >= 7){
+                if (zoneFlags.indexOf('boxHadUltraBeasts') !== -1
+                    && (typeof addedSpecies['type-null'] === 'undefined'
+                        || addedSpecies['type-null'] < 1)){
+                    eventBoost = (thisZoneData.date.month + 1) / 12;
+                    eventBase = 100 * eventBoost;
+                    if (currentUltraBeastNum > 0){ eventBase *= (currentUltraBeastNum + 1); }
+                    eventPokemonChanceBases['type-null'] = eventBase;
+                    eventPokemonChanceBoosters['type-null'] = eventBoost;
+                    }
+                }
+
+            // (GEN 7+) Ultra beasts are summoned when the box has too much ultra energy (and no silvally)
+            eventPokemonChanceBoosters['ultra-beast'] = 0;
+            if (maxIndexKeyToLoad >= 7){
+                if (currentUltraBeastNum < 1
+                    && thisZoneData.date.year >= 1
+                    && thisZoneData.date.month >= 9
+                    && zoneFlags.indexOf('boxHasUltraEnergy') !== -1
+                    && zoneFlags.indexOf('silvallyHasAppeared') === -1){
+                    eventBoost = (thisZoneData.date.month + 1) / 12;
+                    eventBase = 100 * eventBoost;
+                    if (currentUltraBeastNum > 0){ eventBoost /= (currentUltraBeastNum + 1);  }
+                    eventPokemonChanceBases['ultra-beast'] = eventBase;
+                    eventPokemonChanceBoosters['ultra-beast'] = eventBoost;
+                    }
                 }
 
             }
