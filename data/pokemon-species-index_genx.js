@@ -300,6 +300,29 @@
                 }]
             },
 
+        'baby-goldeen': {
+            order: thisIndex.beforeOrder('goldeen'),
+            token: 'baby-goldeen',
+            name: 'Baby Goldeen',
+            class: 'baby',
+            formClass: 'baby-evolution',
+            formToken: 'baby',
+            number: 118,
+            types: ['water'],
+            baseStats: {hp: 23, phAttack: 34, phDefense: 30, spAttack: 18, spDefense: 25, speed: 32},
+            abilities: {0: 'swift-swim', 1: 'water-veil', hidden: 'lightning-rod'},
+            height: 0.6,
+            weight: 15,
+            colors: ['red', 'orange', 'white'],
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'goldeen',
+                method: 'level-up',
+                value: 17
+                }]
+            },
+
         'ms-mime': {
             order: thisIndex.afterOrder('mr-mime'),
             token: 'ms-mime',
@@ -354,6 +377,7 @@
         {base: 'grimer', species: 'baby-grimer', method: 'type-surge', value: 'poison'},
         {base: 'alolan-grimer', species: 'baby-alolan-grimer', method: 'type-surge', value: 'poison'},
         {base: 'tangela', species: 'baby-tangela', method: 'type-surge', value: 'grass'},
+        {base: 'goldeen', species: 'baby-goldeen', method: 'type-surge', value: 'water'},
         ]);
 
     // Update previous gen pokemon with new prev evolution data
