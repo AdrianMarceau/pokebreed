@@ -1656,6 +1656,24 @@
             eggGroups: ['undiscovered']
             },
 
+        'guzzlord': {
+            order: indexOrder++,
+            token: 'guzzlord',
+            species: 'Guzzlord',
+            class: 'ultra-beast',
+            hasUltraEnergy: true,
+            number: 799,
+            types: ['dark', 'dragon'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 223, phAttack: 101, phDefense: 53, spAttack: 97, spDefense: 53, speed: 43},
+            abilities: {0: 'beast-boost'},
+            height: 5.5,
+            weight: 888,
+            colors: ['black', 'yellow', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
         'necrozma': {
             order: indexOrder++,
             token: 'necrozma',
