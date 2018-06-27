@@ -1720,6 +1720,25 @@
             prevEvolution: 'poipole'
             },
 
+        'stakataka': {
+            order: indexOrder++,
+            token: 'stakataka',
+            name: 'Stakataka',
+            class: 'ultra-beast',
+            hasUltraEnergy: true,
+            number: 805,
+            sortNumber: 799.3,
+            types: ['rock', 'steel'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 61, phAttack: 131, phDefense: 211, spAttack: 53, spDefense: 101, speed: 13},
+            abilities: {0: 'beast-boost'},
+            height: 5.5,
+            weight: 820,
+            colors: ['gray', 'black', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
         'necrozma': {
             order: indexOrder++,
             token: 'necrozma',
