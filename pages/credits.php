@@ -36,7 +36,7 @@
                 <strong>Ageman20XX / Adrian Marceau</strong><br />
                 <a href="http://plutolighthouse.net/" target="_blank">http://plutolighthouse.net/</a><br />
                 <em>
-                    Baby Meowth, Baby Grimer, Baby Kangaskhan,
+                    Baby Meowth, Baby Grimer, Baby Kangaskhan, Baby Maractus,
                     Estrus Nidoqueen, Burst Machamp, Frilled Heliolisk, Zenith Marshadow,
                     Snow Burmy, Snow Wormadam, Bubble Burmy, Bubble Wormadam,
                     Pumpkaboo Sizes (x4), Gourgeist Sizes (x4),
