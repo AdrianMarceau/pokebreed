@@ -176,6 +176,29 @@
                 }]
             },
 
+        'baby-doduo': {
+            order: thisIndex.beforeOrder('doduo'),
+            token: 'baby-doduo',
+            name: 'Baby Doduo',
+            class: 'baby',
+            formClass: 'baby-evolution',
+            formToken: 'baby',
+            number: 84,
+            types: ['normal', 'flying'],
+            baseStats: {hp: 18, phAttack: 43, phDefense: 23, spAttack: 18, spDefense: 18, speed: 37},
+            abilities: {0: 'run-away', 1: 'early-bird', hidden: 'tangled-feet'},
+            height: 1.4,
+            weight: 39.2,
+            colors: ['brown', 'white'],
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'doduo',
+                method: 'level-up',
+                value: 16
+                }]
+            },
+
         'baby-grimer': {
             order: thisIndex.beforeOrder('grimer'),
             token: 'baby-grimer',
@@ -327,6 +350,7 @@
         {base: 'alolan-meowth', species: 'baby-alolan-meowth', method: 'type-surge', value: 'dark'},
         {base: 'growlithe', species: 'baby-growlithe', method: 'type-surge', value: 'fire'},
         {base: 'ponyta', species: 'baby-ponyta', method: 'type-surge', value: 'fire'},
+        {base: 'doduo', species: 'baby-doduo', method: 'type-surge', value: 'normal'},
         {base: 'grimer', species: 'baby-grimer', method: 'type-surge', value: 'poison'},
         {base: 'alolan-grimer', species: 'baby-alolan-grimer', method: 'type-surge', value: 'poison'},
         {base: 'tangela', species: 'baby-tangela', method: 'type-surge', value: 'grass'},
