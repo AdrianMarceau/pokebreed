@@ -582,6 +582,12 @@
                     nationalDexNumbers.push(indexInfo.number);
                     }
 
+                // Use the national dex number if not explicitly provided
+                if (typeof indexInfo.number !== 'undefined'
+                    && typeof indexInfo.sortNumber === 'undefined'){
+                    indexInfo.sortNumber = indexInfo.number;
+                    }
+
                 // If class or formClass are not set, create them as empty strings
                 if (typeof indexInfo.class === 'undefined'){ indexInfo.class = ''; }
                 if (typeof indexInfo.formClass === 'undefined'){ indexInfo.formClass = ''; }
@@ -681,8 +687,8 @@
                 var basicA = tokenA === infoA.basicEvolution ? true : false;
                 var basicB = tokenB === infoB.basicEvolution ? true : false;
 
-                var baseNumA = baseInfoA['number'];
-                var baseNumB = baseInfoB['number'];
+                var baseNumA = baseInfoA['sortNumber'];
+                var baseNumB = baseInfoB['sortNumber'];
                 if (typeof baseInfoA['subNumber'] !== 'undefined'){ baseNumA += (baseInfoA['subNumber'] / 10); }
                 if (typeof baseInfoB['subNumber'] !== 'undefined'){ baseNumB += (baseInfoB['subNumber'] / 10); }
 
@@ -756,8 +762,8 @@
                 var basicA = tokenA === infoA.basicEvolution ? true : false;
                 var basicB = tokenB === infoB.basicEvolution ? true : false;
 
-                var baseNumA = baseInfoA['number'];
-                var baseNumB = baseInfoB['number'];
+                var baseNumA = baseInfoA['sortNumber'];
+                var baseNumB = baseInfoB['sortNumber'];
                 if (typeof baseInfoA['subNumber'] !== 'undefined'){ baseNumA += (baseInfoA['subNumber'] / 10); }
                 if (typeof baseInfoB['subNumber'] !== 'undefined'){ baseNumB += (baseInfoB['subNumber'] / 10); }
 
@@ -5271,8 +5277,8 @@
     // Define a function for sorting species token by index number
     function sortSpeciesTokensByNumber(speciesTokens, reverseOrder){
         speciesTokens.sort(function(tokenA, tokenB){
-            var indexNumA = PokemonSpeciesIndex[tokenA]['number'];
-            var indexNumB = PokemonSpeciesIndex[tokenB]['number'];
+            var indexNumA = PokemonSpeciesIndex[tokenA]['sortNumber'];
+            var indexNumB = PokemonSpeciesIndex[tokenB]['sortNumber'];
             var reverse = reverseOrder ? -1 : 1;
             if (indexNumA < indexNumB){ return -1 * reverse; }
             else if (indexNumA > indexNumB){ return 1 * reverse; }
