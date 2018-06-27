@@ -363,6 +363,29 @@
             buttonGeneration: 1
             },
 
+        'baby-maractus': {
+            order: thisIndex.beforeOrder('maractus'),
+            token: 'baby-maractus',
+            name: 'Baby Maractus',
+            class: 'baby',
+            formClass: 'baby-evolution',
+            formToken: 'baby',
+            number: 556,
+            types: ['grass'],
+            baseStats: {hp: 38, phAttack: 43, phDefense: 34, spAttack: 53, spDefense: 34, speed: 30},
+            abilities: {0: 'water-absorb', 1: 'chlorophyll', hidden: 'storm-drain'},
+            height: 1,
+            weight: 28,
+            colors: ['green', 'pink', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'maractus',
+                method: 'level-up',
+                value: 10
+                }]
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
@@ -378,6 +401,7 @@
         {base: 'alolan-grimer', species: 'baby-alolan-grimer', method: 'type-surge', value: 'poison'},
         {base: 'tangela', species: 'baby-tangela', method: 'type-surge', value: 'grass'},
         {base: 'goldeen', species: 'baby-goldeen', method: 'type-surge', value: 'water'},
+        {base: 'maractus', species: 'baby-maractus', method: 'type-surge', value: 'grass'},
         ]);
 
     // Update previous gen pokemon with new prev evolution data
