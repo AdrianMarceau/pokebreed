@@ -55,7 +55,7 @@
                 <strong>PTGigi</strong><br />
                 <a href="http://ptgigi.com/" target="_blank">http://ptgigi.com/</a><br />
                 <em>
-                    Baby Tangela, Baby Doduo, Baby Goldeen *
+                    Baby Tangela, Baby Doduo *, Baby Goldeen *
                 </em>
             </li>
             <li>
