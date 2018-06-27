@@ -2270,6 +2270,17 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 .panel .buttons .info[data-tab="credits"] {
 
 }
+.panel .buttons .info[data-tab="credits"] li {
+    margin: 0 auto 10px;
+}
+.panel .buttons .info[data-tab="credits"] li em {
+    color: #c7c7c7;
+    display: block;
+    font-size: 85%;
+    line-height: 1.6;
+    letter-spacing: 1px;
+}
+
 
 .panel .buttons .info.links .link.pokedex {
     float: left;

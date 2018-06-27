@@ -33,16 +33,36 @@
         </p>
         <ul>
             <li>
-                <strong>Baby Ponyta & Baby Growlithe</strong> by <strong>@Corvos / C. Tyler Corbett</strong>
+                <strong>Ageman20XX / Adrian Marceau</strong><br />
+                <a href="http://plutolighthouse.net/" target="_blank">http://plutolighthouse.net/</a><br />
+                <em>
+                    Baby Meowth, Baby Grimer, Baby Kangaskhan,
+                    Estrus Nidoqueen, Burst Machamp, Frilled Heliolisk, Zenith Marshadow,
+                    Snow Burmy, Snow Wormadam, Bubble Burmy, Bubble Wormadam,
+                    Pumpkaboo Sizes (x4), Gourgeist Sizes (x4),
+                    Spinda Patterns (x6), Kecleon Colours (x11), Genesect Drives (x5), Silvally Types (x18),
+                    Ms. Mime, Hippopotas (F), Hippowdon (F), Shiny Ditto
+                </em>
             </li>
             <li>
-                <strong>Baby Tangela</strong> by <strong>@PTGigi</strong> (<a href="http://ptgigi.com/" target="_blank">http://ptgigi.com/</a>)
+                <strong>Corvos / C. Tyler Corbett</strong><br />
+                <em>
+                    Baby Ponyta, Baby Growlithe,
+                    Zygarde Cell, Zygarde Core
+                </em>
             </li>
             <li>
-                <strong>Baby Paras</strong> by <strong>@MBM / MegaBossMan</strong>
+                <strong>PTGigi</strong><br />
+                <a href="http://ptgigi.com/" target="_blank">http://ptgigi.com/</a><br />
+                <em>
+                    Baby Tangela
+                </em>
             </li>
             <li>
-                <strong>Baby Kangaskhan, Baby Grimer, Baby Meowth</strong> by <strong>@Ageman20XX / Adrian Marceau</strong> (<a href="http://plutolighthouse.net/" target="_blank">http://plutolighthouse.net/</a>)
+                <strong>MBM / MegaBossMan</strong> <br />
+                <em>
+                    Baby Paras
+                </em>
             </li>
         </ul>
     </div>
