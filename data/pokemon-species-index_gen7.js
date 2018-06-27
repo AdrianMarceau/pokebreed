@@ -1620,6 +1620,24 @@
             eggGroups: ['undiscovered']
             },
 
+        'celesteela': {
+            order: indexOrder++,
+            token: 'celesteela',
+            name: 'Celesteela',
+            class: 'ultra-beast',
+            hasUltraEnergy: true,
+            number: 797,
+            types: ['steel', 'flying'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 97, phAttack: 101, phDefense: 103, spAttack: 107, spDefense: 101, speed: 61},
+            abilities: {0: 'beast-boost'},
+            height: 9.2,
+            weight: 999.9,
+            colors: ['green', 'gray', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
         'necrozma': {
             order: indexOrder++,
             token: 'necrozma',
