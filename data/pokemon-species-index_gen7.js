@@ -1739,6 +1739,25 @@
             eggGroups: ['undiscovered']
             },
 
+        'blacephalon': {
+            order: indexOrder++,
+            token: 'blacephalon',
+            name: 'Blacephalon',
+            class: 'ultra-beast',
+            hasUltraEnergy: true,
+            number: 806,
+            sortNumber: 799.4,
+            types: ['fire', 'ghost'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 53, phAttack: 127, phDefense: 53, spAttack: 151, spDefense: 79, speed: 107},
+            abilities: {0: 'beast-boost'},
+            height: 1.8,
+            weight: 13,
+            colors: ['white', 'yellow', 'blue', 'pink'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
         'necrozma': {
             order: indexOrder++,
             token: 'necrozma',
