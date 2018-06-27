@@ -55,15 +55,16 @@
                 <strong>PTGigi</strong><br />
                 <a href="http://ptgigi.com/" target="_blank">http://ptgigi.com/</a><br />
                 <em>
-                    Baby Tangela
+                    Baby Tangela, Baby Doduo, Baby Goldeen *
                 </em>
             </li>
             <li>
                 <strong>MBM / MegaBossMan</strong> <br />
                 <em>
-                    Baby Paras
+                    Baby Paras *
                 </em>
             </li>
         </ul>
+        <p style="font-size: 10px; color: #7a7a7a;">* Minor edits by Ageman20XX</p>
     </div>
 </div>
