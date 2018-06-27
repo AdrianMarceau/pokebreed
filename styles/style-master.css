@@ -860,6 +860,7 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     border-radius: 3px;
     position: relative;
 }
+
 .panel .overview.types .title .delta {
     display: block;
     text-align: center;
@@ -870,13 +871,52 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     font-size: 10px;
     line-height: 10px;
     font-weight: normal;
+    color: #cacaca;
+}
+.panel .overview.types .title .delta > div {
+    display: inline-block;
+    margin: 0 auto;
+    width: auto;
+}
+.panel .overview.types .title .delta .icon {
+    display: inline-block;
+    width: 8px;
+    height: 10px;
+    vertical-align: middle;
+    position: relative;
+    margin-right: 2px;
+}
+.panel .overview.types .title .delta .icon i {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    text-align: center;
+    font-style: normal;
+}
+.panel .overview.types .title .delta .icon i:before {
+    content: "";
+}
+.panel .overview.types .title .delta .icon i.d {
+    z-index: 2;
+    opacity: 1.0;
+}
+.panel .overview.types .title .delta .icon i.d:before {
+    content: "\1d6ab";
+    color: #969696;
+}
+.panel .overview.types .title .delta .icon i.z {
+    z-index: 1;
+    opacity: 0.0;
+}
+.panel .overview.types .title .delta .icon i.z:before {
+    content: "\1d419";
     color: #8bec72;
 }
-.panel .overview.types .title .delta:before {
-    /*content: "\1d6ab";*/
-    content: "Z";
-    content: "\1d419";
+.panel .overview.types .title .delta .percent {
+    display: inline-block;
 }
+
 .panel .overview.types .title .subs,
 .panel .overview.species .title .subs,
 .panel .overview.visitors .title .subs {

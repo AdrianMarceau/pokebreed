@@ -766,6 +766,11 @@
                 if (tokenA === 'ditto'){ dittoA = true; }
                 if (tokenB === 'ditto'){ dittoB = true; }
 
+                var zygardeA = false;
+                var zygardeB = false;
+                if (tokenA.indexOf('zygarde') !== -1){ zygardeA = true; }
+                if (tokenB.indexOf('zygarde') !== -1){ zygardeB = true; }
+
                 var shinyDittoA = false;
                 var shinyDittoB = false;
                 if (tokenA === 'shiny-ditto'){ shinyDittoA = true; }
@@ -794,6 +799,9 @@
                 if (infoB['formClass'] === 'gender-variant' && typeof infoB['prevEvolution'] === 'undefined'){ genderVariantB = true; }
 
                 if (false){ return 0; }
+
+                else if (zygardeA && !zygardeB){ return 1; }
+                else if (!zygardeA && zygardeB){ return -1; }
 
                 else if (dittoA && !dittoB){ return 1; }
                 else if (!dittoA && dittoB){ return -1; }
@@ -2481,16 +2489,30 @@
         $('.zone .date .data', $panelMainOverview).text(dateString);
         $('.zone .capacity .data', $panelMainOverview).text(thisZoneData.currentPokemon.length + ' / ' + thisZoneData.capacity);
 
-        // Update the type delta if it's been set and non zero
-        var deltaValue = thisZoneData.currentStats.typesDiff / 300;
-        var deltaPercent = Math.round(deltaValue * 100);
-        if (thisZoneData.currentStats.typesDiff >= 250){
-            var diffOver = thisZoneData.currentStats.typesDiff - 250;
-            if (diffOver >= 50){ deltaOpacity = 1; }
-            else { deltaOpacity = (diffOver / 50); }
-            $('.stats .delta', $panelTypesOverview).css({opacity:deltaOpacity});
-            } else {
-            $('.stats .delta', $panelTypesOverview).css({opacity:0});
+        // Update the difference (delta) between the two type appeal extremes
+        var currentTypesDiff = Math.round(thisZoneData.currentStats.typesDiff);
+        $('.stats .delta .percent', $panelTypesOverview).html(currentTypesDiff);
+
+        // (GEN 6+) If we're in the right generation, calculate Z-Power mechanics
+        if (maxIndexKeyToLoad >= 6){
+
+            // Calculate and highlight Z power if the value is high enough
+            var zPowerMin = 250;
+            var zPowerMax = 300;
+            var zPowerDiff = zPowerMax - zPowerMin;
+            var zPowerValue = currentTypesDiff / zPowerMax;
+            var zPowerPercent = Math.round(zPowerValue * 100);
+            if (currentTypesDiff >= zPowerMin){
+                var diffOver = currentTypesDiff - zPowerMin;
+                if (diffOver >= zPowerDiff){ deltaOpacity = 1; }
+                else { deltaOpacity = (diffOver / zPowerDiff); }
+                $('.stats .delta .z', $panelTypesOverview).css({opacity:(deltaOpacity)});
+                $('.stats .delta .d', $panelTypesOverview).css({opacity:(1 - deltaOpacity)});
+                } else {
+                $('.stats .delta .d', $panelTypesOverview).css({opacity:1});
+                $('.stats .delta .z', $panelTypesOverview).css({opacity:0});
+                }
+
             }
 
         // Loop though and count population by types & species
@@ -3215,7 +3237,7 @@
 
         //console.log('currentZoneStats(Day '+thisZoneData.day+'A) = ', currentZoneStats);
 
-        // (GEN 6+) If Zygarde Complete is on the
+        // (GEN 6+) If we're in the right generation, calculate Zygarde Complete mechanics
         if (maxIndexKeyToLoad >= 6){
 
             // If a Zygarde Complete is on the field, invert all stats in the name of balance
