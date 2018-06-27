@@ -184,7 +184,7 @@
             formClass: 'baby-evolution',
             formToken: 'baby',
             number: 84,
-            types: ['normal', 'flying'],
+            types: ['normal'],
             baseStats: {hp: 18, phAttack: 43, phDefense: 23, spAttack: 18, spDefense: 18, speed: 37},
             abilities: {0: 'run-away', 1: 'early-bird', hidden: 'tangled-feet'},
             height: 1.4,
