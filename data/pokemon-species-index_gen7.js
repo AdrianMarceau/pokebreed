@@ -1638,6 +1638,24 @@
             eggGroups: ['undiscovered']
             },
 
+        'kartana': {
+            order: indexOrder++,
+            token: 'kartana',
+            name: 'Kartana',
+            class: 'ultra-beast',
+            hasUltraEnergy: true,
+            number: 798,
+            types: ['grass', 'steel'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 59, phAttack: 181, phDefense: 131, spAttack: 59, spDefense: 31, speed: 109},
+            abilities: {0: 'beast-boost'},
+            height: 0.3,
+            weight: 0.1,
+            colors: ['white', 'yellow', 'orange'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
         'necrozma': {
             order: indexOrder++,
             token: 'necrozma',
