@@ -4282,6 +4282,8 @@
         if (thisZoneData.currentPokemon.length >= thisZoneData.capacity){ return false; }
 
         // Check to see if we're at high (95%) zone capacity already
+        var currentZoneStats = thisZoneData.currentStats;
+        var currentTypeStats = currentZoneStats['types'];
         var zoneCapacityPercent = ((thisZoneData.currentPokemon.length / thisZoneData.capacity) * 100);
         var zoneIsOvercrowded = zoneCapacityPercent >= 95 ? true : false;
         //console.log('zoneCapacityPercent = ', zoneCapacityPercent);
@@ -4534,27 +4536,65 @@
                 //console.log('(eggsAddedCount('+eggsAddedCount+') < eggsToAddCount('+eggsToAddCount+')) && (thisZoneData.currentPokemon.length('+thisZoneData.currentPokemon.length+') < thisZoneData.capacity('+thisZoneData.capacity+'))');
                 //console.log('eggsToAddIndex = ', eggsToAddIndex);
                 for (var key = 0; key < eggsToAddIndexTokens.length; key++){
-                    var pokeToken = eggsToAddIndexTokens[key];
-                    // Check again to see if we're at overcrowded capacity
-                    zoneCapacityPercent = ((thisZoneData.currentPokemon.length / thisZoneData.capacity) * 100);
-                    zoneIsOvercrowded = zoneCapacityPercent >= 95 ? true : false;
-                    //console.log('zoneCapacityPercent = ', zoneCapacityPercent);
-                    //console.log('zoneIsOvercrowded = ', zoneIsOvercrowded);
                     //console.log('eggsToAddIndex[pokeToken] = ', pokeToken, eggsToAddIndex[pokeToken]);
-                    if (zoneIsOvercrowded){
+
+                    // Collect the token and index data for the new baby
+                    var pokeToken = eggsToAddIndexTokens[key];
+                    var pokeIndex = PokemonSpeciesIndex[pokeToken];
+                    var allowEgg = true;
+
+                    // Check again to see if we're at overcrowded capacity
+                    if (allowEgg){
+                        zoneCapacityPercent = ((thisZoneData.currentPokemon.length / thisZoneData.capacity) * 100);
+                        zoneIsOvercrowded = zoneCapacityPercent >= 95 ? true : false;
+                        //console.log('zoneCapacityPercent = ', zoneCapacityPercent);
+                        //console.log('zoneIsOvercrowded = ', zoneIsOvercrowded);
+                        if (zoneIsOvercrowded){ allowEgg = false; }
+                        }
+
+                    // Check to see if this species is not appropriate for this zone
+                    if (allowEgg){
+                        var appealPoints = 0;
+                        var minAppealRequired = pokeIndex.eggCycles * -1;
+                        //console.log('\n-----');
+                        //console.log(pokeToken + ' | minAppealRequired = ' + minAppealRequired + ' | appealPoints = ' + appealPoints);
+                        for (var i = 0; i < pokeIndex.types.length; i++){
+                            var type = pokeIndex.types[i];
+                            if (typeof currentTypeStats[type] !== 'undefined'){
+                                //console.log('appealPoints('+appealPoints+') += currentTypeStats['+type+']('+currentTypeStats[type]+');');
+                                appealPoints += currentTypeStats[type];
+                                }
+                            }
+                        //console.log(pokeToken + ' | minAppealRequired = ' + minAppealRequired + ' | appealPoints = ' + appealPoints);
+                        if (appealPoints < minAppealRequired){ allowEgg = false; }
+                        }
+
+                    // Delete eggs for this species if not allowed, else proceed with creation normally
+                    if (!allowEgg){
+
+                        // Delete the egg from the index completely
                         eggsToAddIndex[pokeToken] = 0;
                         delete eggsToAddIndex[pokeToken];
+
                         } else if (eggsToAddIndex[pokeToken] > 0){
+
+                        // Check to Shiny Ditto reductions and then add new egg to the zone
                         if (existingShinyDitto > 0){ addPokemonToZone(pokeToken, true, existingShinyDitto); }
                         else { addPokemonToZone(pokeToken, true); }
+
+                        // Increment the egg count and delete from index if now empty
                         eggsAddedCount++;
                         eggsToAddIndex[pokeToken] -= 1;
                         if (eggsToAddIndex[pokeToken] == 0){
                             delete eggsToAddIndex[pokeToken];
                             }
+
                         }
+
+                    // Break if index is empty or zone is now overcrowded
                     if (jQuery.isEmptyObject(eggsToAddIndex)){ break; }
                     else if (zoneIsOvercrowded){ break; }
+
                     }
                 }
 
