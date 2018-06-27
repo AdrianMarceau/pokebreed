@@ -1602,6 +1602,24 @@
             eggGroups: ['undiscovered']
             },
 
+        'xurkitree': {
+            order: indexOrder++,
+            token: 'xurkitree',
+            name: 'Xurkitree',
+            class: 'ultra-beast',
+            hasUltraEnergy: true,
+            number: 796,
+            types: ['electric'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 83, phAttack: 89, phDefense: 71, spAttack: 173, spDefense: 71, speed: 83},
+            abilities: {0: 'beast-boost'},
+            height: 3.8,
+            weight: 100,
+            colors: ['black', 'white', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
         'necrozma': {
             order: indexOrder++,
             token: 'necrozma',
