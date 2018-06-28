@@ -1726,7 +1726,14 @@
             // We're ready to show the filter panel now too (and reset more buttons)
             $thisFilterWrapper.removeClass('hidden');
             $('.button.enter-seed', $thisFilterWrapper).removeClass('disabled');
-            $('.button.add-ditto', $pokePanelFilters).removeClass('disabled');
+
+            // If we've seen ditto by now, we can show the button, else keep hidden
+            if (typeof PokemonSpeciesSeen['ditto'] !== 'undefined'
+                || PokemonSpeciesSeen['ditto'] > 0){
+                $('.button.add-ditto', $pokePanelFilters).removeClass('hidden');
+                } else {
+                $('.button.add-ditto', $pokePanelFilters).addClass('hidden');
+                }
 
             }, 0);
 
