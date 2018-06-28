@@ -3978,15 +3978,35 @@
                         if (methodToken === 'fusion-species'
                             && typeof thisZoneData.currentStats['species'][methodValue] !== 'undefined'
                             && thisZoneData.currentStats['species'][methodValue] > 0){
+
                             // If the previous method was unsuccessful, return now
                             if (methodNum > 1 && prevChanceValue === 0){ return 0; }
+                            //console.log('pokemonInfo.token = ', pokemonInfo.token);
+                            //console.log('methodToken = ', methodToken);
+                            //console.log('methodValue = ', methodValue);
+                            //console.log('methodNum = ', methodNum);
+                            //console.log('prevChanceValue = ', prevChanceValue);
+
                             // Find a copy of the other species to merge with, then remove it from play
                             var possibleFusions = getZonePokemonByToken(methodValue);
                             possibleFusions.sort(function(a, b){ return a.growthCycles > b.growthCycles ? -1 : (a.growthCycles < b.growthCycles ? 1 : 0); });
+                            //console.log('possibleFusions = ', possibleFusions);
+
+                            // Collect the fusion pokemon if set
                             var fusionPokemon = possibleFusions[0];
-                            //removePokemonByID(fusionPokemon.id);
-                            fusionPokemonToBeRemoved = fusionPokemon;
-                            return 1 + thisZoneData.currentStats['species'][methodValue];
+                            //console.log('fusionPokemon = ', fusionPokemon);
+                            if (fusionPokemon.id === pokemonInfo.id){
+                                if (possibleFusions.length > 1){ fusionPokemon = possibleFusions[1]; }
+                                else { fusionPokemon = false; }
+                                //console.log('fusionPokemon(B) = ', fusionPokemon);
+                                }
+
+                            // If a fusion was collected, return now
+                            if (fusionPokemon !== false){
+                                fusionPokemonToBeRemoved = fusionPokemon;
+                                return 1 + thisZoneData.currentStats['species'][methodValue];
+                                }
+
                             }
 
                         // Extinction-based evolutions trigger when this pokemon is the last  of its species

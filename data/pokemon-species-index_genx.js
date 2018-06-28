@@ -429,7 +429,7 @@
         {base: 'mime-jr', species: 'mr-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'male', method3: 'level-up', value3: 25, replace: true},
         {base: 'mime-jr', species: 'ms-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'female', method3: 'level-up', value3: 25},
 
-        {base: 'ditto', species: 'super-ditto', method: 'level-up', value: 2, method2: 'fusion-species', value2: 'ditto', switch: 'and'},
+        {base: 'ditto', species: 'super-ditto', method: 'level-up', value: 10, method2: 'fusion-species', value2: 'ditto', switch: 'and'},
 
         ]);
 
