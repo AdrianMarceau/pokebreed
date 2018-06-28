@@ -1855,6 +1855,9 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 .panel .buttons .filter-pokemon .button.enter-seed:before {
     background-image: url(../images/icons/controls/link.png);
 }
+.panel .buttons .filter-pokemon .button.add-ditto:before {
+    background-image: url(../images/icons/controls/ditto.png);
+}
 
 .panel .buttons .controls .control.pause {
     margin-right: 18px;
