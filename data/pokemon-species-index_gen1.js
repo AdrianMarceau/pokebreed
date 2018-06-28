@@ -2423,7 +2423,7 @@
             abilities: {0: 'limber', hidden: 'imposter'},
             height: 0.3,
             weight: 4,
-            colors: ['pink', 'purple'],
+            colors: ['purple'],
             eggCycles: 20,
             eggGroups: ['ditto']
             },

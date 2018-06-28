@@ -352,13 +352,13 @@
             formToken: 'super',
             number: 132,
             types: ['normal'],
-            lifePoints: 360,
             genderRatio: {none: 1.000},
+            lifePoints: 360,
             baseStats: {hp: 48, phAttack: 48, phDefense: 48, spAttack: 48, spDefense: 48, speed: 48},
             abilities: {0: 'limber'}, // hidden: 'imposter' [removed]
             height: 0.3,
             weight: 4,
-            colors: ['blue'],
+            colors: ['purple'],
             eggCycles: 20,
             eggGroups: ['ditto'],
             prevEvolution: 'ditto'

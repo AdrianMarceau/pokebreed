@@ -534,7 +534,6 @@
 
                 });
 
-
             });
 
         // Define a click event for the starter seed entry button
@@ -543,6 +542,16 @@
             // If the box is empty, allow starter seed entry
             if (thisZoneData.currentPokemon.length === 0){
                 triggerStarterSeedPrompt();
+                }
+            });
+
+        // Define a click event for the add ditto quick button
+        $('.button.add-ditto', $pokePanelFilters).bind('click', function(e){
+            e.preventDefault();
+            //console.log('Ditto button has been clicked');
+            // If the box is not full, trigger a click on the actual ditto button
+            if (thisZoneData.currentPokemon.length < pokemonRequiredToStart){
+                    $('button[data-action="add"][data-token="ditto"]', $pokePanelSelectButtons).trigger('click');
                 }
             });
 
@@ -1678,6 +1687,11 @@
                             $('.controls .start', $panelButtons).removeClass('ready');
                             $('.button.enter-seed', $pokePanelFilters).removeClass('disabled');
                             }
+                        if (thisZoneData.currentPokemon.length >= pokemonRequiredToStart){
+                            $('.button.add-ditto', $pokePanelFilters).addClass('disabled');
+                            } else {
+                            $('.button.add-ditto', $pokePanelFilters).removeClass('disabled');
+                            }
                         return true;
                         }
                     }
@@ -1708,6 +1722,7 @@
             // We're ready to show the filter panel now too (and reset more buttons)
             $thisFilterWrapper.removeClass('hidden');
             $('.button.enter-seed', $thisFilterWrapper).removeClass('disabled');
+            $('.button.add-ditto', $pokePanelFilters).removeClass('disabled');
 
             }, 0);
 
@@ -3002,6 +3017,11 @@
                 $('.controls .start', $panelButtons).removeClass('ready');
                 $('.button.enter-seed', $pokePanelFilters).removeClass('disabled');
                 }
+            if (thisZoneData.currentPokemon.length >= pokemonRequiredToStart){
+                $('.button.add-ditto', $pokePanelFilters).addClass('disabled');
+                } else {
+                $('.button.add-ditto', $pokePanelFilters).removeClass('disabled');
+                }
             }
         // Otherwise, clicking simply places a "watched" indicator on the pokemon
         else {
@@ -3080,6 +3100,13 @@
             recalculateZoneStats();
             $('.controls .start', $panelButtons).addClass('ready');
             $('.button.enter-seed', $pokePanelFilters).addClass('disabled');
+            }
+
+        // If we're at starter max, hide the Ditto button, otherwise show it
+        if (thisZoneData.currentPokemon.length >= pokemonRequiredToStart){
+            $('.button.add-ditto', $pokePanelFilters).addClass('disabled');
+            } else {
+            $('.button.add-ditto', $pokePanelFilters).removeClass('disabled');
             }
 
     }
