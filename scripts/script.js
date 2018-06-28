@@ -636,7 +636,7 @@
                 var isSpecial = false;
                 if (indexInfo.token === 'unown'
                     || indexInfo.token === 'ditto'
-                    || indexInfo.token === 'shiny-ditto'){
+                    || indexInfo.token === 'super-ditto'){
                     totalMiscBeasts++;
                     isSpecial = true;
                     } else if (indexInfo.class === 'legendary'){
@@ -699,8 +699,8 @@
 
                 //var shinyDittoA = false;
                 //var shinyDittoB = false;
-                //if (tokenA === 'shiny-ditto'){ shinyDittoA = true; }
-                //if (tokenB === 'shiny-ditto'){ shinyDittoB = true; }
+                //if (tokenA === 'super-ditto'){ shinyDittoA = true; }
+                //if (tokenB === 'super-ditto'){ shinyDittoB = true; }
 
                 //var unownA = false;
                 //var unownB = false;
@@ -779,8 +779,8 @@
 
                 var shinyDittoA = false;
                 var shinyDittoB = false;
-                if (tokenA === 'shiny-ditto'){ shinyDittoA = true; }
-                if (tokenB === 'shiny-ditto'){ shinyDittoB = true; }
+                if (tokenA === 'super-ditto'){ shinyDittoA = true; }
+                if (tokenB === 'super-ditto'){ shinyDittoB = true; }
 
                 var unownA = false;
                 var unownB = false;
@@ -1530,7 +1530,7 @@
         //if (seenSpeciesTokens.length >= 807){ freeStarterPokemon.push('?', '?', '?'); }
 
         // Allow shiny ditto if the user has completed at least one generation's dex
-        if (hasUnlockedShinyDitto()){ freeStarterPokemon.push('shiny-ditto'); }
+        if (hasUnlockedShinyDitto()){ freeStarterPokemon.push('super-ditto'); }
 
         // Check to see if we can allow special pokemon to be selected yet
         var allowSpecialPokemon = hasUnlockedSpecialPokemon();
@@ -1755,7 +1755,7 @@
 
                 // Insert a break after each new generation
                 var thisGeneration = pokeIndex.gameGeneration;
-                if (pokemonIsSpecial || pokeToken === 'shiny-ditto'){ thisGeneration = 'specials'; }
+                if (pokemonIsSpecial || pokeToken === 'super-ditto'){ thisGeneration = 'specials'; }
                 if (thisGeneration !== lastGeneration){
                     var addBreak = true;
                     if (pokeIndex.class === 'baby'){ addBreak = false; }
@@ -2172,7 +2172,7 @@
         // Check to see if this pokemon should be a variant
         var allowVariant = true;
         if (!isEgg){ allowVariant = false; }
-        if (pokemonToken === 'ditto' || pokemonToken === 'shiny-ditto'){ allowVariant = false; }
+        if (pokemonToken === 'ditto' || pokemonToken === 'super-ditto'){ allowVariant = false; }
         if ((indexData.class === 'legendary'
             || indexData.class === 'mythical'
             || indexData.class === 'ultra-beast')
@@ -4334,9 +4334,9 @@
             // Pre-count the number of Ditto on the field
             var existingDitto = typeof pokeSpecies['ditto'] !== 'undefined' ? pokeSpecies['ditto']['none'] : 0;
             var existingShinyDitto = 0;
-            if (typeof pokeSpecies['shiny-ditto'] !== 'undefined'){
-                existingDitto += pokeSpecies['shiny-ditto']['none'];
-                existingShinyDitto += pokeSpecies['shiny-ditto']['none'];
+            if (typeof pokeSpecies['super-ditto'] !== 'undefined'){
+                existingDitto += pokeSpecies['super-ditto']['none'];
+                existingShinyDitto += pokeSpecies['super-ditto']['none'];
                 }
 
             // First generate an array of eggs to add (by species) with counts
@@ -5455,7 +5455,7 @@
             else if (indexInfo.class === 'legendary'){ influencePoints = influencePoints * 10;  }
             else if (indexInfo.class === 'mythical'){ influencePoints = influencePoints * 12;  }
             else if (indexInfo.token === 'ditto'
-                || indexInfo.token === 'shiny-ditto'){
+                || indexInfo.token === 'sortNumber'){
                 influencePoints = 0;
                 }
             }

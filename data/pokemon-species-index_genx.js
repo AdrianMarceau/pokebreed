@@ -344,23 +344,24 @@
             buttonGeneration: 1
             },
 
-        'shiny-ditto': {
+        'super-ditto': {
             order: thisIndex.afterOrder('ditto'),
-            token: 'shiny-ditto',
-            name: 'Shiny Ditto',
-            formClass: 'shiny-variant',
-            formToken: 'shiny',
+            token: 'super-ditto',
+            name: 'Super Ditto',
+            formClass: 'super-evolution',
+            formToken: 'super',
             number: 132,
             types: ['normal'],
+            lifePoints: 360,
             genderRatio: {none: 1.000},
-            baseStats: {hp: 189, phAttack: 1, phDefense: 48, spAttack: 1, spDefense: 48, speed: 1},
-            abilities: {0: 'limber', hidden: 'imposter'},
+            baseStats: {hp: 48, phAttack: 48, phDefense: 48, spAttack: 48, spDefense: 48, speed: 48},
+            abilities: {0: 'limber'}, // hidden: 'imposter' [removed]
             height: 0.3,
             weight: 4,
             colors: ['blue'],
             eggCycles: 20,
             eggGroups: ['ditto'],
-            buttonGeneration: 1
+            prevEvolution: 'ditto'
             },
 
         'baby-maractus': {
@@ -427,6 +428,8 @@
 
         {base: 'mime-jr', species: 'mr-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'male', method3: 'level-up', value3: 25, replace: true},
         {base: 'mime-jr', species: 'ms-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'female', method3: 'level-up', value3: 25},
+
+        {base: 'ditto', species: 'super-ditto', method: 'level-up', value: 2, method2: 'fusion-species', value2: 'ditto', switch: 'and'},
 
         ]);
 
