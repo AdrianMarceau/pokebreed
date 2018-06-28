@@ -55,13 +55,13 @@
                 <strong>PTGigi</strong><br />
                 <a href="http://ptgigi.com/" target="_blank">http://ptgigi.com/</a><br />
                 <em>
-                    Baby Tangela, Baby Doduo *, Baby Goldeen *
+                    Baby Tangela, Baby Doduo*, Baby Goldeen*, Super Ditto
                 </em>
             </li>
             <li>
                 <strong>MBM / MegaBossMan</strong> <br />
                 <em>
-                    Baby Paras *
+                    Baby Paras*
                 </em>
             </li>
         </ul>
