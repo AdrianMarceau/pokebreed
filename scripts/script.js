@@ -20,6 +20,7 @@
     var PokemonSpeciesDexOrder = [];
     var PokemonTypesIndex = {};
     var PokemonTypesIndexTokens = [];
+    var globalNameToTokenIndex = {};
 
     var StarterPokemonHistory = [];
     var StarterPokemonSeed = 0;
@@ -640,6 +641,9 @@
                 // If this pokemon has ultra energy or is in ultra beast, add it to the parent array
                 if (indexInfo.class === 'ultra-beast'){ ultraBeastSpecies.push(indexInfo.token); }
                 if (indexInfo.hasUltraEnergy === true){ ultraEnergySpecies.push(indexInfo.token); }
+
+                // Push this pokemon's name into the translation index (so it's easier to parse seeds)
+                globalNameToTokenIndex[indexInfo.name] = indexInfo.token;
 
                 // If this pokemon is in a special class, incremeent appropriate counters
                 var isSpecial = false;
@@ -5638,10 +5642,20 @@
             var pokeList = [];
             var genderTrans = {m:'male',f:'female',n:'none'};
             for (var i = 0; i < rawList.length; i++){
-                var rawInfo = rawList[i].match(/^([-_a-z0-9é\s\.\']+)\s(?:×|x)?\s?([0-9mf×x\/]+)$/i);
+                var rawInfo = rawList[i].match(/^(\S+)\s(?:×|x)?\s?([0-9mf×x\/]+)$/i);
                 //console.log('rawInfo['+ i +'] = ', rawInfo);
                 if (typeof rawInfo[1] !== 'undefined'){
-                    var pokeToken = rawInfo[1].toLowerCase().replace(/é/g, 'e').replace(/\s+/g, '-').replace(/[^-a-z0-9]+/g, '');
+                    var pokeName = rawInfo[1];
+                    if (typeof globalNameToTokenIndex[pokeName] !== 'undefined'){
+                        var pokeToken = globalNameToTokenIndex[pokeName];
+                        } else {
+                        var pokeToken = pokeName
+                            .toLowerCase()
+                            .replace(/é/g, 'e')
+                            .replace(/\s+/g, '-')
+                            .replace(/[^-a-z0-9]+/g, '')
+                            ;
+                        }
                     var pokeCounts = rawInfo[2].toLowerCase().replace(/(×|x)+/, '').split(/\//);
                     var pokeIndex = PokemonSpeciesIndex[pokeToken];
                     //console.log('pokeToken = ', pokeToken);
