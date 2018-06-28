@@ -1659,7 +1659,7 @@
         'guzzlord': {
             order: indexOrder++,
             token: 'guzzlord',
-            species: 'Guzzlord',
+            name: 'Guzzlord',
             class: 'ultra-beast',
             hasUltraEnergy: true,
             number: 799,
