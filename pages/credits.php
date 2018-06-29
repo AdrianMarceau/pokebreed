@@ -48,14 +48,14 @@
                 <strong>Corvos / C. Tyler Corbett</strong><br />
                 <em>
                     Baby Ponyta, Baby Growlithe,
-                    Zygarde Cell, Zygarde Core
+                    Zygarde Cell, Zygarde Core, Super Ditto
                 </em>
             </li>
             <li>
                 <strong>PTGigi</strong><br />
                 <a href="http://ptgigi.com/" target="_blank">http://ptgigi.com/</a><br />
                 <em>
-                    Baby Tangela, Baby Doduo*, Baby Goldeen*, Super Ditto
+                    Baby Tangela, Baby Doduo*, Baby Goldeen*
                 </em>
             </li>
             <li>
