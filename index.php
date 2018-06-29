@@ -43,6 +43,8 @@ if (isset($_GET['gen'])
         <? } else { ?>
             <meta name="robots" content="noindex,follow" />
         <? } ?>
+        <meta name="keywords" content="pokemon, pokemon simulator, pokemon eggs, pokemon breeding, pokemon evolution, pokemon biomes, pokemon types, baby pokemon" />
+        <meta name="description" content="Pokébox is a web-app that simulates the biomes, relationships, breeding, evolution, and life-cycles of every single official Pokémon and form (plus a few others).  Use type appeal to lure new and different species to your box on a quest to complete your Global Pokédex." />
         <meta id="myViewport" name="viewport" content="width=device-width, initial-scale=1">
         <base href="<?= POKEBS_ROOT_URL ?>" />
         <link type="text/css" rel="stylesheet" href="styles/style-base.min.css?v<?= $version_number ?>" />
