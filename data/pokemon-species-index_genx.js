@@ -62,7 +62,7 @@
         'baby-paras': {
             order: thisIndex.beforeOrder('paras'),
             token: 'baby-paras',
-            name: 'Baby Paras',
+            name: 'Baby Paras',  // Para / Parababy / [Paramite]
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
@@ -85,7 +85,7 @@
         'baby-meowth': {
             order: thisIndex.beforeOrder('meowth'),
             token: 'baby-meowth',
-            name: 'Baby Meowth',
+            name: 'Baby Meowth',  // Meowzy / Meowny / Purrchance / [Purrzy]
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
@@ -107,7 +107,7 @@
         'baby-alolan-meowth': {
             order: thisIndex.afterOrder('persian', 1),
             token: 'baby-alolan-meowth',
-            name: 'Baby Alolan Meowth',
+            name: 'Baby Alolan Meowth',  // Alolan Meowzy / Meowny / Purrchance / [Purrzy]
             class: 'baby',
             formClass: 'baby-evolution',
             formClass2: 'regional-variant',
@@ -132,7 +132,7 @@
         'baby-growlithe': {
             order: thisIndex.beforeOrder('growlithe'),
             token: 'baby-growlithe',
-            name: 'Baby Growlithe',
+            name: 'Baby Growlithe',  // Puchie / Puppers / Barkindle / [Embark]
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
@@ -156,7 +156,7 @@
         'baby-ponyta': {
             order: thisIndex.beforeOrder('ponyta'),
             token: 'baby-ponyta',
-            name: 'Baby Ponyta',
+            name: 'Baby Ponyta',  // Coalt / Minicorn / [Unicolt]
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
@@ -179,7 +179,7 @@
         'baby-doduo': {
             order: thisIndex.beforeOrder('doduo'),
             token: 'baby-doduo',
-            name: 'Baby Doduo',
+            name: 'Baby Doduo',  // Chix / Doduno / [Dododo]
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
@@ -202,7 +202,7 @@
         'baby-grimer': {
             order: thisIndex.beforeOrder('grimer'),
             token: 'baby-grimer',
-            name: 'Baby Grimer',
+            name: 'Baby Grimer',  // Gunky / Sludgby / Oozy / [Oozby]
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
@@ -224,7 +224,7 @@
         'baby-alolan-grimer': {
             order: thisIndex.afterOrder('muk', 1),
             token: 'baby-alolan-grimer',
-            name: 'Baby Alolan Grimer',
+            name: 'Baby Alolan Grimer',  // Alolan Gunky / Sludgby / Oozy / [Oozby]
             class: 'baby',
             formClass: 'baby-evolution',
             formClass2: 'regional-variant',
@@ -249,7 +249,7 @@
         'baby-tangela': {
             order: thisIndex.beforeOrder('tangela'),
             token: 'baby-tangela',
-            name: 'Baby Tangela',
+            name: 'Baby Tangela',  // Tangroll / Cutangle / Tendrella / Curlivine / [Tanglet]
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
@@ -303,7 +303,7 @@
         'baby-goldeen': {
             order: thisIndex.beforeOrder('goldeen'),
             token: 'baby-goldeen',
-            name: 'Baby Goldeen',
+            name: 'Baby Goldeen',  // Guppi / Dignify / [Heirfry]
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
@@ -367,7 +367,7 @@
         'baby-maractus': {
             order: thisIndex.beforeOrder('maractus'),
             token: 'baby-maractus',
-            name: 'Baby Maractus',
+            name: 'Baby Maractus',  //  Succulite / Marakid / [Cactini]
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
