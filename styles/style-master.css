@@ -1643,6 +1643,9 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     opacity: 1.0;
     filter: brightness(1.0);
 }
+.panel .buttons .filter-pokemon .filter.disabled .label,
+.panel .buttons .filter-pokemon .filter.disabled .options .option,
+.panel .buttons .filter-pokemon .filter .label.disabled,
 .panel .buttons .filter-pokemon .filter .options .option.disabled,
 .panel .buttons .filter-pokemon .more .button.disabled {
     pointer-events: none;
@@ -1694,6 +1697,19 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 .panel .buttons .filter-pokemon .filter.generations .options .option[data-gen="all"],
 .panel .buttons .filter-pokemon .filter.types .options .option[data-type="all"] {
     width: 30px;
+}
+
+.panel .buttons .filter-pokemon .modes {
+    width: 200px;
+    float: right;
+    margin: 0 0 0 6px;
+}
+.panel .buttons .filter-pokemon .modes .label {
+    width: 50px;
+}
+.panel .buttons .filter-pokemon .modes .options .option {
+    width: 75px;
+    padding: 3px 9px;
 }
 
 

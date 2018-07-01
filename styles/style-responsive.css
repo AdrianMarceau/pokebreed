@@ -75,6 +75,14 @@
     }
 
 }
+@media (max-width: 1150px){
+    .bp1:before { content: "a4+";  }
+
+    .panel .buttons .filter-pokemon .filter.modes {
+
+    }
+
+}
 @media (max-width: 1024px){
     .bp1:before { content: "a5";  }
 
@@ -90,6 +98,10 @@
     .panel .buttons .filter-pokemon .more {
         clear: left;
         margin-top: 5px;
+    }
+
+    .panel .buttons .filter-pokemon.lower {
+        padding-top: 0;
     }
 
 }
@@ -160,7 +172,8 @@
         display: none;
     }
     .panel .buttons .filter-pokemon .filter.generations,
-    .panel .buttons .filter-pokemon .filter.types {
+    .panel .buttons .filter-pokemon .filter.types,
+    .panel .buttons .filter-pokemon .filter.modes {
         text-align: center;
         width: 100%;
     }
@@ -182,6 +195,9 @@
     .panel .buttons .filter-pokemon .filter.types .options .option[data-type="all"] {
         width: calc((100% / 10) * 2);
     }
+    .panel .buttons .filter-pokemon .filter.modes .options .option {
+        width: calc(100% / 2);
+    }
     .panel .buttons .filter-pokemon .filter .options .option:first-child {
         -moz-border-radius: 0 0 0 3px;
         -webkit-border-radius: 0 0 0 3px;
@@ -191,6 +207,9 @@
         -moz-border-radius: 0 0 3px 0;
         -webkit-border-radius: 0 0 3px 0;
         border-radius: 0 0 3px 0;
+    }
+    .panel .buttons .filter-pokemon.lower {
+        margin-top: 0;
     }
 
 }

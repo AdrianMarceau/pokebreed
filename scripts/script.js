@@ -475,10 +475,16 @@
             //console.log('filterTarget = ', filterTarget);
             if (allowedFilterTargets.indexOf(filterTarget) === -1){ return true; }
             if (filterTarget === 'buttons'){
-                if (typeof currentButtonFilters[filterKind] === 'undefined'){ currentButtonFilters[filterKind] = 'all'; }
+                if (typeof currentButtonFilters[filterKind] === 'undefined'){
+                    currentButtonFilters[filterKind] = 'all';
+                    }
                 //console.log('currentButtonFilters['+ filterKind +'] = ', currentButtonFilters[filterKind]);
                 } else if (filterTarget === 'pokedex'){
-                if (typeof currentPokedexFilters[filterKind] === 'undefined'){ currentPokedexFilters[filterKind] = 'all'; }
+                if (typeof currentPokedexFilters[filterKind] === 'undefined'){
+                    if (filterKind === 'mode'){ currentPokedexFilters[filterKind] = 'legacy'; }
+                    else if (filterKind === 'gen'){ currentPokedexFilters[filterKind] = 1; }
+                    else { currentPokedexFilters[filterKind] = 'all'; }
+                    }
                 //console.log('currentPokedexFilters['+ filterKind +'] = ', currentPokedexFilters[filterKind]);
                 }
             $filterOptions.bind('click', function(){
@@ -514,6 +520,7 @@
                         }
 
                     } else if (filterTarget === 'pokedex'){
+                    //console.log('filterTarget = ', filterTarget);
 
                     // Add and apply pokemon button filters now that they've been updated
                     currentPokedexFilters[filterKind] = optionValue;
@@ -595,7 +602,8 @@
                 // Use the national dex number if not explicitly provided
                 if (typeof indexInfo.number !== 'undefined'
                     && typeof indexInfo.sortNumber === 'undefined'){
-                    indexInfo.sortNumber = indexInfo.number;
+                    if (typeof indexInfo.dexNumber !== 'undefined'){ indexInfo.sortNumber = indexInfo.dexNumber; }
+                    else { indexInfo.sortNumber = indexInfo.number; }
                     }
 
                 // If class or formClass are not set, create them as empty strings
@@ -637,6 +645,24 @@
 
                 // Collect tokens for all related pokemon and add here
                 indexInfo.relatedSpecies = getRelatedSpeciesTokens(indexInfo.token);
+                if (typeof indexInfo.baseSpecies !== 'undefined'
+                    && typeof PokemonSpeciesIndex[indexInfo.baseSpecies] !== 'undefined'
+                    && indexInfo.relatedSpecies.indexOf(indexInfo.baseSpecies) === -1){
+                    var baseRelatedSpecies = getRelatedSpeciesTokens(indexInfo.baseSpecies);
+                    baseRelatedSpecies = baseRelatedSpecies.concat(indexInfo.relatedSpecies);
+                    baseRelatedSpecies = baseRelatedSpecies.filter(arrayFilterUnique);
+                    indexInfo.relatedSpecies = baseRelatedSpecies;
+                    }
+
+                // Define this pokemon's base generation (as in, the lowest in its related species)
+                indexInfo.baseGameGeneration = indexInfo.gameGeneration;
+                for (var i = 0; i < indexInfo.relatedSpecies.length; i++){
+                    var relIndex = PokemonSpeciesIndex[indexInfo.relatedSpecies[i]];
+                    if (relIndex.gameGeneration < indexInfo.baseGameGeneration
+                        || (indexInfo.baseGameGeneration === 'x' && relIndex.gameGeneration !== 'x')){
+                        indexInfo.baseGameGeneration = relIndex.gameGeneration;
+                        }
+                    }
 
                 // If this pokemon has ultra energy or is in ultra beast, add it to the parent array
                 if (indexInfo.class === 'ultra-beast'){ ultraBeastSpecies.push(indexInfo.token); }
@@ -669,6 +695,7 @@
                     totalSpecialPokemon++;
                     }
 
+
                 }
 
             /*
@@ -699,6 +726,9 @@
 
                 var basicA = tokenA === infoA.basicEvolution ? true : false;
                 var basicB = tokenB === infoB.basicEvolution ? true : false;
+
+                var baseGenA = baseInfoA['baseGameGeneration'];
+                var baseGenB = baseInfoB['baseGameGeneration'];
 
                 var baseNumA = baseInfoA['sortNumber'];
                 var baseNumB = baseInfoB['sortNumber'];
@@ -742,6 +772,9 @@
                 else if (specialA && !specialB){ return 1; }
                 else if (!specialA && specialB){ return -1; }
 
+                else if (baseGenA < baseGenB){ return -1; }
+                else if (baseGenA > baseGenB){ return 1; }
+
                 else if (baseNumA < baseNumB){ return -1; }
                 else if (baseNumA > baseNumB){ return 1; }
 
@@ -762,6 +795,11 @@
                 return 0;
 
                 });
+
+            //console.log('Tyrogue = ', PokemonSpeciesDexOrder.indexOf('tyrogue'), PokemonSpeciesIndex['tyrogue'].sortNumber, PokemonSpeciesDexOrder.indexOf('tyrogue') < PokemonSpeciesDexOrder.indexOf('hitmonlee'), PokemonSpeciesIndex['tyrogue'].sortNumber < PokemonSpeciesIndex['hitmonlee'].sortNumber);
+            //console.log('Hitmonlee = ', PokemonSpeciesDexOrder.indexOf('hitmonlee'), PokemonSpeciesIndex['hitmonlee'].sortNumber, PokemonSpeciesDexOrder.indexOf('hitmonlee') < PokemonSpeciesDexOrder.indexOf('hitmonchan'), PokemonSpeciesIndex['hitmonlee'].sortNumber < PokemonSpeciesIndex['hitmonchan'].sortNumber);
+            //console.log('Hitmonchan = ', PokemonSpeciesDexOrder.indexOf('hitmonchan'), PokemonSpeciesIndex['hitmonchan'].sortNumber, PokemonSpeciesDexOrder.indexOf('hitmonchan') < PokemonSpeciesDexOrder.indexOf('hitmontop'), PokemonSpeciesIndex['hitmonchan'].sortNumber < PokemonSpeciesIndex['hitmontop'].sortNumber);
+            //console.log('Hitmontop = ', PokemonSpeciesDexOrder.indexOf('hitmontop'), PokemonSpeciesIndex['hitmontop'].sortNumber, PokemonSpeciesDexOrder.indexOf('hitmontop') > PokemonSpeciesDexOrder.indexOf('hitmonchan'), PokemonSpeciesIndex['hitmontop'].sortNumber > PokemonSpeciesIndex['hitmonchan'].sortNumber);
 
             // Sort the display list in national order, BUT with family lines together and inverted (parents on top)
             PokemonSpeciesDisplayOrder.sort(function(tokenA, tokenB){
@@ -1824,10 +1862,15 @@
                     }
                 var pokeIcon = getPokemonIcon(pokeToken, false, customData);
                 var pokemonGen = typeof pokeIndex.dexGeneration !== 'undefined' ? pokeIndex.dexGeneration : pokeIndex.gameGeneration;
+                var pokemonBaseGen = pokeIndex.baseGameGeneration;
                 pokedexMarkup.push('<li class="entry" ' +
+                    'data-token="' + pokeToken + '" ' +
                     'data-gen="'+ pokemonGen +'" ' +
-                    'data-type="'+ pokeIndex.types.join(',') +'">' +
-                        '<div class="'+ liClass +'" data-token="' + pokeToken + '" title="'+ titleText +'">' +
+                    'data-basegen="'+ pokemonBaseGen +'" ' +
+                    'data-type="'+ pokeIndex.types.join(',') +'" ' +
+                    'title="'+ titleText +'" ' +
+                    '>' +
+                        '<div class="'+ liClass +'">' +
                             '<div class="bubble">' +
                                 '<span class="num">' + numText + '</span> ' +
                                 '<span class="name"><span>' + nameText + '</span><span>- - -</span></span> ' +
@@ -1919,16 +1962,18 @@
             //console.log('\nCheck ' + $button.attr('data-token') + ' for matches...', currentButtonFilters);
             var isMatch = true;
             for (var i = 0; i < currentButtonFiltersKeys.length; i++){
-                var filterKey = currentButtonFiltersKeys[i];
-                var currentValue = currentButtonFilters[filterKey];
+                var filterKind = currentButtonFiltersKeys[i];
+                var currentValue = currentButtonFilters[filterKind];
                 if (currentValue === 'all'){ continue; }
-                var thisValue = $button.attr('data-'+filterKey);
-                //console.log('|- Does ' + filterKey + ' match current value ' + currentValue + ' ? thisValue = ', thisValue);
-                if (filterKey === 'gen'){
+                var thisValue = $button.attr('data-'+filterKind);
+                //console.log('|- Does ' + filterKind + ' match current value ' + currentValue + ' ? thisValue = ', thisValue);
+                if (filterKind === 'gen'){
                     thisValue = thisValue !== 'x' ? parseInt(thisValue) : thisValue;
                     if (thisValue !== currentValue){ isMatch = false; break; }
-                    } else if (filterKey === 'type'){
+                    } else if (filterKind === 'type'){
                     thisValue = thisValue.split(',');
+                    if (thisValue.indexOf(currentValue) === -1){ isMatch = false; break; }
+                    } else {
                     if (thisValue.indexOf(currentValue) === -1){ isMatch = false; break; }
                     }
                 }
@@ -1966,6 +2011,10 @@
         if (showBreaks){ $pokePanelPokedexEntries.find('.breaker').removeClass('hidden'); }
         else { $pokePanelPokedexEntries.find('.breaker').addClass('hidden'); }
 
+        // Show or hide the mode selectors based on the gen filter value
+        if (currentPokedexFilters['gen'] === 'all'){ $filterDivs.filter('[data-filter="mode"]').addClass('disabled'); }
+        else { $filterDivs.filter('[data-filter="mode"]').removeClass('disabled'); }
+
         // Define totals variables to increment later during looping
         var showingTotal = 0;
         var unlockedTotal = 0;
@@ -1978,17 +2027,22 @@
             //console.log('\nCheck ' + $entry.attr('data-token') + ' for matches...', currentPokedexFilters);
             var isMatch = true;
             for (var i = 0; i < currentPokedexFiltersKeys.length; i++){
-                var filterKey = currentPokedexFiltersKeys[i];
-                var currentValue = currentPokedexFilters[filterKey];
+                var filterKind = currentPokedexFiltersKeys[i];
+                if (filterKind === 'mode'){ continue; }
+                var currentValue = currentPokedexFilters[filterKind];
                 if (currentValue === 'all'){ continue; }
-                var thisValue = $entry.attr('data-'+filterKey);
-                //console.log('|- Does ' + filterKey + ' match current value ' + currentValue + ' ? thisValue = ', thisValue);
-                if (filterKey === 'gen'){
+                var filterAttr = filterKind;
+                if (filterKind === 'gen' && currentPokedexFilters['mode'] !== 'legacy'){ filterAttr = 'basegen'; }
+                var thisValue = $entry.attr('data-'+filterAttr);
+                //console.log('|- Does ' + filterKind + ' match current value ' + currentValue + ' ? thisValue = ', thisValue);
+                if (filterKind === 'gen'){
                     thisValue = thisValue !== 'x' ? parseInt(thisValue) : thisValue;
                     if (thisValue !== currentValue){ isMatch = false; break; }
-                    } else if (filterKey === 'type'){
+                    } else if (filterKind === 'type'){
                     thisValue = thisValue.split(',');
                     if (thisValue.indexOf(currentValue) === -1){ isMatch = false; break; }
+                    } else {
+                    if (thisValue !== currentValue){ isMatch = false; break; }
                     }
                 }
             if (isMatch){
@@ -5733,6 +5787,10 @@
       }
     };
 
+    // Filter a function for filtering an array to only unique values
+    function arrayFilterUnique(value, index, self) {
+        return self.indexOf(value) === index;
+    }
 
     // Polyfill for requestAnimationFrame if not exists
     window.requestAnimationFrame = window.requestAnimationFrame
