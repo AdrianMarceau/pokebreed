@@ -1,0 +1,125 @@
+/*
+ * POKéBOX TODOS & IDEAS
+ * http://pokebox.net/
+ * via @Ageman20XX
+ * /
+
+/* ----------------------- */
+/* -- PLANNED REVISIONS -- */
+/* ----------------------- */
+
++  Update the following Pokemon with localized English names:
+    +  Baby Paras  =>  Para / Parababy / [Paramite]
+    +  Baby Meowth  =>  Meowzy / Meowny / Purrchance / [Purrzy]
+    +  Baby Growlithe  =>  Puchie / Puppers / Barkindle / [Embark]
+    +  Baby Ponyta  =>  Coalt / Minicorn / [Unicolt]
+    +  Baby Doduo  =>  Chix / Doduno / [Dododo]
+    +  Baby Grimer  =>  Gunky / Sludgby / Oozy / [Oozby]
+    +  Baby Tangela  =>  Tangroll / Cutangle / Tendrella / Curlivine / Ringela / [Tanglet]
+    +  Baby Kangaskhan  =>  (maybe leave as-is?)
+    +  Baby Goldeen  =>  Guppi / Dignify / [Heirfry]
+    +  Baby Maractus  =>  Succulite / Marakid / [Cactini]
+
++  Add more interspecies relationships
+    +  Deoxys attracted to alien Pokemon
+
+
+/* ------------------------- */
+/* -- PLANNED NEW CONTENT -- */
+/* ------------------------- */
+
++  Add more box biomes
+    +  Dragon (Spire BG?)
+    +  Fairy (Contest/Musical BG)
+    +  Fighting (Pokeathlon BG?)
+
++  Add more baby evolutions to current species
+    +  Baby Vulpix
+    +  Baby Girafarig
+
++  Add some beta Pokemon as evolutions for current species
+    +  Add beta Qwilfish evolution  (maybe Poison / Electric?)
+
++  Add other beta Pokemon as branched evolutions for current species
+    +  Add beta Tangela evolution (via Grass type surge like baby?)
+    +  Add beta Likitung evolution (via Normal type surge?)
+
++  Add a few regional variants but label them as "beta" forms
+    +  Add beta variants for the entire Hoppip line  (visual only)
+
++  Add unusual beta Pokemon with special mechanics
+    +  Add beta Turban as castoff species when Slowbro/king dies
+
+
+/* -------------------------- */
+/* -- PLANNED NEW FEATURES -- */
+/* -------------------------- */
+
++  Add single-instance evolution criteria/condition (only one at a time)
+    +  Add to Combee / Vespiquen
+    +  Maybe add to Salandit / Salazzal
+    +  Maybe add to Carbink / Diancie
+
++  Add weather to the simulator
+    +  Allow weather-related abilities to force it like Drought, Drizzle, etc.
+
++  Add more Pokedex filters
+    +  Add for registered/unregistered, possibly more.
+
++  Allow panel customization
+    +  Like hiding current list, showing colour list, etc.
+
++  Allow animation toggle to disable/enable
+    +  Make possible to disable animation outside of warp-speed
+
++  Display notifications for new stuff
+    + Show messages/popups when new Pokemon appear or are unlocked
+
++  Allow Data Export
+    +  When a simulation ends, user should be able to export to CSV
+
++  Add support for interspeces relationship intensity
+    +  Make it so that some species relationships are stronger than others
+
++  Compensate for single-gendered species
+    +  Find some way to keep non-gendered species alive longer (w/o Ditto)
+
++  Add an achievement system maybe?
+    +  Even a simple one would be nice to have somewhere
+
++  Highlight legendary visitors
+    +  Add custom backgrounds to visiting legendaries/mythicals/etc.
+
+
+/* -------------------- */
+/* -- NEW FORM IDEAS -- */
+/* -------------------- */
+
++  More weather variations for Castform
+    +  Sandstorm form (Rock or Ground)
+    +  Fog form (Flying)
+
++  More cloak variations for Burmy / Wormadam
+    +  Scaly Cloak (Spire / Dragon)
+    +  Boney Cloak (Graveyard / Ghost)
+    +  Lunar Cloak (Space / Psychic)
+
+
+/* ----------------------- */
+/* -- NEW POKEMON IDEAS -- */
+/* ----------------------- */
+
++  Female-only, single-instance evolution of Durant
+    +  Possible names  :  Antiqueen, Fortrant, Protectant, [Impenetrant]
+    +  Immune to Heatmor's attacks via primary "Heatproof" ability
+
++  Use beta Tyrogue as a female-only alternate baby form for Hitmons
+    +  Possible names  :  Roguelet, Roguelite, Rougelle, Tyrook, [Tybold]
+
+    +  Evolves into female-only Hitmon, egg partner to all the others
+        +  Possible names  :  Hitwoman, Hitwompop, Hitsumo, Hitmom, [Hitsumom]
+
++  Shared pre-evolution for Frillish (genderless)
+
++  Shared pre-evolution for Pansage/Pansear/Panpour
+
