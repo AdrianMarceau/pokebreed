@@ -600,11 +600,14 @@
                     }
 
                 // Use the national dex number if not explicitly provided
+                /*
                 if (typeof indexInfo.number !== 'undefined'
                     && typeof indexInfo.sortNumber === 'undefined'){
                     if (typeof indexInfo.dexNumber !== 'undefined'){ indexInfo.sortNumber = indexInfo.dexNumber; }
+                    else if (typeof indexInfo.dexNumber !== 'undefined'){ indexInfo.sortNumber = indexInfo.dexNumber; }
                     else { indexInfo.sortNumber = indexInfo.number; }
                     }
+                    */
 
                 // If class or formClass are not set, create them as empty strings
                 if (typeof indexInfo.class === 'undefined'){ indexInfo.class = ''; }
@@ -731,8 +734,11 @@
                 var baseGenB = baseInfoB['baseGameGeneration'];
 
                 var baseNumA = baseInfoA['sortNumber'];
-                var baseNumB = baseInfoB['sortNumber'];
+                if (typeof baseInfoA['dexNumber'] !== 'undefined'){ baseNumA = baseInfoA['dexNumber']; }
                 if (typeof baseInfoA['subNumber'] !== 'undefined'){ baseNumA += (baseInfoA['subNumber'] / 10); }
+
+                var baseNumB = baseInfoB['sortNumber'];
+                if (typeof baseInfoB['dexNumber'] !== 'undefined'){ baseNumB = baseInfoB['dexNumber']; }
                 if (typeof baseInfoB['subNumber'] !== 'undefined'){ baseNumB += (baseInfoB['subNumber'] / 10); }
 
                 //var dittoA = false;
@@ -814,8 +820,11 @@
                 var basicB = tokenB === infoB.basicEvolution ? true : false;
 
                 var baseNumA = baseInfoA['sortNumber'];
-                var baseNumB = baseInfoB['sortNumber'];
+                if (typeof baseInfoA['displayNumber'] !== 'undefined'){ baseNumA = baseInfoA['displayNumber']; }
                 if (typeof baseInfoA['subNumber'] !== 'undefined'){ baseNumA += (baseInfoA['subNumber'] / 10); }
+
+                var baseNumB = baseInfoB['sortNumber'];
+                if (typeof baseInfoB['displayNumber'] !== 'undefined'){ baseNumB = baseInfoB['displayNumber']; }
                 if (typeof baseInfoB['subNumber'] !== 'undefined'){ baseNumB += (baseInfoB['subNumber'] / 10); }
 
                 var dittoA = false;
@@ -1624,7 +1633,7 @@
                 if (!allowPokemon){ continue; }
 
                 // Insert a break after each new generation
-                var thisGeneration = typeof pokemonData.buttonGeneration !== 'undefined' ? pokemonData.buttonGeneration : pokemonData.gameGeneration;
+                var thisGeneration = typeof pokemonData.buttonGeneration !== 'undefined' ? pokemonData.buttonGeneration : pokemonData.baseGameGeneration;
                 if (pokemonIsSpecial){ thisGeneration = 'specials'; }
                 if (thisGeneration !== lastGeneration
                     && pokemonData.formClass !== 'gender-variant'
@@ -1947,7 +1956,11 @@
             var filterValue = currentButtonFilters[filterKind];
             var $optionLink = $filterOptions.filter('.option[data-'+ filterKind +'="'+ filterValue +'"]');
             $optionLink.addClass('active');
-            if (filterValue !== 'all'){ showBreaks = false; }
+            if ((filterKind === 'gen'
+                || filterKind === 'type')
+                && filterValue !== 'all'){
+                showBreaks = false;
+                }
             }
 
         // Show line breaks if all buttons are currently showing, else hide
@@ -2004,7 +2017,11 @@
             var filterValue = currentPokedexFilters[filterKind];
             var $optionLink = $filterOptions.filter('.option[data-'+ filterKind +'="'+ filterValue +'"]');
             $optionLink.addClass('active');
-            if (filterValue !== 'all'){ showBreaks = false; }
+            if ((filterKind === 'gen'
+                || filterKind === 'type')
+                && filterValue !== 'all'){
+                showBreaks = false;
+                }
             }
 
         // Show line breaks if all entrys are currently showing, else hide
