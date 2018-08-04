@@ -2639,6 +2639,7 @@
         {base: 'regirock', species: 'relicanth'},
         {base: 'regice', species: 'relicanth'},
         {base: 'registeel', species: 'relicanth'},
+        {base: 'rayquaza', species: 'deoxys'},
         {base: 'deoxys', species: 'rayquaza'},
         {base: 'deoxys', species: 'mega-rayquaza'},
 
