@@ -2639,6 +2639,8 @@
         {base: 'regirock', species: 'relicanth'},
         {base: 'regice', species: 'relicanth'},
         {base: 'registeel', species: 'relicanth'},
+        {base: 'deoxys', species: 'rayquaza'},
+        {base: 'deoxys', species: 'mega-rayquaza'},
 
         // Miscellaneous appeal
         {base: 'porygon2', species: 'deoxys'},
