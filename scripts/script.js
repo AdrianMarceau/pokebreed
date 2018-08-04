@@ -1915,6 +1915,7 @@
 
     // Define a function for updating the pokedex with currently seen species
     function updatePokemonPokedex(){
+        //console.log('-----\nupdatePokemonPokedex()');
 
         // If we're in the free mode, there is no pokedex to update
         if (appFreeMode){ return false; }
@@ -1927,7 +1928,8 @@
         var seenSpeciesTokens = Object.keys(PokemonSpeciesSeen);
         for (var key = 0; key < seenSpeciesTokens.length; key++){
             var pokeToken = seenSpeciesTokens[key];
-            var $pokeBlock = $('.species[data-token="'+ pokeToken +'"]', $pokedexList);
+            var $pokeEntry = $('.entry[data-token="'+ pokeToken +'"]', $pokedexList);
+            var $pokeBlock = $('.species', $pokeEntry);
             if ($pokeBlock.hasClass('unknown')){
                 $pokeBlock.removeClass('unknown');
                 var titleText = getPokemonTitleText(pokeToken);
