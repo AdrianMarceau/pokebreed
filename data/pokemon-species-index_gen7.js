@@ -1228,6 +1228,7 @@
             height: 0.3,
             weight: 40,
             colors: ['white'],
+            eggCycles: 25,
             eggGroups: ['mineral'],
             prevEvolution: 'minior'
             },

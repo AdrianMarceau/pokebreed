@@ -1703,6 +1703,7 @@
             weight: 180,
             colors: ['gray', 'black', 'yellow', 'red', 'blue'],
             genderRatio: {none: 1.000},
+            eggCycles: 20,
             eggGroups: ['mineral'],
             prevEvolution: 'magneton'
             },

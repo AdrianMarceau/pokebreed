@@ -1709,6 +1709,7 @@
             height: 2.4,
             weight: 155.5,
             colors: ['green', 'red', 'yellow', 'blue'],
+            eggCycles: 20,
             eggGroups: ['monster', 'grass'],
             prevEvolution: 'venusaur'
             },
@@ -1727,6 +1728,7 @@
             height: 1.7,
             weight: 110.5,
             colors: ['black', 'blue'],
+            eggCycles: 20,
             eggGroups: ['monster', 'dragon'],
             prevEvolution: 'charizard'
             },
@@ -1745,6 +1747,7 @@
             height: 1.7,
             weight: 100.5,
             colors: ['orange', 'yellow', 'green'],
+            eggCycles: 20,
             eggGroups: ['monster', 'dragon'],
             prevEvolution: 'charizard'
             },
@@ -1763,6 +1766,7 @@
             height: 1.6,
             weight: 101.1,
             colors: ['blue', 'brown', 'gray', 'yellow'],
+            eggCycles: 20,
             eggGroups: ['monster', 'water-1'],
             prevEvolution: 'blastoise'
             },
@@ -1839,6 +1843,7 @@
             height: 2,
             weight: 120,
             colors: ['gray', 'pink', 'white', 'yellow'],
+            eggCycles: 20,
             eggGroups: ['monster', 'water-1'],
             prevEvolution: 'slowbro'
             },
@@ -2013,6 +2018,7 @@
             height: 2.3,
             weight: 127,
             colors: ['white', 'purple', 'red'],
+            eggCycles: 120,
             eggGroups: ['undiscovered'],
             prevEvolution: 'mewtwo'
             },
@@ -2032,6 +2038,7 @@
             height: 1.5,
             weight: 33,
             colors: ['purple', 'white', 'blue'],
+            eggCycles: 120,
             eggGroups: ['undiscovered'],
             prevEvolution: 'mewtwo'
             },
@@ -2631,6 +2638,7 @@
             height: 1.5,
             weight: 32,
             colors: ['white', 'pink', 'yellow'],
+            eggCycles: 20,
             eggGroups: ['fairy'],
             prevEvolution: 'audino'
             },
