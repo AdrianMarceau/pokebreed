@@ -75,6 +75,7 @@
     var evolvedPokemonSpeciesTokens = [];
     var faintedPokemonSpeciesTokens = [];
 
+    var defaultTypeForms = [];
     var defaultTypeFormTriggers = {};
 
 
@@ -593,6 +594,9 @@
                 if (typeof indexInfo.breedPoints === 'undefined'){ indexInfo.breedPoints = calculateBreedPoints(indexInfo['baseStats']); }
                 if (typeof indexInfo.influencePoints === 'undefined'){ indexInfo.influencePoints = calculateInfluencePoints(indexInfo); }
 
+                // DEBUG CHECKS FOR REQUIRED DATA
+                //if (typeof indexInfo.eggCycles === 'undefined'){ //console.log('eggCycles are undefined for ', token, indexInfo); }
+
                 // If the number has been defined, add it to the above list
                 if (typeof indexInfo.number !== 'undefined'
                     && nationalDexNumbers.indexOf(indexInfo.number) === -1){
@@ -837,6 +841,11 @@
                 if (tokenA.indexOf('zygarde') !== -1){ zygardeA = true; }
                 if (tokenB.indexOf('zygarde') !== -1){ zygardeB = true; }
 
+                var arceusA = false;
+                var arceusB = false;
+                if (tokenA === 'arceus'){ arceusA = true; }
+                if (tokenB === 'arceus'){ arceusB = true; }
+
                 var shinyDittoA = false;
                 var shinyDittoB = false;
                 if (tokenA === 'super-ditto'){ shinyDittoA = true; }
@@ -865,6 +874,9 @@
                 if (infoB['formClass'] === 'gender-variant' && typeof infoB['prevEvolution'] === 'undefined'){ genderVariantB = true; }
 
                 if (false){ return 0; }
+
+                else if (arceusA && !arceusB){ return 1; }
+                else if (!arceusA && arceusB){ return -1; }
 
                 else if (zygardeA && !zygardeB){ return 1; }
                 else if (!zygardeA && zygardeB){ return -1; }
@@ -970,6 +982,7 @@
         // Define the default set of type form triggers for pokemon that use them
         for (var i = 0; i < PokemonTypesIndexTokens.length; i++){
             var typeToken = PokemonTypesIndexTokens[i];
+            defaultTypeForms.push(typeToken);
             defaultTypeFormTriggers[typeToken] = typeToken;
             }
 
@@ -1556,6 +1569,12 @@
         return allowSpecialPokemon;
     }
 
+    // Define a function for checking if we've unlocked the final pokemon
+    function hasUnlockedFinalPokemon(){
+        if (currentPokedexTotals.totalPokemonEncountered >= (currentPokedexTotals.totalPokemon - 1)){ return true; }
+        return false;
+    }
+
     // Define a function for checking if we've unlocked all pokemon
     function hasUnlockedAllPokemon(){
         if (currentPokedexTotals.totalPokemonEncountered >= currentPokedexTotals.totalPokemon){ return true; }
@@ -1589,8 +1608,8 @@
         if (seenSpeciesTokens.length >= 721){ freeStarterPokemon.push('rowlet', 'litten', 'popplio'); } // gen 7 starters
         //if (seenSpeciesTokens.length >= 807){ freeStarterPokemon.push('?', '?', '?'); }
 
-        // Allow shiny ditto if the user has completed at least one generation's dex
-        if (hasUnlockedShinyDitto()){ freeStarterPokemon.push('super-ditto'); }
+        // Unlock the final pokemon ARCEUS if the user has encountered every other species
+        if (hasUnlockedFinalPokemon()){ freeStarterPokemon.push('arceus'); }
 
         // Check to see if we can allow special pokemon to be selected yet
         var allowSpecialPokemon = hasUnlockedSpecialPokemon();
@@ -2173,7 +2192,7 @@
 
     // Define a function for adding a new pokemon to a zone
     function addPokemonToZone(pokemonToken, isEgg, reduceCycles, isVisitor, customData){
-        //console.log('Adding '+token+' to zone.');
+        //console.log('addPokemonToZone(pokemonToken:'+pokemonToken+', isEgg:'+isEgg+', reduceCycles:'+reduceCycles+', isVisitor:'+isVisitor+', customData:'+customData+')');
         if (typeof PokemonSpeciesIndex[pokemonToken] === 'undefined'){ return false; }
         if (typeof isEgg !== 'boolean'){ isEgg = true; }
         if (typeof reduceCycles !== 'number'){ reduceCycles = 0; }
@@ -2393,6 +2412,7 @@
         // Push the new pokemon to the list and collect its key
         var newKey = thisZoneData.currentPokemon.length;
         thisZoneData.currentPokemon.push(newPokemon);
+        //console.log('newKey / newPokemon = ', newKey, JSON.stringify(newPokemon));
 
         // Add this pokemon's cell markup to the container div
         var cellMarkup = generatePokemonCellMarkup(newPokemon, newKey);
@@ -2901,7 +2921,7 @@
                 for (var key = 0; key < nextVisitors.length; key++){
                     var visitor = nextVisitors[key];
                     var pokeInfo = PokemonSpeciesIndex[visitor.token];
-                    var pokePercent = Math.ceil((visitor.chance / totalVisitorChance) * 100);
+                    var pokePercent = typeof visitor.chance === 'number' && visitor.chance > 0 ? Math.ceil((visitor.chance / totalVisitorChance) * 100) : 0;
                     usedPercent += pokePercent;
                     if (usedPercent > 100){ pokePercent -= (usedPercent - 100); }
                     //console.log('visitor = ', visitor);
@@ -3797,6 +3817,9 @@
                 var indexInfo = PokemonSpeciesIndex[pokemonInfo.token];
                 //console.log('-----\nChecking evolution data for ' + pokemonInfo.token, pokemonInfo, indexInfo);
 
+                // If pokemon is still an egg, skip growth cycles for now
+                if (pokemonInfo.eggCycles > 0){ continue; }
+
                 // Check to see to see if this pokemon is in growth cooldown, else no evolution
                 var onlyLevelUpEvolutions = false;
                 if (pokemonInfo.growthCooldown > 0){
@@ -3873,11 +3896,6 @@
                                     }
                                 }
                             }
-                        }
-
-                    if (indexInfo.formClass === 'type-variant'
-                        && typeof indexInfo.possibleFormsTriggers !== 'undefined'
-                        && thisZoneData.field.length){
                         }
 
                     }
@@ -4239,7 +4257,7 @@
                     if (queuedEvolutions.length > 0){
 
                         // Sort the evolution possibilities by highest chance, then pick first
-                        //console.log('queuedEvolutions for '+pokemonInfo.token+' = ', queuedEvolutions);
+                        //console.log('<< queuedEvolutions for '+pokemonInfo.token+' = ', 'pokemonInfo:'+JSON.stringify(pokemonInfo), 'queuedEvolutions:'+JSON.stringify(queuedEvolutions));
                         queuedEvolutions.sort(function(a, b){
                             if (a.chance > b.chance){ return -1; }
                             else if (a.chance < b.chance){ return 1; }
@@ -4247,8 +4265,8 @@
                             });
                         var selectedEvolution = queuedEvolutions[0];
                         var selectedEvolutionData = PokemonSpeciesIndex[selectedEvolution.token];
-                        //console.log('selectedEvolution = ', selectedEvolution);
-                        //console.log('selectedEvolutionData = ', selectedEvolutionData);
+                        //console.log('<< selectedEvolution = ', selectedEvolution);
+                        //console.log('<< selectedEvolutionData = ', selectedEvolutionData);
 
                         // Create an entry for this species and in the global count if not exists
                         var evolvedPokemonSpecies = thisZoneData.evolvedPokemonSpecies;
@@ -4471,6 +4489,10 @@
                 existingShinyDitto += pokeSpecies['super-ditto']['none'];
                 }
 
+            // Pre-count the number of Arceus on the field
+            var existingArceus = typeof pokeSpecies['arceus'] !== 'undefined' ? pokeSpecies['arceus']['none'] : 0;
+            //console.log('existingArceus = ', existingArceus);
+
             // First generate an array of eggs to add (by species) with counts
             var eggsToAddIndex = {};
             var eggsToAddCount = 0;
@@ -4482,18 +4504,35 @@
                 var indexInfo = PokemonSpeciesIndex[pokeToken];
                //console.log('|- ['+ pokeToken +'] indexInfo.lifePoints = ' + indexInfo.lifePoints + ' | indexInfo.breedPoints = ' + indexInfo.breedPoints+ ' | indexInfo.baseStats = ', indexInfo.baseStats);
 
+                // Check to see if this is legendary
+                var isLegendary = false;
+                if (typeof indexInfo.class !== 'undefined'
+                    && (indexInfo.class === 'legendary'
+                        || indexInfo.class === 'mythical'
+                        || indexInfo.class === 'ultra-beast')){
+                    isLegendary = true;
+                    }
+
+                // Check to see if we bypass normal breeding restrictions
+                var allowLegendaryBreeding = existingArceus > 0 ? true : false;
+
                 // Skip ahead if this species is incapable of breeding
                 if (indexInfo.eggGroups.indexOf('ditto') !== -1){
-                    //console.log(pokeToken+' cannot breed with itself');
+                    //console.log(pokeToken+' cannot breed with itself\n-----');
                     continue;
-                    } else if (indexInfo.eggGroups.indexOf('undiscovered') !== -1){
-                    //console.log(pokeToken+' cannot breed at all');
+                    } else if (pokeToken === 'arceus'){
+                    //console.log(pokeToken+' cannot breed with itself\n-----');
+                    continue;
+                    } else if (isLegendary && !allowLegendaryBreeding){
+                    //console.log('legendaries like '+pokeToken+' cannot breed at all\n-----');
+                    continue;
+                    } else if (!isLegendary && indexInfo.eggGroups.indexOf('undiscovered') !== -1){
+                    //console.log(pokeToken+' cannot breed at all\n-----');
                     continue;
                     }
 
                 var baseEvolution = pokemonGetBaseEvolution(pokeToken, true, false);
                 var baseEvolutionInfo = PokemonSpeciesIndex[baseEvolution];
-
                 //console.log('pokeToken('+pokeToken+') | baseEvolution('+baseEvolution+')');
 
                 // Define new unit count at zero with an empty token
@@ -4503,13 +4542,6 @@
                 // If this species has a defined egg species, overwrite new unit token
                 if (typeof indexInfo.eggSpecies !== 'undefined'){
                     newUnitsToken = indexInfo.eggSpecies;
-                    }
-
-                // Check to see if this is legendary
-                var isLegendary = false;
-                if (typeof indexInfo.class !== 'undefined'
-                    && (indexInfo.class === 'legendary' || indexInfo.class === 'mythical')){
-                    isLegendary = true;
                     }
 
                 // If this species is NOT single-gender, we can proceed normally, else there's more work
@@ -4620,6 +4652,7 @@
                 // This single-gendered pokemon has no defined egg partner so we can only hook up with ditto
                 else if ((isLegendary || indexInfo.hasOneGender) && !indexInfo.hasEggPartner){
 
+                    // Calculate the number of base units for this pokemon and current eggs
                     var baseUnits = pokeSpecies[pokeToken][indexInfo.speciesGender];
                     var currentEggs = typeof pokeEggs[baseEvolution] !== 'undefined' ? pokeEggs[baseEvolution] : 0;
                     if (typeof indexInfo.eggSpecies !== 'undefined'
@@ -4631,8 +4664,14 @@
                         currentEggs += pokeEggs[indexInfo.eggParent];
                         baseUnits += typeof pokeSpecies[indexInfo.eggParent] !== 'undefined' ? sumValues(pokeSpecies[indexInfo.eggParent]) : 0;
                         }
-                    var newUnits = existingDitto > 0 ? Math.max(baseUnits, existingDitto) : 0;
-                    //console.log('|- baseUnits('+pokeToken+'/'+baseUnits+') | currentEggs('+baseEvolution+'/'+currentEggs+') | newUnits('+newUnits+')');
+
+                    // Calculate the number of new units to create for this species
+                    var newUnits = 0;
+                    // Only non-legendaries (plus Manaphy) can breed with Ditto
+                    if (!isLegendary || pokeToken === 'manaphy'){ newUnits += existingDitto > 0 ? Math.max(baseUnits, existingDitto) : 0; }
+                    // Only legendaries and mythicals can request an egg from Arceus
+                    if (isLegendary){ newUnits += existingArceus > 0 ? Math.max(baseUnits, existingArceus) : 0; }
+                    //console.log('|- baseUnits('+pokeToken+'/'+baseUnits+') | currentEggs('+baseEvolution+'/'+currentEggs+') | newUnits('+newUnitsToken+'/'+newUnits+')');
 
                     // If partner pokemon have already produced eggs, include in this count
                     if (typeof eggsToAddIndex[pokeToken] !== 'undefined'){
@@ -4660,6 +4699,8 @@
                         if (typeof eggsToAddIndex[pokeEggSpecies] === 'undefined'){ eggsToAddIndex[pokeEggSpecies] = 0; }
                         eggsToAddIndex[pokeEggSpecies] += 1;
                         eggsToAddCount += 1;
+                        //console.log('|- eggsToAddIndex['+pokeEggSpecies+'] += 1 |= ', eggsToAddIndex[pokeEggSpecies]);
+                        //console.log('|- eggsToAddCount += 1 |= ', eggsToAddCount);
                         }
                     }
 
@@ -4674,12 +4715,12 @@
                 //console.log('(eggsAddedCount('+eggsAddedCount+') < eggsToAddCount('+eggsToAddCount+')) && (thisZoneData.currentPokemon.length('+thisZoneData.currentPokemon.length+') < thisZoneData.capacity('+thisZoneData.capacity+'))');
                 //console.log('eggsToAddIndex = ', eggsToAddIndex);
                 for (var key = 0; key < eggsToAddIndexTokens.length; key++){
-                    //console.log('eggsToAddIndex[pokeToken] = ', pokeToken, eggsToAddIndex[pokeToken]);
 
                     // Collect the token and index data for the new baby
                     var pokeToken = eggsToAddIndexTokens[key];
                     var pokeIndex = PokemonSpeciesIndex[pokeToken];
                     var allowEgg = true;
+                    //console.log('eggsToAddIndexTokens['+key+'] = ', pokeToken, pokeIndex);
 
                     // Check again to see if we're at overcrowded capacity
                     if (allowEgg){
@@ -4865,13 +4906,16 @@
             var currentMythicalNum = typeof zoneStats['class']['mythical'] !== 'undefined' ? zoneStats['class']['mythical'] : 0;
             var currentLegendaryNum = typeof zoneStats['class']['legendary'] !== 'undefined' ? zoneStats['class']['legendary'] : 0;
             var currentUltraBeastNum = typeof zoneStats['class']['ultra-beast'] !== 'undefined' ? zoneStats['class']['ultra-beast'] : 0;
+            var currentArceusNum = typeof zoneStats['species']['arceus'] !== 'undefined' ? zoneStats['species']['arceus'] : 0;
 
             // MYTHICAL pokemon appear more often once every three years
             eventPokemonChanceBoosters['mythical'] = 0;
             if (mythicalYear
-                && currentMythicalNum < 1
-                && thisZoneData.date.year >= 3
-                && thisZoneData.date.month >= 11){
+                && (currentArceusNum > 0 || (
+                    currentMythicalNum < 1
+                    && thisZoneData.date.year >= 3
+                    && thisZoneData.date.month >= 11
+                    ))){
                 eventBoost = ((thisZoneData.date.month + 9) / 12) + ((thisZoneData.date.day + 9) / 30) / 10;
                 eventBase = 120 * eventBoost;
                 eventPokemonChanceBases['mythical'] = eventBase;
@@ -4881,9 +4925,11 @@
             // LEGENDARY pokemon appear more often once every year
             eventPokemonChanceBoosters['legendary'] = 0;
             if (!mythicalYear
-                && currentLegendaryNum < 1
-                && thisZoneData.date.year >= 1
-                && thisZoneData.date.month >= 10){
+                && (currentArceusNum > 0 || (
+                    currentLegendaryNum < 1
+                    && thisZoneData.date.year >= 1
+                    && thisZoneData.date.month >= 10
+                    ))){
                 eventBoost = ((thisZoneData.date.month + 6) / 12) + ((thisZoneData.date.day + 6) / 30) / 10;
                 eventBase = 100 * eventBoost;
                 if (currentLegendaryNum > 0){ eventBoost /= (currentLegendaryNum + 1);  }
@@ -5008,6 +5054,15 @@
                     if (currentUltraBeastNum > 0){ eventBase *= (currentUltraBeastNum + 1); }
                     eventPokemonChanceBases['type-null'] = eventBase;
                     eventPokemonChanceBoosters['type-null'] = eventBoost;
+                    }
+                }
+
+            // (GEN 4+) ARCEUS prevents non-legendary/mythical pokemon from appearing (never appears on its own, unlocked as gift)
+            eventPokemonChanceBoosters['arceus'] = 0;
+            if (maxIndexKeyToLoad >= 4){
+                if (currentArceusNum > 0){
+                    eventPokemonChanceBases[''] = 0;
+                    eventPokemonChanceBoosters[''] = 0;
                     }
                 }
 
