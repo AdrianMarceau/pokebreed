@@ -2381,6 +2381,32 @@
             prevEvolution: 'shaymin'
             },
 
+        'arceus': {
+            order: indexOrder++,
+            token: 'arceus',
+            name: 'Arceus',
+            class: 'legendary',
+            visitorClass: '',
+            number: 493,
+            excludeFromZoneStats: true,
+            persistentVisitor: true,
+            formClass: 'type-variant',
+            dynamicForms: true,
+            typeForms: true,
+            syncTypeToForm: false,
+            baseForm: 'normal',
+            types: ['normal'],
+            genderRatio: {none: 1.0000},
+            lifePoints: -1,
+            baseStats: {hp: 120, phAttack: 120, phDefense: 120, spAttack: 120, spDefense: 120, speed: 120},
+            abilities: {0: 'multitype'},
+            height: 3.2,
+            weight: 320,
+            colors: ['white', 'black', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
