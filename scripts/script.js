@@ -4211,7 +4211,6 @@
                         // Collect the details of the next evolution
                         var nextEvolution = indexInfo.nextEvolutions[i];
                         var nextEvolutionInfo = PokemonSpeciesIndex[nextEvolution.species];
-                        //console.log('|- Checking indexInfo.nextEvolutions['+i+'] = ', nextEvolution, nextEvolutionInfo);
 
                         // Define vars to count the number of trigged evos and switch type
                         var totalMethods = 0;
@@ -4221,11 +4220,14 @@
                             var switchKind = nextEvolution.switch;
                             } else {
                             var switchKind = 'and';
-                            if (nextEvolution.method === 'mega-evolution'
-                                || nextEvolution.method === 'primal-reversion'){
+                            if (pokemonInfo.reachedAdulthood === true
+                                && (nextEvolution.method === 'mega-evolution'
+                                    || nextEvolution.method === 'primal-reversion')){
                                 switchKind = 'or';
                                 }
                             }
+
+                        //console.log('|- Checking indexInfo.nextEvolutions['+i+'] = ', nextEvolution, nextEvolutionInfo, 'switchKind:'+switchKind);
 
                         // Define a variable to hold the trigger chance value
                         var triggeredChance = 0;
@@ -4525,6 +4527,9 @@
             var existingArceus = typeof pokeSpecies['arceus'] !== 'undefined' ? pokeSpecies['arceus']['none'] : 0;
             //console.log('existingArceus = ', existingArceus);
 
+            // Prevent breeding of these special exception species
+            var preventBreeding = ['zygarde-cell'];
+
             // First generate an array of eggs to add (by species) with counts
             var eggsToAddIndex = {};
             var eggsToAddCount = 0;
@@ -4546,7 +4551,7 @@
                     }
 
                 // Check to see if we bypass normal breeding restrictions
-                var allowLegendaryBreeding = existingArceus > 0 ? true : false;
+                var allowLegendaryBreeding = existingArceus > 0 && preventBreeding.indexOf(pokeToken) === -1 ? true : false;
 
                 // Skip ahead if this species is incapable of breeding
                 if (indexInfo.eggGroups.indexOf('ditto') !== -1){
