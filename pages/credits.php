@@ -55,16 +55,23 @@
                 <strong>PTGigi</strong><br />
                 <a href="http://ptgigi.com/" target="_blank">http://ptgigi.com/</a><br />
                 <em>
-                    Baby Tangela, Baby Doduo*, Baby Goldeen*, Baby Vulpix (x2)*
+                    Baby Tangela, Baby Doduo, Baby Goldeen, Baby Vulpix (x2),
+                    Primal Dialga, Primal Palkia
                 </em>
+                <p style="font-size: 10px; color: #7a7a7a;">
+                    * Minor edits by Ageman20XX, originals can be found on
+                    <a href="http://gigisartdump.smackjeeves.com/comics/2639720/sprites-for-pokebox/" target="_blank">Gigi's Art Dump</a>
+                </p>
             </li>
             <li>
                 <strong>MBM / MegaBossMan</strong> <br />
                 <em>
-                    Baby Paras*
+                    Baby Paras
                 </em>
+                <p style="font-size: 10px; color: #7a7a7a;">
+                    * Minor edits by Ageman20XX
+                </p>
             </li>
         </ul>
-        <p style="font-size: 10px; color: #7a7a7a;">* Minor edits by Ageman20XX but much respect to the original artists</p>
     </div>
 </div>
