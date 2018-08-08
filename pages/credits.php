@@ -36,7 +36,7 @@
                 <strong>Ageman20XX / Adrian Marceau</strong><br />
                 <a href="http://plutolighthouse.net/" target="_blank">http://plutolighthouse.net/</a><br />
                 <em>
-                    Baby Meowth, Baby Grimer, Baby Kangaskhan, Baby Maractus,
+                    Baby Meowth (x2), Baby Grimer (x2), Baby Kangaskhan, Baby Maractus,
                     Estrus Nidoqueen, Burst Machamp, Frilled Heliolisk, Zenith Marshadow,
                     Snow Burmy, Snow Wormadam, Bubble Burmy, Bubble Wormadam,
                     Pumpkaboo Sizes (x4), Gourgeist Sizes (x4),
@@ -55,7 +55,7 @@
                 <strong>PTGigi</strong><br />
                 <a href="http://ptgigi.com/" target="_blank">http://ptgigi.com/</a><br />
                 <em>
-                    Baby Tangela, Baby Doduo*, Baby Goldeen*
+                    Baby Tangela, Baby Doduo*, Baby Goldeen*, Baby Vulpix (x2)*
                 </em>
             </li>
             <li>
@@ -65,6 +65,6 @@
                 </em>
             </li>
         </ul>
-        <p style="font-size: 10px; color: #7a7a7a;">* Minor edits by Ageman20XX</p>
+        <p style="font-size: 10px; color: #7a7a7a;">* Minor edits by Ageman20XX but much respect to the original artists</p>
     </div>
 </div>
