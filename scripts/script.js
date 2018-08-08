@@ -2211,6 +2211,9 @@
         if (typeof PokemonSpeciesSeen[pokemonToken] === 'undefined'){ PokemonSpeciesSeen[pokemonToken] = 0; }
         PokemonSpeciesSeen[pokemonToken]++;
 
+        // Pre-count the number of special pokemon on the field
+        var existingArceus = typeof addedPokemonSpecies['arceus'] !== 'undefined' ? addedPokemonSpecies['arceus'] : 0;
+
         // If this pokemon is in an egg, also create and entry for the species in the global egg counter
         if (isEgg){
             var addedPokemonEggs = thisZoneData.addedPokemonEggs;
@@ -2408,6 +2411,9 @@
                 newPokemon.formToken = indexData['baseForm'];
                 }
             }
+
+        // If this pokemon has a special relationship to on-field pokemon, modify base stats
+        if (pokemonToken === 'unown' && existingArceus > 0){ newPokemon.lifePoints = indexData.lifePoints + (indexData.lifePoints * existingArceus); }
 
         // Push the new pokemon to the list and collect its key
         var newKey = thisZoneData.currentPokemon.length;
@@ -2711,6 +2717,7 @@
                 if (typeValue > 0){ attractTypes[typeToken] = typeValue; }
                 else if (typeValue < 0){ repelTypes[typeToken] = typeValue; }
                 }
+            // Display attracted types in the appeal list
             if (!jQuery.isEmptyObject(attractTypes)){
                 var sortedKeys = getSortedKeys(attractTypes);
                 var statListMarkup = '';
@@ -2732,7 +2739,11 @@
                     }
                 //$('.stats .list.attract', $panelTypesOverview).append(statListMarkup);
                 $('.stats .list.attract', $panelTypesOverview).html(statListMarkup);
+                } else {
+                // There is no type appeal right now so clear the list
+                $('.stats .list.attract', $panelTypesOverview).empty();
                 }
+            // Display repelled types in the appeal list
             if (!jQuery.isEmptyObject(repelTypes)){
                 var sortedKeys = getSortedKeys(repelTypes);
                 var statListMarkup = '';
@@ -2755,6 +2766,9 @@
                     }
                 //$('.stats .list.repel', $panelTypesOverview).append(statListMarkup);
                 $('.stats .list.repel', $panelTypesOverview).html(statListMarkup);
+                } else {
+                // There is no type appeal right now so clear the list
+                $('.stats .list.repel', $panelTypesOverview).empty();
                 }
             }
 
@@ -3813,9 +3827,14 @@
         if (thisZoneData.currentPokemon.length){
             for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
 
+                // Collect this Pokemon's local/current and index info from the DB
                 var pokemonInfo = thisZoneData.currentPokemon[key];
                 var indexInfo = PokemonSpeciesIndex[pokemonInfo.token];
                 //console.log('-----\nChecking evolution data for ' + pokemonInfo.token, pokemonInfo, indexInfo);
+
+                // Collect this Pokemon's life points and adjust if necessary
+                var pokemonLifePoints = indexInfo.lifePoints;
+                if (typeof pokemonInfo.lifePoints !== 'undefined'){ pokemonLifePoints = pokemonInfo.lifePoints; }
 
                 // If pokemon is still an egg, skip growth cycles for now
                 if (pokemonInfo.eggCycles > 0){ continue; }
@@ -3871,16 +3890,29 @@
                         if (typeof indexInfo.possibleFormsTriggers !== 'undefined'){ var possibleFormsTriggers = indexInfo.possibleFormsTriggers; }
                         else { var possibleFormsTriggers = defaultTypeFormTriggers; }
                         var triggerTokens = Object.keys(possibleFormsTriggers);
-                        triggerTokens.sort(function(f1, f2){
-                            var t1 = possibleFormsTriggers[f1];
-                            var t2 = possibleFormsTriggers[f2];
-                            var t1val = thisZoneData.currentStats['types'][t1];
-                            var t2val = thisZoneData.currentStats['types'][t2];
-                            if (t1val > t2val){ return -1; }
-                            else if (t1val < t2val){ return 1; }
-                            else { return 0; }
-                            });
-                        if (pokemonInfo.formToken !== triggerTokens[0]){
+                        var newFormToken = pokemonInfo.formToken;
+                        // Check if type appeal exists yet, else simply collect the base form
+                        var typeAppealDiff = sumValues(thisZoneData.currentStats['types']);
+                        var typeAppealExists = typeof typeAppealDiff === 'number' && typeAppealDiff !== 0 ? true : false;
+                        //console.log('thisZoneData.currentStats[\'types\'] = ', thisZoneData.currentStats['types']);
+                        //console.log('typeAppealDiff = ', typeAppealDiff);
+                        //console.log('typeAppealExists = ', typeAppealExists);
+                        if (typeAppealExists === true){
+                            triggerTokens.sort(function(f1, f2){
+                                var t1 = possibleFormsTriggers[f1];
+                                var t2 = possibleFormsTriggers[f2];
+                                var t1val = thisZoneData.currentStats['types'][t1];
+                                var t2val = thisZoneData.currentStats['types'][t2];
+                                if (t1val > t2val){ return -1; }
+                                else if (t1val < t2val){ return 1; }
+                                else { return 0; }
+                                });
+                            var newFormToken = triggerTokens[0];
+                            } else if (typeof indexInfo.baseForm !== 'undefined'){
+                            var newFormToken = indexInfo.baseForm;
+                            }
+                        // If the Pokemon is not already in this form, change it now
+                        if (pokemonInfo.formToken !== newFormToken){
                             var formToken = triggerTokens[0];
                             var formType = possibleFormsTriggers[formToken];
                             pokemonInfo.formToken = formToken;
@@ -4362,8 +4394,8 @@
                     }
 
                 // If this Pokemon is not an adult has grown to its max life points, it's an adult now
-                if (indexInfo.lifePoints !== -1
-                    && pokemonInfo.growthCycles >= indexInfo.lifePoints
+                if (pokemonLifePoints !== -1
+                    && pokemonInfo.growthCycles >= pokemonLifePoints
                     && pokemonInfo.reachedAdulthood === false){
                     pokemonInfo.reachedAdulthood = true;
                     }
@@ -4395,8 +4427,8 @@
 
                 // If this pokemon has reached adulthood, every day they loose a little growth
                 if (pokemonInfo.reachedAdulthood === true
-                    && indexInfo.lifePoints !== -1){
-                    pokemonInfo.growthCycles -= Math.ceil(indexInfo.lifePoints * 0.10);
+                    && pokemonLifePoints !== -1){
+                    pokemonInfo.growthCycles -= Math.ceil(pokemonLifePoints * 0.10);
                     }
 
                 }
@@ -5063,6 +5095,8 @@
                 if (currentArceusNum > 0){
                     eventPokemonChanceBases[''] = 0;
                     eventPokemonChanceBoosters[''] = 0;
+                    eventPokemonChanceBases['unown'] = currentArceusNum * 10;
+                    eventPokemonChanceBoosters['unown'] = currentArceusNum * 2;
                     }
                 }
 
@@ -5153,7 +5187,7 @@
 
             // Apply any event-specific species or class boosters to the chance rating
             if (typeof eventPokemonChanceBases[pokeToken] !== 'undefined'){ pokeChance = eventPokemonChanceBases[pokeToken]; }
-            if (typeof eventPokemonChanceBases[pokeClass] !== 'undefined'){ pokeChance = eventPokemonChanceBases[pokeClass]; }
+            else if (typeof eventPokemonChanceBases[pokeClass] !== 'undefined'){ pokeChance = eventPokemonChanceBases[pokeClass]; }
 
             // Increase the chance of this pokemon appearing based on type appeal (give monotypes a boost)
             var pokeTypes = pokeInfo.types;
@@ -5222,7 +5256,7 @@
 
             // Apply any event-specific species or class boosters to the chance rating
             if (typeof eventPokemonChanceBoosters[pokeToken] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters[pokeToken]; }
-            if (typeof eventPokemonChanceBoosters[pokeClass] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters[pokeClass]; }
+            else if (typeof eventPokemonChanceBoosters[pokeClass] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters[pokeClass]; }
 
             // Decrease the chance if there is already a colony of this species
             if (typeof thisZoneData.addedPokemonSpecies[pokeToken] !== 'undefined'){
@@ -5837,9 +5871,15 @@
         return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
 
-    // Define a constant function for summing the values of an object
-    const sumValues = obj => {
-        Object.values(obj).reduce((a, b) => a + b);
+    // Define a function for calculating the sum of all values in an object
+    function sumValues( obj ) {
+        var sum = 0;
+        for( var el in obj ) {
+            if( obj.hasOwnProperty( el ) ) {
+                sum += parseFloat( obj[el] );
+                }
+            }
+        return sum;
     }
 
     // Define a function for removing an array element by its value
