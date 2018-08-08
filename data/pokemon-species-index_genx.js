@@ -108,7 +108,7 @@
         'baby-alolan-vulpix': {
             order: thisIndex.afterOrder('ninetales', 1),
             token: 'baby-alolan-vulpix',
-            name: 'Baby Alolan Vulpix',
+            name: 'Baby Alolan Vulpix', // [???]
             class: 'baby',
             formClass: 'baby-evolution',
             formClass2: 'regional-variant',
@@ -413,6 +413,47 @@
             prevEvolution: 'ditto'
             },
 
+        'primal-dialga': {
+            order: thisIndex.afterOrder('dialga'),
+            token: 'primal-dialga',
+            name: 'Primal Dialga',
+            class: 'legendary',
+            formClass: 'primal-reversion',
+            formToken: 'primal',
+            baseSpecies: 'dialga',
+            number: 483,
+            types: ['steel', 'dragon'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 140, phDefense: 140, spAttack: 170, spDefense: 120, speed: 110},
+            abilities: {0: 'telepathy'},
+            height: 5.9,
+            weight: 1025,
+            colors: ['white', 'blue', 'gray'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'dialga'
+            },
+        'primal-palkia': {
+            order: thisIndex.afterOrder('palkia'),
+            token: 'primal-palkia',
+            name: 'Primal Palkia',
+            class: 'legendary',
+            formClass: 'primal-reversion',
+            formToken: 'primal',
+            baseSpecies: 'palkia',
+            number: 484,
+            types: ['water', 'dragon'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 90, phAttack: 140, phDefense: 120, spAttack: 170, spDefense: 140, speed: 120},
+            abilities: {0: 'telepathy'},
+            height: 4.6,
+            weight: 504,
+            colors: ['purple', 'white', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'palkia'
+            },
+
         'baby-maractus': {
             order: thisIndex.beforeOrder('maractus'),
             token: 'baby-maractus',
@@ -481,6 +522,9 @@
         {base: 'mime-jr', species: 'ms-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'female', method3: 'level-up', value3: 25},
 
         {base: 'ditto', species: 'super-ditto', method: 'level-up', value: 10, method2: 'fusion-species', value2: 'ditto', switch: 'and'},
+
+        {base: 'dialga', species: 'primal-dialga', method: 'primal-reversion', value: 'adamant-orb'},
+        {base: 'palkia', species: 'primal-palkia', method: 'primal-reversion', value: 'lustrous-orb'},
 
         ]);
 
