@@ -2488,7 +2488,7 @@
         {base: 'kricketot', species: 'chatot'},
 
         // Legendary trigger relationships
-        // ---
+        {base: 'unown', species: 'arceus'},
 
         ]);
 
