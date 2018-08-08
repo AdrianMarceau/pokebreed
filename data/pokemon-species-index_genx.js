@@ -82,6 +82,55 @@
                 }]
             },
 
+        'baby-vulpix': {
+            order: thisIndex.beforeOrder('vulpix'),
+            token: 'baby-vulpix', // [???]
+            name: 'Baby Vulpix',
+            class: 'baby',
+            formClass: 'baby-evolution',
+            formToken: 'baby',
+            number: 37,
+            types: ['fire'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 19, phAttack: 21, phDefense: 20, spAttack: 25, spDefense: 33, speed: 33},
+            abilities: {0: 'flash-fire', hidden: 'drought'},
+            height: 0.6,
+            weight: 9.9,
+            colors: ['brown', 'orange'],
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'vulpix',
+                method: 'level-up',
+                value: 10
+                }]
+            },
+        'baby-alolan-vulpix': {
+            order: thisIndex.afterOrder('ninetales', 1),
+            token: 'baby-alolan-vulpix',
+            name: 'Baby Alolan Vulpix',
+            class: 'baby',
+            formClass: 'baby-evolution',
+            formClass2: 'regional-variant',
+            formToken: 'baby-alolan',
+            baseSpecies: 'baby-vulpix',
+            number: 37,
+            types: ['ice'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 19, phAttack: 21, phDefense: 20, spAttack: 25, spDefense: 33, speed: 33},
+            abilities: {0: 'snow-cloak', hidden: 'snow-warning'},
+            height: 0.6,
+            weight: 9.9,
+            colors: ['white', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'alolan-vulpix',
+                method: 'level-up',
+                value: 10
+                }]
+            },
+
         'baby-meowth': {
             order: thisIndex.beforeOrder('meowth'),
             token: 'baby-meowth',
@@ -112,7 +161,7 @@
             formClass: 'baby-evolution',
             formClass2: 'regional-variant',
             formToken: 'baby-alolan',
-            baseSpecies: 'meowth',
+            baseSpecies: 'baby-meowth',
             number: 52,
             types: ['dark'],
             baseStats: {hp: 20, phAttack: 17, phDefense: 17, spAttack: 25, spDefense: 20, speed: 45},
@@ -393,6 +442,8 @@
     // Update previous gen pokemon with alt base evolution data
     thisIndex.addAltBaseEvolutions([
         {base: 'paras', species: 'baby-paras', method: 'type-surge', value: 'bug'},
+        {base: 'vulpix', species: 'baby-vulpix', method: 'type-surge', value: 'fire'},
+        {base: 'alolan-vulpix', species: 'baby-alolan-vulpix', method: 'type-surge', value: 'ice'},
         {base: 'meowth', species: 'baby-meowth', method: 'type-surge', value: 'normal'},
         {base: 'alolan-meowth', species: 'baby-alolan-meowth', method: 'type-surge', value: 'dark'},
         {base: 'growlithe', species: 'baby-growlithe', method: 'type-surge', value: 'fire'},
