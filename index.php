@@ -148,16 +148,24 @@ if (isset($_GET['gen'])
                 </div>
 
                 <div class="overview floatlist species hidden">
-                    <div class="title">
-                        <strong class="main">Pokémon List</strong>
-                        <div class="subs">
-                            <strong class="sub alltime">All-Time <span class="count">0</span></strong>
-                            <strong class="sub current">Current <span class="count">0</span></strong>
+                    <div class="details stats">
+                        <div class="title">
+                            <strong class="main">Pokémon List</strong>
+                                <div class="delta">
+                                    <div>
+                                        <span class="icon"><i class="d"></i><i class="s"></i></span>
+                                        <span class="percent">0%</span>
+                                    </div>
+                                </div>
+                            <div class="subs">
+                                <strong class="sub alltime">All-Time <span class="count">0</span></strong>
+                                <strong class="sub current">Current <span class="count">0</span></strong>
+                            </div>
                         </div>
-                    </div>
-                    <div class="wrap">
-                        <ul class="list alltime"></ul>
-                        <ul class="list current"></ul>
+                        <div class="wrap">
+                            <ul class="list alltime"></ul>
+                            <ul class="list current"></ul>
+                        </div>
                     </div>
                 </div>
 

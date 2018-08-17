@@ -2621,6 +2621,10 @@
         $('.zone .date .data', $panelMainOverview).text(dateString);
         $('.zone .capacity .data', $panelMainOverview).text(thisZoneData.currentPokemon.length + ' / ' + thisZoneData.capacity);
 
+        // Update the difference (delta) between the two pokemon list sizes
+        var currentSpeciesDiff = Math.round(thisZoneData.currentStats.speciesDiff);
+        $('.stats .delta .percent', $panelSpeciesOverview).html(currentSpeciesDiff);
+
         // Update the difference (delta) between the two type appeal extremes
         var currentTypesDiff = Math.round(thisZoneData.currentStats.typesDiff);
         $('.stats .delta .percent', $panelTypesOverview).html(currentTypesDiff);
@@ -2643,6 +2647,28 @@
                 } else {
                 $('.stats .delta .d', $panelTypesOverview).css({opacity:1});
                 $('.stats .delta .z', $panelTypesOverview).css({opacity:0});
+                }
+
+            }
+
+        // (GEN X) If we're in the right generation, calculate Shadow-Power mechanics
+        if (maxIndexKeyToLoad >= 8){
+
+            // Calculate and highlight Z power if the value is high enough
+            var sEnergyMin = 25;
+            var sEnergyMax = 50;
+            var sEnergyDiff = sEnergyMax - sEnergyMin;
+            var sEnergyValue = currentSpeciesDiff / sEnergyMax;
+            var sEnergyPercent = Math.round(sEnergyValue * 100);
+            if (currentSpeciesDiff >= sEnergyMin){
+                var diffOver = currentSpeciesDiff - sEnergyMin;
+                if (diffOver >= sEnergyDiff){ deltaOpacity = 1; }
+                else { deltaOpacity = (diffOver / sEnergyDiff); }
+                $('.stats .delta .s', $panelSpeciesOverview).css({opacity:(deltaOpacity)});
+                $('.stats .delta .d', $panelSpeciesOverview).css({opacity:(1 - deltaOpacity)});
+                } else {
+                $('.stats .delta .d', $panelSpeciesOverview).css({opacity:1});
+                $('.stats .delta .s', $panelSpeciesOverview).css({opacity:0});
                 }
 
             }
@@ -3432,26 +3458,6 @@
         //console.log('currentZoneStats(Day '+thisZoneData.day+'B) = ', currentZoneStats);
         //console.log('thisZoneData.currentStats = ', thisZoneData.currentStats);
 
-        // (GEN 6+) If we're in the right generation, calculate Zygarde Cell mechanics
-        currentZoneStats['typesDiff'] = 0;
-        if (maxIndexKeyToLoad >= 6){
-
-            // Check to see if Critical or Extreme type appeal are in effect
-            var typeTokens = Object.keys(currentZoneStats['types']);
-            var highTypeValue = currentZoneStats['types'][typeTokens[0]];
-            var lowTypeValue = currentZoneStats['types'][typeTokens[typeTokens.length - 1]];
-            var typeValueDiff = highTypeValue - lowTypeValue;
-            currentZoneStats['typesDiff'] = typeValueDiff;
-            //console.log('Day '+ thisZoneData.day +' | typeValueDiff = ', typeValueDiff);
-            var extremeTypeAppeal = typeValueDiff >= 250 ? true : false;
-            if (extremeTypeAppeal && currentZoneFlags.indexOf('extremeTypeAppeal') === -1){ currentZoneFlags.push('extremeTypeAppeal'); }
-            else if (!extremeTypeAppeal && currentZoneFlags.indexOf('extremeTypeAppeal') !== -1){ arrayRemoveByValue(currentZoneFlags, 'extremeTypeAppeal'); }
-            var criticalTypeAppeal = typeValueDiff >= 300 ? true : false;
-            if (criticalTypeAppeal && currentZoneFlags.indexOf('criticalTypeAppeal') === -1){ currentZoneFlags.push('criticalTypeAppeal'); }
-            else if (!criticalTypeAppeal && currentZoneFlags.indexOf('criticalTypeAppeal') !== -1){ arrayRemoveByValue(currentZoneFlags, 'criticalTypeAppeal'); }
-
-            }
-
         // (GEN 7+) If we're in the right generation, calculate Ultra Space mechanics
         if (maxIndexKeyToLoad >= 7){
 
@@ -3516,6 +3522,45 @@
 
         //console.log('Day '+ thisZoneData.day +' | currentZoneFlags = ', currentZoneFlags);
         //console.log('currentZoneStats(Day '+thisZoneData.day+'A) = ', currentZoneStats);
+
+        // Calculate the current species difference (delta) between the species in the box now vs species in the box ever
+        currentZoneStats['speciesDiff'] = 0;
+        if (true){
+
+            // Check to see if Critical or Extreme species diffs are in effect
+            var addedPokemonTokens = Object.keys(thisZoneData.addedPokemonSpecies);
+            var currentPokemonTokens = Object.keys(currentZoneStats['species']);
+            var speciesCountDiff = addedPokemonTokens.length - currentPokemonTokens.length;
+            currentZoneStats['speciesDiff'] = speciesCountDiff;
+            //console.log('Day '+ thisZoneData.day +' | speciesCountDiff = ', speciesCountDiff);
+            var extremeSpeciesExtinction = speciesCountDiff >= 25 ? true : false;
+            if (extremeSpeciesExtinction && currentZoneFlags.indexOf('extremeSpeciesExtinction') === -1){ currentZoneFlags.push('extremeSpeciesExtinction'); }
+            else if (!extremeSpeciesExtinction && currentZoneFlags.indexOf('extremeSpeciesExtinction') !== -1){ arrayRemoveByValue(currentZoneFlags, 'extremeSpeciesExtinction'); }
+            var criticalSpeciesExtinction = speciesCountDiff >= 50 ? true : false;
+            if (criticalSpeciesExtinction && currentZoneFlags.indexOf('criticalSpeciesExtinction') === -1){ currentZoneFlags.push('criticalSpeciesExtinction'); }
+            else if (!criticalSpeciesExtinction && currentZoneFlags.indexOf('criticalSpeciesExtinction') !== -1){ arrayRemoveByValue(currentZoneFlags, 'criticalSpeciesExtinction'); }
+
+            }
+
+        // Calculate the current type difference (delta) between the highest attract vs highest repel
+        currentZoneStats['typesDiff'] = 0;
+        if (true){
+
+            // Check to see if Critical or Extreme type appeal are in effect
+            var typeTokens = Object.keys(currentZoneStats['types']);
+            var highTypeValue = currentZoneStats['types'][typeTokens[0]];
+            var lowTypeValue = currentZoneStats['types'][typeTokens[typeTokens.length - 1]];
+            var typeValueDiff = highTypeValue - lowTypeValue;
+            currentZoneStats['typesDiff'] = typeValueDiff;
+            //console.log('Day '+ thisZoneData.day +' | typeValueDiff = ', typeValueDiff);
+            var extremeTypeAppeal = typeValueDiff >= 250 ? true : false;
+            if (extremeTypeAppeal && currentZoneFlags.indexOf('extremeTypeAppeal') === -1){ currentZoneFlags.push('extremeTypeAppeal'); }
+            else if (!extremeTypeAppeal && currentZoneFlags.indexOf('extremeTypeAppeal') !== -1){ arrayRemoveByValue(currentZoneFlags, 'extremeTypeAppeal'); }
+            var criticalTypeAppeal = typeValueDiff >= 300 ? true : false;
+            if (criticalTypeAppeal && currentZoneFlags.indexOf('criticalTypeAppeal') === -1){ currentZoneFlags.push('criticalTypeAppeal'); }
+            else if (!criticalTypeAppeal && currentZoneFlags.indexOf('criticalTypeAppeal') !== -1){ arrayRemoveByValue(currentZoneFlags, 'criticalTypeAppeal'); }
+
+            }
 
         // Loop through and assign the new zone stat values to the parent array
         var zoneStatTokens = Object.keys(currentZoneStats);

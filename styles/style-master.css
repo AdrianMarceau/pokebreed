@@ -861,7 +861,7 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     position: relative;
 }
 
-.panel .overview.types .title .delta {
+.panel .overview .stats .title .delta {
     display: block;
     text-align: center;
     position: absolute;
@@ -873,12 +873,12 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     font-weight: normal;
     color: #cacaca;
 }
-.panel .overview.types .title .delta > div {
+.panel .overview .stats .title .delta > div {
     display: inline-block;
     margin: 0 auto;
     width: auto;
 }
-.panel .overview.types .title .delta .icon {
+.panel .overview .stats .title .delta .icon {
     display: inline-block;
     width: 8px;
     height: 10px;
@@ -886,7 +886,7 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     position: relative;
     margin-right: 2px;
 }
-.panel .overview.types .title .delta .icon i {
+.panel .overview .stats .title .delta .icon i {
     position: absolute;
     top: 0;
     left: 0;
@@ -894,26 +894,31 @@ body[data-speed="slow"] .panel .overview.main .details.pokemon .list.slots li.sl
     text-align: center;
     font-style: normal;
 }
-.panel .overview.types .title .delta .icon i:before {
+.panel .overview .stats .title .delta .icon i:before {
     content: "";
 }
-.panel .overview.types .title .delta .icon i.d {
+.panel .overview .stats .title .delta .icon i.d {
     z-index: 2;
     opacity: 1.0;
 }
-.panel .overview.types .title .delta .icon i.d:before {
+.panel .overview .stats .title .delta .icon i.d:before {
     content: "\1d6ab";
     color: #969696;
 }
-.panel .overview.types .title .delta .icon i.z {
+.panel .overview .stats .title .delta .icon i.z,
+.panel .overview .stats .title .delta .icon i.s {
     z-index: 1;
     opacity: 0.0;
 }
-.panel .overview.types .title .delta .icon i.z:before {
+.panel .overview .stats .title .delta .icon i.z:before {
     content: "\1d419";
     color: #8bec72;
 }
-.panel .overview.types .title .delta .percent {
+.panel .overview .stats .title .delta .icon i.s:before {
+    content: "\1d6f4";
+    color: #ac72ec;
+}
+.panel .overview .stats .title .delta .percent {
     display: inline-block;
 }
 
