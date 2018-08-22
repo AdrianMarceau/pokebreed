@@ -578,6 +578,28 @@
             eggGroups: ['undiscovered']
             },
 
+        'shadow-entei': {
+            order: indexOrder++,
+            token: 'shadow-entei',
+            name: 'Shadow Entei',
+            class: 'legendary',
+            formClass: 'shadow-variant',
+            formToken: 'shadow',
+            baseSpecies: 'entei',
+            number: 244,
+            dexNumber: 1004,
+            displayNumber: 1004,
+            types: ['shadow', 'fire'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 115, phAttack: 115, phDefense: 85, spAttack: 90, spDefense: 75, speed: 100},
+            abilities: {0: 'pressure', hidden: 'inner-focus'},
+            height: 2.1,
+            weight: 198,
+            colors: ['gray', 'black', 'blue', 'white', 'red'],
+            eggCycles: 80,
+            eggGroups: ['undiscovered']
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
