@@ -622,6 +622,48 @@
             eggGroups: ['undiscovered'],
             },
 
+        'shadow-latios': {
+            order: indexOrder++,
+            token: 'shadow-latios',
+            name: 'Shadow Latios',
+            class: 'legendary',
+            formClass: 'shadow-variant',
+            formToken: 'shadow',
+            baseSpecies: 'latios',
+            number: 381,
+            dexNumber: 1006,
+            displayNumber: 1006,
+            types: ['shadow', 'dragon'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 80, phAttack: 90, phDefense: 80, spAttack: 130, spDefense: 110, speed: 110},
+            abilities: {0: 'levitate'},
+            height: 2,
+            weight: 60,
+            colors: ['purple', 'blue', 'white', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+        'shadow-mega-latios': {
+            order: indexOrder++,
+            token: 'shadow-mega-latios',
+            name: 'Shadow Mega Latios',
+            class: 'legendary',
+            formClass: 'shadow-variant',
+            formToken: 'shadow-mega',
+            baseSpecies: 'mega-latios',
+            number: 381,
+            types: ['shadow', 'dragon'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 80, phAttack: 130, phDefense: 100, spAttack: 160, spDefense: 120, speed: 110},
+            abilities: {0: 'levitate'},
+            height: 2.3,
+            weight: 70,
+            colors: ['purple', 'blue', 'white', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'shadow-latios'
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
