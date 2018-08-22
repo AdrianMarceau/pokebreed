@@ -557,7 +557,7 @@
             },
 
         'shadow-lugia': {
-            order: indexOrder++,
+            order: thisIndex.afterOrder('lugia', 1),
             token: 'shadow-lugia',
             name: 'Shadow Lugia',
             class: 'legendary',
@@ -565,7 +565,7 @@
             formToken: 'shadow',
             baseSpecies: 'lugia',
             number: 249,
-            dexNumber: 1003,
+            //dexNumber: 1003,
             displayNumber: 1003,
             types: ['shadow', 'flying'],
             genderRatio: {none: 1.0000},
@@ -579,7 +579,7 @@
             },
 
         'shadow-entei': {
-            order: indexOrder++,
+            order: thisIndex.afterOrder('entei', 1),
             token: 'shadow-entei',
             name: 'Shadow Entei',
             class: 'legendary',
@@ -587,7 +587,7 @@
             formToken: 'shadow',
             baseSpecies: 'entei',
             number: 244,
-            dexNumber: 1004,
+            //dexNumber: 1004,
             displayNumber: 1004,
             types: ['shadow', 'fire'],
             genderRatio: {none: 1.0000},
@@ -601,7 +601,7 @@
             },
 
         'shadow-celebi': {
-            order: indexOrder++,
+            order: thisIndex.afterOrder('celebi', 1),
             token: 'shadow-celebi',
             name: 'Shadow Celebi',
             class: 'mythical',
@@ -609,7 +609,7 @@
             formToken: 'shadow',
             baseSpecies: 'celebi',
             number: 251,
-            dexNumber: 1005,
+            //dexNumber: 1005,
             displayNumber: 1005,
             types: ['shadow', 'grass'],
             genderRatio: {none: 1.0000},
@@ -623,7 +623,7 @@
             },
 
         'shadow-latios': {
-            order: indexOrder++,
+            order: thisIndex.afterOrder('latios', 1),
             token: 'shadow-latios',
             name: 'Shadow Latios',
             class: 'legendary',
@@ -631,7 +631,7 @@
             formToken: 'shadow',
             baseSpecies: 'latios',
             number: 381,
-            dexNumber: 1006,
+            //dexNumber: 1006,
             displayNumber: 1006,
             types: ['shadow', 'dragon'],
             genderRatio: {male: 1.0000},
@@ -644,7 +644,7 @@
             eggGroups: ['undiscovered']
             },
         'shadow-mega-latios': {
-            order: indexOrder++,
+            order: thisIndex.afterOrder('latios', 2),
             token: 'shadow-mega-latios',
             name: 'Shadow Mega Latios',
             class: 'legendary',
@@ -652,6 +652,8 @@
             formToken: 'shadow-mega',
             baseSpecies: 'mega-latios',
             number: 381,
+            //dexNumber: 1007,
+            displayNumber: 1007,
             types: ['shadow', 'dragon'],
             genderRatio: {male: 1.0000},
             baseStats: {hp: 80, phAttack: 130, phDefense: 100, spAttack: 160, spDefense: 120, speed: 110},

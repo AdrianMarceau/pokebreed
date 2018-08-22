@@ -768,8 +768,16 @@
                 var regVariantA = false;
                 var regVariantB = false;
                 if (infoA['gameGeneration'] !== infoB['gameGeneration']){
-                    if (infoA['formClass'] === 'regional-variant'){ regVariantA = true; }
-                    if (infoB['formClass'] === 'regional-variant'){ regVariantB = true; }
+                    if (infoA['formClass'] === 'regional-variant'
+                        || infoA['formClass'] === 'baby-evolution'
+                        || infoA['formClass'] === 'shadow-variant'){
+                        regVariantA = true;
+                        }
+                    if (infoB['formClass'] === 'regional-variant'
+                        || infoB['formClass'] === 'baby-evolution'
+                        || infoB['formClass'] === 'shadow-variant'){
+                        regVariantB = true;
+                        }
                     }
 
                 var genderVariantA = false;
