@@ -556,6 +556,28 @@
             prevEvolution: 'shadow-mewtwo'
             },
 
+        'shadow-lugia': {
+            order: indexOrder++,
+            token: 'shadow-lugia',
+            name: 'Shadow Lugia',
+            class: 'legendary',
+            formClass: 'shadow-variant',
+            formToken: 'shadow',
+            baseSpecies: 'lugia',
+            number: 249,
+            dexNumber: 1003,
+            displayNumber: 1003,
+            types: ['shadow', 'flying'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 106, phAttack: 90, phDefense: 130, spAttack: 90, spDefense: 154, speed: 110},
+            abilities: {0: 'pressure', hidden: 'multiscale'},
+            height: 5.2,
+            weight: 216,
+            colors: ['purple', 'blue', 'white', 'red'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
