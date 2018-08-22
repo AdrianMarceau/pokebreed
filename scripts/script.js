@@ -2961,7 +2961,8 @@
                 }
 
             // Update the visitor appeal area with new sprites
-            if (nextVisitors.length > 0){
+            if (totalVisitorChance > 0
+                && nextVisitors.length > 0){
 
                 // Generate new species markup for the overview panel
                 var visitorListMarkup = '';
@@ -2994,9 +2995,14 @@
                     }
 
                 // Append generated visitor list markup to the panel (fade in if necessary)
-                var $visitorList = $('.list', $panelVisitorsOverview);
-                $visitorList.html(visitorListMarkup);
+                $('.list', $panelVisitorsOverview).html(visitorListMarkup);
                 $panelVisitorsOverview.removeClass('hidden');
+
+                } else {
+
+                // Hide the visitor list as none are currently queued
+                $('.list', $panelVisitorsOverview).empty();
+                $panelVisitorsOverview.addClass('hidden');
 
                 }
 
@@ -5158,6 +5164,20 @@
                     }
                 }
 
+            // (GEN X+) SHADOW POKEMON prevent all visitor pokemon from appearing
+            eventPokemonChanceBases['shadow-variant'] = 0;
+            eventPokemonChanceBoosters['shadow-variant'] = 0;
+            if (maxIndexKeyToLoad >= 8){
+                var currentSpeciesTokens = '|' + Object.keys(zoneStats['species']).join('|');
+                var shadowPokemonOnField = currentSpeciesTokens.indexOf('|shadow-') !== -1 ? true : false;
+                //console.log('currentSpeciesTokens = ', currentSpeciesTokens);
+                //console.log('shadowPokemonOnField = ', shadowPokemonOnField);
+                if (shadowPokemonOnField){
+                    eventPokemonChanceBases['*'] = 0;
+                    eventPokemonChanceBoosters['*'] = 0;
+                    }
+                }
+
             }
 
         //console.log(thisZoneData.date.year + ' / ' + thisZoneData.date.month + ' / ' + thisZoneData.date.day);
@@ -5229,6 +5249,7 @@
 
             // Check to see if this is a basic or a special pokemon
             var pokeClass = typeof pokeInfo.visitorClass !== 'undefined' ? pokeInfo.visitorClass : pokeInfo.class;
+            var pokeFormClass = typeof pokeInfo.formClass !== 'undefined' ? pokeInfo.formClass : '';
             var isBasicPokemon = pokeClass === '' ? true : false;
             var isSpecialPokemon = false;
             if (pokeClass !== ''
@@ -5244,7 +5265,9 @@
             if (typeof pokeInfo.persistentVisitor !== 'undefined'){ persistentVisitor = pokeInfo.persistentVisitor; }
 
             // Apply any event-specific species or class boosters to the chance rating
-            if (typeof eventPokemonChanceBases[pokeToken] !== 'undefined'){ pokeChance = eventPokemonChanceBases[pokeToken]; }
+            if (typeof eventPokemonChanceBases['*'] !== 'undefined'){ pokeChance = eventPokemonChanceBases['*']; }
+            else if (typeof eventPokemonChanceBases[pokeToken] !== 'undefined'){ pokeChance = eventPokemonChanceBases[pokeToken]; }
+            else if (typeof eventPokemonChanceBases[pokeFormClass] !== 'undefined'){ pokeChance = eventPokemonChanceBases[pokeFormClass]; }
             else if (typeof eventPokemonChanceBases[pokeClass] !== 'undefined'){ pokeChance = eventPokemonChanceBases[pokeClass]; }
 
             // Increase the chance of this pokemon appearing based on type appeal (give monotypes a boost)
@@ -5313,7 +5336,9 @@
                 }
 
             // Apply any event-specific species or class boosters to the chance rating
-            if (typeof eventPokemonChanceBoosters[pokeToken] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters[pokeToken]; }
+            if (typeof eventPokemonChanceBoosters['*'] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters['*']; }
+            else if (typeof eventPokemonChanceBoosters[pokeToken] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters[pokeToken]; }
+            else if (typeof eventPokemonChanceBoosters[pokeFormClass] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters[pokeFormClass]; }
             else if (typeof eventPokemonChanceBoosters[pokeClass] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters[pokeClass]; }
 
             // Decrease the chance if there is already a colony of this species
