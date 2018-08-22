@@ -600,6 +600,28 @@
             eggGroups: ['undiscovered']
             },
 
+        'shadow-celebi': {
+            order: indexOrder++,
+            token: 'shadow-celebi',
+            name: 'Shadow Celebi',
+            class: 'mythical',
+            formClass: 'shadow-variant',
+            formToken: 'shadow',
+            baseSpecies: 'celebi',
+            number: 251,
+            dexNumber: 1005,
+            displayNumber: 1005,
+            types: ['shadow', 'grass'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 100, phDefense: 100, spAttack: 100, spDefense: 100, speed: 100},
+            abilities: {0: 'natural-cure'},
+            height: 0.6,
+            weight: 5,
+            colors: ['gray', 'purple', 'red'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
