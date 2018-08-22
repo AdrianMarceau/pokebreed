@@ -477,6 +477,85 @@
                 }]
             },
 
+        'shadow-mewtwo': {
+            order: thisIndex.afterOrder('mewtwo', 3),
+            token: 'shadow-mewtwo',
+            name: 'Shadow Mewtwo',
+            class: 'legendary',
+            formClass: 'shadow-variant',
+            formToken: 'shadow',
+            baseSpecies: 'mewtwo',
+            number: 150,
+            //dexNumber: 1000,
+            displayNumber: 1000,
+            types: ['shadow'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 106, phAttack: 110, phDefense: 90, spAttack: 154, spDefense: 90, speed: 130},
+            abilities: {0: 'pressure', hidden: 'unnerve'},
+            height: 2,
+            weight: 122,
+            colors: ['gray', 'yellow', 'black'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'shadow-mega-mewtwo-x',
+                method: 'mega-evolution',
+                value: 'mewtwonite-x',
+                method2: 'type-appeal',
+                value2: 'fighting'
+                }, {
+                species: 'shadow-mega-mewtwo-y',
+                method: 'mega-evolution',
+                value: 'mewtwonite-y',
+                method2: 'type-appeal',
+                value2: 'psychic'
+                }]
+            },
+        'shadow-mega-mewtwo-x': {
+            order: thisIndex.afterOrder('mewtwo', 4),
+            token: 'shadow-mega-mewtwo-x',
+            name: 'Shadow Mega Mewtwo X',
+            class: 'legendary',
+            formClass: 'shadow-variant',
+            formToken: 'shadow-mega-x',
+            baseSpecies: 'mega-mewtwo-x',
+            number: 150,
+            //dexNumber: 1001,
+            displayNumber: 1001,
+            types: ['shadow', 'fighting'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 106, phAttack: 190, phDefense: 100, spAttack: 154, spDefense: 100, speed: 130},
+            abilities: {0: 'steadfast'},
+            height: 2.3,
+            weight: 127,
+            colors: ['white', 'purple', 'red'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'shadow-mewtwo'
+            },
+        'shadow-mega-mewtwo-y': {
+            order: thisIndex.afterOrder('mewtwo', 5),
+            token: 'shadow-mega-mewtwo-y',
+            name: 'Shadow Mega Mewtwo Y',
+            class: 'legendary',
+            formClass: 'shadow-variant',
+            formToken: 'shadow-mega-y',
+            baseSpecies: 'mega-mewtwo-y',
+            number: 150,
+            //dexNumber: 1002,
+            displayNumber: 1002,
+            types: ['shadow', 'psychic'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 106, phAttack: 150, phDefense: 70, spAttack: 194, spDefense: 120, speed: 140},
+            abilities: {0: 'insomnia'},
+            height: 1.5,
+            weight: 33,
+            colors: ['purple', 'white', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'shadow-mewtwo'
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
