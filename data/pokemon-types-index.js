@@ -265,7 +265,23 @@
                 resistances: ['bug', 'dark', 'fighting'],
                 immunities: ['dragon']
                 }
+            },
+
+        shadow: {
+            order: indexOrder++,
+            token: 'shadow',
+            name: 'Shadow',
+            colour: '705898',
+            matchups: {
+                strengths: ['shadow'],
+                handicaps: [],
+                futilities: [],
+                weaknesses: ['shadow'],
+                resistances: [],
+                immunities: []
+                }
             }
+
         };
 
     // Update the global index order with current value
