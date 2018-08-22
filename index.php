@@ -217,8 +217,8 @@ if (isset($_GET['gen'])
                                 <div class="options">
                                     <a class="option" data-gen="all">All</a>
                                     <? for ($gen = 1; $gen <= $allowed_generations; $gen++){ ?>
-                                        <? if ($gen === 8){ break; } ?>
-                                        <a class="option" data-gen="<?= $gen ?>"><?= $gen ?></a>
+                                        <? $genx = $gen === 8 ? 'x' : $gen; ?>
+                                        <a class="option" data-gen="<?= $genx ?>"><?= ucfirst($genx) ?></a>
                                     <? } ?>
                                 </div>
                             </div>
