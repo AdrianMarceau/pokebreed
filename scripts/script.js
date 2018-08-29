@@ -769,13 +769,11 @@
                 var regVariantB = false;
                 if (infoA['gameGeneration'] !== infoB['gameGeneration']){
                     if (infoA['formClass'] === 'regional-variant'
-                        || infoA['formClass'] === 'baby-evolution'
-                        || infoA['formClass'] === 'shadow-variant'){
+                        || infoA['formClass'] === 'baby-evolution'){
                         regVariantA = true;
                         }
                     if (infoB['formClass'] === 'regional-variant'
-                        || infoB['formClass'] === 'baby-evolution'
-                        || infoB['formClass'] === 'shadow-variant'){
+                        || infoB['formClass'] === 'baby-evolution'){
                         regVariantB = true;
                         }
                     }
@@ -2629,10 +2627,6 @@
         $('.zone .date .data', $panelMainOverview).text(dateString);
         $('.zone .capacity .data', $panelMainOverview).text(thisZoneData.currentPokemon.length + ' / ' + thisZoneData.capacity);
 
-        // Update the difference (delta) between the two pokemon list sizes
-        var currentSpeciesDiff = Math.round(thisZoneData.currentStats.speciesDiff);
-        $('.stats .delta .percent', $panelSpeciesOverview).html(currentSpeciesDiff);
-
         // Update the difference (delta) between the two type appeal extremes
         var currentTypesDiff = Math.round(thisZoneData.currentStats.typesDiff);
         $('.stats .delta .percent', $panelTypesOverview).html(currentTypesDiff);
@@ -2655,28 +2649,6 @@
                 } else {
                 $('.stats .delta .d', $panelTypesOverview).css({opacity:1});
                 $('.stats .delta .z', $panelTypesOverview).css({opacity:0});
-                }
-
-            }
-
-        // (GEN X) If we're in the right generation, calculate Shadow-Power mechanics
-        if (maxIndexKeyToLoad >= 8){
-
-            // Calculate and highlight Z power if the value is high enough
-            var sEnergyMin = 25;
-            var sEnergyMax = 50;
-            var sEnergyDiff = sEnergyMax - sEnergyMin;
-            var sEnergyValue = currentSpeciesDiff / sEnergyMax;
-            var sEnergyPercent = Math.round(sEnergyValue * 100);
-            if (currentSpeciesDiff >= sEnergyMin){
-                var diffOver = currentSpeciesDiff - sEnergyMin;
-                if (diffOver >= sEnergyDiff){ deltaOpacity = 1; }
-                else { deltaOpacity = (diffOver / sEnergyDiff); }
-                $('.stats .delta .s', $panelSpeciesOverview).css({opacity:(deltaOpacity)});
-                $('.stats .delta .d', $panelSpeciesOverview).css({opacity:(1 - deltaOpacity)});
-                } else {
-                $('.stats .delta .d', $panelSpeciesOverview).css({opacity:1});
-                $('.stats .delta .s', $panelSpeciesOverview).css({opacity:0});
                 }
 
             }
@@ -3536,25 +3508,6 @@
 
         //console.log('Day '+ thisZoneData.day +' | currentZoneFlags = ', currentZoneFlags);
         //console.log('currentZoneStats(Day '+thisZoneData.day+'A) = ', currentZoneStats);
-
-        // Calculate the current species difference (delta) between the species in the box now vs species in the box ever
-        currentZoneStats['speciesDiff'] = 0;
-        if (true){
-
-            // Check to see if Critical or Extreme species diffs are in effect
-            var addedPokemonTokens = Object.keys(thisZoneData.addedPokemonSpecies);
-            var currentPokemonTokens = Object.keys(currentZoneStats['species']);
-            var speciesCountDiff = addedPokemonTokens.length - currentPokemonTokens.length;
-            currentZoneStats['speciesDiff'] = speciesCountDiff;
-            //console.log('Day '+ thisZoneData.day +' | speciesCountDiff = ', speciesCountDiff);
-            var extremeSpeciesExtinction = speciesCountDiff >= 25 ? true : false;
-            if (extremeSpeciesExtinction && currentZoneFlags.indexOf('extremeSpeciesExtinction') === -1){ currentZoneFlags.push('extremeSpeciesExtinction'); }
-            else if (!extremeSpeciesExtinction && currentZoneFlags.indexOf('extremeSpeciesExtinction') !== -1){ arrayRemoveByValue(currentZoneFlags, 'extremeSpeciesExtinction'); }
-            var criticalSpeciesExtinction = speciesCountDiff >= 50 ? true : false;
-            if (criticalSpeciesExtinction && currentZoneFlags.indexOf('criticalSpeciesExtinction') === -1){ currentZoneFlags.push('criticalSpeciesExtinction'); }
-            else if (!criticalSpeciesExtinction && currentZoneFlags.indexOf('criticalSpeciesExtinction') !== -1){ arrayRemoveByValue(currentZoneFlags, 'criticalSpeciesExtinction'); }
-
-            }
 
         // Calculate the current type difference (delta) between the highest attract vs highest repel
         currentZoneStats['typesDiff'] = 0;
@@ -5168,6 +5121,8 @@
             eventPokemonChanceBases['shadow-variant'] = 0;
             eventPokemonChanceBoosters['shadow-variant'] = 0;
             if (maxIndexKeyToLoad >= 8){
+
+                // Check to see if any shadow pokemon are on the field and block visitors if so
                 var currentSpeciesTokens = '|' + Object.keys(zoneStats['species']).join('|');
                 var shadowPokemonOnField = currentSpeciesTokens.indexOf('|shadow-') !== -1 ? true : false;
                 //console.log('currentSpeciesTokens = ', currentSpeciesTokens);
@@ -5176,6 +5131,7 @@
                     eventPokemonChanceBases['*'] = 0;
                     eventPokemonChanceBoosters['*'] = 0;
                     }
+
                 }
 
             }
@@ -5335,12 +5291,6 @@
                     }
                 }
 
-            // Apply any event-specific species or class boosters to the chance rating
-            if (typeof eventPokemonChanceBoosters['*'] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters['*']; }
-            else if (typeof eventPokemonChanceBoosters[pokeToken] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters[pokeToken]; }
-            else if (typeof eventPokemonChanceBoosters[pokeFormClass] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters[pokeFormClass]; }
-            else if (typeof eventPokemonChanceBoosters[pokeClass] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters[pokeClass]; }
-
             // Decrease the chance if there is already a colony of this species
             if (typeof thisZoneData.addedPokemonSpecies[pokeToken] !== 'undefined'){
                 //console.log('numAddedAlready ', pokeToken, numAddedAlready);
@@ -5355,6 +5305,12 @@
                     //console.log('pokeChance ', pokeToken, pokeChance);
                     }
                 }
+
+            // Apply any event-specific species or class boosters to the chance rating
+            if (typeof eventPokemonChanceBoosters[pokeFormClass] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters[pokeFormClass]; }
+            if (typeof eventPokemonChanceBoosters[pokeClass] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters[pokeClass]; }
+            if (typeof eventPokemonChanceBoosters[pokeToken] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters[pokeToken]; }
+            if (typeof eventPokemonChanceBoosters['*'] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters['*']; }
 
             // If the chance was more than zero, push into the queue
             if ((pokeChance > 0 || isSpecialPokemon)
@@ -5391,9 +5347,14 @@
         //console.log('triggerZoneVisitor(visitorKind)', visitorKind);
         if (typeof visitorKind !== 'string'){ visitorKind = 'auto'; }
 
+        // Collect visitor appeal and sum all the chance values (return false if zero)
+        var currentVisitorAppeal = thisZoneData.currentStats['visitorAppeal'];
+        var currentVisitorAppealTotal = sumValuesByKey(currentVisitorAppeal, 'chance');
+        //console.log('currentVisitorAppealTotal = ', currentVisitorAppealTotal, currentVisitorAppeal);
+        if (!(currentVisitorAppealTotal > 0)){ return false; }
+
         // Collect the visitor token based on kind, either directly or whatever is next in line
         var visitorToken = false;
-        var currentVisitorAppeal = thisZoneData.currentStats['visitorAppeal'];
         if (visitorKind !== 'auto'
             && typeof PokemonSpeciesIndex[visitorKind] !== 'undefined'){
             visitorToken = visitorKind;
@@ -5958,8 +5919,24 @@
     function sumValues( obj ) {
         var sum = 0;
         for( var el in obj ) {
-            if( obj.hasOwnProperty( el ) ) {
+            if( obj.hasOwnProperty( el )
+                && typeof obj[el] === 'number') {
                 sum += parseFloat( obj[el] );
+                }
+            }
+        return sum;
+    }
+
+    // Define a function for calculating the sum of all values in an object
+    function sumValuesByKey( obj, key ) {
+        if (typeof obj === 'undefined'){ return false; }
+        if (typeof key === 'undefined'){ return false; }
+        var sum = 0;
+        var pKeys = Object.keys(obj);
+        for (var i = 0; i < pKeys.length; i++){
+            var sObj = obj[i];
+            if (typeof sObj[key] === 'number'){
+                sum += sObj[key];
                 }
             }
         return sum;

@@ -151,12 +151,6 @@ if (isset($_GET['gen'])
                     <div class="details stats">
                         <div class="title">
                             <strong class="main">Pokémon List</strong>
-                                <div class="delta">
-                                    <div>
-                                        <span class="icon"><i class="d"></i><i class="s"></i></span>
-                                        <span class="percent">0%</span>
-                                    </div>
-                                </div>
                             <div class="subs">
                                 <strong class="sub alltime">All-Time <span class="count">0</span></strong>
                                 <strong class="sub current">Current <span class="count">0</span></strong>
