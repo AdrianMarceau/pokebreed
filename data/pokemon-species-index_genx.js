@@ -134,7 +134,7 @@
         'baby-meowth': {
             order: thisIndex.beforeOrder('meowth'),
             token: 'baby-meowth',
-            name: 'Baby Meowth',  // Meowzy / Meowny / Purrchance / [Purrzy]
+            name: 'Baby Meowth',  // [Meowzy] / Meowny / Purrchance / Purrzy
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
@@ -321,7 +321,7 @@
         'baby-kangaskhan': {
             order: thisIndex.beforeOrder('kangaskhan'),
             token: 'baby-kangaskhan',
-            name: 'Baby Kangaskhan',
+            name: 'Baby Kangaskhan', // Kangaskid, Roogaby, [Kangaby]
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
