@@ -454,6 +454,37 @@
             prevEvolution: 'palkia'
             },
 
+        'baby-tauros': {
+            order: thisIndex.beforeOrder('tauros'),
+            token: 'baby-tauros',
+            name: 'Baby Tauros',  //  Calfling, Caffling, [Kaffling]
+            class: 'baby',
+            formClass: 'baby-evolution',
+            formToken: 'baby',
+            number: 128,
+            types: ['normal'],
+            baseStats: {hp: 42, phAttack: 45, phDefense: 50, spAttack: 20, spDefense: 35, speed: 52},
+            abilities: {0: 'intimidate', 1: 'anger-point', hidden: 'sheer-force'},
+            height: 0.7,
+            weight: 40.9,
+            colors: ['brown', 'white', 'gray', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'tauros',
+                method: 'level-up',
+                value: 11,
+                method2: 'gender',
+                value2: 'male'
+                }, {
+                species: 'miltank',
+                method: 'level-up',
+                value: 9,
+                method2: 'gender',
+                value2: 'female'
+                }]
+            },
+
         'baby-maractus': {
             order: thisIndex.beforeOrder('maractus'),
             token: 'baby-maractus',
@@ -610,6 +641,8 @@
         {base: 'tangela', species: 'baby-tangela', method: 'type-surge', value: 'grass'},
         {base: 'goldeen', species: 'baby-goldeen', method: 'type-surge', value: 'water'},
         {base: 'maractus', species: 'baby-maractus', method: 'type-surge', value: 'grass'},
+        {base: 'tauros', species: 'baby-tauros', method: 'type-surge', value: 'normal'},
+        {base: 'miltank', species: 'baby-tauros', method: 'type-surge', value: 'normal'},
         ]);
 
     // Update previous gen pokemon with new prev evolution data

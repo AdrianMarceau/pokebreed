@@ -1627,12 +1627,7 @@
             colors: ['pink', 'black', 'yellow'],
             eggCycles: 20,
             eggGroups: ['field'],
-            eggPartner: 'tauros',
-            altBaseEvolutions: [{
-                'species': 'tauros',
-                'method': 'chance',
-                'value': 50
-                }]
+            eggPartner: 'tauros'
             },
 
         'blissey': {
@@ -1852,11 +1847,6 @@
     // Update previous gen pokemon with new egg partner data
     thisIndex.addEggPartners([
         {base: 'tauros', species: 'miltank'},
-        ]);
-
-    // Update previous gen pokemon with alt base evolution data
-    thisIndex.addAltBaseEvolutions([
-        {base: 'tauros', species: 'miltank', 'method': 'chance', 'value': 50},
         ]);
 
     // Update previous gen pokemon with known species appeal data
