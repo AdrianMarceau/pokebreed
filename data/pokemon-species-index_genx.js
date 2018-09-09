@@ -457,7 +457,7 @@
         'baby-tauros': {
             order: thisIndex.beforeOrder('tauros'),
             token: 'baby-tauros',
-            name: 'Baby Tauros',  //  Calfling, Caffling, [Kaffling]
+            name: 'Baby Tauros',  //  Calfling, Caffling, Kaffling, [Kalfling]
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
