@@ -1900,6 +1900,9 @@
                 pokedexMarkup.push('<li class="entry" ' +
                     'data-token="' + pokeToken + '" ' +
                     'data-gen="'+ pokemonGen +'" ' +
+                    'data-key="'+ pokeNum +'" ' +
+                    'data-legnum="'+ pokeIndex.number +'" ' +
+                    'data-modnum="'+ pokeIndex.order +'" ' +
                     'data-basegen="'+ pokemonBaseGen +'" ' +
                     'data-type="'+ pokeIndex.types.join(',') +'" ' +
                     'title="'+ titleText +'" ' +
@@ -2095,6 +2098,21 @@
                 showingTotal++;
                 }
             });
+
+        // Re-sort the elements based on which mode we're in
+        if (currentPokedexFilters['mode'] === 'legacy'){ var sortBy = 'data-key'; }
+        else { var sortBy = 'data-modnum'; }
+        //console.log('currentPokedexFilters[\'mode\'] = ', currentPokedexFilters['mode']);
+        //console.log('sortBy = ', sortBy);
+        var $sortedEntries = $pokemonEntries.sort(function(a, b){
+            var aNum = parseFloat($(a).attr(sortBy));
+            var bNum = parseFloat($(b).attr(sortBy));
+            if (aNum < bNum){ return -1; }
+            else if (aNum > bNum){ return 1; }
+            else { return 0; }
+            });
+        //console.log('Inserting sorted results...');
+        $('.list', $pokePanelPokedexEntries).empty().html($sortedEntries);
 
         // Update the scrollbar wrapper since there have been changes
         //$pokePanelPokedexEntries.find('.entrywrap').perfectScrollbar('update');
