@@ -136,10 +136,11 @@
                 }]
             },
 
-        'baby-meowth': {
+        'meowzy': {
             order: thisIndex.beforeOrder('meowth'),
-            token: 'baby-meowth',
-            name: 'Baby Meowth',  // [Meowzy] / Meowny / Purrchance / Purrzy
+            token: 'meowzy',
+            legacyToken: 'baby-meowth',
+            name: 'Meowzy',
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
@@ -159,15 +160,16 @@
                 value: 14
                 }]
             },
-        'baby-alolan-meowth': {
+        'alolan-meowzy': {
             order: thisIndex.afterOrder('persian', 1),
-            token: 'baby-alolan-meowth',
-            name: 'Baby Alolan Meowth',  // Alolan Meowzy / Meowny / Purrchance / [Purrzy]
+            token: 'alolan-meowzy',
+            legacyToken: 'baby-alolan-meowth',
+            name: 'Alolan Meowzy',
             class: 'baby',
             formClass: 'baby-evolution',
             formClass2: 'regional-variant',
             formToken: 'baby-alolan',
-            baseSpecies: 'baby-meowth',
+            baseSpecies: 'meowzy',
             number: 52,
             dexNumber: 1002.1,
             types: ['dark'],
@@ -652,7 +654,7 @@
         {base: 'paras', species: 'baby-paras', method: 'type-surge', value: 'bug'},
         {base: 'vulpix', species: 'baby-vulpix', method: 'type-surge', value: 'fire'},
         {base: 'alolan-vulpix', species: 'baby-alolan-vulpix', method: 'type-surge', value: 'ice'},
-        {base: 'meowth', species: 'baby-meowth', method: 'type-surge', value: 'normal'},
+        {base: 'meowth', species: 'meowzy', method: 'type-surge', value: 'normal'},
         {base: 'alolan-meowth', species: 'baby-alolan-meowth', method: 'type-surge', value: 'dark'},
         {base: 'growlithe', species: 'baby-growlithe', method: 'type-surge', value: 'fire'},
         {base: 'ponyta', species: 'baby-ponyta', method: 'type-surge', value: 'fire'},
