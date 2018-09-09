@@ -3931,13 +3931,15 @@
                     && indexInfo.dynamicForms === true){
 
                     // If seasonal variant, change the form based on the current season
-                    if (indexInfo.formClass === 'seasonal-variant'
+                    if ((indexInfo.formClass === 'seasonal-variant'
+                        || indexInfo.formClass2 === 'seasonal-variant')
                         && thisZoneData.season.length){
                         pokemonInfo.formToken = thisZoneData.season;
                         }
 
                     // If colorized variant, change the form based on the current top color
-                    if (indexInfo.formClass === 'color-variant'
+                    if ((indexInfo.formClass === 'color-variant'
+                        || indexInfo.formClass2 === 'color-variant')
                         && topColor.length){
                         colorKey++;
                         if (topColors.length > 1){
@@ -3950,7 +3952,8 @@
                         }
 
                     // If field variant, change the form based on the current biome
-                    if (indexInfo.formClass === 'field-variant'
+                    if ((indexInfo.formClass === 'field-variant'
+                        || indexInfo.formClass2 === 'field-variant')
                         && typeof indexInfo.possibleFormsTriggers !== 'undefined'
                         && thisZoneData.field.length){
                         var triggerTokens = Object.keys(indexInfo.possibleFormsTriggers);
@@ -3965,7 +3968,8 @@
                         }
 
                     // If type variant, change the form based on current type appeal
-                    if (indexInfo.formClass === 'type-variant'){
+                    if (indexInfo.formClass === 'type-variant'
+                        || indexInfo.formClass2 === 'type-variant'){
                         if (typeof indexInfo.possibleFormsTriggers !== 'undefined'){ var possibleFormsTriggers = indexInfo.possibleFormsTriggers; }
                         else { var possibleFormsTriggers = defaultTypeFormTriggers; }
                         var triggerTokens = Object.keys(possibleFormsTriggers);

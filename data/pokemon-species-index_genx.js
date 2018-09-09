@@ -544,6 +544,58 @@
                 }]
             },
 
+        'elemonk': {
+            order: thisIndex.beforeOrder('pansage'),
+            token: 'elemonk',
+            name: 'Elemonk',
+            class: 'baby',
+            formClass: 'baby-evolution',
+            formClass2: 'type-variant',
+            dynamicForms: true,
+            typeForms: true,
+            syncTypeToForm: false,
+            possibleForms: ['baby', 'baby-grass', 'baby-fire', 'baby-water'],
+            possibleFormsTriggers: {'baby': 'normal', 'baby-grass': 'grass', 'baby-fire': 'fire', 'baby-water': 'water'},
+            baseForm: 'base',
+            formToken: 'baby',
+            number: 511,
+            dexNumber: 1007,
+            types: ['normal'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 25, phAttack: 26, phDefense: 24, spAttack: 26, spDefense: 24, speed: 32},
+            abilities: {0: 'gluttony', hidden: 'overgrow'},
+            height: 0.4,
+            weight: 7.1,
+            colors: ['gray', 'white', 'yellow'],
+            possibleFormColors: {
+                'baby': ['gray', 'white', 'yellow'],
+                'baby-grass': ['gray', 'white', 'yellow', 'green'],
+                'baby-fire': ['gray', 'white', 'yellow', 'red'],
+                'baby-water': ['gray', 'white', 'yellow', 'blue']
+                },
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'pansage',
+                method: 'form',
+                value: 'baby-grass',
+                method2: 'level-up',
+                value2: 10
+                }, {
+                species: 'pansear',
+                method: 'form',
+                value: 'baby-fire',
+                method2: 'level-up',
+                value2: 10
+                }, {
+                species: 'panpour',
+                method: 'form',
+                value: 'baby-water',
+                method2: 'level-up',
+                value2: 10
+                }]
+            },
+
         'shadow-mewtwo': {
             order: indexOrder++,
             token: 'shadow-mewtwo',
@@ -679,6 +731,9 @@
         {base: 'maractus', species: 'succulite', method: 'type-surge', value: 'grass'},
         {base: 'tauros', species: 'kalfling', method: 'type-surge', value: 'normal'},
         {base: 'miltank', species: 'kalfling', method: 'type-surge', value: 'normal'},
+        {base: 'pansage', species: 'elemonk', method: 'type-warning', value: 'grass'},
+        {base: 'pansear', species: 'elemonk', method: 'type-warning', value: 'fire'},
+        {base: 'panpour', species: 'elemonk', method: 'type-warning', value: 'water'},
         ]);
 
     // Update previous gen pokemon with new prev evolution data
