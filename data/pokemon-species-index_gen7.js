@@ -1969,6 +1969,129 @@
             eggGroups: ['undiscovered'],
             },
 
+        });
+    thisIndex.indexOrder = indexOrder;
+
+    // Add the generation's list of base species to the index
+    var indexOrder = thisIndex.indexOrder;
+    thisIndex.addSpeciesIndex({
+
+        // Cross-Gen Forms
+
+        'zygarde-cell': {
+            order: thisIndex.beforeOrder('zygarde-50-percent', 3),
+            token: 'zygarde-cell',
+            name: 'Zygarde Cell',
+            baseSpecies: 'zygarde',
+            class: 'legendary',
+            visitorClass: '',
+            formClass: 'form-variant',
+            formToken: 'cell',
+            number: 718,
+            dexNumber: 718 - 0.3,
+            baseGameGeneration: 6,
+            excludeFromZoneStats: true,
+            persistentVisitor: true,
+            types: ['dragon', 'ground'],
+            genderRatio: {none: 1.000},
+            lifePoints: 360,
+            baseStats: {hp: 6, phAttack: 10, phDefense: 8, spAttack: 7, spDefense: 9, speed: 12},
+            abilities: {0: 'aura-break', hidden: 'power-construct'},
+            height: 1.2,
+            weight: 33.5,
+            colors: ['black', 'green', 'red', 'white'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
+        'zygarde-core': {
+            order: thisIndex.beforeOrder('zygarde-50-percent', 2),
+            token: 'zygarde-core',
+            name: 'Zygarde Core',
+            baseSpecies: 'zygarde',
+            class: 'legendary',
+            visitorClass: '',
+            formClass: 'form-variant',
+            formToken: 'core',
+            number: 718,
+            dexNumber: 718 - 0.2,
+            baseGameGeneration: 6,
+            requiredVisitorSpecies: 'zygarde-cell',
+            persistentVisitor: true,
+            types: ['dragon', 'ground'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 27, phAttack: 50, phDefense: 36, spAttack: 31, spDefense: 43, speed: 58},
+            abilities: {0: 'aura-break', hidden: 'power-construct'},
+            height: 1.2,
+            weight: 33.5,
+            colors: ['green', 'white', 'red', 'black'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'zygarde-10-percent',
+                method: 'level-up',
+                value: 10,
+                method2: 'fusion-species',
+                value2: 'zygarde-cell',
+                switch: 'and'
+                }]
+            },
+        'zygarde-10-percent': {
+            order: thisIndex.beforeOrder('zygarde-50-percent', 1),
+            token: 'zygarde-10-percent',
+            name: 'Zygarde 10%',
+            baseSpecies: 'zygarde',
+            class: 'legendary',
+            formClass: 'form-variant',
+            formToken: 'p10',
+            number: 718,
+            dexNumber: 718 - 0.1,
+            baseGameGeneration: 6,
+            types: ['dragon', 'ground'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 54, phAttack: 100, phDefense: 71, spAttack: 61, spDefense: 85, speed: 115},
+            abilities: {0: 'aura-break', hidden: 'power-construct'},
+            height: 1.2,
+            weight: 33.5,
+            colors: ['black', 'green', 'red', 'white'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'zygarde-core',
+            nextEvolutions: [{
+                species: 'zygarde-50-percent',
+                method: 'level-up',
+                value: 50,
+                method2: 'fusion-species',
+                value2: 'zygarde-cell',
+                switch: 'and'
+                }]
+            },
+
+        'zygarde-complete': {
+            order: thisIndex.afterOrder('zygarde-50-percent'),
+            token: 'zygarde-complete',
+            name: 'Zygarde Complete',
+            baseSpecies: 'zygarde',
+            class: 'legendary',
+            formClass: 'form-variant',
+            formToken: 'complete',
+            number: 718,
+            dexNumber: 718 + 0.1,
+            baseGameGeneration: 6,
+            types: ['dragon', 'ground'],
+            genderRatio: {none: 1.000},
+            lifePoints: 360,
+            baseStats: {hp: 216, phAttack: 100, phDefense: 121, spAttack: 91, spDefense: 95, speed: 85},
+            abilities: {0: 'power-construct'},
+            height: 4.5,
+            weight: 610,
+            colors: ['black', 'green', 'white', 'red', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'zygarde-50-percent'
+            },
+
+
         // Alolan Variants
 
         'alolan-rattata': {

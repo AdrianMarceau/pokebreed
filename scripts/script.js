@@ -2103,24 +2103,33 @@
             });
 
         // Re-sort the elements based on which mode we're in
-        if (currentPokedexFilters['gen'] === 'all'){ var sortBy = 'data-modnum'; } //data-key
-        else if (currentPokedexFilters['mode'] === 'legacy'){ var sortBy = 'data-legnum'; }
-        else if (currentPokedexFilters['mode'] === 'modern'){ var sortBy = 'data-modnum'; }
+        if (currentPokedexFilters['gen'] === 'all'){ var sortBy = ['data-modnum', 'data-legnum']; } //data-key
+        else if (currentPokedexFilters['mode'] === 'legacy'){ var sortBy = ['data-legnum', 'data-modnum']; }
+        else if (currentPokedexFilters['mode'] === 'modern'){ var sortBy = ['data-modnum', 'data-legnum']; }
         //console.log('currentPokedexFilters[\'mode\'] = ', currentPokedexFilters['mode']);
         //console.log('sortBy = ', sortBy);
         var $sortedEntries = $pokemonEntries.sort(function(a, b){
+            var $a = $(a), $b = $(b);
+            var aToken = $a.attr('data-token'), bToken = $b.attr('data-token');
+            var aIndex = PokemonSpeciesIndex[aToken], bIndex = PokemonSpeciesIndex[bToken];
             if (currentPokedexFilters['gen'] !== 'x'
                 && currentPokedexFilters['mode'] === 'legacy'){
-                var aGen = parseFloat($(a).attr('data-basegen'));
-                var bGen = parseFloat($(b).attr('data-basegen'));
-                if (aGen > bGen){ return -1; }
-                else if (aGen < bGen){ return 1; }
+                var aVar = aIndex.formClass !== '' && aIndex.baseGameGeneration !== aIndex.gameGeneration ? 1 : 0;
+                var bVar = bIndex.formClass !== '' && bIndex.baseGameGeneration !== bIndex.gameGeneration ? 1 : 0;
+                if (aVar < bVar){ return -1; }
+                else if (aVar > bVar){ return 1; }
                 }
-            var aNum = parseFloat($(a).attr(sortBy));
-            var bNum = parseFloat($(b).attr(sortBy));
+            var aNum = parseFloat($a.attr(sortBy[0]));
+            var bNum = parseFloat($b.attr(sortBy[0]));
             if (aNum < bNum){ return -1; }
             else if (aNum > bNum){ return 1; }
-            else { return 0; }
+            else {
+                var aNum2 = parseFloat($a.attr(sortBy[1]));
+                var bNum2 = parseFloat($b.attr(sortBy[1]));
+                if (aNum2 < bNum2){ return -1; }
+                else if (aNum2 > bNum2){ return 1; }
+                else {return 0; }
+                }
             });
         //console.log('Inserting sorted results...');
         $('.list', $pokePanelPokedexEntries).empty().html($sortedEntries);
