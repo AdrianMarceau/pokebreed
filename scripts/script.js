@@ -2109,6 +2109,13 @@
         //console.log('currentPokedexFilters[\'mode\'] = ', currentPokedexFilters['mode']);
         //console.log('sortBy = ', sortBy);
         var $sortedEntries = $pokemonEntries.sort(function(a, b){
+            if (currentPokedexFilters['gen'] !== 'x'
+                && currentPokedexFilters['mode'] === 'legacy'){
+                var aGen = parseFloat($(a).attr('data-basegen'));
+                var bGen = parseFloat($(b).attr('data-basegen'));
+                if (aGen > bGen){ return -1; }
+                else if (aGen < bGen){ return 1; }
+                }
             var aNum = parseFloat($(a).attr(sortBy));
             var bNum = parseFloat($(b).attr(sortBy));
             if (aNum < bNum){ return -1; }
