@@ -1899,11 +1899,12 @@
                 var pokeIcon = getPokemonIcon(pokeToken, false, customData);
                 var pokemonGen = typeof pokeIndex.dexGeneration !== 'undefined' ? pokeIndex.dexGeneration : pokeIndex.gameGeneration;
                 var pokemonBaseGen = pokeIndex.baseGameGeneration;
+                var pokeLegNum = pokemonGen === 'x' && typeof pokeIndex.dexNumber !== 'undefined' ? pokeIndex.dexNumber : pokeIndex.number;
                 pokedexMarkup.push('<li class="entry" ' +
                     'data-token="' + pokeToken + '" ' +
                     'data-gen="'+ pokemonGen +'" ' +
                     'data-key="'+ pokeNum +'" ' +
-                    'data-legnum="'+ pokeIndex.number +'" ' +
+                    'data-legnum="'+ pokeLegNum +'" ' +
                     'data-modnum="'+ pokeIndex.order +'" ' +
                     'data-basegen="'+ pokemonBaseGen +'" ' +
                     'data-type="'+ pokeIndex.types.join(',') +'" ' +
