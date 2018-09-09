@@ -275,33 +275,6 @@
         PokemonFieldsIndex = window.PokemonFieldsIndex;
         PokemonFieldsIndexTokens = Object.keys(PokemonFieldsIndex);
 
-        // Do not load from LOCAL STORAGE records if we're in free mode
-        if (!appFreeMode){
-            //console.log('NOT in free mode, let us LOAD');
-            // Check if a localStorage value exsists for species seen
-            if (typeof window.localStorage !== 'undefined'){
-                var savedPokemonSpeciesSeen = window.localStorage.getItem('PokemonSpeciesSeen');
-                //console.log('savedPokemonSpeciesSeen = ', savedPokemonSpeciesSeen);
-                if (typeof savedPokemonSpeciesSeen === 'string'){
-                    savedPokemonSpeciesSeen = JSON.parse(savedPokemonSpeciesSeen);
-                    var savedTokens = Object.keys(savedPokemonSpeciesSeen);
-                    //console.log('savedTokens = ', savedTokens);
-                    //console.log('PokemonSpeciesIndexTokens = ', PokemonSpeciesIndexTokens);
-                    for (var i = 0; i < savedTokens.length; i++){
-                        var savedToken = savedTokens[i];
-                        var savedData = savedPokemonSpeciesSeen[savedToken];
-                        //console.log('savedToken = ', savedToken);
-                        //console.log('savedData = ', savedData);
-                        //console.log('PokemonSpeciesIndexTokens.indexOf('+ savedToken +') = ', PokemonSpeciesIndexTokens.indexOf(savedToken));
-                        if (PokemonSpeciesIndexTokens.indexOf(savedToken) !== -1){
-                            PokemonSpeciesSeen[savedToken] = savedData;
-                            }
-                        }
-                    }
-                //console.log('PokemonSpeciesSeen = ', PokemonSpeciesSeen);
-                }
-            }
-
         // Update the banner counters with the total days and current species
         var pokedexCurrent = Object.keys(PokemonSpeciesSeen).length;
         var pokedexTotal = PokemonSpeciesIndexTokens.length;
@@ -323,6 +296,54 @@
 
         // Optimize the pokemon indexes for faster calculation speeds
         optimizeIndexes();
+
+        // Do not load from LOCAL STORAGE records if we're in free mode
+        if (!appFreeMode){
+            //console.log('NOT in free mode, let us LOAD');
+            // Check if a localStorage value exsists for species seen
+            if (typeof window.localStorage !== 'undefined'){
+                var savedPokemonSpeciesSeen = window.localStorage.getItem('PokemonSpeciesSeen');
+                //console.log('savedPokemonSpeciesSeen = ', savedPokemonSpeciesSeen);
+                if (typeof savedPokemonSpeciesSeen === 'string'){
+                    savedPokemonSpeciesSeen = JSON.parse(savedPokemonSpeciesSeen);
+
+                    // If legacy tokens exist, rewrite save data with new names
+                    //console.log('legacyTokenMap = ', JSON.stringify(legacyTokenMap), jQuery.isEmptyObject(legacyTokenMap));
+                    if (!jQuery.isEmptyObject(legacyTokenMap)){
+                        var legacyTokens = Object.keys(legacyTokenMap);
+                        //console.log('legacyTokens = ', legacyTokens);
+                        for (var i = 0; i < legacyTokens.length; i++){
+                            var legacyToken = legacyTokens[i];
+                            var newToken = legacyTokenMap[legacyToken];
+                            if (typeof savedPokemonSpeciesSeen[legacyToken] !== 'undefined'
+                                && typeof savedPokemonSpeciesSeen[newToken] === 'undefined'){
+                                //console.log('rewriting ', legacyToken, ' to ', newToken);
+                                savedPokemonSpeciesSeen[newToken] = savedPokemonSpeciesSeen[legacyToken] + 0;
+                                delete savedPokemonSpeciesSeen[legacyToken];
+                                }
+                            }
+                        }
+
+                    // Collect saved tokens now that they've been filtered/rewritten
+                    var savedTokens = Object.keys(savedPokemonSpeciesSeen);
+                    //console.log('savedTokens = ', savedTokens);
+
+                    //console.log('PokemonSpeciesIndexTokens = ', PokemonSpeciesIndexTokens);
+                    for (var i = 0; i < savedTokens.length; i++){
+                        var savedToken = savedTokens[i];
+                        var savedData = savedPokemonSpeciesSeen[savedToken];
+                        //console.log('savedToken = ', savedToken);
+                        //console.log('savedData = ', savedData);
+                        //console.log('PokemonSpeciesIndexTokens.indexOf('+ savedToken +') = ', PokemonSpeciesIndexTokens.indexOf(savedToken));
+                        if (PokemonSpeciesIndexTokens.indexOf(savedToken) !== -1){
+                            PokemonSpeciesSeen[savedToken] = savedData;
+                            }
+                        }
+
+                    }
+                //console.log('PokemonSpeciesSeen = ', PokemonSpeciesSeen);
+                }
+            }
 
         // Generate type styles so we can use them on buttons and panels
         generateTypeStyles();
@@ -584,6 +605,7 @@
     var nationalDexNumbers = [];
     var missingDexNumbers = [];
     var maxDexNumber = 0;
+    var legacyTokenMap = {};
     function optimizeIndexes(){
         $pokePanelLoading.append('.'); // append loading dot
         if (PokemonSpeciesIndexTokens.length){
@@ -616,6 +638,9 @@
                     else { indexInfo.sortNumber = indexInfo.number; }
                     }
                     */
+
+                // Check to see if this pokemon has been renamed
+                if (typeof indexInfo.legacyToken !== 'undefined'){ legacyTokenMap[indexInfo.legacyToken] = indexInfo.token; }
 
                 // If class or formClass are not set, create them as empty strings
                 if (typeof indexInfo.class === 'undefined'){ indexInfo.class = ''; }
