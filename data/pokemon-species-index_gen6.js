@@ -1479,14 +1479,13 @@
             eggGroups: ['undiscovered']
             },
 
-        'zygarde-50-percent': {
+        'zygarde': {
             order: indexOrder++,
-            token: 'zygarde-50-percent',
-            name: 'Zygarde 50%',
+            token: 'zygarde',
+            legacyToken: 'zygarde-50-percent',
+            name: 'Zygarde',
             baseSpecies: 'zygarde',
             class: 'legendary',
-            formClass: 'form-variant',
-            formToken: 'p50',
             number: 718,
             types: ['dragon', 'ground'],
             genderRatio: {none: 1.000},
@@ -1497,15 +1496,6 @@
             colors: ['black', 'green', 'white'],
             eggCycles: 120,
             eggGroups: ['undiscovered'],
-            prevEvolution: 'zygarde-10-percent',
-            nextEvolutions: [{
-                species: 'zygarde-complete',
-                method: 'level-up',
-                value: 100,
-                method2: 'fusion-species',
-                value2: 'zygarde-cell',
-                switch: 'and'
-                }]
             },
 
         'diancie': {
@@ -2672,7 +2662,6 @@
 
         // Legendary trigger relationships
         {base: 'diancie', species: 'carbink'},
-        {base: 'zygarde-core', species: 'zygarde-cell'},
 
         ]);
 

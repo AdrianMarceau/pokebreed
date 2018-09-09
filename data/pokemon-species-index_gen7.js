@@ -1979,7 +1979,7 @@
         // Cross-Gen Forms
 
         'zygarde-cell': {
-            order: thisIndex.beforeOrder('zygarde-50-percent', 3),
+            order: thisIndex.beforeOrder('zygarde', 3),
             token: 'zygarde-cell',
             name: 'Zygarde Cell',
             baseSpecies: 'zygarde',
@@ -2005,7 +2005,7 @@
             },
 
         'zygarde-core': {
-            order: thisIndex.beforeOrder('zygarde-50-percent', 2),
+            order: thisIndex.beforeOrder('zygarde', 2),
             token: 'zygarde-core',
             name: 'Zygarde Core',
             baseSpecies: 'zygarde',
@@ -2037,7 +2037,7 @@
                 }]
             },
         'zygarde-10-percent': {
-            order: thisIndex.beforeOrder('zygarde-50-percent', 1),
+            order: thisIndex.beforeOrder('zygarde', 1),
             token: 'zygarde-10-percent',
             name: 'Zygarde 10%',
             baseSpecies: 'zygarde',
@@ -2058,7 +2058,7 @@
             eggGroups: ['undiscovered'],
             prevEvolution: 'zygarde-core',
             nextEvolutions: [{
-                species: 'zygarde-50-percent',
+                species: 'zygarde',
                 method: 'level-up',
                 value: 50,
                 method2: 'fusion-species',
@@ -2068,7 +2068,7 @@
             },
 
         'zygarde-complete': {
-            order: thisIndex.afterOrder('zygarde-50-percent'),
+            order: thisIndex.afterOrder('zygarde'),
             token: 'zygarde-complete',
             name: 'Zygarde Complete',
             baseSpecies: 'zygarde',
@@ -2088,7 +2088,7 @@
             colors: ['black', 'green', 'white', 'red', 'blue'],
             eggCycles: 120,
             eggGroups: ['undiscovered'],
-            prevEvolution: 'zygarde-50-percent'
+            prevEvolution: 'zygarde'
             },
 
 
@@ -2533,6 +2533,19 @@
         });
     thisIndex.indexOrder = indexOrder;
 
+    // Update previous gen pokemon ZYGARDE with new data
+    var zygardeData = thisIndex.indexList['zygarde'];
+    zygardeData.name = 'Zygarde 50%';
+    zygardeData.formClass = 'form-variant';
+    zygardeData.formToken = 'p50';
+
+    // Update previous gen pokemon with new prev evolution data
+    thisIndex.addPrevEvolutions([
+
+        {base: 'zygarde', species: 'zygarde-10-percent'},
+
+        ]);
+
     // Update previous gen pokemon with new next evolution data
     thisIndex.addNextEvolutions([
 
@@ -2544,6 +2557,8 @@
 
         {base: 'cubone', species: 'alolan-marowak', method: 'level-up', value: 28, method2: 'type-appeal', value2: 'ground', replace: true}, // level-up
         {base: 'cubone', species: 'alolan-marowak', method: 'level-up', value: 28, method2: 'type-appeal', value2: 'fire'}, // level-up + alola-region
+
+        {base: 'zygarde', species: 'zygarde-complete', method: 'level-up', value: 100, method2: 'fusion-species', value2: 'zygarde-cell', switch: 'and'}, // cell-fusion
 
         ]);
 
@@ -2624,6 +2639,7 @@
         {base: 'necrozma', species: 'cosmoem'},
         {base: 'necrozma', species: 'solgaleo'},
         {base: 'necrozma', species: 'lunala'},
+        {base: 'zygarde-core', species: 'zygarde-cell'},
 
         ]);
 

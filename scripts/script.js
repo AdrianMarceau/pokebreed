@@ -314,6 +314,10 @@
         // Update the title bar to show the next action (Select Pokemon)
         $('.details.zone .title', $panelMainOverview).html('Select Starter Pokémon');
 
+        // (GEN 7+) If we're in the right generation, show the Z-Power counter
+        if (maxIndexKeyToLoad >= 7){ $('.stats .delta', $panelTypesOverview).css({display:''}); }
+        else { $('.stats .delta', $panelTypesOverview).css({display:'none'}); }
+
         // Reset zone data to default parameters
         resetZoneData();
 
@@ -2665,12 +2669,12 @@
         $('.zone .date .data', $panelMainOverview).text(dateString);
         $('.zone .capacity .data', $panelMainOverview).text(thisZoneData.currentPokemon.length + ' / ' + thisZoneData.capacity);
 
-        // Update the difference (delta) between the two type appeal extremes
-        var currentTypesDiff = Math.round(thisZoneData.currentStats.typesDiff);
-        $('.stats .delta .percent', $panelTypesOverview).html(currentTypesDiff);
+        // (GEN 7+) If we're in the right generation, calculate Z-Power mechanics
+        if (maxIndexKeyToLoad >= 7){
 
-        // (GEN 6+) If we're in the right generation, calculate Z-Power mechanics
-        if (maxIndexKeyToLoad >= 6){
+            // Update the difference (delta) between the two type appeal extremes
+            var currentTypesDiff = Math.round(thisZoneData.currentStats.typesDiff);
+            $('.stats .delta .percent', $panelTypesOverview).html(currentTypesDiff);
 
             // Calculate and highlight Z power if the value is high enough
             var zPowerMin = 250;
@@ -4886,8 +4890,8 @@
         var currentZoneStats = thisZoneData.currentStats;
         var useTypeAppeal = false;
 
-        // (GEN 6+) If we're in the right generation, calculate Zygarde Complete mechanics
-        if (maxIndexKeyToLoad >= 6){
+        // (GEN 7+) If we're in the right generation, calculate Zygarde Complete mechanics
+        if (maxIndexKeyToLoad >= 7){
             // Invert the box's biome if zygarde complete is on the field
             if (typeof currentZoneStats['species']['zygarde-complete'] !== 'undefined'
                 && currentZoneStats['species']['zygarde-complete'] > 0){
@@ -5032,10 +5036,10 @@
                 eventPokemonChanceBoosters['ditto'] = eventBoost;
                 }
 
-            // (GEN 6+) ZYGARDE cells and cores are summoned when type appeal conditions are too extreme
+            // (GEN 7+) ZYGARDE cells and cores are summoned when type appeal conditions are too extreme
             eventPokemonChanceBoosters['zygarde-core'] = 0;
             eventPokemonChanceBoosters['zygarde-cell'] = 0;
-            if (maxIndexKeyToLoad >= 6){
+            if (maxIndexKeyToLoad >= 7){
 
                 // Check if type appeal is critical or extreme right now
                 var extremeTypeAppeal = zoneFlags.indexOf('extremeTypeAppeal') !== -1 ? true : false;
@@ -5051,10 +5055,10 @@
                     numZygardeCores += zoneStats['species']['zygarde-10-percent'];
                     numZygardeCells += 1 * zoneStats['species']['zygarde-10-percent'];
                     }
-                if (typeof zoneStats['species']['zygarde-50-percent'] !== 'undefined'
-                    && zoneStats['species']['zygarde-50-percent'] > 0){
-                    numZygardeCores += zoneStats['species']['zygarde-50-percent'];
-                    numZygardeCells += 2 * zoneStats['species']['zygarde-50-percent'];
+                if (typeof zoneStats['species']['zygarde'] !== 'undefined'
+                    && zoneStats['species']['zygarde'] > 0){
+                    numZygardeCores += zoneStats['species']['zygarde'];
+                    numZygardeCells += 2 * zoneStats['species']['zygarde'];
                     }
                 if (typeof zoneStats['species']['zygarde-complete'] !== 'undefined'
                     && zoneStats['species']['zygarde-complete'] > 0){
