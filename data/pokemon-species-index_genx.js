@@ -61,10 +61,11 @@
             prevEvolution: 'machamp'
             },
 
-        'baby-paras': {
+        'paramite': {
             order: thisIndex.beforeOrder('paras'),
-            token: 'baby-paras',
-            name: 'Baby Paras',  // Para / Parababy / [Paramite]
+            token: 'paramite',
+            legacyToken: 'baby-paras',
+            name: 'Paramite',
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
@@ -85,10 +86,11 @@
                 }]
             },
 
-        'baby-vulpix': {
+        'kittri': {
             order: thisIndex.beforeOrder('vulpix'),
-            token: 'baby-vulpix', // [???]
-            name: 'Baby Vulpix',
+            token: 'kittri',
+            legacyToken: 'baby-vulpix',
+            name: 'Kittri',
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
@@ -109,15 +111,16 @@
                 value: 10
                 }]
             },
-        'baby-alolan-vulpix': {
+        'alolan-kittri': {
             order: thisIndex.afterOrder('ninetales', 1),
-            token: 'baby-alolan-vulpix',
-            name: 'Baby Alolan Vulpix', // [???]
+            token: 'alolan-kittri',
+            legacyToken: 'baby-alolan-vulpix',
+            name: 'Alolan Kittri', // [???]
             class: 'baby',
             formClass: 'baby-evolution',
             formClass2: 'regional-variant',
             formToken: 'baby-alolan',
-            baseSpecies: 'baby-vulpix',
+            baseSpecies: 'kittri',
             number: 37,
             dexNumber: 1003.1,
             types: ['ice'],
@@ -187,10 +190,11 @@
                 }]
             },
 
-        'baby-growlithe': {
+        'embark': {
             order: thisIndex.beforeOrder('growlithe'),
-            token: 'baby-growlithe',
-            name: 'Baby Growlithe',  // Puchie / Puppers / Barkindle / [Embark]
+            token: 'embark',
+            legacyToken: 'baby-growlithe',
+            name: 'Embark',
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
@@ -212,10 +216,11 @@
                 }]
             },
 
-        'baby-ponyta': {
+        'unicolt': {
             order: thisIndex.beforeOrder('ponyta'),
-            token: 'baby-ponyta',
-            name: 'Baby Ponyta',  // Coalt / Minicorn / [Unicolt]
+            token: 'unicolt',
+            legacyToken: 'baby-ponyta',
+            name: 'Unicolt',
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
@@ -236,10 +241,11 @@
                 }]
             },
 
-        'baby-doduo': {
+        'dododo': {
             order: thisIndex.beforeOrder('doduo'),
-            token: 'baby-doduo',
-            name: 'Baby Doduo',  // Chix / Doduno / [Dododo]
+            token: 'dododo',
+            legacyToken: 'baby-doduo',
+            name: 'Dododo',
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
@@ -260,10 +266,11 @@
                 }]
             },
 
-        'baby-grimer': {
+        'oozby': {
             order: thisIndex.beforeOrder('grimer'),
-            token: 'baby-grimer',
-            name: 'Baby Grimer',  // Gunky / Sludgby / Oozy / [Oozby]
+            token: 'oozby',
+            legacyToken: 'baby-grimer',
+            name: 'Oozby',
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
@@ -283,15 +290,16 @@
                 value: 19
                 }]
             },
-        'baby-alolan-grimer': {
+        'alolan-oozby': {
             order: thisIndex.afterOrder('muk', 1),
-            token: 'baby-alolan-grimer',
-            name: 'Baby Alolan Grimer',  // Alolan Gunky / Sludgby / Oozy / [Oozby]
+            token: 'alolan-oozby',
+            legacyToken: 'baby-alolan-grimer',
+            name: 'Alolan Oozby',
             class: 'baby',
             formClass: 'baby-evolution',
             formClass2: 'regional-variant',
             formToken: 'baby-alolan',
-            baseSpecies: 'grimer',
+            baseSpecies: 'oozby',
             number: 88,
             dexNumber: 1004.1,
             types: ['poison'],
@@ -309,10 +317,11 @@
                 }]
             },
 
-        'baby-tangela': {
+        'tanglet': {
             order: thisIndex.beforeOrder('tangela'),
-            token: 'baby-tangela',
-            name: 'Baby Tangela',  // Tangroll / Cutangle / Tendrella / Curlivine / [Tanglet]
+            token: 'tanglet',
+            legacyToken: 'baby-tangela',
+            name: 'Tanglet',
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
@@ -333,10 +342,11 @@
                 }]
             },
 
-        'baby-kangaskhan': {
+        'kangaby': {
             order: thisIndex.beforeOrder('kangaskhan'),
-            token: 'baby-kangaskhan',
-            name: 'Baby Kangaskhan', // Kangaskid, Roogaby, [Kangaby]
+            token: 'kangaby',
+            legacyToken: 'baby-kangaskhan',
+            name: 'Kangaby',
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
@@ -365,10 +375,11 @@
                 }]
             },
 
-        'baby-goldeen': {
+        'heirfry': {
             order: thisIndex.beforeOrder('goldeen'),
-            token: 'baby-goldeen',
-            name: 'Baby Goldeen',  // Guppi / Dignify / [Heirfry]
+            token: 'heirfry',
+            legacyToken: 'baby-goldeen',
+            name: 'Heirfry',
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
@@ -475,10 +486,11 @@
             prevEvolution: 'palkia'
             },
 
-        'baby-tauros': {
+        'kalfling': {
             order: thisIndex.beforeOrder('tauros'),
-            token: 'baby-tauros',
-            name: 'Baby Tauros',  //  Calfling, Caffling, Kaffling, [Kalfling]
+            token: 'kalfling',
+            legacyToken: 'baby-tauros',
+            name: 'Kalfling',
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
@@ -507,10 +519,11 @@
                 }]
             },
 
-        'baby-maractus': {
+        'succulite': {
             order: thisIndex.beforeOrder('maractus'),
-            token: 'baby-maractus',
-            name: 'Baby Maractus',  //  Succulite / Marakid / [Cactini]
+            token: 'succulite',
+            legacyToken: 'baby-maractus',
+            name: 'Succulite',
             class: 'baby',
             formClass: 'baby-evolution',
             formToken: 'baby',
@@ -651,26 +664,26 @@
 
     // Update previous gen pokemon with alt base evolution data
     thisIndex.addAltBaseEvolutions([
-        {base: 'paras', species: 'baby-paras', method: 'type-surge', value: 'bug'},
-        {base: 'vulpix', species: 'baby-vulpix', method: 'type-surge', value: 'fire'},
-        {base: 'alolan-vulpix', species: 'baby-alolan-vulpix', method: 'type-surge', value: 'ice'},
+        {base: 'paras', species: 'paramite', method: 'type-surge', value: 'bug'},
+        {base: 'vulpix', species: 'kittri', method: 'type-surge', value: 'fire'},
+        {base: 'alolan-vulpix', species: 'alolan-kittri', method: 'type-surge', value: 'ice'},
         {base: 'meowth', species: 'meowzy', method: 'type-surge', value: 'normal'},
-        {base: 'alolan-meowth', species: 'baby-alolan-meowth', method: 'type-surge', value: 'dark'},
-        {base: 'growlithe', species: 'baby-growlithe', method: 'type-surge', value: 'fire'},
-        {base: 'ponyta', species: 'baby-ponyta', method: 'type-surge', value: 'fire'},
-        {base: 'doduo', species: 'baby-doduo', method: 'type-surge', value: 'normal'},
-        {base: 'grimer', species: 'baby-grimer', method: 'type-surge', value: 'poison'},
-        {base: 'alolan-grimer', species: 'baby-alolan-grimer', method: 'type-surge', value: 'dark'},
-        {base: 'tangela', species: 'baby-tangela', method: 'type-surge', value: 'grass'},
-        {base: 'goldeen', species: 'baby-goldeen', method: 'type-surge', value: 'water'},
-        {base: 'maractus', species: 'baby-maractus', method: 'type-surge', value: 'grass'},
-        {base: 'tauros', species: 'baby-tauros', method: 'type-surge', value: 'normal'},
-        {base: 'miltank', species: 'baby-tauros', method: 'type-surge', value: 'normal'},
+        {base: 'alolan-meowth', species: 'alolan-meowzy', method: 'type-surge', value: 'dark'},
+        {base: 'growlithe', species: 'embark', method: 'type-surge', value: 'fire'},
+        {base: 'ponyta', species: 'unicolt', method: 'type-surge', value: 'fire'},
+        {base: 'doduo', species: 'dododo', method: 'type-surge', value: 'normal'},
+        {base: 'grimer', species: 'oozby', method: 'type-surge', value: 'poison'},
+        {base: 'alolan-grimer', species: 'alolan-oozby', method: 'type-surge', value: 'dark'},
+        {base: 'tangela', species: 'tangelet', method: 'type-surge', value: 'grass'},
+        {base: 'goldeen', species: 'heirfry', method: 'type-surge', value: 'water'},
+        {base: 'maractus', species: 'succulite', method: 'type-surge', value: 'grass'},
+        {base: 'tauros', species: 'kalfling', method: 'type-surge', value: 'normal'},
+        {base: 'miltank', species: 'kalfling', method: 'type-surge', value: 'normal'},
         ]);
 
     // Update previous gen pokemon with new prev evolution data
     thisIndex.addPrevEvolutions([
-        {base: 'kangaskhan', species: 'baby-kangaskhan'},
+        {base: 'kangaskhan', species: 'kangaby'},
         ]);
 
     // Update previous gen pokemon with new gender ratio data
