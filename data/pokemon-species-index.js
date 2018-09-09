@@ -58,7 +58,6 @@
             }
     }
 
-
     // Define a function for adding prev evolution data to a given species
     function addPrevEvolution(prevEvolution){
         //console.log('addPrevEvolution(prevEvolution)', prevEvolution);

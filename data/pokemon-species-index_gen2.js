@@ -1618,6 +1618,7 @@
             number: 241,
             displayNumber: 128.1,
             dexNumber: 128.1,
+            baseGameGeneration: 1,
             types: ['normal'],
             genderRatio: {female: 1.0000},
             baseStats: {hp: 95, phAttack: 80, phDefense: 105, spAttack: 40, spDefense: 70, speed: 100},

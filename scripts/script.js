@@ -662,12 +662,14 @@
                     }
 
                 // Define this pokemon's base generation (as in, the lowest in its related species)
-                indexInfo.baseGameGeneration = indexInfo.gameGeneration;
-                for (var i = 0; i < indexInfo.relatedSpecies.length; i++){
-                    var relIndex = PokemonSpeciesIndex[indexInfo.relatedSpecies[i]];
-                    if (relIndex.gameGeneration < indexInfo.baseGameGeneration
-                        || (indexInfo.baseGameGeneration === 'x' && relIndex.gameGeneration !== 'x')){
-                        indexInfo.baseGameGeneration = relIndex.gameGeneration;
+                if (typeof indexInfo.baseGameGeneration === 'undefined'){
+                    indexInfo.baseGameGeneration = indexInfo.gameGeneration;
+                    for (var i = 0; i < indexInfo.relatedSpecies.length; i++){
+                        var relIndex = PokemonSpeciesIndex[indexInfo.relatedSpecies[i]];
+                        if (relIndex.gameGeneration < indexInfo.baseGameGeneration
+                            || (indexInfo.baseGameGeneration === 'x' && relIndex.gameGeneration !== 'x')){
+                            indexInfo.baseGameGeneration = relIndex.gameGeneration;
+                            }
                         }
                     }
 
@@ -2100,8 +2102,9 @@
             });
 
         // Re-sort the elements based on which mode we're in
-        if (currentPokedexFilters['mode'] === 'legacy'){ var sortBy = 'data-key'; }
-        else { var sortBy = 'data-modnum'; }
+        if (currentPokedexFilters['gen'] === 'all'){ var sortBy = 'data-modnum'; } //data-key
+        else if (currentPokedexFilters['mode'] === 'legacy'){ var sortBy = 'data-legnum'; }
+        else if (currentPokedexFilters['mode'] === 'modern'){ var sortBy = 'data-modnum'; }
         //console.log('currentPokedexFilters[\'mode\'] = ', currentPokedexFilters['mode']);
         //console.log('sortBy = ', sortBy);
         var $sortedEntries = $pokemonEntries.sort(function(a, b){
