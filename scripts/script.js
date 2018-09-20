@@ -1703,7 +1703,6 @@
 
                 // Generate the pokemon's name for the hover
                 var pokemonName = pokemonData.name;
-                pokemonName += ' ('+ (pokemonData.types.join(' / ').toLowerCase().replace(/\b[a-z]/g, function(l) { return l.toUpperCase(); })) +')';
 
                 // Collect the pokemon's gen in terms of buttons
                 var pokemonGen = typeof pokemonData.buttonGeneration !== 'undefined' ? pokemonData.buttonGeneration : pokemonData.gameGeneration;
@@ -1718,6 +1717,21 @@
                 if (shownTypes.indexOf(pokemonData.types[0]) === -1){ shownTypes.push(pokemonData.types[0]); }
                 if (typeof pokemonTypes[1] !== 'undefined' && shownTypes.indexOf(pokemonData.types[1]) === -1){ shownTypes.push(pokemonData.types[1]); }
 
+                // Check to see if this is a SHADOW pokemon
+                var isShadowPokemon = pokemonToken.match(/^shadow-/) ? true : false;
+
+                // Generate the base title text for this button
+                var pokemonTitle = '';
+                pokemonTitle += pokemonName;
+                if (!isShadowPokemon){
+                    pokemonTitle += ' ('+
+                        (pokemonData.types.join(' / ').toLowerCase().replace(/\b[a-z]/g, function(l) { return l.toUpperCase(); }))+
+                        ')';
+                    }
+                if (typeof pokemonData.buttonQuote !== 'undefined'){
+                    pokemonTitle += '\n' + '"' + pokemonData.buttonQuote + '"';
+                    }
+
                 // Generate the markup for the pokemon button
                 var buttonMarkup = '';
                 buttonMarkup += '<button '+
@@ -1727,7 +1741,7 @@
                     'data-token="'+ pokemonToken +'" '+
                     'data-gen="'+ pokemonGen +'" '+
                     'data-type="'+ pokemonData.types.join(',') +'" '+
-                    'title="'+ pokemonName +'" '+
+                    'title="'+ pokemonTitle.replace('"', '&quot;') +'" '+
                     '>';
                     buttonMarkup += '<span class="gloss"></span>';
                     buttonMarkup += '<span class="plus">+</span>';

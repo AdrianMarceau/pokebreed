@@ -131,11 +131,11 @@
 +  Shadow Pokemon unlocked via completed dex, have special properties
     +  Infinite life points, allowing to live forever (?)
     +  Do not evolve to prevent overcomplicating (?)
-    +  Shadow Mewtwo prevents VISITORS
-    +  Shadow Lugia prevents ELEMENTS
-    +  Shadow Entei prevents BREEDING
-    +  Shadow Celebi prevents EVOLUTION
-    +  Shadow Latios prevents VARIATIONS
+    +  Shadow Mewtwo repels VISITORS
+    +  Shadow Lugia reverses ELEMENTS
+    +  Shadow Entei prohibits BREEDING
+    +  Shadow Celebi suppresses EVOLUTION
+    +  Shadow Latios inhibits VARIATIONS
 
 
 /* ------------------------ */
@@ -152,7 +152,7 @@ Oozby [Baby Grimer] +A
 
 Dododo [Baby Doduo]
 Kalfling [Baby Tauros]
-Elemonk [Baby Pan{sage/sear/pour}] [x]
+Elemonk [Baby Pan{sage/sear/pour}]
 
 Heirfry [Baby Goldeen]
 Polypie [Baby Frillish] [x]

@@ -617,7 +617,8 @@
             weight: 122,
             colors: ['gray', 'yellow', 'black'],
             eggCycles: 120,
-            eggGroups: ['undiscovered']
+            eggGroups: ['undiscovered'],
+            buttonQuote: 'Its dark aura repels any and all visitors.'
             },
         'shadow-lugia': {
             order: indexOrder++,
@@ -640,7 +641,8 @@
             weight: 216,
             colors: ['purple', 'blue', 'white', 'red'],
             eggCycles: 120,
-            eggGroups: ['undiscovered']
+            eggGroups: ['undiscovered'],
+            buttonQuote: 'Its dark aura reverses elemental type appeal.'
             },
         'shadow-entei': {
             order: indexOrder++,
@@ -663,7 +665,8 @@
             weight: 198,
             colors: ['gray', 'black', 'blue', 'white', 'red'],
             eggCycles: 80,
-            eggGroups: ['undiscovered']
+            eggGroups: ['undiscovered'],
+            buttonQuote: 'Its dark aura prohibits all forms of breeding.'
             },
         'shadow-celebi': {
             order: indexOrder++,
@@ -687,6 +690,7 @@
             colors: ['gray', 'purple', 'red'],
             eggCycles: 120,
             eggGroups: ['undiscovered'],
+            buttonQuote: 'Its dark aura suppresses all kinds of evolution.'
             },
         'shadow-latios': {
             order: indexOrder++,
@@ -708,7 +712,8 @@
             weight: 60,
             colors: ['purple', 'blue', 'white', 'yellow'],
             eggCycles: 120,
-            eggGroups: ['undiscovered']
+            eggGroups: ['undiscovered'],
+            buttonQuote: 'Its dark aura inhibits random colour variants.'
             },
 
         });
