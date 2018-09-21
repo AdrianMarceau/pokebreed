@@ -129,13 +129,18 @@
 /* ----------------------- */
 
 +  Shadow Pokemon unlocked via completed dex, have special properties
-    +  Infinite life points, allowing to live forever (?)
+    +  Infinite life points, allowing to live forever
     +  Do not evolve to prevent overcomplicating (?)
-    +  Shadow Mewtwo repels VISITORS
-    +  Shadow Lugia reverses ELEMENTS
-    +  Shadow Entei prohibits BREEDING
-    +  Shadow Celebi suppresses EVOLUTION
-    +  Shadow Latios inhibits VARIATIONS
+    +  Shadow Mewtwo repels VISITORS  (Invited trainers to island in movie / Repels visitors as Shadow Pokemon)
+    +  Shadow Lugia reverses ELEMENTS  (Balanced elemental types in movie / Reverses type-appeal as Shadow Pokemon)
+    +  Shadow Entei prohibits BREEDING  (Protected young child in movie / Prohibits breeding as Shadow Pokemon)
+    +  Shadow Celebi suppresses EVOLUTION  (Traveled through time in movie / Suppresses evolution as Shadow Pokemon)
+    +  Shadow Latios obstructs RELATIONSHIPS  (Connected to sister in movie / Obstructs relationships as Shadow Pokemon)
+
++  Shining Pokemon unlocked via completed dex, have special properties
+    +  Infinite life points, allowing to live forever
+    +  Golden Ho-oh increases VARIATIONS (First episode of the original anime)
+
 
 
 /* ------------------------ */
