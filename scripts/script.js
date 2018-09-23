@@ -278,15 +278,6 @@
         PokemonFieldsIndex = window.PokemonFieldsIndex;
         PokemonFieldsIndexTokens = Object.keys(PokemonFieldsIndex);
 
-        // Update the banner counters with the total days and current species
-        var pokedexCurrent = Object.keys(PokemonSpeciesSeen).length;
-        var pokedexTotal = PokemonSpeciesIndexTokens.length;
-        var pokedexPercent = pokedexTotal > 0 ? (Math.ceil((pokedexCurrent / pokedexTotal) * 1000) / 10) : 0;
-        $('.timer .count .total', $panelBanner).html(numberWithCommas(PokeboxDaysPassed));
-        $('.pokedex .count .current', $panelBanner).html(pokedexCurrent);
-        $('.pokedex .count .total', $panelBanner).html(pokedexTotal);
-        $('.pokedex .count .percent', $panelBanner).html(pokedexPercent+'%');
-
         // Update the title bar to show the next action (Select Pokemon)
         $('.details.zone .title', $panelMainOverview).html('Select Starter Pokémon');
 
@@ -299,6 +290,20 @@
 
         // Optimize the pokemon indexes for faster calculation speeds
         optimizeIndexes();
+
+        // Update the banner counters with the total days and current species
+        var pokedexCurrent = Object.keys(PokemonSpeciesSeen).length;
+        var pokedexTotal = PokemonSpeciesIndexTokens.length - hiddenPokemonTokens.length;
+        var pokedexPercent = pokedexTotal > 0 ? (Math.ceil((pokedexCurrent / pokedexTotal) * 1000) / 10) : 0;
+        $('.timer .count .total', $panelBanner).html(numberWithCommas(PokeboxDaysPassed));
+        $('.pokedex .count .current', $panelBanner).html(pokedexCurrent);
+        $('.pokedex .count .total', $panelBanner).html(pokedexTotal);
+        $('.pokedex .count .percent', $panelBanner).html(pokedexPercent+'%');
+        //console.log('pokedexCurrent = ', pokedexCurrent);
+        //console.log('PokemonSpeciesIndexTokens.length = ', PokemonSpeciesIndexTokens.length);
+        //console.log('hiddenPokemonTokens.length = ', hiddenPokemonTokens.length);
+        //console.log('pokedexTotal = ', pokedexTotal);
+        //console.log('pokedexPercent = ', pokedexPercent);
 
         // Do not load from LOCAL STORAGE records if we're in free mode
         if (!appFreeMode){
@@ -319,7 +324,8 @@
                             var legacyToken = legacyTokens[i];
                             var newToken = legacyTokenMap[legacyToken];
                             if (typeof savedPokemonSpeciesSeen[legacyToken] !== 'undefined'
-                                && typeof savedPokemonSpeciesSeen[newToken] === 'undefined'){
+                                && typeof savedPokemonSpeciesSeen[newToken] === 'undefined'
+                                && hiddenPokemonTokens.indexOf(newToken) === -1){
                                 //console.log('rewriting ', legacyToken, ' to ', newToken);
                                 savedPokemonSpeciesSeen[newToken] = savedPokemonSpeciesSeen[legacyToken] + 0;
                                 delete savedPokemonSpeciesSeen[legacyToken];
@@ -338,7 +344,8 @@
                         //console.log('savedToken = ', savedToken);
                         //console.log('savedData = ', savedData);
                         //console.log('PokemonSpeciesIndexTokens.indexOf('+ savedToken +') = ', PokemonSpeciesIndexTokens.indexOf(savedToken));
-                        if (PokemonSpeciesIndexTokens.indexOf(savedToken) !== -1){
+                        if (PokemonSpeciesIndexTokens.indexOf(savedToken) !== -1
+                            && hiddenPokemonTokens.indexOf(savedToken) === -1){
                             PokemonSpeciesSeen[savedToken] = savedData;
                             }
                         }
@@ -609,6 +616,7 @@
     var missingDexNumbers = [];
     var maxDexNumber = 0;
     var legacyTokenMap = {};
+    var hiddenPokemonTokens = [];
     function optimizeIndexes(){
         $pokePanelLoading.append('.'); // append loading dot
         if (PokemonSpeciesIndexTokens.length){
@@ -717,6 +725,13 @@
                     && indexInfo.speciesEffects.length > 0){
                     if (typeof globalSpeciesEffects[indexInfo.token] === 'undefined'){ globalSpeciesEffects[indexInfo.token] = []; }
                     for (var i = 0; i < indexInfo.speciesEffects.length; i++){ globalSpeciesEffects[indexInfo.token].push(indexInfo.speciesEffects[i]); }
+                    }
+
+                // Check to see if this is a hidden pokemon, add to index if true
+                if (typeof indexInfo.hiddenPokemon !== 'undefined'
+                    && indexInfo.hiddenPokemon === true){
+                    hiddenPokemonTokens.push(indexInfo.token);
+                    //console.log('add ' + indexInfo.token + ' to hiddenPokemonTokens', hiddenPokemonTokens);
                     }
 
                 // If this pokemon is in a special class, incremeent appropriate counters
@@ -1913,9 +1928,17 @@
             var pokedexMarkup = [];
             for (var key = 0; key < PokemonSpeciesDexOrder.length; key++){
                 //console.log('pokedex markup ', key);
+
+                // Collect the number and index info for this pokemon
                 var pokeNum = key + 1;
                 var pokeToken = PokemonSpeciesDexOrder[key];
                 var pokeIndex = PokemonSpeciesIndex[pokeToken];
+
+                // If this is a hidden pokemon, don't generate any markup
+                if (typeof pokeIndex.hiddenPokemon !== 'undefined'
+                    && pokeIndex.hiddenPokemon === true){
+                    continue;
+                    }
 
                 // Check to see if this pokemon is special in some way
                 var pokemonIsSpecial = false;
@@ -2323,8 +2346,10 @@
         addedPokemonSpecies[pokemonToken]++;
 
         // Create an entry for this pokemon in the seen count if not exists
-        if (typeof PokemonSpeciesSeen[pokemonToken] === 'undefined'){ PokemonSpeciesSeen[pokemonToken] = 0; }
-        PokemonSpeciesSeen[pokemonToken]++;
+        if (hiddenPokemonTokens.indexOf(pokemonToken) === -1){
+            if (typeof PokemonSpeciesSeen[pokemonToken] === 'undefined'){ PokemonSpeciesSeen[pokemonToken] = 0; }
+            PokemonSpeciesSeen[pokemonToken]++;
+            }
 
         // Pre-count the number of special pokemon on the field
         var existingArceus = typeof addedPokemonSpecies['arceus'] !== 'undefined' ? addedPokemonSpecies['arceus'] : 0;
@@ -2712,10 +2737,16 @@
 
         // Update the banner counters with the total days and current species
         var pokedexCurrent = Object.keys(PokemonSpeciesSeen).length;
-        var pokedexPercent = (Math.ceil((pokedexCurrent / PokemonSpeciesIndexTokens.length) * 1000) / 10);
+        var pokedexTotal = PokemonSpeciesIndexTokens.length - hiddenPokemonTokens.length;
+        var pokedexPercent = (Math.ceil((pokedexCurrent / pokedexTotal) * 1000) / 10);
         $('.timer .count .total', $panelBanner).html(numberWithCommas(PokeboxDaysPassed));
         $('.pokedex .count .current', $panelBanner).html(pokedexCurrent);
         $('.pokedex .count .percent', $panelBanner).html(pokedexPercent+'%');
+        //console.log('pokedexCurrent = ', pokedexCurrent);
+        //console.log('PokemonSpeciesIndexTokens.length = ', PokemonSpeciesIndexTokens.length);
+        //console.log('hiddenPokemonTokens.length = ', hiddenPokemonTokens.length);
+        //console.log('pokedexTotal = ', pokedexTotal);
+        //console.log('pokedexPercent = ', pokedexPercent);
 
         // Generate the biome name using the field and the region
         var biomeName = thisZoneData.name;
@@ -3259,7 +3290,7 @@
             $li.remove();
             thisZoneData.addedPokemonSpecies[pokeInfo.token]--;
             thisZoneData.currentPokemon.splice(pokeKey, 1);
-            PokemonSpeciesSeen[pokeInfo.token]--;
+            if (typeof PokemonSpeciesSeen[pokeInfo.token] !== 'undefined'){ PokemonSpeciesSeen[pokeInfo.token]--; }
             if (PokemonSpeciesSeen[pokeInfo.token] === 0){ delete PokemonSpeciesSeen[pokeInfo.token]; }
             recalculateZoneStats();
             updateOverview();
@@ -4512,8 +4543,10 @@
                         addedPokemonSpecies[selectedEvolution.token]++;
 
                         // Create an entry for this pokemon in the seen count if not exists
-                        if (typeof PokemonSpeciesSeen[selectedEvolution.token] === 'undefined'){ PokemonSpeciesSeen[selectedEvolution.token] = 0; }
-                        PokemonSpeciesSeen[selectedEvolution.token]++;
+                        if (hiddenPokemonTokens.indexOf(selectedEvolution.token) === -1){
+                            if (typeof PokemonSpeciesSeen[selectedEvolution.token] === 'undefined'){ PokemonSpeciesSeen[selectedEvolution.token] = 0; }
+                            PokemonSpeciesSeen[selectedEvolution.token]++;
+                            }
 
                         // Push an event to the analytics
                         if (typeof ga !== 'undefined'){

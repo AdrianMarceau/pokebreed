@@ -620,7 +620,7 @@
             eggGroups: ['undiscovered'],
             buttonQuote: 'Its dark aura repels any and all visitors.',
             speciesEffects: ['repelAllVisitors'],
-            excludeFromPokedex: true
+            hiddenPokemon: true
             },
         'shadow-lugia': {
             order: indexOrder++,
@@ -646,7 +646,7 @@
             eggGroups: ['undiscovered'],
             buttonQuote: 'Its dark aura reverses elemental type appeal.',
             speciesEffects: ['reverseTypeAppeal'],
-            excludeFromPokedex: true
+            hiddenPokemon: true
             },
         'shadow-entei': {
             order: indexOrder++,
@@ -672,7 +672,7 @@
             eggGroups: ['undiscovered'],
             buttonQuote: 'Its dark aura prohibits all forms of breeding.',
             speciesEffects: ['preventAllBreeding'],
-            excludeFromPokedex: true
+            hiddenPokemon: true
             },
         'shadow-celebi': {
             order: indexOrder++,
@@ -698,7 +698,7 @@
             eggGroups: ['undiscovered'],
             buttonQuote: 'Its dark aura suppresses all kinds of evolution.',
             speciesEffects: ['preventAllEvolution'],
-            excludeFromPokedex: true
+            hiddenPokemon: true
             },
         'shadow-latios': {
             order: indexOrder++,
@@ -724,7 +724,7 @@
             eggGroups: ['undiscovered'],
             buttonQuote: 'Its dark aura nullifies inter-species appeal.',
             speciesEffects: ['ignoreSpeciesAppeal'],
-            excludeFromPokedex: true
+            hiddenPokemon: true
             },
 
         'gold-ho-oh': {
@@ -752,7 +752,7 @@
             eggGroups: ['undiscovered'],
             buttonQuote: 'Its rainbow feathers inspire Pokémon to show their true colours.',
             speciesEffects: ['increaseColourVariations'],
-            excludeFromPokedex: true
+            hiddenPokemon: true
             },
         'silver-suicune': {
             order: indexOrder++,
@@ -777,7 +777,7 @@
             eggGroups: ['undiscovered'],
             buttonQuote: 'Its shimmering coat inspires Pokémon to resist legendary influence.',
             speciesEffects: ['repelSpecialVisitors'],
-            excludeFromPokedex: true
+            hiddenPokemon: true
             },
         'crystal-onix': {
             order: indexOrder++,
@@ -802,7 +802,7 @@
             eggGroups: ['undiscovered'],
             buttonQuote: 'Its unbreakable body inspires Pokémon to discard their weaknesses.',
             speciesEffects: ['ignoreTypeWeaknesses'],
-            excludeFromPokedex: true
+            hiddenPokemon: true
             },
 
         });
