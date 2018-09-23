@@ -37,6 +37,27 @@
     var ultraEnergySpecies = [];
     var ultraBeastSpecies = [];
 
+    // Define the individual effects for SHADOW pokemon species
+    var globalSpeciesEffects = {
+
+        // Legendary Pokemon
+        'arceus': 'repelBasicVisitors',
+        'zygarde-complete': 'reverseTypeAppeal',
+
+        // Shadow Pokemon
+        'shadow-mewtwo': 'repelAllVisitors',
+        'shadow-lugia': 'reverseTypeAppeal',
+        'shadow-entei': 'preventAllBreeding',
+        'shadow-celebi': 'preventAllEvolution',
+        'shadow-latios': 'ignoreSpeciesAppeal',
+
+        // Shining Pokemon
+        'gold-ho-oh': 'increaseColourVariations',
+        'silver-suicune': 'repelSpecialVisitors',
+        'crystal-onix': 'ignoreTypeWeaknesses',
+
+        };
+
     // GLOBAL ZONE DATA
 
     var defaultZoneData = {
@@ -52,6 +73,7 @@
         currentFlags: [],
         currentStats: {},
         currentPokemon: [],
+        currentEffects: {},
         faintedPokemon: [],
         addedPokemonEggs: {},
         addedPokemonSpecies: {},
@@ -868,6 +890,16 @@
                 if (typeof baseInfoB['displayNumber'] !== 'undefined'){ baseNumB = baseInfoB['displayNumber']; }
                 if (typeof baseInfoB['subNumber'] !== 'undefined'){ baseNumB += (baseInfoB['subNumber'] / 10); }
 
+                var shadowA = false;
+                var shadowB = false;
+                if (baseInfoA.formClass === 'shadow-variant'){ shadowA = true; }
+                if (baseInfoB.formClass === 'shadow-variant'){ shadowB = true; }
+
+                var shiningA = false;
+                var shiningB = false;
+                if (baseInfoA.formClass === 'shining-variant'){ shiningA = true; }
+                if (baseInfoB.formClass === 'shining-variant'){ shiningB = true; }
+
                 var dittoA = false;
                 var dittoB = false;
                 if (tokenA === 'ditto'){ dittoA = true; }
@@ -914,6 +946,12 @@
 
                 else if (arceusA && !arceusB){ return 1; }
                 else if (!arceusA && arceusB){ return -1; }
+
+                else if (shiningA && !shiningB){ return 1; }
+                else if (!shiningA && shiningB){ return -1; }
+
+                else if (shadowA && !shadowB){ return 1; }
+                else if (!shadowA && shadowB){ return -1; }
 
                 else if (zygardeA && !zygardeB){ return 1; }
                 else if (!zygardeA && zygardeB){ return -1; }
@@ -1707,6 +1745,10 @@
                 // Collect the pokemon's gen in terms of buttons
                 var pokemonGen = typeof pokemonData.buttonGeneration !== 'undefined' ? pokemonData.buttonGeneration : pokemonData.gameGeneration;
 
+                // Check to see if this is a SHADOW pokemon
+                var isShadowPokemon = pokemonData.formClass === 'shadow-variant' ? true : false;
+                var isShiningPokemon = pokemonData.formClass === 'shining-variant' ? true : false;
+
                 // Define the class for the pokemon button
                 var buttonClass = 'button type ';
                 if (typeof pokemonTypes[0] === 'string'){ buttonClass += pokemonTypes[0]+' '; }
@@ -1717,13 +1759,11 @@
                 if (shownTypes.indexOf(pokemonData.types[0]) === -1){ shownTypes.push(pokemonData.types[0]); }
                 if (typeof pokemonTypes[1] !== 'undefined' && shownTypes.indexOf(pokemonData.types[1]) === -1){ shownTypes.push(pokemonData.types[1]); }
 
-                // Check to see if this is a SHADOW pokemon
-                var isShadowPokemon = pokemonToken.match(/^shadow-/) ? true : false;
-
                 // Generate the base title text for this button
                 var pokemonTitle = '';
                 pokemonTitle += pokemonName;
-                if (!isShadowPokemon){
+                if (!isShadowPokemon
+                    && !isShiningPokemon){
                     pokemonTitle += ' ('+
                         (pokemonData.types.join(' / ').toLowerCase().replace(/\b[a-z]/g, function(l) { return l.toUpperCase(); }))+
                         ')';
@@ -2378,16 +2418,28 @@
         // If this is a visitor, create the appropriate flag
         if (isVisitor){ newPokemon.isVisitor = true; }
 
+        // SPECIAL BOX EFFECT : Increase colour variations if the appropriate flag is active
+        var increaseColourVariations = false;
+        if (thisZoneData.currentEffects['increaseColourVariations'] === true){ increaseColourVariations = true; }
+
         // Check to see if this pokemon should be a variant
         var allowVariant = true;
         if (!isEgg){ allowVariant = false; }
-        if (pokemonToken === 'ditto' || pokemonToken === 'super-ditto'){ allowVariant = false; }
-        if ((indexData.class === 'legendary'
+        if (pokemonToken === 'ditto'
+            || pokemonToken === 'super-ditto'){
+            allowVariant = false;
+            }
+        if (existingArceus === 0
+            && (indexData.class === 'legendary'
             || indexData.class === 'mythical'
             || indexData.class === 'ultra-beast')
-            && pokemonToken !== 'phione'){ allowVariant = false; }
-        if (allowVariant
-            && Math.random() >= 0.75){
+            && pokemonToken !== 'phione'){
+            allowVariant = false;
+            }
+
+        // If variations are allowed, randomize and see if we're lucky
+        var variationChance = increaseColourVariations ? 0.25 : 0.75;
+        if (allowVariant && Math.random() >= variationChance){
             //console.log('allowVariant for '+ pokemonToken +'! ');
 
             // Generate several random numbers to use later
@@ -2399,7 +2451,8 @@
             // Use the max and min to define the hue offset
             var minOffset = 0;
             var maxOffset = 30;
-            if (pokemonToken === 'smeargle'){
+            if (pokemonToken === 'smeargle'
+                || increaseColourVariations){
                 maxOffset = 360;
                 } else if (pokemonToken === 'kecleon'){
                 maxOffset = 0;
@@ -3349,6 +3402,14 @@
                 }
             }
 
+        // SPECIAL BOX EFFECT : Ignore elemental weaknesses if the appropriate flag is active
+        var ignoreTypeWeaknesses = false;
+        if (thisZoneData.currentEffects['ignoreTypeWeaknesses'] === true){ ignoreTypeWeaknesses = true; }
+
+        // SPECIAL BOX EFFECT : Ignore elemental strengths if the appropriate flag is active
+        var ignoreTypeStrengths = false;
+        if (thisZoneData.currentEffects['ignoreTypeStrengths'] === true){ ignoreTypeStrengths = true; }
+
         // Loop through and count pokemon by species, groups, generations, and regions
         for (var key1 = 0; key1 < thisZoneData.currentPokemon.length; key1++){
             var pokeInfo = thisZoneData.currentPokemon[key1];
@@ -3378,40 +3439,52 @@
                 for (var key2 = 0; key2 < pokeTypes.length; key2++){
                     var typeToken = pokeTypes[key2];
                     var typeInfo = PokemonTypesIndex[typeToken];
+
+                    // Skip types that aren't actually types
+                    if (typeof typeInfo.hiddenType !== 'undefined'
+                        && typeInfo.hiddenType === true){ continue; }
+
                     // Add +1 appeal point for this pokemon's type
                     if (typeof currentZoneStats['types'][typeToken] === 'undefined'){ currentZoneStats['types'][typeToken] = 0; }
                     currentZoneStats['types'][typeToken] += 1.00 * pokeIndex.influencePoints;
+
                     // Add +1 appeal point for any type this pokemon is prey to
-                    if (typeInfo['matchups']['weaknesses'].length){
-                        for (var key3 = 0; key3 < typeInfo['matchups']['weaknesses'].length; key3++){
-                            var type = typeInfo['matchups']['weaknesses'][key3];
-                            // Skip if an ability grants immunity to this type
-                            if (type === 'water' && pokeAbilities.indexOf('dry-skin') !== -1){ continue; }
-                            if (type === 'fire' && pokeAbilities.indexOf('flash-fire') !== -1){ continue; }
-                            if (type === 'ground' && pokeAbilities.indexOf('levitate') !== -1){ continue; }
-                            if (type === 'electric' && pokeAbilities.indexOf('lightning-rod') !== -1){ continue; }
-                            if (type === 'electric' && pokeAbilities.indexOf('motor-drive') !== -1){ continue; }
-                            if (type === 'grass' && pokeAbilities.indexOf('sap-sipper') !== -1){ continue; }
-                            if (type === 'water' && pokeAbilities.indexOf('storm-drain') !== -1){ continue; }
-                            if (type === 'electric' && pokeAbilities.indexOf('volt-absorb') !== -1){ continue; }
-                            if (type === 'water' && pokeAbilities.indexOf('water-absorb') !== -1){ continue; }
-                            // Tweak the influence value if an ability requires it
-                            var modInfluencePoints = pokeIndex.influencePoints;
-                            if (pokeAbilities.indexOf('filter') !== -1){ modInfluencePoints -= modInfluencePoints * 0.25; }
-                            if ((type === 'ice' || type === 'fire') && pokeAbilities.indexOf('thick-fat') !== -1){ modInfluencePoints -= modInfluencePoints * 0.50; }
-                            // Otherwise we can add the weakness type stats
-                            if (typeof currentZoneStats['types'][type] === 'undefined'){ currentZoneStats['types'][type] = 0; }
-                            currentZoneStats['types'][type] += 0.50 * modInfluencePoints;
+                    if (!ignoreTypeWeaknesses){
+                        if (typeInfo['matchups']['weaknesses'].length){
+                            for (var key3 = 0; key3 < typeInfo['matchups']['weaknesses'].length; key3++){
+                                var type = typeInfo['matchups']['weaknesses'][key3];
+                                // Skip if an ability grants immunity to this type
+                                if (type === 'water' && pokeAbilities.indexOf('dry-skin') !== -1){ continue; }
+                                if (type === 'fire' && pokeAbilities.indexOf('flash-fire') !== -1){ continue; }
+                                if (type === 'ground' && pokeAbilities.indexOf('levitate') !== -1){ continue; }
+                                if (type === 'electric' && pokeAbilities.indexOf('lightning-rod') !== -1){ continue; }
+                                if (type === 'electric' && pokeAbilities.indexOf('motor-drive') !== -1){ continue; }
+                                if (type === 'grass' && pokeAbilities.indexOf('sap-sipper') !== -1){ continue; }
+                                if (type === 'water' && pokeAbilities.indexOf('storm-drain') !== -1){ continue; }
+                                if (type === 'electric' && pokeAbilities.indexOf('volt-absorb') !== -1){ continue; }
+                                if (type === 'water' && pokeAbilities.indexOf('water-absorb') !== -1){ continue; }
+                                // Tweak the influence value if an ability requires it
+                                var modInfluencePoints = pokeIndex.influencePoints;
+                                if (pokeAbilities.indexOf('filter') !== -1){ modInfluencePoints -= modInfluencePoints * 0.25; }
+                                if ((type === 'ice' || type === 'fire') && pokeAbilities.indexOf('thick-fat') !== -1){ modInfluencePoints -= modInfluencePoints * 0.50; }
+                                // Otherwise we can add the weakness type stats
+                                if (typeof currentZoneStats['types'][type] === 'undefined'){ currentZoneStats['types'][type] = 0; }
+                                currentZoneStats['types'][type] += 0.50 * modInfluencePoints;
+                                }
                             }
                         }
-                    // Add -1 appeal point for any type this pokemon is predator to
-                    if (typeInfo['matchups']['strengths'].length){
-                        for (var key4 = 0; key4 < typeInfo['matchups']['strengths'].length; key4++){
-                            var type = typeInfo['matchups']['strengths'][key4];
-                            if (typeof currentZoneStats['types'][type] === 'undefined'){ currentZoneStats['types'][type] = 0; }
-                            currentZoneStats['types'][type] -= 0.50 * pokeIndex.influencePoints;
+
+                        // Add -1 appeal point for any type this pokemon is predator to
+                        if (!ignoreTypeStrengths){
+                            if (typeInfo['matchups']['strengths'].length){
+                                for (var key4 = 0; key4 < typeInfo['matchups']['strengths'].length; key4++){
+                                    var type = typeInfo['matchups']['strengths'][key4];
+                                    if (typeof currentZoneStats['types'][type] === 'undefined'){ currentZoneStats['types'][type] = 0; }
+                                    currentZoneStats['types'][type] -= 0.50 * pokeIndex.influencePoints;
+                                    }
+                                }
                             }
-                        }
+
                     }
 
                 // Check to see if this pokemon has any subtypes from abilities
@@ -3482,24 +3555,17 @@
 
         //console.log('currentZoneStats(Day '+thisZoneData.day+'A) = ', currentZoneStats);
 
-        // (GEN 6+) If we're in the right generation, calculate Zygarde Complete mechanics
-        if (maxIndexKeyToLoad >= 6){
-
-            // If a Zygarde Complete is on the field, invert all stats in the name of balance
-            if (typeof currentZoneStats['species']['zygarde-complete'] !== 'undefined'
-                && currentZoneStats['species']['zygarde-complete'] > 0){
-
-                // Loop through and invert all stats as long as this pokemon is in the box
-                var typeTokens = Object.keys(currentZoneStats['types']);
-                for (var i = 0; i < typeTokens.length; i++){
-                    var typeToken = typeTokens[i];
-                    var typeValue = currentZoneStats['types'][typeToken];
-                    var isNegative = typeValue < 0 ? true : false;
-                    var newTypeValue = (typeValue * -1) * (isNegative ? 2.0 : 0.5);
-                    currentZoneStats['types'][typeToken] = newTypeValue;
-                    }
+        // SPECIAL BOX EFFECT : Reverse type appeal if the appropriate flag is active
+        if (thisZoneData.currentEffects['reverseTypeAppeal'] === true){
+            // Loop through and invert all stats as long as this pokemon is in the box
+            var typeTokens = Object.keys(currentZoneStats['types']);
+            for (var i = 0; i < typeTokens.length; i++){
+                var typeToken = typeTokens[i];
+                var typeValue = currentZoneStats['types'][typeToken];
+                var isNegative = typeValue < 0 ? true : false;
+                var newTypeValue = (typeValue * -1) * (isNegative ? 2.0 : 0.5);
+                currentZoneStats['types'][typeToken] = newTypeValue;
                 }
-
             }
 
         // Loop though and re-sort all the zone stats based on their values
@@ -3629,6 +3695,16 @@
             // Recalculate the current visitor appeal values
             recalculateVisitorAppeal();
 
+            }
+
+        // Always check to see if special pokemon are messing with BOX EFFECTS
+        var currentSpeciesTokens = Object.keys(currentZoneStats['species']);
+        var effectSpeciesTokens = Object.keys(globalSpeciesEffects);
+        for (var i = 0; i < effectSpeciesTokens.length; i++){
+            var species = effectSpeciesTokens[i];
+            var effect = globalSpeciesEffects[species];
+            if (currentSpeciesTokens.indexOf(species) !== -1){ thisZoneData.currentEffects[effect] = true; }
+            else { thisZoneData.currentEffects[effect] = false; }
             }
 
         // Return true on success
@@ -3916,6 +3992,10 @@
                 }
             }
 
+        // SPECIAL BOX EFFECT : Prevent all evolution and form changes if the appropriate flag is active
+        var preventAllEvolution = false;
+        if (thisZoneData.currentEffects['preventAllEvolution'] === true){ preventAllEvolution = true; }
+
         // Now, loop through all the non-egg pokemon again and check evolutions
         if (thisZoneData.currentPokemon.length){
             for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
@@ -4030,7 +4110,8 @@
                     }
 
                 // If this Pokemon has any evolutions, check to see if should be triggered
-                if (typeof indexInfo.nextEvolutions !== 'undefined'
+                if (!preventAllEvolution
+                    && typeof indexInfo.nextEvolutions !== 'undefined'
                     && indexInfo.nextEvolutions.length){
 
                     // Count the number of active species related to this pokemon
@@ -4568,6 +4649,9 @@
         // If we're at or over capacity, no more breeding action should take place
         if (thisZoneData.currentPokemon.length >= thisZoneData.capacity){ return false; }
 
+        // SPECIAL BOX EFFECT : Prevent all breeding if the appropriate flag is active
+        if (thisZoneData.currentEffects['preventAllBreeding'] === true){ return false; }
+
         // Check to see if we're at high (95%) zone capacity already
         var currentZoneStats = thisZoneData.currentStats;
         var currentTypeStats = currentZoneStats['types'];
@@ -4625,7 +4709,7 @@
             //console.log('existingArceus = ', existingArceus);
 
             // Prevent breeding of these special exception species
-            var preventBreeding = ['zygarde-cell'];
+            var preventBreeding = ['zygarde-cell', 'shadow-variant', 'shining-variant'];
 
             // First generate an array of eggs to add (by species) with counts
             var eggsToAddIndex = {};
@@ -4638,7 +4722,7 @@
                 var indexInfo = PokemonSpeciesIndex[pokeToken];
                //console.log('|- ['+ pokeToken +'] indexInfo.lifePoints = ' + indexInfo.lifePoints + ' | indexInfo.breedPoints = ' + indexInfo.breedPoints+ ' | indexInfo.baseStats = ', indexInfo.baseStats);
 
-                // Check to see if this is legendary
+                // Check to see if this is legendary or special
                 var isLegendary = false;
                 if (typeof indexInfo.class !== 'undefined'
                     && (indexInfo.class === 'legendary'
@@ -4647,8 +4731,22 @@
                     isLegendary = true;
                     }
 
+                // Check to see if this pokemon has a form class or not
+                var pokeFormClass = false;
+                if (typeof indexInfo.formClass !== 'undefined'){
+                    pokeFormClass = indexInfo.formClass;
+                    } else if (typeof indexInfo.formClass2 !== 'undefined'){
+                    pokeFormClass = indexInfo.formClass2;
+                    }
+
                 // Check to see if we bypass normal breeding restrictions
-                var allowLegendaryBreeding = existingArceus > 0 && preventBreeding.indexOf(pokeToken) === -1 ? true : false;
+                var allowLegendaryBreeding = false;
+                if (existingArceus > 0
+                    && preventBreeding.indexOf(pokeToken) === -1
+                    && preventBreeding.indexOf(pokeFormClass) === -1
+                    ){
+                    allowLegendaryBreeding = true;
+                    }
 
                 // Skip ahead if this species is incapable of breeding
                 if (indexInfo.eggGroups.indexOf('ditto') !== -1){
@@ -4854,6 +4952,12 @@
                     var pokeToken = eggsToAddIndexTokens[key];
                     var pokeIndex = PokemonSpeciesIndex[pokeToken];
                     var allowEgg = true;
+                    if (typeof pokeIndex === 'undefined'){
+                        console.log('undefined!!!');
+                        console.log('pokeToken', typeof pokeToken, pokeToken);
+                        console.log('pokeIndex', typeof pokeIndex, pokeIndex);
+                        continue;
+                        }
                     //console.log('eggsToAddIndexTokens['+key+'] = ', pokeToken, pokeIndex);
 
                     // Check again to see if we're at overcrowded capacity
@@ -5195,28 +5299,33 @@
             eventPokemonChanceBoosters['arceus'] = 0;
             if (maxIndexKeyToLoad >= 4){
                 if (currentArceusNum > 0){
-                    eventPokemonChanceBases[''] = 0;
-                    eventPokemonChanceBoosters[''] = 0;
                     eventPokemonChanceBases['unown'] = currentArceusNum * 10;
                     eventPokemonChanceBoosters['unown'] = currentArceusNum * 2;
                     }
                 }
 
-            // (GEN X+) SHADOW POKEMON prevent all visitor pokemon from appearing
+            // (GEN X+) SHADOW POKEMON should never appear naturally on the field
             eventPokemonChanceBases['shadow-variant'] = 0;
             eventPokemonChanceBoosters['shadow-variant'] = 0;
-            if (maxIndexKeyToLoad >= 8){
+            eventPokemonChanceBases['shining-variant'] = 0;
+            eventPokemonChanceBoosters['shining-variant'] = 0;
 
-                // Check to see if any shadow pokemon are on the field and block visitors if so
-                var currentSpeciesTokens = '|' + Object.keys(zoneStats['species']).join('|');
-                var shadowPokemonOnField = currentSpeciesTokens.indexOf('|shadow-') !== -1 ? true : false;
-                //console.log('currentSpeciesTokens = ', currentSpeciesTokens);
-                //console.log('shadowPokemonOnField = ', shadowPokemonOnField);
-                if (shadowPokemonOnField){
-                    eventPokemonChanceBases['*'] = 0;
-                    eventPokemonChanceBoosters['*'] = 0;
-                    }
+            // SPECIAL BOX EFFECT : Repel all visitor pokemon if the appropriate flag is active
+            if (thisZoneData.currentEffects['repelAllVisitors'] === true){
+                eventPokemonChanceBases['*'] = 0;
+                eventPokemonChanceBoosters['*'] = 0;
+                }
 
+            // SPECIAL BOX EFFECT : Repel basic visitor pokemon if the appropriate flag is active
+            if (thisZoneData.currentEffects['repelBasicVisitors'] === true){
+                eventPokemonChanceBases['basic'] = 0;
+                eventPokemonChanceBoosters['basic'] = 0;
+                }
+
+            // SPECIAL BOX EFFECT : Repel special visitor pokemon if the appropriate flag is active
+            if (thisZoneData.currentEffects['repelSpecialVisitors'] === true){
+                eventPokemonChanceBases['special'] = 0;
+                eventPokemonChanceBoosters['special'] = 0;
                 }
 
             }
@@ -5226,28 +5335,33 @@
         //console.log('eventPokemonChanceBoosters = ', eventPokemonChanceBoosters);
         //window.eventPokemonChanceBoosters = eventPokemonChanceBoosters;
 
+        // SPECIAL BOX EFFECT : Ignore species appeal entirely if the appropriate flag is active
+        var ignoreSpeciesAppeal = false;
+        if (thisZoneData.currentEffects['ignoreSpeciesAppeal'] === true){ ignoreSpeciesAppeal = true; }
+
         // Loop through every pokemon and see what they like to eat, then check if that species is currently active
         var speciesAppealIndex = {};
-        for (var key = 0; key < PokemonSpeciesIndexTokens.length; key++){
-            var pokeToken = PokemonSpeciesIndexTokens[key];
-            var pokeInfo = PokemonSpeciesIndex[pokeToken];
-            if (typeof pokeInfo.speciesAppeal !== 'undefined'){
-                for (var key2 = 0; key2 < pokeInfo.speciesAppeal.length; key2++){
-                    var speciesToken = pokeInfo.speciesAppeal[key2];
-                    if ((typeof thisZoneData.currentStats['species'][speciesToken] !== 'undefined'
-                        && thisZoneData.currentStats['species'][speciesToken] > 0)
-                        && (typeof thisZoneData.currentStats['species'][pokeToken] === 'undefined'
-                        || thisZoneData.currentStats['species'][pokeToken] <= 3)){
-                        //console.log('pokeToken = '+pokeToken+' | speciesToken = '+speciesToken+'');
-                        //console.log('thisZoneData.currentStats[\'species\']['+speciesToken+'] = ', thisZoneData.currentStats['species'][speciesToken]);
-                        //console.log('thisZoneData.currentStats[\'species\']['+pokeToken+'] = ', thisZoneData.currentStats['species'][pokeToken]);
-                        speciesAppealIndex[pokeToken] = thisZoneData.currentStats['species'][speciesToken];
+        if (!ignoreSpeciesAppeal){
+            for (var key = 0; key < PokemonSpeciesIndexTokens.length; key++){
+                var pokeToken = PokemonSpeciesIndexTokens[key];
+                var pokeInfo = PokemonSpeciesIndex[pokeToken];
+                if (typeof pokeInfo.speciesAppeal !== 'undefined'){
+                    for (var key2 = 0; key2 < pokeInfo.speciesAppeal.length; key2++){
+                        var speciesToken = pokeInfo.speciesAppeal[key2];
+                        if ((typeof thisZoneData.currentStats['species'][speciesToken] !== 'undefined'
+                            && thisZoneData.currentStats['species'][speciesToken] > 0)
+                            && (typeof thisZoneData.currentStats['species'][pokeToken] === 'undefined'
+                            || thisZoneData.currentStats['species'][pokeToken] <= 3)){
+                            //console.log('pokeToken = '+pokeToken+' | speciesToken = '+speciesToken+'');
+                            //console.log('thisZoneData.currentStats[\'species\']['+speciesToken+'] = ', thisZoneData.currentStats['species'][speciesToken]);
+                            //console.log('thisZoneData.currentStats[\'species\']['+pokeToken+'] = ', thisZoneData.currentStats['species'][pokeToken]);
+                            speciesAppealIndex[pokeToken] = thisZoneData.currentStats['species'][speciesToken];
+                            }
                         }
                     }
                 }
-
-        }
-        //console.log('speciesAppealIndex = ', speciesAppealIndex);
+            //console.log('speciesAppealIndex = ', speciesAppealIndex);
+            }
 
         // Collect a reference to the current type stats
         var currentTypeStats = thisZoneData.currentStats['types'];
@@ -5297,7 +5411,9 @@
                 && (pokeClass === 'legendary'
                     || pokeClass === 'mythical'
                     || pokeClass === 'ultra-beast'
-                    || pokeClass === 'shiny-variant')){
+                    || pokeClass === 'shiny-variant'
+                    || pokeFormClass === 'shadow-variant'
+                    || pokeFormClass === 'shining-variant')){
                     isSpecialPokemon = true;
                 }
 
@@ -5307,6 +5423,8 @@
 
             // Apply any event-specific species or class boosters to the chance rating
             if (typeof eventPokemonChanceBases['*'] !== 'undefined'){ pokeChance = eventPokemonChanceBases['*']; }
+            else if (!isSpecialPokemon && typeof eventPokemonChanceBases['basic'] !== 'undefined'){ pokeChance = eventPokemonChanceBases['basic']; }
+            else if (isSpecialPokemon && typeof eventPokemonChanceBases['special'] !== 'undefined'){ pokeChance = eventPokemonChanceBases['special']; }
             else if (typeof eventPokemonChanceBases[pokeToken] !== 'undefined'){ pokeChance = eventPokemonChanceBases[pokeToken]; }
             else if (typeof eventPokemonChanceBases[pokeFormClass] !== 'undefined'){ pokeChance = eventPokemonChanceBases[pokeFormClass]; }
             else if (typeof eventPokemonChanceBases[pokeClass] !== 'undefined'){ pokeChance = eventPokemonChanceBases[pokeClass]; }
@@ -5392,6 +5510,8 @@
                 }
 
             // Apply any event-specific species or class boosters to the chance rating
+            if (!isSpecialPokemon && typeof eventPokemonChanceBoosters['basic'] !== 'undefined'){ pokeChance = eventPokemonChanceBoosters['basic']; }
+            if (isSpecialPokemon && typeof eventPokemonChanceBoosters['special'] !== 'undefined'){ pokeChance = eventPokemonChanceBoosters['special']; }
             if (typeof eventPokemonChanceBoosters[pokeFormClass] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters[pokeFormClass]; }
             if (typeof eventPokemonChanceBoosters[pokeClass] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters[pokeClass]; }
             if (typeof eventPokemonChanceBoosters[pokeToken] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters[pokeToken]; }
@@ -5930,6 +6050,8 @@
         var rawString = seedString;
         //var seedData = rawString.match(/^`?`?\[\s?PBS\s+\|\s+(.*)?\s+\|\s+(.*)?\s?\]`?`?$/i);
         rawString = rawString.replace(' ♂', '-m', rawString).replace(' ♀', '-f', rawString);
+        rawString = rawString.replace(/×\s/g, '×1 ', rawString);
+        //console.log('rawString = ', rawString);
         var seedData = rawString.match(/^[`]{0,}\[?(?:PBS\s+\|\s+)?([^|]+)?(?:\s+\|\s+(?:v[0-9]+\.[0-9]+\.[0-9]+[a-z]?))?\]?[`]{0,}$/i);
         //var seedString = rawString.replace(/^[`]{0,}\[?(?:PBS\s+\|\s+)?([^|]+)?(?:\s+\|\s+(?:v[0-9]+\.[0-9]+\.[0-9]+[a-z]?))?\]?[`]{0,}$/i, '$1');
         //console.log('seedData = ', seedData);
@@ -5941,8 +6063,12 @@
             var pokeList = [];
             var genderTrans = {m:'male',f:'female',n:'none'};
             for (var i = 0; i < rawList.length; i++){
-                var rawInfo = rawList[i].match(/^(\S+)\s(?:×|x)?\s?([0-9mf×x\/]+)$/i);
-                //console.log('rawInfo['+ i +'] = ', rawInfo);
+                var rawValue = rawList[i];
+                if (!rawValue.match(/\s(?:×|x)?\s?([0-9mf×x\/]+)$/i)){ rawValue += ' ×1'; }
+                var rawInfo = rawValue.match(/^(\S+)\s(?:×|x)?\s?([0-9mf×x\/]+)$/i);
+                if (rawInfo === null){ rawInfo = rawValue.match(/^(\S+\s\S+)\s(?:×|x)?\s?([0-9mf×x\/]+)$/i); }
+                //console.log('rawValue = ', typeof rawValue, rawValue);
+                //console.log('rawInfo = ', typeof rawInfo, rawInfo);
                 if (typeof rawInfo[1] !== 'undefined'){
                     var pokeName = rawInfo[1];
                     if (typeof globalNameToTokenIndex[pokeName] !== 'undefined'){
@@ -5957,9 +6083,9 @@
                         }
                     var pokeCounts = rawInfo[2].toLowerCase().replace(/(×|x)+/, '').split(/\//);
                     var pokeIndex = PokemonSpeciesIndex[pokeToken];
-                    //console.log('pokeToken = ', pokeToken);
-                    //console.log('pokeCounts = ', pokeCounts);
-                    //console.log('pokeIndex = ', pokeIndex);
+                    //console.log('\tpokeToken = ', pokeToken);
+                    //console.log('\tpokeCounts = ', pokeCounts);
+                    //console.log('\tpokeIndex = ', pokeIndex);
                     if (typeof pokeIndex === 'undefined'){ continue; }
                     for (var j = 0; j < pokeCounts.length; j++){
                         var raw = pokeCounts[j].match(/^([0-9]+)(f|m)?$/);
@@ -6049,6 +6175,18 @@
     // Filter a function for filtering an array to only unique values
     function arrayFilterUnique(value, index, self) {
         return self.indexOf(value) === index;
+    }
+
+    // Remove entries from an array given a list of values to remove
+    function removeFromAray(arr){
+        var what, a = arguments, L = a.length, ax;
+        while (L > 1 && arr.length) {
+            what = a[--L];
+            while ((ax= arr.indexOf(what)) !== -1) {
+                arr.splice(ax, 1);
+                }
+            }
+        return arr;
     }
 
     // Polyfill for requestAnimationFrame if not exists

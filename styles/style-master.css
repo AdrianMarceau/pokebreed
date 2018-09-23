@@ -1498,6 +1498,11 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     opacity: 0;
 }
 
+/* Shining Pokemon Colours */
+.panel .buttons button[data-token^="gold-"] { background-color: #bd9a21 !important; }
+.panel .buttons button[data-token^="silver-"] { background-color: #7186a0 !important; }
+.panel .buttons button[data-token^="crystal-"] { background-color: #43979e !important; }
+
 
 .panel .buttons .filter-pokemon {
     display: block;
