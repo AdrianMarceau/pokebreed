@@ -128,6 +128,16 @@
 /* -- GIFT POKEMON IDEAS -- */
 /* ----------------------- */
 
++  New regional variants for non-Alolan regions
+    + Kanto / Kantonian
+    + Johto / Johtonian
+    + Hoenn / Hoennian
+    + Sinnoh / Sinnohan
+        + Sinnohan Snorlax (Normal / Ice) [from "Snowmen Snorlax" in anime]
+    + Unova / Unovan
+    + Kalos / Kalosian
+    - Alola / Alolan
+
 +  Shadow Pokemon unlocked via completed dex, have special properties
     +  Infinite life points, allowing to live forever
     +  Do not evolve to prevent overcomplicating (?)
@@ -135,11 +145,13 @@
     +  Shadow Lugia reverses ELEMENTS  (Balanced elemental types in movie / Reverses type-appeal as Shadow Pokemon)
     +  Shadow Entei prohibits BREEDING  (Protected young child in movie / Prohibits breeding as Shadow Pokemon)
     +  Shadow Celebi suppresses EVOLUTION  (Traveled through time in movie / Suppresses evolution as Shadow Pokemon)
-    +  Shadow Latios obstructs RELATIONSHIPS  (Connected to sister in movie / Obstructs relationships as Shadow Pokemon)
+    +  Shadow Latios nullifies RELATIONSHIPS  (Connected to partner in movie / Nullifies species-appeal as Shadow Pokemon)
 
 +  Shining Pokemon unlocked via completed dex, have special properties
     +  Infinite life points, allowing to live forever
-    +  Golden Ho-oh increases VARIATIONS (First episode of the original anime)
+    +  Gold Ho-oh increases VARIATIONS (First episode of the anime)
+    +  Silver Suicune repels LEGENDARIES (Original creation for box)
+    +  Crystal Onix ignores WEAKNESSES (Special episode of the anime)
 
 
 
