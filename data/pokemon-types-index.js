@@ -271,12 +271,29 @@
             order: indexOrder++,
             token: 'shadow',
             name: 'Shadow',
+            hiddenType: true,
             colour: '705898',
             matchups: {
                 strengths: ['shadow'],
                 handicaps: [],
                 futilities: [],
                 weaknesses: ['shadow'],
+                resistances: [],
+                immunities: []
+                }
+            },
+
+        shining: {
+            order: indexOrder++,
+            token: 'shining',
+            name: 'Shining',
+            hiddenType: true,
+            colour: '5e5e5e',
+            matchups: {
+                strengths: ['shining'],
+                handicaps: [],
+                futilities: [],
+                weaknesses: ['shining'],
                 resistances: [],
                 immunities: []
                 }
