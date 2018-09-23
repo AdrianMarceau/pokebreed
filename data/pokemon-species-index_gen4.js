@@ -2404,7 +2404,8 @@
             weight: 320,
             colors: ['white', 'black', 'yellow'],
             eggCycles: 120,
-            eggGroups: ['undiscovered']
+            eggGroups: ['undiscovered'],
+            speciesEffects: ['repelBasicVisitors']
             },
 
         });

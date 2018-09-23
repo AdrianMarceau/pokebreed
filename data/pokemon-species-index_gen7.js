@@ -2088,7 +2088,8 @@
             colors: ['black', 'green', 'white', 'red', 'blue'],
             eggCycles: 120,
             eggGroups: ['undiscovered'],
-            prevEvolution: 'zygarde'
+            prevEvolution: 'zygarde',
+            speciesEffects: ['reverseTypeAppeal']
             },
 
 

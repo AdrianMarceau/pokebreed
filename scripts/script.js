@@ -37,26 +37,7 @@
     var ultraEnergySpecies = [];
     var ultraBeastSpecies = [];
 
-    // Define the individual effects for SHADOW pokemon species
-    var globalSpeciesEffects = {
-
-        // Legendary Pokemon
-        'arceus': 'repelBasicVisitors',
-        'zygarde-complete': 'reverseTypeAppeal',
-
-        // Shadow Pokemon
-        'shadow-mewtwo': 'repelAllVisitors',
-        'shadow-lugia': 'reverseTypeAppeal',
-        'shadow-entei': 'preventAllBreeding',
-        'shadow-celebi': 'preventAllEvolution',
-        'shadow-latios': 'ignoreSpeciesAppeal',
-
-        // Shining Pokemon
-        'gold-ho-oh': 'increaseColourVariations',
-        'silver-suicune': 'repelSpecialVisitors',
-        'crystal-onix': 'ignoreTypeWeaknesses',
-
-        };
+    var globalSpeciesEffects = {};
 
     // GLOBAL ZONE DATA
 
@@ -730,6 +711,13 @@
 
                 // Push this pokemon's name into the translation index (so it's easier to parse seeds)
                 globalNameToTokenIndex[indexInfo.name] = indexInfo.token;
+
+                // If this pokemon has a ny special effects defined, add them to the index
+                if (typeof indexInfo.speciesEffects !== 'undefined'
+                    && indexInfo.speciesEffects.length > 0){
+                    if (typeof globalSpeciesEffects[indexInfo.token] === 'undefined'){ globalSpeciesEffects[indexInfo.token] = []; }
+                    for (var i = 0; i < indexInfo.speciesEffects.length; i++){ globalSpeciesEffects[indexInfo.token].push(indexInfo.speciesEffects[i]); }
+                    }
 
                 // If this pokemon is in a special class, incremeent appropriate counters
                 var isSpecial = false;
@@ -1623,7 +1611,7 @@
     }
 
     // Define a function for checking if we've unlocked shiny ditto
-    function hasUnlockedShinyDitto(){
+    function hasUnlockedSuperDitto(){
         // Allow shiny ditto if the user has completed at least one generation's dex
         var totalsByGeneration = currentPokedexTotals.totalsByGeneration;
         for (var gen = 1; gen < 7; gen++){
@@ -3697,14 +3685,20 @@
 
             }
 
-        // Always check to see if special pokemon are messing with BOX EFFECTS
+        // Always recalculate BOX EFFECTS by checking which pokemon are active
+        thisZoneData.currentEffects = {};
         var currentSpeciesTokens = Object.keys(currentZoneStats['species']);
         var effectSpeciesTokens = Object.keys(globalSpeciesEffects);
         for (var i = 0; i < effectSpeciesTokens.length; i++){
             var species = effectSpeciesTokens[i];
-            var effect = globalSpeciesEffects[species];
-            if (currentSpeciesTokens.indexOf(species) !== -1){ thisZoneData.currentEffects[effect] = true; }
-            else { thisZoneData.currentEffects[effect] = false; }
+            var effects = globalSpeciesEffects[species];
+            for (var j = 0; j < effects.length; j++){
+                var effect = effects[j];
+                if (currentSpeciesTokens.indexOf(species) !== -1){
+                    thisZoneData.currentEffects[effect] = true;
+                    }
+                }
+
             }
 
         // Return true on success
@@ -4698,10 +4692,10 @@
 
             // Pre-count the number of Ditto on the field
             var existingDitto = typeof pokeSpecies['ditto'] !== 'undefined' ? pokeSpecies['ditto']['none'] : 0;
-            var existingShinyDitto = 0;
+            var existingSuperDitto = 0;
             if (typeof pokeSpecies['super-ditto'] !== 'undefined'){
                 existingDitto += pokeSpecies['super-ditto']['none'];
-                existingShinyDitto += pokeSpecies['super-ditto']['none'];
+                existingSuperDitto += pokeSpecies['super-ditto']['none'];
                 }
 
             // Pre-count the number of Arceus on the field
@@ -4996,7 +4990,7 @@
                         } else if (eggsToAddIndex[pokeToken] > 0){
 
                         // Check to Shiny Ditto reductions and then add new egg to the zone
-                        if (existingShinyDitto > 0){ addPokemonToZone(pokeToken, true, existingShinyDitto); }
+                        if (existingSuperDitto > 0){ addPokemonToZone(pokeToken, true, existingSuperDitto); }
                         else { addPokemonToZone(pokeToken, true); }
 
                         // Increment the egg count and delete from index if now empty

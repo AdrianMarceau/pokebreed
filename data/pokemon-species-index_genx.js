@@ -618,7 +618,9 @@
             colors: ['gray', 'yellow', 'black'],
             eggCycles: 120,
             eggGroups: ['undiscovered'],
-            buttonQuote: 'Its dark aura repels any and all visitors.'
+            buttonQuote: 'Its dark aura repels any and all visitors.',
+            speciesEffects: ['repelAllVisitors'],
+            excludeFromPokedex: true
             },
         'shadow-lugia': {
             order: indexOrder++,
@@ -642,7 +644,9 @@
             colors: ['purple', 'blue', 'white', 'red'],
             eggCycles: 120,
             eggGroups: ['undiscovered'],
-            buttonQuote: 'Its dark aura reverses elemental type appeal.'
+            buttonQuote: 'Its dark aura reverses elemental type appeal.',
+            speciesEffects: ['reverseTypeAppeal'],
+            excludeFromPokedex: true
             },
         'shadow-entei': {
             order: indexOrder++,
@@ -666,7 +670,9 @@
             colors: ['gray', 'black', 'blue', 'white', 'red'],
             eggCycles: 80,
             eggGroups: ['undiscovered'],
-            buttonQuote: 'Its dark aura prohibits all forms of breeding.'
+            buttonQuote: 'Its dark aura prohibits all forms of breeding.',
+            speciesEffects: ['preventAllBreeding'],
+            excludeFromPokedex: true
             },
         'shadow-celebi': {
             order: indexOrder++,
@@ -690,7 +696,9 @@
             colors: ['gray', 'purple', 'red'],
             eggCycles: 120,
             eggGroups: ['undiscovered'],
-            buttonQuote: 'Its dark aura suppresses all kinds of evolution.'
+            buttonQuote: 'Its dark aura suppresses all kinds of evolution.',
+            speciesEffects: ['preventAllEvolution'],
+            excludeFromPokedex: true
             },
         'shadow-latios': {
             order: indexOrder++,
@@ -714,7 +722,9 @@
             colors: ['purple', 'blue', 'white', 'yellow'],
             eggCycles: 120,
             eggGroups: ['undiscovered'],
-            buttonQuote: 'Its dark aura nullifies inter-species appeal.'
+            buttonQuote: 'Its dark aura nullifies inter-species appeal.',
+            speciesEffects: ['ignoreSpeciesAppeal'],
+            excludeFromPokedex: true
             },
 
         'gold-ho-oh': {
@@ -740,7 +750,9 @@
             colors: ['gold'],
             eggCycles: 120,
             eggGroups: ['undiscovered'],
-            buttonQuote: 'Its rainbow feathers inspire Pokémon to show their true colours.'
+            buttonQuote: 'Its rainbow feathers inspire Pokémon to show their true colours.',
+            speciesEffects: ['increaseColourVariations'],
+            excludeFromPokedex: true
             },
         'silver-suicune': {
             order: indexOrder++,
@@ -763,7 +775,9 @@
             colors: ['silver'],
             eggCycles: 80,
             eggGroups: ['undiscovered'],
-            buttonQuote: 'Its shimmering coat inspires Pokémon to resist legendary influence.'
+            buttonQuote: 'Its shimmering coat inspires Pokémon to resist legendary influence.',
+            speciesEffects: ['repelSpecialVisitors'],
+            excludeFromPokedex: true
             },
         'crystal-onix': {
             order: indexOrder++,
@@ -786,7 +800,9 @@
             colors: ['crystal'],
             eggCycles: 25,
             eggGroups: ['undiscovered'],
-            buttonQuote: 'Its unbreakable body inspires Pokémon to discard their weaknesses.'
+            buttonQuote: 'Its unbreakable body inspires Pokémon to discard their weaknesses.',
+            speciesEffects: ['ignoreTypeWeaknesses'],
+            excludeFromPokedex: true
             },
 
         });
