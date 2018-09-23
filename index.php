@@ -258,7 +258,8 @@ if (isset($_GET['gen'])
                     <a class="link" data-tab="help">help</a>
                     <a class="link" data-tab="credits">credits</a>
                     <a class="link" data-tab="privacy">privacy</a>
-                    <a class="link chat" href="https://discord.gg/8jsSYt5" target="_blank"><span>chat</span></a>
+                    <a class="link icon reddit" href="https://www.reddit.com/r/pokebox/" target="_blank"><span>reddit</span></a>
+                    <a class="link icon discord" href="https://discord.gg/8jsSYt5" target="_blank"><span>discord</span></a>
                     <? if (!$is_free_mode){ ?>
                         <a class="link pokedex hidden wait" data-tab="pokedex"><span>pokédex</span><span>&hellip;</span></a>
                     <? } else { ?>

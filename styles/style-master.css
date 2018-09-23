@@ -2314,13 +2314,13 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 .panel .buttons .info.links .link.pokedex {
     float: left;
 }
-.panel .buttons .info.links .link.chat span,
+.panel .buttons .info.links .link.icon span,
 .panel .buttons .info.links .link.mode span,
 .panel .buttons .info.links .link.pokedex span {
     vertical-align: middle;
     line-height: 13px;
 }
-.panel .buttons .info.links .link.chat:after,
+.panel .buttons .info.links .link.icon:after,
 .panel .buttons .info.links .link.pokedex:after {
     content: "";
     display: inline-block;
@@ -2333,8 +2333,14 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     margin-left: 4px;
     vertical-align: middle;
 }
-.panel .buttons .info.links .link.chat:after {
+.panel .buttons .info.links .link.discord:after {
     background-image: url(../images/discord.png);
+}
+.panel .buttons .info.links .link.reddit:after {
+    background-image: url(../images/reddit.png);
+    height: 16px;
+    position: relative;
+    top: -2px;
 }
 .panel .buttons .info.links .link.pokedex:after {
     background-image: url(../images/pokeball.png);
