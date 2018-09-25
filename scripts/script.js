@@ -653,6 +653,14 @@
                 // Check to see if this pokemon has been renamed
                 if (typeof indexInfo.legacyToken !== 'undefined'){ legacyTokenMap[indexInfo.legacyToken] = indexInfo.token; }
 
+                // Define the plural formClasses array if not exists
+                if (typeof indexInfo.formClasses === 'undefined'){
+                    indexInfo.formClasses = [];
+                    if (typeof indexInfo.formClass !== 'undefined'){ indexInfo.formClasses.push(indexInfo.formClass); }
+                    if (typeof indexInfo.formClass2 !== 'undefined'){ indexInfo.formClasses.push(indexInfo.formClass2); }
+                    if (typeof indexInfo.formClass3 !== 'undefined'){ indexInfo.formClasses.push(indexInfo.formClass3); }
+                    }
+
                 // If class or formClass are not set, create them as empty strings
                 if (typeof indexInfo.class === 'undefined'){ indexInfo.class = ''; }
                 if (typeof indexInfo.formClass === 'undefined'){ indexInfo.formClass = ''; }
@@ -4050,15 +4058,18 @@
                     && indexInfo.dynamicForms === true){
 
                     // If seasonal variant, change the form based on the current season
-                    if ((indexInfo.formClass === 'seasonal-variant'
-                        || indexInfo.formClass2 === 'seasonal-variant')
+                    if (indexInfo.formClasses.indexOf('seasonal-variant') !== -1
                         && thisZoneData.season.length){
-                        pokemonInfo.formToken = thisZoneData.season;
+                        if (typeof indexInfo.possibleFormsTriggers !== 'undefined'
+                            && typeof indexInfo.possibleFormsTriggers[thisZoneData.season] !== 'undefined'){
+                            pokemonInfo.formToken = indexInfo.possibleFormsTriggers[thisZoneData.season];
+                            } else {
+                            pokemonInfo.formToken = thisZoneData.season;
+                            }
                         }
 
                     // If colorized variant, change the form based on the current top color
-                    if ((indexInfo.formClass === 'color-variant'
-                        || indexInfo.formClass2 === 'color-variant')
+                    if (indexInfo.formClasses.indexOf('color-variant') !== -1
                         && topColor.length){
                         colorKey++;
                         if (topColors.length > 1){
@@ -4071,8 +4082,7 @@
                         }
 
                     // If field variant, change the form based on the current biome
-                    if ((indexInfo.formClass === 'field-variant'
-                        || indexInfo.formClass2 === 'field-variant')
+                    if (indexInfo.formClasses.indexOf('field-variant') !== -1
                         && typeof indexInfo.possibleFormsTriggers !== 'undefined'
                         && thisZoneData.field.length){
                         var triggerTokens = Object.keys(indexInfo.possibleFormsTriggers);
@@ -4087,8 +4097,7 @@
                         }
 
                     // If type variant, change the form based on current type appeal
-                    if (indexInfo.formClass === 'type-variant'
-                        || indexInfo.formClass2 === 'type-variant'){
+                    if (indexInfo.formClasses.indexOf('type-variant') !== -1){
                         if (typeof indexInfo.possibleFormsTriggers !== 'undefined'){ var possibleFormsTriggers = indexInfo.possibleFormsTriggers; }
                         else { var possibleFormsTriggers = defaultTypeFormTriggers; }
                         var triggerTokens = Object.keys(possibleFormsTriggers);
@@ -4980,9 +4989,9 @@
                     var pokeIndex = PokemonSpeciesIndex[pokeToken];
                     var allowEgg = true;
                     if (typeof pokeIndex === 'undefined'){
-                        console.log('undefined!!!');
-                        console.log('pokeToken', typeof pokeToken, pokeToken);
-                        console.log('pokeIndex', typeof pokeIndex, pokeIndex);
+                        //console.log('undefined!!!');
+                        //console.log('pokeToken', typeof pokeToken, pokeToken);
+                        //console.log('pokeIndex', typeof pokeIndex, pokeIndex);
                         continue;
                         }
                     //console.log('eggsToAddIndexTokens['+key+'] = ', pokeToken, pokeIndex);
