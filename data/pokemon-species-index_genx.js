@@ -620,8 +620,57 @@
             eggGroups: ['undiscovered'],
             buttonQuote: 'Its dark aura repels any and all visitors.',
             speciesEffects: ['repelAllVisitors'],
+            hiddenPokemon: true,
+            nextEvolutions: [{
+                species: 'shadow-mega-mewtwo',
+                method: 'level-up',
+                value: 360
+                }]
+            },
+        'shadow-mega-mewtwo': {
+            order: indexOrder++,
+            token: 'shadow-mega-mewtwo',
+            name: 'Shadow Mega Mewtwo',
+            class: 'legendary',
+            formClass: 'shadow-variant',
+            formClass2: 'mega-evolution',
+            formClass3: 'seasonal-variant',
+            formToken: 'shadow-mega-x',
+            baseSpecies: 'shadow-mewtwo',
+            dynamicForms: true,
+            seasonalForms: true,
+            possibleForms: ['shadow-mega-x', 'shadow-mega-y'],
+            possibleFormsTriggers: {
+                'winter': 'shadow-mega-x',
+                'spring': 'shadow-mega-y',
+                'summer': 'shadow-mega-x',
+                'autumn': 'shadow-mega-y',
+                },
+            baseForm: 'shadow-mega-x',
+            number: 150,
+            dexNumber: 1039.5,
+            displayNumber: 1039.5,
+            dexGeneration: 'x',
+            types: ['shadow'],
+            genderRatio: {none: 1.0000},
+            lifePoints: -1,
+            baseStats: {hp: 106, phAttack: 170, phDefense: 85, spAttack: 174, spDefense: 110, speed: 85},
+            abilities: {0: 'pressure'},
+            height: 2.3,
+            weight: 127,
+            colors: ['gray', 'yellow', 'black'],
+            possibleFormColors: {
+                'shadow-mega-x': ['gray', 'yellow', 'black', 'blue'],
+                'shadow-mega-y': ['gray', 'yellow', 'black', 'red']
+                },
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'shadow-mewtwo',
+            buttonQuote: 'Its dark aura repels any and all visitors.',
+            speciesEffects: ['repelAllVisitors'],
             hiddenPokemon: true
             },
+
         'shadow-lugia': {
             order: indexOrder++,
             token: 'shadow-lugia',
@@ -807,6 +856,15 @@
 
         });
     thisIndex.indexOrder = indexOrder;
+
+    /*
+    // Add the generation's list of base species to the index
+    var indexOrder = thisIndex.indexOrder;
+    thisIndex.addSpeciesIndex({
+
+        });
+    thisIndex.indexOrder = indexOrder;
+    */
 
     // Update previous gen pokemon with alt base evolution data
     thisIndex.addAltBaseEvolutions([
