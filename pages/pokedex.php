@@ -8,9 +8,9 @@
                     <div class="filter generations" data-filter="gen" data-max="<?= $allowed_generations ?>">
                         <label class="label">Gen</label>
                         <div class="options">
-                            <a class="option" data-gen="all">All</a>
+                            <? /* <a class="option" data-gen="all">All</a> */ ?>
                             <? for ($gen = 1; $gen <= $allowed_generations; $gen++){ ?>
-                                <? $genx = $gen === 8 ? 'x' : $gen; ?>
+                                <? $genx = $gen === $max_allowed_generations ? 'x' : $gen; ?>
                                 <a class="option" data-gen="<?= $genx ?>"><?= ucfirst($genx) ?></a>
                             <? } ?>
                         </div>

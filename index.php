@@ -24,12 +24,13 @@ $is_free_mode = isset($_GET['freeMode']) && $_GET['freeMode'] === 'true' ? true 
 if ($is_free_mode){ $page_is_indexed = false; }
 
 // Collect the max generation number and make sure it doesn't go over
-$allowed_generations = 8;
+$max_allowed_generations = 9;
+$allowed_generations = $max_allowed_generations;
 if (isset($_GET['gen'])
     && is_numeric($_GET['gen'])){
     $allowed_generations = (int)($_GET['gen']);
     if ($allowed_generations < 1){ $allowed_generations = 1; }
-    elseif ($allowed_generations > 8){ $allowed_generations = 8; }
+    elseif ($allowed_generations > $max_allowed_generations){ $allowed_generations = $max_allowed_generations; }
 }
 
 ?>
@@ -206,12 +207,12 @@ if (isset($_GET['gen'])
                     <div class="wrap">
                         <div class="title">Filters</div>
                         <? if ($allowed_generations > 1){ ?>
-                            <div class="filter generations" data-filter="gen" data-max="<?= $allowed_generations === 8 ? 7 : $allowed_generations ?>">
+                            <div class="filter generations" data-filter="gen" data-max="<?= $allowed_generations ?>">
                                 <label class="label">Gen</label>
-                                <div class="options">
+                                <div class="options" data-count="<?= $allowed_generations + 1 ?>">
                                     <a class="option" data-gen="all">All</a>
                                     <? for ($gen = 1; $gen <= $allowed_generations; $gen++){ ?>
-                                        <? $genx = $gen === 8 ? 'x' : $gen; ?>
+                                        <? $genx = $gen === $max_allowed_generations ? 'x' : $gen; ?>
                                         <a class="option" data-gen="<?= $genx ?>"><?= ucfirst($genx) ?></a>
                                     <? } ?>
                                 </div>
@@ -258,8 +259,8 @@ if (isset($_GET['gen'])
                     <a class="link" data-tab="help">help</a>
                     <a class="link" data-tab="credits">credits</a>
                     <a class="link" data-tab="privacy">privacy</a>
-                    <a class="link icon reddit" href="https://www.reddit.com/r/pokebox/" target="_blank"><span>reddit</span></a>
-                    <a class="link icon discord" href="https://discord.gg/8jsSYt5" target="_blank"><span>discord</span></a>
+                    <a class="link icon reddit" href="https://www.reddit.com/r/pokebox/" target="_blank" title="Check out our Subreddit!"><span>reddit</span></a>
+                    <a class="link icon discord" href="https://discord.gg/8jsSYt5" target="_blank" title="Join us on Discord!"><span>discord</span></a>
                     <? if (!$is_free_mode){ ?>
                         <a class="link pokedex hidden wait" data-tab="pokedex"><span>pokédex</span><span>&hellip;</span></a>
                     <? } else { ?>

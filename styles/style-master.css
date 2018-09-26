@@ -2333,6 +2333,14 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     margin-left: 4px;
     vertical-align: middle;
 }
+.panel .buttons .info.links .link.discord span,
+.panel .buttons .info.links .link.reddit span {
+    display: none;
+}
+.panel .buttons .info.links .link.discord:after,
+.panel .buttons .info.links .link.reddit:after {
+    margin-left: auto;
+}
 .panel .buttons .info.links .link.discord:after {
     background-image: url(../images/discord.png);
 }

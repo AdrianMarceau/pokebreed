@@ -9,9 +9,9 @@
     var appFreeMode = false; // free-mode (show all pokemon)
     var appBaseHref = '';
 
-    var requiredPokemonIndexes = ['', 1, 2, 3, 4, 5, 6, 7, 'x'];
-    var maxIndexKeyToLoad = 8;
-    var maxIndexKeyAllowed = 8;
+    var requiredPokemonIndexes = ['', 1, 2, 3, 4, 5, 6, 7, 8, 'x'];
+    var maxIndexKeyToLoad = 9;
+    var maxIndexKeyAllowed = 9;
 
     var PokemonSpeciesIndex = {};
     var PokemonSpeciesIndexTokens = [];

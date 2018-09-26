@@ -2,7 +2,7 @@
     <div class="group modes">
         <h2>Available Modes</h2>
         <ul>
-            <li><a<?= $is_free_mode || $allowed_generations !== 8 ? ' href="/"' : ' class="active"' ?>>Normal Mode</a> - Complete your Pokédex! Use starter Pokémon to attract new species, then chain to find them all!</li>
+            <li><a<?= $is_free_mode || $allowed_generations !== $max_allowed_generations ? ' href="/"' : ' class="active"' ?>>Normal Mode</a> - Complete your Pokédex! Use starter Pokémon to attract new species, then chain to find them all!</li>
             <li><a<?= !$is_free_mode ? ' href="free-mode/"' : ' class="active"' ?>>Free Mode</a> - No Limits! Any basic Pokémon can be added to your box, but records are not saved.</li>
             <li class="gen-filters">
                 <p style="margin-bottom: 4px;"><a>Filters</a> - Use the Normal Mode filters below if you only want to encounter Pokémon up to a certain generation:</p>
@@ -14,6 +14,8 @@
                     <li><a<?= $allowed_generations !== 5 ? ' href="gen5/"' : ' class="active"' ?>>Gen 5</a></li>
                     <li><a<?= $allowed_generations !== 6 ? ' href="gen6/"' : ' class="active"' ?>>Gen 6</a></li>
                     <li><a<?= $allowed_generations !== 7 ? ' href="gen7/"' : ' class="active"' ?>>Gen 7</a></li>
+                    <li><a<?= $allowed_generations !== 8 ? ' href="gen8/"' : ' class="active"' ?>>Gen 8</a></li>
+                    <li><a<?= $allowed_generations !== $max_allowed_generations ? ' href="/"' : ' class="active"' ?>>Gen X</a></li>
                 </ul>
             </li>
         </ul>
