@@ -18,49 +18,6 @@
 
         // Base Pokedex
 
-        'estrus-nidoqueen': {
-            order: thisIndex.afterOrder('nidoqueen'),
-            token: 'estrus-nidoqueen',
-            name: 'Estrus Nidoqueen',
-            formClass: 'burst-evolution',
-            formToken: 'estrus',
-            baseSpecies: 'nidoqueen',
-            number: 31,
-            dexNumber: 1030,
-            types: ['poison', 'ground'],
-            genderRatio: {female: 1.000},
-            baseStats: {hp: 90, phAttack: 117, phDefense: 87, spAttack: 100, spDefense: 85, speed: 126},
-            abilities: {0: 'poison-point', 1: 'rivalry', hidden: 'sheer-force'},
-            height: 0.2,
-            weight: 0.9,
-            colors: ['blue', 'pink'],
-            eggCycles: 20,
-            eggPartner: 'nidoking',
-            eggGroups: ['monster', 'field'],
-            prevEvolution: 'nidoqueen'
-            },
-
-        'burst-machamp': {
-            order: thisIndex.afterOrder('machamp'),
-            token: 'burst-machamp',
-            name: 'Burst Machamp',
-            formClass: 'burst-evolution',
-            formToken: 'burst',
-            baseSpecies: 'machamp',
-            number: 68,
-            dexNumber: 1032,
-            types: ['fighting'],
-            genderRatio: {male: 0.75, female: 0.25},
-            baseStats: {hp: 90, phAttack: 130, phDefense: 80, spAttack: 65, spDefense: 85, speed: 55},
-            abilities: {0: 'guts', 1: 'no-guard', hidden: 'steadfast'},
-            height: 1.6,
-            weight: 130,
-            colors: ['red', 'black', 'yellow'],
-            eggCycles: 20,
-            eggGroups: ['human-like'],
-            prevEvolution: 'machamp'
-            },
-
         'paramite': {
             order: thisIndex.beforeOrder('paras'),
             token: 'paramite',
@@ -422,70 +379,6 @@
             buttonGeneration: 1
             },
 
-        'super-ditto': {
-            order: thisIndex.afterOrder('ditto'),
-            token: 'super-ditto',
-            name: 'Super Ditto',
-            formClass: 'super-evolution',
-            formToken: 'super',
-            number: 132,
-            dexNumber: 1028,
-            types: ['normal'],
-            genderRatio: {none: 1.000},
-            lifePoints: 360,
-            baseStats: {hp: 48, phAttack: 48, phDefense: 48, spAttack: 48, spDefense: 48, speed: 48},
-            abilities: {0: 'limber'}, // hidden: 'imposter' [removed]
-            height: 0.3,
-            weight: 4,
-            colors: ['purple'],
-            eggCycles: 20,
-            eggGroups: ['ditto'],
-            prevEvolution: 'ditto'
-            },
-
-        'primal-dialga': {
-            order: thisIndex.afterOrder('dialga'),
-            token: 'primal-dialga',
-            name: 'Primal Dialga',
-            class: 'legendary',
-            formClass: 'primal-reversion',
-            formToken: 'primal',
-            baseSpecies: 'dialga',
-            number: 483,
-            dexNumber: 1037,
-            types: ['steel', 'dragon'],
-            genderRatio: {none: 1.0000},
-            baseStats: {hp: 100, phAttack: 140, phDefense: 140, spAttack: 170, spDefense: 120, speed: 110},
-            abilities: {0: 'telepathy'},
-            height: 5.9,
-            weight: 1025,
-            colors: ['white', 'blue', 'gray'],
-            eggCycles: 120,
-            eggGroups: ['undiscovered'],
-            prevEvolution: 'dialga'
-            },
-        'primal-palkia': {
-            order: thisIndex.afterOrder('palkia'),
-            token: 'primal-palkia',
-            name: 'Primal Palkia',
-            class: 'legendary',
-            formClass: 'primal-reversion',
-            formToken: 'primal',
-            baseSpecies: 'palkia',
-            number: 484,
-            dexNumber: 1038,
-            types: ['water', 'dragon'],
-            genderRatio: {none: 1.0000},
-            baseStats: {hp: 90, phAttack: 140, phDefense: 120, spAttack: 170, spDefense: 140, speed: 120},
-            abilities: {0: 'telepathy'},
-            height: 4.6,
-            weight: 504,
-            colors: ['purple', 'white', 'blue'],
-            eggCycles: 120,
-            eggGroups: ['undiscovered'],
-            prevEvolution: 'palkia'
-            },
-
         'kalfling': {
             order: thisIndex.beforeOrder('tauros'),
             token: 'kalfling',
@@ -596,6 +489,220 @@
                 }]
             },
 
+        });
+    thisIndex.indexOrder = indexOrder;
+
+    // Add the generation's list of cross-gen evos/forms to the index
+    var indexOrder = thisIndex.indexOrder;
+    thisIndex.addSpeciesIndex({
+
+        // Primal Evolutions
+
+        'primal-dialga': {
+            order: thisIndex.afterOrder('dialga'),
+            token: 'primal-dialga',
+            name: 'Primal Dialga',
+            class: 'legendary',
+            formClass: 'primal-reversion',
+            formToken: 'primal',
+            baseSpecies: 'dialga',
+            number: 483,
+            dexNumber: 1037,
+            types: ['steel', 'dragon'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 140, phDefense: 140, spAttack: 170, spDefense: 120, speed: 110},
+            abilities: {0: 'telepathy'},
+            height: 5.9,
+            weight: 1025,
+            colors: ['white', 'blue', 'gray'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'dialga'
+            },
+
+        'primal-palkia': {
+            order: thisIndex.afterOrder('palkia'),
+            token: 'primal-palkia',
+            name: 'Primal Palkia',
+            class: 'legendary',
+            formClass: 'primal-reversion',
+            formToken: 'primal',
+            baseSpecies: 'palkia',
+            number: 484,
+            dexNumber: 1038,
+            types: ['water', 'dragon'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 90, phAttack: 140, phDefense: 120, spAttack: 170, spDefense: 140, speed: 120},
+            abilities: {0: 'telepathy'},
+            height: 4.6,
+            weight: 504,
+            colors: ['purple', 'white', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'palkia'
+            },
+
+        // Burst Evolutions
+
+        'estrus-nidoqueen': {
+            order: thisIndex.afterOrder('nidoqueen'),
+            token: 'estrus-nidoqueen',
+            name: 'Estrus Nidoqueen',
+            formClass: 'burst-evolution',
+            formToken: 'estrus',
+            baseSpecies: 'nidoqueen',
+            number: 31,
+            dexNumber: 1030,
+            types: ['poison', 'ground'],
+            genderRatio: {female: 1.000},
+            baseStats: {hp: 90, phAttack: 117, phDefense: 87, spAttack: 100, spDefense: 85, speed: 126},
+            abilities: {0: 'poison-point', 1: 'rivalry', hidden: 'sheer-force'},
+            height: 0.2,
+            weight: 0.9,
+            colors: ['blue', 'pink'],
+            eggCycles: 20,
+            eggPartner: 'nidoking',
+            eggGroups: ['monster', 'field'],
+            prevEvolution: 'nidoqueen'
+            },
+
+        'burst-machamp': {
+            order: thisIndex.afterOrder('machamp'),
+            token: 'burst-machamp',
+            name: 'Burst Machamp',
+            formClass: 'burst-evolution',
+            formToken: 'burst',
+            baseSpecies: 'machamp',
+            number: 68,
+            dexNumber: 1032,
+            types: ['fighting'],
+            genderRatio: {male: 0.75, female: 0.25},
+            baseStats: {hp: 90, phAttack: 130, phDefense: 80, spAttack: 65, spDefense: 85, speed: 55},
+            abilities: {0: 'guts', 1: 'no-guard', hidden: 'steadfast'},
+            height: 1.6,
+            weight: 130,
+            colors: ['red', 'black', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['human-like'],
+            prevEvolution: 'machamp'
+            },
+
+        'super-ditto': {
+            order: thisIndex.afterOrder('ditto'),
+            token: 'super-ditto',
+            name: 'Super Ditto',
+            formClass: 'burst-evolution',
+            formToken: 'super',
+            number: 132,
+            dexNumber: 1028,
+            types: ['normal'],
+            genderRatio: {none: 1.000},
+            lifePoints: 360,
+            baseStats: {hp: 48, phAttack: 48, phDefense: 48, spAttack: 48, spDefense: 48, speed: 48},
+            abilities: {0: 'limber'}, // hidden: 'imposter' [removed]
+            height: 0.3,
+            weight: 4,
+            colors: ['purple'],
+            eggCycles: 20,
+            eggGroups: ['ditto'],
+            prevEvolution: 'ditto'
+            },
+
+        });
+    thisIndex.indexOrder = indexOrder;
+
+    // Update previous gen pokemon with alt base evolution data
+    thisIndex.addAltBaseEvolutions([
+        {base: 'paras', species: 'paramite', method: 'type-surge', value: 'bug'},
+        {base: 'vulpix', species: 'kittri', method: 'type-surge', value: 'fire'},
+        {base: 'alolan-vulpix', species: 'alolan-kittri', method: 'type-surge', value: 'ice'},
+        {base: 'meowth', species: 'meowzy', method: 'type-surge', value: 'normal'},
+        {base: 'alolan-meowth', species: 'alolan-meowzy', method: 'type-surge', value: 'dark'},
+        {base: 'growlithe', species: 'embark', method: 'type-surge', value: 'fire'},
+        {base: 'ponyta', species: 'unicolt', method: 'type-surge', value: 'fire'},
+        {base: 'doduo', species: 'dododo', method: 'type-surge', value: 'normal'},
+        {base: 'grimer', species: 'oozby', method: 'type-surge', value: 'poison'},
+        {base: 'alolan-grimer', species: 'alolan-oozby', method: 'type-surge', value: 'dark'},
+        {base: 'tangela', species: 'tangelet', method: 'type-surge', value: 'grass'},
+        {base: 'goldeen', species: 'heirfry', method: 'type-surge', value: 'water'},
+        {base: 'maractus', species: 'succulite', method: 'type-surge', value: 'grass'},
+        {base: 'tauros', species: 'kalfling', method: 'type-surge', value: 'normal'},
+        {base: 'miltank', species: 'kalfling', method: 'type-surge', value: 'normal'},
+        {base: 'pansage', species: 'elemonk', method: 'type-warning', value: 'grass'},
+        {base: 'pansear', species: 'elemonk', method: 'type-warning', value: 'fire'},
+        {base: 'panpour', species: 'elemonk', method: 'type-warning', value: 'water'},
+        ]);
+
+    // Update previous gen pokemon with new prev evolution data
+    thisIndex.addPrevEvolutions([
+        {base: 'kangaskhan', species: 'kangaby'},
+        ]);
+
+    // Update previous gen pokemon with new gender ratio data
+    thisIndex.addGenderRatios([
+        {base: 'mr-mime', ratio: {male: 1.0000}},
+        ]);
+
+    // Update previous gen pokemon with new gender ratio data
+    thisIndex.addEggPartners([
+        {base: 'mr-mime', species: 'ms-mime'},
+        ]);
+
+    // Update previous gen pokemon with new next evolution data
+    thisIndex.addNextEvolutions([
+
+        {base: 'mime-jr', species: 'mr-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'male', method3: 'level-up', value3: 25, replace: true},
+        {base: 'mime-jr', species: 'ms-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'female', method3: 'level-up', value3: 25},
+
+        {base: 'dialga', species: 'primal-dialga', method: 'primal-reversion', value: 'adamant-orb'},
+        {base: 'palkia', species: 'primal-palkia', method: 'primal-reversion', value: 'lustrous-orb'},
+
+        {base: 'machamp', species: 'burst-machamp', method: 'burst-evolution', value: 'fighting-spirit', method2: 'type-surge', value2: 'fighting'},
+        {base: 'nidoqueen', species: 'estrus-nidoqueen', method: 'burst-evolution', value: 'burning-passion', method2: 'type-surge', value2: 'poison'},
+
+        {base: 'ditto', species: 'super-ditto', method: 'level-up', value: 10, method2: 'fusion-species', value2: 'ditto', switch: 'and'},
+
+        ]);
+
+    // Update previous gen pokemon with known species appeal data
+    thisIndex.addSpeciesAppealValues([
+
+        // Predator/prey relationships
+        // ---
+
+        // Symbiotic relationships
+        // ---
+
+        // Rival relationships
+        // ---
+
+        // Romantic relationships
+        // ---
+
+        // Feeding/pollination relationships
+        // ---
+
+        // One-sided (theft) relationships
+        // ---
+
+        // Mistaken identify relationships
+        // ---
+
+        // Legendary trigger relationships
+        // ---
+
+        ]);
+
+
+    // ---------------------- //
+
+
+    // Add the generation's list of hidden species to the index
+    var indexOrder = thisIndex.indexOrder;
+    thisIndex.addSpeciesIndex({
+
+        // Shadow Pokemon
+
         'shadow-mewtwo': {
             order: indexOrder++,
             token: 'shadow-mewtwo',
@@ -697,6 +804,7 @@
             speciesEffects: ['reverseTypeAppeal'],
             hiddenPokemon: true
             },
+
         'shadow-entei': {
             order: indexOrder++,
             token: 'shadow-entei',
@@ -723,6 +831,7 @@
             speciesEffects: ['preventAllBreeding'],
             hiddenPokemon: true
             },
+
         'shadow-celebi': {
             order: indexOrder++,
             token: 'shadow-celebi',
@@ -749,6 +858,7 @@
             speciesEffects: ['preventAllEvolution'],
             hiddenPokemon: true
             },
+
         'shadow-latios': {
             order: indexOrder++,
             token: 'shadow-latios',
@@ -775,6 +885,8 @@
             speciesEffects: ['ignoreSpeciesAppeal'],
             hiddenPokemon: true
             },
+
+        // Shining Evolutions
 
         'gold-ho-oh': {
             order: indexOrder++,
@@ -803,6 +915,7 @@
             speciesEffects: ['increaseColourVariations'],
             hiddenPokemon: true
             },
+
         'silver-suicune': {
             order: indexOrder++,
             token: 'silver-suicune',
@@ -828,6 +941,7 @@
             speciesEffects: ['repelSpecialVisitors'],
             hiddenPokemon: true
             },
+
         'crystal-onix': {
             order: indexOrder++,
             token: 'crystal-onix',
@@ -856,96 +970,5 @@
 
         });
     thisIndex.indexOrder = indexOrder;
-
-    /*
-    // Add the generation's list of base species to the index
-    var indexOrder = thisIndex.indexOrder;
-    thisIndex.addSpeciesIndex({
-
-        });
-    thisIndex.indexOrder = indexOrder;
-    */
-
-    // Update previous gen pokemon with alt base evolution data
-    thisIndex.addAltBaseEvolutions([
-        {base: 'paras', species: 'paramite', method: 'type-surge', value: 'bug'},
-        {base: 'vulpix', species: 'kittri', method: 'type-surge', value: 'fire'},
-        {base: 'alolan-vulpix', species: 'alolan-kittri', method: 'type-surge', value: 'ice'},
-        {base: 'meowth', species: 'meowzy', method: 'type-surge', value: 'normal'},
-        {base: 'alolan-meowth', species: 'alolan-meowzy', method: 'type-surge', value: 'dark'},
-        {base: 'growlithe', species: 'embark', method: 'type-surge', value: 'fire'},
-        {base: 'ponyta', species: 'unicolt', method: 'type-surge', value: 'fire'},
-        {base: 'doduo', species: 'dododo', method: 'type-surge', value: 'normal'},
-        {base: 'grimer', species: 'oozby', method: 'type-surge', value: 'poison'},
-        {base: 'alolan-grimer', species: 'alolan-oozby', method: 'type-surge', value: 'dark'},
-        {base: 'tangela', species: 'tangelet', method: 'type-surge', value: 'grass'},
-        {base: 'goldeen', species: 'heirfry', method: 'type-surge', value: 'water'},
-        {base: 'maractus', species: 'succulite', method: 'type-surge', value: 'grass'},
-        {base: 'tauros', species: 'kalfling', method: 'type-surge', value: 'normal'},
-        {base: 'miltank', species: 'kalfling', method: 'type-surge', value: 'normal'},
-        {base: 'pansage', species: 'elemonk', method: 'type-warning', value: 'grass'},
-        {base: 'pansear', species: 'elemonk', method: 'type-warning', value: 'fire'},
-        {base: 'panpour', species: 'elemonk', method: 'type-warning', value: 'water'},
-        ]);
-
-    // Update previous gen pokemon with new prev evolution data
-    thisIndex.addPrevEvolutions([
-        {base: 'kangaskhan', species: 'kangaby'},
-        ]);
-
-    // Update previous gen pokemon with new gender ratio data
-    thisIndex.addGenderRatios([
-        {base: 'mr-mime', ratio: {male: 1.0000}},
-        ]);
-
-    // Update previous gen pokemon with new gender ratio data
-    thisIndex.addEggPartners([
-        {base: 'mr-mime', species: 'ms-mime'},
-        ]);
-
-    // Update previous gen pokemon with new next evolution data
-    thisIndex.addNextEvolutions([
-
-        {base: 'machamp', species: 'burst-machamp', method: 'burst-evolution', value: 'fighting-spirit', method2: 'type-surge', value2: 'fighting'},
-        {base: 'nidoqueen', species: 'estrus-nidoqueen', method: 'burst-evolution', value: 'burning-passion', method2: 'type-surge', value2: 'poison'},
-
-        {base: 'mime-jr', species: 'mr-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'male', method3: 'level-up', value3: 25, replace: true},
-        {base: 'mime-jr', species: 'ms-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'female', method3: 'level-up', value3: 25},
-
-        {base: 'ditto', species: 'super-ditto', method: 'level-up', value: 10, method2: 'fusion-species', value2: 'ditto', switch: 'and'},
-
-        {base: 'dialga', species: 'primal-dialga', method: 'primal-reversion', value: 'adamant-orb'},
-        {base: 'palkia', species: 'primal-palkia', method: 'primal-reversion', value: 'lustrous-orb'},
-
-        ]);
-
-    // Update previous gen pokemon with known species appeal data
-    thisIndex.addSpeciesAppealValues([
-
-        // Predator/prey relationships
-        // ---
-
-        // Symbiotic relationships
-        // ---
-
-        // Rival relationships
-        // ---
-
-        // Romantic relationships
-        // ---
-
-        // Feeding/pollination relationships
-        // ---
-
-        // One-sided (theft) relationships
-        // ---
-
-        // Mistaken identify relationships
-        // ---
-
-        // Legendary trigger relationships
-        // ---
-
-        ]);
 
 })();
