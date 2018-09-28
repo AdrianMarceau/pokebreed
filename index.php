@@ -254,8 +254,7 @@ if (isset($_GET['gen'])
                     </div>
                 </div>
                 <div class="info links">
-                    <a class="link" data-tab="about">about</a>
-                    <a class="link" data-tab="modes">modes</a>
+                    <a class="link" data-tab="about">info</a>
                     <a class="link" data-tab="help">help</a>
                     <a class="link" data-tab="credits">credits</a>
                     <a class="link" data-tab="privacy">privacy</a>
@@ -269,9 +268,6 @@ if (isset($_GET['gen'])
                 </div>
                 <div class="info hidden" data-tab="about">
                     <? require('pages/about.php'); ?>
-                </div>
-                <div class="info hidden" data-tab="modes">
-                    <? require('pages/modes.php'); ?>
                 </div>
                 <div class="info hidden" data-tab="help">
                     <? require('pages/help.php'); ?>
