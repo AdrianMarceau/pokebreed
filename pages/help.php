@@ -5,7 +5,8 @@
             Add up to 10 different Pokémon to your box and then press play.  Watch as they grow, evolve,
             multiply, and eventually die leaving their offspring to continue the cycle. The kinds of Pokémon
             you add to a box can alter its appeal to other species and can greatly affect its resident's growth
-            and breeding behaviours over time.
+            and breeding behaviours over time.  Whenever you're ready, STOP the simulator then try a different
+            combination of starter Pokémon.
         </p>
         <p>
             The basic goal of the simulator is to encounter <em>all</em> the different species and forms
