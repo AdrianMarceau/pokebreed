@@ -567,7 +567,7 @@
 
 /* -- Overview Panels -- */
 
-@media (min-width: 768px) and (max-width: 1125px) and (max-height: 647px){
+@media (min-width: 768px) and (max-width: 1366px) and (max-height: 647px){
     .bp3:before { content: "d0";  }
 
     .panel .overview.species .wrap {
