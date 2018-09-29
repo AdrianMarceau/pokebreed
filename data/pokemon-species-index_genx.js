@@ -496,6 +496,80 @@
     var indexOrder = thisIndex.indexOrder;
     thisIndex.addSpeciesIndex({
 
+        // Regional Variants (Proto Space)
+
+        'proto-hoppip': {
+            order: thisIndex.afterOrder('jumpluff', 1),
+            token: 'proto-hoppip',
+            name: 'Proto Hoppip',
+            formClass: 'regional-variant',
+            formToken: 'proto',
+            baseSpecies: 'hoppip',
+            number: 187,
+            types: ['grass'],
+            baseStats: {hp: 35, phAttack: 35, phDefense: 50, spAttack: 35, spDefense: 55, speed: 40},
+            abilities: {0: 'leaf-guard', 1: 'sap-sipper', hidden: 'levitate'},
+            height: 0.4,
+            weight: 0.5,
+            colors: ['black', 'green', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'grass'],
+            nextEvolutions: [{
+                species: 'proto-skiploom',
+                method: 'level-up',
+                value: 18
+                }],
+            altBaseEvolutions: [{
+                species: 'hoppip',
+                method: 'type-appeal',
+                value: 'flying'
+                }],
+            buttonGeneration: 2
+            },
+        'proto-skiploom': {
+            order: thisIndex.afterOrder('jumpluff', 2),
+            token: 'proto-skiploom',
+            name: 'Proto Skiploom',
+            formClass: 'regional-variant',
+            formToken: 'proto',
+            baseSpecies: 'skiploom',
+            number: 188,
+            types: ['grass'],
+            baseStats: {hp: 55, phAttack: 45, phDefense: 80, spAttack: 45, spDefense: 65, speed: 50},
+            abilities: {0: 'leaf-guard', 1: 'sap-sipper', hidden: 'levitate'},
+            height: 0.6,
+            weight: 1,
+            colors: ['green', 'yellow', 'red'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'grass'],
+            prevEvolution: 'proto-hoppip',
+            nextEvolutions: [{
+                species: 'proto-jumpluff',
+                method: 'level-up',
+                value: 27
+                }],
+            buttonGeneration: 2
+            },
+        'proto-jumpluff': {
+            order: thisIndex.afterOrder('jumpluff', 3),
+            token: 'proto-jumpluff',
+            name: 'Proto Jumpluff',
+            formClass: 'regional-variant',
+            formToken: 'proto',
+            baseSpecies: 'jumpluff',
+            number: 189,
+            types: ['grass'],
+            baseStats: {hp: 75, phAttack: 55, phDefense: 110, spAttack: 55, spDefense: 95, speed: 70},
+            abilities: {0: 'leaf-guard', 1: 'sap-sipper', hidden: 'levitate'},
+            height: 0.8,
+            weight: 3,
+            colors: ['pink', 'green', 'white', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'grass'],
+            prevEvolution: 'proto-skiploom',
+            buttonGeneration: 2
+            },
+
         // Primal Evolutions
 
         'primal-dialga': {
@@ -631,6 +705,7 @@
         {base: 'pansage', species: 'elemonk', method: 'type-warning', value: 'grass'},
         {base: 'pansear', species: 'elemonk', method: 'type-warning', value: 'fire'},
         {base: 'panpour', species: 'elemonk', method: 'type-warning', value: 'water'},
+        {base: 'hoppip', species: 'proto-hoppip', method: 'type-warning', value: 'flying'},
         ]);
 
     // Update previous gen pokemon with new prev evolution data
