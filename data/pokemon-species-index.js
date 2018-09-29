@@ -131,6 +131,14 @@
             if (typeof basePokemon.possibleForms === 'undefined'){ basePokemon.possibleForms = []; }
             basePokemon.possibleForms.push(possibleForm.form);
             //console.log('|- basePokemon = ', basePokemon);
+            if (typeof possibleForm.triggers !== 'undefined'){
+                if (typeof basePokemon.possibleFormsTriggers === 'undefined'){ basePokemon.possibleFormsTriggers = {}; }
+                basePokemon.possibleFormsTriggers[possibleForm.form] = possibleForm.triggers.slice(0);
+                }
+            if (typeof possibleForm.colors !== 'undefined'){
+                if (typeof basePokemon.possibleFormsColors === 'undefined'){ basePokemon.possibleFormsColors = {}; }
+                basePokemon.possibleFormsColors[possibleForm.form] = possibleForm.colors.slice(0);
+                }
             }
     }
 

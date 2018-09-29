@@ -16,7 +16,7 @@
     var indexOrder = thisIndex.indexOrder;
     thisIndex.addSpeciesIndex({
 
-        // Base Pokedex
+        // Cross-gen Prev-Evolutions
 
         'paramite': {
             order: thisIndex.beforeOrder('paras'),
@@ -357,28 +357,6 @@
                 }]
             },
 
-        'ms-mime': {
-            order: thisIndex.afterOrder('mr-mime'),
-            token: 'ms-mime',
-            name: 'Ms. Mime',
-            formClass: 'gender-variant',
-            formToken: 'female',
-            number: 122,
-            dexNumber: 1023,
-            types: ['psychic', 'fairy'],
-            genderRatio: {female: 1.0000},
-            baseStats: {hp: 40, phAttack: 45, phDefense: 65, spAttack: 100, spDefense: 120, speed: 90},
-            abilities: {0: 'soundproof', 1: 'filter', hidden: 'technician'},
-            height: 1.3,
-            weight: 54.5,
-            colors: ['blue', 'pink', 'white', 'red'],
-            eggCycles: 25,
-            eggPartner: 'mr-mime',
-            eggGroups: ['human-like'],
-            prevEvolution: 'mime-jr',
-            buttonGeneration: 1
-            },
-
         'kalfling': {
             order: thisIndex.beforeOrder('tauros'),
             token: 'kalfling',
@@ -489,6 +467,30 @@
                 }]
             },
 
+        // Cross-gen Next-Evolutions
+
+        'ms-mime': {
+            order: thisIndex.afterOrder('mr-mime'),
+            token: 'ms-mime',
+            name: 'Ms. Mime',
+            formClass: 'gender-variant',
+            formToken: 'female',
+            number: 122,
+            dexNumber: 1023,
+            types: ['psychic', 'fairy'],
+            genderRatio: {female: 1.0000},
+            baseStats: {hp: 40, phAttack: 45, phDefense: 65, spAttack: 100, spDefense: 120, speed: 90},
+            abilities: {0: 'soundproof', 1: 'filter', hidden: 'technician'},
+            height: 1.3,
+            weight: 54.5,
+            colors: ['blue', 'pink', 'white', 'red'],
+            eggCycles: 25,
+            eggPartner: 'mr-mime',
+            eggGroups: ['human-like'],
+            prevEvolution: 'mime-jr',
+            buttonGeneration: 1
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
@@ -496,7 +498,48 @@
     var indexOrder = thisIndex.indexOrder;
     thisIndex.addSpeciesIndex({
 
-        // Regional Variants (Proto Space)
+        // Newly Discovered Forms
+
+        'snow-wormadam': {
+            order: thisIndex.afterOrder('trash-wormadam', 1),
+            token: 'snow-wormadam',
+            name: 'Snow Wormadam',
+            formClass: 'field-variant',
+            formToken: 'snow',
+            number: 413,
+            types: ['bug', 'ice'],
+            genderRatio: {female: 1.000},
+            baseStats: {hp: 60, phAttack: 69, phDefense: 95, spAttack: 69, spDefense: 95, speed: 36},
+            abilities: {0: 'anticipation', hidden: 'overcoat'},
+            height: 0.5,
+            weight: 6.5,
+            colors: ['white', 'blue', 'black'],
+            eggPartner: 'mothim',
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            prevEvolution: 'burmy'
+            },
+        'bubble-wormadam': {
+            order: thisIndex.afterOrder('trash-wormadam', 2),
+            token: 'bubble-wormadam',
+            name: 'Bubble Wormadam',
+            formClass: 'field-variant',
+            formToken: 'bubble',
+            number: 413,
+            types: ['bug', 'water'],
+            genderRatio: {female: 1.000},
+            baseStats: {hp: 60, phAttack: 69, phDefense: 95, spAttack: 69, spDefense: 95, speed: 36},
+            abilities: {0: 'anticipation', hidden: 'overcoat'},
+            height: 0.5,
+            weight: 6.5,
+            colors: ['blue', 'yellow', 'purple', 'black'],
+            eggPartner: 'mothim',
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            prevEvolution: 'burmy'
+            },
+
+        // Regional Variants (via Proto Space)
 
         'proto-hoppip': {
             order: thisIndex.afterOrder('jumpluff', 1),
@@ -687,6 +730,7 @@
 
     // Update previous gen pokemon with alt base evolution data
     thisIndex.addAltBaseEvolutions([
+
         {base: 'paras', species: 'paramite', method: 'type-surge', value: 'bug'},
         {base: 'vulpix', species: 'kittri', method: 'type-surge', value: 'fire'},
         {base: 'alolan-vulpix', species: 'alolan-kittri', method: 'type-surge', value: 'ice'},
@@ -705,12 +749,24 @@
         {base: 'pansage', species: 'elemonk', method: 'type-warning', value: 'grass'},
         {base: 'pansear', species: 'elemonk', method: 'type-warning', value: 'fire'},
         {base: 'panpour', species: 'elemonk', method: 'type-warning', value: 'water'},
+
         {base: 'hoppip', species: 'proto-hoppip', method: 'type-warning', value: 'flying'},
+
         ]);
 
     // Update previous gen pokemon with new prev evolution data
     thisIndex.addPrevEvolutions([
+
         {base: 'kangaskhan', species: 'kangaby'},
+
+        ]);
+
+    // Update previous gen pokemon with new possible form data
+    thisIndex.addPossibleForms([
+
+        {base: 'burmy', form: 'snow', triggers: ['snow', 'sky'], colors: ['white', 'black', 'blue', 'yellow']},
+        {base: 'burmy', form: 'bubble', triggers: ['river', 'seafloor'], colors: ['blue', 'black', 'purple', 'yellow']},
+
         ]);
 
     // Update previous gen pokemon with new gender ratio data
@@ -728,6 +784,9 @@
 
         {base: 'mime-jr', species: 'mr-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'male', method3: 'level-up', value3: 25, replace: true},
         {base: 'mime-jr', species: 'ms-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'female', method3: 'level-up', value3: 25},
+
+        {base: 'burmy', species: 'snow-wormadam', method: 'level-up', value: 20, method2: 'gender', value2: 'female', method3: 'form', value3: 'snow'},
+        {base: 'burmy', species: 'bubble-wormadam', method: 'level-up', value: 20, method2: 'gender', value2: 'female', method3: 'form', value3: 'bubble'},
 
         {base: 'dialga', species: 'primal-dialga', method: 'primal-reversion', value: 'adamant-orb'},
         {base: 'palkia', species: 'primal-palkia', method: 'primal-reversion', value: 'lustrous-orb'},

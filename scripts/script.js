@@ -1747,8 +1747,21 @@
                     lastGeneration = thisGeneration;
                 }
 
+
+                var customData = {};
+                if (typeof pokemonData.formToken === 'string' && pokemonData.formToken.length > 0){
+                    customData.formToken = pokemonData.formToken; // Preset form
+                    } else if ((pokemonData.randomizeForms === true
+                        || pokemonData.seasonalForms === true
+                        || pokemonData.colorizedForms === true
+                        || pokemonData.fieldForms === true)
+                            && typeof pokemonData.baseForm !== 'undefined'
+                            && pokemonData.baseForm.length > 0){
+                    customData.formToken = typeof pokemonData.dexBaseForm !== 'undefined' ? pokemonData.dexBaseForm : pokemonData.baseForm; // Random/seasonal/color form with base
+                    }
+
                 // Collect the pokemon's image icon
-                var pokemonIcon = getPokemonIcon(pokemonToken);
+                var pokemonIcon = getPokemonIcon(pokemonToken, false, customData);
 
                 // Generate the pokemon's name for the hover
                 var pokemonName = pokemonData.name;
@@ -1996,7 +2009,7 @@
                         || pokeIndex.fieldForms === true)
                             && typeof pokeIndex.baseForm !== 'undefined'
                             && pokeIndex.baseForm.length > 0){
-                    customData.formToken = pokeIndex.baseForm; // Random/seasonal/color form with base
+                    customData.formToken = typeof pokeIndex.dexBaseForm !== 'undefined' ? pokeIndex.dexBaseForm : pokeIndex.baseForm; // Random/seasonal/color form with base
                     }
                 var pokeIcon = getPokemonIcon(pokeToken, false, customData);
                 var pokemonGen = typeof pokeIndex.dexGeneration !== 'undefined' ? pokeIndex.dexGeneration : pokeIndex.gameGeneration;
