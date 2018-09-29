@@ -36,27 +36,44 @@
                 <strong>Ageman20XX / Adrian Marceau</strong><br />
                 <a href="http://plutolighthouse.net/" target="_blank">http://plutolighthouse.net/</a><br />
                 <em>
-                    Baby Meowth (x2), Baby Grimer (x2), Baby Kangaskhan, Baby Maractus,
-                    Estrus Nidoqueen, Burst Machamp, Frilled Heliolisk, Zenith Marshadow,
+                    <span title="Baby Meowth">Meowzy</span> (x2),
+                    <span title="Baby Grimer">Oozby</span> (x2),
+                    <span title="Baby Kangaskhan">Kangaby</span>,
+                    <span title="Baby Maractus">Cactini</span>,
+                    <span title="Baby Pansage/Pansear/Panpour">Elemonk</span>,
+                    <span title="Baby Tauros/Miltank">Kalfling</span>,
+                    Estrus Nidoqueen, Burst Machamp,
+                    Frilled Heliolisk, Zenith Marshadow,
                     Snow Burmy, Snow Wormadam, Bubble Burmy, Bubble Wormadam,
                     Pumpkaboo Sizes (x4), Gourgeist Sizes (x4),
                     Spinda Patterns (x6), Kecleon Colours (x11), Genesect Drives (x5), Silvally Types (x18),
-                    Ms. Mime, Hippopotas (F), Hippowdon (F), Shiny Ditto
+                    Ms. Mime, Hippopotas (F), Hippowdon (F),
+                    <del>Shiny Ditto</del>,
+                    <span title="Shadow Celebi, Shadow Entei, Shadow Latios">Shadow Pokemon</span> (x3),
+                    <span title="Gold Ho-oh, Silver Suicine, Cystal Onix">Shining Pokemon</span> (x3),
+                    <del>Meltan</del>
                 </em>
             </li>
             <li>
                 <strong>Corvos / C. Tyler Corbett</strong><br />
                 <em>
-                    Baby Ponyta, Baby Growlithe,
-                    Zygarde Cell, Zygarde Core, Super Ditto
+                    <span title="Baby Ponyta">Unicolt</span>,
+                    <span title="Baby Growlithe">Embark</span>,
+                    Zygarde Cell, Zygarde Core,
+                    <span title="Ditto Evo">Super Ditto</span>
                 </em>
             </li>
             <li>
                 <strong>PTGigi</strong><br />
                 <a href="http://ptgigi.com/" target="_blank">http://ptgigi.com/</a><br />
                 <em>
-                    Baby Tangela, Baby Doduo, Baby Goldeen, Baby Vulpix (x2),
-                    Primal Dialga, Primal Palkia
+                    <span title="Baby Tangela">Tanglet</span>,
+                    <span title="Baby Doduo">Dododo</span>,
+                    <span title="Baby Goldeen">Heirfry</span>,
+                    <span title="Baby Vulpix">Kittri</span> (x2),
+                    Primal Dialga, Primal Palkia,
+                    <span title="Shadow Mewtwo, Shadow Mega Mewtwo (x2), Shadow Lugia">Shadow Pokemon</span> (x4),
+                    Proto Hoppip, Proto Skiploom, Proto Jumpluff
                 </em>
                 <p style="font-size: 10px; color: #7a7a7a;">
                     * Minor edits by Ageman20XX, originals can be found on
@@ -66,7 +83,7 @@
             <li>
                 <strong>MBM / MegaBossMan</strong> <br />
                 <em>
-                    Baby Paras
+                    <span title="Baby Paras">Paramite</span>
                 </em>
                 <p style="font-size: 10px; color: #7a7a7a;">
                     * Minor edits by Ageman20XX
