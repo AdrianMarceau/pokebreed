@@ -498,11 +498,12 @@
             fieldForms: true,
             possibleForms: ['plant', 'sandy', 'trash', 'snow', 'bubble'],
             possibleFormsTriggers: {
-                'plant': ['forest', 'savanna', 'graveyard'],
-                'sandy': ['desert', 'beach', 'cliffside', 'volcano'],
+                'plant': ['forest', 'savanna'],
+                'sandy': ['desert', 'beach', 'cliffside'],
                 'trash': ['city', 'factory', 'crag'],
-                'snow': ['snow', 'sky', 'space'],
+                'snow': ['snow', 'sky'],
                 'bubble': ['river', 'seafloor'],
+                'cloakless': ['graveyard', 'volcano', 'space'],
                 },
             baseForm: 'plant',
             types: ['bug'],
@@ -516,7 +517,8 @@
                 'sandy': ['brown', 'black', 'gray', 'yellow'],
                 'trash': ['pink', 'black', 'gray', 'yellow'],
                 'snow': ['white', 'black', 'blue', 'yellow'],
-                'bubble': ['blue', 'black', 'purple', 'yellow']
+                'bubble': ['blue', 'black', 'purple', 'yellow'],
+                'cloakless': ['black', 'yellow']
                 },
             eggCycles: 15,
             eggGroups: ['bug'],

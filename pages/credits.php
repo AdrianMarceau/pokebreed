@@ -73,7 +73,8 @@
                     <span title="Baby Vulpix">Kittri</span> (x2),
                     Primal Dialga, Primal Palkia,
                     <span title="Shadow Mewtwo, Shadow Mega Mewtwo (x2), Shadow Lugia">Shadow Pokemon</span> (x4),
-                    Proto Hoppip, Proto Skiploom, Proto Jumpluff
+                    Proto Hoppip, Proto Skiploom, Proto Jumpluff,
+                    Cloakless Burmy
                 </em>
                 <p style="font-size: 10px; color: #7a7a7a;">
                     * Minor edits by Ageman20XX, originals can be found on
