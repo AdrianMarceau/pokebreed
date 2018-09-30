@@ -260,9 +260,8 @@ if (isset($_GET['gen'])
                     <a class="link" data-tab="privacy">privacy</a>
                     <a class="link icon reddit" href="https://www.reddit.com/r/pokebox/" target="_blank" title="Check out our Subreddit!"><span>reddit</span></a>
                     <a class="link icon discord" href="https://discord.gg/8jsSYt5" target="_blank" title="Join us on Discord!"><span>discord</span></a>
-                    <? if (!$is_free_mode){ ?>
-                        <a class="link pokedex hidden wait" data-tab="pokedex"><span>pokédex</span><span>&hellip;</span></a>
-                    <? } else { ?>
+                    <a class="link pokedex hidden wait" data-tab="pokedex"><span>pokédex</span><span>&hellip;</span></a>
+                    <? if ($is_free_mode){ ?>
                         <a class="link mode" href="/"><span>&laquo; normal mode</span></a>
                     <? } ?>
                 </div>
@@ -278,11 +277,9 @@ if (isset($_GET['gen'])
                 <div class="info hidden" data-tab="privacy">
                     <? require('pages/privacy.php'); ?>
                 </div>
-                <? if (!$is_free_mode){ ?>
-                    <div class="info hidden" data-tab="pokedex">
-                        <? require('pages/pokedex.php'); ?>
-                    </div>
-                <? } ?>
+                <div class="info hidden" data-tab="pokedex">
+                    <? require('pages/pokedex.php'); ?>
+                </div>
             </div>
 
         </div>

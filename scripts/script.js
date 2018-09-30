@@ -153,16 +153,14 @@
             //console.log('currentButtonFilters = ', currentButtonFilters);
 
             // Load settings for any POKEDEX filters
-            if (!appFreeMode){
-                var storageName = ('CurrentPokedexFilters' + (maxIndexKeyToLoad < maxIndexKeyAllowed ? 'Gen' + maxIndexKeyToLoad : ''));
-                var savedCurrentPokedexFilters = window.localStorage.getItem(storageName);
-                if (typeof savedCurrentPokedexFilters === 'string'){ currentPokedexFilters = JSON.parse(savedCurrentPokedexFilters); }
-                //console.log('storageName = ', storageName);
-                //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
-                //console.log('maxIndexKeyAllowed = ', maxIndexKeyAllowed);
-                //console.log('savedCurrentPokedexFilters = ', savedCurrentPokedexFilters);
-                //console.log('currentPokedexFilters = ', currentPokedexFilters);
-                }
+            var storageName = ('CurrentPokedexFilters' + (maxIndexKeyToLoad < maxIndexKeyAllowed ? 'Gen' + maxIndexKeyToLoad : ''));
+            var savedCurrentPokedexFilters = window.localStorage.getItem(storageName);
+            if (typeof savedCurrentPokedexFilters === 'string'){ currentPokedexFilters = JSON.parse(savedCurrentPokedexFilters); }
+            //console.log('storageName = ', storageName);
+            //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
+            //console.log('maxIndexKeyAllowed = ', maxIndexKeyAllowed);
+            //console.log('savedCurrentPokedexFilters = ', savedCurrentPokedexFilters);
+            //console.log('currentPokedexFilters = ', currentPokedexFilters);
 
             }
 
@@ -239,7 +237,6 @@
         var $pokedexLink = $('.link[data-tab="pokedex"]', $panelButtons);
         $('.counter.pokedex', $panelBanner).bind('click', function(e){
             e.preventDefault();
-            if (appFreeMode){ return false; }
             if (clickTimeoutB !== false){ clearTimeout(clickTimeoutB); }
             if (!$pokedexLink.hasClass('active')){ $pokedexLink.trigger('click'); }
             clickTimeoutB = setTimeout(function(){ $("html, body").scrollTop($pokedexLink.offset().top); }, 0);
@@ -1927,9 +1924,6 @@
         //console.log('generatePokemonPokedex()');
         //$pokePanelLoading.append('.'); // append loading dot
 
-        // If we're in the free mode, do not generate the pokedex
-        if (appFreeMode){ return false; }
-
         // Remove the hidden class from the pokedex link
         $('.info.links .link[data-tab="pokedex"]', $panelButtons).removeClass('hidden');
 
@@ -1988,8 +1982,9 @@
                 }
 
                 var isUnlocked = false;
-                if (typeof PokemonSpeciesSeen[pokeToken] !== 'undefined'
-                    && PokemonSpeciesSeen[pokeToken] > 0){
+                if (appFreeMode
+                    || (typeof PokemonSpeciesSeen[pokeToken] !== 'undefined'
+                        && PokemonSpeciesSeen[pokeToken] > 0)){
                     isUnlocked = true;
                     }
                 var liClass = 'species ';
@@ -2015,6 +2010,7 @@
                 var pokemonGen = typeof pokeIndex.dexGeneration !== 'undefined' ? pokeIndex.dexGeneration : pokeIndex.gameGeneration;
                 var pokemonBaseGen = pokeIndex.baseGameGeneration;
                 var pokeLegNum = pokemonGen === 'x' && typeof pokeIndex.dexNumber !== 'undefined' ? pokeIndex.dexNumber : pokeIndex.number;
+
                 pokedexMarkup.push('<li class="entry" ' +
                     'data-token="' + pokeToken + '" ' +
                     'data-gen="'+ pokemonGen +'" ' +
@@ -2063,7 +2059,7 @@
     function updatePokemonPokedex(){
         //console.log('-----\nupdatePokemonPokedex()');
 
-        // If we're in the free mode, there is no pokedex to update
+        // If we're in the free mode, the pokedex is already complete
         if (appFreeMode){ return false; }
 
         // Collect a reference to the pokedex list wrapper
@@ -2265,7 +2261,7 @@
     function getPokemonTitleText(pokeToken){
         var pokeIndex = PokemonSpeciesIndex[pokeToken];
         var isUnlocked = false;
-        if (typeof PokemonSpeciesSeen[pokeToken] !== 'undefined' && PokemonSpeciesSeen[pokeToken] > 0){ isUnlocked = true; }
+        if (appFreeMode || (typeof PokemonSpeciesSeen[pokeToken] !== 'undefined' && PokemonSpeciesSeen[pokeToken] > 0)){ isUnlocked = true; }
         var pokeNum = PokemonSpeciesDexOrder.indexOf(pokeToken) + 1;
         var numText = '#' + strPad('000', pokeNum, true);
         var nameText = pokeIndex.name;
