@@ -27,6 +27,7 @@
 
     var PokeboxDaysPassed = 0;
     var PokemonSpeciesSeen = {};
+    var PokeBoxRewards = [];
 
     var totalSpecialPokemon = 0;
     var totalLegendaryPokemon = 0;
@@ -1681,18 +1682,34 @@
 
         // Define the pokemon allowed regardless of seen status, (starters for each gen)
         freeStarterPokemon = [];
-        freeStarterPokemon.push('bulbasaur', 'charmander', 'squirtle'); // gen 1 starters
+
+        // Everyone gains access to the series mascots
         freeStarterPokemon.push('pikachu', 'eevee'); // special edition starters
+
+        // Unlock the starters from Gen 1 automatically and the rest via dex completion
+        freeStarterPokemon.push('bulbasaur', 'charmander', 'squirtle'); // gen 1 starters
         if (seenSpeciesTokens.length >= 151){ freeStarterPokemon.push('chikorita', 'cyndaquil', 'totodile'); } // gen 2 starters
         if (seenSpeciesTokens.length >= 251){ freeStarterPokemon.push('treecko', 'torchic', 'mudkip'); } // gen 3 starters
         if (seenSpeciesTokens.length >= 386){ freeStarterPokemon.push('turtwig', 'chimchar', 'piplup'); } // gen 4 starters
         if (seenSpeciesTokens.length >= 493){ freeStarterPokemon.push('snivy', 'tepid', 'oshawott'); } // gen 5 starters
         if (seenSpeciesTokens.length >= 649){ freeStarterPokemon.push('chespin', 'fennekin', 'froakie'); } // gen 6 starters
         if (seenSpeciesTokens.length >= 721){ freeStarterPokemon.push('rowlet', 'litten', 'popplio'); } // gen 7 starters
-        //if (seenSpeciesTokens.length >= 807){ freeStarterPokemon.push('?', '?', '?'); }
+        //if (seenSpeciesTokens.length >= 807){ freeStarterPokemon.push('?', '?', '?'); } // gen 8 starters
+
+        // Unlock shadow pokemon at repeating dex counts matching corresponding movies numbers
+        if (seenSpeciesTokens.length >= 111){ freeStarterPokemon.push('shadow-mewtwo'); }
+        if (seenSpeciesTokens.length >= 222){ freeStarterPokemon.push('shadow-lugia'); }
+        if (seenSpeciesTokens.length >= 333){ freeStarterPokemon.push('shadow-entei'); }
+        if (seenSpeciesTokens.length >= 444){ freeStarterPokemon.push('shadow-celebi'); }
+        if (seenSpeciesTokens.length >= 555){ freeStarterPokemon.push('shadow-latios'); }
 
         // Unlock the final pokemon ARCEUS if the user has encountered every other species
         if (hasUnlockedFinalPokemon()){ freeStarterPokemon.push('arceus'); }
+
+        // Unlock shining pokemon if promotional passwords have been entered into the simulator
+        if (PokeBoxRewards.indexOf('gold-ho-oh') !== -1){ freeStarterPokemon.push('gold-ho-oh'); }
+        if (PokeBoxRewards.indexOf('silver-suicune') !== -1){ freeStarterPokemon.push('silver-suicune'); }
+        if (PokeBoxRewards.indexOf('crystal-onix') !== -1){ freeStarterPokemon.push('crystal-onix'); }
 
         // Check to see if we can allow special pokemon to be selected yet
         var allowSpecialPokemon = hasUnlockedSpecialPokemon();
@@ -1903,7 +1920,8 @@
 
             // We're ready to show the filter panel now too (and reset more buttons)
             $thisFilterWrapper.removeClass('hidden');
-            $('.button.enter-seed', $thisFilterWrapper).removeClass('disabled');
+            if (Object.keys(PokemonSpeciesSeen).length > 0){ $('.button.enter-seed', $thisFilterWrapper).removeClass('disabled'); }
+            else { $('.button.enter-seed', $thisFilterWrapper).addClass('disabled'); }
 
             // If we've seen ditto by now, we can show the button, else keep hidden
             if (appFreeMode
@@ -3354,6 +3372,17 @@
             + 'Please enter a starter seed below (include all special characters):');
         if (rawSeed && rawSeed.length > 0){
             //console.log('rawSeed = ', rawSeed);
+
+            // Check to see if the seed is actually a password and unlock rewards if true then return
+            var isPassword = false;
+            var rawPassword = stringToPassValue(rawSeed);
+            if (rawPassword === 11770){ PokeBoxRewards.push('gold-ho-oh'); isPassword = true; }
+            else if (rawPassword === 17666){ PokeBoxRewards.push('silver-suicune'); isPassword = true; }
+            else if (rawPassword === 21053){ PokeBoxRewards.push('crystal-onix'); isPassword = true; }
+            //console.log('PokeBoxRewards = ', PokeBoxRewards);
+            if (isPassword){ generatePokemonButtons(); return; }
+
+            // Otherwise we can continue parsing the password normally for actual Pokemon amounts
             var seedPokemon = parsePokeBoxSeed(rawSeed);
             //console.log('seedPokemon = ', seedPokemon);
             if (seedPokemon
@@ -6232,6 +6261,16 @@
                 }
             }
         return arr;
+    }
+
+    // Define a function to convert a given string into a password value for comparrison
+    function stringToPassValue(ps){
+        ps = ps.toUpperCase().replace(/[^a-z0-9]+/i, '');
+        var pv = 0;
+        for (var i = 0; i < ps.length; i++){
+            pv += ps.charCodeAt(i) * i;
+            }
+        return pv;
     }
 
     // Polyfill for requestAnimationFrame if not exists
