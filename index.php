@@ -212,9 +212,10 @@ if (isset($_GET['gen'])
                                 <div class="options" data-count="<?= $allowed_generations + 1 ?>">
                                     <a class="option" data-gen="all">All</a>
                                     <? for ($gen = 1; $gen <= $allowed_generations; $gen++){ ?>
-                                        <? $genx = $gen === $max_allowed_generations ? 'x' : $gen; ?>
-                                        <a class="option" data-gen="<?= $genx ?>"><?= ucfirst($genx) ?></a>
+                                        <? if ($gen === $max_allowed_generations){ break; } ?>
+                                        <a class="option" data-gen="<?= $gen ?>"><?= ucfirst($gen) ?></a>
                                     <? } ?>
+                                    <a class="option" data-gen="x">X</a>
                                 </div>
                             </div>
                         <? } ?>

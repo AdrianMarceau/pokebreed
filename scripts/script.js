@@ -9,9 +9,10 @@
     var appFreeMode = false; // free-mode (show all pokemon)
     var appBaseHref = '';
 
-    var requiredPokemonIndexes = ['', 1, 2, 3, 4, 5, 6, 7, 8, 'x'];
     var maxIndexKeyToLoad = 9;
     var maxIndexKeyAllowed = 9;
+    var requiredIndexFiles = [];
+    var loadedIndexFiles = [];
 
     var PokemonSpeciesIndex = {};
     var PokemonSpeciesIndexTokens = [];
@@ -127,6 +128,13 @@
         // Overwrite the default index load value if set
         if (typeof window.PokemonAllowedGenerationsMax !== 'undefined'){ maxIndexKeyToLoad = window.PokemonAllowedGenerationsMax; }
         //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
+
+        // Use the loaded generation settings to decide script filenames to load
+        requiredIndexFiles.push(''); // Always add base class file first
+        for (var i = 1; i <= maxIndexKeyToLoad; i++){ requiredIndexFiles.push('gen'+(i < maxIndexKeyAllowed ? i : 'x')); }
+        requiredIndexFiles.push('rewards'); // Always add the global rewards file
+        //console.log('requiredIndexFiles = ', requiredIndexFiles);
+        //console.log('loadedIndexFiles = ', loadedIndexFiles);
 
         // Check to ensure we have access to LOCAL STORAGE
         if (typeof window.localStorage !== 'undefined'){
@@ -1364,16 +1372,17 @@
     function preloadPokemonIndex(onReady, indexKey){
         if (typeof onReady !== 'function'){ onReady = function(){}; }
         if (typeof indexKey === 'undefined'){ indexKey = 0; }
-        if (indexKey <= maxIndexKeyToLoad
-            && typeof requiredPokemonIndexes[indexKey] !== 'undefined'){
+        if (requiredIndexFiles.length > loadedIndexFiles.length
+            && typeof requiredIndexFiles[indexKey] !== 'undefined'){
             requestedScripts++;
-            var indexToken = requiredPokemonIndexes[indexKey];
-            //console.log('loading requiredPokemonIndexes['+indexKey+'] = ', indexToken);
-            if (indexToken === ''){ var fileName = 'pokemon-species-index.min.js'; }
-            else { var fileName = 'pokemon-species-index_gen'+ indexToken +'.min.js'; }
+            var fileToken = requiredIndexFiles[indexKey];
+            //console.log('loading requiredIndexFiles['+indexKey+'] = ', fileToken);
+            if (fileToken === ''){ var fileName = 'pokemon-species-index.min.js'; }
+            else { var fileName = 'pokemon-species-index_'+ fileToken +'.min.js'; }
             filePath = 'data/'+ fileName +'?v'+ appVersionNumber;
             $.getScript(filePath, function(){
                 loadedScripts++;
+                loadedIndexFiles.push(fileToken);
                 $pokePanelLoading.append('.'); // append loading dot
                 //console.log('loaded filePath = ', filePath);
                 return preloadPokemonIndex(onReady, indexKey + 1);
