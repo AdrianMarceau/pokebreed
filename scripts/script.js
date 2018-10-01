@@ -128,40 +128,49 @@
         if (typeof window.PokemonAllowedGenerationsMax !== 'undefined'){ maxIndexKeyToLoad = window.PokemonAllowedGenerationsMax; }
         //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
 
-        // Do not load from LOCAL STORAGE records if we're in free mode
-        if (!appFreeMode){
-            //console.log('NOT in free mode, let us LOAD');
-            // Check if a localStorage value exsists for total days
-            if (typeof window.localStorage !== 'undefined'){
+        // Check to ensure we have access to LOCAL STORAGE
+        if (typeof window.localStorage !== 'undefined'){
+
+            // Prevent certain local storage settings from being loaded in FREE MODE
+            if (!appFreeMode){
+
+                //console.log('NOT in free mode, let us LOAD');
+
+                // Load the TOTAL DAYS PASSED if it's been saved
                 var savedPokeboxDaysPassed = window.localStorage.getItem('PokeboxDaysPassed');
                 if (typeof savedPokeboxDaysPassed !== 'undefined'){ PokeboxDaysPassed = savedPokeboxDaysPassed ? parseInt(savedPokeboxDaysPassed) : 0; }
                 //console.log('savedPokeboxDaysPassed = ', savedPokeboxDaysPassed, typeof savedPokeboxDaysPassed);
                 //console.log('PokeboxDaysPassed = ', PokeboxDaysPassed, typeof PokeboxDaysPassed);
+
+                // Load the list of earned POKEBOX REWARD TOKENS if they've been saved
+                var storageName = ('CurrentPokeBoxRewards');
+                var savedCurrentCurrentPokeBoxRewards = window.localStorage.getItem(storageName);
+                if (typeof savedCurrentCurrentPokeBoxRewards === 'string'){ PokeBoxRewards = JSON.parse(savedCurrentCurrentPokeBoxRewards); }
+                //console.log('storageName = ', storageName);
+                //console.log('savedCurrentCurrentPokeBoxRewards = ', savedCurrentCurrentPokeBoxRewards);
+                //console.log('PokeBoxRewards = ', PokeBoxRewards);
+
                 }
-            }
 
-        // But we can still load from LOCAL STORAGE in the case of filter settings
-        if (typeof window.localStorage !== 'undefined'){
+                // Load settings for any BUTTON filters
+                var storageName = !appFreeMode ? ('CurrentButtonFilters' + (maxIndexKeyToLoad < maxIndexKeyAllowed ? 'Gen' + maxIndexKeyToLoad : '')) : 'FreeButtonFilters';
+                var savedCurrentButtonFilters = window.localStorage.getItem(storageName);
+                if (typeof savedCurrentButtonFilters === 'string'){ currentButtonFilters = JSON.parse(savedCurrentButtonFilters); }
+                //console.log('storageName = ', storageName);
+                //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
+                //console.log('maxIndexKeyAllowed = ', maxIndexKeyAllowed);
+                //console.log('savedCurrentButtonFilters = ', savedCurrentButtonFilters);
+                //console.log('currentButtonFilters = ', currentButtonFilters);
 
-            // Load settings for any BUTTON filters
-            var storageName = !appFreeMode ? ('CurrentButtonFilters' + (maxIndexKeyToLoad < maxIndexKeyAllowed ? 'Gen' + maxIndexKeyToLoad : '')) : 'FreeButtonFilters';
-            var savedCurrentButtonFilters = window.localStorage.getItem(storageName);
-            if (typeof savedCurrentButtonFilters === 'string'){ currentButtonFilters = JSON.parse(savedCurrentButtonFilters); }
-            //console.log('storageName = ', storageName);
-            //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
-            //console.log('maxIndexKeyAllowed = ', maxIndexKeyAllowed);
-            //console.log('savedCurrentButtonFilters = ', savedCurrentButtonFilters);
-            //console.log('currentButtonFilters = ', currentButtonFilters);
-
-            // Load settings for any POKEDEX filters
-            var storageName = ('CurrentPokedexFilters' + (maxIndexKeyToLoad < maxIndexKeyAllowed ? 'Gen' + maxIndexKeyToLoad : ''));
-            var savedCurrentPokedexFilters = window.localStorage.getItem(storageName);
-            if (typeof savedCurrentPokedexFilters === 'string'){ currentPokedexFilters = JSON.parse(savedCurrentPokedexFilters); }
-            //console.log('storageName = ', storageName);
-            //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
-            //console.log('maxIndexKeyAllowed = ', maxIndexKeyAllowed);
-            //console.log('savedCurrentPokedexFilters = ', savedCurrentPokedexFilters);
-            //console.log('currentPokedexFilters = ', currentPokedexFilters);
+                // Load settings for any POKEDEX filters
+                var storageName = ('CurrentPokedexFilters' + (maxIndexKeyToLoad < maxIndexKeyAllowed ? 'Gen' + maxIndexKeyToLoad : ''));
+                var savedCurrentPokedexFilters = window.localStorage.getItem(storageName);
+                if (typeof savedCurrentPokedexFilters === 'string'){ currentPokedexFilters = JSON.parse(savedCurrentPokedexFilters); }
+                //console.log('storageName = ', storageName);
+                //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
+                //console.log('maxIndexKeyAllowed = ', maxIndexKeyAllowed);
+                //console.log('savedCurrentPokedexFilters = ', savedCurrentPokedexFilters);
+                //console.log('currentPokedexFilters = ', currentPokedexFilters);
 
             }
 
@@ -3380,7 +3389,11 @@
             else if (rawPassword === 17666){ PokeBoxRewards.push('silver-suicune'); isPassword = true; }
             else if (rawPassword === 21053){ PokeBoxRewards.push('crystal-onix'); isPassword = true; }
             //console.log('PokeBoxRewards = ', PokeBoxRewards);
-            if (isPassword){ generatePokemonButtons(); return; }
+            if (isPassword){
+                saveCurrentPokeBoxRewards();
+                generatePokemonButtons();
+                return;
+                }
 
             // Otherwise we can continue parsing the password normally for actual Pokemon amounts
             var seedPokemon = parsePokeBoxSeed(rawSeed);
@@ -3892,26 +3905,29 @@
             // Update the pokeball colour if necessary
             recalculatePokedexIconColour();
 
-            // Update local storage with the new day total
+            // Check to see if we have access to local storage
             if (typeof window.localStorage !== 'undefined'){
+
+                // Update local storage with the new day total
                 var savePokeboxDaysPassed = PokeboxDaysPassed;
                 window.localStorage.setItem('PokeboxDaysPassed', savePokeboxDaysPassed);
                 //console.log('savePokeboxDaysPassed = ', savePokeboxDaysPassed);
-                }
 
-            // Update local storage with the current seen pokemon index
-            if (typeof window.localStorage !== 'undefined'){
+                // Update local storage with the current seen pokemon index
+                if (true){
+                    // Collect saved global array and prepare to merge with local filtered
+                    var savedPokemonSpeciesSeen = window.localStorage.getItem('PokemonSpeciesSeen');
+                    if (typeof savedPokemonSpeciesSeen === 'string'){ savedPokemonSpeciesSeen = JSON.parse(savedPokemonSpeciesSeen); }
+                    else { savedPokemonSpeciesSeen = {}; }
+                    //console.log('savedPokemonSpeciesSeen = ', savedPokemonSpeciesSeen);
+                    // Merge the local array into the saved one, and then re-strinify it
+                    var mergedPokemonSpeciesSeen = JSON.stringify(jQuery.extend({}, savedPokemonSpeciesSeen, PokemonSpeciesSeen));
+                    window.localStorage.setItem('PokemonSpeciesSeen', mergedPokemonSpeciesSeen);
+                    //console.log('mergedPokemonSpeciesSeen = ', mergedPokemonSpeciesSeen);
+                    }
 
-                // Collect saved global array and prepare to merge with local filtered
-                var savedPokemonSpeciesSeen = window.localStorage.getItem('PokemonSpeciesSeen');
-                if (typeof savedPokemonSpeciesSeen === 'string'){ savedPokemonSpeciesSeen = JSON.parse(savedPokemonSpeciesSeen); }
-                else { savedPokemonSpeciesSeen = {}; }
-                //console.log('savedPokemonSpeciesSeen = ', savedPokemonSpeciesSeen);
-
-                // Merge the local array into the saved one, and then re-strinify it
-                var mergedPokemonSpeciesSeen = JSON.stringify(jQuery.extend({}, savedPokemonSpeciesSeen, PokemonSpeciesSeen));
-                window.localStorage.setItem('PokemonSpeciesSeen', mergedPokemonSpeciesSeen);
-                //console.log('mergedPokemonSpeciesSeen = ', mergedPokemonSpeciesSeen);
+                // Update local storage with the current pokebox rewards index
+                saveCurrentPokeBoxRewards();
 
                 }
 
@@ -6178,8 +6194,29 @@
             //console.log('seed string was invalid');
             return false;
             }
+    }
 
-        };
+    // Define a function for saving pokebox rewards to local storage
+    function saveCurrentPokeBoxRewards(){
+
+        // Return if we don't have access to local storage or we're not allowed to save
+        if (appFreeMode){ return false; }
+        if (typeof window.localStorage === 'undefined'){ return false; }
+
+        // Collect saved global array and prepare to merge with local filtered
+        var savedCurrentPokeBoxRewards = window.localStorage.getItem('CurrentPokeBoxRewards');
+        if (typeof savedCurrentPokeBoxRewards === 'string'){ savedCurrentPokeBoxRewards = JSON.parse(savedCurrentPokeBoxRewards); }
+        else { savedCurrentPokeBoxRewards = []; }
+        //console.log('savedCurrentPokeBoxRewards = ', savedCurrentPokeBoxRewards);
+
+        // Merge the local array into the saved one, and then re-strinify it
+
+        // Merge the local array into the saved one, and then re-strinify it
+        var mergedCurrentPokeBoxRewards = JSON.stringify(savedCurrentPokeBoxRewards.concat(PokeBoxRewards).filter(function(v, i, s) { return s.indexOf(v) === i; }));
+        window.localStorage.setItem('CurrentPokeBoxRewards', mergedCurrentPokeBoxRewards);
+        //console.log('mergedCurrentPokeBoxRewards = ', mergedCurrentPokeBoxRewards);
+
+    }
 
     // Update the math object with a seeded random functon
     Math.seed = 1;
