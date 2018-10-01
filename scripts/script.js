@@ -271,6 +271,7 @@
                     if (typeof window.localStorage !== 'undefined'){
                         window.localStorage.removeItem('PokeboxDaysPassed');
                         window.localStorage.removeItem('PokemonSpeciesSeen');
+                        window.localStorage.removeItem('CurrentPokeBoxRewards');
                         window.location = window.location.href;
                         return true;
                         }
