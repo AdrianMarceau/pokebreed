@@ -1045,7 +1045,7 @@
             colors: ['gold'],
             eggCycles: 120,
             eggGroups: ['undiscovered'],
-            buttonQuote: 'Its rainbow feathers inspire Pokémon to show their true colours.',
+            buttonQuote: 'Its rainbow wings inspire Pokémon to show their true colours.',
             speciesEffects: ['increaseColourVariations'],
             hiddenPokemon: true
             },
