@@ -1922,9 +1922,10 @@
             // Re-apply the pokemon button filter now that they've been updated
             applyPokemonButtonFilters();
 
-            // Hide any options were are not currently represented
+            // Disable any options were are not currently represented
             var $thisFilterWrapper = $pokePanelFilters.filter('[data-target="buttons"]');
             $thisFilterWrapper.find('.filter .option.disabled').removeClass('disabled');
+            $thisFilterWrapper.find('.filter .option.hidden').removeClass('hidden');
             $thisFilterWrapper.find('.filter.generations .option:not([data-gen="all"])').each(function(){
                 $option = $(this);
                 var thisGen = $option.attr('data-gen');
@@ -1936,6 +1937,12 @@
                 var thisType = $option.attr('data-type');
                 if (shownTypes.indexOf(thisType) === -1){ $option.addClass('disabled'); }
                 });
+
+            // Hide the Gen X option if the user shouldn't see it yet
+            if (shownGens.indexOf('x') === -1){ $thisFilterWrapper.find('.filter .option[data-gen="x"]').addClass('hidden'); }
+            var numGenButtons = $thisFilterWrapper.find('.filter .option[data-gen]:not(.hidden)').length;
+            //console.log('numGenButtons = ', numGenButtons);
+            $thisFilterWrapper.find('.options[data-count]').attr('data-count', numGenButtons);
 
             // We're ready to show the filter panel now too (and reset more buttons)
             $thisFilterWrapper.removeClass('hidden');

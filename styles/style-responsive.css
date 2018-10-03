@@ -184,15 +184,16 @@
     .panel .buttons .filter-pokemon .filter.generations .options .option[data-gen="all"] { width: 60px; }
     .panel .buttons .filter-pokemon .filter.generations .options .option:not([data-gen="all"]) { width: calc((100% - 60px) / 9); }
 
-    .panel .buttons .filter-pokemon .filter.generations[data-max="1"] .options .option:not([data-gen="all"]) { width: calc((100% - 60px) / 1); }
-    .panel .buttons .filter-pokemon .filter.generations[data-max="2"] .options .option:not([data-gen="all"]) { width: calc((100% - 60px) / 2); }
-    .panel .buttons .filter-pokemon .filter.generations[data-max="3"] .options .option:not([data-gen="all"]) { width: calc((100% - 60px) / 3); }
-    .panel .buttons .filter-pokemon .filter.generations[data-max="4"] .options .option:not([data-gen="all"]) { width: calc((100% - 60px) / 4); }
-    .panel .buttons .filter-pokemon .filter.generations[data-max="5"] .options .option:not([data-gen="all"]) { width: calc((100% - 60px) / 5); }
-    .panel .buttons .filter-pokemon .filter.generations[data-max="6"] .options .option:not([data-gen="all"]) { width: calc((100% - 60px) / 6); }
-    .panel .buttons .filter-pokemon .filter.generations[data-max="7"] .options .option:not([data-gen="all"]) { width: calc((100% - 60px) / 7); }
-    .panel .buttons .filter-pokemon .filter.generations[data-max="8"] .options .option:not([data-gen="all"]) { width: calc((100% - 60px) / 8); }
-    .panel .buttons .filter-pokemon .filter.generations[data-max="9"] .options .option:not([data-gen="all"]) { width: calc((100% - 60px) / 9); }
+    .panel .buttons .filter-pokemon .filter.generations .options[data-count="1"] .option:not([data-gen="all"]) { width: 100%; }
+    .panel .buttons .filter-pokemon .filter.generations .options[data-count="2"] .option:not([data-gen="all"]) { width: calc((100% - 60px) / 1); }
+    .panel .buttons .filter-pokemon .filter.generations .options[data-count="3"] .option:not([data-gen="all"]) { width: calc((100% - 60px) / 2); }
+    .panel .buttons .filter-pokemon .filter.generations .options[data-count="4"] .option:not([data-gen="all"]) { width: calc((100% - 60px) / 3); }
+    .panel .buttons .filter-pokemon .filter.generations .options[data-count="5"] .option:not([data-gen="all"]) { width: calc((100% - 60px) / 4); }
+    .panel .buttons .filter-pokemon .filter.generations .options[data-count="6"] .option:not([data-gen="all"]) { width: calc((100% - 60px) / 5); }
+    .panel .buttons .filter-pokemon .filter.generations .options[data-count="7"] .option:not([data-gen="all"]) { width: calc((100% - 60px) / 6); }
+    .panel .buttons .filter-pokemon .filter.generations .options[data-count="8"] .option:not([data-gen="all"]) { width: calc((100% - 60px) / 7); }
+    .panel .buttons .filter-pokemon .filter.generations .options[data-count="9"] .option:not([data-gen="all"]) { width: calc((100% - 60px) / 8); }
+    .panel .buttons .filter-pokemon .filter.generations .options[data-count="10"] .option:not([data-gen="all"]) { width: calc((100% - 60px) / 9); }
 
     .panel .buttons .filter-pokemon[data-target="pokedex"] .filter.generations[data-max="1"] .options .option { width: calc(100% / 1); }
     .panel .buttons .filter-pokemon[data-target="pokedex"] .filter.generations[data-max="2"] .options .option { width: calc(100% / 2); }
