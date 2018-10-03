@@ -2274,7 +2274,8 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     margin-left: 5px;
     margin-right: 5px;
 }
-.panel .buttons .info.links .link {
+.panel .buttons .info.links .link,
+.panel .buttons .info.links .count {
     display: inline-block;
     margin: 0 5px 0 0;
     text-decoration: none;
@@ -2287,7 +2288,8 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     border-radius: 3px;
 }
 .panel .buttons .info.links .link:hover,
-.panel .buttons .info.links .link.active {
+.panel .buttons .info.links .link.active,
+.panel .buttons .info.links .count:hover {
     text-decoration: none;
     color: #b0b0b0;
     background-color: rgba(0, 0, 0, 0.2);
@@ -2311,7 +2313,8 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 }
 
 
-.panel .buttons .info.links .link.pokedex {
+.panel .buttons .info.links .link.pokedex,
+.panel .buttons .info.links .count.score {
     float: left;
 }
 .panel .buttons .info.links .link.icon span,

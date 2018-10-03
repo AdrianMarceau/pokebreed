@@ -380,6 +380,7 @@
         // Calculate pokedex totals and the current pokeball colour
         recalculatePokedexTotals();
         recalculatePokedexIconColour();
+        recalculatePokedexScore();
 
         // Generate the actual pokemon buttons for the user to select from
         generatePokemonButtons();
@@ -1586,6 +1587,7 @@
         // Define variables for counting certain things
         var pokedexTotals = {
             totalPokemon: 0,
+            totalNonHiddenPokemon: 0,
             totalPokemonEncountered: 0,
             totalCommonPokemon: 0,
             totalCommonPokemonEncountered: 0,
@@ -1595,7 +1597,8 @@
             totalMythicalPokemonEncountered: 0,
             totalUltraBeasts: 0,
             totalUltraBeastsEncountered: 0,
-            totalsByGeneration: {}
+            totalsByGeneration: {},
+            currentPokedexScore: 0
             };
 
         // Loop through all pokemon and increment applicable totals
@@ -1644,6 +1647,9 @@
 
             }
 
+        // Update the overall counter minus hidden pokemon
+        pokedexTotals.totalNonHiddenPokemon = pokedexTotals.totalPokemon - hiddenPokemonTokens.length;
+
         // Update the parent array with calculated pokedex totals
         //console.log('pokedexTotals = ', pokedexTotals);
         currentPokedexTotals = pokedexTotals;
@@ -1674,19 +1680,21 @@
 
     // Define a function for checking if we've unlocked the final pokemon
     function hasUnlockedFinalPokemon(){
-        if (currentPokedexTotals.totalPokemonEncountered >= (currentPokedexTotals.totalPokemon - 1)){ return true; }
+        if (currentPokedexTotals.totalPokemonEncountered >= (currentPokedexTotals.totalNonHiddenPokemon - 1)){ return true; }
         return false;
     }
 
     // Define a function for checking if we've unlocked all pokemon
     function hasUnlockedAllPokemon(){
-        if (currentPokedexTotals.totalPokemonEncountered >= currentPokedexTotals.totalPokemon){ return true; }
+        if (currentPokedexTotals.totalPokemonEncountered >= currentPokedexTotals.totalNonHiddenPokemon){ return true; }
         return false;
     }
 
     // Define a function for calculating our completion percent
     function calculatePokedexCompletion(){
-        return Math.ceil((currentPokedexTotals.totalPokemonEncountered / currentPokedexTotals.totalPokemon) * 1000) / 10;
+        var completePercent = Math.ceil((currentPokedexTotals.totalPokemonEncountered / currentPokedexTotals.totalNonHiddenPokemon) * 1000) / 10;
+        //console.log('Math.ceil(('+ currentPokedexTotals.totalPokemonEncountered +' / '+ currentPokedexTotals.totalNonHiddenPokemon +') * 1000) / 10 = ', completePercent);
+        return completePercent;
     }
 
     // Define a function for generating the simulator buttons for each Pokemon
@@ -1970,6 +1978,7 @@
 
         // Remove the hidden class from the pokedex link
         $('.info.links .link[data-tab="pokedex"]', $panelButtons).removeClass('hidden');
+        $('.info.links .count.score', $panelButtons).removeClass('hidden');
 
         // Collect a reference to the pokedex list wrapper
         var $pokedexContainer = $('.info[data-tab="pokedex"]', $panelButtons);
@@ -2094,6 +2103,7 @@
 
             // Remove the hidden class from the pokedex link
             $('.info.links .link[data-tab="pokedex"]', $panelButtons).removeClass('wait');
+            $('.info.links .count.score', $panelButtons).removeClass('wait');
 
             }, 0);
 
@@ -3922,6 +3932,9 @@
             // Update the pokeball colour if necessary
             recalculatePokedexIconColour();
 
+            // Update the overall score counter for right now
+            recalculatePokedexScore();
+
             // Check to see if we have access to local storage
             if (typeof window.localStorage !== 'undefined'){
 
@@ -3983,6 +3996,37 @@
         //console.log('newBallKind', newBallKind);
         //console.log('completionPercent', completionPercent);
 
+    }
+
+    // Define a function for recalculating and updating the pokedex score counter
+    var $pokedexScoreContainer = false;
+    function recalculatePokedexScore(){
+        if ($pokedexScoreContainer === false){ $pokedexScoreContainer = $('.info.links .count.score .total', $panelButtons); }
+        if (PokeboxDaysPassed > 0){
+            //console.log('-----');
+            var completionPercent = calculatePokedexCompletion();
+            var totalNonHiddenPokemon =  currentPokedexTotals.totalNonHiddenPokemon;
+            var pokeboxDaysPassed = PokeboxDaysPassed;
+            //console.log('completionPercent = ', completionPercent);
+            //console.log('totalNonHiddenPokemon = ', totalNonHiddenPokemon);
+            //console.log('pokeboxDaysPassed = ', pokeboxDaysPassed);
+            //console.log('-');
+            var basePoints = completionPercent * currentPokedexTotals.totalPokemonEncountered;
+            var baseMultiplier = 100000;
+            var penaltyMultiplier = (100 - completionPercent) / 100;
+            var potentialScore = ((basePoints / pokeboxDaysPassed) * baseMultiplier);
+            var currentScore = Math.floor(potentialScore - (potentialScore * penaltyMultiplier));
+            //console.log('basePoints = ', basePoints);
+            //console.log('baseMultiplier = ', baseMultiplier);
+            //console.log('penaltyMultiplier = ', penaltyMultiplier);
+            //console.log('potentialScore = ', potentialScore);
+            //console.log('currentScore = ', currentScore);
+            //console.log('-');
+            } else {
+            var currentScore = 0;
+            }
+        currentPokedexTotals.currentPokedexScore = currentScore;
+        $pokedexScoreContainer.html(numberWithCommas(currentScore));
     }
 
     // Define a function for calculating the current Vivillon pattern
