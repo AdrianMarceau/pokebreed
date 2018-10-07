@@ -4043,8 +4043,7 @@
             updateOverview(function(){
                 if (thisZoneData.currentPokemon.length > 0
                     && dayTimeoutSpeed !== 'pause'){
-                    if (dayTimeoutSpeed === 'warp'){ dayTimeoutHandler(); }
-                    else { dayTimeoutID = setTimeout(dayTimeoutHandler, dayTimeoutDuration); }
+                    dayTimeoutID = setTimeout(dayTimeoutHandler, dayTimeoutDuration);
                     }
                 });
             });
@@ -4554,13 +4553,17 @@
 
                         // Ultra-energy evolutions trigger when there's enough ultra energy in the box
                         if (methodToken === 'ultra-energy'
-                            && (currentUltraEnergy >= 3 || totalUltraEnergy >= 9)){
+                            && ((methodValue === 'high' && currentUltraEnergy >= 6)
+                            || (methodValue === 'low' && currentUltraEnergy < 6)
+                            || (methodValue === 'none' && currentUltraEnergy === 0))){
                             return 1;
                             }
 
                         // Ancient-power evolutions trigger when there's enough ancient power in the box
                         if (methodToken === 'ancient-power'
-                            && (currentAncientPower >= 6 || totalAncientPower >= 36)){
+                            && ((methodValue === 'high' && currentAncientPower >= 24)
+                            || (methodValue === 'low' && currentAncientPower < 24)
+                            || (methodValue === 'none' && currentAncientPower === 0))){
                             return 1;
                             }
 
@@ -5943,7 +5946,9 @@
 
                         // Calculate ULTRA ENERGY effects on base evolution
                         } else if (baseEvolution.method === 'ultra-energy'
-                        && (currentUltraEnergy >= 3 || totalUltraEnergy >= 9)){
+                        && ((baseEvolution.value === 'high' && currentUltraEnergy >= 6)
+                            || (baseEvolution.value === 'low' && currentUltraEnergy < 6)
+                            || (baseEvolution.value === 'none' && currentUltraEnergy === 0))){
                         queuedBaseEvolutionsTokens.push(baseEvolution.species);
                         queuedBaseEvolutions.push({
                             token: baseEvolution.species,
@@ -5952,7 +5957,9 @@
 
                         // Calculate ANCIENT POWER effects on base evolution
                         } else if (baseEvolution.method === 'ancient-power'
-                        && (currentAncientPower >= 6 || totalAncientPower >= 36)){
+                        && ((baseEvolution.value === 'high' && currentAncientPower >= 24)
+                            || (baseEvolution.value === 'low' && currentAncientPower < 24)
+                            || (baseEvolution.value === 'none' && currentAncientPower === 0))){
                         queuedBaseEvolutionsTokens.push(baseEvolution.species);
                         queuedBaseEvolutions.push({
                             token: baseEvolution.species,
