@@ -5589,6 +5589,13 @@
                     }
                 }
 
+            // (GEN X+) Ancient variants are never summoned as visitors and can only be encountered via breeding/evolution
+            eventPokemonChanceBoosters['ancient-variant'] = 0;
+
+            // (GEN X+) Shadow and Shining are never summoned as visitors and can only be unlocked via events/passwords
+            eventPokemonChanceBoosters['shadow-variant'] = 0;
+            eventPokemonChanceBoosters['shining-variant'] = 0;
+
             }
 
         //console.log(thisZoneData.date.year + ' / ' + thisZoneData.date.month + ' / ' + thisZoneData.date.day);
