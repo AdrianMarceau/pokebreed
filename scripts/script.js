@@ -34,7 +34,6 @@
     var totalLegendaryPokemon = 0;
     var totalMythicalPokemon = 0;
     var totalUltraBeasts = 0;
-    var totalMiscBeasts = 0;
 
     var ultraEnergySpecies = [];
     var ultraBeastSpecies = [];
@@ -759,35 +758,30 @@
                     for (var i = 0; i < indexInfo.speciesEffects.length; i++){ globalSpeciesEffects[indexInfo.token].push(indexInfo.speciesEffects[i]); }
                     }
 
-                // Check to see if this is a hidden pokemon, add to index if true
-                if (typeof indexInfo.isHiddenPokemon !== 'undefined'
-                    && indexInfo.isHiddenPokemon === true){
-                    hiddenPokemonTokens.push(indexInfo.token);
-                    //console.log('add ' + indexInfo.token + ' to hiddenPokemonTokens', hiddenPokemonTokens);
+                // Check to see if this is a special and / or hidden pokemon
+                indexInfo.isSpecialPokemon = typeof indexInfo.isSpecialPokemon !== 'undefined' && indexInfo.isSpecialPokemon === true ? true : false;
+                if (indexInfo.class === 'legendary'
+                    || indexInfo.class === 'mythical'
+                    || indexInfo.class === 'ultra-beast'){
+                    indexInfo.isSpecialPokemon = true;
                     }
 
-                // If this pokemon is in a special class, incremeent appropriate counters
-                var isSpecial = false;
-                if (indexInfo.token === 'unown'
-                    || indexInfo.token === 'ditto'
-                    || indexInfo.token === 'super-ditto'){
-                    totalMiscBeasts++;
-                    isSpecial = true;
-                    } else if (indexInfo.class === 'legendary'){
-                    totalLegendaryPokemon++;
-                    isSpecial = true;
-                    } else if (indexInfo.class === 'mythical'){
-                    totalMythicalPokemon++;
-                    isSpecial = true;
-                    } else if (indexInfo.class === 'ultra-beast'){
-                    totalUltraBeasts++;
-                    isSpecial = true;
-                    } else if (indexInfo.class === 'mythical'){
-                    totalMythicalPokemon++;
-                    isSpecial = true;
-                    }
-                if (isSpecial){
-                    totalSpecialPokemon++;
+                // Check to see if this isn't a hidden pokemon, otherwise we can't add it to global counts
+                indexInfo.isHiddenPokemon = typeof indexInfo.isHiddenPokemon !== 'undefined' && indexInfo.isHiddenPokemon === true ? true : false;
+                if (!indexInfo.isHiddenPokemon){
+
+                    // If this pokemon is in a special class, incremeent appropriate counters
+                    if (indexInfo.class === 'legendary'){ totalLegendaryPokemon++; }
+                    else if (indexInfo.class === 'mythical'){ totalMythicalPokemon++; }
+                    else if (indexInfo.class === 'ultra-beast'){ totalUltraBeasts++; }
+                    if (indexInfo.isSpecialPokemon){ totalSpecialPokemon++; }
+
+                    } else {
+
+                    // Pokemon is hidden so let's add it to this hidden token list
+                    hiddenPokemonTokens.push(indexInfo.token);
+                    //console.log('add ' + indexInfo.token + ' to hiddenPokemonTokens', hiddenPokemonTokens);
+
                     }
 
 
@@ -798,7 +792,6 @@
             //console.log('totalLegendaryPokemon = ', totalLegendaryPokemon);
             //console.log('totalMythicalPokemon = ', totalMythicalPokemon);
             //console.log('totalUltraBeasts = ', totalUltraBeasts);
-            //console.log('totalMiscBeasts = ', totalMiscBeasts);
             //console.log('PokemonSpeciesIndexTokens.length = ', PokemonSpeciesIndexTokens.length);
             //console.log('numRequiredToCompletePokedex = ', (PokemonSpeciesIndexTokens.length - totalSpecialPokemon));
             */
@@ -1819,6 +1812,8 @@
 
                 // Collect the pokemon's gen in terms of buttons
                 var pokemonGen = typeof pokemonData.buttonGeneration !== 'undefined' ? pokemonData.buttonGeneration : pokemonData.gameGeneration;
+                var pokemonBaseGen = pokemonData.baseGameGeneration;
+                var pokeLegNum = pokemonGen === 'x' && typeof pokemonData.dexNumber !== 'undefined' ? pokemonData.dexNumber : pokemonData.number;
 
                 // Check to see if this is a SHADOW pokemon
                 var isShadowPokemon = pokemonData.formClass === 'shadow-variant' ? true : false;
@@ -1855,6 +1850,10 @@
                     'data-kind="pokemon" '+
                     'data-token="'+ pokemonToken +'" '+
                     'data-gen="'+ pokemonGen +'" '+
+                    'data-key="'+ (key + 1) +'" ' +
+                    'data-legnum="'+ pokeLegNum +'" ' +
+                    'data-modnum="'+ pokemonData.order +'" ' +
+                    'data-basegen="'+ pokemonBaseGen +'" ' +
                     'data-type="'+ pokemonData.types.join(',') +'" '+
                     'title="'+ pokemonTitle.replace('"', '&quot;') +'" '+
                     '>';
@@ -2213,6 +2212,51 @@
             if (isMatch){ $button.removeClass('hidden'); }
             });
 
+        // Re-sort the elements based on which mode we're in
+        if (currentButtonFilters['gen'] === 'all'){ var sortBy = ['data-modnum', 'data-legnum']; } //data-key
+        else { var sortBy = ['data-legnum', 'data-modnum']; }
+        //else if (currentButtonFilters['mode'] === 'legacy'){ var sortBy = ['data-legnum', 'data-modnum']; }
+        //else if (currentButtonFilters['mode'] === 'modern'){ var sortBy = ['data-modnum', 'data-legnum']; }
+        //console.log('currentButtonFilters[\'gen\'] = ', currentButtonFilters['gen']);
+        //console.log('sortBy = ', sortBy);
+        var $sortedButtons = $pokemonButtons.sort(function(a, b){
+            var $a = $(a), $b = $(b);
+            var aToken = $a.attr('data-token'), bToken = $b.attr('data-token');
+            var aIndex = PokemonSpeciesIndex[aToken], bIndex = PokemonSpeciesIndex[bToken];
+            if (true){
+                if (aIndex.isSpecialPokemon !== true && bIndex.isSpecialPokemon === true){ return -1; }
+                else if (aIndex.isSpecialPokemon === true && bIndex.isSpecialPokemon !== true){ return 1; }
+            }
+            if (currentButtonFilters['gen'] !== 'all'
+                && currentButtonFilters['gen'] !== 'x'
+                && aIndex.isSpecialPokemon !== true
+                && bIndex.isSpecialPokemon !== true){
+                var currGen = currentButtonFilters['gen'];
+                if (aIndex.baseGameGeneration === currGen && bIndex.baseGameGeneration !== currGen){ return -1; }
+                else if (aIndex.baseGameGeneration !== currGen && bIndex.baseGameGeneration === currGen){ return 1; }
+            }
+            if (currentButtonFilters['gen'] !== 'x'
+                && currentButtonFilters['mode'] === 'legacy'){
+                var aVar = aIndex.formClass !== '' && aIndex.baseGameGeneration !== aIndex.gameGeneration ? 1 : 0;
+                var bVar = bIndex.formClass !== '' && bIndex.baseGameGeneration !== bIndex.gameGeneration ? 1 : 0;
+                if (aVar < bVar){ return -1; }
+                else if (aVar > bVar){ return 1; }
+                }
+            var aNum = parseFloat($a.attr(sortBy[0]));
+            var bNum = parseFloat($b.attr(sortBy[0]));
+            if (aNum < bNum){ return -1; }
+            else if (aNum > bNum){ return 1; }
+            else {
+                var aNum2 = parseFloat($a.attr(sortBy[1]));
+                var bNum2 = parseFloat($b.attr(sortBy[1]));
+                if (aNum2 < bNum2){ return -1; }
+                else if (aNum2 > bNum2){ return 1; }
+                else {return 0; }
+                }
+            });
+        //console.log('Inserting sorted results...');
+        $('.buttonwrap', $pokePanelSelectButtons).empty().html($sortedButtons);
+
         // Update the scrollbar wrapper since there have been changes
         $pokePanelSelectButtons.find('.buttonwrap').perfectScrollbar('update');
 
@@ -2320,9 +2364,6 @@
             });
         //console.log('Inserting sorted results...');
         $('.list', $pokePanelPokedexEntries).empty().html($sortedEntries);
-
-        // Update the scrollbar wrapper since there have been changes
-        //$pokePanelPokedexEntries.find('.entrywrap').perfectScrollbar('update');
 
         // Update the pokedex totals for how many are showing, unlocked, and overall
         var percentTotal = Math.ceil((unlockedTotal / showingTotal) * 1000) / 10;
@@ -6597,7 +6638,6 @@
             legendaryPokemon: totalLegendaryPokemon,
             mythicalPokemon: totalMythicalPokemon,
             ultraBeasts: totalUltraBeasts,
-            miscBeasts: totalMiscBeasts,
             maxDexNumber: maxDexNumber,
             nationalDexNumbers: nationalDexNumbers.length,
             missingDexNumbers: missingDexNumbers.length
