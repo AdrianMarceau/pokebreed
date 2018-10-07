@@ -726,6 +726,27 @@
             prevEvolution: 'proto-skiploom'
             },
 
+        'proto-politoed': {
+            order: thisIndex.afterOrder('politoed', 1),
+            token: 'proto-politoed',
+            name: 'Proto Politoed',
+            formClass: 'ancient-variant',
+            formToken: 'proto',
+            baseSpecies: 'politoed',
+            hasAncientPower: true,
+            number: 186,
+            dexNumber: 1034.1,
+            types: ['water'],
+            baseStats: {hp: 90, phAttack: 76, phDefense: 90, spAttack: 76, spDefense: 100, speed: 68},
+            abilities: {0: 'water-absorb', 1: 'damp', hidden: 'drizzle'},
+            height: 1.2,
+            weight: 34,
+            colors: ['green', 'yellow', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['water-1'],
+            prevEvolution: 'poliwhirl'
+            },
+
 
         // Newly Discovered Forms
 
@@ -946,6 +967,8 @@
 
         {base: 'mime-jr', species: 'mr-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'male', method3: 'level-up', value3: 25, replace: true},
         {base: 'mime-jr', species: 'ms-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'female', method3: 'level-up', value3: 25},
+
+        {base: 'poliwhirl', species: 'proto-politoed', method: 'ancient-power', value: 'high', method2: 'level-up', value2: 45},
 
         {base: 'burmy', species: 'snow-wormadam', method: 'level-up', value: 20, method2: 'gender', value2: 'female', method3: 'form', value3: 'snow'},
         {base: 'burmy', species: 'bubble-wormadam', method: 'level-up', value: 20, method2: 'gender', value2: 'female', method3: 'form', value3: 'bubble'},

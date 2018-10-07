@@ -4601,7 +4601,7 @@
                             && ((methodValue === 'high' && currentUltraEnergy >= 6)
                             || (methodValue === 'low' && currentUltraEnergy < 6)
                             || (methodValue === 'none' && currentUltraEnergy === 0))){
-                            return 1;
+                            return 1 + (currentUltraEnergy * 100);
                             }
 
                         // Ancient-power evolutions trigger when there's enough ancient power in the box
@@ -4609,7 +4609,7 @@
                             && ((methodValue === 'high' && currentAncientPower >= 24)
                             || (methodValue === 'low' && currentAncientPower < 24)
                             || (methodValue === 'none' && currentAncientPower === 0))){
-                            return 1;
+                            return 1 + (currentAncientPower * 100);
                             }
 
                         // Extinction-based evolutions trigger when this pokemon is the last  of its species
