@@ -511,7 +511,7 @@
             baseStats: {hp: 55, phAttack: 85, phDefense: 55, spAttack: 40, spDefense: 55, speed: 70},
             abilities: {0: 'run-away', 1: 'pickup', hidden: 'skill-link'},
             height: 0.8,
-            weight: 11.5,
+            weight: 11.4,
             colors: ['black', 'brown'],
             eggCycles: 20,
             eggGroups: ['field'],
@@ -541,8 +541,8 @@
             types: ['dark', 'fighting'],
             baseStats: {hp: 75, phAttack: 115, phDefense: 66, spAttack: 60, spDefense: 66, speed: 100},
             abilities: {0: 'technician', 1: 'pickup', hidden: 'skill-link'},
-            height: 1.2,
-            weight: 20.3,
+            height: 1.1,
+            weight: 20.2,
             colors: ['black', 'gray', 'brown'],
             eggCycles: 20,
             eggGroups: ['field'],
@@ -571,7 +571,34 @@
                 species: 'sneasel',
                 method: 'type-warning',
                 value: 'normal'
+                }],
+            nextEvolutions: [{
+                species: 'proto-weavile',
+                method: 'type-surge',
+                value: ['normal', 'ice'],
+                method2: 'level-up',
+                value2: 30
                 }]
+            },
+        'proto-weavile': {
+            order: thisIndex.afterOrder('weavile', 2),
+            token: 'proto-weavile',
+            name: 'Proto Weavile',
+            formClass: 'ancient-variant',
+            formToken: 'proto',
+            baseSpecies: 'weavile',
+            hasAncientPower: true,
+            number: 461,
+            dexNumber: 1029.1,
+            types: ['normal', 'ice'],
+            baseStats: {hp: 70, phAttack: 120, phDefense: 85, spAttack: 45, spDefense: 70, speed: 120},
+            abilities: {0: 'pressure', hidden: 'pickpocket'},
+            height: 1.1,
+            weight: 34,
+            colors: ['white', 'brown', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'proto-sneasel'
             },
 
         'proto-remoraid': {
