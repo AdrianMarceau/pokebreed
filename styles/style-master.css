@@ -1499,9 +1499,18 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 }
 
 /* Shining Pokemon Colours */
-.panel .buttons button[data-token^="gold-"] { background-color: #bd9a21 !important; }
-.panel .buttons button[data-token^="silver-"] { background-color: #7186a0 !important; }
-.panel .buttons button[data-token^="crystal-"] { background-color: #43979e !important; }
+.panel .buttons button[data-token^="gold-"],
+.panel .overview.species .list li.species[data-token^="gold-"] {
+    background-color: #bd9a21 !important;
+}
+.panel .buttons button[data-token^="silver-"],
+.panel .overview.species .list li.species[data-token^="silver-"] {
+    background-color: #7186a0 !important;
+}
+.panel .buttons button[data-token^="crystal-"],
+.panel .overview.species .list li.species[data-token^="crystal-"] {
+    background-color: #43979e !important;
+}
 
 
 .panel .buttons .filter-pokemon {

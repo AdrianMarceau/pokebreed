@@ -3079,7 +3079,7 @@
                 liClass += 'type '+pokeInfo['types'][0]+' ';
                 if (typeof pokeInfo['types'][1] !== 'undefined'){ liClass += pokeInfo['types'][1]+'2 '; }
                 pokeIcon = getPokemonIcon(pokeInfo.token);
-                speciesListMarkup += '<li class="'+liClass+'">'+
+                speciesListMarkup += '<li class="'+liClass+'" data-token="'+poke+'">'+
                         '<div class="bubble">'+
                             '<span class="icon">'+ pokeIcon +'</span> '+
                             '<span class="name">'+ pokeInfo['name'] +'</span> '+
@@ -3128,7 +3128,7 @@
                 liClass += 'type '+pokeInfo['types'][0]+' ';
                 if (typeof pokeInfo['types'][1] !== 'undefined'){ liClass += pokeInfo['types'][1]+'2 '; }
                 pokeIcon = getPokemonIcon(pokeInfo.token);
-                speciesListMarkup += '<li class="'+liClass+'">'+
+                speciesListMarkup += '<li class="'+liClass+'" data-token="'+poke+'">'+
                         '<div class="bubble">'+
                             '<span class="icon">'+ pokeIcon +'</span> '+
                             '<span class="name">'+ pokeInfo['name'] +'</span> '+
@@ -4075,28 +4075,10 @@
     var $pokedexScoreContainer = false;
     function recalculatePokedexScore(){
         if ($pokedexScoreContainer === false){ $pokedexScoreContainer = $('.info.links .count.score .total', $panelButtons); }
+        var currentScore = 0;
         if (PokeboxDaysPassed > 0){
-            //console.log('-----');
-            var completionPercent = calculatePokedexCompletion();
-            var totalNonHiddenPokemon =  currentPokedexTotals.totalNonHiddenPokemon;
-            var pokeboxDaysPassed = PokeboxDaysPassed;
-            //console.log('completionPercent = ', completionPercent);
-            //console.log('totalNonHiddenPokemon = ', totalNonHiddenPokemon);
-            //console.log('pokeboxDaysPassed = ', pokeboxDaysPassed);
-            //console.log('-');
-            var basePoints = completionPercent * currentPokedexTotals.totalPokemonEncountered;
-            var baseMultiplier = 100000;
-            var penaltyMultiplier = (100 - completionPercent) / 100;
-            var potentialScore = ((basePoints / pokeboxDaysPassed) * baseMultiplier);
-            var currentScore = Math.floor(potentialScore - (potentialScore * penaltyMultiplier));
-            //console.log('basePoints = ', basePoints);
-            //console.log('baseMultiplier = ', baseMultiplier);
-            //console.log('penaltyMultiplier = ', penaltyMultiplier);
-            //console.log('potentialScore = ', potentialScore);
-            //console.log('currentScore = ', currentScore);
-            //console.log('-');
-            } else {
-            var currentScore = 0;
+            currentScore += currentPokedexTotals.totalPokemonEncountered * 1000;
+            currentScore -= PokeboxDaysPassed * 10;
             }
         currentPokedexTotals.currentPokedexScore = currentScore;
         $pokedexScoreContainer.html(numberWithCommas(currentScore));
