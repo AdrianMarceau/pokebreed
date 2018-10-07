@@ -39,6 +39,9 @@
     var ultraEnergySpecies = [];
     var ultraBeastSpecies = [];
 
+    var ancientPowerSpecies = [];
+    var ancientVariantSpecies = [];
+
     var globalSpeciesEffects = {};
 
     // GLOBAL ZONE DATA
@@ -740,7 +743,11 @@
 
                 // If this pokemon has ultra energy or is in ultra beast, add it to the parent array
                 if (indexInfo.class === 'ultra-beast'){ ultraBeastSpecies.push(indexInfo.token); }
-                if (indexInfo.hasUltraEnergy === true){ ultraEnergySpecies.push(indexInfo.token); }
+                if (indexInfo.class === 'ultra-beast' || indexInfo.hasUltraEnergy === true){ ultraEnergySpecies.push(indexInfo.token); }
+
+                // If this pokemon has ancient power or is in ancient varient, add it to the parent array
+                if (indexInfo.class === 'ancient-variant'){ ancientVariantSpecies.push(indexInfo.token); }
+                if (indexInfo.class === 'ancient-variant' || indexInfo.hasAncientPower === true){ ancientPowerSpecies.push(indexInfo.token); }
 
                 // Push this pokemon's name into the translation index (so it's easier to parse seeds)
                 globalNameToTokenIndex[indexInfo.name] = indexInfo.token;
@@ -850,10 +857,12 @@
                 var regVariantB = false;
                 if (infoA['gameGeneration'] !== infoB['gameGeneration']){
                     if (infoA['formClass'] === 'regional-variant'
+                        || infoA['formClass'] === 'ancient-variant'
                         || infoA['formClass'] === 'baby-evolution'){
                         regVariantA = true;
                         }
                     if (infoB['formClass'] === 'regional-variant'
+                        || infoB['formClass'] === 'ancient-variant'
                         || infoB['formClass'] === 'baby-evolution'){
                         regVariantB = true;
                         }
@@ -961,8 +970,8 @@
                 var regVariantA = false;
                 var regVariantB = false;
                 if (infoA['gameGeneration'] !== infoB['gameGeneration']){
-                    //if (infoA['formClass'] === 'regional-variant' || infoA['formClass2'] === 'regional-variant'){ regVariantA = true; }
-                    //if (infoB['formClass'] === 'regional-variant' || infoB['formClass2'] === 'regional-variant'){ regVariantB = true; }
+                    //if (infoA['formClasses'].indexOf('regional-variant') !== -1 || infoA['formClasses'].indexOf('ancient-variant') !== -1){ regVariantA = true; }
+                    //if (infoB['formClasses'].indexOf('regional-variant') !== -1 || infoB['formClasses'].indexOf('ancient-variant') !== -1){ regVariantB = true; }
                     }
 
                 var genderVariantA = false;
@@ -1783,7 +1792,8 @@
                 if (pokemonIsSpecial){ thisGeneration = 'specials'; }
                 if (thisGeneration !== lastGeneration
                     && pokemonData.formClass !== 'gender-variant'
-                    && pokemonData.formClass !== 'regional-variant'){
+                    && pokemonData.formClass !== 'regional-variant'
+                    && pokemonData.formClass !== 'ancient-variant'){
                     if (lastGeneration !== false){ pokePanelMarkup += '<hr class="breaker" />'; }
                     lastGeneration = thisGeneration;
                 }
@@ -2025,6 +2035,7 @@
                     else if (pokeIndex.formClass === 'mega-evolution'){ addBreak = false; }
                     else if (pokeIndex.formClass === 'burst-evolution'){ addBreak = false; }
                     else if (pokeIndex.formClass === 'regional-variant'){ addBreak = false; }
+                    else if (pokeIndex.formClass === 'ancient-variant'){ addBreak = false; }
                     else if (pokeIndex.formClass === 'gender-variant'){ addBreak = false; }
                     else if (typeof pokeIndex.prevEvolution !== 'undefined'){ addBreak = false; }
                     if (addBreak){
@@ -2384,6 +2395,7 @@
                 if (pokeIndex.formClass === 'gender-variant'){ titleText += '\n' + 'Gender Variant'; }
                 if (pokeIndex.formClass === 'seasonal-variant'){ titleText += '\n' + 'Seasonal Variant'; }
                 if (pokeIndex.formClass === 'regional-variant'){ titleText += '\n' + 'Regional Variant'; }
+                if (pokeIndex.formClass === 'ancient-variant'){ titleText += '\n' + 'Ancient Variant'; }
                 if (pokeIndex.formClass === 'weather-variant'){ titleText += '\n' + 'Weather Variant'; }
                 if (pokeIndex.formClass === 'field-variant'){ titleText += '\n' + 'Field Variant'; }
                 if (pokeIndex.formClass === 'type-variant'){ titleText += '\n' + 'Type Variant'; }
@@ -3741,37 +3753,80 @@
                     }
                 }
 
-            // Check to see if the box has traces of Ultra Energy inside (it stays)
-            var totalUltraEnergy = 0;
-            var currentUltraEnergy = 0;
-            for (var i = 0; i < ultraEnergySpecies.length; i++){
-                var token = ultraEnergySpecies[i];
-                if (typeof addedSpecies[token] !== 'undefined'){
-                    totalUltraEnergy += addedSpecies[token];
-                    }
-                if (typeof currentZoneStats['species'][token] !== 'undefined'){
-                    currentUltraEnergy += currentZoneStats['species'][token];
-                    }
-                }
-            currentZoneStats['totalUltraEnergy'] = totalUltraEnergy;
-            currentZoneStats['currentUltraEnergy'] = currentUltraEnergy;
-            if (totalUltraEnergy > 0
-                && currentZoneFlags.indexOf('boxHasUltraEnergy') === -1){
-                currentZoneFlags.push('boxHasUltraEnergy');
-                }
+            // Check for the presence of ULTRA ENERGY and ULTRA BEASTS
+            if (true){
 
-            // Check to see if the box has a history of Ultra Beasts inside
-            if (currentZoneFlags.indexOf('boxHadUltraBeasts') === -1){
-                var ultraBeastValue = 0;
-                for (var i = 0; i < ultraBeastSpecies.length; i++){
-                    var token = ultraBeastSpecies[i];
+                // Check to see if the box has traces of Ultra Energy inside (it stays)
+                var totalUltraEnergy = 0;
+                var currentUltraEnergy = 0;
+                for (var i = 0; i < ultraEnergySpecies.length; i++){
+                    var token = ultraEnergySpecies[i];
                     if (typeof addedSpecies[token] !== 'undefined'){
-                        ultraBeastValue += addedSpecies[token];
+                        totalUltraEnergy += addedSpecies[token];
+                        }
+                    if (typeof currentZoneStats['species'][token] !== 'undefined'){
+                        currentUltraEnergy += currentZoneStats['species'][token];
                         }
                     }
-                if (ultraBeastValue >= 3){
-                    currentZoneFlags.push('boxHadUltraBeasts');
+                currentZoneStats['totalUltraEnergy'] = totalUltraEnergy;
+                currentZoneStats['currentUltraEnergy'] = currentUltraEnergy;
+                if (totalUltraEnergy > 0
+                    && currentZoneFlags.indexOf('boxHasUltraEnergy') === -1){
+                    currentZoneFlags.push('boxHasUltraEnergy');
                     }
+
+                // Check to see if the box has a history of Ultra Beasts inside
+                if (currentZoneFlags.indexOf('boxHadUltraBeasts') === -1){
+                    var ultraBeastValue = 0;
+                    for (var i = 0; i < ultraBeastSpecies.length; i++){
+                        var token = ultraBeastSpecies[i];
+                        if (typeof addedSpecies[token] !== 'undefined'){
+                            ultraBeastValue += addedSpecies[token];
+                            }
+                        }
+                    if (ultraBeastValue >= 3){
+                        currentZoneFlags.push('boxHadUltraBeasts');
+                        }
+                    }
+
+                }
+
+            // Check for the presence of ANCIENT POWER and ANCIENT VARIANTS
+            if (true){
+
+                // Check to see if the box has traces of Ancient Power inside (it stays)
+                var totalAncientPower = 0;
+                var currentAncientPower = 0;
+                for (var i = 0; i < ancientPowerSpecies.length; i++){
+                    var token = ancientPowerSpecies[i];
+                    if (typeof addedSpecies[token] !== 'undefined'){
+                        totalAncientPower += addedSpecies[token];
+                        }
+                    if (typeof currentZoneStats['species'][token] !== 'undefined'){
+                        currentAncientPower += currentZoneStats['species'][token];
+                        }
+                    }
+                currentZoneStats['totalAncientPower'] = totalAncientPower;
+                currentZoneStats['currentAncientPower'] = currentAncientPower;
+                if (totalAncientPower > 0
+                    && currentZoneFlags.indexOf('boxHasAncientPower') === -1){
+                    currentZoneFlags.push('boxHasAncientPower');
+                    }
+
+                // Check to see if the box has a history of Ancient Variants inside
+                if (currentZoneFlags.indexOf('boxHadAncientVariants') === -1){
+                    var ancientVariantValue = 0;
+                    for (var i = 0; i < ancientVariantSpecies.length; i++){
+                        var token = ancientVariantSpecies[i];
+                        if (typeof addedSpecies[token] !== 'undefined'){
+                            ancientVariantValue += addedSpecies[token];
+                            }
+                        }
+                    if (ancientVariantValue >= 3){
+                        currentZoneFlags.push('boxHadAncientVariants');
+                        }
+                    }
+
                 }
 
             }
@@ -4096,9 +4151,10 @@
         if (thisZoneData.day === 0){ return false; }
 
         // Collect references to current zone stats
-        var currentTypeStats = thisZoneData.currentStats['types'];
-        var currentSpeciesStats = thisZoneData.currentStats['species'];
-        var currentBaseStats = thisZoneData.currentStats['baseStats'];
+        var currentZoneStats = thisZoneData.currentStats;
+        var currentTypeStats = currentZoneStats['types'];
+        var currentSpeciesStats = currentZoneStats['species'];
+        var currentBaseStats = currentZoneStats['baseStats'];
 
         // Define a variable to hold (temporary) allowed trade evolutions this cycle
         var allowedTradeEvolutions = {};
@@ -4107,7 +4163,7 @@
         var colorKey = 0;
         var topColor = '';
         var topColors = [];
-        var colorStats = thisZoneData.currentStats['colors'];
+        var colorStats = currentZoneStats['colors'];
         var colorStatsRounded = {};
         var maxValue = 0;
         if (typeof colorStats !== 'undefined'
@@ -4135,6 +4191,12 @@
         //console.log('topColors = ', topColors);
         //console.log('topColorsCount = ', topColorsCount);
         //console.log('maxTopColorsKey = ', maxTopColorsKey);
+
+        // Collect refs to zone stats and special energy/power counters
+        var currentUltraEnergy = typeof currentZoneStats['currentUltraEnergy'] !== 'undefined' ? currentZoneStats['currentUltraEnergy'] : 0;
+        var totalUltraEnergy = typeof currentZoneStats['totalUltraEnergy'] !== 'undefined' ? currentZoneStats['totalUltraEnergy'] : 0;
+        var currentAncientPower = typeof currentZoneStats['currentAncientPower'] !== 'undefined' ? currentZoneStats['currentAncientPower'] : 0;
+        var totalAncientPower = typeof currentZoneStats['totalAncientPower'] !== 'undefined' ? currentZoneStats['totalAncientPower'] : 0;
 
         // First, loop through all the non-egg pokemon and increment growth cycle
         if (thisZoneData.currentPokemon.length){
@@ -4490,8 +4552,20 @@
 
                             }
 
+                        // Ultra-energy evolutions trigger when there's enough ultra energy in the box
+                        if (methodToken === 'ultra-energy'
+                            && (currentUltraEnergy >= 3 || totalUltraEnergy >= 9)){
+                            return 1;
+                            }
+
+                        // Ancient-power evolutions trigger when there's enough ancient power in the box
+                        if (methodToken === 'ancient-power'
+                            && (currentAncientPower >= 6 || totalAncientPower >= 36)){
+                            return 1;
+                            }
+
                         // Extinction-based evolutions trigger when this pokemon is the last  of its species
-                        if ((methodToken === 'extinction')
+                        if (methodToken === 'extinction'
                             && numRelatedPokemon == 1){
                             return 1;
                             }
@@ -5828,52 +5902,87 @@
             if (includeAlts && typeof indexInfo.altBaseEvolutions !== 'undefined'){
                 //console.log('\npokemonGetBaseEvolution('+pokeToken+', '+includeBaby+', '+includeAlts+')');
                 //console.log('includeAlts && typeof indexInfo.altBaseEvolutions !== \'undefined\' = ', indexInfo.altBaseEvolutions);
+
+                // Collect refs to zone stats and special energy/power counters
+                var zoneStats = thisZoneData.currentStats;
+                var currentUltraEnergy = typeof zoneStats['currentUltraEnergy'] !== 'undefined' ? zoneStats['currentUltraEnergy'] : 0;
+                var totalUltraEnergy = typeof zoneStats['totalUltraEnergy'] !== 'undefined' ? zoneStats['totalUltraEnergy'] : 0;
+                var currentAncientPower = typeof zoneStats['currentAncientPower'] !== 'undefined' ? zoneStats['currentAncientPower'] : 0;
+                var totalAncientPower = typeof zoneStats['totalAncientPower'] !== 'undefined' ? zoneStats['totalAncientPower'] : 0;
+
+                // Define arrays to hold queued evolutions and then start looping
                 var queuedBaseEvolutions = [];
                 var queuedBaseEvolutionsTokens = [];
-
                 for (var i = 0; i < indexInfo.altBaseEvolutions.length; i++){
                     var baseEvolution = indexInfo.altBaseEvolutions[i];
                     var baseEvolutionInfo = PokemonSpeciesIndex[baseEvolution.species];
                     //console.log('baseEvolution['+ i +'] = ', baseEvolution);
-                    //console.log('thisZoneData.currentStats[\'types\'][baseEvolution.value] = ', thisZoneData.currentStats['types'][baseEvolution.value]);
+                    //console.log('zoneStats[\'types\'][baseEvolution.value] = ', zoneStats['types'][baseEvolution.value]);
+
+                    // Calculate TYPE APPEAL & SURGE effects on base evolution
                     if ((baseEvolution.method === 'type-appeal'
-                        && thisZoneData.currentStats['types'][baseEvolution.value] >= 20)
+                        && zoneStats['types'][baseEvolution.value] >= 20)
                         || (baseEvolution.method === 'type-surge'
-                        && thisZoneData.currentStats['types'][baseEvolution.value] >= 40)){
+                        && zoneStats['types'][baseEvolution.value] >= 40)){
                         queuedBaseEvolutionsTokens.push(baseEvolution.species);
                         queuedBaseEvolutions.push({
                             token: baseEvolution.species,
-                            chance: (baseEvolution.method === 'type-appeal' ? 2 : 3) + thisZoneData.currentStats['types'][baseEvolution.value]
+                            chance: (baseEvolution.method === 'type-appeal' ? 2 : 3) + zoneStats['types'][baseEvolution.value]
                             });
+
+                        // Calculate TYPE WARNING & CRISIS effects on base evolution
                         } else if ((baseEvolution.method === 'type-warning'
-                        && thisZoneData.currentStats['types'][baseEvolution.value] <= -5)
+                        && zoneStats['types'][baseEvolution.value] <= -5)
                         || baseEvolution.method === 'type-crisis'
-                        && thisZoneData.currentStats['types'][baseEvolution.value] <= -10){
+                        && zoneStats['types'][baseEvolution.value] <= -10){
                         queuedBaseEvolutionsTokens.push(baseEvolution.species);
                         queuedBaseEvolutions.push({
                             token: baseEvolution.species,
-                            chance: (baseEvolution.method === 'type-warning' ? 2 : 3) + ((thisZoneData.currentStats['types'][baseEvolution.value] * -1)  * 2)
+                            chance: (baseEvolution.method === 'type-warning' ? 2 : 3) + ((zoneStats['types'][baseEvolution.value] * -1)  * 2)
                             });
+
+                        // Calculate ULTRA ENERGY effects on base evolution
+                        } else if (baseEvolution.method === 'ultra-energy'
+                        && (currentUltraEnergy >= 3 || totalUltraEnergy >= 9)){
+                        queuedBaseEvolutionsTokens.push(baseEvolution.species);
+                        queuedBaseEvolutions.push({
+                            token: baseEvolution.species,
+                            chance: (currentUltraEnergy * totalUltraEnergy)
+                            });
+
+                        // Calculate ANCIENT POWER effects on base evolution
+                        } else if (baseEvolution.method === 'ancient-power'
+                        && (currentAncientPower >= 6 || totalAncientPower >= 36)){
+                        queuedBaseEvolutionsTokens.push(baseEvolution.species);
+                        queuedBaseEvolutions.push({
+                            token: baseEvolution.species,
+                            chance: (currentAncientPower * totalAncientPower)
+                            });
+
+                        // Calculate CHANCE effects on base evolution
                         } else if (baseEvolution.method === 'chance'
                         && (Math.seededRandomChance() < baseEvolution.value)){
                         queuedBaseEvolutionsTokens.push(baseEvolution.species);
                         queuedBaseEvolutions.push({
                             token: baseEvolution.species,
-                            chance: 2 + thisZoneData.currentStats['types'][indexInfo.types[0]]
+                            chance: 2 + zoneStats['types'][indexInfo.types[0]]
                             });
+
+                        // Process ALWAYS conditions on base evolution
                         } else if (baseEvolution.method === 'always'){
                         queuedBaseEvolutionsTokens.push(baseEvolution.species);
                         queuedBaseEvolutions.push({
                             token: baseEvolution.species,
                             chance: 100 + i
                             });
+
                         }
                     }
                 if (queuedBaseEvolutionsTokens.indexOf(indexInfo.token) === -1){
                     queuedBaseEvolutionsTokens.push(indexInfo.token);
                     queuedBaseEvolutions.push({
                         token: indexInfo.token,
-                        chance: 1 + thisZoneData.currentStats['types'][indexInfo.types[0]]
+                        chance: 1 + zoneStats['types'][indexInfo.types[0]]
                         });
                     }
                 if (queuedBaseEvolutions.length > 0){
