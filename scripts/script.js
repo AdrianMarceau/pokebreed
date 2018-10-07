@@ -753,8 +753,8 @@
                     }
 
                 // Check to see if this is a hidden pokemon, add to index if true
-                if (typeof indexInfo.hiddenPokemon !== 'undefined'
-                    && indexInfo.hiddenPokemon === true){
+                if (typeof indexInfo.isHiddenPokemon !== 'undefined'
+                    && indexInfo.isHiddenPokemon === true){
                     hiddenPokemonTokens.push(indexInfo.token);
                     //console.log('add ' + indexInfo.token + ' to hiddenPokemonTokens', hiddenPokemonTokens);
                     }
@@ -2003,8 +2003,8 @@
                 var pokeIndex = PokemonSpeciesIndex[pokeToken];
 
                 // If this is a hidden pokemon, don't generate any markup
-                if (typeof pokeIndex.hiddenPokemon !== 'undefined'
-                    && pokeIndex.hiddenPokemon === true){
+                if (typeof pokeIndex.isHiddenPokemon !== 'undefined'
+                    && pokeIndex.isHiddenPokemon === true){
                     continue;
                     }
 
@@ -2026,7 +2026,6 @@
                     else if (pokeIndex.formClass === 'burst-evolution'){ addBreak = false; }
                     else if (pokeIndex.formClass === 'regional-variant'){ addBreak = false; }
                     else if (pokeIndex.formClass === 'gender-variant'){ addBreak = false; }
-                    else if (pokeIndex.formClass === 'shiny-variant'){ addBreak = false; }
                     else if (typeof pokeIndex.prevEvolution !== 'undefined'){ addBreak = false; }
                     if (addBreak){
                         if (lastGeneration !== false){ pokedexMarkup.push('<li class="breaker"><hr class="breaker" /></li>'); }
@@ -2376,7 +2375,8 @@
                 if (pokeIndex.formClass === 'weather-variant'){ titleText += '\n' + 'Weather Variant'; }
                 if (pokeIndex.formClass === 'field-variant'){ titleText += '\n' + 'Field Variant'; }
                 if (pokeIndex.formClass === 'type-variant'){ titleText += '\n' + 'Type Variant'; }
-                if (pokeIndex.formClass === 'shiny-variant'){ titleText += '\n' + 'Shiny Variant'; }
+                if (pokeIndex.formClass === 'shadow-variant'){ titleText += '\n' + 'Shadow Variant'; }
+                if (pokeIndex.formClass === 'shining-variant'){ titleText += '\n' + 'Shining Variant'; }
                 }
             }
         if (isUnlocked){
@@ -3532,6 +3532,12 @@
                 // Growing pokemon count toward stats species stats
                 if (typeof currentZoneStats['species'][pokeToken] === 'undefined'){ currentZoneStats['species'][pokeToken] = 0; }
                 currentZoneStats['species'][pokeToken] += 1;
+
+                // Continue if this pokemon is hidden and not an official species
+                if (typeof pokeIndex.isHiddenPokemon !== 'undefined'
+                    && pokeIndex.isHiddenPokemon === true){
+                    continue;
+                    }
 
                 // Continue if this pokemon needs to be excluded from (other) zone stats
                 if (typeof pokeIndex.excludeFromZoneStats !== 'undefined'
@@ -5276,6 +5282,13 @@
     function recalculateVisitorAppeal(){
         //console.log('recalculateVisitorAppeal()');
 
+        // SPECIAL BOX EFFECT : Repel all visitor pokemon if the appropriate flag is active
+        if (thisZoneData.currentEffects['repelAllVisitors'] === true){
+            // Update the parent appeal index with the an empty array
+            thisZoneData.currentStats['visitorAppeal'] = [];
+            return;
+        }
+
         // Collect reference to key zone stats and values
         var zoneStats = thisZoneData.currentStats;
         var zoneFlags = thisZoneData.currentFlags;
@@ -5292,41 +5305,79 @@
             var eventBase = 0;
             var eventBoost = 0;
             var mythicalYear = thisZoneData.date.year % 3 === 0 ? true : false;
+
+            // Count the number of special pokemon by category or species
             var currentMythicalNum = typeof zoneStats['class']['mythical'] !== 'undefined' ? zoneStats['class']['mythical'] : 0;
             var currentLegendaryNum = typeof zoneStats['class']['legendary'] !== 'undefined' ? zoneStats['class']['legendary'] : 0;
             var currentUltraBeastNum = typeof zoneStats['class']['ultra-beast'] !== 'undefined' ? zoneStats['class']['ultra-beast'] : 0;
             var currentArceusNum = typeof zoneStats['species']['arceus'] !== 'undefined' ? zoneStats['species']['arceus'] : 0;
 
-            // MYTHICAL pokemon appear more often once every three years
-            eventPokemonChanceBoosters['mythical'] = 0;
-            if (mythicalYear
-                && (currentArceusNum > 0 || (
-                    currentMythicalNum < 1
-                    && thisZoneData.date.year >= 3
-                    && thisZoneData.date.month >= 11
-                    ))){
-                eventBoost = ((thisZoneData.date.month + 9) / 12) + ((thisZoneData.date.day + 9) / 30) / 10;
-                eventBase = 120 * eventBoost;
-                eventPokemonChanceBases['mythical'] = eventBase;
-                eventPokemonChanceBoosters['mythical'] = eventBoost;
+            // Check to see if certain kinds of pokemon are being repelled
+            var repelBasicVisitors = thisZoneData.currentEffects['repelBasicVisitors'] ? true : false;
+            var repelSpecialVisitors = thisZoneData.currentEffects['repelSpecialVisitors'] ? true : false;
+            var naturalEncounterRates = repelBasicVisitors || repelSpecialVisitors ? false : true;
+            var increaseSpecialVisitors = thisZoneData.currentEffects['increaseSpecialVisitors'] ? true : false;
+
+            //console.log('----------- = ');
+            //console.log('currentMythicalNum = ', currentMythicalNum);
+            //console.log('currentLegendaryNum = ', currentLegendaryNum);
+            //console.log('increaseSpecialVisitors = ', increaseSpecialVisitors);
+            //console.log('repelBasicVisitors = ', repelBasicVisitors);
+            //console.log('repelSpecialVisitors = ', repelSpecialVisitors);
+            //console.log('naturalEncounterRates = ', naturalEncounterRates);
+
+            // If we're using NATURAL encounter rates, we do BASIC for most of the year and SPECIAL at the end
+            if (naturalEncounterRates){
+
+                // MYTHICAL pokemon appear more often near the end of the year, every three years
+                var mythicalMonths = increaseSpecialVisitors ? [5,6,11,12] : [11,12];
+                eventPokemonChanceBoosters['mythical'] = 0;
+                if (mythicalYear
+                    && (currentMythicalNum < (increaseSpecialVisitors ? 2 : 1)
+                        && thisZoneData.date.year >= 3
+                        && mythicalMonths.indexOf(thisZoneData.date.month) !== -1
+                        )){
+                    eventBoost = ((thisZoneData.date.month + 9) / 12) + ((thisZoneData.date.day + 9) / 30) / 10;
+                    eventBase = 120 * eventBoost;
+                    eventPokemonChanceBases['mythical'] = eventBase;
+                    eventPokemonChanceBoosters['mythical'] = eventBoost;
+                    }
+                // Otherwise LEGENDARY pokemon appear more often near the end of the year, every other year
+                var legendaryMonths = increaseSpecialVisitors ? [4,5,6,10,11,12] : [10,11,12];
+                eventPokemonChanceBoosters['legendary'] = 0;
+                if (!mythicalYear
+                    && (currentLegendaryNum < (increaseSpecialVisitors ? 2 : 1)
+                        && thisZoneData.date.year >= 1
+                        && legendaryMonths.indexOf(thisZoneData.date.month) !== -1
+                        )){
+                    eventBoost = ((thisZoneData.date.month + 6) / 12) + ((thisZoneData.date.day + 6) / 30) / 10;
+                    eventBase = 100 * eventBoost;
+                    if (currentLegendaryNum > 0 && !increaseSpecialVisitors){ eventBoost /= (currentLegendaryNum + 1);  }
+                    eventPokemonChanceBases['legendary'] = eventBase;
+                    eventPokemonChanceBoosters['legendary'] = eventBoost;
+                    }
+
+                } else {
+
+                // SPECIAL BOX EFFECT : Repel basic visitor pokemon if the appropriate flag is active
+                if (repelBasicVisitors){
+                    eventPokemonChanceBoosters['basic'] = 0;
+                    }
+
+                // SPECIAL BOX EFFECT : Repel special visitor pokemon if the appropriate flag is active
+                if (repelSpecialVisitors){
+                    eventPokemonChanceBoosters['special'] = 0;
+                    } else {
+                    eventPokemonChanceBoosters['mythical'] = mythicalYear ? 1 : 0;
+                    eventPokemonChanceBoosters['legendary'] = !mythicalYear ? 1 : 0;
+                    }
+
                 }
 
-            // LEGENDARY pokemon appear more often once every year
-            eventPokemonChanceBoosters['legendary'] = 0;
-            if (!mythicalYear
-                && (currentArceusNum > 0 || (
-                    currentLegendaryNum < 1
-                    && thisZoneData.date.year >= 1
-                    && thisZoneData.date.month >= 10
-                    ))){
-                eventBoost = ((thisZoneData.date.month + 6) / 12) + ((thisZoneData.date.day + 6) / 30) / 10;
-                eventBase = 100 * eventBoost;
-                if (currentLegendaryNum > 0){ eventBoost /= (currentLegendaryNum + 1);  }
-                eventPokemonChanceBases['legendary'] = eventBase;
-                eventPokemonChanceBoosters['legendary'] = eventBoost;
-                }
+            //console.log('eventPokemonChanceBases = ', eventPokemonChanceBases);
+            //console.log('eventPokemonChanceBoosters = ', eventPokemonChanceBoosters);
 
-            // DITTO appears more 6 months into the year when the box is nearly empty
+            // (GEN 1+) DITTO appears more 6 months into the year when the box is nearly empty
             eventPokemonChanceBoosters['ditto'] = 0;
             if (thisZoneData.date.month >= 6
                 && emptySpacePercent >= 90){
@@ -5339,52 +5390,57 @@
             eventPokemonChanceBoosters['zygarde-cell'] = 0;
             if (maxIndexKeyToLoad >= 7){
 
-                // Check if type appeal is critical or extreme right now
-                var extremeTypeAppeal = zoneFlags.indexOf('extremeTypeAppeal') !== -1 ? true : false;
-                var criticalTypeAppeal = zoneFlags.indexOf('criticalTypeAppeal') !== -1 ? true : false;
-                //console.log('extremeTypeAppeal = ', extremeTypeAppeal);
-                //console.log('criticalTypeAppeal = ', criticalTypeAppeal);
+                // SPECIAL BOX EFFECT : Prevent special visitor pokemon if the appropriate flag is active
+                if (thisZoneData.currentEffects['repelSpecialVisitors'] !== true){
 
-                // Cound the current number of cells and cores (in all their forms) in the box
-                var numZygardeCells = typeof zoneStats['species']['zygarde-cell'] !== 'undefined' ? zoneStats['species']['zygarde-cell'] : 0;
-                var numZygardeCores = typeof zoneStats['species']['zygarde-core'] !== 'undefined' ? zoneStats['species']['zygarde-core'] : 0;
-                if (typeof zoneStats['species']['zygarde-10-percent'] !== 'undefined'
-                    && zoneStats['species']['zygarde-10-percent'] > 0){
-                    numZygardeCores += zoneStats['species']['zygarde-10-percent'];
-                    numZygardeCells += 1 * zoneStats['species']['zygarde-10-percent'];
-                    }
-                if (typeof zoneStats['species']['zygarde'] !== 'undefined'
-                    && zoneStats['species']['zygarde'] > 0){
-                    numZygardeCores += zoneStats['species']['zygarde'];
-                    numZygardeCells += 2 * zoneStats['species']['zygarde'];
-                    }
-                if (typeof zoneStats['species']['zygarde-complete'] !== 'undefined'
-                    && zoneStats['species']['zygarde-complete'] > 0){
-                    numZygardeCores += zoneStats['species']['zygarde-complete'];
-                    numZygardeCells += 3 * zoneStats['species']['zygarde-complete'];
-                    }
-                //console.log('numZygardeCells = ', numZygardeCells);
-                //console.log('numZygardeCores = ', numZygardeCores);
+                    // Check if type appeal is critical or extreme right now
+                    var extremeTypeAppeal = zoneFlags.indexOf('extremeTypeAppeal') !== -1 ? true : false;
+                    var criticalTypeAppeal = zoneFlags.indexOf('criticalTypeAppeal') !== -1 ? true : false;
+                    //console.log('extremeTypeAppeal = ', extremeTypeAppeal);
+                    //console.log('criticalTypeAppeal = ', criticalTypeAppeal);
 
-                // Summon cells only until there are a max of three in the box
-                if (numZygardeCores < 1
-                    && numZygardeCells < 3
-                    && (extremeTypeAppeal || criticalTypeAppeal)){
-                    //console.log('try to add a cell');
-                    eventBase = 0 + (extremeTypeAppeal ? 100 : 0) + (criticalTypeAppeal ? 100 : 0);
-                    eventBoost = 0 + (extremeTypeAppeal ? 2 : 0) + (criticalTypeAppeal ? 2 : 0);
-                    eventPokemonChanceBases['zygarde-cell'] = eventBase;
-                    eventPokemonChanceBoosters['zygarde-cell'] = eventBoost;
-                    }
+                    // Cound the current number of cells and cores (in all their forms) in the box
+                    var numZygardeCells = typeof zoneStats['species']['zygarde-cell'] !== 'undefined' ? zoneStats['species']['zygarde-cell'] : 0;
+                    var numZygardeCores = typeof zoneStats['species']['zygarde-core'] !== 'undefined' ? zoneStats['species']['zygarde-core'] : 0;
+                    if (typeof zoneStats['species']['zygarde-10-percent'] !== 'undefined'
+                        && zoneStats['species']['zygarde-10-percent'] > 0){
+                        numZygardeCores += zoneStats['species']['zygarde-10-percent'];
+                        numZygardeCells += 1 * zoneStats['species']['zygarde-10-percent'];
+                        }
+                    if (typeof zoneStats['species']['zygarde'] !== 'undefined'
+                        && zoneStats['species']['zygarde'] > 0){
+                        numZygardeCores += zoneStats['species']['zygarde'];
+                        numZygardeCells += 2 * zoneStats['species']['zygarde'];
+                        }
+                    if (typeof zoneStats['species']['zygarde-complete'] !== 'undefined'
+                        && zoneStats['species']['zygarde-complete'] > 0){
+                        numZygardeCores += zoneStats['species']['zygarde-complete'];
+                        numZygardeCells += 3 * zoneStats['species']['zygarde-complete'];
+                        }
+                    //console.log('numZygardeCells = ', numZygardeCells);
+                    //console.log('numZygardeCores = ', numZygardeCores);
 
-                // Summon a single core when at least three cells are currently in the box
-                if (numZygardeCores < 1
-                    && numZygardeCells >= 3){
-                    //console.log('try to add a core');
-                    eventBase = 100 * numZygardeCells;
-                    eventBoost = 2 * numZygardeCells;
-                    eventPokemonChanceBases['zygarde-core'] = eventBase;
-                    eventPokemonChanceBoosters['zygarde-core'] = eventBoost;
+                    // Summon cells only until there are a max of three in the box
+                    if (numZygardeCores < 1
+                        && numZygardeCells < 3
+                        && (extremeTypeAppeal || criticalTypeAppeal)){
+                        //console.log('try to add a cell');
+                        eventBase = 0 + (extremeTypeAppeal ? 100 : 0) + (criticalTypeAppeal ? 100 : 0);
+                        eventBoost = 0 + (extremeTypeAppeal ? 2 : 0) + (criticalTypeAppeal ? 2 : 0);
+                        eventPokemonChanceBases['zygarde-cell'] = eventBase;
+                        eventPokemonChanceBoosters['zygarde-cell'] = eventBoost;
+                        }
+
+                    // Summon a single core when at least three cells are currently in the box
+                    if (numZygardeCores < 1
+                        && numZygardeCells >= 3){
+                        //console.log('try to add a core');
+                        eventBase = 100 * numZygardeCells;
+                        eventBoost = 2 * numZygardeCells;
+                        eventPokemonChanceBases['zygarde-core'] = eventBase;
+                        eventPokemonChanceBoosters['zygarde-core'] = eventBoost;
+                        }
+
                     }
 
                 }
@@ -5446,39 +5502,6 @@
                     }
                 }
 
-            // (GEN 4+) ARCEUS prevents non-legendary/mythical pokemon from appearing (never appears on its own, unlocked as gift)
-            eventPokemonChanceBoosters['arceus'] = 0;
-            if (maxIndexKeyToLoad >= 4){
-                if (currentArceusNum > 0){
-                    eventPokemonChanceBases['unown'] = currentArceusNum * 10;
-                    eventPokemonChanceBoosters['unown'] = currentArceusNum * 2;
-                    }
-                }
-
-            // (GEN X+) SHADOW POKEMON should never appear naturally on the field
-            eventPokemonChanceBases['shadow-variant'] = 0;
-            eventPokemonChanceBoosters['shadow-variant'] = 0;
-            eventPokemonChanceBases['shining-variant'] = 0;
-            eventPokemonChanceBoosters['shining-variant'] = 0;
-
-            // SPECIAL BOX EFFECT : Repel all visitor pokemon if the appropriate flag is active
-            if (thisZoneData.currentEffects['repelAllVisitors'] === true){
-                eventPokemonChanceBases['*'] = 0;
-                eventPokemonChanceBoosters['*'] = 0;
-                }
-
-            // SPECIAL BOX EFFECT : Repel basic visitor pokemon if the appropriate flag is active
-            if (thisZoneData.currentEffects['repelBasicVisitors'] === true){
-                eventPokemonChanceBases['basic'] = 0;
-                eventPokemonChanceBoosters['basic'] = 0;
-                }
-
-            // SPECIAL BOX EFFECT : Repel special visitor pokemon if the appropriate flag is active
-            if (thisZoneData.currentEffects['repelSpecialVisitors'] === true){
-                eventPokemonChanceBases['special'] = 0;
-                eventPokemonChanceBoosters['special'] = 0;
-                }
-
             }
 
         //console.log(thisZoneData.date.year + ' / ' + thisZoneData.date.month + ' / ' + thisZoneData.date.day);
@@ -5535,6 +5558,28 @@
             var pokeInfo = PokemonSpeciesIndex[pokeToken];
             var pokeChance = 0;
 
+            // Skip hidden or gift pokemon as they cannot appear as visitors
+            if (typeof pokeInfo.isHiddenPokemon !== 'undefined' && pokeInfo.isHiddenPokemon === true){ continue; }
+            if (typeof pokeInfo.isGiftPokemon !== 'undefined' && pokeInfo.isGiftPokemon === true){ continue; }
+
+            // Check to see if this is a basic or a special pokemon
+            var pokeClass = typeof pokeInfo.visitorClass !== 'undefined' ? pokeInfo.visitorClass : pokeInfo.class;
+            var pokeFormClass = typeof pokeInfo.formClass !== 'undefined' ? pokeInfo.formClass : '';
+            var isBasicPokemon = pokeClass === '' ? true : false;
+            var isSpecialPokemon = false;
+            if (pokeClass !== ''
+                && (pokeClass === 'legendary'
+                    || pokeClass === 'mythical'
+                    || pokeClass === 'ultra-beast')){
+                    isSpecialPokemon = true;
+                }
+
+            // Skip if this pokemon's class has been explicitly banned from appearing
+            if (isBasicPokemon && eventPokemonChanceBoosters['basic'] === 0){ continue; }
+            if (isSpecialPokemon && eventPokemonChanceBoosters['special'] === 0){ continue; }
+            if (eventPokemonChanceBoosters[pokeClass] === 0){ continue; }
+            if (eventPokemonChanceBoosters[pokeFormClass] === 0){ continue; }
+
             // Count the times this species has appear ever and right now
             var numAddedAlready = 0;
             var numAddedCurrently = 0;
@@ -5547,30 +5592,12 @@
                     numAddedCurrently += thisZoneData.currentStats['species'][relToken];
                     }
                 }
-            //var numAddedAlready = thisZoneData.addedPokemonSpecies[pokeToken];
-            //var numAddedCurrently = thisZoneData.currentStats['species'][pokeToken];
-            //console.log('relatedSpecies = ', pokeInfo.relatedSpecies);
-            //console.log('numAddedAlready = ', numAddedAlready);
-            //console.log('numAddedCurrently = ', numAddedCurrently);
-
-            // Check to see if this is a basic or a special pokemon
-            var pokeClass = typeof pokeInfo.visitorClass !== 'undefined' ? pokeInfo.visitorClass : pokeInfo.class;
-            var pokeFormClass = typeof pokeInfo.formClass !== 'undefined' ? pokeInfo.formClass : '';
-            var isBasicPokemon = pokeClass === '' ? true : false;
-            var isSpecialPokemon = false;
-            if (pokeClass !== ''
-                && (pokeClass === 'legendary'
-                    || pokeClass === 'mythical'
-                    || pokeClass === 'ultra-beast'
-                    || pokeClass === 'shiny-variant'
-                    || pokeFormClass === 'shadow-variant'
-                    || pokeFormClass === 'shining-variant')){
-                    isSpecialPokemon = true;
-                }
+            //console.log('relatedSpecies = ', pokeToken, pokeInfo.relatedSpecies);
+            //console.log('numAddedAlready = ', pokeToken, numAddedAlready);
+            //console.log('numAddedCurrently = ', pokeToken, numAddedCurrently);
 
             // Check to see if this is a persistent visitor (which is to say it can show up any number of times)
-            var persistentVisitor = false;
-            if (typeof pokeInfo.persistentVisitor !== 'undefined'){ persistentVisitor = pokeInfo.persistentVisitor; }
+            var repeatVisitor = typeof pokeInfo.repeatVisitor !== 'undefined' ? pokeInfo.repeatVisitor : false;
 
             // Apply any event-specific species or class boosters to the chance rating
             if (typeof eventPokemonChanceBases['*'] !== 'undefined'){ pokeChance = eventPokemonChanceBases['*']; }
@@ -5646,16 +5673,19 @@
                 }
 
             // Decrease the chance if there is already a colony of this species
-            if (typeof thisZoneData.addedPokemonSpecies[pokeToken] !== 'undefined'){
-                //console.log('numAddedAlready ', pokeToken, numAddedAlready);
-                if (numAddedAlready === 1){ pokeChance *= 2; }
-                else if (!persistentVisitor && numAddedAlready > 3) { pokeChance -= numAddedAlready; }
+            //console.log('repeatVisitor ', pokeToken, repeatVisitor);
+            //console.log('numAddedAlready ', pokeToken, numAddedAlready);
+            if (!repeatVisitor && numAddedAlready > 0){
+                if (numAddedAlready > 1){ pokeChance -= numAddedAlready; }
                 //console.log('pokeChance ', pokeToken, pokeChance);
-                if (!persistentVisitor
-                    && (!isBasicPokemon
-                        || numAddedCurrently > 3)){
-                    pokeChance *= -1;
-                    pokeChance -= numAddedAlready;
+                if (isSpecialPokemon){
+                    if (numAddedCurrently >= 1){ pokeChance = 0; }
+                    else if (numAddedAlready >= 3){ pokeChance = 0; }
+                    //console.log('pokeChance ', pokeToken, pokeChance);
+                    } else {
+                    if (numAddedCurrently === 1){ pokeChance *= 2.0; }
+                    else if (numAddedCurrently >= 3){ pokeChance = 0; }
+                    else if (numAddedAlready >= 6){ pokeChance = 0; }
                     //console.log('pokeChance ', pokeToken, pokeChance);
                     }
                 }
@@ -5669,8 +5699,7 @@
             if (typeof eventPokemonChanceBoosters['*'] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters['*']; }
 
             // If the chance was more than zero, push into the queue
-            if ((pokeChance > 0 || isSpecialPokemon)
-                && pokemonVisitorChanceTokens.indexOf(pokeToken) === -1){
+            if (pokeChance > 0 && pokemonVisitorChanceTokens.indexOf(pokeToken) === -1){
                 pokemonVisitorChanceTokens.push(pokeToken);
                 pokemonVisitorChances.push({
                     token: pokeToken,
@@ -5705,7 +5734,7 @@
 
         // Collect visitor appeal and sum all the chance values (return false if zero)
         var currentVisitorAppeal = thisZoneData.currentStats['visitorAppeal'];
-        var currentVisitorAppealTotal = sumValuesByKey(currentVisitorAppeal, 'chance');
+        var currentVisitorAppealTotal = sumValuesByKey(currentVisitorAppeal, 'chance', true);
         //console.log('currentVisitorAppealTotal = ', currentVisitorAppealTotal, currentVisitorAppeal);
         if (!(currentVisitorAppealTotal > 0)){ return false; }
 
@@ -6311,14 +6340,16 @@
     }
 
     // Define a function for calculating the sum of all values in an object
-    function sumValuesByKey( obj, key ) {
+    function sumValuesByKey( obj, key, skipNeg ) {
         if (typeof obj === 'undefined'){ return false; }
         if (typeof key === 'undefined'){ return false; }
+        if (typeof skipNeg === 'undefined'){ skipNeg = false; }
         var sum = 0;
         var pKeys = Object.keys(obj);
         for (var i = 0; i < pKeys.length; i++){
             var sObj = obj[i];
             if (typeof sObj[key] === 'number'){
+                if (skipNeg && sObj[key] < 0){ continue; }
                 sum += sObj[key];
                 }
             }

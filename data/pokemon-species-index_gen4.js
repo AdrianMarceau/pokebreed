@@ -2349,7 +2349,8 @@
             colors: ['white', 'black', 'yellow'],
             eggCycles: 120,
             eggGroups: ['undiscovered'],
-            speciesEffects: ['repelBasicVisitors']
+            speciesEffects: ['repelBasicVisitors', 'increaseSpecialVisitors'],
+            isGiftPokemon: true
             },
 
         });

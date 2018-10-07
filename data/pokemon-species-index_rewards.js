@@ -41,7 +41,8 @@
             eggGroups: ['undiscovered'],
             buttonQuote: 'Its dark aura repels any and all visitors.',
             speciesEffects: ['repelAllVisitors'],
-            hiddenPokemon: true,
+            isHiddenPokemon: true,
+            isGiftPokemon: true,
             nextEvolutions: [{
                 species: 'shadow-mega-mewtwo',
                 method: 'level-up',
@@ -89,7 +90,8 @@
             prevEvolution: 'shadow-mewtwo',
             buttonQuote: 'Its dark aura repels any and all visitors.',
             speciesEffects: ['repelAllVisitors'],
-            hiddenPokemon: true
+            isGiftPokemon: true,
+            isHiddenPokemon: true
             },
 
         'shadow-lugia': {
@@ -116,7 +118,8 @@
             eggGroups: ['undiscovered'],
             buttonQuote: 'Its dark aura reverses elemental type appeal.',
             speciesEffects: ['reverseTypeAppeal'],
-            hiddenPokemon: true
+            isGiftPokemon: true,
+            isHiddenPokemon: true
             },
 
         'shadow-entei': {
@@ -141,9 +144,10 @@
             colors: ['gray', 'black', 'blue', 'white', 'red'],
             eggCycles: 80,
             eggGroups: ['undiscovered'],
-            buttonQuote: 'Its dark aura prohibits all forms of breeding.',
+            buttonQuote: 'Its dark aura prohibits all species from breeding.',
             speciesEffects: ['preventAllBreeding'],
-            hiddenPokemon: true
+            isGiftPokemon: true,
+            isHiddenPokemon: true
             },
 
         'shadow-celebi': {
@@ -168,9 +172,10 @@
             colors: ['gray', 'purple', 'red'],
             eggCycles: 120,
             eggGroups: ['undiscovered'],
-            buttonQuote: 'Its dark aura suppresses all kinds of evolution.',
+            buttonQuote: 'Its dark aura suppresses all forms of evolution.',
             speciesEffects: ['preventAllEvolution'],
-            hiddenPokemon: true
+            isGiftPokemon: true,
+            isHiddenPokemon: true
             },
 
         'shadow-latios': {
@@ -197,7 +202,8 @@
             eggGroups: ['undiscovered'],
             buttonQuote: 'Its dark aura nullifies inter-species appeal.',
             speciesEffects: ['ignoreSpeciesAppeal'],
-            hiddenPokemon: true
+            isGiftPokemon: true,
+            isHiddenPokemon: true
             },
 
         // Shining Evolutions
@@ -225,9 +231,10 @@
             colors: ['gold'],
             eggCycles: 120,
             eggGroups: ['undiscovered'],
-            buttonQuote: 'Its rainbow wings inspire Pokémon to show their true colours.',
+            buttonQuote: 'Its rainbow gold wings inspire Pokémon to show their true colours.',
             speciesEffects: ['increaseColourVariations'],
-            hiddenPokemon: true
+            isGiftPokemon: true,
+            isHiddenPokemon: true
             },
 
         'silver-suicune': {
@@ -251,9 +258,10 @@
             colors: ['silver'],
             eggCycles: 80,
             eggGroups: ['undiscovered'],
-            buttonQuote: 'Its shimmering coat inspires Pokémon to resist legendary influence.',
-            speciesEffects: ['repelSpecialVisitors'],
-            hiddenPokemon: true
+            buttonQuote: 'Its shimmering silver coat entices powerful Pokémon to visit more frequently.',
+            speciesEffects: ['increaseSpecialVisitors'],
+            isGiftPokemon: true,
+            isHiddenPokemon: true
             },
 
         'crystal-onix': {
@@ -277,9 +285,10 @@
             colors: ['crystal'],
             eggCycles: 25,
             eggGroups: ['undiscovered'],
-            buttonQuote: 'Its unbreakable body inspires Pokémon to discard their weaknesses.',
+            buttonQuote: 'Its unbreakable crystal body protects Pokémon from their elemental weaknesses.',
             speciesEffects: ['ignoreTypeWeaknesses'],
-            hiddenPokemon: true
+            isGiftPokemon: true,
+            isHiddenPokemon: true
             },
 
         });
