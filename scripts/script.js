@@ -3064,9 +3064,10 @@
         var totalEggCount = 0;
         if (!jQuery.isEmptyObject(currentPokemonSpecies)){
             //console.log('currentPokemonSpecies = ', currentPokemonSpecies);
+
+            // Loop through and print out all the individual species stats
+            var markupToAppend = '';
             var sortedTokens = getSortedKeys(currentPokemonSpecies);
-            //console.log('sortedTokens = ', sortedTokens);
-            // Print out all the pokemon that have hatched from their eggs
             for (var key = 0; key < sortedTokens.length; key++){
                 var poke = sortedTokens[key];
                 var pokeInfo = PokemonSpeciesIndex[poke];
@@ -3079,28 +3080,35 @@
                 liClass += 'type '+pokeInfo['types'][0]+' ';
                 if (typeof pokeInfo['types'][1] !== 'undefined'){ liClass += pokeInfo['types'][1]+'2 '; }
                 pokeIcon = getPokemonIcon(pokeInfo.token);
-                speciesListMarkup += '<li class="'+liClass+'" data-token="'+poke+'">'+
+                var thisMarkup = '<li class="'+liClass+'" data-token="'+poke+'">'+
                         '<div class="bubble">'+
                             '<span class="icon">'+ pokeIcon +'</span> '+
                             '<span class="name">'+ pokeInfo['name'] +'</span> '+
                             '<span class="val">&times;'+ pokeCount + '</span>'+
                         '</div>'+
                     '</li>';
+                //console.log(pokeInfo.token, 'hiddenPokemon', pokeInfo.isHiddenPokemon);
+                if (pokeInfo.isHiddenPokemon === true){ markupToAppend += thisMarkup; }
+                else { speciesListMarkup += thisMarkup; }
                 numCurrentSpecies++;
                 numCurrentShown++;
                 }
-                // Print out a slot for eggs if there are any
-                if (totalEggCount > 0){
-                    pokeIcon = getPokemonIcon('ditto', true);
-                    speciesListMarkup += '<li class="species type normal">'+
-                            '<div class="bubble">'+
-                                '<span class="icon">'+ pokeIcon +'</span> '+
-                                '<span class="name">Eggs</span> '+
-                                '<span class="val">&times;'+ totalEggCount +'</span>'+
-                            '</div>'+
-                        '</li>';
-                    numCurrentShown++;
-                    }
+            //console.log('markupToAppend = ', markupToAppend);
+            speciesListMarkup += markupToAppend;
+
+            // Print out a block for the total eggs added
+            if (totalEggCount > 0){
+                pokeIcon = getPokemonIcon('ditto', true);
+                speciesListMarkup += '<li class="species type normal">'+
+                        '<div class="bubble">'+
+                            '<span class="icon">'+ pokeIcon +'</span> '+
+                            '<span class="name">Eggs</span> '+
+                            '<span class="val">&times;'+ totalEggCount +'</span>'+
+                        '</div>'+
+                    '</li>';
+                numCurrentShown++;
+                }
+
             } else {
             speciesListMarkup += '<li class="species spacer">'+
                     '<div class="bubble"><span class="name">&nbsp;</span></div>'+
@@ -3116,8 +3124,10 @@
         //$alltimeSpeciesList.empty();
         var speciesListMarkup = '';
         if (!jQuery.isEmptyObject(addedPokemonSpecies)){
+            //console.log('addedPokemonSpecies = ', addedPokemonSpecies);
 
             // Loop through and print out all the individual species stats
+            var markupToAppend = '';
             var sortedTokens = getSortedKeys(addedPokemonSpecies);
             for (var key = 0; key < sortedTokens.length; key++){
                 var poke = sortedTokens[key];
@@ -3128,16 +3138,21 @@
                 liClass += 'type '+pokeInfo['types'][0]+' ';
                 if (typeof pokeInfo['types'][1] !== 'undefined'){ liClass += pokeInfo['types'][1]+'2 '; }
                 pokeIcon = getPokemonIcon(pokeInfo.token);
-                speciesListMarkup += '<li class="'+liClass+'" data-token="'+poke+'">'+
+                var thisMarkup = '<li class="'+liClass+'" data-token="'+poke+'">'+
                         '<div class="bubble">'+
                             '<span class="icon">'+ pokeIcon +'</span> '+
                             '<span class="name">'+ pokeInfo['name'] +'</span> '+
                             '<span class="val">&times;'+ pokeCount +'</span>'+
                         '</div>'+
                     '</li>';
+                //console.log(pokeInfo.token, 'hiddenPokemon', pokeInfo.isHiddenPokemon);
+                if (pokeInfo.isHiddenPokemon === true){ markupToAppend += thisMarkup; }
+                else { speciesListMarkup += thisMarkup; }
                 numAllTimeSpecies++;
                 numAllTimeShown++;
                 }
+            //console.log('markupToAppend = ', markupToAppend);
+            speciesListMarkup += markupToAppend;
 
             // Print out a block for the total eggs added
             if (!jQuery.isEmptyObject(addedPokemonEggs)){
