@@ -538,15 +538,16 @@
             prevEvolution: 'burmy'
             },
 
-        // Regional Variants (via Proto Space)
+        // Ancient Variants (via Ancient Power)
 
         'proto-hoppip': {
             order: thisIndex.afterOrder('jumpluff', 1),
             token: 'proto-hoppip',
             name: 'Proto Hoppip',
-            formClass: 'regional-variant',
+            formClass: 'ancient-variant',
             formToken: 'proto',
             baseSpecies: 'hoppip',
+            hasAncientPower: true,
             number: 187,
             types: ['grass'],
             baseStats: {hp: 35, phAttack: 35, phDefense: 50, spAttack: 35, spDefense: 55, speed: 40},
@@ -572,9 +573,10 @@
             order: thisIndex.afterOrder('jumpluff', 2),
             token: 'proto-skiploom',
             name: 'Proto Skiploom',
-            formClass: 'regional-variant',
+            formClass: 'ancient-variant',
             formToken: 'proto',
             baseSpecies: 'skiploom',
+            hasAncientPower: true,
             number: 188,
             types: ['grass'],
             baseStats: {hp: 55, phAttack: 45, phDefense: 80, spAttack: 45, spDefense: 65, speed: 50},
@@ -596,9 +598,10 @@
             order: thisIndex.afterOrder('jumpluff', 3),
             token: 'proto-jumpluff',
             name: 'Proto Jumpluff',
-            formClass: 'regional-variant',
+            formClass: 'ancient-variant',
             formToken: 'proto',
             baseSpecies: 'jumpluff',
+            hasAncientPower: true,
             number: 189,
             types: ['grass'],
             baseStats: {hp: 75, phAttack: 55, phDefense: 110, spAttack: 55, spDefense: 95, speed: 70},
@@ -622,6 +625,7 @@
             formClass: 'primal-reversion',
             formToken: 'primal',
             baseSpecies: 'dialga',
+            hasAncientPower: true,
             number: 483,
             dexNumber: 1037,
             types: ['steel', 'dragon'],
@@ -644,6 +648,7 @@
             formClass: 'primal-reversion',
             formToken: 'primal',
             baseSpecies: 'palkia',
+            hasAncientPower: true,
             number: 484,
             dexNumber: 1038,
             types: ['water', 'dragon'],
@@ -749,7 +754,7 @@
         {base: 'pansear', species: 'elemonk', method: 'type-warning', value: 'fire'},
         {base: 'panpour', species: 'elemonk', method: 'type-warning', value: 'water'},
 
-        {base: 'hoppip', species: 'proto-hoppip', method: 'type-warning', value: 'flying'},
+        {base: 'hoppip', species: 'proto-hoppip', method: 'ancient-power', value: 'high'},
 
         ]);
 

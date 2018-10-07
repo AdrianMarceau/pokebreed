@@ -22,6 +22,7 @@
             token: 'meltan',
             name: 'Meltan',
             class: 'mythical',
+            hasAncientPower: true,
             number: 808,
             types: ['steel'],
             genderRatio: {none: 1.0000},
