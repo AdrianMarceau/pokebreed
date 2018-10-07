@@ -2109,20 +2109,32 @@
     }
 
     // Define a function for updating the pokedex with currently seen species
+    var seenSpeciesTokensCache = [];
     function updatePokemonPokedex(){
         //console.log('-----\nupdatePokemonPokedex()');
 
         // If we're in the free mode, the pokedex is already complete
         if (appFreeMode){ return false; }
 
+        // Collect seen species tokens to count and/or scan later
+        var seenSpeciesTokens = Object.keys(PokemonSpeciesSeen);
+
+        // If the number of seen species hasn't changed, we don't need to update anything
+        if (seenSpeciesTokens.length === seenSpeciesTokensCache.length){ return true; }
+
+        // Check to see which species tokens have been added since last time
+        var newSpeciesTokens = seenSpeciesTokens.filter(function(token){ return seenSpeciesTokensCache.indexOf(token) < 0; });
+
+        // Update the seen species cache for next loop
+        seenSpeciesTokensCache = seenSpeciesTokens;
+
         // Collect a reference to the pokedex list wrapper
         var $pokedexContainer = $('.info[data-tab="pokedex"]', $panelButtons);
         var $pokedexList = $('.list', $pokedexContainer);
 
         // Loop through the list of seen species and unhide appropriate blocks
-        var seenSpeciesTokens = Object.keys(PokemonSpeciesSeen);
-        for (var key = 0; key < seenSpeciesTokens.length; key++){
-            var pokeToken = seenSpeciesTokens[key];
+        for (var key = 0; key < newSpeciesTokens.length; key++){
+            var pokeToken = newSpeciesTokens[key];
             var $pokeEntry = $('.entry[data-token="'+ pokeToken +'"]', $pokedexList);
             var $pokeBlock = $('.species', $pokeEntry);
             if ($pokeBlock.hasClass('unknown')){
@@ -3976,7 +3988,8 @@
             updateOverview(function(){
                 if (thisZoneData.currentPokemon.length > 0
                     && dayTimeoutSpeed !== 'pause'){
-                    dayTimeoutID = setTimeout(dayTimeoutHandler, dayTimeoutDuration);
+                    if (dayTimeoutSpeed === 'warp'){ dayTimeoutHandler(); }
+                    else { dayTimeoutID = setTimeout(dayTimeoutHandler, dayTimeoutDuration); }
                     }
                 });
             });
