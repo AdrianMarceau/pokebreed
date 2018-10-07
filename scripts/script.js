@@ -1900,38 +1900,8 @@
             // Unhide the start button now that pokemon list is ready
             $('.controls .start', $panelButtons).removeClass('hidden');
 
-            // Attach a click event to the generated buttons
-            $('button[data-action]', $pokePanelSelectButtons).bind('click', function(e){
-                e.preventDefault();
-                if (simulationStarted
-                    || thisZoneData.currentPokemon.length >= 10){
-                    return false;
-                    }
-                var $button = $(this);
-                var action = $button.attr('data-action');
-                var kind = $button.attr('data-kind');
-                var token = $button.attr('data-token');
-                if (action == 'add'){
-                    if (kind == 'pokemon'){
-                        addPokemonToZone(token, false);
-                        recalculateZoneStats();
-                        if (thisZoneData.currentPokemon.length > 0){
-                            $('.controls .start', $panelButtons).addClass('ready');
-                            $('.button.enter-seed', $pokePanelFilters).addClass('disabled');
-                            } else {
-                            $('.controls .start', $panelButtons).removeClass('ready');
-                            $('.button.enter-seed', $pokePanelFilters).removeClass('disabled');
-                            }
-                        if (thisZoneData.currentPokemon.length >= pokemonRequiredToStart){
-                            $('.button.add-ditto', $pokePanelFilters).addClass('disabled');
-                            } else {
-                            $('.button.add-ditto', $pokePanelFilters).removeClass('disabled');
-                            }
-                        return true;
-                        }
-                    }
-                return false;
-                });
+            // Bind the global click event for the poke panel select buttons
+            $('button[data-action]', $pokePanelSelectButtons).bind('click', pokeSelectButtonClickEvent);
 
             //console.log('shownGens = ', shownGens);
             //console.log('shownTypes = ', shownTypes);
@@ -2256,6 +2226,9 @@
             });
         //console.log('Inserting sorted results...');
         $('.buttonwrap', $pokePanelSelectButtons).empty().html($sortedButtons);
+
+        // Re-Bind the global click event for the poke panel select buttons
+        $('button[data-action]', $pokePanelSelectButtons).bind('click', pokeSelectButtonClickEvent);
 
         // Update the scrollbar wrapper since there have been changes
         $pokePanelSelectButtons.find('.buttonwrap').perfectScrollbar('update');
@@ -3477,6 +3450,40 @@
         // Update the overview with changes
         updateOverview();
 
+    }
+
+    // Attach a click event to the generated buttons
+    function pokeSelectButtonClickEvent(e){
+        e.preventDefault();
+        var $button = $(this);
+        if (simulationStarted
+            || thisZoneData.currentPokemon.length >= 10){
+            return false;
+            }
+        var $button = $(this);
+        var action = $button.attr('data-action');
+        var kind = $button.attr('data-kind');
+        var token = $button.attr('data-token');
+        if (action == 'add'){
+            if (kind == 'pokemon'){
+                addPokemonToZone(token, false);
+                recalculateZoneStats();
+                if (thisZoneData.currentPokemon.length > 0){
+                    $('.controls .start', $panelButtons).addClass('ready');
+                    $('.button.enter-seed', $pokePanelFilters).addClass('disabled');
+                    } else {
+                    $('.controls .start', $panelButtons).removeClass('ready');
+                    $('.button.enter-seed', $pokePanelFilters).removeClass('disabled');
+                    }
+                if (thisZoneData.currentPokemon.length >= pokemonRequiredToStart){
+                    $('.button.add-ditto', $pokePanelFilters).addClass('disabled');
+                    } else {
+                    $('.button.add-ditto', $pokePanelFilters).removeClass('disabled');
+                    }
+                return true;
+                }
+            }
+        return false;
     }
 
     // Define a function for triggering the starter seed prompt
