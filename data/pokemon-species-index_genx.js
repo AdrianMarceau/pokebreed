@@ -507,7 +507,7 @@
             hasAncientPower: true,
             number: 190,
             dexNumber: 1028,
-            types: ['dark'],
+            types: ['dark', 'fighting'],
             baseStats: {hp: 55, phAttack: 85, phDefense: 55, spAttack: 40, spDefense: 55, speed: 70},
             abilities: {0: 'run-away', 1: 'pickup', hidden: 'skill-link'},
             height: 0.8,
@@ -519,7 +519,34 @@
                 species: 'aipom',
                 method: 'type-warning',
                 value: 'dark'
+                }],
+            nextEvolutions: [{
+                species: 'proto-ambipom',
+                method: 'type-surge',
+                value: ['dark', 'fighting'],
+                method2: 'level-up',
+                value2: 22
                 }]
+            },
+        'proto-ambipom': {
+            order: thisIndex.afterOrder('ambipom', 2),
+            token: 'proto-ambipom',
+            name: 'Proto Ambipom',
+            formClass: 'ancient-variant',
+            formToken: 'proto',
+            baseSpecies: 'ambipom',
+            hasAncientPower: true,
+            number: 424,
+            dexNumber: 1028.1,
+            types: ['dark', 'fighting'],
+            baseStats: {hp: 75, phAttack: 115, phDefense: 66, spAttack: 60, spDefense: 66, speed: 100},
+            abilities: {0: 'technician', 1: 'pickup', hidden: 'skill-link'},
+            height: 1.2,
+            weight: 20.3,
+            colors: ['black', 'gray', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'proto-aipom'
             },
 
         'proto-sneasel': {
