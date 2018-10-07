@@ -538,7 +538,108 @@
             prevEvolution: 'burmy'
             },
 
+
         // Ancient Variants (via Ancient Power)
+
+        'proto-aipom': {
+            order: thisIndex.afterOrder('ambipom', 1),
+            token: 'proto-aipom',
+            name: 'Proto Aipom',
+            formClass: 'ancient-variant',
+            formToken: 'proto',
+            baseSpecies: 'aipom',
+            hasAncientPower: true,
+            number: 190,
+            buttonGeneration: 2,
+            types: ['dark'],
+            baseStats: {hp: 55, phAttack: 85, phDefense: 55, spAttack: 40, spDefense: 55, speed: 70},
+            abilities: {0: 'run-away', 1: 'pickup', hidden: 'skill-link'},
+            height: 0.8,
+            weight: 11.5,
+            colors: ['black', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            altBaseEvolutions: [{
+                species: 'aipom',
+                method: 'type-warning',
+                value: 'dark'
+                }]
+            },
+
+        'proto-sneasel': {
+            order: thisIndex.afterOrder('weavile', 1),
+            token: 'proto-sneasel',
+            name: 'Proto Sneasel',
+            formClass: 'ancient-variant',
+            formToken: 'proto',
+            baseSpecies: 'sneasel',
+            hasAncientPower: true,
+            number: 215,
+            buttonGeneration: 2,
+            types: ['normal', 'ice'],
+            baseStats: {hp: 55, phAttack: 95, phDefense: 75, spAttack: 35, spDefense: 60, speed: 110},
+            abilities: {0: 'inner-focus', 1: 'keen-eye', hidden: 'pickpocket'},
+            height: 0.9,
+            weight: 28,
+            colors: ['white', 'brown', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            altBaseEvolutions: [{
+                species: 'sneasel',
+                method: 'type-warning',
+                value: 'normal'
+                }]
+            },
+
+        'proto-remoraid': {
+            order: thisIndex.afterOrder('octillery', 1),
+            token: 'proto-remoraid',
+            name: 'Proto Remoraid',
+            formClass: 'ancient-variant',
+            formToken: 'proto',
+            baseSpecies: 'remoraid',
+            hasAncientPower: true,
+            number: 223,
+            buttonGeneration: 2,
+            types: ['water', 'steel'],
+            baseStats: {hp: 35, phAttack: 35, phDefense: 65, spAttack: 35, spDefense: 65, speed: 65},
+            abilities: {0: 'hustle', 1: 'sniper', hidden: 'moody'},
+            height: 0.6,
+            weight: 12,
+            colors: ['gray', 'brown', 'white'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'water-2'],
+            nextEvolutions: [{
+                species: 'proto-octillery',
+                method: 'level-up',
+                value: 25
+                }],
+            altBaseEvolutions: [{
+                species: 'remoraid',
+                method: 'type-warning',
+                value: 'steel'
+                }]
+            },
+        'proto-octillery': {
+            order: thisIndex.afterOrder('octillery', 2),
+            token: 'proto-octillery',
+            name: 'Proto Octillery',
+            formClass: 'ancient-variant',
+            formToken: 'proto',
+            baseSpecies: 'octillery',
+            hasAncientPower: true,
+            number: 224,
+            buttonGeneration: 2,
+            types: ['water', 'steel'],
+            baseStats: {hp: 75, phAttack: 75, phDefense: 105, spAttack: 75, spDefense: 105, speed: 45},
+            abilities: {0: 'suction-cups', 1: 'sniper', hidden: 'moody'},
+            height: 0.9,
+            weight: 28.5,
+            colors: ['red', 'brown', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'water-2'],
+            prevEvolution: 'proto-remoraid'
+            },
 
         'proto-hoppip': {
             order: thisIndex.afterOrder('jumpluff', 1),
@@ -549,6 +650,7 @@
             baseSpecies: 'hoppip',
             hasAncientPower: true,
             number: 187,
+            buttonGeneration: 2,
             types: ['grass'],
             baseStats: {hp: 35, phAttack: 35, phDefense: 50, spAttack: 35, spDefense: 55, speed: 40},
             abilities: {0: 'leaf-guard', 1: 'sap-sipper', hidden: 'levitate'},
@@ -566,8 +668,7 @@
                 species: 'hoppip',
                 method: 'type-appeal',
                 value: 'flying'
-                }],
-            buttonGeneration: 2
+                }]
             },
         'proto-skiploom': {
             order: thisIndex.afterOrder('jumpluff', 2),
@@ -578,6 +679,7 @@
             baseSpecies: 'skiploom',
             hasAncientPower: true,
             number: 188,
+            buttonGeneration: 2,
             types: ['grass'],
             baseStats: {hp: 55, phAttack: 45, phDefense: 80, spAttack: 45, spDefense: 65, speed: 50},
             abilities: {0: 'leaf-guard', 1: 'sap-sipper', hidden: 'levitate'},
@@ -591,8 +693,7 @@
                 species: 'proto-jumpluff',
                 method: 'level-up',
                 value: 27
-                }],
-            buttonGeneration: 2
+                }]
             },
         'proto-jumpluff': {
             order: thisIndex.afterOrder('jumpluff', 3),
@@ -603,6 +704,7 @@
             baseSpecies: 'jumpluff',
             hasAncientPower: true,
             number: 189,
+            buttonGeneration: 2,
             types: ['grass'],
             baseStats: {hp: 75, phAttack: 55, phDefense: 110, spAttack: 55, spDefense: 95, speed: 70},
             abilities: {0: 'leaf-guard', 1: 'sap-sipper', hidden: 'levitate'},
@@ -611,8 +713,7 @@
             colors: ['pink', 'green', 'white', 'yellow'],
             eggCycles: 20,
             eggGroups: ['fairy', 'grass'],
-            prevEvolution: 'proto-skiploom',
-            buttonGeneration: 2
+            prevEvolution: 'proto-skiploom'
             },
 
         // Primal Evolutions
@@ -754,6 +855,9 @@
         {base: 'pansear', species: 'elemonk', method: 'type-warning', value: 'fire'},
         {base: 'panpour', species: 'elemonk', method: 'type-warning', value: 'water'},
 
+        {base: 'aipom', species: 'proto-aipom', method: 'ancient-power', value: 'high'},
+        {base: 'sneasel', species: 'proto-sneasel', method: 'ancient-power', value: 'high'},
+        {base: 'remoraid', species: 'proto-remoraid', method: 'ancient-power', value: 'high'},
         {base: 'hoppip', species: 'proto-hoppip', method: 'ancient-power', value: 'high'},
 
         ]);
