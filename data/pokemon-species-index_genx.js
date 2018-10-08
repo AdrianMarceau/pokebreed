@@ -127,7 +127,7 @@
                 }]
             },
         'alolan-kittri': {
-            order: thisIndex.afterOrder('ninetales', 1),
+            order: thisIndex.beforeOrder('alolan-vulpix'),
             token: 'alolan-kittri',
             legacyToken: 'baby-alolan-vulpix',
             name: 'Alolan Kittri', // [???]
@@ -738,13 +738,34 @@
             dexNumber: 1034.1,
             types: ['water'],
             baseStats: {hp: 90, phAttack: 76, phDefense: 90, spAttack: 76, spDefense: 100, speed: 68},
-            abilities: {0: 'water-absorb', 1: 'damp', hidden: 'drizzle'},
+            abilities: {0: 'water-absorb', 1: 'drizzle', hidden: 'sap-sipper'},
             height: 1.2,
             weight: 34,
             colors: ['green', 'yellow', 'pink'],
             eggCycles: 20,
             eggGroups: ['water-1'],
             prevEvolution: 'poliwhirl'
+            },
+
+        'proto-kingdra': {
+            order: thisIndex.afterOrder('kingdra', 1),
+            token: 'proto-kingdra',
+            name: 'Proto Kingdra',
+            formClass: 'ancient-variant',
+            formToken: 'proto',
+            baseSpecies: 'kingdra',
+            hasAncientPower: true,
+            number: 230,
+            dexNumber: 1034.2,
+            types: ['water', 'dragon'],
+            baseStats: {hp: 105, phAttack: 90, phDefense: 95, spAttack: 90, spDefense: 95, speed: 65},
+            abilities: {0: 'swift-swim', 1: 'sniper', hidden: 'rough-skin'},
+            height: 1.8,
+            weight: 152,
+            colors: ['blue', 'white'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'dragon'],
+            prevEvolution: 'seadra'
             },
 
 
@@ -969,6 +990,7 @@
         {base: 'mime-jr', species: 'ms-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'female', method3: 'level-up', value3: 25},
 
         {base: 'poliwhirl', species: 'proto-politoed', method: 'ancient-power', value: 'high', method2: 'level-up', value2: 45},
+        {base: 'seadra', species: 'proto-kingdra', method: 'ancient-power', value: 'high', method2: 'level-up', value2: 42},
 
         {base: 'burmy', species: 'snow-wormadam', method: 'level-up', value: 20, method2: 'gender', value2: 'female', method3: 'form', value3: 'snow'},
         {base: 'burmy', species: 'bubble-wormadam', method: 'level-up', value: 20, method2: 'gender', value2: 'female', method3: 'form', value3: 'bubble'},
