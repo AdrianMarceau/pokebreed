@@ -1195,6 +1195,7 @@
             order: indexOrder++,
             token: 'minior',
             name: 'Minior',
+            hasAncientPower: true,
             number: 774,
             types: ['rock', 'flying'],
             genderRatio: {none: 1.000},
