@@ -638,33 +638,26 @@
 
         // Define the key-binding reference index
         var keyCodes = {
-            a: 65,
-            d: 68,
-            n: 78,
-            r: 82,
-            s: 83,
-            x: 88,
-            z: 90,
-            esc: 27,
-            space: 32,
-            enter: 13,
-            backSpace: 8,
-            leftArrow: 37,
-            rightArrow: 39,
-            leftBrace: 219,
-            rightBrace: 221,
+            a: 65, d: 68, g: 71, n: 78, p: 50, r: 82, s: 83, t: 84, x: 88, z: 90,
+            esc: 27, space: 32, enter: 13, backSpace: 8,
+            leftArrow: 37, rightArrow: 39, leftBrace: 219, rightBrace: 221,
             tild: 192
             };
 
         // Bind the specific key presses to different button panel options
         $(document).keyup(function(e){
-            // Check to see if the simulation has started or we're in the selection phase
+
+            // Check to see which view/context we're currently in
+            var currentView = 'select-starters';
+            if (simulationStarted){ currentView = 'simulation-running'; }
+            else if (!simulationStarted && $('.select-pokemon', $panelButtons).hasClass('hidden')){ currentView = 'simulation-over'; }
             //console.log('simulationStarted = ', simulationStarted);
-            var validAction = false;
-            var currentView = 'selection';
-            if (simulationStarted){ currentView = 'progress'; }
-            else if (!simulationStarted && $('.select-pokemon', $panelButtons).hasClass('hidden')){ currentView = 'preselect'; }
             //console.log('currentView', currentView, 'e.which', e.which);
+            //console.log('keyup = ', e.which);
+
+            // Predefine validity flag so we know whether to cancel default later
+            var validAction = false;
+
             // USE-ANYWHERE SHORTCUTS
             switch (e.which){
                 // SCROLLTO shortcuts
@@ -675,16 +668,55 @@
                     break;
                     }
                 }
-            // CONTEXT-SENSITIVE SHORTCUTS
-            if (currentView === 'progress'){
+
+            // CONTEXT-SENSITIVE SHORTCUTS (SELECT-STARTERS)
+            if (currentView === 'select-starters'){
+                //console.log('SELECTION KEY ', e.which); // filter/ditto/seed/start
+                var maxPokeKey = thisZoneData.currentPokemon.length - 1;
+                switch (e.which){
+                    // START BUTTON shortcuts
+                    case keyCodes['enter']:
+                        { validAction = true; $startButton.trigger('click'); break; }
+                    // SEED BUTTON shortcuts
+                    case keyCodes['s']:
+                        { validAction = true; $seedButton.trigger('click'); break; }
+                    // ARCEUS BUTTON shortcuts
+                    case keyCodes['a']:
+                        { validAction = true; /*$arceusButton.trigger('click');*/ break; }
+                    // DITTO BUTTON shortcuts
+                    case keyCodes['d']:
+                        { validAction = true; $dittoButton.trigger('click'); break; }
+                    // REMOVE LEFT shortcuts
+                    case keyCodes['leftBrace']:
+                        { validAction = true; $('li[data-key="0"]', $pokeList).trigger('click'); break; }
+                    // REMOVE RIGHT shortcuts
+                    case keyCodes['rightBrace']:
+                        { validAction = true; $('li[data-key="'+maxPokeKey+'"]', $pokeList).trigger('click'); break; }
+                    // REMOVE LAST shortcuts
+                    case keyCodes['backSpace']:
+                        { validAction = true; $('li[data-id]:last-child', $pokeList).trigger('click'); break; }
+                    }
+                }
+
+            // CONTEXT-SENSITIVE SHORTCUTS (SIMULATION RUNNING)
+            if (currentView === 'simulation-running'){
                 //console.log('PROGRESS KEY ', e.which); // play/pause/stop/speed
                 switch (e.which){
                     // PAUSE/PLAY BUTTON shortcuts
                     case keyCodes['space']:
+                    case keyCodes['enter']:
                         {
                         validAction = true;
                         if (dayTimeoutSpeed !== 'pause'){ $pauseButton.trigger('click'); }
                         else { $playButton.trigger('click'); }
+                        break;
+                        }
+                    // STOP BUTTON shortcuts
+                    case keyCodes['esc']:
+                    case keyCodes['backSpace']:
+                        {
+                        validAction = true;
+                        $stopButton.trigger('click');
                         break;
                         }
                     // SLOWER BUTTON shortcuts
@@ -715,93 +747,29 @@
                             }
                         break;
                         }
-                    // STOP BUTTON shortcuts
-                    case keyCodes['esc']:
-                    case keyCodes['backSpace']:
-                        {
-                        validAction = true;
-                        $stopButton.trigger('click');
-                        break;
-                        }
                     }
-                } else if (currentView === 'preselect') {
+                }
+
+            // CONTEXT-SENSITIVE SHORTCUTS (SIMULATION OVER)
+            if (currentView === 'simulation-over'){
                 //console.log('PRE-SELECT KEY ', e.which); // restart/ew
                 switch (e.which){
                     // RE-USE STARTERS BUTTON shortcuts
                     case keyCodes['leftArrow']:
-                        {
-                        validAction = true;
-                        $restartButton.trigger('click');
-                        break;
-                        }
+                        { validAction = true; $restartButton.trigger('click'); break; }
                     // NEW STARTERS BUTTON shortcuts
                     case keyCodes['rightArrow']:
                     case keyCodes['enter']:
-                        {
-                        validAction = true;
-                        $newButton.trigger('click');
-                        break;
-                        }
-                    }
-                } else if (currentView === 'selection'){
-                //console.log('SELECTION KEY ', e.which); // filter/ditto/seed/start
-                switch (e.which){
-                    // START BUTTON shortcuts
-                    case keyCodes['enter']:
-                        {
-                        validAction = true;
-                        $startButton.trigger('click');
-                        break;
-                        }
-                    // SEED BUTTON shortcuts
-                    case keyCodes['s']:
-                        {
-                        validAction = true;
-                        $seedButton.trigger('click');
-                        break;
-                        }
-                    // ARCEUS BUTTON shortcuts
-                    case keyCodes['a']:
-                        {
-                        validAction = true;
-                        //$arceusButton.trigger('click');
-                        break;
-                        }
-                    // DITTO BUTTON shortcuts
-                    case keyCodes['d']:
-                        {
-                        validAction = true;
-                        $dittoButton.trigger('click');
-                        break;
-                        }
-                    // REMOVE LEFT shortcuts
-                    case keyCodes['leftBrace']:
-                        {
-                        validAction = true;
-                        $('li[data-key="0"]', $pokeList).trigger('click');
-                        break;
-                        }
-                    // REMOVE RIGHT shortcuts
-                    case keyCodes['rightBrace']:
-                        {
-                        validAction = true;
-                        var maxKey = thisZoneData.currentPokemon.length - 1;
-                        $('li[data-key="'+maxKey+'"]', $pokeList).trigger('click');
-                        break;
-                        }
-                    // REMOVE LAST shortcuts
-                    case keyCodes['backSpace']:
-                        {
-                        validAction = true;
-                        $('li[data-id]:last-child', $pokeList).trigger('click');
-                        break;
-                        }
+                        { validAction = true; $newButton.trigger('click'); break; }
                     }
                 }
+
+            // If valid action was processed, prevent default
             if (validAction){
                 e.preventDefault();
                 return false;
                 }
+
             });
 
     }
