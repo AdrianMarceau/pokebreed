@@ -401,6 +401,7 @@
     // Define a function for delegating button events for the edit
     var speedValues = {normal:1200,warp:100,fast:600,slow:2400};
     var stopConfirmTimeout = false;
+    var $controlButtonPanel = false;
     var $controlButtons = false;
     var prevSpeedToken = false;
     var prevSpeedDuration = false;
@@ -409,7 +410,8 @@
 
         // Define the click-event for the speed buttons
         var secretClicks = 0;
-        $controlButtons = $('.controls .control[data-control]', $panelButtons);
+        $controlButtonPanel = $('.controls', $panelButtons);
+        $controlButtons = $('.control[data-control]', $controlButtonPanel);
         $controlButtons.bind('click', function(e){
             e.preventDefault();
 
@@ -600,20 +602,205 @@
             });
 
         // Define a click event for the starter seed entry button
-        $('.button.enter-seed', $pokePanelFilters).bind('click', function(e){
+        var $seedButton = $('.button.enter-seed', $pokePanelFilters);
+        $seedButton.bind('click', function(e){
             e.preventDefault();
             if ($(this).hasClass('disabled') || $(this).hasClass('hidden')){ return false; }
-            if (thisZoneData.currentPokemon.length === 0){
-                triggerStarterSeedPrompt();
-                }
+            triggerStarterSeedPrompt();
             });
 
         // Define a click event for the add ditto quick button
-        $('.button.add-ditto', $pokePanelFilters).bind('click', function(e){
+        var $dittoButton = $('.button.add-ditto', $pokePanelFilters);
+        $dittoButton.bind('click', function(e){
             e.preventDefault();
             if ($(this).hasClass('disabled') || $(this).hasClass('hidden')){ return false; }
-            if (thisZoneData.currentPokemon.length < pokemonRequiredToStart){
-                $('button[data-action="add"][data-token="ditto"]', $pokePanelSelectButtons).trigger('click');
+            $('button[data-action="add"][data-token="ditto"]', $pokePanelSelectButtons).trigger('click');
+            });
+
+        // Collect references to the various control buttons
+        var $startButton = $('.start', $controlButtonPanel);
+        var $playButton = $('.play', $controlButtonPanel);
+        var $pauseButton = $('.pause', $controlButtonPanel);
+        var $stopButton = $('.stop', $controlButtonPanel);
+        var $slowButton = $('.slow', $controlButtonPanel);
+        var $fastButton = $('.fast', $controlButtonPanel);
+        var $warpButton = $('.warp', $controlButtonPanel);
+        var $restartButton = $('.restart', $controlButtonPanel);
+        var $newButton = $('.new', $controlButtonPanel);
+        var $scrollToButton = $panelMainOverview.find('.details.zone .title');
+
+        // Prevent the spacebar from scrolling as it normally would
+        window.addEventListener('keydown', function(e) {
+            if(e.keyCode == 32 && e.target == document.body){
+                e.preventDefault();
+                }
+            });
+
+        // Define the key-binding reference index
+        var keyCodes = {
+            a: 65,
+            d: 68,
+            n: 78,
+            r: 82,
+            s: 83,
+            x: 88,
+            z: 90,
+            esc: 27,
+            space: 32,
+            enter: 13,
+            backSpace: 8,
+            leftArrow: 37,
+            rightArrow: 39,
+            leftBrace: 219,
+            rightBrace: 221,
+            tild: 192
+            };
+
+        // Bind the specific key presses to different button panel options
+        $(document).keyup(function(e){
+            // Check to see if the simulation has started or we're in the selection phase
+            //console.log('simulationStarted = ', simulationStarted);
+            var validAction = false;
+            var currentView = 'selection';
+            if (simulationStarted){ currentView = 'progress'; }
+            else if (!simulationStarted && $('.select-pokemon', $panelButtons).hasClass('hidden')){ currentView = 'preselect'; }
+            //console.log('currentView', currentView, 'e.which', e.which);
+            // USE-ANYWHERE SHORTCUTS
+            switch (e.which){
+                // SCROLLTO shortcuts
+                case keyCodes['tild']:
+                    {
+                    validAction = true;
+                    $scrollToButton.trigger('click');
+                    break;
+                    }
+                }
+            // CONTEXT-SENSITIVE SHORTCUTS
+            if (currentView === 'progress'){
+                //console.log('PROGRESS KEY ', e.which); // play/pause/stop/speed
+                switch (e.which){
+                    // PAUSE/PLAY BUTTON shortcuts
+                    case keyCodes['space']:
+                        {
+                        validAction = true;
+                        if (dayTimeoutSpeed !== 'pause'){ $pauseButton.trigger('click'); }
+                        else { $playButton.trigger('click'); }
+                        break;
+                        }
+                    // SLOWER BUTTON shortcuts
+                    case keyCodes['leftArrow']:
+                    case keyCodes['leftBrace']:
+                        {
+                        validAction = true;
+                        //console.log('slower than '+dayTimeoutSpeed+'!');
+                        switch (dayTimeoutSpeed){
+                            case 'warp': { $fastButton.trigger('click'); break; }
+                            case 'fast': { $fastButton.trigger('click'); break; }
+                            case 'normal': { $slowButton.trigger('click'); break; }
+                            case 'slow': { break; }
+                            }
+                        break;
+                        }
+                    // FASTER BUTTON shortcuts
+                    case keyCodes['rightArrow']:
+                    case keyCodes['rightBrace']:
+                        {
+                        validAction = true;
+                        //console.log('faster than '+dayTimeoutSpeed+'!');
+                        switch (dayTimeoutSpeed){
+                            case 'slow': { $slowButton.trigger('click'); break; }
+                            case 'normal': { $fastButton.trigger('click'); break; }
+                            case 'fast': { $warpButton.trigger('click'); break; }
+                            case 'warp': { break; }
+                            }
+                        break;
+                        }
+                    // STOP BUTTON shortcuts
+                    case keyCodes['esc']:
+                    case keyCodes['backSpace']:
+                        {
+                        validAction = true;
+                        $stopButton.trigger('click');
+                        break;
+                        }
+                    }
+                } else if (currentView === 'preselect') {
+                //console.log('PRE-SELECT KEY ', e.which); // restart/ew
+                switch (e.which){
+                    // RE-USE STARTERS BUTTON shortcuts
+                    case keyCodes['leftArrow']:
+                        {
+                        validAction = true;
+                        $restartButton.trigger('click');
+                        break;
+                        }
+                    // NEW STARTERS BUTTON shortcuts
+                    case keyCodes['rightArrow']:
+                    case keyCodes['enter']:
+                        {
+                        validAction = true;
+                        $newButton.trigger('click');
+                        break;
+                        }
+                    }
+                } else if (currentView === 'selection'){
+                //console.log('SELECTION KEY ', e.which); // filter/ditto/seed/start
+                switch (e.which){
+                    // START BUTTON shortcuts
+                    case keyCodes['enter']:
+                        {
+                        validAction = true;
+                        $startButton.trigger('click');
+                        break;
+                        }
+                    // SEED BUTTON shortcuts
+                    case keyCodes['s']:
+                        {
+                        validAction = true;
+                        $seedButton.trigger('click');
+                        break;
+                        }
+                    // ARCEUS BUTTON shortcuts
+                    case keyCodes['a']:
+                        {
+                        validAction = true;
+                        //$arceusButton.trigger('click');
+                        break;
+                        }
+                    // DITTO BUTTON shortcuts
+                    case keyCodes['d']:
+                        {
+                        validAction = true;
+                        $dittoButton.trigger('click');
+                        break;
+                        }
+                    // REMOVE LEFT shortcuts
+                    case keyCodes['leftBrace']:
+                        {
+                        validAction = true;
+                        $('li[data-key="0"]', $pokeList).trigger('click');
+                        break;
+                        }
+                    // REMOVE RIGHT shortcuts
+                    case keyCodes['rightBrace']:
+                        {
+                        validAction = true;
+                        var maxKey = thisZoneData.currentPokemon.length - 1;
+                        $('li[data-key="'+maxKey+'"]', $pokeList).trigger('click');
+                        break;
+                        }
+                    // REMOVE LAST shortcuts
+                    case keyCodes['backSpace']:
+                        {
+                        validAction = true;
+                        $('li[data-id]:last-child', $pokeList).trigger('click');
+                        break;
+                        }
+                    }
+                }
+            if (validAction){
+                e.preventDefault();
+                return false;
                 }
             });
 
@@ -1989,7 +2176,7 @@
             }
 
         // Enable the seed button only if we haven't selected any pokemon yet
-        if (thisZoneData.currentPokemon.length === 0){
+        if (thisZoneData.currentPokemon.length < pokemonRequiredToStart){
             $seedButton.removeClass('disabled');
             }
 
@@ -3523,7 +3710,7 @@
         // Collect and parse the seed if it's given, else do nothing
         var rawSeed = prompt(
             'Starter seeds can be found in the footer of an active PokéBox. \n'
-            + 'Please enter a starter seed below (include all special characters):');
+            + 'Please enter a starter seed below (or any fragment of it):');
         if (rawSeed && rawSeed.length > 0){
             //console.log('rawSeed = ', rawSeed);
 
@@ -3556,12 +3743,15 @@
                     var isFree = freeStarterPokemon.indexOf(starterToken) !== -1 ? true : false;
                     var isSeen = typeof PokemonSpeciesSeen[starterToken] !== 'undefined' && PokemonSpeciesSeen[starterToken] > 0 ? true : false;
                     //console.log('starterToken = ', starterToken);
+                    //console.log('starterGender = ', typeof starterGender, starterGender);
                     //console.log('isFree = ', isFree);
                     //console.log('isBasic = ', isBasic);
                     //console.log('isSeen = ', isSeen);
                     //console.log('indexInfo = ', indexInfo);
                     if (appFreeMode || isFree || (isBasic && isSeen)){
-                        addPokemonToZone(starterToken, false, false, false, {gender:starterGender});
+                        var customData = {};
+                        if (typeof starterGender !== 'undefined'){ customData['gender'] = starterGender; }
+                        addPokemonToZone(starterToken, false, false, false, customData);
                         } else if (blockedPokemon.indexOf(indexInfo['name']) === -1){
                         blockedPokemon.push(indexInfo['name']);
                         }
@@ -6456,7 +6646,8 @@
                 if (rawInfo === null){ rawInfo = rawValue.match(/^(\S+\s\S+)\s(?:×|x)?\s?([0-9mf×x\/]+)$/i); }
                 //console.log('rawValue = ', typeof rawValue, rawValue);
                 //console.log('rawInfo = ', typeof rawInfo, rawInfo);
-                if (typeof rawInfo[1] !== 'undefined'){
+                if (rawInfo !== null
+                    && typeof rawInfo[1] !== 'undefined'){
                     var pokeName = rawInfo[1];
                     if (typeof globalNameToTokenIndex[pokeName] !== 'undefined'){
                         var pokeToken = globalNameToTokenIndex[pokeName];
