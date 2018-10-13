@@ -1439,6 +1439,9 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 .panel .buttons .select-pokemon {
     overflow: hidden;
     margin: 0 auto;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
 }
 .panel .buttons .select-pokemon.loaded {
     overflow: hidden;
@@ -2428,4 +2431,19 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 }
 .panel .buttons .info .group.modes .gen-filters ul li:last-child:after {
     display: none;
+}
+
+/* -- KEYBOARD SHORTCUT STYLES -- */
+
+.panel .buttons .select-pokemon,
+.panel .buttons .filter-pokemon .filter.generations,
+.panel .buttons .filter-pokemon .filter.types {
+    border: 1px solid transparent;
+}
+.panel .buttons .select-pokemon.hasfocus,
+.panel .buttons .select-pokemon button.hasfocus,
+.panel .buttons .filter-pokemon .filter.generations.hasfocus,
+.panel .buttons .filter-pokemon .filter.types.hasfocus {
+    /* border: 2px solid rgba(255, 255, 255, 0.6); */
+    border-color: rgba(255, 255, 255, 0.6);
 }

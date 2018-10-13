@@ -629,39 +629,73 @@
         var $newButton = $('.new', $controlButtonPanel);
         var $scrollToButton = $panelMainOverview.find('.details.zone .title');
 
-        // Prevent the spacebar from scrolling as it normally would
+        // Collect references to the various control containers
+        var $selectPokesWrap = $('.select-pokemon', $panelButtons);
+        var $filterGensWrap = $('.filter-pokemon[data-target="buttons"] .filter.generations', $panelButtons);
+        var $filterTypesWrap = $('.filter-pokemon[data-target="buttons"] .filter.types', $panelButtons);
+
+        // Create a focus panel array and index so we can loop later
+        focusTokens.push('select-pokemon'); $focusPanels['select-pokemon'] = $selectPokesWrap;
+        if ($filterGensWrap.length){ focusTokens.push('filter-generations'); $focusPanels['filter-generations'] = $filterGensWrap; }
+        if ($filterTypesWrap.length){ focusTokens.push('filter-types'); $focusPanels['filter-types'] = $filterTypesWrap; }
+        for (var i = 0; i < focusTokens.length; i++){ var tk = focusTokens[i]; $focusPanels[tk].addClass('focus-panel').attr('data-panel', tk); }
+
+        // Make sure poke button sizes are refreshed on resize
+        $(window).bind('resize', refreshPokeButtonSizes);
+
+        // Prevent default keyboard events that conflict with app functionality
+        var spbw = $selectPokesWrap.find('.buttonwrap').get();
         window.addEventListener('keydown', function(e) {
-            if(e.keyCode == 32 && e.target == document.body){
+            // Turn off certain keyboard bindings globally
+            if((e.keyCode == 32 // prevent spacebar auto-scroll
+                || e.keyCode == 9 // prevent tab from link-jumping
+                ) && e.target == document.body){
                 e.preventDefault();
                 }
+            // Turn off other keyboard shortcuts based on context
+            if((e.keyCode == 39 // prevent up from scrolling
+                || e.keyCode == 40 // prevent down from scrolling
+                ) && currentFocusPanel !== ''){
+                e.preventDefault();
+                }
+
             });
 
-        // Define the key-binding reference index
-        var keyCodes = {
-            a: 65, d: 68, g: 71, n: 78, p: 50, r: 82, s: 83, t: 84, x: 88, z: 90,
-            esc: 27, space: 32, enter: 13, backSpace: 8,
-            leftArrow: 37, rightArrow: 39, leftBrace: 219, rightBrace: 221,
-            tild: 192
+        // Define a function for checking which key was pressed
+        var keyCodeMap = {
+            65: 'a', 68: 'd', 71: 'g', 78: 'n', 80: 'p',
+            82: 'r', 83: 's', 84: 't', 88: 'x', 90: 'z',
+            27: 'esc', 32: 'space', 13: 'enter', 9: 'tab', 192: 'tild', 8: 'backSpace', 16: 'shift', 187: 'equals',
+            37: 'leftArrow', 38: 'upArrow', 39: 'rightArrow', 40: 'downArrow', 219: 'leftBrace', 221: 'rightBrace'
             };
 
         // Bind the specific key presses to different button panel options
         $(document).keyup(function(e){
 
-            // Check to see which view/context we're currently in
-            var currentView = 'select-starters';
-            if (simulationStarted){ currentView = 'simulation-running'; }
-            else if (!simulationStarted && $('.select-pokemon', $panelButtons).hasClass('hidden')){ currentView = 'simulation-over'; }
-            //console.log('simulationStarted = ', simulationStarted);
-            //console.log('currentView', currentView, 'e.which', e.which);
-            //console.log('keyup = ', e.which);
+            // Immediately return if control key is pressed
+            if (e.ctrlKey === true){ return true; }
+            //console.log('----');
+
+            // Collect the name of the currently pressed key
+            var keyName = typeof keyCodeMap[e.which] !== 'undefined' ? keyCodeMap[e.which] : false;
+            //console.log('key =', e.which, '=', keyName);
+
+            // Check to see which phase of the simulation we're currently in
+            var currentPhase = 'select-starters';
+            if (simulationStarted){ currentPhase = 'simulation-running'; }
+            else if (!simulationStarted && $('.select-pokemon', $panelButtons).hasClass('hidden')){ currentPhase = 'simulation-over'; }
+            //console.log('currentPhase', currentPhase, 'e.which', e.which);
 
             // Predefine validity flag so we know whether to cancel default later
             var validAction = false;
 
+            // Check to see if the shift key is being held down right now
+            var shiftKey = e.shiftKey === true ? true : false;
+
             // USE-ANYWHERE SHORTCUTS
-            switch (e.which){
+            switch (keyName){
                 // SCROLLTO shortcuts
-                case keyCodes['tild']:
+                case 'tild':
                     {
                     validAction = true;
                     $scrollToButton.trigger('click');
@@ -670,41 +704,206 @@
                 }
 
             // CONTEXT-SENSITIVE SHORTCUTS (SELECT-STARTERS)
-            if (currentView === 'select-starters'){
-                //console.log('SELECTION KEY ', e.which); // filter/ditto/seed/start
-                var maxPokeKey = thisZoneData.currentPokemon.length - 1;
-                switch (e.which){
+            if (currentPhase === 'select-starters'){
+                //console.log('SELECTION KEY ', keyName); // filter/ditto/seed/start
+
+                // Check to see which button panel has been highlighted, if any
+                var currentPanel = '';
+                var $currentPanel = $('.focus-panel.hasfocus', $panelButtons);
+                if ($currentPanel.length){ currentPanel = $currentPanel.attr('data-panel'); }
+                //console.log('currentPanel =', currentPanel);
+
+                // Cotinue to process keyboard-specific shortcuts for this phase
+                switch (keyName){
                     // START BUTTON shortcuts
-                    case keyCodes['enter']:
+                    case 'enter':
                         { validAction = true; $startButton.trigger('click'); break; }
                     // SEED BUTTON shortcuts
-                    case keyCodes['s']:
+                    case 's':
                         { validAction = true; $seedButton.trigger('click'); break; }
                     // ARCEUS BUTTON shortcuts
-                    case keyCodes['a']:
+                    case 'a':
                         { validAction = true; /*$arceusButton.trigger('click');*/ break; }
                     // DITTO BUTTON shortcuts
-                    case keyCodes['d']:
+                    case 'd':
                         { validAction = true; $dittoButton.trigger('click'); break; }
                     // REMOVE LEFT shortcuts
-                    case keyCodes['leftBrace']:
+                    case 'leftBrace':
                         { validAction = true; $('li[data-key="0"]', $pokeList).trigger('click'); break; }
                     // REMOVE RIGHT shortcuts
-                    case keyCodes['rightBrace']:
-                        { validAction = true; $('li[data-key="'+maxPokeKey+'"]', $pokeList).trigger('click'); break; }
+                    case 'rightBrace':
+                        { validAction = true; $('li[data-key="'+(thisZoneData.currentPokemon.length - 1)+'"]', $pokeList).trigger('click'); break; }
                     // REMOVE LAST shortcuts
-                    case keyCodes['backSpace']:
+                    case 'backSpace':
                         { validAction = true; $('li[data-id]:last-child', $pokeList).trigger('click'); break; }
+                    // PANEL FOCUS shortcuts
+                    case 'tab':
+                        {
+                        validAction = true;
+                        if (currentPanel === ''){ selectFocusPanel(focusTokens[0]); break; }
+                        var panelKey = focusTokens.indexOf(currentPanel);
+                        var newKey = panelKey + (!shiftKey ? 1 : -1);
+                        var newToken = focusTokens[newKey];
+                        if (typeof newToken === 'undefined'){ newToken = !shiftKey ? focusTokens[0] : focusTokens[focusTokens.length - 1]; }
+                        selectFocusPanel(newToken);
+                        break;
+                        }
+                    // CONFIRM shortcuts
+                    case 'space':
+                        {
+                        validAction = true;
+                        if (currentPanel !== 'select-pokemon'){ selectFocusPanel('select-pokemon'); }
+                        else { $currentPanel.find('button.hasfocus').trigger('click'); }
+                        break;
+                        }
+                    // NAVIGATE shortcuts
+                    case 'leftArrow':
+                    case 'rightArrow':
+                    case 'upArrow':
+                    case 'downArrow':
+                        {
+                        validAction = true;
+                        var arrowDir = keyName.replace('Arrow', '');
+                        //console.log('--');
+                        //console.log('arrowDir = ', arrowDir);
+                        if (currentPanel === 'select-pokemon'){
+                            //console.log('focus button to the', arrowDir);
+                            var selectorClass = '.button:not(.disabled):not(.hidden)';
+                            var activeClass = '.hasfocus';
+                            } else {
+                            //console.log('shift selected filter', arrowDir);
+                            var selectorClass = '.option:not(.disabled):not(.hidden)';
+                            var activeClass = '.active';
+                            }
+                        var $visible = $currentPanel.find(selectorClass);
+                        var bcount = $visible.length;
+                        //console.log('buttons =', bcount);
+                        //console.log('columns =', pokeGridSize.columns);
+                        //console.log('rows =', pokeGridSize.rows);
+                        var $current = $currentPanel.find(selectorClass).filter(activeClass);
+                        var currentKey = parseInt($current.attr('data-key'));
+                        //console.log('$current.key =', currentKey);
+                        //console.log('$current.token =', $current.attr('data-token'));
+
+                        if (currentPanel === 'select-pokemon'){
+
+                            // pokemon navigation (left/right/up/down + loop at all sides)
+                            if (arrowDir === 'right'){
+                                var $new = $current.nextAll(selectorClass).first();
+                                if (!$new.length){ $new = $currentPanel.find(selectorClass).first(); } // needs to change
+                                } else if (arrowDir === 'left'){
+                                var $new = $current.prevAll(selectorClass).first();
+                                if (!$new.length){ $new = $currentPanel.find(selectorClass).last(); } // needs to change
+                                } else if (arrowDir === 'down'){
+                                var newKey = currentKey + pokeGridSize.columns;
+                                if (newKey > (bcount - 1)){ newKey = currentKey % pokeGridSize.columns; } // done
+                                var $new = $visible.filter('[data-key="'+newKey+'"]');
+                                } else if (arrowDir === 'up'){
+                                var newKey = currentKey - pokeGridSize.columns;
+                                if (newKey < 0){
+                                    newKey = bcount - (bcount % pokeGridSize.columns) + currentKey;
+                                    if (newKey > (bcount - 1)){ newKey -= pokeGridSize.columns; }
+                                    }
+                                var $new = $visible.filter('[data-key="'+newKey+'"]');
+                                }
+
+                            } else {
+
+                            // filter navigation (left/right + loop at start/end)
+                            if (arrowDir === 'right'){
+                                var $new = $current.nextAll(selectorClass).first();
+                                if (!$new.length){ $new = $currentPanel.find(selectorClass).first(); }
+                                } else if (arrowDir === 'left'){
+                                var $new = $current.prevAll(selectorClass).first();
+                                if (!$new.length){ $new = $currentPanel.find(selectorClass).last(); }
+                                } else if (arrowDir === 'up'){
+                                var $new = $currentPanel.find(selectorClass).last();
+                                } else if (arrowDir === 'down'){
+                                var $new = $currentPanel.find(selectorClass).first();
+                                }
+
+                            }
+
+                        //console.log('new', $new);
+                        if ($new.length){
+                            if (currentPanel === 'select-pokemon'){
+
+                                //console.log('$new.key =', parseInt($new.attr('data-key')));
+                                //console.log('$new.token =', $new.attr('data-token'));
+
+                                // only highlight pokemon buttons
+                                $current.removeClass('hasfocus');
+                                $new.addClass('hasfocus');
+
+                                /*
+                                var pokeButtonSizes = {};
+                                var pokePanelSizes = {};
+                                var pokeGridSize = {};
+                                */
+
+                                var panelScrollTop = $currentPanel.scrollTop();
+                                var newButtonTop = $new.position().top;
+                                //console.log('panelScrollTop =', panelScrollTop);
+                                //console.log('newButtonTop =', newButtonTop);
+
+                                //var downIndex = $new.index() + pokeGridSize.columns;
+                                //var $new = $current.parent().find(selectorClass).eq($current.index() + pokeGridSize.columns);
+                                //console.log('downIndex =', downIndex);
+                                //console.log('if down token =', $down.attr('data-token'));
+
+                                /*
+                                var buttonPadding = 6;
+                                var buttonHeight = 40;
+                                var panelHeight = $currentPanel.height();
+                                var panelScrollTop = $currentPanel.scrollTop();
+                                var currentButtonTop = $current.position().top;
+                                var newButtonTop = $new.position().top;
+                                //console.log('buttonPadding =', buttonPadding);
+                                //console.log('buttonHeight =', buttonHeight);
+                                //console.log('panelHeight =', panelHeight);
+                                //console.log('panelScrollTop =', panelScrollTop);
+                                //console.log('currentButtonTop =', currentButtonTop);
+                                //console.log('newButtonTop =', newButtonTop);
+                                */
+
+                                /*
+                                //console.log('psize =', top);
+                                //console.log('btop =', btop);
+                                if (btop < 0){
+                                    //console.log('scroll to', 0);
+                                    $currentPanel.find('.buttonwrap').stop().animate({scrollTop: 0});
+                                } else if ((btop + vsize) > psize){
+                                    //console.log('scroll to', (btop + tpad));
+                                    $currentPanel.find('.buttonwrap').stop().animate({scrollTop: (btop - tpad)});
+                                    }
+                                //if (true){
+                                    //top += top > 1 ? -6 : 6;
+                                    //console.log('scroll panel top to ', top);
+                                    //$currentPanel.find('.buttonwrap').stop().animate({scrollTop: top});
+                                //    }
+                                */
+
+                                } else {
+
+                                // manually click filter buttons
+                                $new.trigger('click');
+
+                                }
+
+                            }
+
+                        break;
+                        }
                     }
                 }
 
             // CONTEXT-SENSITIVE SHORTCUTS (SIMULATION RUNNING)
-            if (currentView === 'simulation-running'){
-                //console.log('PROGRESS KEY ', e.which); // play/pause/stop/speed
-                switch (e.which){
+            if (currentPhase === 'simulation-running'){
+                //console.log('PROGRESS KEY ', keyName); // play/pause/stop/speed
+                switch (keyName){
                     // PAUSE/PLAY BUTTON shortcuts
-                    case keyCodes['space']:
-                    case keyCodes['enter']:
+                    case 'space':
+                    case 'enter':
                         {
                         validAction = true;
                         if (dayTimeoutSpeed !== 'pause'){ $pauseButton.trigger('click'); }
@@ -712,16 +911,16 @@
                         break;
                         }
                     // STOP BUTTON shortcuts
-                    case keyCodes['esc']:
-                    case keyCodes['backSpace']:
+                    case 'esc':
+                    case 'backSpace':
                         {
                         validAction = true;
                         $stopButton.trigger('click');
                         break;
                         }
                     // SLOWER BUTTON shortcuts
-                    case keyCodes['leftArrow']:
-                    case keyCodes['leftBrace']:
+                    case 'leftArrow':
+                    case 'leftBrace':
                         {
                         validAction = true;
                         //console.log('slower than '+dayTimeoutSpeed+'!');
@@ -734,8 +933,8 @@
                         break;
                         }
                     // FASTER BUTTON shortcuts
-                    case keyCodes['rightArrow']:
-                    case keyCodes['rightBrace']:
+                    case 'rightArrow':
+                    case 'rightBrace':
                         {
                         validAction = true;
                         //console.log('faster than '+dayTimeoutSpeed+'!');
@@ -751,15 +950,17 @@
                 }
 
             // CONTEXT-SENSITIVE SHORTCUTS (SIMULATION OVER)
-            if (currentView === 'simulation-over'){
-                //console.log('PRE-SELECT KEY ', e.which); // restart/ew
-                switch (e.which){
+            if (currentPhase === 'simulation-over'){
+                //console.log('PRE-SELECT KEY ', keyName); // restart/ew
+                switch (keyName){
                     // RE-USE STARTERS BUTTON shortcuts
-                    case keyCodes['leftArrow']:
+                    case 'leftArrow':
+                    case 'equals':
                         { validAction = true; $restartButton.trigger('click'); break; }
                     // NEW STARTERS BUTTON shortcuts
-                    case keyCodes['rightArrow']:
-                    case keyCodes['enter']:
+                    case 'rightArrow':
+                    case 'backSpace':
+                    case 'enter':
                         { validAction = true; $newButton.trigger('click'); break; }
                     }
                 }
@@ -772,6 +973,47 @@
 
             });
 
+    }
+
+    // Define a function for manually switching focus panels by token
+    var focusTokens = [];
+    var $focusPanels = {};
+    var currentFocusPanel = '';
+    function selectFocusPanel(panelToken){
+        currentFocusPanel = panelToken;
+        $('.hasfocus', $panelButtons).removeClass('hasfocus');
+        if (panelToken === ''){ return; }
+        var $panelDiv = $focusPanels[panelToken];
+        $panelDiv.addClass('hasfocus');
+        if (panelToken === 'select-pokemon'){
+            var $panelWrap = $panelDiv.find('.buttonwrap');
+            var $panelButton = $panelDiv.find('button:visible').first();
+            $panelButton.addClass('hasfocus');
+            $panelWrap.trigger('focus').stop().animate({scrollTop: ($panelButton.position().top - 6)});
+            refreshPokeButtonSizes();
+            }
+    }
+
+    // Collect details about pokemon button sizes, margins, etc.
+    var pokePanelSizes = {};
+    var pokeButtonSizes = {};
+    var pokeGridSize = {};
+    function refreshPokeButtonSizes(){
+        //console.log('refreshPokeButtonSizes()');
+        var $panel = $focusPanels['select-pokemon'];
+        var $buttons = $panel.find('.button:not(.disabled):not(.hidden)');
+        var $button = $buttons.first();
+        pokePanelSizes.height = $panel.height();
+        pokePanelSizes.width = $panel.width();
+        pokeButtonSizes.height = $button.outerHeight(true);
+        pokeButtonSizes.width = $button.outerWidth(true);
+        pokeGridSize.columns = Math.floor(pokePanelSizes.width / pokeButtonSizes.width); // column count based on available width
+        pokeGridSize.rows = Math.floor(pokePanelSizes.height / pokeButtonSizes.height); // max visible rows, not necessarily full
+        //console.log('$panel =', $panel);
+        //console.log('$button =', $button);
+        //console.log('pokePanelSizes =', pokePanelSizes);
+        //console.log('pokeButtonSizes =', pokeButtonSizes);
+        //console.log('pokeGridSize =', pokeGridSize);
     }
 
     // Define a function for resetting zone data to default values
@@ -1257,6 +1499,9 @@
 
         // Set the start flag to true
         simulationStarted = true;
+
+        // Clear the current focus panel
+        selectFocusPanel('');
 
         // Add the started class to the main overview
         $panelMainOverview.addClass('started');
@@ -2089,14 +2334,14 @@
             $thisFilterWrapper.removeClass('hidden');
 
             // Refresh panel button statuses as appropriate
-            refreshPokePanelButtons();
+            refreshPokePanelQuickButtons();
 
             }, 0);
 
     }
 
     // Define a function for refreshing panel buttons and showing/hiding as appropriate
-    function refreshPokePanelButtons(){
+    function refreshPokePanelQuickButtons(){
 
         // Refresh and update the ditto and seed buttons as appropriate
         checkDittoButtonAllowed();
@@ -2426,6 +2671,8 @@
                 }
             });
         //console.log('Inserting sorted results...');
+        $sortedButtons.each(function(){ $(this).attr('data-key', 0); });
+        $sortedButtons.filter(':not(.hidden):not(.disabled)').each(function(key){ $(this).attr('data-key', key); });
         $('.buttonwrap', $pokePanelSelectButtons).empty().html($sortedButtons);
 
         // Re-Bind the global click event for the poke panel select buttons
@@ -2890,7 +3137,7 @@
         // Update the overview with changes
         if (!simulationStarted){
             updateOverview();
-            refreshPokePanelButtons();
+            refreshPokePanelQuickButtons();
             }
 
         // Push an event to Google Analytics
@@ -3624,7 +3871,7 @@
             updateOverview();
             if (thisZoneData.currentPokemon.length > 0){ $('.controls .start', $panelButtons).addClass('ready'); }
             else { $('.controls .start', $panelButtons).removeClass('ready'); }
-            refreshPokePanelButtons();
+            refreshPokePanelQuickButtons();
             }
         // Otherwise, clicking simply places a "watched" indicator on the pokemon
         else {
@@ -3665,7 +3912,7 @@
                 recalculateZoneStats();
                 if (thisZoneData.currentPokemon.length > 0){ $('.controls .start', $panelButtons).addClass('ready'); }
                 else { $('.controls .start', $panelButtons).removeClass('ready'); }
-                refreshPokePanelButtons();
+                refreshPokePanelQuickButtons();
                 return true;
                 }
             }
@@ -3742,7 +3989,7 @@
             }
 
         // Refresh poke panel button statuses as appropriate
-        refreshPokePanelButtons();
+        refreshPokePanelQuickButtons();
 
          // Recalculate zone stats then show the start button if ready
         if (thisZoneData.currentPokemon.length > 0){
