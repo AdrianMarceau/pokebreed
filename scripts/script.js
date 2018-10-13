@@ -784,9 +784,8 @@
                         var currentKey = parseInt($current.attr('data-key'));
                         //console.log('$current.key =', currentKey);
                         //console.log('$current.token =', $current.attr('data-token'));
-
+                        // Navigate pokemon button grid differently then horizotal filter buttons
                         if (currentPanel === 'select-pokemon'){
-
                             // pokemon navigation (left/right/up/down + loop at all sides)
                             if (arrowDir === 'right'){
                                 var $new = $current.nextAll(selectorClass).first();
@@ -806,9 +805,7 @@
                                     }
                                 var $new = $visible.filter('[data-key="'+newKey+'"]');
                                 }
-
                             } else {
-
                             // filter navigation (left/right + loop at start/end)
                             if (arrowDir === 'right'){
                                 var $new = $current.nextAll(selectorClass).first();
@@ -821,77 +818,22 @@
                                 } else if (arrowDir === 'down'){
                                 var $new = $currentPanel.find(selectorClass).first();
                                 }
-
                             }
-
-                        //console.log('new', $new);
+                        // Only proceed if a new button was found to focus/click
                         if ($new.length){
                             if (currentPanel === 'select-pokemon'){
-
-                                //console.log('$new.key =', parseInt($new.attr('data-key')));
-                                //console.log('$new.token =', $new.attr('data-token'));
-
-                                // only highlight pokemon buttons
+                                // highlight pokemon buttons (rather than clicking)
                                 $current.removeClass('hasfocus');
                                 $new.addClass('hasfocus');
-
-                                /*
-                                var pokeButtonSizes = {};
-                                var pokePanelSizes = {};
-                                var pokeGridSize = {};
-                                */
-
-                                var panelScrollTop = $currentPanel.scrollTop();
-                                var newButtonTop = $new.position().top;
-                                //console.log('panelScrollTop =', panelScrollTop);
-                                //console.log('newButtonTop =', newButtonTop);
-
-                                //var downIndex = $new.index() + pokeGridSize.columns;
-                                //var $new = $current.parent().find(selectorClass).eq($current.index() + pokeGridSize.columns);
-                                //console.log('downIndex =', downIndex);
-                                //console.log('if down token =', $down.attr('data-token'));
-
-                                /*
-                                var buttonPadding = 6;
-                                var buttonHeight = 40;
-                                var panelHeight = $currentPanel.height();
-                                var panelScrollTop = $currentPanel.scrollTop();
-                                var currentButtonTop = $current.position().top;
-                                var newButtonTop = $new.position().top;
-                                //console.log('buttonPadding =', buttonPadding);
-                                //console.log('buttonHeight =', buttonHeight);
-                                //console.log('panelHeight =', panelHeight);
-                                //console.log('panelScrollTop =', panelScrollTop);
-                                //console.log('currentButtonTop =', currentButtonTop);
-                                //console.log('newButtonTop =', newButtonTop);
-                                */
-
-                                /*
-                                //console.log('psize =', top);
-                                //console.log('btop =', btop);
-                                if (btop < 0){
-                                    //console.log('scroll to', 0);
-                                    $currentPanel.find('.buttonwrap').stop().animate({scrollTop: 0});
-                                } else if ((btop + vsize) > psize){
-                                    //console.log('scroll to', (btop + tpad));
-                                    $currentPanel.find('.buttonwrap').stop().animate({scrollTop: (btop - tpad)});
-                                    }
-                                //if (true){
-                                    //top += top > 1 ? -6 : 6;
-                                    //console.log('scroll panel top to ', top);
-                                    //$currentPanel.find('.buttonwrap').stop().animate({scrollTop: top});
-                                //    }
-                                */
-
+                                var newButtonKey = parseInt($new.attr('data-key'));
+                                var newButtonRow = Math.floor(newButtonKey / pokeGridSize.columns) + 1;
+                                var newScrollTop = ((newButtonRow - 1) * pokeButtonSizes.height);
+                                $currentPanel.find('.buttonwrap').stop().animate({scrollTop: newScrollTop});
                                 } else {
-
                                 // manually click filter buttons
                                 $new.trigger('click');
-
                                 }
-
                             }
-
                         break;
                         }
                     }
@@ -988,9 +930,11 @@
         if (panelToken === 'select-pokemon'){
             var $panelWrap = $panelDiv.find('.buttonwrap');
             var $panelButton = $panelDiv.find('button:visible').first();
-            $panelButton.addClass('hasfocus');
-            $panelWrap.trigger('focus').stop().animate({scrollTop: ($panelButton.position().top - 6)});
-            refreshPokeButtonSizes();
+            if ($panelButton.length){
+                $panelButton.addClass('hasfocus');
+                $panelWrap.trigger('focus').stop().animate({scrollTop: ($panelButton.position().top - 6)});
+                refreshPokeButtonSizes();
+                }
             }
     }
 
