@@ -651,15 +651,15 @@
             colors: ['gray', 'brown', 'white'],
             eggCycles: 20,
             eggGroups: ['water-1', 'water-2'],
+            altBaseEvolutions: [{
+                species: 'remoraid',
+                method: 'ancient-power',
+                value: 'low'
+                }],
             nextEvolutions: [{
                 species: 'proto-octillery',
                 method: 'level-up',
                 value: 25
-                }],
-            altBaseEvolutions: [{
-                species: 'remoraid',
-                method: 'type-warning',
-                value: 'steel'
                 }]
             },
         'proto-octillery': {
@@ -701,15 +701,15 @@
             colors: ['black', 'green', 'yellow'],
             eggCycles: 20,
             eggGroups: ['fairy', 'grass'],
+            altBaseEvolutions: [{
+                species: 'hoppip',
+                method: 'ancient-power',
+                value: 'low'
+                }],
             nextEvolutions: [{
                 species: 'proto-skiploom',
                 method: 'level-up',
                 value: 18
-                }],
-            altBaseEvolutions: [{
-                species: 'hoppip',
-                method: 'type-appeal',
-                value: 'flying'
                 }]
             },
         'proto-skiploom': {
