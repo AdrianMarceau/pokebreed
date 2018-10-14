@@ -440,6 +440,38 @@
                 }]
             },
 
+        'twintied': {
+            order: thisIndex.beforeOrder('girafarig'),
+            token: 'twintied',
+            name: 'Twintied',
+            class: 'baby',
+            formClass: 'baby-evolution',
+            formToken: 'baby',
+            number: 203,
+            dexNumber: 1014,
+            types: ['psychic', 'ghost'],
+            baseStats: {hp: 35, phAttack: 40, phDefense: 65, spAttack: 32, spDefense: 32, speed: 42}, // x0.5
+            abilities: {0: 'levitate'},
+            height: 1.4,
+            weight: 1.2,
+            colors: ['black', 'pink', 'white'],
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'girafarig',
+                method: 'level-up',
+                value: 29,
+                method2: 'ancient-power',
+                value2: 'none'
+                }, {
+                species: 'proto-girafarig',
+                method: 'level-up',
+                value: 29,
+                method2: 'ancient-power',
+                value2: 'high'
+                }]
+            },
+
         'tanglet': {
             order: thisIndex.beforeOrder('tangela'),
             token: 'tanglet',
@@ -747,6 +779,27 @@
             prevEvolution: 'poliwhirl'
             },
 
+        'proto-girafarig': {
+            order: thisIndex.afterOrder('girafarig'),
+            token: 'proto-girafarig',
+            name: 'Proto Girafarig',
+            formClass: 'ancient-variant',
+            formToken: 'proto',
+            baseSpecies: 'girafarig',
+            hasAncientPower: true,
+            number: 203,
+            dexNumber: 1034.2,
+            types: ['normal', 'ghost'],
+            baseStats: {hp: 105, phAttack: 120, phDefense: 65, spAttack: 98, spDefense: 98, speed: 128},
+            abilities: {0: 'inner-focus', 1: 'early-bird', hidden: 'sap-sipper'},
+            height: 1.7,
+            weight: 42.6,
+            colors: ['yellow', 'black', 'white', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'twintied'
+            },
+
         'proto-kingdra': {
             order: thisIndex.afterOrder('kingdra', 1),
             token: 'proto-kingdra',
@@ -945,6 +998,7 @@
         {base: 'tangela', species: 'tangelet', method: 'type-surge', value: 'grass'},
         {base: 'goldeen', species: 'heirfry', method: 'type-surge', value: 'water'},
         {base: 'maractus', species: 'succulite', method: 'type-surge', value: 'grass'},
+        {base: 'girafarig', species: 'twintied', method: 'type-surge', value: 'ghost'},
         {base: 'tauros', species: 'kalfling', method: 'type-surge', value: 'normal'},
         {base: 'miltank', species: 'kalfling', method: 'type-surge', value: 'normal'},
         {base: 'pansage', species: 'elemonk', method: 'type-warning', value: 'grass'},
