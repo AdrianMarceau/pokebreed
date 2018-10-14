@@ -797,7 +797,15 @@
             colors: ['yellow', 'black', 'white', 'pink'],
             eggCycles: 20,
             eggGroups: ['field'],
-            prevEvolution: 'twintied'
+            altBaseEvolutions: [{
+                species: 'twintied',
+                method: 'ancient-power',
+                value: 'high'
+                }, {
+                species: 'girafarig',
+                method: 'ancient-power',
+                value: 'none'
+                }]
             },
 
         'proto-kingdra': {
@@ -998,7 +1006,7 @@
         {base: 'tangela', species: 'tangelet', method: 'type-surge', value: 'grass'},
         {base: 'goldeen', species: 'heirfry', method: 'type-surge', value: 'water'},
         {base: 'maractus', species: 'succulite', method: 'type-surge', value: 'grass'},
-        {base: 'girafarig', species: 'twintied', method: 'type-surge', value: 'ghost'},
+        {base: 'girafarig', species: 'twintied', method: 'ancient-power', value: 'high'},
         {base: 'tauros', species: 'kalfling', method: 'type-surge', value: 'normal'},
         {base: 'miltank', species: 'kalfling', method: 'type-surge', value: 'normal'},
         {base: 'pansage', species: 'elemonk', method: 'type-warning', value: 'grass'},
