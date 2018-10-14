@@ -462,7 +462,7 @@
                 method: 'level-up',
                 value: 29,
                 method2: 'ancient-power',
-                value2: 'none'
+                value2: 'low'
                 }, {
                 species: 'proto-girafarig',
                 method: 'level-up',
@@ -539,7 +539,7 @@
             hasAncientPower: true,
             number: 190,
             dexNumber: 1028,
-            types: ['dark', 'fighting'],
+            types: ['dark'],
             baseStats: {hp: 55, phAttack: 85, phDefense: 55, spAttack: 40, spDefense: 55, speed: 70},
             abilities: {0: 'run-away', 1: 'pickup', hidden: 'skill-link'},
             height: 0.8,
@@ -549,8 +549,8 @@
             eggGroups: ['field'],
             altBaseEvolutions: [{
                 species: 'aipom',
-                method: 'type-warning',
-                value: 'dark'
+                method: 'ancient-power',
+                value: 'low'
                 }],
             nextEvolutions: [{
                 species: 'proto-ambipom',
@@ -601,8 +601,8 @@
             eggGroups: ['field'],
             altBaseEvolutions: [{
                 species: 'sneasel',
-                method: 'type-warning',
-                value: 'normal'
+                method: 'ancient-power',
+                value: 'low'
                 }],
             nextEvolutions: [{
                 species: 'proto-weavile',

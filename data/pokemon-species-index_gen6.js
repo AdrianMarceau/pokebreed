@@ -2439,6 +2439,7 @@
             formClass: 'mega-evolution',
             formToken: 'mega',
             baseSpecies: 'rayquaza',
+            hasAncientPower: true,
             number: 384,
             types: ['dragon', 'flying'],
             genderRatio: {none: 1.0000},
