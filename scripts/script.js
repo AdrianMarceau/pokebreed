@@ -618,6 +618,14 @@
             $('button[data-action="add"][data-token="ditto"]', $pokePanelSelectButtons).trigger('click');
             });
 
+        // Define a click event for the add arceus quick button
+        var $arceusButton = $('.button.add-arceus', $pokePanelFilters);
+        $arceusButton.bind('click', function(e){
+            e.preventDefault();
+            if ($(this).hasClass('disabled') || $(this).hasClass('hidden')){ return false; }
+            $('button[data-action="add"][data-token="arceus"]', $pokePanelSelectButtons).trigger('click');
+            });
+
         // Collect references to the various control buttons
         var $startButton = $('.start', $controlButtonPanel);
         var $playButton = $('.play', $controlButtonPanel);
@@ -2300,6 +2308,7 @@
 
         // Refresh and update the ditto and seed buttons as appropriate
         checkDittoButtonAllowed();
+        checkArceusButtonAllowed();
         checkSeedButtonAllowed();
 
     }
@@ -2323,6 +2332,29 @@
         // Enable the ditto button only if there's room in the selection panel
         if (thisZoneData.currentPokemon.length < pokemonRequiredToStart){
             $dittoButton.removeClass('disabled');
+            }
+
+    }
+
+    // Define a function for checking to see if the arceus button should be shown
+    function checkArceusButtonAllowed(){
+        if (simulationStarted === true){ return; }
+        //console.log('checkArceusButtonAllowed()');
+
+        // Hide and disable the arceus button by default
+        var $arceusButton = $('.button.add-arceus', $pokePanelFilters);
+        $arceusButton.addClass('hidden disabled');
+
+        // Unhide the arceus button if we're in free mode or we've seen it already
+        if (appFreeMode
+            || (typeof PokemonSpeciesSeen['arceus'] !== 'undefined'
+                && PokemonSpeciesSeen['arceus'] > 0)){
+            $arceusButton.removeClass('hidden');
+            }
+
+        // Enable the arceus button only if there's room in the selection panel
+        if (thisZoneData.currentPokemon.length < pokemonRequiredToStart){
+            $arceusButton.removeClass('disabled');
             }
 
     }
