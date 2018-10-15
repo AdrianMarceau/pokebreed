@@ -1453,8 +1453,8 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 .panel .buttons button .trait.special,
 .panel .buttons button .trait.xhidden {
     bottom: auto;
-    top: 4px;
-    right: 4px;
+    right: 2px;
+    top: 2px;
 }
 .panel .buttons button .trait.special {
     background-position: -30px 0;
@@ -2233,8 +2233,8 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 .panel .buttons .info .group.pokedex .list .species .bubble .trait.special,
 .panel .buttons .info .group.pokedex .list .species .bubble .trait.xhidden {
     bottom: auto;
-    top: 2px;
-    right: 4px;
+    top: -1px;
+    right: -1px;
 }
 .panel .buttons .info .group.pokedex .list .species .bubble .trait.special {
     background-position: -30px 0;
