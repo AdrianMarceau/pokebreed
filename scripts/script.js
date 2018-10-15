@@ -2192,6 +2192,7 @@
                 if (pokemonData.hasUltraEnergy === true){ pokeTraits.push('<i class="trait ultra"></i>'); }
                 if (pokemonData.hasAncientPower === true){ pokeTraits.push('<i class="trait ancient"></i>'); }
                 if (pokemonData.isHiddenPokemon === true){ pokeTraits.push('<i class="trait xhidden"></i>'); }
+                else if (pokemonData.isSpecialPokemon === true){ pokeTraits.push('<i class="trait special"></i>'); }
 
                 // Generate the markup for the pokemon button
                 var buttonMarkup = '';
@@ -2447,6 +2448,7 @@
                 if (pokeIndex.hasUltraEnergy === true){ pokeTraits.push('<i class="trait ultra"></i>'); }
                 if (pokeIndex.hasAncientPower === true){ pokeTraits.push('<i class="trait ancient"></i>'); }
                 if (pokeIndex.isHiddenPokemon === true){ pokeTraits.push('<i class="trait xhidden"></i>'); }
+                else if (pokeIndex.isSpecialPokemon === true){ pokeTraits.push('<i class="trait special"></i>'); }
 
                 pokedexMarkup.push('<li class="entry" ' +
                     'data-token="' + pokeToken + '" ' +

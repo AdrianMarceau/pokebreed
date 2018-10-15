@@ -1435,15 +1435,6 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     background-size: auto;
     z-index: 10;
 }
-.panel .buttons button .trait.ultra {
-    background-position: 0 0;
-}
-.panel .buttons button .trait.ancient {
-    background-position: -5px 0;
-}
-.panel .buttons button .trait.xhidden {
-    background-position: -35px 0;
-}
 .panel .buttons button .trait {
     right: 4px;
 }
@@ -1452,6 +1443,24 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 }
 .panel .buttons button .trait + .trait + .trait {
     right: 12px;
+}
+.panel .buttons button .trait.ultra {
+    background-position: 0 0;
+}
+.panel .buttons button .trait.ancient {
+    background-position: -5px 0;
+}
+.panel .buttons button .trait.special,
+.panel .buttons button .trait.xhidden {
+    bottom: auto;
+    top: 4px;
+    right: 4px;
+}
+.panel .buttons button .trait.special {
+    background-position: -30px 0;
+}
+.panel .buttons button .trait.xhidden {
+    background-position: -35px 0;
 }
 .panel .buttons .select-pokemon,
 .panel .buttons .controls {
@@ -2206,15 +2215,6 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     background-size: auto;
     z-index: 10;
 }
-.panel .buttons .info .group.pokedex .list .species .bubble .trait.ultra {
-    background-position: 0 0;
-}
-.panel .buttons .info .group.pokedex .list .species .bubble .trait.ancient {
-    background-position: -5px 0;
-}
-.panel .buttons .info .group.pokedex .list .species .bubble .trait.xhidden {
-    background-position: -35px 0;
-}
 .panel .buttons .info .group.pokedex .list .species .bubble .trait {
     right: 2px;
 }
@@ -2223,6 +2223,24 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 }
 .panel .buttons .info .group.pokedex .list .species .bubble .trait + .trait + .trait {
     right: 12px;
+}
+.panel .buttons .info .group.pokedex .list .species .bubble .trait.ultra {
+    background-position: 0 0;
+}
+.panel .buttons .info .group.pokedex .list .species .bubble .trait.ancient {
+    background-position: -5px 0;
+}
+.panel .buttons .info .group.pokedex .list .species .bubble .trait.special,
+.panel .buttons .info .group.pokedex .list .species .bubble .trait.xhidden {
+    bottom: auto;
+    top: 2px;
+    right: 4px;
+}
+.panel .buttons .info .group.pokedex .list .species .bubble .trait.special {
+    background-position: -30px 0;
+}
+.panel .buttons .info .group.pokedex .list .species .bubble .trait.xhidden {
+    background-position: -35px 0;
 }
 
 .panel .buttons .info .group.pokedex .list .species.unknown {
