@@ -520,6 +520,25 @@
             prevEvolution: 'mime-jr'
             },
 
+        'buzzqwill': {
+            order: thisIndex.afterOrder('qwilfish'),
+            token: 'buzzqwill',
+            name: 'Buzzqwill',
+            formClass: 'next-evolution',
+            formToken: 'evo',
+            number: 211,
+            dexNumber: 1025,
+            types: ['water', 'poison'],
+            baseStats: {hp: 95, phAttack: 100, phDefense: 95, spAttack: 60, spDefense: 75, speed: 85},
+            abilities: {0: 'poison-point', 1: 'volt-absorb', hidden: 'aftermath'},
+            height: 0.5,
+            weight: 3.9,
+            colors: ['purple', 'yellow', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['water-2'],
+            prevEvolution: 'qwilfish'
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
@@ -1046,6 +1065,8 @@
 
         {base: 'mime-jr', species: 'mr-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'male', method3: 'level-up', value3: 25, replace: true},
         {base: 'mime-jr', species: 'ms-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'female', method3: 'level-up', value3: 25},
+
+        {base: 'qwilfish', species: 'buzzqwill', method: 'type-surge', value: 'electric', method2: 'level-up', value2: 30},
 
         {base: 'poliwhirl', species: 'proto-politoed', method: 'ancient-power', value: 'high', method2: 'level-up', value2: 45},
         {base: 'seadra', species: 'proto-kingdra', method: 'ancient-power', value: 'high', method2: 'level-up', value2: 42},
