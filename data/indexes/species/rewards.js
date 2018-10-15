@@ -8,7 +8,7 @@
 
     // Collect a reference to the global species index
     var thisIndex = window.PokemonSpeciesIndex;
-    thisIndex.setGeneration('x');
+    thisIndex.setGeneration('r');
     thisIndex.setRegion('custom');
 
     // Add the generation's list of hidden species to the index
@@ -28,7 +28,7 @@
             number: 150,
             dexNumber: 1045,
             displayNumber: 1045,
-            dexGeneration: 'x',
+            dexGeneration: 'r',
             types: ['shadow'],
             genderRatio: {none: 1.0000},
             lifePoints: -1,
@@ -72,7 +72,7 @@
             number: 150,
             dexNumber: 1045.5,
             displayNumber: 1045.5,
-            dexGeneration: 'x',
+            dexGeneration: 'r',
             types: ['shadow'],
             genderRatio: {none: 1.0000},
             lifePoints: -1,
@@ -105,7 +105,7 @@
             number: 249,
             dexNumber: 1046,
             displayNumber: 1046,
-            dexGeneration: 'x',
+            dexGeneration: 'r',
             types: ['shadow'],
             genderRatio: {none: 1.0000},
             lifePoints: -1,
@@ -133,7 +133,7 @@
             number: 244,
             dexNumber: 1047,
             displayNumber: 1047,
-            dexGeneration: 'x',
+            dexGeneration: 'r',
             types: ['shadow'],
             genderRatio: {none: 1.0000},
             lifePoints: -1,
@@ -161,7 +161,7 @@
             number: 251,
             dexNumber: 1048,
             displayNumber: 1048,
-            dexGeneration: 'x',
+            dexGeneration: 'r',
             types: ['shadow'],
             genderRatio: {none: 1.0000},
             lifePoints: -1,
@@ -189,7 +189,7 @@
             number: 381,
             dexNumber: 1049,
             displayNumber: 1049,
-            dexGeneration: 'x',
+            dexGeneration: 'r',
             types: ['shadow'],
             genderRatio: {none: 1.0000},
             lifePoints: -1,
@@ -219,7 +219,7 @@
             number: 250,
             dexNumber: 1050,
             displayNumber: 1050,
-            dexGeneration: 'x',
+            dexGeneration: 'r',
             excludeFromZoneStats: true,
             types: ['shining'],
             genderRatio: {none: 1.0000},

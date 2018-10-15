@@ -10,7 +10,7 @@ require('../config.php');
 // Collect the file name if set, then check if it exists
 $script_filename = false;
 if (!empty($_GET['file'])
-    && preg_match('/^(scripts|data)\/([-_a-z0-9\.]+)\.js$/i', $_GET['file'])){
+    && preg_match('/^(scripts|data)\/([-_a-z0-9\.\/]+)\.js$/i', $_GET['file'])){
     $script_filename = trim($_GET['file']);
     if (!file_exists(POKEBS_ROOT_DIR.$script_filename)){
         $script_filename = false;

@@ -216,6 +216,7 @@ if (isset($_GET['gen'])
                                         <a class="option" data-gen="<?= $gen ?>"><?= ucfirst($gen) ?></a>
                                     <? } ?>
                                     <a class="option" data-gen="x">X</a>
+                                    <a class="option" data-gen="r">&infin;</a>
                                 </div>
                             </div>
                         <? } ?>

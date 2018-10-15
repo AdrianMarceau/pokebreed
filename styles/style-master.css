@@ -1718,6 +1718,9 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 .panel .buttons .filter-pokemon .filter.generations .options .option {
     width: 26px;
 }
+.panel .buttons .filter-pokemon .filter.generations .options .option[data-gen="r"] {
+    font-size: 180%;
+}
 
 /*
 

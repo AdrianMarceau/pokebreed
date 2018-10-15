@@ -10,7 +10,7 @@ require('../config.php');
 // Collect the file name if set, then check if it exists
 $style_filename = false;
 if (!empty($_GET['file'])
-    && preg_match('/^(styles|data)\/([-_a-z0-9\.]+)\.css$/i', $_GET['file'])){
+    && preg_match('/^(styles|data)\/([-_a-z0-9\.\/]+)\.css$/i', $_GET['file'])){
     $style_filename = trim($_GET['file']);
     if (!file_exists(POKEBS_ROOT_DIR.$style_filename)){
         $style_filename = false;

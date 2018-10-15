@@ -551,7 +551,8 @@
                 var optionValue = $optionLink.attr('data-'+ filterKind);
                 if (filterKind === 'gen'
                     && optionValue !== 'all'
-                    && optionValue !== 'x'){
+                    && optionValue !== 'x'
+                    && optionValue !== 'r'){
                     optionValue = parseInt(optionValue);
                     }
                 //console.log('filterKind = ', filterKind);
@@ -1074,7 +1075,8 @@
                     for (var i = 0; i < indexInfo.relatedSpecies.length; i++){
                         var relIndex = PokemonSpeciesIndex[indexInfo.relatedSpecies[i]];
                         if (relIndex.gameGeneration < indexInfo.baseGameGeneration
-                            || (indexInfo.baseGameGeneration === 'x' && relIndex.gameGeneration !== 'x')){
+                            || (indexInfo.baseGameGeneration === 'x' && relIndex.gameGeneration !== 'x')
+                            || (indexInfo.baseGameGeneration === 'r' && relIndex.gameGeneration !== 'r')){
                             indexInfo.baseGameGeneration = relIndex.gameGeneration;
                             }
                         }
@@ -1697,7 +1699,7 @@
     function preloadTypeIndex(onReady){
         if (typeof onReady !== 'function'){ onReady = function(){}; }
         requestedScripts++;
-        $.getScript('data/pokemon-types-index.min.js?v'+appVersionNumber, function(){
+        $.getScript('data/indexes/types/types.min.js?v'+appVersionNumber, function(){
             loadedScripts++;
             $pokePanelLoading.append('.'); // append loading dot
             if (isReady()){ onReady(); }
@@ -1708,7 +1710,7 @@
     function preloadFieldIndex(onReady){
         if (typeof onReady !== 'function'){ onReady = function(){}; }
         requestedScripts++;
-        $.getScript('data/pokemon-fields-index.min.js?v'+appVersionNumber, function(){
+        $.getScript('data/indexes/fields/fields.min.js?v'+appVersionNumber, function(){
             loadedScripts++;
             $pokePanelLoading.append('.'); // append loading dot
             if (isReady()){ onReady(); }
@@ -1724,9 +1726,9 @@
             requestedScripts++;
             var fileToken = requiredIndexFiles[indexKey];
             //console.log('loading requiredIndexFiles['+indexKey+'] = ', fileToken);
-            if (fileToken === ''){ var fileName = 'pokemon-species-index.min.js'; }
-            else { var fileName = 'pokemon-species-index_'+ fileToken +'.min.js'; }
-            filePath = 'data/'+ fileName +'?v'+ appVersionNumber;
+            if (fileToken === ''){ var fileName = 'species.min.js'; }
+            else { var fileName = fileToken +'.min.js'; }
+            filePath = 'data/indexes/species/'+ fileName +'?v'+ appVersionNumber;
             $.getScript(filePath, function(){
                 loadedScripts++;
                 loadedIndexFiles.push(fileToken);
@@ -2156,7 +2158,7 @@
                 // Collect the pokemon's gen in terms of buttons
                 var pokemonGen = typeof pokemonData.buttonGeneration !== 'undefined' ? pokemonData.buttonGeneration : pokemonData.gameGeneration;
                 var pokemonBaseGen = pokemonData.baseGameGeneration;
-                var pokeLegNum = pokemonGen === 'x' && typeof pokemonData.dexNumber !== 'undefined' ? pokemonData.dexNumber : pokemonData.number;
+                var pokeLegNum = (pokemonGen === 'x' || pokemonGen === 'r') && typeof pokemonData.dexNumber !== 'undefined' ? pokemonData.dexNumber : pokemonData.number;
 
                 // Check to see if this is a SHADOW pokemon
                 var isShadowPokemon = pokemonData.formClass === 'shadow-variant' ? true : false;
@@ -2266,7 +2268,7 @@
             $thisFilterWrapper.find('.filter.generations .option:not([data-gen="all"])').each(function(){
                 $option = $(this);
                 var thisGen = $option.attr('data-gen');
-                if (thisGen !== 'x'){ thisGen = parseInt(thisGen); }
+                if (thisGen !== 'x' && thisGen !== 'r'){ thisGen = parseInt(thisGen); }
                 if (shownGens.indexOf(thisGen) === -1){ $option.addClass('disabled'); }
                 });
             $thisFilterWrapper.find('.filter.types .option:not([data-type="all"])').each(function(){
@@ -2277,6 +2279,7 @@
 
             // Hide the Gen X option if the user shouldn't see it yet
             if (shownGens.indexOf('x') === -1){ $thisFilterWrapper.find('.filter .option[data-gen="x"]').addClass('hidden'); }
+            if (shownGens.indexOf('r') === -1){ $thisFilterWrapper.find('.filter .option[data-gen="r"]').addClass('hidden'); }
             var numGenButtons = $thisFilterWrapper.find('.filter .option[data-gen]:not(.hidden)').length;
             //console.log('numGenButtons = ', numGenButtons);
             $thisFilterWrapper.find('.options[data-count]').attr('data-count', numGenButtons);
@@ -2438,7 +2441,7 @@
                 var pokeIcon = getPokemonIcon(pokeToken, false, customData);
                 var pokemonGen = typeof pokeIndex.dexGeneration !== 'undefined' ? pokeIndex.dexGeneration : pokeIndex.gameGeneration;
                 var pokemonBaseGen = pokeIndex.baseGameGeneration;
-                var pokeLegNum = pokemonGen === 'x' && typeof pokeIndex.dexNumber !== 'undefined' ? pokeIndex.dexNumber : pokeIndex.number;
+                var pokeLegNum = (pokemonGen === 'x' || pokemonGen === 'r') && typeof pokeIndex.dexNumber !== 'undefined' ? pokeIndex.dexNumber : pokeIndex.number;
 
                 var pokeTraits = [];
                 if (pokeIndex.hasUltraEnergy === true){ pokeTraits.push('<i class="trait ultra"></i>'); }
@@ -2573,7 +2576,7 @@
                 var thisValue = $button.attr('data-'+filterKind);
                 //console.log('|- Does ' + filterKind + ' match current value ' + currentValue + ' ? thisValue = ', thisValue);
                 if (filterKind === 'gen'){
-                    thisValue = thisValue !== 'x' ? parseInt(thisValue) : thisValue;
+                    thisValue = (thisValue !== 'x' && thisValue !== 'r') ? parseInt(thisValue) : thisValue;
                     if (thisValue !== currentValue){ isMatch = false; break; }
                     } else if (filterKind === 'type'){
                     thisValue = thisValue.split(',');
@@ -2602,6 +2605,7 @@
             }
             if (currentButtonFilters['gen'] !== 'all'
                 && currentButtonFilters['gen'] !== 'x'
+                && currentButtonFilters['gen'] !== 'r'
                 && aIndex.isSpecialPokemon !== true
                 && bIndex.isSpecialPokemon !== true){
                 var currGen = currentButtonFilters['gen'];
@@ -2609,6 +2613,7 @@
                 else if (aIndex.baseGameGeneration !== currGen && bIndex.baseGameGeneration === currGen){ return 1; }
             }
             if (currentButtonFilters['gen'] !== 'x'
+                && currentButtonFilters['gen'] !== 'r'
                 && currentButtonFilters['mode'] === 'legacy'){
                 var aVar = aIndex.formClass !== '' && aIndex.baseGameGeneration !== aIndex.gameGeneration ? 1 : 0;
                 var bVar = bIndex.formClass !== '' && bIndex.baseGameGeneration !== bIndex.gameGeneration ? 1 : 0;
@@ -2695,7 +2700,7 @@
                 var thisValue = $entry.attr('data-'+filterAttr);
                 //console.log('|- Does ' + filterKind + ' match current value ' + currentValue + ' ? thisValue = ', thisValue);
                 if (filterKind === 'gen'){
-                    thisValue = thisValue !== 'x' ? parseInt(thisValue) : thisValue;
+                    thisValue = thisValue !== 'x' && thisValue !== 'r' ? parseInt(thisValue) : thisValue;
                     if (thisValue !== currentValue){ isMatch = false; break; }
                     } else if (filterKind === 'type'){
                     thisValue = thisValue.split(',');
@@ -2722,6 +2727,7 @@
             var aToken = $a.attr('data-token'), bToken = $b.attr('data-token');
             var aIndex = PokemonSpeciesIndex[aToken], bIndex = PokemonSpeciesIndex[bToken];
             if (currentPokedexFilters['gen'] !== 'x'
+                && currentPokedexFilters['gen'] !== 'r'
                 && currentPokedexFilters['mode'] === 'legacy'){
                 var aVar = aIndex.formClass !== '' && aIndex.baseGameGeneration !== aIndex.gameGeneration ? 1 : 0;
                 var bVar = bIndex.formClass !== '' && bIndex.baseGameGeneration !== bIndex.gameGeneration ? 1 : 0;
