@@ -499,6 +499,25 @@
 
         // Cross-gen Next-Evolutions
 
+        'meandrabel': {
+            order: thisIndex.afterOrder('victreebel'),
+            token: 'meandrabel',
+            name: 'Meandrabel',
+            formClass: 'next-evolution',
+            formToken: 'evo',
+            number: 70,
+            dexNumber: 1021,
+            types: ['poison', 'grass'],
+            baseStats: {hp: 75, phAttack: 100, phDefense: 65, spAttack: 105, spDefense: 70, speed: 75},
+            abilities: {0: 'poison-heal', hidden: 'unaware'},
+            height: 1.6,
+            weight: 14.5,
+            colors: ['yellow', 'green', 'brown', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['grass'],
+            prevEvolution: 'weepinbell'
+            },
+
         'ms-mime': {
             order: thisIndex.afterOrder('mr-mime'),
             token: 'ms-mime',
@@ -1062,6 +1081,9 @@
 
     // Update previous gen pokemon with new next evolution data
     thisIndex.addNextEvolutions([
+
+        {base: 'weepinbell', species: 'victreebel', method: 'type-appeal', value: 'grass', method2: 'level-up', value2: 41, replace: true}, // leaf-stone
+        {base: 'weepinbell', species: 'meandrabel', method: 'type-appeal', value: 'poison', method2: 'level-up', value2: 41}, // poison-stone
 
         {base: 'mime-jr', species: 'mr-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'male', method3: 'level-up', value3: 25, replace: true},
         {base: 'mime-jr', species: 'ms-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'female', method3: 'level-up', value3: 25},

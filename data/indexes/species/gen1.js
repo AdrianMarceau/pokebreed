@@ -1367,7 +1367,7 @@
             colors: ['yellow', 'green', 'pink'],
             eggCycles: 20,
             eggGroups: ['grass'],
-            prevEvolution: 'bellsprout'
+            prevEvolution: 'weepinbell'
             },
 
         'tentacool': {
