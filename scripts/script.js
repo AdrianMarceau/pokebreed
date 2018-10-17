@@ -2884,7 +2884,7 @@
 
     // Define a function for adding a new pokemon to a zone
     function addPokemonToZone(pokemonToken, isEgg, reduceCycles, isVisitor, customData){
-        //console.log('addPokemonToZone(pokemonToken:'+pokemonToken+', isEgg:'+isEgg+', reduceCycles:'+reduceCycles+', isVisitor:'+isVisitor+', customData:'+customData+')');
+        //console.log('addPokemonToZone(pokemonToken:'+pokemonToken+', isEgg:'+isEgg+', reduceCycles:'+reduceCycles+', isVisitor:'+isVisitor+', customData:'+JSON.stringify(customData)+')');
         if (typeof PokemonSpeciesIndex[pokemonToken] === 'undefined'){ return false; }
         if (typeof isEgg !== 'boolean'){ isEgg = true; }
         if (typeof reduceCycles !== 'number'){ reduceCycles = 0; }
@@ -2924,12 +2924,18 @@
         // Define the egg cycles for this pokemon and reduce if necessary
         var indexData = PokemonSpeciesIndex[pokemonToken];
         var baseStats = indexData['baseStats'];
-        var eggCycles = isEgg ? indexData.eggCycles : 0;
-        if (reduceCycles > 0){
-            for (var i = 0; i < reduceCycles; i++){ eggCycles = (eggCycles / 2); }
-            eggCycles = Math.ceil(eggCycles);
-            if (eggCycles < 1){ eggCycles = 1; }
+        var eggCycles = 0;
+        if (isEgg){
+            eggCycles = indexData.eggCycles;
+            if (reduceCycles > 0){
+                for (var i = 0; i < reduceCycles; i++){ eggCycles = (eggCycles / 2); }
+                eggCycles = Math.ceil(eggCycles);
+                if (eggCycles < 1){ eggCycles = 1; }
+                }
             }
+
+        //console.log('reduceCycles = ', reduceCycles);
+        //console.log('eggCycles = ', eggCycles);
 
         // Calculate this pokemon's gender based on ratios
         var pokeGender = 'none';
@@ -2971,6 +2977,8 @@
             growthCooldown: 0,
             reachedAdulthood: false,
             };
+
+        //console.log('newPokemon = ', newPokemon);
 
         // If custom data was provdied, use it to overwrite above
         if (!jQuery.isEmptyObject(customData)){
