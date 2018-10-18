@@ -501,8 +501,8 @@
             formClass: 'baby-evolution',
             formToken: 'baby',
             number: 203,
-            dexNumber: 1018,
-            types: ['ghost', 'psychic'],
+            dexNumber: 1020,
+            types: ['ghost'],
             baseStats: {hp: 35, phAttack: 40, phDefense: 65, spAttack: 32, spDefense: 32, speed: 42},
             abilities: {0: 'levitate'},
             height: 1.4,
@@ -513,39 +513,28 @@
             nextEvolutions: [{
                 species: 'girafarig',
                 method: 'level-up',
-                value: 29,
-                method2: 'type-appeal',
-                value2: 'psychic'
-                }, {
-                species: 'farigiraf',
-                method: 'level-up',
-                value: 29,
-                method2: 'type-appeal',
-                value2: 'ghost'
+                value: 22
                 }]
             },
-        'farigiraf': {
+        'mega-girafarig': {
             order: thisIndex.afterOrder('girafarig'),
-            token: 'farigiraf',
-            name: 'Farigiraf',
-            formClass: 'next-evolution',
-            formToken: 'baby-evo',
+            token: 'mega-girafarig',
+            name: 'Mega Girafarig',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'girafarig',
             number: 203,
-            dexNumber: 1019,
+            dexNumber: 1021,
             baseGameGeneration: 2,
-            types: ['ghost', 'normal'],
-            baseStats: {hp: 105, phAttack: 120, phDefense: 65, spAttack: 98, spDefense: 98, speed: 128},
-            abilities: {0: 'inner-focus', 1: 'early-bird', hidden: 'sap-sipper'},
+            types: ['psychic', 'normal'],
+            baseStats: {hp: 95, phAttack: 100, phDefense: 60, spAttack: 140, spDefense: 85, speed: 80},
+            abilities: {0: 'insomnia'},
             height: 1.7,
             weight: 42.6,
-            colors: ['yellow', 'black', 'white', 'pink'],
+            colors: ['black', 'white', 'pink', 'yellow'],
             eggCycles: 20,
             eggGroups: ['field'],
-            altBaseEvolutions: [{
-                species: 'twintied',
-                method: 'type-warning',
-                value: 'ghost'
-                }]
+            prevEvolution: 'girafarig'
             },
 
         // Cross-gen Next-Evolutions
@@ -1067,7 +1056,7 @@
         {base: 'lickitung', species: 'tungzel', method: 'type-surge', value: 'normal'},
         {base: 'goldeen', species: 'heirfry', method: 'type-surge', value: 'water'},
         {base: 'maractus', species: 'succulite', method: 'type-surge', value: 'grass'},
-        {base: 'girafarig', species: 'twintied', method: 'type-warning', value: 'psychic'},
+        {base: 'girafarig', species: 'twintied', method: 'type-surge', value: 'ghost'},
         {base: 'tauros', species: 'kalfling', method: 'type-surge', value: 'normal'},
         {base: 'miltank', species: 'kalfling', method: 'type-surge', value: 'normal'},
         {base: 'pansage', species: 'elemonk', method: 'type-warning', value: 'grass'},
@@ -1108,6 +1097,8 @@
 
     // Update previous gen pokemon with new next evolution data
     thisIndex.addNextEvolutions([
+
+        {base: 'girafarig', species: 'mega-girafarig', method: 'mega-evolution', value: 'girafarigite'},
 
         {base: 'weepinbell', species: 'victreebel', method: 'type-appeal', value: 'grass', method2: 'level-up', value2: 41, replace: true}, // leaf-stone
         {base: 'weepinbell', species: 'meandrabel', method: 'type-appeal', value: 'poison', method2: 'level-up', value2: 41}, // poison-stone
