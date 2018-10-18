@@ -4,22 +4,6 @@
  * via @Ageman20XX
  * /
 
-/* ----------------------- */
-/* -- PLANNED REVISIONS -- */
-/* ----------------------- */
-
-+  Update the following Pokemon with localized English names:
-    +  Baby Paras  =>  Para / Parababy / [Paramite]
-    +  Baby Meowth  =>  Meowzy / Meowny / Purrchance / [Purrzy]
-    +  Baby Growlithe  =>  Puchie / Puppers / Barkindle / [Embark]
-    +  Baby Ponyta  =>  Coalt / Minicorn / [Unicolt]
-    +  Baby Doduo  =>  Chix / Doduno / [Dododo]
-    +  Baby Grimer  =>  Gunky / Sludgby / Oozy / [Oozby]
-    +  Baby Tangela  =>  Tangroll / Cutangle / Tendrella / Curlivine / Ringela / [Tanglet]
-    +  Baby Kangaskhan  =>  (maybe leave as-is?)
-    +  Baby Goldeen  =>  Guppi / Dignify / [Heirfry]
-    +  Baby Maractus  =>  Succulite / Marakid / [Cactini]
-
 
 /* ------------------------- */
 /* -- PLANNED NEW CONTENT -- */
@@ -30,22 +14,13 @@
     +  Fairy (Contest/Musical BG)
     +  Fighting (Pokeathlon BG?)
 
-+  Add more baby evolutions to current species
-    +  Baby Vulpix
-    +  Baby Girafarig
-
-+  Add some beta Pokemon as evolutions for current species
-    +  Add beta Qwilfish evolution  (maybe Poison / Electric?)
-
 +  Add other beta Pokemon as branched evolutions for current species
     +  Add beta Tangela evolution (via Grass type surge like baby?)
-    +  Add beta Likitung evolution (via Normal type surge?)
-
-+  Add a few regional variants but label them as "beta" forms
-    +  Add beta variants for the entire Hoppip line  (visual only)
+    +  Add beta Lickitung evolution (via Normal type surge?)
 
 +  Add unusual beta Pokemon with special mechanics
-    +  Add beta Turban as castoff species when Slowbro/king dies
+    +  Add beta Turban as Mega Slowking and have Slowking's tail
+       stick out like a tounge (inversion of Mega Slowbro)
 
 
 /* -------------------------- */
@@ -59,9 +34,6 @@
 
 +  Add weather to the simulator
     +  Allow weather-related abilities to force it like Drought, Drizzle, etc.
-
-+  Add more Pokedex filters
-    +  Add for registered/unregistered, possibly more.
 
 +  Allow panel customization
     +  Like hiding current list, showing colour list, etc.
@@ -113,7 +85,7 @@
 +  Use beta Tyrogue as a female-only alternate baby form for Hitmons
     +  Possible names  :  [Roguelet], Roguelite, Rougelle, Tyrook, Tybold
     +  Evolves into female-only Hitmon, egg partner to all the others
-        +  Possible names  :  Hitwoman, Hitwompop, Hitsumo, Hitmom, [Hitsumom]
+        +  Possible names  :  Hitwoman, Hitwompop, Hitsumo, Hitmom, Hitsumom, [Hitmonvana]
 
 +  Shared pre-evolution for Frillish (genderless)
 
@@ -121,7 +93,7 @@
     +  Possible names : [Elemonk], Monkly, Monklite, Chimpbo, Monkby
 
 +  Male counterpart for breeding w/ Flabebe, Floette, Florges (?)
-    +
+    + (Bayleef beta? Hanamogura / Blossomole?)
 
 
 /* ----------------------- */
@@ -140,7 +112,6 @@
 
 +  Shadow Pokemon unlocked via completed dex, have special properties
     +  Infinite life points, allowing to live forever
-    +  Do not evolve to prevent overcomplicating (?)
     +  Shadow Mewtwo repels VISITORS  (Invited trainers to island in movie / Repels visitors as Shadow Pokemon)
     +  Shadow Lugia reverses ELEMENTS  (Balanced elemental types in movie / Reverses type-appeal as Shadow Pokemon)
     +  Shadow Entei prohibits BREEDING  (Protected young child in movie / Prohibits breeding as Shadow Pokemon)
