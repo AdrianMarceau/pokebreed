@@ -466,6 +466,31 @@
                 }]
             },
 
+        'tungzel': {
+            order: thisIndex.beforeOrder('lickitung'),
+            token: 'tungzel',
+            legacyToken: 'baby-lickitung',
+            name: 'Tungzel',
+            class: 'baby',
+            formClass: 'baby-evolution',
+            formToken: 'baby',
+            number: 108,
+            dexNumber: 1016,
+            types: ['normal'],
+            baseStats: {hp: 45, phAttack: 28, phDefense: 38, spAttack: 30, spDefense: 38, speed: 15},
+            abilities: {0: 'own-tempo', 1: 'oblivious', hidden: 'cloud-nine'},
+            height: 0.9,
+            weight: 45.1,
+            colors: ['pink', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'lickitung',
+                method: 'level-up',
+                value: 17
+                }]
+            },
+
         // Cross-gen Prev-Evolutions AND Next-Evolutions
 
         'twintied': {
@@ -476,7 +501,7 @@
             formClass: 'baby-evolution',
             formToken: 'baby',
             number: 203,
-            dexNumber: 1016,
+            dexNumber: 1018,
             types: ['ghost', 'psychic'],
             baseStats: {hp: 35, phAttack: 40, phDefense: 65, spAttack: 32, spDefense: 32, speed: 42},
             abilities: {0: 'levitate'},
@@ -506,7 +531,7 @@
             formClass: 'next-evolution',
             formToken: 'baby-evo',
             number: 203,
-            dexNumber: 1017,
+            dexNumber: 1019,
             baseGameGeneration: 2,
             types: ['ghost', 'normal'],
             baseStats: {hp: 105, phAttack: 120, phDefense: 65, spAttack: 98, spDefense: 98, speed: 128},
