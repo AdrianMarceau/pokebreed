@@ -2004,31 +2004,25 @@
 
     }
 
-    // Define a function for checking if we've unlocked shiny ditto
-    function hasUnlockedSuperDitto(){
-        // Allow shiny ditto if the user has completed at least one generation's dex
-        var totalsByGeneration = currentPokedexTotals.totalsByGeneration;
-        for (var gen = 1; gen < 7; gen++){
-            if (typeof totalsByGeneration[gen] === 'undefined'){ break; }
-            var genTotals = totalsByGeneration[gen];
-            if (genTotals.totalPokemonEncountered >= genTotals.totalPokemon){
-                return true;
-                }
-            }
-        return false;
-    }
-
     // Define a function for checking if we've unlocked special pokemon
     function hasUnlockedSpecialPokemon(){
+        //console.log('\nhasUnlockedSpecialPokemon()');
         // Check to see if we can allow special pokemon to be selected yet
         var allowSpecialPokemon = false;
-        if (currentPokedexTotals.totalCommonPokemonEncountered >= currentPokedexTotals.totalCommonPokemon){ allowSpecialPokemon = true; }
+        var requiredEncounters = currentPokedexTotals.totalCommonPokemon;
+        //console.log('requiredEncounters = ', requiredEncounters);
+        //console.log('totalCommonPokemonEncountered = ', currentPokedexTotals.totalCommonPokemonEncountered);
+        if (currentPokedexTotals.totalCommonPokemonEncountered >= requiredEncounters){ allowSpecialPokemon = true; }
         return allowSpecialPokemon;
     }
 
     // Define a function for checking if we've unlocked the final pokemon
     function hasUnlockedFinalPokemon(){
-        if (currentPokedexTotals.totalPokemonEncountered >= (currentPokedexTotals.totalNonHiddenPokemon - 1)){ return true; }
+        //console.log('\nhasUnlockedFinalPokemon()');
+        var requiredEncounters = currentPokedexTotals.totalNonHiddenPokemon - 1;
+        //console.log('requiredEncounters = ', requiredEncounters);
+        //console.log('totalPokemonEncountered = ', currentPokedexTotals.totalPokemonEncountered);
+        if (currentPokedexTotals.totalPokemonEncountered >= requiredEncounters){ return true; }
         return false;
     }
 
@@ -2058,36 +2052,41 @@
         // Define the pokemon allowed regardless of seen status, (starters for each gen)
         freeStarterPokemon = [];
 
-        // Everyone gains access to the series mascots
-        freeStarterPokemon.push('pikachu', 'eevee'); // special edition starters
+        // Starters rewards are not necessary if we're in free mode
+        if (!appFreeMode){
 
-        // Unlock the starters from Gen 1 automatically and the rest via dex completion
-        freeStarterPokemon.push('bulbasaur', 'charmander', 'squirtle'); // gen 1 starters
-        if (seenSpeciesTokens.length >= 151){ freeStarterPokemon.push('chikorita', 'cyndaquil', 'totodile'); } // gen 2 starters
-        if (seenSpeciesTokens.length >= 251){ freeStarterPokemon.push('treecko', 'torchic', 'mudkip'); } // gen 3 starters
-        if (seenSpeciesTokens.length >= 386){ freeStarterPokemon.push('turtwig', 'chimchar', 'piplup'); } // gen 4 starters
-        if (seenSpeciesTokens.length >= 493){ freeStarterPokemon.push('snivy', 'tepid', 'oshawott'); } // gen 5 starters
-        if (seenSpeciesTokens.length >= 649){ freeStarterPokemon.push('chespin', 'fennekin', 'froakie'); } // gen 6 starters
-        if (seenSpeciesTokens.length >= 721){ freeStarterPokemon.push('rowlet', 'litten', 'popplio'); } // gen 7 starters
-        //if (seenSpeciesTokens.length >= 807){ freeStarterPokemon.push('?', '?', '?'); } // gen 8 starters
+            // Check to see if we can allow special pokemon to be selected yet
+            var allowSpecialPokemon = hasUnlockedSpecialPokemon();
 
-        // Unlock shadow pokemon at repeating dex counts matching corresponding movies numbers
-        if (seenSpeciesTokens.length >= 111){ freeStarterPokemon.push('shadow-mewtwo'); }
-        if (seenSpeciesTokens.length >= 222){ freeStarterPokemon.push('shadow-lugia'); }
-        if (seenSpeciesTokens.length >= 333){ freeStarterPokemon.push('shadow-entei'); }
-        if (seenSpeciesTokens.length >= 444){ freeStarterPokemon.push('shadow-celebi'); }
-        if (seenSpeciesTokens.length >= 555){ freeStarterPokemon.push('shadow-latios'); }
+            // Everyone gains access to the series mascots
+            freeStarterPokemon.push('pikachu', 'eevee'); // special edition starters
 
-        // Unlock the final pokemon ARCEUS if the user has encountered every other species
-        if (hasUnlockedFinalPokemon()){ freeStarterPokemon.push('arceus'); }
+            // Unlock the starters from Gen 1 automatically and the rest via dex completion
+            freeStarterPokemon.push('bulbasaur', 'charmander', 'squirtle'); // gen 1 starters
+            if (seenSpeciesTokens.length >= 151){ freeStarterPokemon.push('chikorita', 'cyndaquil', 'totodile'); } // gen 2 starters
+            if (seenSpeciesTokens.length >= 251){ freeStarterPokemon.push('treecko', 'torchic', 'mudkip'); } // gen 3 starters
+            if (seenSpeciesTokens.length >= 386){ freeStarterPokemon.push('turtwig', 'chimchar', 'piplup'); } // gen 4 starters
+            if (seenSpeciesTokens.length >= 493){ freeStarterPokemon.push('snivy', 'tepid', 'oshawott'); } // gen 5 starters
+            if (seenSpeciesTokens.length >= 649){ freeStarterPokemon.push('chespin', 'fennekin', 'froakie'); } // gen 6 starters
+            if (seenSpeciesTokens.length >= 721){ freeStarterPokemon.push('rowlet', 'litten', 'popplio'); } // gen 7 starters
+            //if (seenSpeciesTokens.length >= 807){ freeStarterPokemon.push('?', '?', '?'); } // gen 8 starters
 
-        // Unlock shining pokemon if promotional passwords have been entered into the simulator
-        if (PokeBoxRewards.indexOf('gold-ho-oh') !== -1){ freeStarterPokemon.push('gold-ho-oh'); }
-        if (PokeBoxRewards.indexOf('silver-suicune') !== -1){ freeStarterPokemon.push('silver-suicune'); }
-        if (PokeBoxRewards.indexOf('crystal-onix') !== -1){ freeStarterPokemon.push('crystal-onix'); }
+            // Unlock shadow pokemon at repeating dex counts matching corresponding movies numbers
+            if (seenSpeciesTokens.length >= 111){ freeStarterPokemon.push('shadow-mewtwo'); }
+            if (seenSpeciesTokens.length >= 222){ freeStarterPokemon.push('shadow-lugia'); }
+            if (seenSpeciesTokens.length >= 333){ freeStarterPokemon.push('shadow-entei'); }
+            if (seenSpeciesTokens.length >= 444){ freeStarterPokemon.push('shadow-celebi'); }
+            if (seenSpeciesTokens.length >= 555){ freeStarterPokemon.push('shadow-latios'); }
 
-        // Check to see if we can allow special pokemon to be selected yet
-        var allowSpecialPokemon = hasUnlockedSpecialPokemon();
+            // Unlock the final pokemon ARCEUS if the user has encountered every other species
+            if (hasUnlockedFinalPokemon()){ freeStarterPokemon.push('arceus'); }
+
+            // Unlock shining pokemon if promotional passwords have been entered into the simulator
+            if (PokeBoxRewards.indexOf('gold-ho-oh') !== -1){ freeStarterPokemon.push('gold-ho-oh'); }
+            if (PokeBoxRewards.indexOf('silver-suicune') !== -1){ freeStarterPokemon.push('silver-suicune'); }
+            if (PokeBoxRewards.indexOf('crystal-onix') !== -1){ freeStarterPokemon.push('crystal-onix'); }
+
+            }
 
         // Wrap execution in timeout to prevent render-blocking
         window.setTimeout(function(){
