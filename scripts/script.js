@@ -293,18 +293,14 @@
         PokemonFieldsIndex = window.PokemonFieldsIndex;
         PokemonFieldsIndexTokens = Object.keys(PokemonFieldsIndex);
 
-        // Update the title bar to show the next action (Select Pokemon)
-        $('.details.zone .title', $panelMainOverview).html('Select Starter Pokémon');
-
-        // (GEN 7+) If we're in the right generation, show the Z-Power counter
-        if (maxIndexKeyToLoad >= 7){ $('.stats .delta', $panelTypesOverview).css({display:''}); }
-        else { $('.stats .delta', $panelTypesOverview).css({display:'none'}); }
-
         // Reset zone data to default parameters
         resetZoneData();
 
         // Optimize the pokemon indexes for faster calculation speeds
         optimizeIndexes();
+
+        // Load the species seen records from storage
+        loadSpeciesSeenFromStorage();
 
         // Update the banner counters with the total days and current species
         var pokedexCurrent = Object.keys(PokemonSpeciesSeen).length;
@@ -320,8 +316,8 @@
         //console.log('pokedexTotal = ', pokedexTotal);
         //console.log('pokedexPercent = ', pokedexPercent);
 
-        // Load the species seen records from storage
-        loadSpeciesSeenFromStorage();
+        // Generate the zone details area markup
+        generateZoneDetailsMarkup();
 
         // Generate type styles so we can use them on buttons and panels
         generateTypeStyles();
@@ -1717,6 +1713,28 @@
             slotMarkup += '<li class="'+liClass+'"></li>';
             }
         $pokeSlots.append(slotMarkup);
+    }
+
+    // Define a function to generate the zone details area
+    function generateZoneDetailsMarkup(){
+
+        // Build the zone details div in the header
+        var $zoneDetails = $('.details.zone', $panelMainOverview);
+        var $zoneDetailsList = $('<ul class="list hidden"></ul>');
+        $zoneDetails.append('<strong class="title">&nbsp;</strong>');
+        $zoneDetailsList.append('<li class="name"><strong>Biome</strong> <span class="data"></span></li>');
+        $zoneDetailsList.append('<li class="day"><strong>Day</strong> <span class="data"></span></li>');
+        $zoneDetailsList.append('<li class="date"><strong>Date</strong> <span class="data"></span></li>');
+        $zoneDetailsList.append('<li class="capacity"><strong>Capacity</strong> <span class="data"></span></li>');
+        $zoneDetailsList.appendTo($zoneDetails);
+
+        // Update the title bar to show the next action (Select Pokemon)
+        $('.details.zone .title', $panelMainOverview).html('Select Starter Pokémon');
+
+        // (GEN 7+) If we're in the right generation, show the Z-Power counter
+        if (maxIndexKeyToLoad >= 7){ $('.stats .delta', $panelTypesOverview).css({display:''}); }
+        else { $('.stats .delta', $panelTypesOverview).css({display:'none'}); }
+
     }
 
     // Define a function for loading seen pokemon from storage (if applicable)

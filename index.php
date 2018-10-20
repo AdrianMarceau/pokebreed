@@ -105,15 +105,7 @@ if (isset($_GET['gen'])
 
             <div class="overview main">
 
-                <div class="details zone">
-                    <strong class="title">&nbsp;</strong>
-                    <ul class="list hidden">
-                        <li class="name"><strong>Biome</strong> <span class="data"></span></li>
-                        <li class="day"><strong>Day</strong> <span class="data"></span></li>
-                        <li class="date"><strong>Date</strong> <span class="data"></span></li>
-                        <li class="capacity"><strong>Capacity</strong> <span class="data"></span></li>
-                    </ul>
-                </div>
+                <div class="details zone"></div>
 
                 <div class="details pokemon">
                     <strong class="title">Current Pokémon</strong>
