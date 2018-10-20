@@ -2566,7 +2566,7 @@
         {base: 'exeggcute', species: 'exeggutor', method: 'type-appeal', value: 'psychic', method2: 'level-up', value2: 20, replace: true}, // leaf-stone
         {base: 'exeggcute', species: 'alolan-exeggutor', method: 'type-appeal', value: 'dragon', method2: 'level-up', value2: 20}, // leaf-stone + alola-region
 
-        {base: 'cubone', species: 'alolan-marowak', method: 'level-up', value: 28, method2: 'type-appeal', value2: 'ground', replace: true}, // level-up
+        {base: 'cubone', species: 'marowak', method: 'level-up', value: 28, method2: 'type-appeal', value2: 'ground', replace: true}, // level-up
         {base: 'cubone', species: 'alolan-marowak', method: 'level-up', value: 28, method2: 'type-appeal', value2: 'fire'}, // level-up + alola-region
 
         {base: 'zygarde', species: 'zygarde-complete', method: 'level-up', value: 100, method2: 'fusion-species', value2: 'zygarde-cell', switch: 'and'}, // cell-fusion
