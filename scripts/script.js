@@ -2822,7 +2822,7 @@
         $('.list', $pokePanelPokedexEntries).empty().html($sortedEntries);
 
         // Update the pokedex totals for how many are showing, unlocked, and overall
-        var percentTotal = Math.ceil((unlockedTotal / showingTotal) * 1000) / 10;
+        var percentTotal = showingTotal > 0 ? (Math.ceil((unlockedTotal / showingTotal) * 1000) / 10) : 0;
         $dexTotals = $pokePanelPokedexEntries.find('.totals');
         $dexTotals.find('.unlocked').html(unlockedTotal);
         $dexTotals.find('.showing').html(showingTotal);
