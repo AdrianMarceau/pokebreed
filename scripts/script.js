@@ -320,57 +320,8 @@
         //console.log('pokedexTotal = ', pokedexTotal);
         //console.log('pokedexPercent = ', pokedexPercent);
 
-        // Do not load from LOCAL STORAGE records if we're in free mode
-        if (!appFreeMode){
-            //console.log('NOT in free mode, let us LOAD');
-
-            // Check if a localStorage value exsists for species seen
-            if (typeof window.localStorage !== 'undefined'){
-                var savedPokemonSpeciesSeen = window.localStorage.getItem('PokemonSpeciesSeen');
-                //console.log('savedPokemonSpeciesSeen = ', savedPokemonSpeciesSeen);
-                if (typeof savedPokemonSpeciesSeen === 'string'){
-                    savedPokemonSpeciesSeen = JSON.parse(savedPokemonSpeciesSeen);
-
-                    // If legacy tokens exist, rewrite save data with new names
-                    //console.log('legacyTokenMap = ', JSON.stringify(legacyTokenMap), jQuery.isEmptyObject(legacyTokenMap));
-                    if (!jQuery.isEmptyObject(legacyTokenMap)){
-                        var legacyTokens = Object.keys(legacyTokenMap);
-                        //console.log('legacyTokens = ', legacyTokens);
-                        for (var i = 0; i < legacyTokens.length; i++){
-                            var legacyToken = legacyTokens[i];
-                            var newToken = legacyTokenMap[legacyToken];
-                            if (typeof savedPokemonSpeciesSeen[legacyToken] !== 'undefined'
-                                && typeof savedPokemonSpeciesSeen[newToken] === 'undefined'
-                                && hiddenPokemonTokens.indexOf(newToken) === -1){
-                                //console.log('rewriting ', legacyToken, ' to ', newToken);
-                                savedPokemonSpeciesSeen[newToken] = savedPokemonSpeciesSeen[legacyToken] + 0;
-                                delete savedPokemonSpeciesSeen[legacyToken];
-                                }
-                            }
-                        }
-
-                    // Collect saved tokens now that they've been filtered/rewritten
-                    var savedTokens = Object.keys(savedPokemonSpeciesSeen);
-                    //console.log('savedTokens = ', savedTokens);
-
-                    //console.log('PokemonSpeciesIndexTokens = ', PokemonSpeciesIndexTokens);
-                    for (var i = 0; i < savedTokens.length; i++){
-                        var savedToken = savedTokens[i];
-                        var savedData = savedPokemonSpeciesSeen[savedToken];
-                        //console.log('savedToken = ', savedToken);
-                        //console.log('savedData = ', savedData);
-                        //console.log('PokemonSpeciesIndexTokens.indexOf('+ savedToken +') = ', PokemonSpeciesIndexTokens.indexOf(savedToken));
-                        if (PokemonSpeciesIndexTokens.indexOf(savedToken) !== -1
-                            && hiddenPokemonTokens.indexOf(savedToken) === -1){
-                            PokemonSpeciesSeen[savedToken] = savedData;
-                            }
-                        }
-
-                    }
-                //console.log('PokemonSpeciesSeen = ', PokemonSpeciesSeen);
-                }
-
-            }
+        // Load the species seen records from storage
+        loadSpeciesSeenFromStorage();
 
         // Generate type styles so we can use them on buttons and panels
         generateTypeStyles();
@@ -1766,6 +1717,62 @@
             slotMarkup += '<li class="'+liClass+'"></li>';
             }
         $pokeSlots.append(slotMarkup);
+    }
+
+    // Define a function for loading seen pokemon from storage (if applicable)
+    function loadSpeciesSeenFromStorage(){
+
+        // Do not load from LOCAL STORAGE records if we're in free mode
+        if (!appFreeMode){
+            //console.log('NOT in free mode, let us LOAD');
+
+            // Check if a localStorage value exsists for species seen
+            if (typeof window.localStorage !== 'undefined'){
+                var savedPokemonSpeciesSeen = window.localStorage.getItem('PokemonSpeciesSeen');
+                //console.log('savedPokemonSpeciesSeen = ', savedPokemonSpeciesSeen);
+                if (typeof savedPokemonSpeciesSeen === 'string'){
+                    savedPokemonSpeciesSeen = JSON.parse(savedPokemonSpeciesSeen);
+
+                    // If legacy tokens exist, rewrite save data with new names
+                    //console.log('legacyTokenMap = ', JSON.stringify(legacyTokenMap), jQuery.isEmptyObject(legacyTokenMap));
+                    if (!jQuery.isEmptyObject(legacyTokenMap)){
+                        var legacyTokens = Object.keys(legacyTokenMap);
+                        //console.log('legacyTokens = ', legacyTokens);
+                        for (var i = 0; i < legacyTokens.length; i++){
+                            var legacyToken = legacyTokens[i];
+                            var newToken = legacyTokenMap[legacyToken];
+                            if (typeof savedPokemonSpeciesSeen[legacyToken] !== 'undefined'
+                                && typeof savedPokemonSpeciesSeen[newToken] === 'undefined'
+                                && hiddenPokemonTokens.indexOf(newToken) === -1){
+                                //console.log('rewriting ', legacyToken, ' to ', newToken);
+                                savedPokemonSpeciesSeen[newToken] = savedPokemonSpeciesSeen[legacyToken] + 0;
+                                delete savedPokemonSpeciesSeen[legacyToken];
+                                }
+                            }
+                        }
+
+                    // Collect saved tokens now that they've been filtered/rewritten
+                    var savedTokens = Object.keys(savedPokemonSpeciesSeen);
+                    //console.log('savedTokens = ', savedTokens);
+
+                    //console.log('PokemonSpeciesIndexTokens = ', PokemonSpeciesIndexTokens);
+                    for (var i = 0; i < savedTokens.length; i++){
+                        var savedToken = savedTokens[i];
+                        var savedData = savedPokemonSpeciesSeen[savedToken];
+                        //console.log('savedToken = ', savedToken);
+                        //console.log('savedData = ', savedData);
+                        //console.log('PokemonSpeciesIndexTokens.indexOf('+ savedToken +') = ', PokemonSpeciesIndexTokens.indexOf(savedToken));
+                        if (PokemonSpeciesIndexTokens.indexOf(savedToken) !== -1
+                            && hiddenPokemonTokens.indexOf(savedToken) === -1){
+                            PokemonSpeciesSeen[savedToken] = savedData;
+                            }
+                        }
+
+                    }
+                //console.log('PokemonSpeciesSeen = ', PokemonSpeciesSeen);
+                }
+
+            }
     }
 
     // Define a function for generating type styles for display
