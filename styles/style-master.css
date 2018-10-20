@@ -1423,45 +1423,36 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     -webkit-box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.2);
     box-shadow: inset 2px 2px 6px rgba(0, 0, 0, 0.2);
 }
-.panel .buttons button .trait {
+
+.panel .buttons button .traits {
+
+}
+.panel .buttons button .traits i {
     display: block;
     position: absolute;
     bottom: 4px;
+    right: 4px;
     width: 5px;
     height: 7px;
-    background-image: url(../images/icons/button-traits.png);
+    background-image: url(../images/icons/trait-icons.png);
     background-position: 0 0;
     background-repeat: no-repeat;
     background-size: auto;
     z-index: 10;
 }
-.panel .buttons button .trait {
+.panel .buttons button .traits i.sp {
+    position: absolute;
+    top: 4px;
     right: 4px;
 }
-.panel .buttons button .trait + .trait {
-    right: 9px;
-}
-.panel .buttons button .trait + .trait + .trait {
-    right: 12px;
-}
-.panel .buttons button .trait.ultra {
-    background-position: 0 0;
-}
-.panel .buttons button .trait.ancient {
-    background-position: -5px 0;
-}
-.panel .buttons button .trait.special,
-.panel .buttons button .trait.xhidden {
-    bottom: auto;
-    right: 2px;
-    top: 2px;
-}
-.panel .buttons button .trait.special {
-    background-position: -30px 0;
-}
-.panel .buttons button .trait.xhidden {
-    background-position: -35px 0;
-}
+.panel .buttons button .traits i.starter { background-position: 0 0; }
+.panel .buttons button .traits i.nonwild { background-position: -5px 0; }
+.panel .buttons button .traits i.ultra { background-position: -45px 0; }
+.panel .buttons button .traits i.legendary { background-position: -50px 0; }
+.panel .buttons button .traits i.mythical { background-position: -55px 0; }
+.panel .buttons button .traits i.xhidden { background-position: -60px 0; }
+
+
 .panel .buttons .select-pokemon,
 .panel .buttons .controls {
     display: block;
@@ -2205,46 +2196,34 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     opacity: 0;
     width: 0;
 }
+.panel .buttons .info .group.pokedex .list .species .traits {
 
-.panel .buttons .info .group.pokedex .list .species .bubble .trait {
+}
+.panel .buttons .info .group.pokedex .list .species .traits i {
     display: block;
     position: absolute;
-    bottom: 2px;
+    bottom: 1px;
+    right: 1px;
     width: 5px;
     height: 7px;
-    background-image: url(../images/icons/pokedex-traits.png);
+    background-image: url(../images/icons/trait-icons.png);
     background-position: 0 0;
     background-repeat: no-repeat;
     background-size: auto;
     z-index: 10;
 }
-.panel .buttons .info .group.pokedex .list .species .bubble .trait {
+.panel .buttons .info .group.pokedex .list .species .traits i.sp {
+    position: absolute;
+    top: 2px;
     right: 2px;
 }
-.panel .buttons .info .group.pokedex .list .species .bubble .trait + .trait {
-    right: 7px;
-}
-.panel .buttons .info .group.pokedex .list .species .bubble .trait + .trait + .trait {
-    right: 12px;
-}
-.panel .buttons .info .group.pokedex .list .species .bubble .trait.ultra {
-    background-position: 0 0;
-}
-.panel .buttons .info .group.pokedex .list .species .bubble .trait.ancient {
-    background-position: -5px 0;
-}
-.panel .buttons .info .group.pokedex .list .species .bubble .trait.special,
-.panel .buttons .info .group.pokedex .list .species .bubble .trait.xhidden {
-    bottom: auto;
-    top: -1px;
-    right: -1px;
-}
-.panel .buttons .info .group.pokedex .list .species .bubble .trait.special {
-    background-position: -30px 0;
-}
-.panel .buttons .info .group.pokedex .list .species .bubble .trait.xhidden {
-    background-position: -35px 0;
-}
+.panel .buttons .info .group.pokedex .list .species .traits i.starter { background-position: 0 0; }
+.panel .buttons .info .group.pokedex .list .species .traits i.nonwild { background-position: -5px 0; }
+.panel .buttons .info .group.pokedex .list .species .traits i.ultra { background-position: -45px 0; }
+.panel .buttons .info .group.pokedex .list .species .traits i.legendary { background-position: -50px 0; }
+.panel .buttons .info .group.pokedex .list .species .traits i.mythical { background-position: -55px 0; }
+.panel .buttons .info .group.pokedex .list .species .traits i.xhidden { background-position: -60px 0; }
+
 
 .panel .buttons .info .group.pokedex .list .species.unknown {
     opacity: 0.3;

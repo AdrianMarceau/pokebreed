@@ -38,9 +38,6 @@
     var ultraEnergySpecies = [];
     var ultraBeastSpecies = [];
 
-    var ancientPowerSpecies = [];
-    var ancientVariantSpecies = [];
-
     var globalSpeciesEffects = {};
 
     // GLOBAL ZONE DATA
@@ -1093,10 +1090,6 @@
                 // If this pokemon has ultra energy or is in ultra beast, add it to the parent array
                 if (indexInfo.class === 'ultra-beast'){ ultraBeastSpecies.push(indexInfo.token); }
                 if (indexInfo.class === 'ultra-beast' || indexInfo.hasUltraEnergy === true){ ultraEnergySpecies.push(indexInfo.token); }
-
-                // If this pokemon has ancient power or is in ancient varient, add it to the parent array
-                if (indexInfo.class === 'ancient-variant'){ ancientVariantSpecies.push(indexInfo.token); }
-                if (indexInfo.class === 'ancient-variant' || indexInfo.hasAncientPower === true){ ancientPowerSpecies.push(indexInfo.token); }
 
                 // Push this pokemon's name into the translation index (so it's easier to parse seeds)
                 globalNameToTokenIndex[indexInfo.name] = indexInfo.token;
@@ -2197,10 +2190,20 @@
 
                 // Check to see if this pokemon has any traits to show
                 var pokeTraits = [];
-                if (pokemonData.hasUltraEnergy === true){ pokeTraits.push('<i class="trait ultra"></i>'); }
-                if (pokemonData.hasAncientPower === true){ pokeTraits.push('<i class="trait ancient"></i>'); }
-                if (pokemonData.isHiddenPokemon === true){ pokeTraits.push('<i class="trait xhidden"></i>'); }
-                else if (pokemonData.isSpecialPokemon === true){ pokeTraits.push('<i class="trait special"></i>'); }
+                if (pokemonData.isHiddenPokemon === true){ pokeTraits.push('<i class="sp xhidden"></i>'); }
+                else if (pokemonData.isSpecialPokemon === true){
+                    if (pokemonData.class === 'ultra-beast'){ pokeTraits.push('<i class="sp ultra"></i>'); }
+                    else if (pokemonData.class === 'legendary'){ pokeTraits.push('<i class="sp legendary"></i>'); }
+                    else if (pokemonData.class === 'mythical'){ pokeTraits.push('<i class="sp mythical"></i>'); }
+                    } else {
+                    if (pokemonData.isStarterPokemon === true){ pokeTraits.push('<i class="starter"></i>'); }
+                    if (pokemonData.gameGeneration !== pokemonData.baseGameGeneration
+                        &&  (pokemonData.formClasses.indexOf('regional-variant') !== -1
+                            || pokemonData.formClasses.indexOf('ancient-variant') !== -1)){
+                            if (pokemonData.formToken.match(/(^|-)?alolan(-|$)?/)){ pokeTraits.push('<i class="nonwild"></i>'); }
+                            if (pokemonData.formToken.match(/(^|-)?proto(-|$)?/)){ pokeTraits.push('<i class="nonwild"></i>'); }
+                        }
+                    }
 
                 // Generate the markup for the pokemon button
                 var buttonMarkup = '';
@@ -2220,7 +2223,7 @@
                     buttonMarkup += '<span class="gloss"></span>';
                     //buttonMarkup += '<span class="plus">+</span>';
                     buttonMarkup += pokemonIcon;
-                    if (pokeTraits.length){ buttonMarkup += pokeTraits.join(''); }
+                    if (pokeTraits.length){ buttonMarkup += '<span class="traits">'+pokeTraits.join('')+'</span>'; }
                     //buttonMarkup += '<strong>' + pokemonData['name'] +'</strong>';
                 buttonMarkup += '</button>';
 
@@ -2477,10 +2480,20 @@
                 var pokeLegNum = (pokemonGen === 'x' || pokemonGen === 'r') && typeof pokeIndex.dexNumber !== 'undefined' ? pokeIndex.dexNumber : pokeIndex.number;
 
                 var pokeTraits = [];
-                if (pokeIndex.hasUltraEnergy === true){ pokeTraits.push('<i class="trait ultra"></i>'); }
-                if (pokeIndex.hasAncientPower === true){ pokeTraits.push('<i class="trait ancient"></i>'); }
-                if (pokeIndex.isHiddenPokemon === true){ pokeTraits.push('<i class="trait xhidden"></i>'); }
-                else if (pokeIndex.isSpecialPokemon === true){ pokeTraits.push('<i class="trait special"></i>'); }
+                if (pokeIndex.isHiddenPokemon === true){ pokeTraits.push('<i class="sp xhidden"></i>'); }
+                else if (pokeIndex.isSpecialPokemon === true){
+                    if (pokeIndex.class === 'ultra-beast'){ pokeTraits.push('<i class="sp ultra"></i>'); }
+                    else if (pokeIndex.class === 'legendary'){ pokeTraits.push('<i class="sp legendary"></i>'); }
+                    else if (pokeIndex.class === 'mythical'){ pokeTraits.push('<i class="sp mythical"></i>'); }
+                    } else {
+                    if (pokeIndex.isStarterPokemon === true){ pokeTraits.push('<i class="starter"></i>'); }
+                    if (pokeIndex.gameGeneration !== pokeIndex.baseGameGeneration
+                        &&  (pokeIndex.formClasses.indexOf('regional-variant') !== -1
+                            || pokeIndex.formClasses.indexOf('ancient-variant') !== -1)){
+                            if (pokeIndex.formToken.match(/(^|-)?alolan(-|$)?/)){ pokeTraits.push('<i class="nonwild"></i>'); }
+                            if (pokeIndex.formToken.match(/(^|-)?proto(-|$)?/)){ pokeTraits.push('<i class="nonwild"></i>'); }
+                        }
+                    }
 
                 pokedexMarkup.push('<li class="entry" ' +
                     'data-token="' + pokeToken + '" ' +
@@ -2497,7 +2510,7 @@
                                 '<span class="num">' + numText + '</span> ' +
                                 '<span class="name"><span>' + nameText + '</span><span>- - -</span></span> ' +
                                 '<span class="sprites">' + pokeIcon + '</span>' +
-                                (pokeTraits.length ? pokeTraits.join('') : '') +
+                                (pokeTraits.length ? '<span class="traits">'+pokeTraits.join('')+'</span>' : '') +
                             '</div>' +
                         '</div>' +
                     '</li>');
@@ -4290,44 +4303,6 @@
 
                 }
 
-            // Check for the presence of ANCIENT POWER and ANCIENT VARIANTS
-            if (true){
-
-                // Check to see if the box has traces of Ancient Power inside (it stays)
-                var totalAncientPower = 0;
-                var currentAncientPower = 0;
-                for (var i = 0; i < ancientPowerSpecies.length; i++){
-                    var token = ancientPowerSpecies[i];
-                    if (typeof addedSpecies[token] !== 'undefined'){
-                        totalAncientPower += addedSpecies[token];
-                        }
-                    if (typeof currentZoneStats['species'][token] !== 'undefined'){
-                        currentAncientPower += currentZoneStats['species'][token];
-                        }
-                    }
-                currentZoneStats['totalAncientPower'] = totalAncientPower;
-                currentZoneStats['currentAncientPower'] = currentAncientPower;
-                if (totalAncientPower > 0
-                    && currentZoneFlags.indexOf('boxHasAncientPower') === -1){
-                    currentZoneFlags.push('boxHasAncientPower');
-                    }
-
-                // Check to see if the box has a history of Ancient Variants inside
-                if (currentZoneFlags.indexOf('boxHadAncientVariants') === -1){
-                    var ancientVariantValue = 0;
-                    for (var i = 0; i < ancientVariantSpecies.length; i++){
-                        var token = ancientVariantSpecies[i];
-                        if (typeof addedSpecies[token] !== 'undefined'){
-                            ancientVariantValue += addedSpecies[token];
-                            }
-                        }
-                    if (ancientVariantValue >= 3){
-                        currentZoneFlags.push('boxHadAncientVariants');
-                        }
-                    }
-
-                }
-
             }
 
         //console.log('Day '+ thisZoneData.day +' | currentZoneFlags = ', currentZoneFlags);
@@ -5038,14 +5013,6 @@
                             || (methodValue === 'low' && currentUltraEnergy < 3)
                             || (methodValue === 'none' && currentUltraEnergy === 0))){
                             return 1 + (currentUltraEnergy * 100);
-                            }
-
-                        // Ancient-power evolutions trigger when there's enough ancient power in the box
-                        if (methodToken === 'ancient-power'
-                            && ((methodValue === 'high' && currentAncientPower >= 24)
-                            || (methodValue === 'low' && currentAncientPower < 12)
-                            || (methodValue === 'none' && currentAncientPower === 0))){
-                            return 1 + (currentAncientPower * 100);
                             }
 
                         // Extinction-based evolutions trigger when this pokemon is the last  of its species
@@ -6073,9 +6040,6 @@
                     }
                 }
 
-            // (GEN X+) Ancient variants are never summoned as visitors and can only be encountered via breeding/evolution
-            eventPokemonChanceBoosters['ancient-variant'] = 0;
-
             // (GEN X+) Shadow and Shining are never summoned as visitors and can only be unlocked via events/passwords
             eventPokemonChanceBoosters['shadow-variant'] = 0;
             eventPokemonChanceBoosters['shining-variant'] = 0;
@@ -6157,6 +6121,16 @@
             if (isSpecialPokemon && eventPokemonChanceBoosters['special'] === 0){ continue; }
             if (eventPokemonChanceBoosters[pokeClass] === 0){ continue; }
             if (eventPokemonChanceBoosters[pokeFormClass] === 0){ continue; }
+
+            // Skip if this is a gift-only starter pokemon
+            if (pokeInfo.isStarterPokemon === true){ continue; }
+
+            // Skip if the pokemon is a cross-gen regional or ancient variant
+            if (pokeInfo.gameGeneration !== pokeInfo.baseGameGeneration
+                && (pokeFormClass === 'regional-variant'
+                    || pokeFormClass === 'ancient-variant')){
+                continue;
+                }
 
             // Count the times this species has appear ever and right now
             var numAddedAlready = 0;
@@ -6441,17 +6415,6 @@
                         queuedBaseEvolutions.push({
                             token: baseEvolution.species,
                             chance: (currentUltraEnergy * totalUltraEnergy)
-                            });
-
-                        // Calculate ANCIENT POWER effects on base evolution
-                        } else if (baseEvolution.method === 'ancient-power'
-                        && ((baseEvolution.value === 'high' && currentAncientPower >= 24)
-                            || (baseEvolution.value === 'low' && currentAncientPower < 12)
-                            || (baseEvolution.value === 'none' && currentAncientPower === 0))){
-                        queuedBaseEvolutionsTokens.push(baseEvolution.species);
-                        queuedBaseEvolutions.push({
-                            token: baseEvolution.species,
-                            chance: (currentAncientPower * totalAncientPower)
                             });
 
                         // Calculate CHANCE effects on base evolution
