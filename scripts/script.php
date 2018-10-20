@@ -24,6 +24,28 @@ if (!$script_filename){
     exit();
 }
 
+// Set the content types in the header
+header('Content-type: text/javascript; charset=utf-8');
+
+// Check to see if caching is turned on right now
+if (POKEBS_CACHE_FILES === true){
+
+    // Define the cache directory and filename for reference
+    $cache_dir = POKEBS_ROOT_DIR.'cache/'.$version_number.'/';
+    if (!is_dir($cache_dir)){ mkdir($cache_dir); }
+    $cache_file = str_replace('/', '.', $script_filename);
+    $cache_file_dir = $cache_dir.$cache_file;
+
+    // If a (relevant) cache file already exists, display and exit
+    if (file_exists($cache_file_dir)){
+        $markup = file_get_contents($cache_file_dir);
+        echo $markup;
+        exit;
+    }
+
+}
+
+
 // Require necessary class files for compressing the script in question
 require(ZLIBS_ROOT_DIR.'minify-master/src/Minify.php');
 //require(ZLIBS_ROOT_DIR.'minify-master/src/CSS.php');
@@ -35,9 +57,6 @@ require(ZLIBS_ROOT_DIR.'minify-master/src/Exceptions/IOException.php');
 require(ZLIBS_ROOT_DIR.'path-converter-master/src/ConverterInterface.php');
 require(ZLIBS_ROOT_DIR.'path-converter-master/src/Converter.php');
 
-// Set the content types in the header
-header('Content-type: text/javascript; charset=utf-8');
-
 // Report all errors except E_NOTICE
 error_reporting(E_ALL & ~E_NOTICE);
 
@@ -45,6 +64,17 @@ error_reporting(E_ALL & ~E_NOTICE);
 use MatthiasMullie\Minify;
 $markup = file_get_contents(POKEBS_ROOT_DIR.$script_filename);
 $minifier = new Minify\JS($markup);
-echo $minifier->minify();
+$new_markup = $minifier->minify();
+
+// If caching is allowed, make a static copy of this file
+if (POKEBS_CACHE_FILES === true){
+    if (file_exists($cache_file_dir)){ unlink($cache_file_dir); }
+    $fh = fopen($cache_file_dir, 'w');
+    fwrite($fh, $new_markup);
+    fclose($fh);
+    }
+
+// Echo the new markup
+echo $new_markup;
 
 ?>

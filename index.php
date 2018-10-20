@@ -291,7 +291,7 @@ if (isset($_GET['gen'])
         <script type="text/javascript" src="scripts/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="scripts/jquery.scrollbar.min.js"></script>
         <script type="text/javascript" src="scripts/polyfill.localstorage.js"></script>
-        <script type="text/javascript" src="scripts/script.js?v<?= $version_number ?>"></script>
+        <script type="text/javascript" src="scripts/<?= ((POKEBS_DEBUG_MODE === true ? 'script.js' : 'script.min.js').'?v'.$version_number) ?>"></script>
         <script type="text/javascript">
 
             // Define the global date and version number vars
