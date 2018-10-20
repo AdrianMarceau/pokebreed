@@ -423,6 +423,7 @@ body:not([data-mode="free"]) .panel .banner .counter.pokedex.active {
 
 .panel .overview.main .details.pokemon {
     margin-top: 0;
+    background-color: #efefef;
     background-image: none;
     background-position: center center;
     background-repeat: repeat;

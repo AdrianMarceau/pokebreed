@@ -197,10 +197,7 @@
         $panelDiv = $('.panel');
         $panelBanner = $('.banner', $panelDiv);
         $panelMainOverview = $('.overview.main', $panelDiv);
-        $panelTypesOverview = $('.overview.types', $panelDiv);
-        $panelSpeciesOverview = $('.overview.species', $panelDiv);
-        $panelVisitorsOverview = $('.overview.visitors', $panelDiv);
-        $panelOverviewFloatLists = $('.overview.floatlist', $panelDiv);
+        $panelMidWrapper = $('.midwrap', $panelDiv);
         $panelButtons = $('> .buttons', $panelDiv);
         $pokePanelFilters = $panelButtons.find('.filter-pokemon');
         $pokePanelSelectButtons = $panelButtons.find('.select-pokemon');
@@ -218,9 +215,6 @@
         var updateScrollWrappers = function(){ $pokePanelSelectButtons.find('.buttonwrap').perfectScrollbar('update'); };
         $(window).resize(updateScrollWrappers);
         updateScrollWrappers();
-
-        // Add the scrollbar to any wrappers that need it
-        $('.wrap', $panelOverviewFloatLists).perfectScrollbar({suppressScrollX: true});
 
         // Preload the type and pokemon indexes
         preloadTypeIndex(function(){
@@ -310,9 +304,14 @@
         // Generate the zone pokemon area markup
         generateZonePokemonMarkup();
 
-        // (GEN 7+) If we're in the right generation, show the Z-Power counter
-        if (maxIndexKeyToLoad >= 7){ $('.stats .delta', $panelTypesOverview).css({display:''}); }
-        else { $('.stats .delta', $panelTypesOverview).css({display:'none'}); }
+        // Generate the lured visitor overview markup
+        generateVisitorsOverviewMarkup();
+
+        // Generate the pokemon list area overview markup
+        generateSpeciesOverviewMarkup();
+
+        // Generate the type appeal area overview markup
+        generateTypesOverviewMarkup();
 
         // Generate type styles so we can use them on buttons and panels
         generateTypeStyles();
@@ -1763,6 +1762,101 @@
 
         // Update reference variables to new divs
         $panelPokemonSpriteWrapper = $('.list.pokemon', $zonePokemon);
+
+    }
+
+    // Define a function for generating the lured visitor overview markup
+    function generateVisitorsOverviewMarkup(){
+
+        // Build the markup necessary for this overview area
+        var $overviewDiv = $('<div class="overview sublist visitors hidden"></div>');
+        var $overviewStats = $('<div class="details stats"></div>');
+        var $overviewTitle = $('<div class="title"></div>');
+        var $overviewWrap = $('<div class="wrap"></div>');
+        var $overviewList = $('<ul class="list"></div>');
+        $overviewTitle.append('<strong class="main">Lured Visitors</strong>');
+        for (var i = 0; i < 5; i++){
+            $overviewList.append('<li class="species"><div class="bubble"></div></li>');
+            }
+        $overviewTitle.appendTo($overviewStats);
+        $overviewList.appendTo($overviewWrap);
+        $overviewWrap.appendTo($overviewStats);
+        $overviewStats.appendTo($overviewDiv);
+        $overviewDiv.appendTo($panelMidWrapper);
+
+        // Add the scrollbar to any wrappers that need it
+        $overviewWrap.perfectScrollbar({suppressScrollX: true});
+
+        // Update reference variables to new divs
+        $panelVisitorsOverview = $('.overview.visitors', $panelDiv);
+        $panelOverviewFloatLists = $('.overview.floatlist', $panelDiv);
+
+    }
+
+
+    // Define a function for generating the pokemon list area overview markup
+    function generateSpeciesOverviewMarkup(){
+
+        // Build the markup necessary for this overview area
+        var $overviewDiv = $('<div class="overview floatlist species hidden"></div>');
+        var $overviewStats = $('<div class="details stats"></div>');
+        var $overviewTitle = $('<div class="title"></div>');
+        var $overviewWrap = $('<div class="wrap"></div>');
+        $overviewTitle.append('<strong class="main">Pokémon List</strong>');
+        $overviewTitle.append('<div class="subs">'+
+            '<strong class="sub alltime">All-Time <span class="count">0</span></strong>'+
+            '<strong class="sub current">Current <span class="count">0</span></strong>'+
+            '</div>');
+        $overviewWrap.append('<ul class="list alltime"></ul>');
+        $overviewWrap.append('<ul class="list current"></ul>');
+        $overviewTitle.appendTo($overviewStats);
+        $overviewWrap.appendTo($overviewStats);
+        $overviewStats.appendTo($overviewDiv);
+        $overviewDiv.appendTo($panelMidWrapper);
+
+        // Add the scrollbar to any wrappers that need it
+        $overviewWrap.perfectScrollbar({suppressScrollX: true});
+
+        // Update reference variables to new divs
+        $panelSpeciesOverview = $('.overview.species', $panelDiv);
+        $panelOverviewFloatLists = $('.overview.floatlist', $panelDiv);
+
+    }
+
+    // Define a function for generating the type appeal area overview markup
+    function generateTypesOverviewMarkup(){
+
+        // Build the markup necessary for this overview area
+        var $overviewDiv = $('<div class="overview floatlist types hidden">');
+        var $overviewStats = $('<div class="details stats"></div>');
+        var $overviewTitle = $('<div class="title"></div>');
+        var $overviewSubs = $('<div class="subs"></div>');
+        var $overviewWrap = $('<div class="wrap"></div>');
+
+        $overviewTitle.append('<strong class="main">Type Appeal</strong>');
+        if (maxIndexKeyToLoad >= 7){  // (GEN 7+) If we're in the right generation, show the Z-Power counter
+            $overviewTitle.append('<div class="delta"><div>'+
+                '<span class="icon"><i class="d"></i><i class="z"></i></span>'+
+                '<span class="percent">0%</span>'+
+                '</div></div>');
+            }
+
+        $overviewSubs.append('<strong class="sub attract">Attract</strong>');
+        $overviewSubs.append('<strong class="sub repel">Repel</strong>');
+        $overviewWrap.append('<ul class="list attract"></ul>');
+        $overviewWrap.append('<ul class="list repel"></ul>');
+        $overviewTitle.appendTo($overviewStats);
+        $overviewSubs.appendTo($overviewTitle);
+        $overviewWrap.appendTo($overviewStats);
+        $overviewStats.appendTo($overviewDiv);
+        $overviewDiv.appendTo($panelMidWrapper);
+
+        // Add the scrollbar to any wrappers that need it
+        $overviewWrap.perfectScrollbar({suppressScrollX: true});
+
+        // Update reference variables to new divs
+        $panelTypesOverview = $('.overview.types', $panelDiv);
+        $panelOverviewFloatLists = $('.overview.floatlist', $panelDiv);
 
     }
 
@@ -4517,7 +4611,8 @@
             }
 
         // If the simulation has started, make sure we update the scroll wrappers
-        if (simulationStarted){
+        if (simulationStarted
+            && $panelOverviewFloatLists.length){
             $('.wrap', $panelOverviewFloatLists).perfectScrollbar('update');
             }
 

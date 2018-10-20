@@ -105,64 +105,7 @@ if (isset($_GET['gen'])
 
             <div class="overview main"></div>
 
-            <div class="midwrap">
-
-                <div class="overview sublist visitors hidden">
-                    <div class="details stats">
-                        <div class="title">
-                            <strong class="main">Lured Visitors</strong>
-                        </div>
-                        <div class="wrap">
-                            <ul class="list">
-                                <li class="species"><div class="bubble"></div></li>
-                                <li class="species"><div class="bubble"></div></li>
-                                <li class="species"><div class="bubble"></div></li>
-                                <li class="species"><div class="bubble"></div></li>
-                                <li class="species"><div class="bubble"></div></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="overview floatlist species hidden">
-                    <div class="details stats">
-                        <div class="title">
-                            <strong class="main">Pokémon List</strong>
-                            <div class="subs">
-                                <strong class="sub alltime">All-Time <span class="count">0</span></strong>
-                                <strong class="sub current">Current <span class="count">0</span></strong>
-                            </div>
-                        </div>
-                        <div class="wrap">
-                            <ul class="list alltime"></ul>
-                            <ul class="list current"></ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="overview floatlist types hidden">
-                    <div class="details stats">
-                        <div class="title">
-                            <strong class="main">Type Appeal</strong>
-                            <div class="delta">
-                                <div>
-                                    <span class="icon"><i class="d"></i><i class="z"></i></span>
-                                    <span class="percent">0%</span>
-                                </div>
-                            </div>
-                        <div class="subs">
-                            <strong class="sub attract">Attract</strong>
-                            <strong class="sub repel">Repel</strong>
-                        </div>
-                        </div>
-                        <div class="wrap">
-                            <ul class="list attract"></ul>
-                            <ul class="list repel"></ul>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+            <div class="midwrap"></div>
 
             <div class="buttons">
                 <div class="controls">
