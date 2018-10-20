@@ -323,6 +323,7 @@
         // Do not load from LOCAL STORAGE records if we're in free mode
         if (!appFreeMode){
             //console.log('NOT in free mode, let us LOAD');
+
             // Check if a localStorage value exsists for species seen
             if (typeof window.localStorage !== 'undefined'){
                 var savedPokemonSpeciesSeen = window.localStorage.getItem('PokemonSpeciesSeen');
@@ -368,10 +369,14 @@
                     }
                 //console.log('PokemonSpeciesSeen = ', PokemonSpeciesSeen);
                 }
+
             }
 
         // Generate type styles so we can use them on buttons and panels
         generateTypeStyles();
+
+        // Generate type filter buttons so we can use them on buttons and panels
+        generateTypeFilterButtons();
 
         // Generate visual slots for the zone pokemon to fit into later
         generateZonePokemonSlots();
@@ -1779,6 +1784,27 @@
             styleSheet += '} \n';
             }
         $('head').append('<style type="text/css">\n'+ styleSheet +'</style>');
+    }
+
+    // Define a function to generate the appropriate type filter buttons
+    function generateTypeFilterButtons(){
+        //console.log('generateTypeFilterButtons()');
+
+        // Generate type filter buttons based on loaded type indexes
+        var typeFilterMarkup = '';
+        typeFilterMarkup += '<a class="option" data-type="all">All</a>';
+        for (var i = 0; i < PokemonTypesIndexTokens.length; i++){
+            var token = PokemonTypesIndexTokens[i];
+            var info = PokemonTypesIndex[token];
+            if (info.hiddenType === true){ continue; }
+            typeFilterMarkup += '<a class="option" data-type="'+token+'">';
+                typeFilterMarkup += '<img src="images/icons/types/'+token+'.png" alt="'+info.name+'" />';
+            typeFilterMarkup += '</a>';
+            }
+        //console.log('typeFilterMarkup = ', typeFilterMarkup);
+        var $filterTypesOptions = $('.filter-pokemon .filter.types .options', $panelButtons);
+        $filterTypesOptions.empty().append(typeFilterMarkup);
+
     }
 
     // Define a function for generating a pokemon's icon image markup
