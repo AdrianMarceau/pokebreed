@@ -3959,6 +3959,9 @@
                 return;
                 }
 
+            // Check if we've unlocked special pokemon yet
+            var unlockedSpecialPokemon = hasUnlockedSpecialPokemon();
+
             // Otherwise we can continue parsing the password normally for actual Pokemon amounts
             var seedPokemon = parsePokeBoxSeed(rawSeed);
             //console.log('seedPokemon = ', seedPokemon);
@@ -3974,13 +3977,21 @@
                     var isBasic = BasicPokemonSpeciesIndexTokens.indexOf(starterToken) !== -1 ? true : false;
                     var isFree = freeStarterPokemon.indexOf(starterToken) !== -1 ? true : false;
                     var isSeen = typeof PokemonSpeciesSeen[starterToken] !== 'undefined' && PokemonSpeciesSeen[starterToken] > 0 ? true : false;
+                    var isSpecial = indexInfo.isSpecialPokemon === true ? true : false;
                     //console.log('starterToken = ', starterToken);
                     //console.log('starterGender = ', typeof starterGender, starterGender);
                     //console.log('isFree = ', isFree);
                     //console.log('isBasic = ', isBasic);
                     //console.log('isSeen = ', isSeen);
                     //console.log('indexInfo = ', indexInfo);
-                    if (appFreeMode || isFree || (isBasic && isSeen)){
+                    // Check to see if we can allow this pokemon to be added
+                    var allowPokemon = true;
+                    if (!appFreeMode && !isFree){
+                        if (!isSeen){ allowPokemon = false; }
+                        else if (isSpecial && !unlockedSpecialPokemon){ allowPokemon = false; }
+                        }
+                    // Add if allowed, otherwise add to list of blocked species
+                    if (allowPokemon){
                         var customData = {};
                         if (typeof starterGender !== 'undefined'){ customData['gender'] = starterGender; }
                         addPokemonToZone(starterToken, false, false, false, customData);
