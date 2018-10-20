@@ -626,8 +626,8 @@
             eggGroups: ['field'],
             altBaseEvolutions: [{
                 species: 'aipom',
-                method: 'ancient-power',
-                value: 'low'
+                method: 'type-warning',
+                value: 'dark'
                 }],
             nextEvolutions: [{
                 species: 'proto-ambipom',
@@ -676,8 +676,8 @@
             eggGroups: ['field'],
             altBaseEvolutions: [{
                 species: 'sneasel',
-                method: 'ancient-power',
-                value: 'low'
+                method: 'type-warning',
+                value: 'normal'
                 }],
             nextEvolutions: [{
                 species: 'proto-weavile',
@@ -726,8 +726,8 @@
             eggGroups: ['water-1', 'water-2'],
             altBaseEvolutions: [{
                 species: 'remoraid',
-                method: 'ancient-power',
-                value: 'low'
+                method: 'type-warning',
+                value: 'steel'
                 }],
             nextEvolutions: [{
                 species: 'proto-octillery',
@@ -774,8 +774,8 @@
             eggGroups: ['fairy', 'grass'],
             altBaseEvolutions: [{
                 species: 'hoppip',
-                method: 'ancient-power',
-                value: 'low'
+                method: 'type-surge',
+                value: 'flying'
                 }],
             nextEvolutions: [{
                 species: 'proto-skiploom',
@@ -825,46 +825,6 @@
             eggCycles: 20,
             eggGroups: ['fairy', 'grass'],
             prevEvolution: 'proto-skiploom'
-            },
-
-        'proto-politoed': {
-            order: thisIndex.afterOrder('politoed', 1),
-            token: 'proto-politoed',
-            name: 'Proto Politoed',
-            formClass: 'ancient-variant',
-            formToken: 'proto',
-            baseSpecies: 'politoed',
-            number: 186,
-            dexNumber: 1038,
-            types: ['water'],
-            baseStats: {hp: 90, phAttack: 76, phDefense: 90, spAttack: 76, spDefense: 100, speed: 68},
-            abilities: {0: 'water-absorb', 1: 'drizzle', hidden: 'sap-sipper'},
-            height: 1.2,
-            weight: 34,
-            colors: ['green', 'yellow', 'pink'],
-            eggCycles: 20,
-            eggGroups: ['water-1'],
-            prevEvolution: 'poliwhirl'
-            },
-
-        'proto-kingdra': {
-            order: thisIndex.afterOrder('kingdra', 1),
-            token: 'proto-kingdra',
-            name: 'Proto Kingdra',
-            formClass: 'ancient-variant',
-            formToken: 'proto',
-            baseSpecies: 'kingdra',
-            number: 230,
-            dexNumber: 1039,
-            types: ['water', 'dragon'],
-            baseStats: {hp: 105, phAttack: 90, phDefense: 95, spAttack: 90, spDefense: 95, speed: 65},
-            abilities: {0: 'swift-swim', 1: 'sniper', hidden: 'rough-skin'},
-            height: 1.8,
-            weight: 152,
-            colors: ['blue', 'white'],
-            eggCycles: 20,
-            eggGroups: ['water-1', 'dragon'],
-            prevEvolution: 'seadra'
             },
 
 
@@ -1050,10 +1010,10 @@
         {base: 'pansear', species: 'elemonk', method: 'type-warning', value: 'fire'},
         {base: 'panpour', species: 'elemonk', method: 'type-warning', value: 'water'},
 
-        {base: 'aipom', species: 'proto-aipom', method: 'ancient-power', value: 'high'},
-        {base: 'sneasel', species: 'proto-sneasel', method: 'ancient-power', value: 'high'},
-        {base: 'remoraid', species: 'proto-remoraid', method: 'ancient-power', value: 'high'},
-        {base: 'hoppip', species: 'proto-hoppip', method: 'ancient-power', value: 'high'},
+        {base: 'aipom', species: 'proto-aipom', method: 'type-surge', value: 'dark'},
+        {base: 'sneasel', species: 'proto-sneasel', method: 'type-surge', value: 'normal'},
+        {base: 'remoraid', species: 'proto-remoraid', method: 'type-surge', value: 'steel'},
+        {base: 'hoppip', species: 'proto-hoppip', method: 'type-warning', value: 'flying'},
 
         ]);
 
@@ -1094,9 +1054,6 @@
         {base: 'mime-jr', species: 'ms-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'female', method3: 'level-up', value3: 25},
 
         {base: 'qwilfish', species: 'buzzqwill', method: 'type-surge', value: 'electric', method2: 'level-up', value2: 30},
-
-        {base: 'poliwhirl', species: 'proto-politoed', method: 'ancient-power', value: 'high', method2: 'level-up', value2: 45},
-        {base: 'seadra', species: 'proto-kingdra', method: 'ancient-power', value: 'high', method2: 'level-up', value2: 42},
 
         {base: 'burmy', species: 'snow-wormadam', method: 'level-up', value: 20, method2: 'gender', value2: 'female', method3: 'form', value3: 'snow'},
         {base: 'burmy', species: 'bubble-wormadam', method: 'level-up', value: 20, method2: 'gender', value2: 'female', method3: 'form', value3: 'bubble'},
