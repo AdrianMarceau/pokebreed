@@ -23,17 +23,19 @@
             </div>
         </div>
         <ul class="list"></ul>
-        <div class="filter-pokemon lower hidden" data-target="pokedex">
-            <div class="wrap">
-                <div class="filter modes" data-filter="mode">
-                    <label class="label">Mode</label>
-                    <div class="options">
-                        <a class="option" data-mode="legacy">Legacy</a>
-                        <a class="option" data-mode="modern">Modern</a>
+        <? if ($allowed_generations > 1){ ?>
+            <div class="filter-pokemon lower hidden" data-target="pokedex">
+                <div class="wrap">
+                    <div class="filter modes" data-filter="mode">
+                        <label class="label">Mode</label>
+                        <div class="options">
+                            <a class="option" data-mode="legacy">Legacy</a>
+                            <a class="option" data-mode="modern">Modern</a>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        <? } ?>
         <div class="totals">
             <span class="unlocked">0</span>
             <span class="showing">0</span>
