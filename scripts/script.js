@@ -301,19 +301,8 @@
         // Load the species seen records from storage
         loadSpeciesSeenFromStorage();
 
-        // Update the banner counters with the total days and current species
-        var pokedexCurrent = Object.keys(PokemonSpeciesSeen).length;
-        var pokedexTotal = PokemonSpeciesIndexTokens.length - hiddenPokemonTokens.length;
-        var pokedexPercent = pokedexTotal > 0 ? (Math.ceil((pokedexCurrent / pokedexTotal) * 1000) / 10) : 0;
-        $('.timer .count .total', $panelBanner).html(numberWithCommas(PokeboxDaysPassed));
-        $('.pokedex .count .current', $panelBanner).html(pokedexCurrent);
-        $('.pokedex .count .total', $panelBanner).html(pokedexTotal);
-        $('.pokedex .count .percent', $panelBanner).html(pokedexPercent+'%');
-        //console.log('pokedexCurrent = ', pokedexCurrent);
-        //console.log('PokemonSpeciesIndexTokens.length = ', PokemonSpeciesIndexTokens.length);
-        //console.log('hiddenPokemonTokens.length = ', hiddenPokemonTokens.length);
-        //console.log('pokedexTotal = ', pokedexTotal);
-        //console.log('pokedexPercent = ', pokedexPercent);
+        // Immediately update the pokemon banner stats
+        updatePokeBoxBannerStats();
 
         // Generate the zone details area markup
         generateZoneDetailsMarkup();
@@ -1719,6 +1708,25 @@
             slotMarkup += '<li class="'+liClass+'"></li>';
             }
         $pokeSlots.append(slotMarkup);
+    }
+
+    // Define a function for updating the banner pokedex and day counters
+    function updatePokeBoxBannerStats(){
+
+        // Update the banner counters with the total days and current species
+        var pokedexCurrent = Object.keys(PokemonSpeciesSeen).length;
+        var pokedexTotal = PokemonSpeciesIndexTokens.length - hiddenPokemonTokens.length;
+        var pokedexPercent = pokedexTotal > 0 ? (Math.ceil((pokedexCurrent / pokedexTotal) * 1000) / 10) : 0;
+        $('.timer .count .total', $panelBanner).html(numberWithCommas(PokeboxDaysPassed));
+        $('.pokedex .count .current', $panelBanner).html(pokedexCurrent);
+        $('.pokedex .count .total', $panelBanner).html(pokedexTotal);
+        $('.pokedex .count .percent', $panelBanner).html(pokedexPercent+'%');
+        //console.log('pokedexCurrent = ', pokedexCurrent);
+        //console.log('PokemonSpeciesIndexTokens.length = ', PokemonSpeciesIndexTokens.length);
+        //console.log('hiddenPokemonTokens.length = ', hiddenPokemonTokens.length);
+        //console.log('pokedexTotal = ', pokedexTotal);
+        //console.log('pokedexPercent = ', pokedexPercent);
+
     }
 
     // Define a function for generating the zone details area
