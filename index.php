@@ -103,23 +103,7 @@ if (isset($_GET['gen'])
                 <? } ?>
             </div>
 
-            <div class="overview main">
-
-                <div class="details zone"></div>
-
-                <div class="details pokemon">
-                    <strong class="title">Current Pokémon</strong>
-                    <div class="wrap">
-                        <ul class="list slots"></ul>
-                        <ul class="list pokemon"></ul>
-                    </div>
-                    <div class="field">
-                        <span class="bg"></span>
-                        <span class="tx"></span>
-                    </div>
-                </div>
-
-            </div>
+            <div class="overview main"></div>
 
             <div class="midwrap">
 

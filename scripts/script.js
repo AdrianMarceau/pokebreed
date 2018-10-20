@@ -201,7 +201,6 @@
         $panelSpeciesOverview = $('.overview.species', $panelDiv);
         $panelVisitorsOverview = $('.overview.visitors', $panelDiv);
         $panelOverviewFloatLists = $('.overview.floatlist', $panelDiv);
-        $panelPokemonSpriteWrapper = $('.details.pokemon .list.pokemon', $panelMainOverview);
         $panelButtons = $('> .buttons', $panelDiv);
         $pokePanelFilters = $panelButtons.find('.filter-pokemon');
         $pokePanelSelectButtons = $panelButtons.find('.select-pokemon');
@@ -318,6 +317,13 @@
 
         // Generate the zone details area markup
         generateZoneDetailsMarkup();
+
+        // Generate the zone pokemon area markup
+        generateZonePokemonMarkup();
+
+        // (GEN 7+) If we're in the right generation, show the Z-Power counter
+        if (maxIndexKeyToLoad >= 7){ $('.stats .delta', $panelTypesOverview).css({display:''}); }
+        else { $('.stats .delta', $panelTypesOverview).css({display:'none'}); }
 
         // Generate type styles so we can use them on buttons and panels
         generateTypeStyles();
@@ -1715,25 +1721,40 @@
         $pokeSlots.append(slotMarkup);
     }
 
-    // Define a function to generate the zone details area
+    // Define a function for generating the zone details area
     function generateZoneDetailsMarkup(){
 
-        // Build the zone details div in the header
-        var $zoneDetails = $('.details.zone', $panelMainOverview);
+        // Build the zone details div in the main overview area
+        var $zoneDetails = $('<div class="details zone"></div>');
         var $zoneDetailsList = $('<ul class="list hidden"></ul>');
-        $zoneDetails.append('<strong class="title">&nbsp;</strong>');
+        $zoneDetails.append('<strong class="title">Select Starter Pokémon</strong>');
         $zoneDetailsList.append('<li class="name"><strong>Biome</strong> <span class="data"></span></li>');
         $zoneDetailsList.append('<li class="day"><strong>Day</strong> <span class="data"></span></li>');
         $zoneDetailsList.append('<li class="date"><strong>Date</strong> <span class="data"></span></li>');
         $zoneDetailsList.append('<li class="capacity"><strong>Capacity</strong> <span class="data"></span></li>');
         $zoneDetailsList.appendTo($zoneDetails);
+        $zoneDetails.prependTo($panelMainOverview);
 
-        // Update the title bar to show the next action (Select Pokemon)
-        $('.details.zone .title', $panelMainOverview).html('Select Starter Pokémon');
+    }
 
-        // (GEN 7+) If we're in the right generation, show the Z-Power counter
-        if (maxIndexKeyToLoad >= 7){ $('.stats .delta', $panelTypesOverview).css({display:''}); }
-        else { $('.stats .delta', $panelTypesOverview).css({display:'none'}); }
+    // Define a function for generating the zone pokemon area
+    function generateZonePokemonMarkup(){
+
+        // Build the zone pokemon div in the main overview area
+        var $zonePokemon = $('<div class="details pokemon"></div>');
+        var $zonePokemonWrap = $('<div class="wrap"></div>');
+        var $zonePokemonField = $('<div class="field"></div>');
+        $zonePokemon.append('<strong class="title">Current Pokémon</strong>');
+        $zonePokemonWrap.append('<ul class="list slots"></ul>');
+        $zonePokemonWrap.append('<ul class="list pokemon"></ul>');
+        $zonePokemonField.append('<span class="bg"></span>');
+        $zonePokemonField.append('<span class="tx"></span>');
+        $zonePokemonWrap.appendTo($zonePokemon);
+        $zonePokemonField.appendTo($zonePokemon);
+        $zonePokemon.appendTo($panelMainOverview);
+
+        // Update reference variables to new divs
+        $panelPokemonSpriteWrapper = $('.list.pokemon', $zonePokemon);
 
     }
 
