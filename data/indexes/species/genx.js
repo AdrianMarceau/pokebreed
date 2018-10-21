@@ -630,7 +630,62 @@
     var indexOrder = thisIndex.indexOrder;
     thisIndex.addSpeciesIndex({
 
-        // Ancient Variants (via Ancient Power)
+        // Regional Variants (Misc Forms)
+
+        'tundra-munchlax': {
+            order: thisIndex.afterOrder('snorlax', 1),
+            token: 'tundra-munchlax',
+            name: 'Tundra Munchlax',
+            class: 'baby',
+            formClass: 'regional-variant',
+            formToken: 'tundra',
+            baseSpecies: 'munchlax',
+            number: 446,
+            dexNumber: 1026.111,
+            types: ['ice', 'normal'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 135, phAttack: 65, phDefense: 60, spAttack: 40, spDefense: 85, speed: 5},
+            abilities: {0: 'slush-rush', 1: 'thick-fat', hidden: 'white-smoke'},
+            height: 0.6,
+            weight: 105,
+            colors: ['white', 'blue'],
+            eggCycles: 40,
+            eggGroups: ['undiscovered'],
+            altBaseEvolutions: [{
+                species: 'munchlax',
+                method: 'type-warning',
+                value: 'ice'
+                }],
+            nextEvolutions: [{
+                species: 'tundra-snorlax',
+                method: 'happiness',
+                value: 'high',
+                method2: 'level-up',
+                value2: 25
+                }]
+            },
+        'tundra-snorlax': {
+            order: thisIndex.afterOrder('snorlax', 2),
+            token: 'tundra-snorlax',
+            name: 'Tundra Snorlax',
+            formClass: 'regional-variant',
+            formToken: 'tundra',
+            baseSpecies: 'snorlax',
+            dexNumber: 1026.222,
+            number: 143,
+            types: ['ice', 'normal'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 160, phAttack: 90, phDefense: 85, spAttack: 65, spDefense: 110, speed: 30},
+            abilities: {0: 'ice-body', 1: 'thick-fat', hidden: 'white-smoke'},
+            height: 2.1,
+            weight: 460,
+            colors: ['white', 'blue', 'gray'],
+            eggCycles: 40,
+            eggGroups: ['monster'],
+            prevEvolution: 'tundra-munchlax'
+            },
+
+        // Ancient Variants (Proto Forms)
 
         'proto-aipom': {
             order: thisIndex.afterOrder('ambipom', 1),
@@ -852,7 +907,6 @@
             prevEvolution: 'proto-skiploom'
             },
 
-
         // Newly Discovered Forms
 
         'snow-wormadam': {
@@ -1036,6 +1090,8 @@
         {base: 'panpour', species: 'elemonk', method: 'type-warning', value: 'water'},
         {base: 'rhyhorn', species: 'rhydoll', method: 'type-surge', value: 'ground'},
 
+        {base: 'munchlax', species: 'tundra-munchlax', method: 'type-surge', value: 'ice'},
+
         {base: 'aipom', species: 'proto-aipom', method: 'type-surge', value: 'dark'},
         {base: 'sneasel', species: 'proto-sneasel', method: 'type-surge', value: 'normal'},
         {base: 'remoraid', species: 'proto-remoraid', method: 'type-surge', value: 'steel'},
@@ -1053,7 +1109,7 @@
     // Update previous gen pokemon with new possible form data
     thisIndex.addPossibleForms([
 
-        {base: 'burmy', form: 'snow', triggers: ['snow', 'sky'], colors: ['white', 'black', 'blue', 'yellow']},
+        {base: 'burmy', form: 'snow', triggers: ['tundra', 'sky'], colors: ['white', 'black', 'blue', 'yellow']},
         {base: 'burmy', form: 'bubble', triggers: ['river', 'seafloor'], colors: ['blue', 'black', 'purple', 'yellow']},
 
         ]);

@@ -68,10 +68,10 @@
             name: 'Volcano',
             baseTypes: ['fire', '', 'rock']
             },
-        'snow': {
+        'tundra': {
             order: indexOrder++,
-            token: 'snow',
-            name: 'Snow',
+            token: 'tundra',
+            name: 'tundra',
             baseTypes: ['ice', '', 'water']
             },
         'city': {
