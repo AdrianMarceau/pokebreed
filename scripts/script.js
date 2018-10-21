@@ -2770,6 +2770,21 @@
         if (showBreaks){ $pokePanelSelectButtons.find('.breaker').removeClass('hidden'); }
         else { $pokePanelSelectButtons.find('.breaker').addClass('hidden'); }
 
+        // Collect references to the gen and mode filters (so we can overwrite them later)
+        var currentGenFilter = currentButtonFilters['gen'];
+        var currentTypeFilter = currentButtonFilters['type'];
+
+        // If we're in the rewards generation (r), do use apply type filters
+        if (currentGenFilter === 'r'){
+            $filterDivs.filter('[data-filter="type"]').addClass('hidden disabled');
+            currentTypeFilter = 'all';
+            } else {
+            $filterDivs.filter('[data-filter="type"]').removeClass('hidden disabled');
+            }
+
+        //console.log('currentGenFilter = ', currentGenFilter);
+        //console.log('currentTypeFilter = ', currentTypeFilter);
+
         // Hide all pokemon buttons by default then loop through to see which match the filter and can be shown
         var $pokemonButtons = $pokePanelSelectButtons.find('.button[data-kind="pokemon"]');
         $pokemonButtons.addClass('hidden');
@@ -2780,6 +2795,7 @@
             for (var i = 0; i < currentButtonFiltersKeys.length; i++){
                 var filterKind = currentButtonFiltersKeys[i];
                 var currentValue = currentButtonFilters[filterKind];
+                if (filterKind === 'type'){ currentValue = currentTypeFilter; }
                 if (currentValue === 'all'){ continue; }
                 var thisValue = $button.attr('data-'+filterKind);
                 //console.log('|- Does ' + filterKind + ' match current value ' + currentValue + ' ? thisValue = ', thisValue);
@@ -2797,11 +2813,11 @@
             });
 
         // Re-sort the elements based on which mode we're in
-        if (currentButtonFilters['gen'] === 'all'){ var sortBy = ['data-modnum', 'data-legnum']; } //data-key
+        if (currentGenFilter === 'all'){ var sortBy = ['data-modnum', 'data-legnum']; } //data-key
         else { var sortBy = ['data-legnum', 'data-modnum']; }
         //else if (currentButtonFilters['mode'] === 'legacy'){ var sortBy = ['data-legnum', 'data-modnum']; }
         //else if (currentButtonFilters['mode'] === 'modern'){ var sortBy = ['data-modnum', 'data-legnum']; }
-        //console.log('currentButtonFilters[\'gen\'] = ', currentButtonFilters['gen']);
+        //console.log('currentGenFilter = ', currentGenFilter);
         //console.log('sortBy = ', sortBy);
         var $sortedButtons = $pokemonButtons.sort(function(a, b){
             var $a = $(a), $b = $(b);
@@ -2811,17 +2827,17 @@
                 if (aIndex.isSpecialPokemon !== true && bIndex.isSpecialPokemon === true){ return -1; }
                 else if (aIndex.isSpecialPokemon === true && bIndex.isSpecialPokemon !== true){ return 1; }
             }
-            if (currentButtonFilters['gen'] !== 'all'
-                && currentButtonFilters['gen'] !== 'x'
-                && currentButtonFilters['gen'] !== 'r'
+            if (currentGenFilter !== 'all'
+                && currentGenFilter !== 'x'
+                && currentGenFilter !== 'r'
                 && aIndex.isSpecialPokemon !== true
                 && bIndex.isSpecialPokemon !== true){
-                var currGen = currentButtonFilters['gen'];
+                var currGen = currentGenFilter;
                 if (aIndex.baseGameGeneration === currGen && bIndex.baseGameGeneration !== currGen){ return -1; }
                 else if (aIndex.baseGameGeneration !== currGen && bIndex.baseGameGeneration === currGen){ return 1; }
             }
-            if (currentButtonFilters['gen'] !== 'x'
-                && currentButtonFilters['gen'] !== 'r'
+            if (currentGenFilter !== 'x'
+                && currentGenFilter !== 'r'
                 && currentButtonFilters['mode'] === 'legacy'){
                 var aVar = aIndex.formClass !== '' && aIndex.baseGameGeneration !== aIndex.gameGeneration ? 1 : 0;
                 var bVar = bIndex.formClass !== '' && bIndex.baseGameGeneration !== bIndex.gameGeneration ? 1 : 0;
