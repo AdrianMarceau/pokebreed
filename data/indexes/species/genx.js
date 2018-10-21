@@ -391,6 +391,31 @@
                 }]
             },
 
+        'rhydoll': {
+            order: thisIndex.beforeOrder('rhyhorn'),
+            token: 'rhydoll',
+            legacyToken: 'baby-rhydoll',
+            name: 'Rhydoll',
+            class: 'baby',
+            formClass: 'baby-evolution',
+            formToken: 'baby',
+            number: 111,
+            dexNumber: 1011.1111,
+            types: ['ground'],
+            baseStats: {hp: 40, phAttack: 42, phDefense: 48, spAttack: 15, spDefense: 15, speed: 13},
+            abilities: {0: 'lightning-rod', 1: 'rock-head', hidden: 'reckless'},
+            height: 0.4,
+            weight: 95,
+            colors: ['gray'],
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'rhyhorn',
+                method: 'level-up',
+                value: 21
+                }]
+            },
+
         'paramite': {
             order: thisIndex.beforeOrder('paras'),
             token: 'paramite',
@@ -488,31 +513,6 @@
                 species: 'lickitung',
                 method: 'level-up',
                 value: 17
-                }]
-            },
-
-        'rhydoll': {
-            order: thisIndex.beforeOrder('rhyhorn'),
-            token: 'rhydoll',
-            legacyToken: 'baby-rhydoll',
-            name: 'Rhydoll',
-            class: 'baby',
-            formClass: 'baby-evolution',
-            formToken: 'baby',
-            number: 111,
-            dexNumber: 1016.1111,
-            types: ['ground', 'rock'],
-            baseStats: {hp: 40, phAttack: 42, phDefense: 48, spAttack: 15, spDefense: 15, speed: 13},
-            abilities: {0: 'lightning-rod', 1: 'rock-head', hidden: 'reckless'},
-            height: 0.4,
-            weight: 95,
-            colors: ['gray'],
-            eggCycles: 20,
-            eggGroups: ['undiscovered'],
-            nextEvolutions: [{
-                species: 'rhyhorn',
-                method: 'level-up',
-                value: 21
                 }]
             },
 
