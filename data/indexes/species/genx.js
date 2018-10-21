@@ -612,9 +612,9 @@
             formToken: 'evo',
             number: 211,
             dexNumber: 1026,
-            types: ['water', 'poison'],
+            types: ['poison', 'electric'],
             baseStats: {hp: 95, phAttack: 100, phDefense: 95, spAttack: 60, spDefense: 75, speed: 85},
-            abilities: {0: 'poison-point', 1: 'volt-absorb', hidden: 'aftermath'},
+            abilities: {0: 'static', 1: 'swift-swim', hidden: 'aftermath'},
             height: 0.5,
             weight: 3.9,
             colors: ['purple', 'yellow', 'pink'],
@@ -1073,13 +1073,11 @@
 
         {base: 'girafarig', species: 'mega-girafarig', method: 'mega-evolution', value: 'girafarigite'},
 
-        {base: 'weepinbell', species: 'victreebel', method: 'type-appeal', value: 'grass', method2: 'level-up', value2: 41, replace: true}, // leaf-stone
-        {base: 'weepinbell', species: 'meandrabel', method: 'type-appeal', value: 'poison', method2: 'level-up', value2: 41}, // poison-stone
-
         {base: 'mime-jr', species: 'mr-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'male', method3: 'level-up', value3: 25, replace: true},
         {base: 'mime-jr', species: 'ms-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'female', method3: 'level-up', value3: 25},
 
-        {base: 'qwilfish', species: 'buzzqwill', method: 'type-surge', value: 'electric', method2: 'level-up', value2: 30},
+        {base: 'weepinbell', species: 'meandrabel', method: 'type-surge', value: 'poison', method2: 'type-warning', value2: 'grass', method3: 'level-up', value3: 41},
+        {base: 'qwilfish', species: 'buzzqwill', method: 'type-surge', value: 'electric', method2: 'type-warning', value2: 'water', method3: 'level-up', value3: 30},
 
         {base: 'burmy', species: 'snow-wormadam', method: 'level-up', value: 20, method2: 'gender', value2: 'female', method3: 'form', value3: 'snow'},
         {base: 'burmy', species: 'bubble-wormadam', method: 'level-up', value: 20, method2: 'gender', value2: 'female', method3: 'form', value3: 'bubble'},
