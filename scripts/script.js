@@ -3091,7 +3091,7 @@
 
         // If this is a baby evolution, reduce egg cycles by half
         if (indexData.class === 'baby'
-            && indexData.formClass === 'baby-evolution'){
+            || indexData.formClasses.indexOf('baby-evolution') !== -1){
             reduceCycles += 1;
             }
 
