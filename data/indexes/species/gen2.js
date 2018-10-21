@@ -1835,11 +1835,8 @@
         {base: 'eevee', species: 'espeon', method: 'type-appeal', value: 'psychic', method2: 'level-up', value2: 20}, // happiness + morning
         {base: 'eevee', species: 'umbreon', method: 'type-appeal', value: 'dark', method2: 'level-up', value2: 20}, // happiness + night
 
-        {base: 'slowpoke', species: 'slowbro', method: 'type-appeal', value: 'water', method2: 'level-up', value2: 37, replace: true}, // level-up
-        {base: 'slowpoke', species: 'slowking', method: 'type-appeal', value: 'psychic', method2: 'level-up', value2: 37}, // kings-rock
-
-        {base: 'poliwhirl', species: 'poliwrath', method: 'type-appeal', value: 'fighting', method2: 'level-up', value2: 45, replace: true}, // trade
-        {base: 'poliwhirl', species: 'politoed', method: 'type-appeal', value: 'water', method2: 'level-up', value2: 45}, // kings-rock
+        {base: 'slowpoke', species: 'slowking', method: 'royal-ascension', value: 20, method2: 'level-up', value2: 37}, // kings-rock
+        {base: 'poliwhirl', species: 'politoed', method: 'royal-ascension', value: 30, method2: 'level-up', value2: 45}, // kings-rock
 
         {base: 'gloom', species: 'vileplume', method: 'type-appeal', value: 'poison', method2: 'level-up', value2: 41, replace: true}, // leaf-stone
         {base: 'gloom', species: 'bellossom', method: 'type-appeal', value: 'grass', method2: 'level-up', value2: 41}, // sun-stone

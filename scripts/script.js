@@ -4773,6 +4773,7 @@
     // Define a function for updating growth cycles
     var pendingTradePartnerTokens = [];
     var pendingTradePartnerIDs = [];
+    var pendingEvolutionLimits = {};
     function updateGrowthCycles(){
 
         // Do not update egg cycles on day zero
@@ -4786,6 +4787,10 @@
 
         // Define a variable to hold (temporary) allowed trade evolutions this cycle
         var allowedTradeEvolutions = {};
+
+        // Reset the pending evolution limits array so we can refil if necessary
+        pendingEvolutionLimits = {};
+        //console.log('\npendingEvolutionLimits =', pendingEvolutionLimits);
 
         // Define variables nessary for calculating color forms and collect data
         var colorKey = 0;
@@ -4854,6 +4859,7 @@
         if (thisZoneData.currentEffects['preventAllEvolution'] === true){ preventAllEvolution = true; }
 
         // Now, loop through all the non-egg pokemon again and check evolutions
+        var newPokemonThisCycle = {};
         if (thisZoneData.currentPokemon.length){
             for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
 
@@ -5003,6 +5009,13 @@
                     function calculateEvolutionChance(pokemonInfo, methodToken, methodValue, methodNum, nextEvolution, prevChanceValue){
                         //console.log('|-- calculateEvolutionChance(pokemonInfo, methodToken, methodValue, methodNum, nextEvolution, prevChanceValue)', pokemonInfo, methodToken, methodValue, methodNum, nextEvolution, prevChanceValue);
 
+                        // Define reference to species count var
+                        var currentSpeciesStats = thisZoneData.currentStats['species'];
+
+                        // Collect the token for this next potential species
+                        var nextSpeciesToken = nextEvolution['species'];
+                        var nextSpeciesCount = typeof currentSpeciesStats[nextSpeciesToken] !== 'undefined' ? currentSpeciesStats[nextSpeciesToken] : 0;
+
                         // Calculate chance value in case we need it
                         var chanceValue = Math.seededRandomChance();
 
@@ -5037,6 +5050,21 @@
                                 } else if (methodValue === 'low'
                                 && numRelatedPokemon < 5){
                                 return 1;
+                                }
+                            }
+
+                        // Royalty-based evolutions trigger if there are enough relatives but a leader doesn't exist yet
+                        if (methodToken === 'royal-ascension'){
+                            //console.log('royal-ascension', nextSpeciesToken, numRelatedPokemon, nextSpeciesCount);
+                            if (numRelatedPokemon >= methodValue){
+                                var existingKingOrQueen = getZonePokemonByFilter({token:nextSpeciesToken,gender:pokemonInfo.gender});
+                                //console.log('existingKingOrQueen =', existingKingOrQueen);
+                                if (!existingKingOrQueen.length){
+                                    //console.log('success! '+pokemonInfo.token+' '+pokemonInfo.id+' will evolve into '+nextSpeciesToken);
+                                    pendingEvolutionLimits[nextSpeciesToken+'/'+pokemonInfo.gender] = 1;
+                                    //console.log('pendingEvolutionLimits =', pendingEvolutionLimits);
+                                    return 1 + (numRelatedPokemon * 100);
+                                    }
                                 }
                             }
 
@@ -5116,8 +5144,8 @@
                                 pendingTradePartnerTokens.splice(pendingTokenKey, 1);
                                 pendingTradePartnerIDs.splice(pendingIDKey, 1);
                                 return 3;
-                                } else if (typeof thisZoneData.currentStats['species'][partnerToken] !== 'undefined'
-                                && thisZoneData.currentStats['species'][partnerToken] > 0){
+                                } else if (typeof currentSpeciesStats[partnerToken] !== 'undefined'
+                                && currentSpeciesStats[partnerToken] > 0){
                                 if (typeof nextEvolution['method2'] !== 'undefined'
                                     && nextEvolution['method2'] === 'level-up'){
                                     var possiblePartners = getZonePokemonByToken(partnerToken);
@@ -5140,15 +5168,15 @@
 
                         // Species-based evolutions trigger if the other species is active on the field
                         if (methodToken === 'evolution-species'
-                            && typeof thisZoneData.currentStats['species'][methodValue] !== 'undefined'
-                            && thisZoneData.currentStats['species'][methodValue] > 0){
+                            && typeof currentSpeciesStats[methodValue] !== 'undefined'
+                            && currentSpeciesStats[methodValue] > 0){
                             return 1;
                             }
 
                         // Fusion-based evolutions trigger if one of the other species is on the field
                         if (methodToken === 'fusion-species'
-                            && typeof thisZoneData.currentStats['species'][methodValue] !== 'undefined'
-                            && thisZoneData.currentStats['species'][methodValue] > 0){
+                            && typeof currentSpeciesStats[methodValue] !== 'undefined'
+                            && currentSpeciesStats[methodValue] > 0){
 
                             // If the previous method was unsuccessful, return now
                             if (methodNum > 1 && prevChanceValue === 0){ return 0; }
@@ -5175,7 +5203,7 @@
                             // If a fusion was collected, return now
                             if (fusionPokemon !== false){
                                 fusionPokemonToBeRemoved = fusionPokemon;
-                                return 1 + thisZoneData.currentStats['species'][methodValue];
+                                return 1 + currentSpeciesStats[methodValue];
                                 }
 
                             }
@@ -5323,10 +5351,36 @@
                         if ((switchKind === 'and' && triggeredMethods === totalMethods)
                             || (switchKind === 'or' && triggeredMethods > 0)
                             || (forceEvo === true)){
-                            var queuedEvolution = {token: nextEvolution.species, types: nextEvolutionInfo.types, chance: triggeredChance};
-                            if (fusionPokemonToBeRemoved !== false){ queuedEvolution.fusion = fusionPokemonToBeRemoved.id; }
-                            if (typeof nextEvolution.castoff !== 'undefined'){ queuedEvolution.castoff = nextEvolution.castoff; }
-                            queuedEvolutions.push(queuedEvolution);
+
+                            // Default to true for allowing this evo
+                            var allowEvo = true;
+
+                            // If there are limits on the number of a specific evo right now, check if we need to block
+                            //console.log('pendingEvolutionLimits = ', pendingEvolutionLimits);
+                            var nextEvoLimit = 0;
+                            if (typeof pendingEvolutionLimits[nextEvolution.species] !== 'undefined'){ nextEvoLimit = pendingEvolutionLimits[nextEvolution.species]; }
+                            else if (typeof pendingEvolutionLimits[nextEvolution.species+'/'+pokemonInfo] !== 'undefined'){ nextEvoLimit = pendingEvolutionLimits[nextEvolution.species+'/'+pokemonInfo]; }
+                            if (nextEvoLimit > 0){
+                                var numNextSpecies = 0;
+                                if (typeof currentSpeciesStats[nextEvolution.species] !== 'undefined'){ numNextSpecies += currentSpeciesStats[nextEvolution.species]; }
+                                if (typeof newPokemonThisCycle[nextEvolution.species] !== 'undefined'){ numNextSpecies += newPokemonThisCycle[nextEvolution.species]; }
+                                //console.log('currentSpeciesStats['+nextEvolution.species+'] = ', currentSpeciesStats[nextEvolution.species]);
+                                //console.log('newPokemonThisCycle['+nextEvolution.species+'] = ', newPokemonThisCycle[nextEvolution.species]);
+                                //console.log('numNextSpecies = ', numNextSpecies);
+                                if (numNextSpecies >= nextEvoLimit){
+                                    allowEvo = false;
+                                    }
+                                }
+
+                            // If allowed, we can proceed with queueing the current evo
+                            //console.log('allowEvo = ', allowEvo);
+                            if (allowEvo){
+                                var queuedEvolution = {token: nextEvolution.species, types: nextEvolutionInfo.types, chance: triggeredChance};
+                                if (fusionPokemonToBeRemoved !== false){ queuedEvolution.fusion = fusionPokemonToBeRemoved.id; }
+                                if (typeof nextEvolution.castoff !== 'undefined'){ queuedEvolution.castoff = nextEvolution.castoff; }
+                                queuedEvolutions.push(queuedEvolution);
+                                }
+
                             }
 
                         }
@@ -5350,6 +5404,11 @@
                         var evolvedPokemonSpecies = thisZoneData.evolvedPokemonSpecies;
                         if (typeof evolvedPokemonSpecies[pokemonInfo.token] === 'undefined'){ evolvedPokemonSpecies[pokemonInfo.token] = 0; }
                         evolvedPokemonSpecies[pokemonInfo.token]++;
+
+                        // Create or update an entry for bew pokemon this cycle
+                        if (typeof newPokemonThisCycle[selectedEvolution.token] === 'undefined'){ newPokemonThisCycle[selectedEvolution.token] = 0; }
+                        newPokemonThisCycle[selectedEvolution.token]++;
+                        //console.log('newPokemonThisCycle = ', newPokemonThisCycle);
 
                         // And then apply the evolution to the pokemon's data
                         var backupToken = pokemonInfo.token;
@@ -5720,13 +5779,16 @@
                     var partnerEggs = partnerInfo && typeof pokeEggs[eggPartner] !== 'undefined' ? pokeEggs[eggPartner] : 0;
                     //console.log('|- partnerUnits('+eggPartner+'/'+partnerUnits+') | partnerEggs('+eggPartner+'/'+partnerEggs+')');
 
-                    var baseToPartnerPairs = Math.min(baseUnits, partnerUnits);
+                    if (indexInfo.eggLimit === -1){ var baseToPartnerPairs = Math.max(baseUnits, partnerUnits); }
+                    else if (typeof indexInfo.eggLimit !== 'undefined'){ var baseToPartnerPairs = Math.min((baseUnits * indexInfo.eggLimit), partnerUnits); }
+                    else { var baseToPartnerPairs = Math.min(baseUnits, partnerUnits); }
+                    //var baseToPartnerPairs = Math.min(baseUnits, partnerUnits);
                     var leftOverBaseUnits = baseToPartnerPairs < baseUnits ? baseUnits - baseToPartnerPairs : 0;
                     var baseToDittoPairs = existingDitto > 0 ? Math.max(leftOverBaseUnits, existingDitto) : 0;
                     //console.log('|- baseToPartnerPairs('+baseToPartnerPairs+') | leftOverBaseUnits('+leftOverBaseUnits+') | baseToDittoPairs('+baseToDittoPairs+')');
 
                     newUnits = baseToPartnerPairs + baseToDittoPairs;
-                    var currentEggs = baseEggs + partnerEggs;
+                    var currentEggs = baseEvolution !== eggPartner ? (baseEggs + partnerEggs) : baseEggs;
                     //console.log('|- newUnits('+newUnits+') | currentEggs('+currentEggs+')');
 
                     // If partner pokemon have already produced eggs, include in this count
@@ -5837,7 +5899,7 @@
                         if (zoneIsOvercrowded){ allowEgg = false; }
                         }
 
-                    // Check to see if this species is not appropriate for this zone
+                    // Check to see if this species is not appropriate for the current biome
                     if (allowEgg){
                         var appealPoints = 0;
                         var minAppealRequired = pokeIndex.eggCycles * -1;
@@ -5863,7 +5925,7 @@
 
                         } else if (eggsToAddIndex[pokeToken] > 0){
 
-                        // Check to Shiny Ditto reductions and then add new egg to the zone
+                        // Check to Super Ditto reductions and then add new egg to the zone
                         if (existingSuperDitto > 0){ addPokemonToZone(pokeToken, true, existingSuperDitto); }
                         else { addPokemonToZone(pokeToken, true); }
 

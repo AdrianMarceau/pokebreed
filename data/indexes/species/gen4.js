@@ -657,7 +657,9 @@
                 method: 'level-up',
                 value: 21,
                 method2: 'gender',
-                value2: 'female'
+                value2: 'female',
+                method3: 'royal-ascension',
+                value3: 10
                 }]
             },
         'vespiquen': {
@@ -674,6 +676,7 @@
             colors: ['yellow', 'black', 'red', 'white'],
             eggPartner: 'combee',
             eggCycles: 15,
+            eggLimit: 10,
             eggGroups: ['bug'],
             prevEvolution: 'combee'
             },

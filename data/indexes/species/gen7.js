@@ -887,7 +887,9 @@
                 method: 'level-up',
                 value: 33,
                 method2: 'gender',
-                value2: 'female'
+                value2: 'female',
+                method3: 'royal-ascension',
+                value3: 5
                 }]
             },
         'salazzle': {
@@ -903,6 +905,7 @@
             weight: 22.2,
             colors: ['gray', 'purple', 'pink'],
             eggCycles: 20,
+            eggLimit: 5,
             eggPartner: 'salandit',
             eggGroups: ['monster', 'dragon'],
             prevEvolution: 'salandit'
