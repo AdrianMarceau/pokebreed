@@ -4341,6 +4341,7 @@
                 // Check to see if this pokemon has any subtypes from abilities
                 var subTypes = [];
                 if (pokeAbilities.indexOf('steelworker') !== -1){ subTypes.push('steel'); }
+                if (pokeAbilities.indexOf('aquatic') !== -1){ subTypes.push('water'); }
                 for (var key2 = 0; key2 < subTypes.length; key2++){
                     var typeToken = subTypes[key2];
                     var typeInfo = PokemonTypesIndex[typeToken];
