@@ -2883,9 +2883,25 @@
         if (showBreaks){ $pokePanelPokedexEntries.find('.breaker').removeClass('hidden'); }
         else { $pokePanelPokedexEntries.find('.breaker').addClass('hidden'); }
 
-        // Show or hide the mode selectors based on the gen filter value
+        /*
+        // Show/hide and enable/disable the mode selectors based on the gen filter value
         if (currentPokedexFilters['gen'] === 'all'){ $filterDivs.filter('[data-filter="mode"]').addClass('disabled'); }
         else { $filterDivs.filter('[data-filter="mode"]').removeClass('disabled'); }
+        */
+
+        // Collect references to the gen and mode filters (so we can overwrite them later)
+        var currentGenFilter = currentPokedexFilters['gen'];
+        var currentModeFilter = currentPokedexFilters['mode'];
+
+        // Show/hide and enable/disable the mode selectors based on the gen filter value
+        if (currentGenFilter === 'x'){
+            $filterDivs.filter('[data-filter="mode"]').addClass('hidden disabled');
+            currentModeFilter = 'legacy';
+            } else {
+            $filterDivs.filter('[data-filter="mode"]').removeClass('hidden');
+            if (currentGenFilter === 'all'){ $filterDivs.filter('[data-filter="mode"]').addClass('disabled'); }
+            else { $filterDivs.filter('[data-filter="mode"]').removeClass('disabled'); }
+            }
 
         // Define totals variables to increment later during looping
         var showingTotal = 0;
@@ -2904,7 +2920,7 @@
                 var currentValue = currentPokedexFilters[filterKind];
                 if (currentValue === 'all'){ continue; }
                 var filterAttr = filterKind;
-                if (filterKind === 'gen' && currentPokedexFilters['mode'] !== 'legacy'){ filterAttr = 'basegen'; }
+                if (filterKind === 'gen' && currentModeFilter !== 'legacy'){ filterAttr = 'basegen'; }
                 var thisValue = $entry.attr('data-'+filterAttr);
                 //console.log('|- Does ' + filterKind + ' match current value ' + currentValue + ' ? thisValue = ', thisValue);
                 if (filterKind === 'gen'){
@@ -2925,18 +2941,18 @@
             });
 
         // Re-sort the elements based on which mode we're in
-        if (currentPokedexFilters['gen'] === 'all'){ var sortBy = ['data-modnum', 'data-legnum']; } //data-key
-        else if (currentPokedexFilters['mode'] === 'legacy'){ var sortBy = ['data-legnum', 'data-modnum']; }
-        else if (currentPokedexFilters['mode'] === 'modern'){ var sortBy = ['data-modnum', 'data-legnum']; }
-        //console.log('currentPokedexFilters[\'mode\'] = ', currentPokedexFilters['mode']);
+        if (currentGenFilter === 'all'){ var sortBy = ['data-modnum', 'data-legnum']; } //data-key
+        else if (currentModeFilter === 'legacy'){ var sortBy = ['data-legnum', 'data-modnum']; }
+        else if (currentModeFilter === 'modern'){ var sortBy = ['data-modnum', 'data-legnum']; }
+        //console.log('currentPokedexFilters[\'mode\'] = ', currentModeFilter);
         //console.log('sortBy = ', sortBy);
         var $sortedEntries = $pokemonEntries.sort(function(a, b){
             var $a = $(a), $b = $(b);
             var aToken = $a.attr('data-token'), bToken = $b.attr('data-token');
             var aIndex = PokemonSpeciesIndex[aToken], bIndex = PokemonSpeciesIndex[bToken];
-            if (currentPokedexFilters['gen'] !== 'x'
-                && currentPokedexFilters['gen'] !== 'r'
-                && currentPokedexFilters['mode'] === 'legacy'){
+            if (currentGenFilter !== 'x'
+                && currentGenFilter !== 'r'
+                && currentModeFilter === 'legacy'){
                 var aVar = aIndex.formClass !== '' && aIndex.baseGameGeneration !== aIndex.gameGeneration ? 1 : 0;
                 var bVar = bIndex.formClass !== '' && bIndex.baseGameGeneration !== bIndex.gameGeneration ? 1 : 0;
                 if (aVar < bVar){ return -1; }
