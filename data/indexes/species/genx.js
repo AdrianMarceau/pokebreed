@@ -909,7 +909,7 @@
             class: 'baby',
             formClass: 'box-variant',
             formToken: 'altered',
-            baseSpecies: 'altered',
+            baseSpecies: 'munchlax',
             number: 446,
             dexNumber: 1037.333,
             types: ['ice', 'normal'],

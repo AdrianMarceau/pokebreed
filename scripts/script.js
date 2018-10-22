@@ -1140,11 +1140,13 @@
                 if (infoA['gameGeneration'] !== infoB['gameGeneration']){
                     if (infoA['formClass'] === 'regional-variant'
                         || infoA['formClass'] === 'ancient-variant'
+                        || infoA['formClass'] === 'box-variant'
                         || infoA['formClass'] === 'baby-evolution'){
                         regVariantA = true;
                         }
                     if (infoB['formClass'] === 'regional-variant'
                         || infoB['formClass'] === 'ancient-variant'
+                        || infoB['formClass'] === 'box-variant'
                         || infoB['formClass'] === 'baby-evolution'){
                         regVariantB = true;
                         }
@@ -1249,13 +1251,6 @@
                 if (infoA['class'] === 'legendary' || infoA['class'] === 'mythical' || infoA['class'] === 'ultra-beast'){ specialA = true; }
                 if (infoB['class'] === 'legendary' || infoB['class'] === 'mythical' || infoB['class'] === 'ultra-beast'){ specialB = true; }
 
-                var regVariantA = false;
-                var regVariantB = false;
-                if (infoA['gameGeneration'] !== infoB['gameGeneration']){
-                    //if (infoA['formClasses'].indexOf('regional-variant') !== -1 || infoA['formClasses'].indexOf('ancient-variant') !== -1){ regVariantA = true; }
-                    //if (infoB['formClasses'].indexOf('regional-variant') !== -1 || infoB['formClasses'].indexOf('ancient-variant') !== -1){ regVariantB = true; }
-                    }
-
                 var genderVariantA = false;
                 var genderVariantB = false;
                 if (infoA['formClass'] === 'gender-variant' && typeof infoA['prevEvolution'] === 'undefined'){ genderVariantA = true; }
@@ -1290,9 +1285,6 @@
                 else if (baseNumA < baseNumB){ return -1; }
                 else if (baseNumA > baseNumB){ return 1; }
 
-                else if (regVariantA && !regVariantB){ return 1; }
-                else if (!regVariantA && regVariantB){ return -1; }
-
                 else if (genderVariantA && !genderVariantB){ return 1; }
                 else if (!genderVariantA && genderVariantB){ return -1; }
 
@@ -1305,8 +1297,6 @@
                 } else {
 
                     var invertVariant = false;
-                    if (regVariantA && regVariantB && basicA && basicB){ invertVariant = true; }
-
                     if (infoA['order'] > infoB['order']){ return -1 * (invertVariant ? -1 : 1); }
                     else if (infoA['order'] < infoB['order']){ return 1 * (invertVariant ? -1 : 1); }
                     else { return 0; }
@@ -2293,7 +2283,8 @@
                 if (thisGeneration !== lastGeneration
                     && pokemonData.formClass !== 'gender-variant'
                     && pokemonData.formClass !== 'regional-variant'
-                    && pokemonData.formClass !== 'ancient-variant'){
+                    && pokemonData.formClass !== 'ancient-variant'
+                    && pokemonData.formClass !== 'box-variant'){
                     if (lastGeneration !== false){ pokePanelMarkup += '<hr class="breaker" />'; }
                     lastGeneration = thisGeneration;
                 }
@@ -2360,9 +2351,9 @@
                     if (pokemonData.isStarterPokemon === true){ pokeTraits.push('<i class="starter"></i>'); }
                     if (pokemonData.gameGeneration !== pokemonData.baseGameGeneration
                         &&  (pokemonData.formClasses.indexOf('regional-variant') !== -1
-                            || pokemonData.formClasses.indexOf('ancient-variant') !== -1)){
-                            if (pokemonData.formToken.match(/(^|-)?alolan(-|$)?/)){ pokeTraits.push('<i class="nonwild"></i>'); }
-                            if (pokemonData.formToken.match(/(^|-)?proto(-|$)?/)){ pokeTraits.push('<i class="nonwild"></i>'); }
+                            || pokemonData.formClasses.indexOf('ancient-variant') !== -1
+                            || pokemonData.formClasses.indexOf('box-variant') !== -1)){
+                            if (pokemonData.formToken.match(/(^|-)?(alolan|proto|altered)(-|$)?/)){ pokeTraits.push('<i class="nonwild"></i>'); }
                         }
                     }
 
@@ -2602,6 +2593,7 @@
                     else if (pokeIndex.formClass === 'burst-evolution'){ addBreak = false; }
                     else if (pokeIndex.formClass === 'regional-variant'){ addBreak = false; }
                     else if (pokeIndex.formClass === 'ancient-variant'){ addBreak = false; }
+                    else if (pokeIndex.formClass === 'box-variant'){ addBreak = false; }
                     else if (pokeIndex.formClass === 'gender-variant'){ addBreak = false; }
                     else if (typeof pokeIndex.prevEvolution !== 'undefined'){ addBreak = false; }
                     if (addBreak){
@@ -2650,9 +2642,9 @@
                     if (pokeIndex.isStarterPokemon === true){ pokeTraits.push('<i class="starter"></i>'); }
                     if (pokeIndex.gameGeneration !== pokeIndex.baseGameGeneration
                         &&  (pokeIndex.formClasses.indexOf('regional-variant') !== -1
-                            || pokeIndex.formClasses.indexOf('ancient-variant') !== -1)){
-                            if (pokeIndex.formToken.match(/(^|-)?alolan(-|$)?/)){ pokeTraits.push('<i class="nonwild"></i>'); }
-                            if (pokeIndex.formToken.match(/(^|-)?proto(-|$)?/)){ pokeTraits.push('<i class="nonwild"></i>'); }
+                            || pokeIndex.formClasses.indexOf('ancient-variant') !== -1
+                            || pokeIndex.formClasses.indexOf('box-variant') !== -1)){
+                            if (pokeIndex.formToken.match(/(^|-)?(alolan|proto|altered)(-|$)?/)){ pokeTraits.push('<i class="nonwild"></i>'); }
                         }
                     }
 
@@ -3061,6 +3053,7 @@
                 if (pokeIndex.formClass === 'seasonal-variant'){ titleText += '\n' + 'Seasonal Variant'; }
                 if (pokeIndex.formClass === 'regional-variant'){ titleText += '\n' + 'Regional Variant'; }
                 if (pokeIndex.formClass === 'ancient-variant'){ titleText += '\n' + 'Ancient Variant'; }
+                if (pokeIndex.formClass === 'box-variant'){ titleText += '\n' + 'Box Variant'; }
                 if (pokeIndex.formClass === 'weather-variant'){ titleText += '\n' + 'Weather Variant'; }
                 if (pokeIndex.formClass === 'field-variant'){ titleText += '\n' + 'Field Variant'; }
                 if (pokeIndex.formClass === 'type-variant'){ titleText += '\n' + 'Type Variant'; }
@@ -6393,10 +6386,11 @@
             // Skip if this is a gift-only starter pokemon
             if (pokeInfo.isStarterPokemon === true){ continue; }
 
-            // Skip if the pokemon is a cross-gen regional or ancient variant
+            // Skip if the pokemon is a cross-gen regional / ancient / box variant
             if (pokeInfo.gameGeneration !== pokeInfo.baseGameGeneration
                 && (pokeFormClass === 'regional-variant'
-                    || pokeFormClass === 'ancient-variant')){
+                    || pokeFormClass === 'ancient-variant'
+                    || pokeFormClass === 'box-variant')){
                 continue;
                 }
 
