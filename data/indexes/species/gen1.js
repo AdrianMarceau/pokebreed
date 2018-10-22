@@ -401,7 +401,7 @@
             prevEvolution: 'rattata'
             },
 
-        spearow: {
+        'spearow': {
             order: indexOrder++,
             token: 'spearow',
             name: 'Spearow',
@@ -420,7 +420,7 @@
                 value: 20
                 }]
             },
-        fearow: {
+        'fearow': {
             order: indexOrder++,
             token: 'fearow',
             name: 'Fearow',
@@ -436,7 +436,7 @@
             prevEvolution: 'spearow'
             },
 
-        ekans: {
+        'ekans': {
             order: indexOrder++,
             token: 'ekans',
             name: 'Ekans',
@@ -455,7 +455,7 @@
                 value: 22
                 }]
             },
-        arbok: {
+        'arbok': {
             order: indexOrder++,
             token: 'arbok',
             name: 'Arbok',
@@ -471,7 +471,7 @@
             prevEvolution: 'ekans'
             },
 
-        pikachu: {
+        'pikachu': {
             order: indexOrder++,
             token: 'pikachu',
             name: 'Pikachu',
@@ -492,7 +492,7 @@
                 value2: 25
                 }]
             },
-        raichu: {
+        'raichu': {
             order: indexOrder++,
             token: 'raichu',
             name: 'Raichu',

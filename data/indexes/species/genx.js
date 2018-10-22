@@ -591,9 +591,9 @@
             formToken: 'female',
             number: 122,
             dexNumber: 1024,
-            types: ['psychic', 'fairy'],
+            types: ['fairy', 'psychic'],
             genderRatio: {female: 1.0000},
-            baseStats: {hp: 40, phAttack: 45, phDefense: 65, spAttack: 100, spDefense: 120, speed: 90},
+            baseStats: {hp: 50, phAttack: 45, phDefense: 55, spAttack: 110, spDefense: 100, speed: 100},
             abilities: {0: 'soundproof', 1: 'filter', hidden: 'technician'},
             height: 1.3,
             weight: 54.5,
@@ -629,61 +629,6 @@
     // Add the generation's list of cross-gen evos/forms to the index
     var indexOrder = thisIndex.indexOrder;
     thisIndex.addSpeciesIndex({
-
-        // Regional Variants (Misc Forms)
-
-        'tundra-munchlax': {
-            order: thisIndex.afterOrder('snorlax', 1),
-            token: 'tundra-munchlax',
-            name: 'Tundra Munchlax',
-            class: 'baby',
-            formClass: 'regional-variant',
-            formToken: 'tundra',
-            baseSpecies: 'munchlax',
-            number: 446,
-            dexNumber: 1026.111,
-            types: ['ice', 'normal'],
-            genderRatio: {male: 0.875, female: 0.125},
-            baseStats: {hp: 135, phAttack: 65, phDefense: 60, spAttack: 40, spDefense: 85, speed: 5},
-            abilities: {0: 'slush-rush', 1: 'thick-fat', hidden: 'white-smoke'},
-            height: 0.6,
-            weight: 105,
-            colors: ['white', 'blue'],
-            eggCycles: 40,
-            eggGroups: ['undiscovered'],
-            altBaseEvolutions: [{
-                species: 'munchlax',
-                method: 'type-warning',
-                value: 'ice'
-                }],
-            nextEvolutions: [{
-                species: 'tundra-snorlax',
-                method: 'happiness',
-                value: 'high',
-                method2: 'level-up',
-                value2: 25
-                }]
-            },
-        'tundra-snorlax': {
-            order: thisIndex.afterOrder('snorlax', 2),
-            token: 'tundra-snorlax',
-            name: 'Tundra Snorlax',
-            formClass: 'regional-variant',
-            formToken: 'tundra',
-            baseSpecies: 'snorlax',
-            dexNumber: 1026.222,
-            number: 143,
-            types: ['ice', 'normal'],
-            genderRatio: {male: 0.875, female: 0.125},
-            baseStats: {hp: 160, phAttack: 90, phDefense: 85, spAttack: 65, spDefense: 110, speed: 30},
-            abilities: {0: 'ice-body', 1: 'thick-fat', hidden: 'white-smoke'},
-            height: 2.1,
-            weight: 460,
-            colors: ['white', 'blue', 'gray'],
-            eggCycles: 40,
-            eggGroups: ['monster'],
-            prevEvolution: 'tundra-munchlax'
-            },
 
         // Ancient Variants (Proto Forms)
 
@@ -907,6 +852,109 @@
             prevEvolution: 'proto-skiploom'
             },
 
+        // Box Variants (Altered Forms)
+
+        'altered-ekans': {
+            order: thisIndex.afterOrder('arbok', 1),
+            token: 'altered-ekans',
+            name: 'Altered Ekans',
+            formClass: 'box-variant',
+            formToken: 'altered',
+            baseSpecies: 'ekans',
+            number: 23,
+            dexNumber: 1037.111,
+            types: ['water', 'poison'],
+            baseStats: {hp: 35, phAttack: 55, phDefense: 34, spAttack: 40, spDefense: 54, speed: 70},
+            abilities: {0: 'swift-swim', 1: 'shed-skin', hidden: 'poison-touch'},
+            height: 2.4,
+            weight: 6.5,
+            colors: ['blue', 'white', 'gray', 'purple', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field', 'dragon'],
+            altBaseEvolutions: [{
+                species: 'ekans',
+                method: 'type-warning',
+                value: 'water'
+                }],
+            nextEvolutions: [{
+                species: 'altered-arbok',
+                method: 'level-up',
+                value: 22
+                }]
+            },
+        'altered-arbok': {
+            order: thisIndex.afterOrder('arbok', 2),
+            token: 'altered-arbok',
+            name: 'Altered Arbok',
+            formClass: 'box-variant',
+            formToken: 'altered',
+            baseSpecies: 'arbok',
+            number: 24,
+            dexNumber: 1037.222,
+            types: ['water', 'poison'],
+            baseStats: {hp: 60, phAttack: 80, phDefense: 59, spAttack: 65, spDefense: 79, speed: 105},
+            abilities: {0: 'swift-swim', 1: 'shed-skin', hidden: 'poison-touch'},
+            height: 3.7,
+            weight: 64.6,
+            colors: ['blue', 'white', 'gray', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field', 'dragon'],
+            prevEvolution: 'altered-ekans'
+            },
+
+        'altered-munchlax': {
+            order: thisIndex.afterOrder('snorlax', 1),
+            token: 'altered-munchlax',
+            name: 'Altered Munchlax',
+            class: 'baby',
+            formClass: 'box-variant',
+            formToken: 'altered',
+            baseSpecies: 'altered',
+            number: 446,
+            dexNumber: 1037.333,
+            types: ['ice', 'normal'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 135, phAttack: 65, phDefense: 60, spAttack: 40, spDefense: 85, speed: 5},
+            abilities: {0: 'snow-cloak', 1: 'thick-fat', hidden: 'white-smoke'},
+            height: 0.6,
+            weight: 105,
+            colors: ['white', 'blue'],
+            eggCycles: 40,
+            eggGroups: ['undiscovered'],
+            altBaseEvolutions: [{
+                species: 'munchlax',
+                method: 'type-warning',
+                value: 'ice'
+                }],
+            nextEvolutions: [{
+                species: 'altered-snorlax',
+                method: 'happiness',
+                value: 'high',
+                method2: 'level-up',
+                value2: 25
+                }]
+            },
+        'altered-snorlax': {
+            order: thisIndex.afterOrder('snorlax', 2),
+            token: 'altered-snorlax',
+            name: 'Altered Snorlax',
+            formClass: 'box-variant',
+            formToken: 'altered',
+            baseSpecies: 'snorlax',
+            dexNumber: 1037.444,
+            number: 143,
+            types: ['ice', 'normal'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 160, phAttack: 90, phDefense: 85, spAttack: 65, spDefense: 110, speed: 30},
+            abilities: {0: 'snow-warning', 1: 'thick-fat', hidden: 'white-smoke'},
+            height: 2.1,
+            weight: 460,
+            colors: ['white', 'blue', 'gray'],
+            eggCycles: 40,
+            eggGroups: ['monster'],
+            prevEvolution: 'altered-munchlax'
+            },
+
         // Newly Discovered Forms
 
         'snow-wormadam': {
@@ -1068,6 +1116,7 @@
     // Update previous gen pokemon with alt base evolution data
     thisIndex.addAltBaseEvolutions([
 
+        // Baby / Pre Evolutions
         {base: 'paras', species: 'paramite', method: 'type-surge', value: 'bug'},
         {base: 'vulpix', species: 'kittri', method: 'type-surge', value: 'fire'},
         {base: 'alolan-vulpix', species: 'alolan-kittri', method: 'type-surge', value: 'ice'},
@@ -1090,8 +1139,11 @@
         {base: 'panpour', species: 'elemonk', method: 'type-warning', value: 'water'},
         {base: 'rhyhorn', species: 'rhydoll', method: 'type-surge', value: 'ground'},
 
-        {base: 'munchlax', species: 'tundra-munchlax', method: 'type-surge', value: 'ice'},
+        // Altered / Box Forms
+        {base: 'ekans', species: 'altered-ekans', method: 'type-surge', value: 'water'},
+        {base: 'munchlax', species: 'altered-munchlax', method: 'type-surge', value: 'ice'},
 
+        // Proto / Ancient Forms
         {base: 'aipom', species: 'proto-aipom', method: 'type-surge', value: 'dark'},
         {base: 'sneasel', species: 'proto-sneasel', method: 'type-surge', value: 'normal'},
         {base: 'remoraid', species: 'proto-remoraid', method: 'type-surge', value: 'steel'},
