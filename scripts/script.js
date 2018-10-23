@@ -2898,8 +2898,8 @@
         */
 
         // Collect references to the gen and mode filters (so we can overwrite them later)
-        var currentGenFilter = currentPokedexFilters['gen'];
-        var currentModeFilter = currentPokedexFilters['mode'];
+        var currentGenFilter = typeof currentPokedexFilters['gen'] !== 'undefined' ? currentPokedexFilters['gen'] : 'all';
+        var currentModeFilter = typeof currentPokedexFilters['mode'] !== 'undefined' ? currentPokedexFilters['mode'] : 'legacy';
 
         // Show/hide and enable/disable the mode selectors based on the gen filter value
         if (currentGenFilter === 'x'){
