@@ -4313,7 +4313,7 @@
                                 if ((type === 'ice' || type === 'fire') && pokeAbilities.indexOf('thick-fat') !== -1){ modInfluencePoints -= modInfluencePoints * 0.50; }
                                 // Otherwise we can add the weakness type stats
                                 if (typeof currentZoneStats['types'][type] === 'undefined'){ currentZoneStats['types'][type] = 0; }
-                                currentZoneStats['types'][type] += 0.50 * modInfluencePoints;
+                                currentZoneStats['types'][type] += 0.25 * modInfluencePoints;
                                 }
                             }
                         }
@@ -4324,7 +4324,7 @@
                                 for (var key4 = 0; key4 < typeInfo['matchups']['strengths'].length; key4++){
                                     var type = typeInfo['matchups']['strengths'][key4];
                                     if (typeof currentZoneStats['types'][type] === 'undefined'){ currentZoneStats['types'][type] = 0; }
-                                    currentZoneStats['types'][type] -= 0.50 * pokeIndex.influencePoints;
+                                    currentZoneStats['types'][type] -= 0.25 * pokeIndex.influencePoints;
                                     }
                                 }
                             }
@@ -6511,6 +6511,9 @@
             if (typeof eventPokemonChanceBoosters[pokeClass] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters[pokeClass]; }
             if (typeof eventPokemonChanceBoosters[pokeToken] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters[pokeToken]; }
             if (typeof eventPokemonChanceBoosters['*'] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters['*']; }
+
+            // Reduce chance slightly if this is a rare fossile pokemon
+            if (pokeInfo.isFossilPokemon === true){ pokeChance -= (pokeChance * 0.20); }
 
             // If the chance was more than zero, push into the queue
             if (pokeChance > 0 && pokemonVisitorChanceTokens.indexOf(pokeToken) === -1){
