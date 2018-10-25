@@ -122,6 +122,12 @@
             name: 'Dreamworld',
             baseTypes: ['fairy', '', 'psychic']
             },
+        'temple': {
+            order: indexOrder++,
+            token: 'temple',
+            name: 'Temple',
+            baseTypes: ['dragon', '', 'flying']
+            },
         };
 
     // Update the global index order with current value
