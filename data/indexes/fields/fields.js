@@ -24,7 +24,7 @@
             order: indexOrder++,
             token: 'savanna',
             name: 'Savanna',
-            baseTypes: ['normal', '', 'fairy', 'electric']
+            baseTypes: ['normal', '', 'electric']
             },
         'desert': {
             order: indexOrder++,
@@ -115,6 +115,12 @@
             token: 'dojo',
             name: 'Dojo',
             baseTypes: ['fighting']
+            },
+        'dreamworld': {
+            order: indexOrder++,
+            token: 'dreamworld',
+            name: 'Dreamworld',
+            baseTypes: ['fairy', '', 'psychic']
             },
         };
 
