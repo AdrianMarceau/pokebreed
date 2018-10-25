@@ -78,7 +78,7 @@
             order: indexOrder++,
             token: 'city',
             name: 'City',
-            baseTypes: ['fighting', 'poison', 'normal']
+            baseTypes: ['poison', 'normal', 'fighting']
             },
         'sky': {
             order: indexOrder++,
@@ -109,6 +109,12 @@
             token: 'cliffside',
             name: 'Cliffside',
             baseTypes: ['rock', '', 'ground', 'dragon']
+            },
+        'dojo': {
+            order: indexOrder++,
+            token: 'dojo',
+            name: 'Dojo',
+            baseTypes: ['fighting']
             },
         };
 
