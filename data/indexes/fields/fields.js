@@ -116,10 +116,10 @@
             name: 'Dojo',
             baseTypes: ['fighting']
             },
-        'dreamworld': {
+        'dreamscape': {
             order: indexOrder++,
-            token: 'dreamworld',
-            name: 'Dreamworld',
+            token: 'dreamscape',
+            name: 'Dreamscape',
             baseTypes: ['fairy', '', 'psychic']
             },
         'temple': {
