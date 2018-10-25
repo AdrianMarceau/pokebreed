@@ -1230,7 +1230,14 @@
             weight: 5.7,
             colors: ['gray', 'white', 'blue'],
             eggCycles: 25,
-            eggGroups: ['fairy', 'mineral']
+            eggGroups: ['fairy', 'mineral'],
+            nextEvolutions: [{
+                species: 'diancie',
+                method: 'level-up',
+                value: 100,
+                method2: 'royal-ascension',
+                value2: 75
+                }]
             },
 
         'goomy': {
@@ -1517,6 +1524,7 @@
             token: 'diancie',
             name: 'Diancie',
             class: 'mythical',
+            eventOnlyPokemon: true,
             number: 719,
             types: ['rock', 'fairy'],
             genderRatio: {none: 1.000},
@@ -2683,7 +2691,7 @@
         // ---
 
         // Legendary trigger relationships
-        {base: 'diancie', species: 'carbink'},
+        //{base: 'diancie', species: 'carbink'},
 
         ]);
 

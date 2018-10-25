@@ -5084,8 +5084,10 @@
                             //console.log('royal-ascension', nextSpeciesToken, numRelatedPokemon, nextSpeciesCount);
                             if (numRelatedPokemon >= methodValue){
                                 var existingKingOrQueen = getZonePokemonByFilter({token:nextSpeciesToken,gender:pokemonInfo.gender});
+                                var existingMegaKingOrQueen = getZonePokemonByFilter({token:'mega-'+nextSpeciesToken,gender:pokemonInfo.gender});
                                 //console.log('existingKingOrQueen =', existingKingOrQueen);
-                                if (!existingKingOrQueen.length){
+                                if (!existingKingOrQueen.length
+                                    && !existingMegaKingOrQueen.length){
                                     //console.log('success! '+pokemonInfo.token+' '+pokemonInfo.id+' will evolve into '+nextSpeciesToken);
                                     pendingEvolutionLimits[nextSpeciesToken+'/'+pokemonInfo.gender] = 1;
                                     //console.log('pendingEvolutionLimits =', pendingEvolutionLimits);
@@ -6361,9 +6363,10 @@
             var pokeInfo = PokemonSpeciesIndex[pokeToken];
             var pokeChance = 0;
 
-            // Skip hidden or gift pokemon as they cannot appear as visitors
-            if (typeof pokeInfo.isHiddenPokemon !== 'undefined' && pokeInfo.isHiddenPokemon === true){ continue; }
-            if (typeof pokeInfo.isGiftPokemon !== 'undefined' && pokeInfo.isGiftPokemon === true){ continue; }
+            // Skip explicitly restricted and hidden or gift pokemon as they cannot appear as visitors
+            if (typeof pokeInfo.eventOnlyPokemon !== 'undefined' && pokeInfo.eventOnlyPokemon === true){ continue; }
+            else if (typeof pokeInfo.isHiddenPokemon !== 'undefined' && pokeInfo.isHiddenPokemon === true){ continue; }
+            else if (typeof pokeInfo.isGiftPokemon !== 'undefined' && pokeInfo.isGiftPokemon === true){ continue; }
 
             // Check to see if this is a basic or a special pokemon
             var pokeClass = typeof pokeInfo.visitorClass !== 'undefined' ? pokeInfo.visitorClass : pokeInfo.class;

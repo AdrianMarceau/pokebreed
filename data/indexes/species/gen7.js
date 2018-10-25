@@ -2552,6 +2552,7 @@
     zygardeData.name = 'Zygarde 50%';
     zygardeData.formClass = 'form-variant';
     zygardeData.formToken = 'p50';
+    zygardeData.isEventOnlyPokemon = true;
 
     // Update previous gen pokemon with new prev evolution data
     thisIndex.addPrevEvolutions([
