@@ -852,14 +852,14 @@
             prevEvolution: 'proto-skiploom'
             },
 
-        // Box Variants (Altered Forms)
+        // Box Variants (Beta Forms)
 
-        'altered-ekans': {
+        'beta-ekans': {
             order: thisIndex.afterOrder('arbok', 1),
-            token: 'altered-ekans',
-            name: 'Altered Ekans',
+            token: 'beta-ekans',
+            name: 'Beta Ekans',
             formClass: 'box-variant',
-            formToken: 'altered',
+            formToken: 'beta',
             baseSpecies: 'ekans',
             number: 23,
             dexNumber: 1037.111,
@@ -877,17 +877,17 @@
                 value: 'water'
                 }],
             nextEvolutions: [{
-                species: 'altered-arbok',
+                species: 'beta-arbok',
                 method: 'level-up',
                 value: 22
                 }]
             },
-        'altered-arbok': {
+        'beta-arbok': {
             order: thisIndex.afterOrder('arbok', 2),
-            token: 'altered-arbok',
-            name: 'Altered Arbok',
+            token: 'beta-arbok',
+            name: 'Beta Arbok',
             formClass: 'box-variant',
-            formToken: 'altered',
+            formToken: 'beta',
             baseSpecies: 'arbok',
             number: 24,
             dexNumber: 1037.222,
@@ -899,16 +899,16 @@
             colors: ['blue', 'white', 'gray', 'yellow'],
             eggCycles: 20,
             eggGroups: ['field', 'dragon'],
-            prevEvolution: 'altered-ekans'
+            prevEvolution: 'beta-ekans'
             },
 
-        'altered-munchlax': {
+        'beta-munchlax': {
             order: thisIndex.afterOrder('snorlax', 1),
-            token: 'altered-munchlax',
-            name: 'Altered Munchlax',
+            token: 'beta-munchlax',
+            name: 'Beta Munchlax',
             class: 'baby',
             formClass: 'box-variant',
-            formToken: 'altered',
+            formToken: 'beta',
             baseSpecies: 'munchlax',
             number: 446,
             dexNumber: 1037.333,
@@ -927,19 +927,19 @@
                 value: 'ice'
                 }],
             nextEvolutions: [{
-                species: 'altered-snorlax',
+                species: 'beta-snorlax',
                 method: 'happiness',
                 value: 'high',
                 method2: 'level-up',
                 value2: 25
                 }]
             },
-        'altered-snorlax': {
+        'beta-snorlax': {
             order: thisIndex.afterOrder('snorlax', 2),
-            token: 'altered-snorlax',
-            name: 'Altered Snorlax',
+            token: 'beta-snorlax',
+            name: 'Beta Snorlax',
             formClass: 'box-variant',
-            formToken: 'altered',
+            formToken: 'beta',
             baseSpecies: 'snorlax',
             dexNumber: 1037.444,
             number: 143,
@@ -952,7 +952,7 @@
             colors: ['white', 'blue', 'gray'],
             eggCycles: 40,
             eggGroups: ['monster'],
-            prevEvolution: 'altered-munchlax'
+            prevEvolution: 'beta-munchlax'
             },
 
         // Newly Discovered Forms
@@ -1140,8 +1140,8 @@
         {base: 'rhyhorn', species: 'rhydoll', method: 'type-surge', value: 'ground'},
 
         // Altered / Box Forms
-        {base: 'ekans', species: 'altered-ekans', method: 'type-surge', value: 'water'},
-        {base: 'munchlax', species: 'altered-munchlax', method: 'type-surge', value: 'ice'},
+        {base: 'ekans', species: 'beta-ekans', method: 'type-surge', value: 'water'},
+        {base: 'munchlax', species: 'beta-munchlax', method: 'type-surge', value: 'ice'},
 
         // Proto / Ancient Forms
         {base: 'aipom', species: 'proto-aipom', method: 'type-surge', value: 'dark'},
