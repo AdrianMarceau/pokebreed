@@ -2630,7 +2630,7 @@
             abilities: {0: 'rock-head', 1: 'pressure', hidden: 'unnerve'},
             height: 1.8,
             weight: 59,
-            colors: ['gray', 'purple'],
+            colors: ['gray', 'purple', 'green'],
             eggCycles: 35,
             eggGroups: ['flying'],
             },

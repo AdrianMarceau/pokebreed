@@ -416,6 +416,33 @@
                 }]
             },
 
+        'pterabite': {
+            order: thisIndex.beforeOrder('aerodactyl'),
+            token: 'pterabite',
+            legacyToken: 'baby-aerodactyl',
+            name: 'Pterabite',
+            class: 'baby',
+            formClass: 'baby-evolution',
+            formToken: 'baby',
+            isFossilPokemon: true,
+            number: 142,
+            dexNumber: 1011.2222,
+            types: ['rock', 'flying'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 40, phAttack: 53, phDefense: 33, spAttack: 30, spDefense: 38, speed: 65},
+            abilities: {0: 'rock-head', 1: 'pressure', hidden: 'unnerve'},
+            height: 1.2,
+            weight: 42,
+            colors: ['gray', 'green', 'purple'],
+            eggCycles: 35,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'aerodactyl',
+                method: 'level-up',
+                value: 20
+                }]
+            },
+
         'paramite': {
             order: thisIndex.beforeOrder('paras'),
             token: 'paramite',
@@ -1138,6 +1165,7 @@
         {base: 'pansear', species: 'elemonk', method: 'type-warning', value: 'fire'},
         {base: 'panpour', species: 'elemonk', method: 'type-warning', value: 'water'},
         {base: 'rhyhorn', species: 'rhydoll', method: 'type-surge', value: 'ground'},
+        {base: 'aerodactyl', species: 'pterabite', method: 'type-surge', value: 'rock'},
 
         // Altered / Box Forms
         {base: 'ekans', species: 'beta-ekans', method: 'type-surge', value: 'water'},
