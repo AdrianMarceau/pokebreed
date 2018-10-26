@@ -22,12 +22,7 @@
 /* -- PLANNED NEW FEATURES -- */
 /* -------------------------- */
 
-+  Add single-instance evolution criteria/condition (only one at a time)
-    +  Add to Combee / Vespiquen
-    +  Maybe add to Salandit / Salazzal
-    +  Maybe add to Carbink / Diancie
-
-+  Add weather to the simulator
++  Add weather to the simulator?
     +  Allow weather-related abilities to force it like Drought, Drizzle, etc.
 
 +  Allow panel customization
@@ -84,26 +79,40 @@
 
 +  Shared pre-evolution for Frillish (genderless)
 
-+  Shared pre-evolution for Pansage/Pansear/Panpour
-    +  Possible names : [Elemonk], Monkly, Monklite, Chimpbo, Monkby
-
 +  Male counterpart for breeding w/ Flabebe, Floette, Florges (?)
     + (Bayleef beta? Hanamogura / Blossomole?)
+
++  New regional variants for non-Alolan regions?
+    + Kanto / Kantonian
+    + Johto / Johtonian
+    + Hoenn / Hoennian
+    + Sinnoh / Sinnohan
+    + Unova / Unovan
+    + Kalos / Kalosian
+    - Alola / Alolan
+
++  New prototype forms?
+    + Stantler (Normal / Steel)
+
++  New box-exclusive variants (beta variants?)
+    +
+    + Munchlax / Snorlax (Normal / Ice) [Gen:4/1]
+    + Ekans / Arbok (Water / Poison) [Gen:1/1]
+    + Bonsly / Sudowoodo (Rock / Ghost) [Gen:4/2]
+    + Slakoth / Vigoroth / Slaking (Normal / Poison) [Gen:3/3/3]
+    + Buneary / Lopunny / Mega Lopunny (Fairy / Fighting) [Gen:4/4/4]
+    + Finneon / Lumineon (Water / Fairy) [Gen:4/4]
+    +
+    + Torkoal (Fire / Water) [Gen:3]
+    +
+    + Aromatisse (Fairy / Poison) [Gen:6]
+    + Slurpuff (Fairy / Fire) [Gen:6]
+    +
 
 
 /* ----------------------- */
 /* -- GIFT POKEMON IDEAS -- */
 /* ----------------------- */
-
-+  New regional variants for non-Alolan regions
-    + Kanto / Kantonian
-    + Johto / Johtonian
-    + Hoenn / Hoennian
-    + Sinnoh / Sinnohan
-        + Sinnohan Snorlax (Normal / Ice) [from "Snowmen Snorlax" in anime]
-    + Unova / Unovan
-    + Kalos / Kalosian
-    - Alola / Alolan
 
 +  Shadow Pokemon unlocked via completed dex, have special properties
     +  Infinite life points, allowing to live forever
