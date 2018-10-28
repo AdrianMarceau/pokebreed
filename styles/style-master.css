@@ -1854,7 +1854,7 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     position: absolute;
     background-color: #373739;
     color: #FFFFFF;
-    z-index: 9999;
+    z-index: 8888;
     width: 70px;
     height: 210px;
     float: none;
@@ -2500,6 +2500,115 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 .panel .buttons .info .group.modes .gen-filters ul li:last-child:after {
     display: none;
 }
+
+/* -- POPUP WINDOW STYLES -- */
+
+.popup {
+    position: absolute;
+    display: block;
+    overflow: hidden;
+}
+.popup.hidden,
+.popup .hidden {
+    display: none !important;
+}
+.popup,
+.popup * {
+    box-sizing: border-box;
+}
+.popup.overlay {
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000000;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+.popup.window {
+    width: 480px;
+    height: auto;
+    min-height: 280px;
+    max-width: 99vw;
+    max-height: 99vh;
+    top: 150px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    background-color: #1c1c1c;
+    border: 2px solid #0c0c0c;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+}
+.popup > .wrap {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+.popup.window > .wrap {
+    padding: 10px 10px 40px;
+    min-height: 276px;
+}
+.popup.window > .wrap > div {
+    display: block;
+    margin: 0 auto 5px;
+    background-color: #161616;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #bdbdbd;
+}
+.popup.window > .wrap > div:last-child {
+    margin-bottom: 0;
+}
+
+.popup.window > .wrap > .banner {
+    height: 125px;
+    border: 1px solid #0c0c0c;
+}
+
+.popup.window > .wrap > .textbox {
+    padding: 20px 10px;
+    min-height: 91px;
+}
+
+.popup.window > .wrap > .buttons {
+    padding: 0;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    background-color: transparent;
+}
+.popup.window > .wrap > .buttons .button {
+    display: inline-block;
+    padding: 5px 10px;
+    border: 1px solid #0c0c0c;
+    background-color: #283f71;
+    color: #fafafa;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: color 0.2s, background-color 0.2s;
+}
+.popup.window > .wrap > .buttons .button:hover {
+    color: #ffffff;
+    background-color: #2e4a84;
+}
+.popup.window > .wrap > .buttons .button.next,
+.popup.window > .wrap > .buttons .button.continue,
+.popup.window > .wrap > .buttons .button:first-child:last-child {
+    width: 100%;
+}
+
 
 /* -- KEYBOARD SHORTCUT STYLES -- */
 

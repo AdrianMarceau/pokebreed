@@ -336,6 +336,9 @@
         // Generate the click events for all the other panel buttons
         generateButtonPanelEvents();
 
+        // Generate the popup window button and panel markup for later
+        generatePopupWindowMarkup();
+
         // Update the overview with current details before starting
         updateOverview();
 
@@ -893,6 +896,153 @@
                 return false;
                 }
 
+            });
+
+    }
+
+    // Define a function for generation popup window + button markup
+    var $popupOverlay = false;
+    var $popupWindow = false;
+    var popupWindowQueue = [];
+    function generatePopupWindowMarkup(){
+
+        // Add the initial, empty containers for the popup elements
+        $('body').append('<div class="popup overlay hidden"><div class="wrap">' +
+                '<div class="popup window"><div class="wrap"></div></div>' +
+            '</div></div>');
+
+        // Update global refs to this newly generated markup
+        $popupOverlay = $('body').find('.popup.overlay');
+        $popupWindow = $('body').find('.popup.window');
+
+        // Bind the overlay and the close button to the close action
+        $popupOverlay.bind('click', function(e){
+            e.preventDefault();
+            //console.log('popup overlay clicked');
+            //closePopupWindow();
+            });
+
+        // Prevent window clicks from propagating to the overlay
+        $popupWindow.bind('click', function(e){
+            e.preventDefault();
+            e.stopPropagation();
+            //console.log('popup window clicked');
+            });
+
+        // Pre-bind an event for the continue button (closes the window)
+        $popupWindow.on('click', '.button.continue', function(e){
+            e.preventDefault();
+            console.log('continue button clicked');
+            closePopupWindow(function(){
+                if (popupWindowQueue.length > 0){
+                    var panelConfig = popupWindowQueue.shift();
+                    openPopupWindow(panelConfig);
+                    }
+                });
+            });
+
+        // Pre-bind and event for the next button (shows next message)
+        $popupWindow.on('click', '.button.next', function(e){
+            e.preventDefault();
+            console.log('next button clicked');
+            if (popupWindowQueue.length > 0){
+                var panelConfig = popupWindowQueue.shift();
+                openPopupWindow(panelConfig);
+                } else {
+                closePopupWindow();
+                }
+            });
+
+    }
+
+    // Define a function for queueing popup windows to be displayed
+    function queuePopupWindow(panelConfig){
+        popupWindowQueue.push(panelConfig);
+    }
+
+    // Define a function for opening content in a new popup window
+    function openPopupWindow(panelConfig){
+        //console.log('openPopupWindow(panelConfig)', panelConfig);
+
+        // Auto-generate certain config values if not explicitly set
+        if (typeof panelConfig.buttons === 'undefined'){ panelConfig.buttons = {continue: 'Let\'s Go!'}; }
+
+        // Loop through provided panel markup and add
+        var newPanelWrapMarkup = '';
+        var panelTokens = Object.keys(panelConfig);
+        for (var i = 0; i < panelTokens.length; i++){
+            //console.log('-----');
+
+            var panelToken = panelTokens[i];
+            var panelContent = panelConfig[panelToken];
+            var panelStyle = '';
+            var panelMarkup = '';
+            //console.log('panelToken = ', typeof panelToken, panelToken);
+            //console.log('panelContent = ', typeof panelContent, panelContent);
+
+            // Process banner and button markup different then other panels
+            if (panelToken === 'banner'
+                && panelContent.match(/^[-_\.a-z0-9]+$/i)){
+
+                var bannerFile = 'images/events/'+panelContent+'.jpg';
+                panelStyle = 'background-image:url(\''+bannerFile+'\');';
+
+                } else if (panelToken === 'buttons'
+                    && typeof panelContent === 'object') {
+
+                var buttonList = Object.keys(panelContent);
+                for (var j = 0; j < buttonList.length; j++){
+                    var buttonToken = buttonList[j];
+                    var buttonText = panelContent[buttonToken];
+                    panelMarkup += '<a class="button '+ buttonToken +'">'+ buttonText +'</a>';
+                    }
+
+                } else if (typeof panelContent === 'string'
+                    && panelContent.length > 0){
+
+                    panelMarkup += panelContent;
+
+                }
+
+            //console.log('panelStyle = ', typeof panelStyle, panelStyle);
+            //console.log('panelMarkup = ', typeof panelMarkup, panelMarkup);
+
+            // Put it all together into the popup window
+            if (panelStyle.length || panelMarkup.length){
+                newPanelWrapMarkup += '<div class="'+panelToken+'"' +
+                    (panelStyle.length ? ' style="'+panelStyle+'"' : '') +
+                    '>' + (panelMarkup.length ? panelMarkup : '') +
+                    '</div>';
+                }
+
+            }
+
+        // Empty the panel of existing markup and replace it
+        var $panelWrap = $popupWindow.find('> .wrap');
+        $panelWrap.empty().append(newPanelWrapMarkup);
+
+        // Remove hidden class then fade-in the popup window
+        if ($popupOverlay.hasClass('hidden')){
+            $popupOverlay.css({opacity:0}).removeClass('hidden');
+            $popupOverlay.animate({opacity:1}, 200, 'linear');
+            }
+
+    }
+
+    // Define a function for closing the current popup window
+    function closePopupWindow(onComplete){
+
+        // Collect temporary element refs
+        var $banner = $popupWindow.find('.banner');
+        var $textbox = $popupWindow.find('.textbox');
+        var $buttons = $popupWindow.find('.buttons');
+
+        // Fade-out the popup window then add the hidden class
+        $popupOverlay.css({opacity:1});
+        $popupOverlay.animate({opacity:0}, 200, 'linear', function(){
+            $(this).addClass('hidden');
+            if (typeof onComplete === 'function'){ return onComplete(); }
+            else { return true; }
             });
 
     }
