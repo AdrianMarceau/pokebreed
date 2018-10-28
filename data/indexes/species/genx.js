@@ -1005,6 +1005,27 @@
             cloneEvolutions: 'castform'
             },
 
+        'cloudy-castform': {
+            order: thisIndex.afterOrder('snowy-castform', 2),
+            token: 'cloudy-castform',
+            name: 'Cloudy Castform',
+            formClass: 'weather-variant',
+            formToken: 'cloudy',
+            baseForm: 'castform',
+            number: 351,
+            dexNumber: 1037.667,
+            types: ['flying'],
+            baseStats: {hp: 70, phAttack: 70, phDefense: 70, spAttack: 70, spDefense: 70, speed: 70},
+            abilities: {0: 'forecast'},
+            height: 0.3,
+            weight: 0.8,
+            colors: ['white', 'gray', 'purple', 'black'],
+            eggCycles: 25,
+            eggGroups: ['fairy', 'amorphous'],
+            prevEvolution: 'castform',
+            cloneEvolutions: 'castform'
+            },
+
         'snow-wormadam': {
             order: thisIndex.afterOrder('trash-wormadam', 1),
             token: 'snow-wormadam',
@@ -1238,6 +1259,7 @@
         {base: 'qwilfish', species: 'buzzqwill', method: 'type-surge', value: 'electric', method2: 'level-up', value2: 30},
 
         {base: 'castform', species: 'rocky-castform', method: 'type-appeal', value: ['rock', 'ground']},
+        {base: 'castform', species: 'cloudy-castform', method: 'type-appeal', value: 'flying'},
 
         {base: 'burmy', species: 'snow-wormadam', method: 'level-up', value: 20, method2: 'gender', value2: 'female', method3: 'form', value3: 'snow'},
         {base: 'burmy', species: 'bubble-wormadam', method: 'level-up', value: 20, method2: 'gender', value2: 'female', method3: 'form', value3: 'bubble'},
