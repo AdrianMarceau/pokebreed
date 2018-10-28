@@ -558,10 +558,8 @@
         $dittoButton.bind('click', function(e){
             e.preventDefault();
             if ($(this).hasClass('disabled') || $(this).hasClass('hidden')){ return false; }
-            console.log('ditto button clicked, shift is ', shiftIsHeld);
             if (shiftIsHeld && (appFreeMode || typeof PokemonSpeciesSeen['super-ditto'] !== 'undefined')){ addStarterPokemonToZone('super-ditto'); }
             else { addStarterPokemonToZone('ditto'); }
-            //$('button[data-action="add"][data-token="ditto"]', $pokePanelSelectButtons).trigger('click');
             });
 
         // Define a click event for the add arceus quick button
