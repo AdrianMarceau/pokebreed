@@ -1837,15 +1837,21 @@
             nextEvolutions: [{
                 species: 'sunny-castform',
                 method: 'type-appeal',
-                value: 'fire'
+                value: 'fire',
+                method2: 'level-up',
+                value2: 10
                 }, {
                 species: 'rainy-castform',
                 method: 'type-appeal',
-                value: 'water'
+                value: 'water',
+                method2: 'level-up',
+                value2: 10
                 }, {
                 species: 'snowy-castform',
                 method: 'type-appeal',
-                value: 'ice'
+                value: 'ice',
+                method2: 'level-up',
+                value2: 10
                 }]
             },
         'sunny-castform': {

@@ -1258,8 +1258,8 @@
 
         {base: 'qwilfish', species: 'buzzqwill', method: 'type-surge', value: 'electric', method2: 'level-up', value2: 30},
 
-        {base: 'castform', species: 'rocky-castform', method: 'type-appeal', value: ['rock', 'ground']},
-        {base: 'castform', species: 'cloudy-castform', method: 'type-appeal', value: 'flying'},
+        {base: 'castform', species: 'rocky-castform', method: 'type-appeal', value: ['rock', 'ground'], method2: 'level-up', value2: 10},
+        {base: 'castform', species: 'cloudy-castform', method: 'type-appeal', value: 'flying', method2: 'level-up', value2: 10},
 
         {base: 'burmy', species: 'snow-wormadam', method: 'level-up', value: 20, method2: 'gender', value2: 'female', method3: 'form', value3: 'snow'},
         {base: 'burmy', species: 'bubble-wormadam', method: 'level-up', value: 20, method2: 'gender', value2: 'female', method3: 'form', value3: 'bubble'},
