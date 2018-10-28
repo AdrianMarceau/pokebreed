@@ -401,7 +401,7 @@
             formToken: 'baby',
             number: 111,
             dexNumber: 1011.1111,
-            types: ['ground'],
+            types: ['ground', 'rock'],
             baseStats: {hp: 40, phAttack: 42, phDefense: 48, spAttack: 15, spDefense: 15, speed: 13},
             abilities: {0: 'lightning-rod', 1: 'rock-head', hidden: 'reckless'},
             height: 0.4,
