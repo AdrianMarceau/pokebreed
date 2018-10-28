@@ -984,6 +984,27 @@
 
         // Newly Discovered Forms
 
+        'rocky-castform': {
+            order: thisIndex.afterOrder('snowy-castform', 1),
+            token: 'rocky-castform',
+            name: 'Rocky Castform',
+            formClass: 'weather-variant',
+            formToken: 'rocky',
+            baseForm: 'castform',
+            number: 351,
+            dexNumber: 1037.555,
+            types: ['rock'],
+            baseStats: {hp: 70, phAttack: 70, phDefense: 70, spAttack: 70, spDefense: 70, speed: 70},
+            abilities: {0: 'forecast'},
+            height: 0.3,
+            weight: 0.8,
+            colors: ['brown', 'gray', 'white', 'black'],
+            eggCycles: 25,
+            eggGroups: ['fairy', 'amorphous'],
+            prevEvolution: 'castform',
+            cloneEvolutions: 'castform'
+            },
+
         'snow-wormadam': {
             order: thisIndex.afterOrder('trash-wormadam', 1),
             token: 'snow-wormadam',
@@ -1215,6 +1236,8 @@
         {base: 'weepinbell', species: 'meandrabel', method: 'type-surge', value: 'poison', method2: 'type-warning', value2: 'grass', method3: 'level-up', value3: 41},
 
         {base: 'qwilfish', species: 'buzzqwill', method: 'type-surge', value: 'electric', method2: 'level-up', value2: 30},
+
+        {base: 'castform', species: 'rocky-castform', method: 'type-appeal', value: ['rock', 'ground']},
 
         {base: 'burmy', species: 'snow-wormadam', method: 'level-up', value: 20, method2: 'gender', value2: 'female', method3: 'form', value3: 'snow'},
         {base: 'burmy', species: 'bubble-wormadam', method: 'level-up', value: 20, method2: 'gender', value2: 'female', method3: 'form', value3: 'bubble'},
