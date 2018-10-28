@@ -1079,7 +1079,7 @@
             dexNumber: 1042,
             types: ['normal'],
             genderRatio: {none: 1.000},
-            lifePoints: 360,
+            lifePoints: -1,
             baseStats: {hp: 48, phAttack: 48, phDefense: 48, spAttack: 48, spDefense: 48, speed: 48},
             abilities: {0: 'limber'}, // hidden: 'imposter' [removed]
             height: 0.3,
