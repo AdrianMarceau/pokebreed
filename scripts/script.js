@@ -558,7 +558,10 @@
         $dittoButton.bind('click', function(e){
             e.preventDefault();
             if ($(this).hasClass('disabled') || $(this).hasClass('hidden')){ return false; }
-            $('button[data-action="add"][data-token="ditto"]', $pokePanelSelectButtons).trigger('click');
+            console.log('ditto button clicked, shift is ', shiftIsHeld);
+            if (shiftIsHeld && (appFreeMode || typeof PokemonSpeciesSeen['super-ditto'] !== 'undefined')){ addStarterPokemonToZone('super-ditto'); }
+            else { addStarterPokemonToZone('ditto'); }
+            //$('button[data-action="add"][data-token="ditto"]', $pokePanelSelectButtons).trigger('click');
             });
 
         // Define a click event for the add arceus quick button
@@ -567,6 +570,33 @@
             e.preventDefault();
             if ($(this).hasClass('disabled') || $(this).hasClass('hidden')){ return false; }
             $('button[data-action="add"][data-token="arceus"]', $pokePanelSelectButtons).trigger('click');
+            });
+
+        // Define a function to update the UI when the shift key is held
+        var shiftIsHeld = false;
+        var shiftTimeout = false;
+        function shiftKeyStateUpdated(){
+            var $dittoButton = $('.button.add-ditto', $pokePanelFilters);
+            if (shiftIsHeld){
+                $dittoButton.addClass('super');
+                } else {
+                $dittoButton.removeClass('super');
+                }
+        }
+
+        // Check to see if shift is current being held down
+        $(document).on('keyup keydown', function(e){
+            if (e.shiftKey){
+                shiftIsHeld = true;
+                shiftKeyStateUpdated();
+            } else {
+                if (shiftTimeout !== false){ clearTimeout(shiftTimeout); }
+                shiftTimeout = setTimeout(function(){
+                    shiftIsHeld = false;
+                    shiftKeyStateUpdated();
+                    }, 200);
+                }
+            return true;
             });
 
         // Collect references to the various control buttons
@@ -4112,15 +4142,20 @@
         var token = $button.attr('data-token');
         if (action == 'add'){
             if (kind == 'pokemon'){
-                addPokemonToZone(token, false);
-                recalculateZoneStats();
-                if (thisZoneData.currentPokemon.length > 0){ $('.controls .start', $panelButtons).addClass('ready'); }
-                else { $('.controls .start', $panelButtons).removeClass('ready'); }
-                refreshPokePanelQuickButtons();
-                return true;
+                return addStarterPokemonToZone(token);
                 }
             }
         return false;
+    }
+
+    // Define a function for specifically adding a starter pokemon
+    function addStarterPokemonToZone(token){
+        addPokemonToZone(token, false);
+        recalculateZoneStats();
+        if (thisZoneData.currentPokemon.length > 0){ $('.controls .start', $panelButtons).addClass('ready'); }
+        else { $('.controls .start', $panelButtons).removeClass('ready'); }
+        refreshPokePanelQuickButtons();
+        return true;
     }
 
     // Define a function for triggering the starter seed prompt
