@@ -1187,9 +1187,9 @@
                         id: eventID,
                         banner: 'unlocked-'+ shadowToken,
                         buttons: {continue: 'Continue'},
-                        textbox: 'A <strong>Shadow Pokémon</strong> has appeared at the facility! <br />' +
-                            'It looks like the <strong>'+ PokemonSpeciesIndex[shadowToken]['name'] +'</strong> wants to join you... <br />' +
-                            'Use it in your box, but beware the effects of its dark aura.'
+                        textbox: 'Wow! A <strong>'+ PokemonSpeciesIndex[shadowToken]['name'] +'</strong> has appeared to you!<br />' +
+                            'The Pokémon wants to help you, but for what purpose? <br />' +
+                            '<em>'+ PokemonSpeciesIndex[shadowToken]['buttonQuote'].replace(/Its\s/, 'My ') +'</em>'
                         });
                     }
                 }
