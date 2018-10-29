@@ -2549,7 +2549,7 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     height: 100%;
 }
 .popup.window > .wrap {
-    padding: 10px 10px 40px;
+    padding: 10px 10px 50px;
     min-height: 276px;
 }
 .popup.window > .wrap > div {
@@ -2561,7 +2561,7 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     border-radius: 3px;
     font-size: 14px;
     line-height: 1.6;
-    color: #bdbdbd;
+    color: #cccccc;
 }
 .popup.window > .wrap > div:last-child {
     margin-bottom: 0;
@@ -2575,6 +2575,19 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 .popup.window > .wrap > .textbox {
     padding: 20px 10px;
     min-height: 91px;
+    font-family: Verdana;
+}
+.popup.window > .wrap > .textbox em:before {
+    content: "\201c";
+    padding-right: 2px;
+    font-weight: bold;
+    color: #666666;
+}
+.popup.window > .wrap > .textbox em:after {
+    content: "\201d";
+    padding-left: 2px;
+    font-weight: bold;
+    color: #666666;
 }
 
 .popup.window > .wrap > .buttons {

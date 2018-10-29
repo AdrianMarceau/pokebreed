@@ -932,7 +932,7 @@
         // Pre-bind an event for the continue button (closes the window)
         $popupWindow.on('click', '.button.continue', function(e){
             e.preventDefault();
-            console.log('continue button clicked');
+            //console.log('continue button clicked');
             closePopupWindow(function(){
                 if (popupWindowQueue.length > 0){
                     var panelConfig = popupWindowQueue.shift();
@@ -944,7 +944,7 @@
         // Pre-bind and event for the next button (shows next message)
         $popupWindow.on('click', '.button.next', function(e){
             e.preventDefault();
-            console.log('next button clicked');
+            //console.log('next button clicked');
             if (popupWindowQueue.length > 0){
                 var panelConfig = popupWindowQueue.shift();
                 openPopupWindow(panelConfig);
@@ -953,18 +953,37 @@
                 }
             });
 
+        // Now that we're done binding, check for any event triggers
+        checkPopupEventTriggers();
+
     }
 
     // Define a function for queueing popup windows to be displayed
     function queuePopupWindow(panelConfig){
+        //console.log('queuePopupWindow(panelConfig)', panelConfig)
         popupWindowQueue.push(panelConfig);
     }
 
+    // Define a function for queueing popup windows to be displayed
+    var queuedPopupTimeout = false;
+    function showQueuedPopups(){
+        //console.log('showQueuedPopups()', popupWindowQueue.length);
+        if (queuedPopupTimeout !== false){ clearTimeout(queuedPopupTimeout); }
+        queuedPopupTimeout = setTimeout(function(){
+            if (popupWindowQueue.length > 0){
+                var panelConfig = popupWindowQueue.shift();
+                openPopupWindow(panelConfig);
+                }
+            }, 100);
+    }
+
     // Define a function for opening content in a new popup window
+    var seenPopupMessages = [];
     function openPopupWindow(panelConfig){
         //console.log('openPopupWindow(panelConfig)', panelConfig);
 
         // Auto-generate certain config values if not explicitly set
+        if (typeof panelConfig.id === 'undefined'){ return false; }
         if (typeof panelConfig.buttons === 'undefined'){ panelConfig.buttons = {continue: 'Let\'s Go!'}; }
 
         // Loop through provided panel markup and add
@@ -979,6 +998,9 @@
             var panelMarkup = '';
             //console.log('panelToken = ', typeof panelToken, panelToken);
             //console.log('panelContent = ', typeof panelContent, panelContent);
+
+            // Skip irrelevant config areas
+            if (panelToken === 'id'){ continue; }
 
             // Process banner and button markup different then other panels
             if (panelToken === 'banner'
@@ -1027,6 +1049,11 @@
             $popupOverlay.animate({opacity:1}, 200, 'linear');
             }
 
+        // Push this panel ID to the list so we don't show again
+        if (seenPopupMessages.indexOf(panelConfig.id) === -1){
+            seenPopupMessages.push(panelConfig.id);
+            }
+
     }
 
     // Define a function for closing the current popup window
@@ -1044,6 +1071,134 @@
             if (typeof onComplete === 'function'){ return onComplete(); }
             else { return true; }
             });
+
+    }
+
+    // Define a function for checking events that might require popups
+    function checkPopupEventTriggers(){
+        //console.log('checkPopupEventTriggers()');
+
+        // Check to see if FREE MODE or NORMAL MODE before walking through events
+        if (appFreeMode){
+
+            // FREE MODE EVENTS
+
+            // .. no events in free mode
+
+            } else {
+
+            // NORMAL MODE EVENTS
+
+            // Show the WELCOME TO POKEBOX message if the user's just starting
+            var eventID = 'welcome';
+            if (PokeboxDaysPassed === 0
+                && seenPopupMessages.indexOf(eventID) === -1){
+                queuePopupWindow({
+                    id: eventID,
+                    banner: 'welcome',
+                    buttons: {next: 'Next'},
+                    textbox: '<em>Oh, hi there! Welcome to PokéBox. You must be the new <br />' +
+                        'Pokémon Biologist we hired. It\'s very nice to meet you!</em>'
+                    });
+                queuePopupWindow({
+                    id: eventID,
+                    banner: 'welcome',
+                    buttons: {next: 'Next'},
+                    textbox: '<em>My name is <strong>Lanette</strong> and I\'m the director of the PokéBox <br />' +
+                        'project. I hope you were able to find the island without <br />' +
+                        'too much trouble. It\'s pretty remote, isn\'t it?</em>  ^_^'
+                    });
+                queuePopupWindow({
+                    id: eventID,
+                    banner: 'welcome',
+                    buttons: {continue: 'Let\'s Go!'},
+                    textbox: '<em>Okay then, let\'s get to work! Use any combination of  <br />' +
+                        'the five starter Pokémon below to create your first <br />' +
+                        'PokéBox.  How many new Pokémon can you attract?</em> <br />' +
+                        '<img src="images/icons/pokemon/1.png" alt="Bulbasaur" /> ' +
+                        '<img src="images/icons/pokemon/4.png" alt="Charmander" /> ' +
+                        '<img src="images/icons/pokemon/7.png" alt="Squirtle" /> ' +
+                        '<img src="images/icons/pokemon/25.png" alt="Pikachu" /> ' +
+                        '<img src="images/icons/pokemon/133.png" alt="Eevee" /> '
+                    });
+                }
+
+            // Show the UNLOCK DITTO message if it's been unlocked but not shown
+            var eventID = 'unlocked-ditto';
+            if (PokeBoxRewards.indexOf('unlocked-ditto') !== -1
+                && (typeof PokemonSpeciesSeen['ditto'] === 'undefined' || PokemonSpeciesSeen['ditto'] === 0)
+                && seenPopupMessages.indexOf(eventID) === -1){
+                var seenCount = Object.keys(PokemonSpeciesSeen).length;
+                queuePopupWindow({
+                    id: eventID,
+                    banner: 'congrats',
+                    buttons: {next: 'Next'},
+                    textbox: '<em>Great work! You\'ve already seen <strong>'+ seenCount +'</strong> different <br />' +
+                        'species of Pokémon! Any new Pokémon you encounter <br />' +
+                        'can be used as starters in future runs. Isn\'t that great?</em>'
+                    });
+                queuePopupWindow({
+                    id: eventID,
+                    banner: 'unlocked-ditto',
+                    buttons: {continue: 'Continue'},
+                    textbox: '<em>As thanks for all your efforts, I\'m going to unlock a new <br />' +
+                        'species for you. Meet <strong>Ditto</strong>, the Mimic Pokémon! Ditto <br />' +
+                        'can breed with almost any other Pokémon. Amazing!</em>'
+                    });
+                }
+
+            // Show the UNLOCK STARTERS (GEN2+) message if they've been unlocked but not shown
+            for (var genNum = 2; genNum < maxIndexKeyAllowed; genNum++){
+                var rewardInfo = starterRewardIndex[genNum];
+                if (typeof rewardInfo === 'undefined'){ continue; }
+                //console.log('starterRewardIndex = ', starterRewardIndex);
+                var regionToken = rewardInfo['region'];
+                var unlockCount = rewardInfo['count'];
+                var startTokens = rewardInfo['species'];
+                var eventID = 'unlocked-gen'+ genNum +'-starters';
+                if (PokeBoxRewards.indexOf('unlocked-gen'+ genNum +'-starters') !== -1
+                    && (typeof PokemonSpeciesSeen[startTokens[0]] === 'undefined' || PokemonSpeciesSeen[startTokens[0]] === 0)
+                    && (typeof PokemonSpeciesSeen[startTokens[1]] === 'undefined' || PokemonSpeciesSeen[startTokens[1]] === 0)
+                    && (typeof PokemonSpeciesSeen[startTokens[2]] === 'undefined' || PokemonSpeciesSeen[startTokens[2]] === 0)
+                    && seenPopupMessages.indexOf(eventID) === -1){
+                    queuePopupWindow({
+                        id: eventID,
+                        banner: 'unlocked-gen'+ genNum +'-starters',
+                        buttons: {continue: 'Continue'},
+                        textbox: '<em>Congratulations! You\'ve seen at least <strong>'+ unlockCount +'</strong> different <br />' +
+                            'species of Pokémon! As thanks for your hard work, the <br />' +
+                            '<strong>'+ (regionToken.charAt(0).toUpperCase() + regionToken.slice(1)) +' Region</strong>\'s starter Pokémon have been unlocked.</em>'
+                        });
+                    }
+                }
+
+            // Show the UNLOCK SHADOW POKEMON message if they've been unlocked but not shown
+            var shadowRewardCount = Object.keys(shadowRewardIndex).length;
+            for (var shadowNum = 1; shadowNum <= shadowRewardCount; shadowNum++){
+                var rewardInfo = shadowRewardIndex[shadowNum];
+                if (typeof rewardInfo === 'undefined'){ continue; }
+                //console.log('rewardInfo = ', rewardInfo);
+                var shadowToken = rewardInfo['species'];
+                var unlockCount = rewardInfo['count'];
+                var eventID = 'unlocked-'+ shadowToken;
+                if (PokeBoxRewards.indexOf('unlocked-'+ shadowToken) !== -1
+                    && seenPopupMessages.indexOf(eventID) === -1){
+                    queuePopupWindow({
+                        id: eventID,
+                        banner: 'unlocked-'+ shadowToken,
+                        buttons: {continue: 'Continue'},
+                        textbox: 'A <strong>Shadow Pokémon</strong> has appeared at the facility! <br />' +
+                            'It looks like the <strong>'+ PokemonSpeciesIndex[shadowToken]['name'] +'</strong> wants to join you... <br />' +
+                            'Use it in your box, but beware the effects of its dark aura.'
+                        });
+                    }
+                }
+
+
+            }
+
+        // Attempt to show an queued popups
+        showQueuedPopups();
 
     }
 
@@ -1704,6 +1859,12 @@
 
         // Update the overiew with cleared data
         updateOverview();
+
+        // Recheck box rewards to see if there's anything new
+        recheckPokeBoxRewards();
+
+        // Process any popups messages that have been generated
+        checkPopupEventTriggers();
 
     }
 
@@ -2385,28 +2546,39 @@
         // Starters rewards are not necessary if we're in free mode
         if (!appFreeMode){
 
+            // Re-check if box rewards before we process buttons
+            recheckPokeBoxRewards();
+
             // Check to see if we can allow special pokemon to be selected yet
             var allowSpecialPokemon = hasUnlockedSpecialPokemon();
 
             // Everyone gains access to the series mascots
             freeStarterPokemon.push('pikachu', 'eevee'); // special edition starters
 
-            // Unlock the starters from Gen 1 automatically and the rest via dex completion
-            freeStarterPokemon.push('bulbasaur', 'charmander', 'squirtle'); // gen 1 starters
-            if (seenSpeciesTokens.length >= 151){ freeStarterPokemon.push('chikorita', 'cyndaquil', 'totodile'); } // gen 2 starters
-            if (seenSpeciesTokens.length >= 251){ freeStarterPokemon.push('treecko', 'torchic', 'mudkip'); } // gen 3 starters
-            if (seenSpeciesTokens.length >= 386){ freeStarterPokemon.push('turtwig', 'chimchar', 'piplup'); } // gen 4 starters
-            if (seenSpeciesTokens.length >= 493){ freeStarterPokemon.push('snivy', 'tepid', 'oshawott'); } // gen 5 starters
-            if (seenSpeciesTokens.length >= 649){ freeStarterPokemon.push('chespin', 'fennekin', 'froakie'); } // gen 6 starters
-            if (seenSpeciesTokens.length >= 721){ freeStarterPokemon.push('rowlet', 'litten', 'popplio'); } // gen 7 starters
-            //if (seenSpeciesTokens.length >= 807){ freeStarterPokemon.push('?', '?', '?'); } // gen 8 starters
+            // Unlock Ditto if the user has seen at least one other species
+            if (PokeBoxRewards.indexOf('unlocked-ditto') !== -1){ freeStarterPokemon.push('ditto'); }
 
-            // Unlock shadow pokemon at repeating dex counts matching corresponding movies numbers
-            if (seenSpeciesTokens.length >= 111){ freeStarterPokemon.push('shadow-mewtwo'); }
-            if (seenSpeciesTokens.length >= 222){ freeStarterPokemon.push('shadow-lugia'); }
-            if (seenSpeciesTokens.length >= 333){ freeStarterPokemon.push('shadow-entei'); }
-            if (seenSpeciesTokens.length >= 444){ freeStarterPokemon.push('shadow-celebi'); }
-            if (seenSpeciesTokens.length >= 555){ freeStarterPokemon.push('shadow-latios'); }
+            // Unlock the starters from Gen 1+ automatically and the rest via dex completion
+            for (var genNum = 1; genNum <= maxIndexKeyAllowed; genNum++){
+                var rewardInfo = starterRewardIndex[genNum];
+                if (typeof rewardInfo === 'undefined'){ continue; }
+                //console.log('rewardInfo = ', genNum, rewardInfo);
+                var startTokens = rewardInfo['species'];
+                if (PokeBoxRewards.indexOf('unlocked-gen'+ genNum +'-starters') !== -1){
+                    freeStarterPokemon.push(startTokens[0], startTokens[1], startTokens[2]);
+                    }
+                }
+
+            // Unlock shadow pokemon automatically and the rest via dex completion
+            var shadowRewardCount = Object.keys(shadowRewardIndex).length;
+            for (var shadowNum = 1; shadowNum <= shadowRewardCount; shadowNum++){
+                var rewardInfo = shadowRewardIndex[shadowNum];
+                if (typeof rewardInfo === 'undefined'){ continue; }
+                //console.log('rewardInfo = ', shadowNum, rewardInfo);
+                if (PokeBoxRewards.indexOf('unlocked-'+ rewardInfo['species']) !== -1){
+                    freeStarterPokemon.push(rewardInfo['species']);
+                    }
+                }
 
             // Unlock the final pokemon ARCEUS if the user has encountered every other species
             if (hasUnlockedFinalPokemon()){ freeStarterPokemon.push('arceus'); }
@@ -4836,6 +5008,7 @@
             var zoneFlags = thisZoneData.currentFlags;
             var addedSpecies = thisZoneData.addedPokemonSpecies;
 
+            /*
             // Summon a Ditto on the first day of the sim if not already unlocked
             if (!appFreeMode
                 && thisZoneData.day === 1
@@ -4843,9 +5016,10 @@
                     || PokemonSpeciesSeen['ditto'] < 1)){
                 triggerZoneVisitor('ditto');
                 }
+            */
 
             // Basic pokemon are summoned every month if none of the other conditions have been met
-            else if (thisZoneData.day % 30 === 0){
+            if (thisZoneData.day % 30 === 0){
                 triggerZoneVisitor('auto');
                 }
 
@@ -6363,7 +6537,8 @@
 
             // (GEN 1+) DITTO appears more 6 months into the year when the box is nearly empty
             eventPokemonChanceBoosters['ditto'] = 0;
-            if (thisZoneData.date.month >= 6
+            if (thisZoneData.date.year > 1
+                && thisZoneData.date.month >= 6
                 && emptySpacePercent >= 90){
                 eventBoost = 80 * (emptySpacePercent / 10);
                 eventPokemonChanceBoosters['ditto'] = eventBoost;
@@ -7316,6 +7491,61 @@
             //console.log('seed string was invalid');
             return false;
             }
+    }
+
+    // Define the starter reward index and populate with starter pokemon from each gen
+    var starterRewardIndex = {
+        1: {region: 'kanto', count: 0, 'species': ['bulbasaur', 'charmander', 'squirtle']},
+        2: {region: 'johto', count: 151, 'species': ['chikorita', 'cyndaquil', 'totodile']},
+        3: {region: 'hoenn', count: 251, 'species': ['treecko', 'torchic', 'mudkip']},
+        4: {region: 'sinnoh', count: 386, 'species': ['turtwig', 'chimchar', 'piplup']},
+        5: {region: 'unova', count: 493, 'species': ['snivy', 'tepid', 'oshawott']},
+        6: {region: 'kalos', count: 649, 'species': ['chespin', 'fennekin', 'froakie']},
+        7: {region: 'alola', count: 721, 'species': ['rowlet', 'litten', 'popplio']},
+        //8: {region: 'meania', count: 807, 'species': ['?', '?', '?']},
+        };
+
+    // Define the shadow reward index and populate with starter pokemon from each gen
+    var shadowRewardIndex = {
+        1: {species: 'shadow-mewtwo', count: 111},
+        2: {species: 'shadow-lugia', count: 222},
+        3: {species: 'shadow-entei', count: 333},
+        4: {species: 'shadow-celebi', count: 444},
+        5: {species: 'shadow-latios', count: 555}
+        };
+
+    // Define a function for checking if certain unlocks have been earned
+    function recheckPokeBoxRewards(){
+
+        // Count the number of species seen so far
+        var seenSpeciesTokens = Object.keys(PokemonSpeciesSeen);
+
+        // Unlock Ditto if the user has seen at least one other species
+        if (seenSpeciesTokens.length >= 1 && PokeBoxRewards.indexOf('unlocked-ditto') === -1){ PokeBoxRewards.push('unlocked-ditto'); }
+
+        // Unlock the starters from Gen 2+ automatically via dex completion (linked to nation dex count as-of prev gen)
+        for (var genNum = 1; genNum <= maxIndexKeyAllowed; genNum++){
+            var rewardInfo = starterRewardIndex[genNum];
+            if (typeof rewardInfo === 'undefined'){ continue; }
+            //console.log('rewardInfo = ', genNum, rewardInfo);
+            if (seenSpeciesTokens.length >= rewardInfo['count']
+                && PokeBoxRewards.indexOf('unlocked-gen'+ genNum +'-starters') === -1){
+                PokeBoxRewards.push('unlocked-gen'+ genNum +'-starters');
+                }
+            }
+
+        // Unlock shadow pokemon automatically and via dex completion (linked to repeating movie appearance num)
+        var shadowRewardCount = Object.keys(shadowRewardIndex).length;
+        for (var shadowNum = 1; shadowNum <= shadowRewardCount; shadowNum++){
+            var rewardInfo = shadowRewardIndex[shadowNum];
+            if (typeof rewardInfo === 'undefined'){ continue; }
+            //console.log('rewardInfo = ', shadowNum, rewardInfo);
+            if (seenSpeciesTokens.length >= rewardInfo['count']
+                && PokeBoxRewards.indexOf('unlocked-'+ rewardInfo['species']) === -1){
+                PokeBoxRewards.push('unlocked-'+ rewardInfo['species']);
+                }
+            }
+
     }
 
     // Define a function for saving pokebox rewards to local storage
