@@ -2589,6 +2589,17 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     font-weight: bold;
     color: #666666;
 }
+.popup.window > .wrap > .textbox em.q {
+    display: inline-block;
+    color: #808080;
+    padding: 3px 0;
+}
+.popup.window > .wrap > .textbox em.shining {
+    max-width: 80%;
+}
+.popup.window > .wrap > .textbox em.shining.s1 {
+    max-width: 70%;
+}
 
 .popup.window > .wrap > .buttons {
     padding: 0;

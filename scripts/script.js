@@ -1125,7 +1125,7 @@
 
             // Show the UNLOCK DITTO message if it's been unlocked but not shown
             var eventID = 'unlocked-ditto';
-            if (PokeBoxRewards.indexOf('unlocked-ditto') !== -1
+            if (PokeBoxRewards.indexOf('ditto') !== -1
                 && (typeof PokemonSpeciesSeen['ditto'] === 'undefined' || PokemonSpeciesSeen['ditto'] === 0)
                 && seenPopupMessages.indexOf(eventID) === -1){
                 var seenCount = Object.keys(PokemonSpeciesSeen).length;
@@ -1156,7 +1156,7 @@
                 var unlockCount = rewardInfo['count'];
                 var startTokens = rewardInfo['species'];
                 var eventID = 'unlocked-gen'+ genNum +'-starters';
-                if (PokeBoxRewards.indexOf('unlocked-gen'+ genNum +'-starters') !== -1
+                if (PokeBoxRewards.indexOf('gen'+ genNum +'-starters') !== -1
                     && (typeof PokemonSpeciesSeen[startTokens[0]] === 'undefined' || PokemonSpeciesSeen[startTokens[0]] === 0)
                     && (typeof PokemonSpeciesSeen[startTokens[1]] === 'undefined' || PokemonSpeciesSeen[startTokens[1]] === 0)
                     && (typeof PokemonSpeciesSeen[startTokens[2]] === 'undefined' || PokemonSpeciesSeen[startTokens[2]] === 0)
@@ -1181,17 +1181,53 @@
                 var shadowToken = rewardInfo['species'];
                 var unlockCount = rewardInfo['count'];
                 var eventID = 'unlocked-'+ shadowToken;
-                if (PokeBoxRewards.indexOf('unlocked-'+ shadowToken) !== -1
+                if (PokeBoxRewards.indexOf(shadowToken) !== -1
                     && seenPopupMessages.indexOf(eventID) === -1){
                     queuePopupWindow({
                         id: eventID,
                         banner: 'unlocked-'+ shadowToken,
                         buttons: {continue: 'Continue'},
-                        textbox: 'Wow! A <strong>'+ PokemonSpeciesIndex[shadowToken]['name'] +'</strong> has appeared to you!<br />' +
-                            'The Pokémon wants to help you, but for what purpose? <br />' +
-                            '<em>'+ PokemonSpeciesIndex[shadowToken]['buttonQuote'].replace(/Its\s/, 'My ') +'</em>'
+                        textbox: 'Wow! A <strong>'+ PokemonSpeciesIndex[shadowToken]['name'] +'</strong> appeared! <br />' +
+                            '<em class="q s'+shadowNum+' shadow">'+ PokemonSpeciesIndex[shadowToken]['buttonQuote'] +'</em> <br />' +
+                            'Maybe try it in one of your boxes? '
                         });
                     }
+                }
+
+            // Show the UNLOCK SHINING POKEMON message if they've been unlocked but not shown
+            var shiningRewardCount = Object.keys(shiningRewardIndex).length;
+            for (var shiningNum = 1; shiningNum <= shiningRewardCount; shiningNum++){
+                var rewardInfo = shiningRewardIndex[shiningNum];
+                if (typeof rewardInfo === 'undefined'){ continue; }
+                //console.log('shiningRewardIndex['+ shiningNum  +'] = ', rewardInfo);
+                var shiningToken = rewardInfo['species'];
+                var unlockCount = rewardInfo['count'];
+                var eventID = 'unlocked-'+ shiningToken;
+                if (PokeBoxRewards.indexOf(shiningToken) !== -1
+                    && seenPopupMessages.indexOf(eventID) === -1){
+                    queuePopupWindow({
+                        id: eventID,
+                        banner: 'unlocked-'+ shiningToken,
+                        buttons: {continue: 'Continue'},
+                        textbox: 'Amazing! A <strong>'+ PokemonSpeciesIndex[shiningToken]['name'] +'</strong> appeared! <br />' +
+                            '<em class="q s'+shiningNum+' shining">'+ PokemonSpeciesIndex[shiningToken]['buttonQuote'] +'</em> <br />' +
+                            'Try adding it to one of your boxes! '
+                        });
+                    }
+                }
+
+            // Show the UNLOCK ARCEUS message if it has been unlocked but not shown
+            var eventID = 'unlocked-final-pokemon';
+            if (PokeBoxRewards.indexOf('arceus') !== -1
+                && seenPopupMessages.indexOf(eventID) === -1){
+                queuePopupWindow({
+                    id: eventID,
+                    banner: 'unlocked-final-pokemon',
+                    buttons: {continue: 'Continue'},
+                    textbox: 'Oh my! The final Pokémon, <strong>Arceus</strong>, has appeared!! <br />' +
+                        'The Original One has recognized your efforts and decided <br />' +
+                        'to share its powers with you.  Congratulations!! '
+                    });
                 }
 
 
@@ -2556,7 +2592,7 @@
             freeStarterPokemon.push('pikachu', 'eevee'); // special edition starters
 
             // Unlock Ditto if the user has seen at least one other species
-            if (PokeBoxRewards.indexOf('unlocked-ditto') !== -1){ freeStarterPokemon.push('ditto'); }
+            if (PokeBoxRewards.indexOf('ditto') !== -1){ freeStarterPokemon.push('ditto'); }
 
             // Unlock the starters from Gen 1+ automatically and the rest via dex completion
             for (var genNum = 1; genNum <= maxIndexKeyAllowed; genNum++){
@@ -2564,7 +2600,7 @@
                 if (typeof rewardInfo === 'undefined'){ continue; }
                 //console.log('rewardInfo = ', genNum, rewardInfo);
                 var startTokens = rewardInfo['species'];
-                if (PokeBoxRewards.indexOf('unlocked-gen'+ genNum +'-starters') !== -1){
+                if (PokeBoxRewards.indexOf('gen'+ genNum +'-starters') !== -1){
                     freeStarterPokemon.push(startTokens[0], startTokens[1], startTokens[2]);
                     }
                 }
@@ -2575,18 +2611,24 @@
                 var rewardInfo = shadowRewardIndex[shadowNum];
                 if (typeof rewardInfo === 'undefined'){ continue; }
                 //console.log('rewardInfo = ', shadowNum, rewardInfo);
-                if (PokeBoxRewards.indexOf('unlocked-'+ rewardInfo['species']) !== -1){
+                if (PokeBoxRewards.indexOf(rewardInfo['species']) !== -1){
+                    freeStarterPokemon.push(rewardInfo['species']);
+                    }
+                }
+
+            // Unlock shining pokemon automatically and the rest via dex completion
+            var shiningRewardCount = Object.keys(shiningRewardIndex).length;
+            for (var shiningNum = 1; shiningNum <= shiningRewardCount; shiningNum++){
+                var rewardInfo = shiningRewardIndex[shiningNum];
+                if (typeof rewardInfo === 'undefined'){ continue; }
+                //console.log('rewardInfo = ', shiningNum, rewardInfo);
+                if (PokeBoxRewards.indexOf(rewardInfo['species']) !== -1){
                     freeStarterPokemon.push(rewardInfo['species']);
                     }
                 }
 
             // Unlock the final pokemon ARCEUS if the user has encountered every other species
-            if (hasUnlockedFinalPokemon()){ freeStarterPokemon.push('arceus'); }
-
-            // Unlock shining pokemon if promotional passwords have been entered into the simulator
-            if (PokeBoxRewards.indexOf('gold-ho-oh') !== -1){ freeStarterPokemon.push('gold-ho-oh'); }
-            if (PokeBoxRewards.indexOf('silver-suicune') !== -1){ freeStarterPokemon.push('silver-suicune'); }
-            if (PokeBoxRewards.indexOf('crystal-onix') !== -1){ freeStarterPokemon.push('crystal-onix'); }
+            if (PokeBoxRewards.indexOf('arceus') !== -1){ freeStarterPokemon.push('arceus'); }
 
             }
 
@@ -7506,12 +7548,19 @@
         };
 
     // Define the shadow reward index and populate with starter pokemon from each gen
-    var shadowRewardIndex = {
-        1: {species: 'shadow-mewtwo', count: 111},
-        2: {species: 'shadow-lugia', count: 222},
-        3: {species: 'shadow-entei', count: 333},
-        4: {species: 'shadow-celebi', count: 444},
-        5: {species: 'shadow-latios', count: 555}
+    var shadowRewardIndex = { // can only be unlocked via days passed only (right now)
+        1: {species: 'shadow-mewtwo', count: 1000},
+        2: {species: 'shadow-lugia', count: 2000},
+        3: {species: 'shadow-entei', count: 3000},
+        4: {species: 'shadow-celebi', count: 4000},
+        5: {species: 'shadow-latios', count: 5000}
+        };
+
+    // Define the shining reward index and populate with starter pokemon from each gen
+    var shiningRewardIndex = { // can be unlocked via days passed or passwords
+        1: {species: 'gold-ho-oh', count: 6000},
+        2: {species: 'silver-suicune', count: 7000},
+        3: {species: 'crystal-onix', count: 8000}
         };
 
     // Define a function for checking if certain unlocks have been earned
@@ -7521,7 +7570,7 @@
         var seenSpeciesTokens = Object.keys(PokemonSpeciesSeen);
 
         // Unlock Ditto if the user has seen at least one other species
-        if (seenSpeciesTokens.length >= 1 && PokeBoxRewards.indexOf('unlocked-ditto') === -1){ PokeBoxRewards.push('unlocked-ditto'); }
+        if (seenSpeciesTokens.length >= 1 && PokeBoxRewards.indexOf('ditto') === -1){ PokeBoxRewards.push('ditto'); }
 
         // Unlock the starters from Gen 2+ automatically via dex completion (linked to nation dex count as-of prev gen)
         for (var genNum = 1; genNum <= maxIndexKeyAllowed; genNum++){
@@ -7529,8 +7578,8 @@
             if (typeof rewardInfo === 'undefined'){ continue; }
             //console.log('rewardInfo = ', genNum, rewardInfo);
             if (seenSpeciesTokens.length >= rewardInfo['count']
-                && PokeBoxRewards.indexOf('unlocked-gen'+ genNum +'-starters') === -1){
-                PokeBoxRewards.push('unlocked-gen'+ genNum +'-starters');
+                && PokeBoxRewards.indexOf('gen'+ genNum +'-starters') === -1){
+                PokeBoxRewards.push('gen'+ genNum +'-starters');
                 }
             }
 
@@ -7540,11 +7589,26 @@
             var rewardInfo = shadowRewardIndex[shadowNum];
             if (typeof rewardInfo === 'undefined'){ continue; }
             //console.log('rewardInfo = ', shadowNum, rewardInfo);
-            if (seenSpeciesTokens.length >= rewardInfo['count']
-                && PokeBoxRewards.indexOf('unlocked-'+ rewardInfo['species']) === -1){
-                PokeBoxRewards.push('unlocked-'+ rewardInfo['species']);
+            if (PokeboxDaysPassed >= rewardInfo['count']
+                && PokeBoxRewards.indexOf(rewardInfo['species']) === -1){
+                PokeBoxRewards.push(rewardInfo['species']);
                 }
             }
+
+        // Unlock shining pokemon automatically and via dex completion (linked to repeating movie appearance num)
+        var shiningRewardCount = Object.keys(shiningRewardIndex).length;
+        for (var shiningNum = 1; shiningNum <= shiningRewardCount; shiningNum++){
+            var rewardInfo = shiningRewardIndex[shiningNum];
+            if (typeof rewardInfo === 'undefined'){ continue; }
+            //console.log('rewardInfo = ', shiningNum, rewardInfo);
+            if (PokeboxDaysPassed >= rewardInfo['count']
+                && PokeBoxRewards.indexOf(rewardInfo['species']) === -1){
+                PokeBoxRewards.push(rewardInfo['species']);
+                }
+            }
+
+        // Unlock the final pokemon ARCEUS if the user has encountered every other species
+        if (hasUnlockedFinalPokemon() && PokeBoxRewards.indexOf('arceus') === -1){ PokeBoxRewards.push('arceus'); }
 
     }
 
