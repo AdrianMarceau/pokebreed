@@ -1113,16 +1113,16 @@
                     banner: 'welcome',
                     buttons: {next: 'Next'},
                     textbox: '<em>Our research here focuses on Pokémon habitats and <br />' +
-                        'our goal is to attract and record data on as many different <br />' +
-                        'Pokémon species as possible. That\'s where you come in!</em>'
+                        'our goal is to record data on as many different species <br />' +
+                        'of Pokémon as possible. That\'s where you come in!</em>'
                     });
                 queuePopupWindow({
                     id: eventID,
                     banner: 'welcome',
                     buttons: {continue: 'Let\'s Go!'},
                     textbox: '<em>For your first attempt, let\'s use a combination of  <br />' +
-                        'the five starter Pokémon. We\'ll start a small colony and  <br />' +
-                        'then see how many new Pokémon it attracts. No pressure!</em> <br />' +
+                        'these five starter Pokémon. We\'ll start a small colony  <br />' +
+                        'and see how many new species it attracts. No pressure!</em> <br />' +
                         '<img src="images/icons/pokemon/1.png" alt="Bulbasaur" /> ' +
                         '<img src="images/icons/pokemon/4.png" alt="Charmander" /> ' +
                         '<img src="images/icons/pokemon/7.png" alt="Squirtle" /> ' +
@@ -1197,7 +1197,8 @@
                         buttons: {continue: 'Continue'},
                         textbox: 'Wow! A <strong>'+ PokemonSpeciesIndex[shadowToken]['name'] +'</strong> appeared! <br />' +
                             '<em class="q s'+shadowNum+' shadow">'+ PokemonSpeciesIndex[shadowToken]['buttonQuote'] +'</em> <br />' +
-                            'Maybe try it in one of your boxes? '
+                            'Maybe we can use it as a starter? ' +
+                            (typeof rewardInfo['secret'] !== 'undefined' ? '<br /><span class="pass">'+ rewardInfo['secret'] +'</span> ' : '')
                         });
                     }
                 }
@@ -1219,7 +1220,8 @@
                         buttons: {continue: 'Continue'},
                         textbox: 'Amazing! A <strong>'+ PokemonSpeciesIndex[shiningToken]['name'] +'</strong> appeared! <br />' +
                             '<em class="q s'+shiningNum+' shining">'+ PokemonSpeciesIndex[shiningToken]['buttonQuote'] +'</em> <br />' +
-                            'Try adding it to one of your boxes! '
+                            'Try adding it to one of your boxes! ' +
+                            (typeof rewardInfo['secret'] !== 'undefined' ? '<br /><span class="pass">'+ rewardInfo['secret'] +'</span> ' : '')
                         });
                     }
                 }
@@ -4531,6 +4533,14 @@
     // Define a function for triggering the starter seed prompt
     function triggerStarterSeedPrompt(){
 
+        // Quickly generate a list of password values and unlocks
+        var rewardIndex = {};
+        var shadowCount = Object.keys(shadowRewardIndex).length;
+        var shiningCount = Object.keys(shiningRewardIndex).length;
+        for (var i = 1; i <= shadowCount; i++){ var info = shadowRewardIndex[i]; rewardIndex[stringToPassValue(info['secret'])] = info['species']; }
+        for (var i = 1; i <= shiningCount; i++){ var info = shiningRewardIndex[i]; rewardIndex[stringToPassValue(info['secret'])] = info['species']; }
+        //console.log('rewardIndex = ', rewardIndex);
+
         // Collect and parse the seed if it's given, else do nothing
         var rawSeed = prompt(
             'Starter seeds can be found in the footer of an active PokéBox. \n'
@@ -4539,14 +4549,12 @@
             //console.log('rawSeed = ', rawSeed);
 
             // Check to see if the seed is actually a password and unlock rewards if true then return
-            var isPassword = false;
-            var rawPassword = stringToPassValue(rawSeed);
-            if (rawPassword === 11770){ PokeBoxRewards.push('gold-ho-oh'); isPassword = true; }
-            else if (rawPassword === 17666){ PokeBoxRewards.push('silver-suicune'); isPassword = true; }
-            else if (rawPassword === 21053){ PokeBoxRewards.push('crystal-onix'); isPassword = true; }
-            //console.log('PokeBoxRewards = ', PokeBoxRewards);
-            if (isPassword){
+            var passValue = stringToPassValue(rawSeed);
+            if (typeof rewardIndex[passValue] !== 'undefined'){
+                PokeBoxRewards.push(rewardIndex[passValue]);
                 saveCurrentPokeBoxRewards();
+                recheckPokeBoxRewards();
+                checkPopupEventTriggers();
                 generatePokemonButtons();
                 return;
                 }
@@ -7556,19 +7564,19 @@
         };
 
     // Define the shadow reward index and populate with starter pokemon from each gen
-    var shadowRewardIndex = { // can only be unlocked via days passed only (right now)
-        1: {species: 'shadow-mewtwo', count: 1000},
-        2: {species: 'shadow-lugia', count: 2000},
-        3: {species: 'shadow-entei', count: 3000},
-        4: {species: 'shadow-celebi', count: 4000},
-        5: {species: 'shadow-latios', count: 5000}
+    var shadowRewardIndex = { // can only be unlocked via days passed or passwords
+        1: {species: 'shadow-mewtwo', count: 1000, secret: 'WHATISMYPURPOSE150'},
+        2: {species: 'shadow-lugia', count: 2000, secret: 'GALEOFDARKNESS249'},
+        3: {species: 'shadow-entei', count: 3000, secret: 'IFTHATISWHATYOUWISH244'},
+        4: {species: 'shadow-celebi', count: 4000, secret: 'VOICEOFTHEFOREST251'},
+        5: {species: 'shadow-latios', count: 5000, secret: 'GUARDIANOFALTOMARE381'}
         };
 
     // Define the shining reward index and populate with starter pokemon from each gen
     var shiningRewardIndex = { // can be unlocked via days passed or passwords
-        1: {species: 'gold-ho-oh', count: 6000},
-        2: {species: 'silver-suicune', count: 7000},
-        3: {species: 'crystal-onix', count: 8000}
+        1: {species: 'crystal-onix', count: 6000, secret: 'UNBREAKABLECRYSTALBODY095'},
+        2: {species: 'silver-suicune', count: 7000, secret: 'SHIMMERINGSILVERCOAT245'},
+        3: {species: 'gold-ho-oh', count: 8000, secret: 'RAINBOWGOLDWINGS250'}
         };
 
     // Define a function for checking if certain unlocks have been earned

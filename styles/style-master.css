@@ -2597,8 +2597,14 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 .popup.window > .wrap > .textbox em.shining {
     max-width: 80%;
 }
-.popup.window > .wrap > .textbox em.shining.s1 {
+.popup.window > .wrap > .textbox em.shining.s3 {
     max-width: 70%;
+}
+.popup.window > .wrap > .textbox .pass {
+  color: #161616;
+  font-size: 8px;
+  display: inline-block;
+  line-height: 1;
 }
 
 .popup.window > .wrap > .buttons {
