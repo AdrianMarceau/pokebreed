@@ -1097,7 +1097,7 @@
                     id: eventID,
                     banner: 'welcome',
                     buttons: {next: 'Next'},
-                    textbox: '<em>Oh, hi there! Welcome to PokéBox. You must be the new <br />' +
+                    textbox: '<em>Oh, hi there! Welcome to <strong>PokéBox</strong>. You must be the new <br />' +
                         'Pokémon Biologist we hired. It\'s very nice to meet you!</em>'
                     });
                 queuePopupWindow({
@@ -1111,10 +1111,18 @@
                 queuePopupWindow({
                     id: eventID,
                     banner: 'welcome',
+                    buttons: {next: 'Next'},
+                    textbox: '<em>Our research here focuses on Pokémon habitats and <br />' +
+                        'our goal is to attract and record data on as many different <br />' +
+                        'Pokémon species as possible. That\'s where you come in!</em>'
+                    });
+                queuePopupWindow({
+                    id: eventID,
+                    banner: 'welcome',
                     buttons: {continue: 'Let\'s Go!'},
-                    textbox: '<em>Okay then, let\'s get to work! Use any combination of  <br />' +
-                        'the five starter Pokémon below to create your first <br />' +
-                        'PokéBox.  How many new Pokémon can you attract?</em> <br />' +
+                    textbox: '<em>For your first attempt, let\'s use a combination of  <br />' +
+                        'the five starter Pokémon. We\'ll start a small colony and  <br />' +
+                        'then see how many new Pokémon it attracts. No pressure!</em> <br />' +
                         '<img src="images/icons/pokemon/1.png" alt="Bulbasaur" /> ' +
                         '<img src="images/icons/pokemon/4.png" alt="Charmander" /> ' +
                         '<img src="images/icons/pokemon/7.png" alt="Squirtle" /> ' +
@@ -1141,7 +1149,7 @@
                     id: eventID,
                     banner: 'unlocked-ditto',
                     buttons: {continue: 'Continue'},
-                    textbox: '<em>As thanks for all your efforts, I\'m going to unlock a new <br />' +
+                    textbox: '<em>To make your job a bit easier, I\'m unlocking a new <br />' +
                         'species for you. Meet <strong>Ditto</strong>, the Mimic Pokémon! Ditto <br />' +
                         'can breed with almost any other Pokémon. Amazing!</em>'
                     });
