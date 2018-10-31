@@ -665,7 +665,8 @@
 
             // Check to see which phase of the simulation we're currently in
             var currentPhase = 'select-starters';
-            if (simulationStarted){ currentPhase = 'simulation-running'; }
+            if (!$('.popup.overlay').hasClass('hidden')){ currentPhase = 'popup-window'; }
+            else if (simulationStarted){ currentPhase = 'simulation-running'; }
             else if (!simulationStarted && $('.select-pokemon', $panelButtons).hasClass('hidden')){ currentPhase = 'simulation-over'; }
             //console.log('currentPhase', currentPhase, 'e.which', e.which);
 
@@ -683,6 +684,17 @@
                     validAction = true;
                     $scrollToButton.trigger('click');
                     break;
+                    }
+                }
+
+            // CONTEXT-SENSITIVE SHORTCUTS (POPUP-WINDOW)
+            if (currentPhase === 'popup-window'){
+                //console.log('POPUP KEY ', keyName); // continue/next
+                switch (keyName){
+                    // CONTEXT/NEXT BUTTON shortcuts
+                    case 'space':
+                    case 'enter':
+                        { validAction = true; $('.popup .button:last-child').trigger('click'); break; }
                     }
                 }
 
