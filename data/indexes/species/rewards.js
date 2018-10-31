@@ -294,4 +294,16 @@
         });
     thisIndex.indexOrder = indexOrder;
 
+    // Add each of the listed shadow pokemon to the global reward index
+    PokeBoxAPI.addShadowRewardToIndex({species: 'shadow-mewtwo', count: 1000, secret: 'WHATISMYPURPOSE150'});
+    PokeBoxAPI.addShadowRewardToIndex({species: 'shadow-lugia', count: 2000, secret: 'GALEOFDARKNESS249'});
+    PokeBoxAPI.addShadowRewardToIndex({species: 'shadow-entei', count: 3000, secret: 'IFTHATISWHATYOUWISH244'});
+    PokeBoxAPI.addShadowRewardToIndex({species: 'shadow-celebi', count: 4000, secret: 'VOICEOFTHEFOREST251'});
+    PokeBoxAPI.addShadowRewardToIndex({species: 'shadow-latios', count: 5000, secret: 'GUARDIANOFALTOMARE381'});
+
+    // Add each of the listed shining pokemon to the global reward index
+    PokeBoxAPI.addShiningRewardToIndex({species: 'crystal-onix', count: 6000, secret: 'UNBREAKABLECRYSTALBODY095'});
+    PokeBoxAPI.addShiningRewardToIndex({species: 'silver-suicune', count: 7000, secret: 'SHIMMERINGSILVERCOAT245'});
+    PokeBoxAPI.addShiningRewardToIndex({species: 'gold-ho-oh', count: 8000, secret: 'RAINBOWGOLDWINGS250'});
+
 })();

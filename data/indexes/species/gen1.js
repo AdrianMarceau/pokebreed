@@ -2828,4 +2828,7 @@
 
         ]);
 
+    // Add each of this region's starter pokemon to the global reward index
+    PokeBoxAPI.addStarterRewardToIndex({region: 'kanto', gen: 1, count: 0, 'species': ['bulbasaur', 'charmander', 'squirtle', 'pikachu', 'eevee']});
+
 })();

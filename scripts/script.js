@@ -1156,22 +1156,23 @@
                 }
 
             // Show the UNLOCK STARTERS (GEN2+) message if they've been unlocked but not shown
-            for (var genNum = 2; genNum < maxIndexKeyAllowed; genNum++){
-                var rewardInfo = starterRewardIndex[genNum];
+            //console.log('starterRewardIndex = ', starterRewardIndex);
+            var starterRewardCount = Object.keys(starterRewardIndex).length;
+            for (var i = 0; i < starterRewardCount; i++){
+                var rewardInfo = starterRewardIndex[i];
                 if (typeof rewardInfo === 'undefined'){ continue; }
                 //console.log('starterRewardIndex = ', starterRewardIndex);
+                var genNumber = rewardInfo['gen'];
                 var regionToken = rewardInfo['region'];
                 var unlockCount = rewardInfo['count'];
                 var startTokens = rewardInfo['species'];
-                var eventID = 'unlocked-gen'+ genNum +'-starters';
-                if (PokeBoxRewards.indexOf('gen'+ genNum +'-starters') !== -1
-                    && (typeof PokemonSpeciesSeen[startTokens[0]] === 'undefined' || PokemonSpeciesSeen[startTokens[0]] === 0)
-                    && (typeof PokemonSpeciesSeen[startTokens[1]] === 'undefined' || PokemonSpeciesSeen[startTokens[1]] === 0)
-                    && (typeof PokemonSpeciesSeen[startTokens[2]] === 'undefined' || PokemonSpeciesSeen[startTokens[2]] === 0)
+                if (unlockCount === 0){ continue; }
+                var eventID = 'unlocked-gen'+ genNumber +'-starters';
+                if (PokeBoxRewards.indexOf('gen'+ genNumber +'-starters') !== -1
                     && seenPopupMessages.indexOf(eventID) === -1){
                     queuePopupWindow({
                         id: eventID,
-                        banner: 'unlocked-gen'+ genNum +'-starters',
+                        banner: 'unlocked-gen'+ genNumber +'-starters',
                         buttons: {continue: 'Continue'},
                         textbox: '<em>Congratulations! You\'ve seen at least <strong>'+ unlockCount +'</strong> different <br />' +
                             'species of Pokémon! As thanks for your hard work, the <br />' +
@@ -1181,6 +1182,7 @@
                 }
 
             // Show the UNLOCK SHADOW POKEMON message if they've been unlocked but not shown
+            //console.log('shadowRewardIndex = ', shadowRewardIndex);
             var shadowRewardCount = Object.keys(shadowRewardIndex).length;
             for (var shadowNum = 1; shadowNum <= shadowRewardCount; shadowNum++){
                 var rewardInfo = shadowRewardIndex[shadowNum];
@@ -1204,6 +1206,7 @@
                 }
 
             // Show the UNLOCK SHINING POKEMON message if they've been unlocked but not shown
+            //console.log('shiningRewardIndex = ', shiningRewardIndex);
             var shiningRewardCount = Object.keys(shiningRewardIndex).length;
             for (var shiningNum = 1; shiningNum <= shiningRewardCount; shiningNum++){
                 var rewardInfo = shiningRewardIndex[shiningNum];
@@ -2598,24 +2601,19 @@
             // Check to see if we can allow special pokemon to be selected yet
             var allowSpecialPokemon = hasUnlockedSpecialPokemon();
 
-            // Everyone gains access to the series mascots
-            freeStarterPokemon.push('pikachu', 'eevee'); // special edition starters
-
-            // Unlock Ditto if the user has seen at least one other species
-            if (PokeBoxRewards.indexOf('ditto') !== -1){ freeStarterPokemon.push('ditto'); }
-
-            // Unlock the starters from Gen 1+ automatically and the rest via dex completion
-            for (var genNum = 1; genNum <= maxIndexKeyAllowed; genNum++){
-                var rewardInfo = starterRewardIndex[genNum];
+            // Unlock any starters that have been unlocked via dex completion counts
+            var starterRewardCount = Object.keys(starterRewardIndex).length;
+            for (var i = 0; i < starterRewardCount; i++){
+                var rewardInfo = starterRewardIndex[i];
                 if (typeof rewardInfo === 'undefined'){ continue; }
-                //console.log('rewardInfo = ', genNum, rewardInfo);
+                //console.log('rewardInfo = ', i, rewardInfo);
                 var startTokens = rewardInfo['species'];
-                if (PokeBoxRewards.indexOf('gen'+ genNum +'-starters') !== -1){
-                    freeStarterPokemon.push(startTokens[0], startTokens[1], startTokens[2]);
+                if (PokeBoxRewards.indexOf('gen'+ rewardInfo['gen'] +'-starters') !== -1){
+                    for (var j = 0; j < startTokens.length; j++){ freeStarterPokemon.push(startTokens[j]); }
                     }
                 }
 
-            // Unlock shadow pokemon automatically and the rest via dex completion
+            // Unlock any shadow pokemon that have been unlocked via overall days passed
             var shadowRewardCount = Object.keys(shadowRewardIndex).length;
             for (var shadowNum = 1; shadowNum <= shadowRewardCount; shadowNum++){
                 var rewardInfo = shadowRewardIndex[shadowNum];
@@ -2626,7 +2624,7 @@
                     }
                 }
 
-            // Unlock shining pokemon automatically and the rest via dex completion
+            // Unlock any shining pokemon that have been unlocked via overall days passed
             var shiningRewardCount = Object.keys(shiningRewardIndex).length;
             for (var shiningNum = 1; shiningNum <= shiningRewardCount; shiningNum++){
                 var rewardInfo = shiningRewardIndex[shiningNum];
@@ -2637,8 +2635,13 @@
                     }
                 }
 
+            // Unlock Ditto if the user has seen at least one other species
+            if (PokeBoxRewards.indexOf('ditto') !== -1){ freeStarterPokemon.push('ditto'); }
+
             // Unlock the final pokemon ARCEUS if the user has encountered every other species
             if (PokeBoxRewards.indexOf('arceus') !== -1){ freeStarterPokemon.push('arceus'); }
+
+            //console.log('freeStarterPokemon = ', freeStarterPokemon);
 
             }
 
@@ -4536,9 +4539,17 @@
         // Quickly generate a list of password values and unlocks
         var rewardIndex = {};
         var shadowCount = Object.keys(shadowRewardIndex).length;
+        for (var i = 1; i <= shadowCount; i++){
+            var info = shadowRewardIndex[i];
+            if (typeof info['secret'] === 'undefined'){ continue; }
+            rewardIndex[stringToPassValue(info['secret'])] = info['species'];
+            }
         var shiningCount = Object.keys(shiningRewardIndex).length;
-        for (var i = 1; i <= shadowCount; i++){ var info = shadowRewardIndex[i]; rewardIndex[stringToPassValue(info['secret'])] = info['species']; }
-        for (var i = 1; i <= shiningCount; i++){ var info = shiningRewardIndex[i]; rewardIndex[stringToPassValue(info['secret'])] = info['species']; }
+        for (var i = 1; i <= shiningCount; i++){
+            var info = shiningRewardIndex[i];
+            if (typeof info['secret'] === 'undefined'){ continue; }
+            rewardIndex[stringToPassValue(info['secret'])] = info['species'];
+            }
         //console.log('rewardIndex = ', rewardIndex);
 
         // Collect and parse the seed if it's given, else do nothing
@@ -7551,33 +7562,11 @@
             }
     }
 
-    // Define the starter reward index and populate with starter pokemon from each gen
-    var starterRewardIndex = {
-        1: {region: 'kanto', count: 0, 'species': ['bulbasaur', 'charmander', 'squirtle']},
-        2: {region: 'johto', count: 151, 'species': ['chikorita', 'cyndaquil', 'totodile']},
-        3: {region: 'hoenn', count: 251, 'species': ['treecko', 'torchic', 'mudkip']},
-        4: {region: 'sinnoh', count: 386, 'species': ['turtwig', 'chimchar', 'piplup']},
-        5: {region: 'unova', count: 493, 'species': ['snivy', 'tepid', 'oshawott']},
-        6: {region: 'kalos', count: 649, 'species': ['chespin', 'fennekin', 'froakie']},
-        7: {region: 'alola', count: 721, 'species': ['rowlet', 'litten', 'popplio']},
-        //8: {region: 'meania', count: 807, 'species': ['?', '?', '?']},
-        };
 
-    // Define the shadow reward index and populate with starter pokemon from each gen
-    var shadowRewardIndex = { // can only be unlocked via days passed or passwords
-        1: {species: 'shadow-mewtwo', count: 1000, secret: 'WHATISMYPURPOSE150'},
-        2: {species: 'shadow-lugia', count: 2000, secret: 'GALEOFDARKNESS249'},
-        3: {species: 'shadow-entei', count: 3000, secret: 'IFTHATISWHATYOUWISH244'},
-        4: {species: 'shadow-celebi', count: 4000, secret: 'VOICEOFTHEFOREST251'},
-        5: {species: 'shadow-latios', count: 5000, secret: 'GUARDIANOFALTOMARE381'}
-        };
-
-    // Define the shining reward index and populate with starter pokemon from each gen
-    var shiningRewardIndex = { // can be unlocked via days passed or passwords
-        1: {species: 'crystal-onix', count: 6000, secret: 'UNBREAKABLECRYSTALBODY095'},
-        2: {species: 'silver-suicune', count: 7000, secret: 'SHIMMERINGSILVERCOAT245'},
-        3: {species: 'gold-ho-oh', count: 8000, secret: 'RAINBOWGOLDWINGS250'}
-        };
+    // Define the starter, shadow, and shining reward indexes so they can be populated later
+    var starterRewardIndex = {};
+    var shadowRewardIndex = {};
+    var shiningRewardIndex = {};
 
     // Define a function for checking if certain unlocks have been earned
     function recheckPokeBoxRewards(){
@@ -7589,13 +7578,14 @@
         if (seenSpeciesTokens.length >= 1 && PokeBoxRewards.indexOf('ditto') === -1){ PokeBoxRewards.push('ditto'); }
 
         // Unlock the starters from Gen 2+ automatically via dex completion (linked to nation dex count as-of prev gen)
-        for (var genNum = 1; genNum <= maxIndexKeyAllowed; genNum++){
-            var rewardInfo = starterRewardIndex[genNum];
+        var starterRewardCount = Object.keys(starterRewardIndex).length;
+        for (var i = 0; i < starterRewardCount; i++){
+            var rewardInfo = starterRewardIndex[i];
             if (typeof rewardInfo === 'undefined'){ continue; }
-            //console.log('rewardInfo = ', genNum, rewardInfo);
+            //console.log('rewardInfo = ', i, rewardInfo);
             if (seenSpeciesTokens.length >= rewardInfo['count']
-                && PokeBoxRewards.indexOf('gen'+ genNum +'-starters') === -1){
-                PokeBoxRewards.push('gen'+ genNum +'-starters');
+                && PokeBoxRewards.indexOf('gen'+ rewardInfo['gen'] +'-starters') === -1){
+                PokeBoxRewards.push('gen'+ rewardInfo['gen'] +'-starters');
                 }
             }
 
@@ -7809,7 +7799,18 @@
             maxDexNumber: maxDexNumber,
             nationalDexNumbers: nationalDexNumbers.length,
             missingDexNumbers: missingDexNumbers.length
-            }; }
+            }; },
+        addStarterRewardToIndex: function(reward){ starterRewardIndex[Object.keys(starterRewardIndex).length] = reward; },
+        addShadowRewardToIndex: function(reward){ shadowRewardIndex[Object.keys(shadowRewardIndex).length] = reward; },
+        addShiningRewardToIndex: function(reward){ shiningRewardIndex[Object.keys(shiningRewardIndex).length] = reward; },
+        getStarterRewardIndex: function(){ return JSON.parse(JSON.stringify(starterRewardIndex)); },
+        getShadowRewardIndex: function(){ return JSON.parse(JSON.stringify(shadowRewardIndex)); },
+        getShiningRewardIndex: function(){ return JSON.parse(JSON.stringify(shiningRewardIndex)); },
+        getRewardIndexes: function(){ return JSON.parse(JSON.stringify({
+            starterPokemon:starterRewardIndex,
+            shadowPokemon:shadowRewardIndex,
+            shiningPokemon:shiningRewardIndex
+            })); },
         };
 
 })();

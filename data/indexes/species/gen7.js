@@ -2658,4 +2658,7 @@
 
         ]);
 
+    // Add each of this region's starter pokemon to the global reward index
+    PokeBoxAPI.addStarterRewardToIndex({region: 'alola', gen: 7, count: 721, 'species': ['rowlet', 'litten', 'popplio']});
+
 })();

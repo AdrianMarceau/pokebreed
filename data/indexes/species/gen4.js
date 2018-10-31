@@ -2454,4 +2454,7 @@
 
         ]);
 
+    // Add each of this region's starter pokemon to the global reward index
+    PokeBoxAPI.addStarterRewardToIndex({region: 'sinnoh', gen: 4, count: 386, 'species': ['turtwig', 'chimchar', 'piplup']});
+
 })();

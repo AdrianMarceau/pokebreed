@@ -1888,4 +1888,7 @@
 
         ]);
 
+    // Add each of this region's starter pokemon to the global reward index
+    PokeBoxAPI.addStarterRewardToIndex({region: 'johto', gen: 2, count: 151, 'species': ['chikorita', 'cyndaquil', 'totodile']});
+
 })();

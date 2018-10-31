@@ -2695,4 +2695,7 @@
 
         ]);
 
+    // Add each of this region's starter pokemon to the global reward index
+    PokeBoxAPI.addStarterRewardToIndex({region: 'kalos', gen: 6, count: 649, 'species': ['chespin', 'fennekin', 'froakie']});
+
 })();

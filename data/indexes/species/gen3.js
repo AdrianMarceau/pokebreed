@@ -2667,5 +2667,8 @@
 
         ]);
 
+    // Add each of this region's starter pokemon to the global reward index
+    PokeBoxAPI.addStarterRewardToIndex({region: 'hoenn', gen: 3, count: 251, 'species': ['treecko', 'torchic', 'mudkip']});
+
 
 })();
