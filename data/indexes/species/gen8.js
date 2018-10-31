@@ -22,20 +22,118 @@
             token: 'meltan',
             name: 'Meltan',
             class: 'mythical',
+            formClass: 'fusion-evolution',
+            formToken: 'x1',
+            isSpecialPokemon: true,
             number: 808,
+            types: ['steel'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 30, phAttack: 30, phDefense: 30, spAttack: 30, spDefense: 30, speed: 30},
+            abilities: {0: 'static'},
+            height: 0.2,
+            weight: 8.0,
+            colors: ['gray', 'yellow', 'black', 'red'],
+            eggCycles: 60,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'bimeltan',
+                method: 'level-up', value: 20,
+                method2: 'fusion-species', value2: 'meltan'
+                }, {
+                species: 'trimeltan',
+                method: 'level-up', value: 30,
+                method2: 'fusion-species', value2: 'bimeltan'
+                }, {
+                species: 'melmetal',
+                method: 'level-up', value: 40,
+                method2: 'fusion-species', value2: 'trimeltan'
+                }]
+            },
+        'bimeltan': {
+            order: indexOrder++,
+            token: 'bimeltan',
+            name: 'Bimeltan',
+            class: 'mythical',
+            formClass: 'fusion-evolution',
+            formToken: 'x2',
+            isSpecialPokemon: true,
+            number: 808,
+            types: ['steel'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 60, phAttack: 60, phDefense: 60, spAttack: 60, spDefense: 60, speed: 60},
+            abilities: {0: 'static'},
+            height: 0.2,
+            weight: 16.0,
+            colors: ['gray', 'yellow', 'black', 'red'],
+            eggCycles: 60,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'meltan',
+            nextEvolutions: [{
+                species: 'trimeltan',
+                method: 'level-up', value: 30,
+                method2: 'fusion-species', value2: 'meltan'
+                }, {
+                species: 'melmetal',
+                method: 'level-up', value: 40,
+                method2: 'fusion-species', value2: 'bimeltan'
+                }]
+            },
+        'trimeltan': {
+            order: indexOrder++,
+            token: 'trimeltan',
+            name: 'Trimeltan',
+            class: 'mythical',
+            formClass: 'fusion-evolution',
+            formToken: 'x3',
+            isSpecialPokemon: true,
+            number: 808,
+            types: ['steel'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 90, phAttack: 90, phDefense: 90, spAttack: 90, spDefense: 90, speed: 90},
+            abilities: {0: 'static'},
+            height: 0.2,
+            weight: 24.0,
+            colors: ['gray', 'yellow', 'black', 'red'],
+            eggCycles: 60,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'meltan',
+            nextEvolutions: [{
+                species: 'melmetal',
+                method: 'level-up', value: 40,
+                method2: 'fusion-species', value2: 'meltan'
+                }]
+            },
+        'melmetal': {
+            order: indexOrder++,
+            token: 'melmetal',
+            name: 'Melmetal',
+            class: 'mythical',
+            number: 809,
             types: ['steel'],
             genderRatio: {none: 1.0000},
             baseStats: {hp: 100, phAttack: 100, phDefense: 100, spAttack: 100, spDefense: 100, speed: 100},
             abilities: {0: 'static'},
-            height: 0.2,
-            weight: 8.0,
-            colors: ['yellow', 'gray', 'black', 'red'],
+            height: 2.5,
+            weight: 800.0,
+            colors: ['gray', 'black', 'yellow'], //'red'
             eggCycles: 60,
-            eggGroups: ['undiscovered']
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'meltan'
             },
 
 
         });
     thisIndex.indexOrder = indexOrder;
+
+    // Update previous gen pokemon with known species appeal data
+    thisIndex.addSpeciesAppealValues([
+
+        // Legendary trigger relationships
+        {base: 'meltan', species: 'meltan'},
+        {base: 'meltan', species: 'bimeltan'},
+        {base: 'meltan', species: 'trimeltan'},
+        {base: 'meltan', species: 'melmetal'},
+
+        ]);
 
 })();

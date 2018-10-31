@@ -3757,6 +3757,9 @@
                 }
             }
 
+        // If a form has not been decided but a base exists in the index data, apply it
+        if (typeof newPokemon.formToken === 'undefined' && typeof indexData['baseForm'] !== 'undefined'){ newPokemon.formToken = indexData['baseForm']; }
+
         // If this pokemon has a special relationship to on-field pokemon, modify base stats
         if (pokemonToken === 'unown' && existingArceus > 0){ newPokemon.lifePoints = indexData.lifePoints + (indexData.lifePoints * existingArceus); }
 
@@ -5855,6 +5858,7 @@
                             //console.log('allowEvo = ', allowEvo);
                             if (allowEvo){
                                 var queuedEvolution = {token: nextEvolution.species, types: nextEvolutionInfo.types, chance: triggeredChance};
+                                if (typeof nextEvolution.form !== 'undefined'){ queuedEvolution.form = nextEvolution.form; }
                                 if (fusionPokemonToBeRemoved !== false){ queuedEvolution.fusion = fusionPokemonToBeRemoved.id; }
                                 if (typeof nextEvolution.castoff !== 'undefined'){ queuedEvolution.castoff = nextEvolution.castoff; }
                                 queuedEvolutions.push(queuedEvolution);
@@ -5884,7 +5888,7 @@
                         if (typeof evolvedPokemonSpecies[pokemonInfo.token] === 'undefined'){ evolvedPokemonSpecies[pokemonInfo.token] = 0; }
                         evolvedPokemonSpecies[pokemonInfo.token]++;
 
-                        // Create or update an entry for bew pokemon this cycle
+                        // Create or update an entry for new pokemon this cycle
                         if (typeof newPokemonThisCycle[selectedEvolution.token] === 'undefined'){ newPokemonThisCycle[selectedEvolution.token] = 0; }
                         newPokemonThisCycle[selectedEvolution.token]++;
                         //console.log('newPokemonThisCycle = ', newPokemonThisCycle);
@@ -5908,6 +5912,10 @@
                             var randomKey = Math.floor((Math.seededRandomChance() / 100) * possibleForms.length);
                             var randomForm = possibleForms[randomKey];
                             pokemonInfo.formToken = randomForm;
+                            }
+                        // Otherwise if the evolution data came with its own form
+                        else if (typeof selectedEvolution.form !== 'undefined'){
+                            pokemonInfo.formToken = selectedEvolution.form;
                             }
 
                         // If this pokemon has a form defined when it really shouldn't, remove it
