@@ -28,7 +28,8 @@
 
     var PokeboxDaysPassed = 0;
     var PokemonSpeciesSeen = {};
-    var PokeBoxRewards = [];
+    var PokeboxPopupsSeen = [];
+    var PokeboxRewards = [];
 
     var totalSpecialPokemon = 0;
     var totalLegendaryPokemon = 0;
@@ -150,12 +151,20 @@
                 //console.log('PokeboxDaysPassed = ', PokeboxDaysPassed, typeof PokeboxDaysPassed);
 
                 // Load the list of earned POKEBOX REWARD TOKENS if they've been saved
-                var storageName = ('CurrentPokeBoxRewards');
-                var savedCurrentCurrentPokeBoxRewards = window.localStorage.getItem(storageName);
-                if (typeof savedCurrentCurrentPokeBoxRewards === 'string'){ PokeBoxRewards = JSON.parse(savedCurrentCurrentPokeBoxRewards); }
+                var storageName = ('PokeboxRewards');
+                var savedPokeboxRewards = window.localStorage.getItem(storageName);
+                if (typeof savedPokeboxRewards === 'string'){ PokeboxRewards = JSON.parse(savedPokeboxRewards); }
                 //console.log('storageName = ', storageName);
-                //console.log('savedCurrentCurrentPokeBoxRewards = ', savedCurrentCurrentPokeBoxRewards);
-                //console.log('PokeBoxRewards = ', PokeBoxRewards);
+                //console.log('savedPokeboxRewards = ', savedPokeboxRewards);
+                //console.log('PokeboxRewards = ', PokeboxRewards);
+
+                // Load the list of earned POKEBOX POPUPS SEEN if they've been saved
+                var storageName = ('PokeboxPopupsSeen');
+                var savedPokeboxPopupsSeen = window.localStorage.getItem(storageName);
+                if (typeof savedPokeboxPopupsSeen === 'string'){ PokeboxPopupsSeen = JSON.parse(savedPokeboxPopupsSeen); }
+                //console.log('storageName = ', storageName);
+                //console.log('savedPokeboxPopupsSeen = ', savedPokeboxPopupsSeen);
+                //console.log('PokeboxPopupsSeen = ', PokeboxPopupsSeen);
 
                 }
 
@@ -263,7 +272,8 @@
                     if (typeof window.localStorage !== 'undefined'){
                         window.localStorage.removeItem('PokeboxDaysPassed');
                         window.localStorage.removeItem('PokemonSpeciesSeen');
-                        window.localStorage.removeItem('CurrentPokeBoxRewards');
+                        window.localStorage.removeItem('PokeboxRewards');
+                        window.localStorage.removeItem('PokeboxPopupsSeen');
                         window.location = window.location.href;
                         return true;
                         }
@@ -944,6 +954,7 @@
         // Pre-bind an event for the continue button (closes the window)
         $popupWindow.on('click', '.button.continue', function(e){
             e.preventDefault();
+            savePokeboxPopupsSeen();
             //console.log('continue button clicked');
             closePopupWindow(function(){
                 if (popupWindowQueue.length > 0){
@@ -956,6 +967,7 @@
         // Pre-bind and event for the next button (shows next message)
         $popupWindow.on('click', '.button.next', function(e){
             e.preventDefault();
+            savePokeboxPopupsSeen();
             //console.log('next button clicked');
             if (popupWindowQueue.length > 0){
                 var panelConfig = popupWindowQueue.shift();
@@ -990,7 +1002,6 @@
     }
 
     // Define a function for opening content in a new popup window
-    var seenPopupMessages = [];
     function openPopupWindow(panelConfig){
         //console.log('openPopupWindow(panelConfig)', panelConfig);
 
@@ -1062,8 +1073,8 @@
             }
 
         // Push this panel ID to the list so we don't show again
-        if (seenPopupMessages.indexOf(panelConfig.id) === -1){
-            seenPopupMessages.push(panelConfig.id);
+        if (PokeboxPopupsSeen.indexOf(panelConfig.id) === -1){
+            PokeboxPopupsSeen.push(panelConfig.id);
             }
 
     }
@@ -1104,7 +1115,7 @@
             // Show the WELCOME TO POKEBOX message if the user's just starting
             var eventID = 'welcome';
             if (PokeboxDaysPassed === 0
-                && seenPopupMessages.indexOf(eventID) === -1){
+                && PokeboxPopupsSeen.indexOf(eventID) === -1){
                 queuePopupWindow({
                     id: eventID,
                     banner: 'welcome',
@@ -1145,9 +1156,9 @@
 
             // Show the UNLOCK DITTO message if it's been unlocked but not shown
             var eventID = 'unlocked-ditto';
-            if (PokeBoxRewards.indexOf('ditto') !== -1
+            if (PokeboxRewards.indexOf('ditto') !== -1
                 && (typeof PokemonSpeciesSeen['ditto'] === 'undefined' || PokemonSpeciesSeen['ditto'] === 0)
-                && seenPopupMessages.indexOf(eventID) === -1){
+                && PokeboxPopupsSeen.indexOf(eventID) === -1){
                 var seenCount = Object.keys(PokemonSpeciesSeen).length;
                 queuePopupWindow({
                     id: eventID,
@@ -1180,8 +1191,8 @@
                 var startTokens = rewardInfo['species'];
                 if (unlockCount === 0){ continue; }
                 var eventID = 'unlocked-gen'+ genNumber +'-starters';
-                if (PokeBoxRewards.indexOf('gen'+ genNumber +'-starters') !== -1
-                    && seenPopupMessages.indexOf(eventID) === -1){
+                if (PokeboxRewards.indexOf('gen'+ genNumber +'-starters') !== -1
+                    && PokeboxPopupsSeen.indexOf(eventID) === -1){
                     queuePopupWindow({
                         id: eventID,
                         banner: 'unlocked-gen'+ genNumber +'-starters',
@@ -1203,8 +1214,8 @@
                 var shadowToken = rewardInfo['species'];
                 var unlockCount = rewardInfo['count'];
                 var eventID = 'unlocked-'+ shadowToken;
-                if (PokeBoxRewards.indexOf(shadowToken) !== -1
-                    && seenPopupMessages.indexOf(eventID) === -1){
+                if (PokeboxRewards.indexOf(shadowToken) !== -1
+                    && PokeboxPopupsSeen.indexOf(eventID) === -1){
                     queuePopupWindow({
                         id: eventID,
                         banner: 'unlocked-'+ shadowToken,
@@ -1227,8 +1238,8 @@
                 var shiningToken = rewardInfo['species'];
                 var unlockCount = rewardInfo['count'];
                 var eventID = 'unlocked-'+ shiningToken;
-                if (PokeBoxRewards.indexOf(shiningToken) !== -1
-                    && seenPopupMessages.indexOf(eventID) === -1){
+                if (PokeboxRewards.indexOf(shiningToken) !== -1
+                    && PokeboxPopupsSeen.indexOf(eventID) === -1){
                     queuePopupWindow({
                         id: eventID,
                         banner: 'unlocked-'+ shiningToken,
@@ -1243,8 +1254,8 @@
 
             // Show the UNLOCK ARCEUS message if it has been unlocked but not shown
             var eventID = 'unlocked-final-pokemon';
-            if (PokeBoxRewards.indexOf('arceus') !== -1
-                && seenPopupMessages.indexOf(eventID) === -1){
+            if (PokeboxRewards.indexOf('arceus') !== -1
+                && PokeboxPopupsSeen.indexOf(eventID) === -1){
                 queuePopupWindow({
                     id: eventID,
                     banner: 'unlocked-final-pokemon',
@@ -1260,6 +1271,9 @@
 
         // Attempt to show an queued popups
         showQueuedPopups();
+
+        // Save a history of which popups have been seen
+        savePokeboxPopupsSeen();
 
     }
 
@@ -1922,7 +1936,7 @@
         updateOverview();
 
         // Recheck box rewards to see if there's anything new
-        recheckPokeBoxRewards();
+        recheckPokeboxRewards();
 
         // Process any popups messages that have been generated
         checkPopupEventTriggers();
@@ -2608,7 +2622,7 @@
         if (!appFreeMode){
 
             // Re-check if box rewards before we process buttons
-            recheckPokeBoxRewards();
+            recheckPokeboxRewards();
 
             // Check to see if we can allow special pokemon to be selected yet
             var allowSpecialPokemon = hasUnlockedSpecialPokemon();
@@ -2620,7 +2634,7 @@
                 if (typeof rewardInfo === 'undefined'){ continue; }
                 //console.log('rewardInfo = ', i, rewardInfo);
                 var startTokens = rewardInfo['species'];
-                if (PokeBoxRewards.indexOf('gen'+ rewardInfo['gen'] +'-starters') !== -1){
+                if (PokeboxRewards.indexOf('gen'+ rewardInfo['gen'] +'-starters') !== -1){
                     for (var j = 0; j < startTokens.length; j++){ freeStarterPokemon.push(startTokens[j]); }
                     }
                 }
@@ -2631,7 +2645,7 @@
                 var rewardInfo = shadowRewardIndex[shadowNum];
                 if (typeof rewardInfo === 'undefined'){ continue; }
                 //console.log('rewardInfo = ', shadowNum, rewardInfo);
-                if (PokeBoxRewards.indexOf(rewardInfo['species']) !== -1){
+                if (PokeboxRewards.indexOf(rewardInfo['species']) !== -1){
                     freeStarterPokemon.push(rewardInfo['species']);
                     }
                 }
@@ -2642,16 +2656,16 @@
                 var rewardInfo = shiningRewardIndex[shiningNum];
                 if (typeof rewardInfo === 'undefined'){ continue; }
                 //console.log('rewardInfo = ', shiningNum, rewardInfo);
-                if (PokeBoxRewards.indexOf(rewardInfo['species']) !== -1){
+                if (PokeboxRewards.indexOf(rewardInfo['species']) !== -1){
                     freeStarterPokemon.push(rewardInfo['species']);
                     }
                 }
 
             // Unlock Ditto if the user has seen at least one other species
-            if (PokeBoxRewards.indexOf('ditto') !== -1){ freeStarterPokemon.push('ditto'); }
+            if (PokeboxRewards.indexOf('ditto') !== -1){ freeStarterPokemon.push('ditto'); }
 
             // Unlock the final pokemon ARCEUS if the user has encountered every other species
-            if (PokeBoxRewards.indexOf('arceus') !== -1){ freeStarterPokemon.push('arceus'); }
+            if (PokeboxRewards.indexOf('arceus') !== -1){ freeStarterPokemon.push('arceus'); }
 
             //console.log('freeStarterPokemon = ', freeStarterPokemon);
 
@@ -4574,9 +4588,8 @@
             // Check to see if the seed is actually a password and unlock rewards if true then return
             var passValue = stringToPassValue(rawSeed);
             if (typeof rewardIndex[passValue] !== 'undefined'){
-                PokeBoxRewards.push(rewardIndex[passValue]);
-                saveCurrentPokeBoxRewards();
-                recheckPokeBoxRewards();
+                PokeboxRewards.push(rewardIndex[passValue]);
+                recheckPokeboxRewards();
                 checkPopupEventTriggers();
                 generatePokemonButtons();
                 return;
@@ -5141,7 +5154,7 @@
                     }
 
                 // Update local storage with the current pokebox rewards index
-                saveCurrentPokeBoxRewards();
+                savePokeboxRewards();
 
                 }
 
@@ -7581,13 +7594,13 @@
     var shiningRewardIndex = {};
 
     // Define a function for checking if certain unlocks have been earned
-    function recheckPokeBoxRewards(){
+    function recheckPokeboxRewards(){
 
         // Count the number of species seen so far
         var seenSpeciesTokens = Object.keys(PokemonSpeciesSeen);
 
         // Unlock Ditto if the user has seen at least one other species
-        if (seenSpeciesTokens.length >= 1 && PokeBoxRewards.indexOf('ditto') === -1){ PokeBoxRewards.push('ditto'); }
+        if (seenSpeciesTokens.length >= 1 && PokeboxRewards.indexOf('ditto') === -1){ PokeboxRewards.push('ditto'); }
 
         // Unlock the starters from Gen 2+ automatically via dex completion (linked to nation dex count as-of prev gen)
         var starterRewardCount = Object.keys(starterRewardIndex).length;
@@ -7596,8 +7609,8 @@
             if (typeof rewardInfo === 'undefined'){ continue; }
             //console.log('rewardInfo = ', i, rewardInfo);
             if (seenSpeciesTokens.length >= rewardInfo['count']
-                && PokeBoxRewards.indexOf('gen'+ rewardInfo['gen'] +'-starters') === -1){
-                PokeBoxRewards.push('gen'+ rewardInfo['gen'] +'-starters');
+                && PokeboxRewards.indexOf('gen'+ rewardInfo['gen'] +'-starters') === -1){
+                PokeboxRewards.push('gen'+ rewardInfo['gen'] +'-starters');
                 }
             }
 
@@ -7608,8 +7621,8 @@
             if (typeof rewardInfo === 'undefined'){ continue; }
             //console.log('rewardInfo = ', shadowNum, rewardInfo);
             if (PokeboxDaysPassed >= rewardInfo['count']
-                && PokeBoxRewards.indexOf(rewardInfo['species']) === -1){
-                PokeBoxRewards.push(rewardInfo['species']);
+                && PokeboxRewards.indexOf(rewardInfo['species']) === -1){
+                PokeboxRewards.push(rewardInfo['species']);
                 }
             }
 
@@ -7620,35 +7633,58 @@
             if (typeof rewardInfo === 'undefined'){ continue; }
             //console.log('rewardInfo = ', shiningNum, rewardInfo);
             if (PokeboxDaysPassed >= rewardInfo['count']
-                && PokeBoxRewards.indexOf(rewardInfo['species']) === -1){
-                PokeBoxRewards.push(rewardInfo['species']);
+                && PokeboxRewards.indexOf(rewardInfo['species']) === -1){
+                PokeboxRewards.push(rewardInfo['species']);
                 }
             }
 
         // Unlock the final pokemon ARCEUS if the user has encountered every other species
-        if (hasUnlockedFinalPokemon() && PokeBoxRewards.indexOf('arceus') === -1){ PokeBoxRewards.push('arceus'); }
+        if (hasUnlockedFinalPokemon() && PokeboxRewards.indexOf('arceus') === -1){ PokeboxRewards.push('arceus'); }
+
+        // Save any changes to the pokebox rewards array
+        savePokeboxRewards();
 
     }
 
     // Define a function for saving pokebox rewards to local storage
-    function saveCurrentPokeBoxRewards(){
+    function savePokeboxRewards(){
 
         // Return if we don't have access to local storage or we're not allowed to save
         if (appFreeMode){ return false; }
         if (typeof window.localStorage === 'undefined'){ return false; }
 
         // Collect saved global array and prepare to merge with local filtered
-        var savedCurrentPokeBoxRewards = window.localStorage.getItem('CurrentPokeBoxRewards');
-        if (typeof savedCurrentPokeBoxRewards === 'string'){ savedCurrentPokeBoxRewards = JSON.parse(savedCurrentPokeBoxRewards); }
-        else { savedCurrentPokeBoxRewards = []; }
-        //console.log('savedCurrentPokeBoxRewards = ', savedCurrentPokeBoxRewards);
+        var savedPokeboxRewards = window.localStorage.getItem('PokeboxRewards');
+        if (typeof savedPokeboxRewards === 'string'){ savedPokeboxRewards = JSON.parse(savedPokeboxRewards); }
+        else { savedPokeboxRewards = []; }
+        //console.log('currentPokeboxRewards = ', PokeboxRewards);
+        //console.log('savedPokeboxRewards = ', savedPokeboxRewards);
 
         // Merge the local array into the saved one, and then re-strinify it
+        var mergedPokeboxRewards = JSON.stringify(savedPokeboxRewards.concat(PokeboxRewards).filter(function(v, i, s) { return s.indexOf(v) === i; }));
+        window.localStorage.setItem('PokeboxRewards', mergedPokeboxRewards);
+        //console.log('mergedPokeboxRewards = ', mergedPokeboxRewards);
+
+    }
+
+    // Define a function for saving pokebox popups seen to local storage
+    function savePokeboxPopupsSeen(){
+
+        // Return if we don't have access to local storage or we're not allowed to save
+        if (appFreeMode){ return false; }
+        if (typeof window.localStorage === 'undefined'){ return false; }
+
+        // Collect saved global array and prepare to merge with local filtered
+        var savedPokeboxPopupsSeen = window.localStorage.getItem('PokeboxPopupsSeen');
+        if (typeof savedPokeboxPopupsSeen === 'string'){ savedPokeboxPopupsSeen = JSON.parse(savedPokeboxPopupsSeen); }
+        else { savedPokeboxPopupsSeen = []; }
+        //console.log('currentPokeboxPopupsSeen = ', PokeboxPopupsSeen);
+        //console.log('savedPokeboxPopupsSeen = ', savedPokeboxPopupsSeen);
 
         // Merge the local array into the saved one, and then re-strinify it
-        var mergedCurrentPokeBoxRewards = JSON.stringify(savedCurrentPokeBoxRewards.concat(PokeBoxRewards).filter(function(v, i, s) { return s.indexOf(v) === i; }));
-        window.localStorage.setItem('CurrentPokeBoxRewards', mergedCurrentPokeBoxRewards);
-        //console.log('mergedCurrentPokeBoxRewards = ', mergedCurrentPokeBoxRewards);
+        var mergedPokeboxPopupsSeen = JSON.stringify(savedPokeboxPopupsSeen.concat(PokeboxPopupsSeen).filter(function(v, i, s) { return s.indexOf(v) === i; }));
+        window.localStorage.setItem('PokeboxPopupsSeen', mergedPokeboxPopupsSeen);
+        //console.log('mergedPokeboxPopupsSeen = ', mergedPokeboxPopupsSeen);
 
     }
 
