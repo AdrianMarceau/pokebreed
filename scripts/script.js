@@ -4539,13 +4539,13 @@
         // Quickly generate a list of password values and unlocks
         var rewardIndex = {};
         var shadowCount = Object.keys(shadowRewardIndex).length;
-        for (var i = 1; i <= shadowCount; i++){
+        for (var i = 0; i < shadowCount; i++){
             var info = shadowRewardIndex[i];
             if (typeof info['secret'] === 'undefined'){ continue; }
             rewardIndex[stringToPassValue(info['secret'])] = info['species'];
             }
         var shiningCount = Object.keys(shiningRewardIndex).length;
-        for (var i = 1; i <= shiningCount; i++){
+        for (var i = 0; i < shiningCount; i++){
             var info = shiningRewardIndex[i];
             if (typeof info['secret'] === 'undefined'){ continue; }
             rewardIndex[stringToPassValue(info['secret'])] = info['species'];
