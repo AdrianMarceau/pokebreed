@@ -1448,6 +1448,7 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 }
 .panel .buttons button .traits i.starter { background-position: 0 0; }
 .panel .buttons button .traits i.nonwild { background-position: -5px 0; }
+.panel .buttons button .traits i.crossgen { background-position: -10px 0; right: auto; left: 4px; }
 .panel .buttons button .traits i.ultra { background-position: -45px 0; }
 .panel .buttons button .traits i.legendary { background-position: -50px 0; }
 .panel .buttons button .traits i.mythical { background-position: -55px 0; }
@@ -2223,6 +2224,7 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 }
 .panel .buttons .info .group.pokedex .list .species .traits i.starter { background-position: 0 0; }
 .panel .buttons .info .group.pokedex .list .species .traits i.nonwild { background-position: -5px 0; }
+.panel .buttons .info .group.pokedex .list .species .traits i.crossgen { background-position: -10px 0; right: auto; left: 1px; }
 .panel .buttons .info .group.pokedex .list .species .traits i.ultra { background-position: -45px 0; }
 .panel .buttons .info .group.pokedex .list .species .traits i.legendary { background-position: -50px 0; }
 .panel .buttons .info .group.pokedex .list .species .traits i.mythical { background-position: -55px 0; }

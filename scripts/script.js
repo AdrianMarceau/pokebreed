@@ -2818,17 +2818,20 @@
                 // Check to see if this pokemon has any traits to show
                 var pokeTraits = [];
                 if (pokemonData.isHiddenPokemon === true){ pokeTraits.push('<i class="sp xhidden"></i>'); }
-                else if (pokemonData.isSpecialPokemon === true){
-                    if (pokemonData.class === 'ultra-beast'){ pokeTraits.push('<i class="sp ultra"></i>'); }
-                    else if (pokemonData.class === 'legendary'){ pokeTraits.push('<i class="sp legendary"></i>'); }
-                    else if (pokemonData.class === 'mythical'){ pokeTraits.push('<i class="sp mythical"></i>'); }
-                    } else {
-                    if (pokemonData.isStarterPokemon === true){ pokeTraits.push('<i class="starter"></i>'); }
-                    if (pokemonData.gameGeneration !== pokemonData.baseGameGeneration
-                        &&  (pokemonData.formClasses.indexOf('regional-variant') !== -1
-                            || pokemonData.formClasses.indexOf('ancient-variant') !== -1
-                            || pokemonData.formClasses.indexOf('box-variant') !== -1)){
-                            if (pokemonData.formToken.match(/(^|-)?(alolan|proto|altered)(-|$)?/)){ pokeTraits.push('<i class="nonwild"></i>'); }
+                else {
+                    if (pokemonData.baseGameGeneration !== pokemonData.gameGeneration){ pokeTraits.push('<i class="crossgen"></i>'); }
+                    if (pokemonData.isSpecialPokemon === true){
+                        if (pokemonData.class === 'ultra-beast'){ pokeTraits.push('<i class="sp ultra"></i>'); }
+                        else if (pokemonData.class === 'legendary'){ pokeTraits.push('<i class="sp legendary"></i>'); }
+                        else if (pokemonData.class === 'mythical'){ pokeTraits.push('<i class="sp mythical"></i>'); }
+                        } else {
+                        if (pokemonData.isStarterPokemon === true){ pokeTraits.push('<i class="starter"></i>'); }
+                        if (pokemonData.gameGeneration !== pokemonData.baseGameGeneration
+                            &&  (pokemonData.formClasses.indexOf('regional-variant') !== -1
+                                || pokemonData.formClasses.indexOf('ancient-variant') !== -1
+                                || pokemonData.formClasses.indexOf('box-variant') !== -1)){
+                                if (pokemonData.formToken.match(/(^|-)?(alolan|proto|altered)(-|$)?/)){ pokeTraits.push('<i class="nonwild"></i>'); }
+                            }
                         }
                     }
 
@@ -3109,17 +3112,20 @@
 
                 var pokeTraits = [];
                 if (pokeIndex.isHiddenPokemon === true){ pokeTraits.push('<i class="sp xhidden"></i>'); }
-                else if (pokeIndex.isSpecialPokemon === true){
-                    if (pokeIndex.class === 'ultra-beast'){ pokeTraits.push('<i class="sp ultra"></i>'); }
-                    else if (pokeIndex.class === 'legendary'){ pokeTraits.push('<i class="sp legendary"></i>'); }
-                    else if (pokeIndex.class === 'mythical'){ pokeTraits.push('<i class="sp mythical"></i>'); }
-                    } else {
-                    if (pokeIndex.isStarterPokemon === true){ pokeTraits.push('<i class="starter"></i>'); }
-                    if (pokeIndex.gameGeneration !== pokeIndex.baseGameGeneration
-                        &&  (pokeIndex.formClasses.indexOf('regional-variant') !== -1
-                            || pokeIndex.formClasses.indexOf('ancient-variant') !== -1
-                            || pokeIndex.formClasses.indexOf('box-variant') !== -1)){
-                            if (pokeIndex.formToken.match(/(^|-)?(alolan|proto|altered)(-|$)?/)){ pokeTraits.push('<i class="nonwild"></i>'); }
+                else {
+                    if (pokeIndex.baseGameGeneration !== pokeIndex.gameGeneration){ pokeTraits.push('<i class="crossgen"></i>'); }
+                    if (pokeIndex.isSpecialPokemon === true){
+                        if (pokeIndex.class === 'ultra-beast'){ pokeTraits.push('<i class="sp ultra"></i>'); }
+                        else if (pokeIndex.class === 'legendary'){ pokeTraits.push('<i class="sp legendary"></i>'); }
+                        else if (pokeIndex.class === 'mythical'){ pokeTraits.push('<i class="sp mythical"></i>'); }
+                        } else {
+                        if (pokeIndex.isStarterPokemon === true){ pokeTraits.push('<i class="starter"></i>'); }
+                        if (pokeIndex.gameGeneration !== pokeIndex.baseGameGeneration
+                            &&  (pokeIndex.formClasses.indexOf('regional-variant') !== -1
+                                || pokeIndex.formClasses.indexOf('ancient-variant') !== -1
+                                || pokeIndex.formClasses.indexOf('box-variant') !== -1)){
+                                if (pokeIndex.formToken.match(/(^|-)?(alolan|proto|altered)(-|$)?/)){ pokeTraits.push('<i class="nonwild"></i>'); }
+                            }
                         }
                     }
 
