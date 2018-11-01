@@ -25,6 +25,7 @@
             formClass: 'fusion-evolution',
             formToken: 'x1',
             isSpecialPokemon: true,
+            repeatVisitor: true,
             number: 808,
             types: ['steel'],
             genderRatio: {none: 1.0000},
@@ -76,6 +77,11 @@
                 species: 'melmetal',
                 method: 'level-up', value: 40,
                 method2: 'fusion-species', value2: 'bimeltan'
+                }, {
+                species: 'melmetal',
+                method: 'level-up', value: 40,
+                method2: 'fusion-species', value2: 'trimeltan',
+                castoff: 'meltan'
                 }]
             },
         'trimeltan': {
@@ -101,6 +107,16 @@
                 species: 'melmetal',
                 method: 'level-up', value: 40,
                 method2: 'fusion-species', value2: 'meltan'
+                }, {
+                species: 'melmetal',
+                method: 'level-up', value: 40,
+                method2: 'fusion-species', value2: 'bimeltan',
+                castoff: 'meltan'
+                }, {
+                species: 'melmetal',
+                method: 'level-up', value: 40,
+                method2: 'fusion-species', value2: 'trimeltan',
+                castoff: 'bimeltan'
                 }]
             },
         'melmetal': {
@@ -111,7 +127,7 @@
             number: 809,
             types: ['steel'],
             genderRatio: {none: 1.0000},
-            baseStats: {hp: 100, phAttack: 100, phDefense: 100, spAttack: 100, spDefense: 100, speed: 100},
+            baseStats: {hp: 120, phAttack: 120, phDefense: 120, spAttack: 120, spDefense: 120, speed: 120},
             abilities: {0: 'static'},
             height: 2.5,
             weight: 800.0,

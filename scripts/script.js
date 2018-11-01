@@ -2625,7 +2625,7 @@
             recheckPokeboxRewards();
 
             // Check to see if we can allow special pokemon to be selected yet
-            var allowSpecialPokemon = hasUnlockedSpecialPokemon();
+            var allowSpecialPokemon = PokeboxRewards.indexOf('special-starters') !== -1 ? true : false;
 
             // Unlock any starters that have been unlocked via dex completion counts
             var starterRewardCount = Object.keys(starterRewardIndex).length;
@@ -6706,6 +6706,23 @@
 
                 }
 
+            // (GEN 8+) MELTAN are summoned in bulk as soon as a single one appears
+            if (maxIndexKeyToLoad >= 8){
+                if (typeof addedSpecies['meltan'] !== 'undefined'){
+                    if (addedSpecies['meltan'] >= 1
+                        && addedSpecies['meltan'] < 4){
+                        eventBoost = 30 * addedSpecies['meltan'];
+                        eventPokemonChanceBoosters['meltan'] = eventBoost;
+                        PokemonSpeciesIndex['meltan']['visitorClass'] = '';
+                        } else if (addedSpecies['meltan'] >= 4){
+                        eventPokemonChanceBoosters['meltan'] = 0;
+                        } else {
+                        if (typeof eventPokemonChanceBoosters['meltan'] !== 'undefined'){ delete eventPokemonChanceBoosters['meltan']; }
+                        if (typeof PokemonSpeciesIndex['meltan']['visitorClass'] !== 'undefined'){ delete PokemonSpeciesIndex['meltan']['visitorClass']; }
+                        }
+                    }
+                }
+
             // (GEN 7+) Necrozma is summoned to devour the light of Lunala or Solgaleo when they appear
             eventPokemonChanceBoosters['necrozma'] = 0;
             if (maxIndexKeyToLoad >= 7){
@@ -7622,7 +7639,7 @@
                 }
             }
 
-        // Unlock shadow pokemon automatically and via dex completion (linked to repeating movie appearance num)
+        // Unlock shadow pokemon automatically and via dex completion
         var shadowRewardCount = Object.keys(shadowRewardIndex).length;
         for (var shadowNum = 1; shadowNum <= shadowRewardCount; shadowNum++){
             var rewardInfo = shadowRewardIndex[shadowNum];
@@ -7634,7 +7651,7 @@
                 }
             }
 
-        // Unlock shining pokemon automatically and via dex completion (linked to repeating movie appearance num)
+        // Unlock shining pokemon automatically and via dex completion
         var shiningRewardCount = Object.keys(shiningRewardIndex).length;
         for (var shiningNum = 1; shiningNum <= shiningRewardCount; shiningNum++){
             var rewardInfo = shiningRewardIndex[shiningNum];
@@ -7646,7 +7663,10 @@
                 }
             }
 
-        // Unlock the final pokemon ARCEUS if the user has encountered every other species
+        // Unlock special pokemon as starters if the user has encountered every non-special species
+        if (hasUnlockedSpecialPokemon() && PokeboxRewards.indexOf('special-starters') === -1){ PokeboxRewards.push('special-starters'); }
+
+        // Unlock the final pokemon Arceus if the user has encountered every other species
         if (hasUnlockedFinalPokemon() && PokeboxRewards.indexOf('arceus') === -1){ PokeboxRewards.push('arceus'); }
 
         // Save any changes to the pokebox rewards array
