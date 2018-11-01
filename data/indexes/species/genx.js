@@ -650,6 +650,29 @@
             prevEvolution: 'qwilfish'
             },
 
+        // Cross-gen Mega-Evolutions
+
+        'mega-politoed': {
+            order: thisIndex.afterOrder('politoed'),
+            token: 'mega-politoed',
+            name: 'Mega Politoed',
+            formClass: 'mega-evolution',
+            formToken: 'mega',
+            baseSpecies: 'politoed',
+            number: 186,
+            dexNumber: 1026.1111,
+            types: ['water'],
+            baseStats: {hp: 90, phAttack: 115, phDefense: 80, spAttack: 130, spDefense: 105, speed: 80},
+            abilities: {0: 'water-absorb', 1: 'damp', hidden: 'drizzle'},
+            height: 1.1,
+            weight: 33.9,
+            colors: ['green', 'yellow', 'blue', 'pink'],
+            eggCycles: 20,
+            eggLimit: 5,
+            eggGroups: ['water-1'],
+            prevEvolution: 'politoed'
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
@@ -1257,6 +1280,8 @@
         {base: 'weepinbell', species: 'meandrabel', method: 'type-surge', value: 'poison', method2: 'type-warning', value2: 'grass', method3: 'level-up', value3: 41},
 
         {base: 'qwilfish', species: 'buzzqwill', method: 'type-surge', value: 'electric', method2: 'level-up', value2: 30},
+
+        {base: 'politoed', species: 'mega-politoed', method: 'mega-evolution', value: 'politoedite'},
 
         {base: 'castform', species: 'rocky-castform', method: 'type-appeal', value: ['rock', 'ground'], method2: 'level-up', value2: 10},
         {base: 'castform', species: 'cloudy-castform', method: 'type-appeal', value: 'flying', method2: 'level-up', value2: 10},

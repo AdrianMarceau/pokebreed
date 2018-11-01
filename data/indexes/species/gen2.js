@@ -669,7 +669,7 @@
             abilities: {0: 'water-absorb', 1: 'damp', hidden: 'drizzle'},
             height: 1.1,
             weight: 33.9,
-            colors: ['green', 'yellow', 'pink'],
+            colors: ['green', 'yellow', 'pink', 'blue'],
             eggCycles: 20,
             eggGroups: ['water-1'],
             prevEvolution: 'poliwhirl'
