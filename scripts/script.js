@@ -1178,7 +1178,7 @@
                     });
                 }
 
-            // Show the UNLOCK STARTERS (GEN2+) message if they've been unlocked but not shown
+            // Show the UNLOCK STARTERS message if they've been unlocked but not shown
             //console.log('starterRewardIndex = ', starterRewardIndex);
             var starterRewardCount = Object.keys(starterRewardIndex).length;
             for (var i = 0; i < starterRewardCount; i++){
@@ -1202,6 +1202,20 @@
                             '<strong>'+ (regionToken.charAt(0).toUpperCase() + regionToken.slice(1)) +' Region</strong>\'s starter Pokémon have been unlocked.</em>'
                         });
                     }
+                }
+
+            // Show the UNLOCK SPECIALS message if they've been unlocked but not shown
+            var eventID = 'unlocked-special-starters';
+            if (PokeboxRewards.indexOf('special-starters') !== -1
+                && PokeboxPopupsSeen.indexOf(eventID) === -1){
+                queuePopupWindow({
+                    id: eventID,
+                    banner: 'congrats-specials',
+                    buttons: {continue: 'Continue'},
+                        textbox: '<em>Congratulations! You\'ve encountered every <br />' +
+                            'non-legendary Pokémon there is to see! As thanks, <br />' +
+                            '<strong>all special Pokémon can now be used as starters</strong>!</em> '
+                    });
                 }
 
             // Show the UNLOCK SHADOW POKEMON message if they've been unlocked but not shown
@@ -4599,7 +4613,7 @@
                 }
 
             // Check if we've unlocked special pokemon yet
-            var unlockedSpecialPokemon = hasUnlockedSpecialPokemon();
+            var unlockedSpecialPokemon = PokeboxRewards.indexOf('special-starters') !== -1 ? true : false;
 
             // Otherwise we can continue parsing the password normally for actual Pokemon amounts
             var seedPokemon = parsePokeBoxSeed(rawSeed);
