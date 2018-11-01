@@ -1207,10 +1207,10 @@
             // Show the UNLOCK SHADOW POKEMON message if they've been unlocked but not shown
             //console.log('shadowRewardIndex = ', shadowRewardIndex);
             var shadowRewardCount = Object.keys(shadowRewardIndex).length;
-            for (var shadowNum = 1; shadowNum <= shadowRewardCount; shadowNum++){
-                var rewardInfo = shadowRewardIndex[shadowNum];
+            for (var i = 0; i < shadowRewardCount; i++){
+                var rewardInfo = shadowRewardIndex[i];
                 if (typeof rewardInfo === 'undefined'){ continue; }
-                //console.log('rewardInfo = ', rewardInfo);
+                //console.log('shadowRewardIndex['+ i  +'] = ', rewardInfo);
                 var shadowToken = rewardInfo['species'];
                 var unlockCount = rewardInfo['count'];
                 var eventID = 'unlocked-'+ shadowToken;
@@ -1221,7 +1221,7 @@
                         banner: 'unlocked-'+ shadowToken,
                         buttons: {continue: 'Continue'},
                         textbox: 'Wow! A <strong>'+ PokemonSpeciesIndex[shadowToken]['name'] +'</strong> appeared! <br />' +
-                            '<em class="q s'+shadowNum+' shadow">'+ PokemonSpeciesIndex[shadowToken]['buttonQuote'] +'</em> <br />' +
+                            '<em class="q s'+ (i + 1) +' shadow">'+ PokemonSpeciesIndex[shadowToken]['buttonQuote'] +'</em> <br />' +
                             'Maybe we can use it as a starter? ' +
                             (typeof rewardInfo['secret'] !== 'undefined' ? '<br /><span class="pass">'+ rewardInfo['secret'] +'</span> ' : '')
                         });
@@ -1231,10 +1231,10 @@
             // Show the UNLOCK SHINING POKEMON message if they've been unlocked but not shown
             //console.log('shiningRewardIndex = ', shiningRewardIndex);
             var shiningRewardCount = Object.keys(shiningRewardIndex).length;
-            for (var shiningNum = 1; shiningNum <= shiningRewardCount; shiningNum++){
-                var rewardInfo = shiningRewardIndex[shiningNum];
+            for (var i = 0; i < shiningRewardCount; i++){
+                var rewardInfo = shiningRewardIndex[i];
                 if (typeof rewardInfo === 'undefined'){ continue; }
-                //console.log('shiningRewardIndex['+ shiningNum  +'] = ', rewardInfo);
+                //console.log('shiningRewardIndex['+ i  +'] = ', rewardInfo);
                 var shiningToken = rewardInfo['species'];
                 var unlockCount = rewardInfo['count'];
                 var eventID = 'unlocked-'+ shiningToken;
@@ -1245,7 +1245,7 @@
                         banner: 'unlocked-'+ shiningToken,
                         buttons: {continue: 'Continue'},
                         textbox: 'Amazing! A <strong>'+ PokemonSpeciesIndex[shiningToken]['name'] +'</strong> appeared! <br />' +
-                            '<em class="q s'+shiningNum+' shining">'+ PokemonSpeciesIndex[shiningToken]['buttonQuote'] +'</em> <br />' +
+                            '<em class="q s'+ (i + 1) +' shining">'+ PokemonSpeciesIndex[shiningToken]['buttonQuote'] +'</em> <br />' +
                             'Try adding it to one of your boxes! ' +
                             (typeof rewardInfo['secret'] !== 'undefined' ? '<br /><span class="pass">'+ rewardInfo['secret'] +'</span> ' : '')
                         });
@@ -2685,10 +2685,10 @@
 
             // Unlock any shadow pokemon that have been unlocked via overall days passed
             var shadowRewardCount = Object.keys(shadowRewardIndex).length;
-            for (var shadowNum = 1; shadowNum <= shadowRewardCount; shadowNum++){
-                var rewardInfo = shadowRewardIndex[shadowNum];
+            for (var i = 0; i < shadowRewardCount; i++){
+                var rewardInfo = shadowRewardIndex[i];
                 if (typeof rewardInfo === 'undefined'){ continue; }
-                //console.log('rewardInfo = ', shadowNum, rewardInfo);
+                //console.log('rewardInfo = ', i, rewardInfo);
                 if (PokeboxRewards.indexOf(rewardInfo['species']) !== -1){
                     freeStarterPokemon.push(rewardInfo['species']);
                     }
@@ -2696,10 +2696,10 @@
 
             // Unlock any shining pokemon that have been unlocked via overall days passed
             var shiningRewardCount = Object.keys(shiningRewardIndex).length;
-            for (var shiningNum = 1; shiningNum <= shiningRewardCount; shiningNum++){
-                var rewardInfo = shiningRewardIndex[shiningNum];
+            for (var i = 0; i < shiningRewardCount; i++){
+                var rewardInfo = shiningRewardIndex[i];
                 if (typeof rewardInfo === 'undefined'){ continue; }
-                //console.log('rewardInfo = ', shiningNum, rewardInfo);
+                //console.log('rewardInfo = ', i, rewardInfo);
                 if (PokeboxRewards.indexOf(rewardInfo['species']) !== -1){
                     freeStarterPokemon.push(rewardInfo['species']);
                     }
@@ -7685,10 +7685,10 @@
 
         // Unlock shadow pokemon automatically and via dex completion
         var shadowRewardCount = Object.keys(shadowRewardIndex).length;
-        for (var shadowNum = 1; shadowNum <= shadowRewardCount; shadowNum++){
-            var rewardInfo = shadowRewardIndex[shadowNum];
+        for (var i = 0; i < shadowRewardCount; i++){
+            var rewardInfo = shadowRewardIndex[i];
             if (typeof rewardInfo === 'undefined'){ continue; }
-            //console.log('rewardInfo = ', shadowNum, rewardInfo);
+            //console.log('rewardInfo = ', i, rewardInfo);
             if (PokeboxDaysPassed >= rewardInfo['count']
                 && PokeboxRewards.indexOf(rewardInfo['species']) === -1){
                 PokeboxRewards.push(rewardInfo['species']);
@@ -7697,10 +7697,10 @@
 
         // Unlock shining pokemon automatically and via dex completion
         var shiningRewardCount = Object.keys(shiningRewardIndex).length;
-        for (var shiningNum = 1; shiningNum <= shiningRewardCount; shiningNum++){
-            var rewardInfo = shiningRewardIndex[shiningNum];
+        for (var i = 0; i < shiningRewardCount; i++){
+            var rewardInfo = shiningRewardIndex[i];
             if (typeof rewardInfo === 'undefined'){ continue; }
-            //console.log('rewardInfo = ', shiningNum, rewardInfo);
+            //console.log('rewardInfo = ', i, rewardInfo);
             if (PokeboxDaysPassed >= rewardInfo['count']
                 && PokeboxRewards.indexOf(rewardInfo['species']) === -1){
                 PokeboxRewards.push(rewardInfo['species']);
