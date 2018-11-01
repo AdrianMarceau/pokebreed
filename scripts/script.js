@@ -1204,20 +1204,6 @@
                     }
                 }
 
-            // Show the UNLOCK SPECIALS message if they've been unlocked but not shown
-            var eventID = 'unlocked-special-starters';
-            if (PokeboxRewards.indexOf('special-starters') !== -1
-                && PokeboxPopupsSeen.indexOf(eventID) === -1){
-                queuePopupWindow({
-                    id: eventID,
-                    banner: 'congrats-specials',
-                    buttons: {continue: 'Continue'},
-                        textbox: '<em>Congratulations! You\'ve encountered every <br />' +
-                            'non-legendary Pokémon there is to see! As thanks, <br />' +
-                            '<strong>all special Pokémon can now be used as starters</strong>!</em> '
-                    });
-                }
-
             // Show the UNLOCK SHADOW POKEMON message if they've been unlocked but not shown
             //console.log('shadowRewardIndex = ', shadowRewardIndex);
             var shadowRewardCount = Object.keys(shadowRewardIndex).length;
@@ -1266,6 +1252,20 @@
                     }
                 }
 
+            // Show the UNLOCK SPECIALS message if they've been unlocked but not shown
+            var eventID = 'unlocked-special-starters';
+            if (PokeboxRewards.indexOf('special-starters') !== -1
+                && PokeboxPopupsSeen.indexOf(eventID) === -1){
+                queuePopupWindow({
+                    id: eventID,
+                    banner: 'congrats-specials',
+                    buttons: {continue: 'Continue'},
+                        textbox: '<em>Congratulations! You\'ve encountered every <br />' +
+                            'non-legendary Pokémon there is to see! As thanks, <br />' +
+                            '<strong>all special Pokémon can now be used as starters</strong>!</em> '
+                    });
+                }
+
             // Show the UNLOCK ARCEUS message if it has been unlocked but not shown
             var eventID = 'unlocked-final-pokemon';
             if (PokeboxRewards.indexOf('arceus') !== -1
@@ -1280,6 +1280,36 @@
                     });
                 }
 
+            // Show the POKEDEX COMPLETE message if complete but not shown yet
+            var eventID = 'global-pokedex-complete';
+            if (PokeboxRewards.indexOf('pokedex-complete') !== -1
+                && PokeboxPopupsSeen.indexOf(eventID) === -1){
+                var seenCount = Object.keys(PokemonSpeciesSeen).length;
+                queuePopupWindow({
+                    id: eventID,
+                    banner: 'congrats-final',
+                    buttons: {next: 'Next'},
+                        textbox: '<em>Wow!! Congratulations! You\'ve encountered every <br />' +
+                            'single Pokémon there is to see! Every last one! <br />' +
+                            'Thank you <strong>so much</strong> for all your help! Seriously!</em> '
+                    });
+                queuePopupWindow({
+                    id: eventID,
+                    banner: 'congrats-final-2',
+                    buttons: {next: 'Next'},
+                        textbox: '<em>Since we started our research, we\'ve seen <br />' +
+                            'a total of <strong>'+ seenCount +' Pokémon </strong> over <strong>'+ numberWithCommas(PokeboxDaysPassed) +' Days</strong> and <br />' +
+                            'raised <strong>'+ numberWithCommas(currentPokedexTotals.currentPokedexScore) +' <span>&#x20bd;</span></strong> in funding. That\'s amazing!!</em> <br /> '
+                    });
+                queuePopupWindow({
+                    id: eventID,
+                    banner: 'congrats-final-3',
+                    buttons: {continue: 'Until next time!'},
+                        textbox: '<em>I\'m not sure what else to say but to thank<br />' +
+                            'you a hundred more times for all your hard work. <br />' +
+                            'I sincerely hope our paths cross again in the future.</em> '
+                    });
+                }
 
             }
 
@@ -7682,6 +7712,9 @@
 
         // Unlock the final pokemon Arceus if the user has encountered every other species
         if (hasUnlockedFinalPokemon() && PokeboxRewards.indexOf('arceus') === -1){ PokeboxRewards.push('arceus'); }
+
+        // Unlock the final pokemon Arceus if the user has encountered every other species
+        if (hasUnlockedAllPokemon() && PokeboxRewards.indexOf('pokedex-complete') === -1){ PokeboxRewards.push('pokedex-complete'); }
 
         // Save any changes to the pokebox rewards array
         savePokeboxRewards();
