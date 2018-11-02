@@ -1002,12 +1002,19 @@
     }
 
     // Define a function for opening content in a new popup window
+    var simRunningBeforePopup = false;
     function openPopupWindow(panelConfig){
         //console.log('openPopupWindow(panelConfig)', panelConfig);
 
         // Auto-generate certain config values if not explicitly set
         if (typeof panelConfig.id === 'undefined'){ return false; }
         if (typeof panelConfig.buttons === 'undefined'){ panelConfig.buttons = {continue: 'Let\'s Go!'}; }
+
+        // If the simulator is currently running, pause it first
+        if (simulationStarted && dayTimeoutSpeed !== 'pause'){
+            $controlButtons.filter('.pause').trigger('click');
+            simRunningBeforePopup = true;
+            }
 
         // Loop through provided panel markup and add
         var newPanelWrapMarkup = '';
@@ -1095,6 +1102,12 @@
             else { return true; }
             });
 
+        // If the simulator is currently running, pause it first
+        if (simulationStarted && simRunningBeforePopup){
+            $controlButtons.filter('.play').trigger('click');
+            simRunningBeforePopup = false;
+            }
+
     }
 
     // Define a function for checking events that might require popups
@@ -1171,10 +1184,18 @@
                 queuePopupWindow({
                     id: eventID,
                     banner: 'unlocked-ditto',
-                    buttons: {continue: 'Continue'},
+                    buttons: {next: 'Next'},
                     textbox: '<em>To make your job a bit easier, I\'m unlocking a new <br />' +
                         'species for you. Meet <strong>Ditto</strong>, the Mimic Pokémon! Ditto <br />' +
                         'can breed with almost any other Pokémon. Amazing!</em>'
+                    });
+                queuePopupWindow({
+                    id: eventID,
+                    banner: 'controls-tutorial-04',
+                    buttons: {continue: 'Continue'},
+                    textbox: '<em>Oh, oh, one more thing! Click the Pokédex button <br />' +
+                        'at the bottom-left to review your progress so far. Okay, <br />' +
+                        'that\'s it, you\'re on your own now! Good luck! ^_^</em> '
                     });
                 }
 
@@ -1828,9 +1849,13 @@
     }
 
     // Define a function for actually starting the simulation
+    var firstSimulation = false;
     var simulationStarted = false;
     function startSimulation(){
         //console.log('startSimulation()');
+
+        // If user has no progress, this is first sim
+        firstSimulation = PokeboxDaysPassed === 0 ? true : false;
 
         // Set the start flag to true
         simulationStarted = true;
@@ -5208,6 +5233,53 @@
 
                 // Update local storage with the current pokebox rewards index
                 savePokeboxRewards();
+
+                }
+
+            }
+
+        // If we're not in free mode and this is an appropriate time, show a tutorial popup
+        if (!appFreeMode){
+
+            // If this is the user's first simulation, we have tutorial text
+            if (firstSimulation){
+
+                // If this is the 10th day, let them know they can speed things up
+                if (thisZoneData.day === 10){
+                    var eventID = 'controls-tutorial-01';
+                    openPopupWindow({
+                        id: eventID,
+                        banner: 'controls-tutorial-01',
+                        buttons: {continue: 'Continue'},
+                        textbox: '<em>You can speed up the simulation by clicking the <br /> ' +
+                            'arrow buttons at the bottom-left of the box. I\'d highly <br /> ' +
+                            'recommend the warp speed. It\'s really, really fast!</em> '
+                        });
+                    }
+                // If they're on the 60th day, let them know they can stop the simulation
+                else if (thisZoneData.day === 60){
+                    var eventID = 'controls-tutorial-02';
+                    openPopupWindow({
+                        id: eventID,
+                        banner: 'controls-tutorial-02',
+                        buttons: {continue: 'Continue'},
+                        textbox: '<em>When you\'re done, double-click the big red STOP button <br /> ' +
+                            'at the bottom-right of the box. The simulation will end and <br /> ' +
+                            'you\'ll be able to review any new Pokédex entries!</em> '
+                        });
+                    }
+                // If they're on the 120th day, let them know they should stop the simulation
+                else if (thisZoneData.day === 120){
+                    var eventID = 'controls-tutorial-03';
+                    openPopupWindow({
+                        id: eventID,
+                        banner: 'controls-tutorial-03',
+                        buttons: {continue: 'Continue'},
+                        textbox: '<em>You should probably stop the simulation now... <br /> ' +
+                            'I\'d like to give you something!  Remember, it\'s the <br /> ' +
+                            'big red STOP button at the bottom-right of the box. </em> '
+                        });
+                    }
 
                 }
 
