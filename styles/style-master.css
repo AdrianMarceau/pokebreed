@@ -2385,6 +2385,28 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 .panel .buttons .info[data-tab="help"] {
 
 }
+.panel .buttons .info[data-tab="help"] .group.hotkeys {
+
+}
+.panel .buttons .info[data-tab="help"] .group.hotkeys > div {
+    margin: 0 auto 10px;
+}
+.panel .buttons .info[data-tab="help"] .group.hotkeys > div:last-child {
+    margin-bottom: 0;
+}
+.panel .buttons .info[data-tab="help"] .group.hotkeys h3 {
+    margin: 0 auto 10px;
+}
+.panel .buttons .info[data-tab="help"] .group.hotkeys ul {
+    margin: 0 auto;
+}
+.panel .buttons .info[data-tab="help"] .group.hotkeys ul li {
+}
+.panel .buttons .info[data-tab="help"] .group.hotkeys .key {
+    font-family: "Courier New", "Courier", sans-serif;
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #c1daf1;
+}
 .panel .buttons .info[data-tab="credits"] {
 
 }

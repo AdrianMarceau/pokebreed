@@ -22,8 +22,8 @@
             <p>
                 Each species that lives in your box contributes to the global Type Appeal values in some way.
                 Fire types, for example, attract other Fire types...  but they also <em>repel</em> Bug, Grass, and Steel types due to their type-advantage over them.
-                Likewise, because Fire types are weak to Rock and Ground attacks themselves, Pokemon of those types may be attracted to the box as well.
-                All basic Pokémon have the same potential influence over a box's appeal but fully-evolved and special or legendary Pokémon have considerably more.
+                Likewise because Fire types are weak to Water attacks themselves, they may inadvertently attract Water type Pokémon to the box as well.
+                All basic Pokémon influence a box's appeal values but fully-evolved and special or legendary Pokémon influence it a bit more.
             </p>
             <p>
                 Type Appeal values affect many things, but the most notable are evolutions and breeding.
@@ -34,22 +34,57 @@
         <div class="group">
             <h3>Evolution Mechanics</h3>
             <p>
-                Simply putting Pokémon into a zone will cause most of them to grow and eventually evolve naturally, but some Pokémon require specific conditions to reach their next stage of development.  Some species rely on high or low type appeal values to evolve, others rely on the presence of other Pokémon, and some even have their own unique evolution methods. Experiment with different combinations of Pokémon to see what happens!
+                Most Pokémon grow and eventually evolve on their own, but some require very specific conditions to reach their next stage of development.
             </p>
             <ul>
                 <li>Level-up evolutions trigger naturally when a Pokémon reaches a certain growth level</li>
-                <li>Happiness-based evolutions trigger when a Pokémon's favourite type(s) have high appeal values</li>
-                <li>Sadness-based evolutions trigger when a Pokémon's favourite types(s) have low appeal values</li>
-                <li>Affection-based evolutions trigger when a Pokémon is surrounded with species from its own family</li>
-                <li>Loneliness-based evolutions trigger when a Pokémon is surrounded with species its not related to</li>
-                <li>Type-appeal based evolutions trigger when the given type is either high or very high</li>
-                <li>Type-warning based evolutions trigger when the given type is either low or very low</li>
-                <li>Trade-based evolutions trigger at certain growth levels as long as a Pokémon has a partner</li>
-                <li>Extinction-based evolutions trigger when this Pokémon is the last active member of its species</li>
+                <li>Happiness evolutions trigger when a Pokémon's favourite type(s) have high appeal</li>
+                <li>Affection evolutions trigger when a Pokémon is surrounded a lot of family</li>
+                <li>Type-appeal evolutions trigger when an elemental type has very high appeal</li>
+                <li>Burst and Mega evolutions trigger when a Pokémon has reached the end of its life</li>
+                <li>Other more obscure methods of evolution may exist as well...</li>
             </ul>
+        </div>
+    </div>
+    <div class="group hotkeys">
+        <h2>Keyboard Controls</h2>
+        <div>
+            <h3>During Starter Selection</h3>
             <ul>
-                <li>Burst evolutions may trigger at the end of a Pokémon's life-cycle if qualifiers are met</li>
-                <li>Mega evolutions trigger automatically at the end of a Pokémon's life-cycle no matter what</li>
+                <li>On the starter selection screen, use <span class="key">[TAB]</span> and the <span class="key">[ARROW KEYS]</span> to navigate</li>
+                <li><span class="key">[TAB]</span> shifts focus from one panel to another (starters, gen filters, then type filters)</li>
+                <li>Starter Panel: Use all four <span class="key">[ARROW KEYS]</span> to navigate buttons, <span class="key">[SPACEBAR]</span> to select a Pokémon as a starter</li>
+                <li>Filter Panels: Use <span class="key">[LEFT ARROW]</span> and <span class="key">[RIGHT ARROW]</span> to navigate filters, <span class="key">[UP ARROW]</span> and <span class="key">[DOWN ARROW]</span> to jump to first/last option</li>
+                <li><span class="key">[S]</span> can be used to bring up the seed / starter prompt (type a name or fragment and hit <span class="key">[ENTER]</span>)</li>
+                <li><span class="key">[D]</span> can be used to add a Ditto (once unlocked)</li>
+                <li><span class="key">[SHIFT] + [D]</span> can be used to a add Super Ditto (once unlocked)</li>
+                <li><span class="key">[A]</span> can be used to add Arcues (once unlocked)</li>
+                <li><span class="key">[BACKSPACE]</span> removes last-added starter Pokémon, can be used repeatedly</li>
+                <li><span class="key">[ENTER]</span> starts the simulation with the selected starter Pokémon</li>
+            </ul>
+        </div>
+        <div>
+            <h3>While Simulation is Running</h3>
+            <ul>
+                <li><span class="key">[SPACEBAR]</span> or <span class="key">[ENTER]</span> pauses and unpauses the simulation</li>
+                <li><span class="key">[ESC]</span> or <span class="key">[BACKSPACE]</span> stops and then ends the simulation</li>
+                <li><span class="key">[RIGHT ARROW]</span> can be used to speed up the simulation</li>
+                <li><span class="key">[LEFT ARROW]</span> can be used to slow down the simulation</li>
+            </ul>
+        </div>
+        <div>
+            <h3>After Simulation has Ended</h3>
+            <ul>
+                <li><span class="key">[LEFT ARROW]</span> continues to the selection screen w/ same starters</li>
+                <li><span class="key">[RIGHT ARROW]</span> or <span class="key">[BACKSPACE]</span> or <span class="key">[ENTER]</span> continues to selection screen w/ new starters</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Other Shortcuts</h3>
+            <ul>
+                <li><span class="key">[~]</span> key can be used to autoscroll to main overview area</li>
+                <li><span class="key">[SPACEBAR]</span> or <span class="key">[ENTER]</span> can be used to dismiss popup messages</li>
+                <li>Pokédex cannot be navigated by keyboard yet (sorry)</li>
             </ul>
         </div>
     </div>
