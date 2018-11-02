@@ -1125,14 +1125,37 @@
             types: ['poison', 'ground'],
             genderRatio: {female: 1.000},
             baseStats: {hp: 90, phAttack: 117, phDefense: 87, spAttack: 100, spDefense: 85, speed: 126},
-            abilities: {0: 'poison-point', 1: 'rivalry', hidden: 'sheer-force'},
-            height: 0.2,
-            weight: 0.9,
+            abilities: {0: 'sheer-force'},
+            height: 1.4,
+            weight: 60,
             colors: ['blue', 'pink'],
             eggCycles: 20,
-            eggPartner: 'nidoking',
+            eggLimit: 4,
+            eggPartner: 'primed-nidoking',
             eggGroups: ['monster', 'field'],
             prevEvolution: 'nidoqueen'
+            },
+        'primed-nidoking': {
+            order: thisIndex.afterOrder('nidoking'),
+            token: 'primed-nidoking',
+            name: 'Primed Nidoking',
+            formClass: 'burst-evolution',
+            formToken: 'primed',
+            baseSpecies: 'nidoking',
+            number: 34,
+            dexNumber: 1044.111,
+            types: ['poison', 'ground'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 81, phAttack: 127, phDefense: 77, spAttack: 110, spDefense: 75, speed: 135},
+            abilities: {0: 'sheer-force'},
+            height: 1.3,
+            weight: 62,
+            colors: ['purple', 'white', 'green'],
+            eggCycles: 20,
+            eggLimit: 4,
+            eggPartner: 'estrus-nidoqueen',
+            eggGroups: ['monster', 'field'],
+            prevEvolution: 'nidoking'
             },
 
         'burst-machamp': {
@@ -1292,8 +1315,9 @@
         {base: 'dialga', species: 'primal-dialga', method: 'primal-reversion', value: 'adamant-orb'},
         {base: 'palkia', species: 'primal-palkia', method: 'primal-reversion', value: 'lustrous-orb'},
 
-        {base: 'machamp', species: 'burst-machamp', method: 'burst-evolution', value: 'fighting-spirit', method2: 'type-surge', value2: 'fighting'},
         {base: 'nidoqueen', species: 'estrus-nidoqueen', method: 'burst-evolution', value: 'burning-passion', method2: 'type-surge', value2: 'poison'},
+        {base: 'nidoking', species: 'primed-nidoking', method: 'burst-evolution', value: 'burning-passion', method2: 'type-surge', value2: 'poison'},
+        {base: 'machamp', species: 'burst-machamp', method: 'burst-evolution', value: 'fighting-spirit', method2: 'type-surge', value2: 'fighting'},
 
         {base: 'ditto', species: 'super-ditto', method: 'level-up', value: 10, method2: 'fusion-species', value2: 'ditto', switch: 'and'},
 
