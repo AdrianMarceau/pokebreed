@@ -3304,6 +3304,6 @@
         ]);
 
     // Add each of this region's starter pokemon to the global reward index
-    PokeBoxAPI.addStarterRewardToIndex({region: 'unova', gen: 5, count: 493, 'species': ['snivy', 'tepid', 'oshawott']});
+    PokeBoxAPI.addStarterRewardToIndex({region: 'unova', gen: 5, count: 493, 'species': ['snivy', 'tepig', 'oshawott']});
 
 })();
