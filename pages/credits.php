@@ -55,6 +55,7 @@
             </li>
             <li>
                 <strong>Corvos / C. Tyler Corbett</strong><br />
+                <a href="https://ctcorbett.tumblr.com/" target="_blank">https://ctcorbett.tumblr.com/</a><br />
                 <em>
                     <span title="Baby Ponyta">Unicolt</span>,
                     <span title="Baby Growlithe">Embark</span>,
@@ -69,7 +70,8 @@
 
                 </em>
                 <p style="font-size: 10px; color: #7a7a7a;">
-                    * Minor edits and collaboration with Ageman20XX
+                    * Minor edits and collaboration with Ageman20XX, originals can be found on
+                    <a href="https://dribbble.com/T-Co" target="_blank">Tyler's Dribbble Portfolio</a>
                 </p>
             </li>
             <li>
