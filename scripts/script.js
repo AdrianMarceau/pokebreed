@@ -6275,9 +6275,11 @@
                     pokeFormClass = indexInfo.formClass2;
                     }
 
-                // Check to see if we bypass normal breeding restrictions
+                // Default the legendary breeding flag to false
                 var allowLegendaryBreeding = false;
-                if (existingArceus > 0
+
+                // Check to see if any conditions allow for legendary breeding
+                if ((existingArceus > 0 || (existingDitto > 0 && typeof indexInfo.eggSpecies !== 'undefined'))
                     && preventBreeding.indexOf(pokeToken) === -1
                     && preventBreeding.indexOf(pokeFormClass) === -1
                     ){
