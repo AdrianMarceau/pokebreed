@@ -71,7 +71,7 @@
         'tundra': {
             order: indexOrder++,
             token: 'tundra',
-            name: 'tundra',
+            name: 'Tundra',
             baseTypes: ['ice', '', 'water']
             },
         'city': {
