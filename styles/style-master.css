@@ -1640,6 +1640,10 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.9);
 }
 /*
+.panel .buttons .filter-pokemon[data-target="pokedex"] .filter .label {
+    background-color: #3e5ca1;
+    color: #fefefe;
+}
 .panel .buttons .filter-pokemon[data-target="buttons"] .filter .label {
     background-color: #2d2d30;
     color: #F0F0F0;
@@ -2425,6 +2429,15 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 .panel .buttons .info.links .link.pokedex,
 .panel .buttons .info.links .count.score {
     float: left;
+}
+.panel .buttons .info.links .link.pokedex.active,
+.panel .buttons .info.links .count.score.active {
+    background-color: #3e5ca1;
+    color: #fefefe;
+}
+body[data-mode="free"] .panel .buttons .info.links .link.pokedex.active,
+body[data-mode="free"] .panel .buttons .info.links .count.score.active {
+    background-color: #3b8e3b;
 }
 .panel .buttons .info.links .link.icon span,
 .panel .buttons .info.links .link.mode span,
