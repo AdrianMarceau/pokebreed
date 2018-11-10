@@ -6188,11 +6188,11 @@
         // SPECIAL BOX EFFECT : Prevent all breeding if the appropriate flag is active
         if (thisZoneData.currentEffects['preventAllBreeding'] === true){ return false; }
 
-        // Check to see if we're at high (95%) zone capacity already
+        // Check to see if we're at high (99%) zone capacity already
         var currentZoneStats = thisZoneData.currentStats;
         var currentTypeStats = currentZoneStats['types'];
         var zoneCapacityPercent = ((thisZoneData.currentPokemon.length / thisZoneData.capacity) * 100);
-        var zoneIsOvercrowded = zoneCapacityPercent >= 95 ? true : false;
+        var zoneIsOvercrowded = zoneCapacityPercent >= 99 ? true : false;
         //console.log('zoneCapacityPercent = ', zoneCapacityPercent);
         //console.log('zoneIsOvercrowded = ', zoneIsOvercrowded);
 
@@ -6504,7 +6504,7 @@
                     // Check again to see if we're at overcrowded capacity
                     if (allowEgg){
                         zoneCapacityPercent = ((thisZoneData.currentPokemon.length / thisZoneData.capacity) * 100);
-                        zoneIsOvercrowded = zoneCapacityPercent >= 95 ? true : false;
+                        zoneIsOvercrowded = zoneCapacityPercent >= 99 ? true : false;
                         //console.log('zoneCapacityPercent = ', zoneCapacityPercent);
                         //console.log('zoneIsOvercrowded = ', zoneIsOvercrowded);
                         if (zoneIsOvercrowded){ allowEgg = false; }
@@ -7152,6 +7152,9 @@
     function triggerZoneVisitor(visitorKind){
         //console.log('triggerZoneVisitor(visitorKind)', visitorKind);
         if (typeof visitorKind !== 'string'){ visitorKind = 'auto'; }
+
+        // If we're already at capacity, we cannot add any more pokemon
+        if (thisZoneData.currentPokemon.length >= thisZoneData.capacity){ return false; }
 
         // Collect visitor appeal and sum all the chance values (return false if zero)
         var currentVisitorAppeal = thisZoneData.currentStats['visitorAppeal'];
