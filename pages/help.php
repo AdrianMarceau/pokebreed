@@ -58,7 +58,7 @@
                 <li><span class="key">[S]</span> can be used to bring up the seed / starter prompt (type a name or fragment and hit <span class="key">[ENTER]</span>)</li>
                 <li><span class="key">[D]</span> can be used to add a Ditto (once unlocked)</li>
                 <li><span class="key">[SHIFT] + [D]</span> can be used to a add Super Ditto (once unlocked)</li>
-                <li><span class="key">[A]</span> can be used to add Arcues (once unlocked)</li>
+                <li><span class="key">[A]</span> can be used to add Arceus (once unlocked)</li>
                 <li><span class="key">[BACKSPACE]</span> removes last-added starter Pokémon, can be used repeatedly</li>
                 <li><span class="key">[ENTER]</span> starts the simulation with the selected starter Pokémon</li>
             </ul>
