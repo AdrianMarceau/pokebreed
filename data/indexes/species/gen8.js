@@ -226,6 +226,28 @@
             prevEvolution: 'eevee',
             hasBigSprite: true
             },
+        'gmax-snorlax': {
+            order: thisIndex.afterOrder('snorlax'),
+            token: 'gmax-snorlax',
+            name: 'Gigantamax Snorlax',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'snorlax',
+            number: 143,
+            types: ['normal'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 1600, phAttack: 110, phDefense: 65, spAttack: 65, spDefense: 110, speed: 30},
+            abilities: {0: 'immunity', 1: 'thick-fat', hidden: 'gluttony'},
+            height: 35.0,
+            weight: -1,
+            colors: ['green', 'brown', 'black', 'yellow'],
+            eggCycles: 40,
+            eggGroups: ['monster'],
+            prevEvolution: 'snorlax',
+            hasBigSprite: true
+            },
 
     });
     thisIndex.indexOrder = indexOrder;
@@ -242,6 +264,7 @@
         {base: 'kingler', species: 'gmax-kingler', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'lapras', species: 'gmax-lapras', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'eevee', species: 'gmax-eevee', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'snorlax', species: 'gmax-snorlax', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
