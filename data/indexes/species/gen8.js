@@ -77,6 +77,27 @@
             prevEvolution: 'butterfree',
             hasBigSprite: true
             },
+        'gmax-pikachu': {
+            order: thisIndex.afterOrder('pikachu'),
+            token: 'gmax-pikachu',
+            name: 'Gigantamax Pikachu',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'pikachu',
+            number: 25,
+            types: ['electric'],
+            baseStats: {hp: 350, phAttack: 55, phDefense: 40, spAttack: 50, spDefense: 50, speed: 90},
+            abilities: {0: 'static', hidden: 'lightning-rod'},
+            height: 21.0,
+            weight: -1,
+            colors: ['white', 'yellow', 'black', 'red', 'brown'],
+            eggCycles: 10,
+            eggGroups: ['field', 'fairy'],
+            prevEvolution: 'pikachu',
+            hasBigSprite: true
+            },
 
     });
     thisIndex.indexOrder = indexOrder;
@@ -86,6 +107,7 @@
 
         {base: 'charizard', species: 'gmax-charizard', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'butterfree', species: 'gmax-butterfree', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'pikachu', species: 'gmax-pikachu', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
