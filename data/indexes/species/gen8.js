@@ -293,6 +293,54 @@
             hasBigSprite: true
             },
 
+        // Galarian Variants
+
+        'galarian-ponyta': {
+            order: thisIndex.afterOrder('rapidash', 1),
+            token: 'galarian-ponyta',
+            name: 'Galarian Ponyta',
+            formClass: 'regional-variant',
+            formToken: 'galarian',
+            baseSpecies: 'ponyta',
+            number: 77,
+            types: ['psychic'],
+            baseStats: {hp: 50, phAttack: 85, phDefense: 55, spAttack: 65, spDefense: 65, speed: 90},
+            abilities: {0: 'run-away', 1: 'pastel-veil', hidden: 'anticipation'},
+            height: 0.8,
+            weight: 24.0,
+            colors: ['white', 'pink', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'galarian-rapidash',
+                method: 'level-up',
+                value: 40
+                }],
+            altBaseEvolutions: [{
+                species: 'ponyta',
+                method: 'type-warning',
+                value: 'psychic'
+                }]
+            },
+        'galarian-rapidash': {
+            order: thisIndex.afterOrder('rapidash', 2),
+            token: 'galarian-rapidash',
+            name: 'Galarian Rapidash',
+            formClass: 'regional-variant',
+            formToken: 'galarian',
+            baseSpecies: 'rapidash',
+            number: 78,
+            types: ['psychic', 'fairy'],
+            baseStats: {hp: 65, phAttack: 100, phDefense: 70, spAttack: 80, spDefense: 80, speed: 105},
+            abilities: {0: 'run-away', 1: 'pastel-veil', hidden: 'anticipation'},
+            height: 1.7,
+            weight: 80.0,
+            colors: ['white', 'pink', 'blue', 'black'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'galarian-ponyta'
+            },
+
     });
     thisIndex.indexOrder = indexOrder;
 
@@ -314,13 +362,12 @@
 
         ]);
 
-    /*
-
     // Update previous gen pokemon with alt base evolution data
     thisIndex.addAltBaseEvolutions([
 
-        ]);
+        {base: 'ponyta', species: 'galarian-ponyta', method: 'type-warning', value: 'fire'},
+        {base: 'ponyta', species: 'galarian-ponyta', method: 'type-appeal', value: 'psychic'},
 
-    */
+        ]);
 
 })();

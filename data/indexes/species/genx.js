@@ -390,6 +390,31 @@
                 value: 20
                 }]
             },
+        'galarian-unicolt': {
+            order: thisIndex.beforeOrder('galarian-ponyta'),
+            token: 'galarian-unicolt',
+            name: 'Galarian Unicolt',
+            class: 'baby',
+            formClass: 'baby-evolution',
+            formClass2: 'regional-variant',
+            formToken: 'baby-galarian',
+            baseSpecies: 'unicolt',
+            number: 77,
+            dexNumber: 1011.1,
+            types: ['psychic'],
+            baseStats: {hp: 25, phAttack: 42, phDefense: 27, spAttack: 32, spDefense: 32, speed: 45},
+            abilities: {0: 'run-away', 1: 'pastel-veil', hidden: 'anticipation'},
+            height: 0.6,
+            weight: 24,
+            colors: ['white', 'pink', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'galarian-ponyta',
+                method: 'level-up',
+                value: 20
+                }]
+            },
 
         'rhydoll': {
             order: thisIndex.beforeOrder('rhyhorn'),
@@ -1264,6 +1289,7 @@
         {base: 'alolan-meowth', species: 'alolan-meowzy', method: 'type-surge', value: 'dark'},
         {base: 'growlithe', species: 'embark', method: 'type-surge', value: 'fire'},
         {base: 'ponyta', species: 'unicolt', method: 'type-surge', value: 'fire'},
+        {base: 'galarian-ponyta', species: 'galarian-unicolt', method: 'type-surge', value: 'psychic'},
         {base: 'doduo', species: 'dododo', method: 'type-surge', value: 'normal'},
         {base: 'grimer', species: 'oozby', method: 'type-surge', value: 'poison'},
         {base: 'alolan-grimer', species: 'alolan-oozby', method: 'type-surge', value: 'dark'},
