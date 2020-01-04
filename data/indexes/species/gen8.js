@@ -11,21 +11,33 @@
     thisIndex.setGeneration(8);
     thisIndex.setRegion('galar');
 
-    /*
-
     // Add the generation's list of base species to the index
     var indexOrder = thisIndex.indexOrder;
     thisIndex.addSpeciesIndex({
 
         // Base Pokedex
 
-        // ...
+        'perrserker': {
+            order: thisIndex.afterOrder('persian', 6),
+            token: 'perrserker',
+            name: 'Perrserker',
+            number: 863,
+            baseGameGeneration: 1,
+            types: ['steel'],
+            baseStats: {hp: 70, phAttack: 110, phDefense: 100, spAttack: 50, spDefense: 60, speed: 50},
+            abilities: {0: 'battle-armor', 1: 'tough-claws', hidden: 'steely-spirit'},
+            height: 0.8,
+            weight: 28.0,
+            colors: ['gray', 'brown', 'black', 'yellow', 'white'],
+            evoLevel: 28,
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'galarian-meowth'
+            },
 
 
         });
     thisIndex.indexOrder = indexOrder;
-
-    */
 
     // Add the generation's list of extra species to the index
     var indexOrder = thisIndex.indexOrder;
@@ -295,6 +307,50 @@
 
         // Galarian Variants
 
+        'galarian-meowth': {
+            order: thisIndex.afterOrder('persian', 5),
+            token: 'galarian-meowth',
+            name: 'Galarian Meowth',
+            formClass: 'regional-variant',
+            formToken: 'galarian',
+            baseSpecies: 'meowth',
+            number: 52,
+            types: ['steel'],
+            baseStats: {hp: 50, phAttack: 65, phDefense: 55, spAttack: 40, spDefense: 40, speed: 40},
+            abilities: {0: 'pickup', 1: 'tough-claws', hidden: 'unnerve'},
+            height: 0.4,
+            weight: 7.5,
+            colors: ['brown', 'black', 'yellow', 'white'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'perrserker',
+                method: 'level-up',
+                value: 28
+                }],
+            altBaseEvolutions: [{
+                species: 'meowth',
+                method: 'type-warning',
+                value: 'steel',
+                method2: 'type-warning',
+                value2: 'dark'
+                },{
+                species: 'alolan-meowth',
+                method: 'type-warning',
+                value: 'steel',
+                method2: 'type-warning',
+                value2: 'normal'
+                },{
+                species: 'meowth',
+                method: 'type-appeal',
+                value: 'normal'
+                },{
+                species: 'alolan-meowth',
+                method: 'type-appeal',
+                value: 'dark'
+                }]
+            },
+
         'galarian-ponyta': {
             order: thisIndex.afterOrder('rapidash', 1),
             token: 'galarian-ponyta',
@@ -364,6 +420,12 @@
 
     // Update previous gen pokemon with alt base evolution data
     thisIndex.addAltBaseEvolutions([
+
+        {base: 'meowth', species: 'galarian-meowth', method: 'type-warning', value: 'normal', method2: 'type-warning', value2: 'dark'},
+        {base: 'meowth', species: 'galarian-meowth', method: 'type-appeal', value: 'steel'},
+
+        {base: 'alolan-meowth', species: 'galarian-meowth', method: 'type-warning', value: 'dark', method2: 'type-warning', value2: 'normal'},
+        {base: 'alolan-meowth', species: 'galarian-meowth', method: 'type-appeal', value: 'steel'},
 
         {base: 'ponyta', species: 'galarian-ponyta', method: 'type-warning', value: 'fire'},
         {base: 'ponyta', species: 'galarian-ponyta', method: 'type-appeal', value: 'psychic'},
