@@ -98,6 +98,27 @@
             prevEvolution: 'pikachu',
             hasBigSprite: true
             },
+        'gmax-meowth': {
+            order: thisIndex.afterOrder('meowth'),
+            token: 'gmax-meowth',
+            name: 'Gigantamax Meowth',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'meowth',
+            number: 52,
+            types: ['normal'],
+            baseStats: {hp: 400, phAttack: 45, phDefense: 35, spAttack: 40, spDefense: 40, speed: 90},
+            abilities: {0: 'pickup', 1: 'technician', hidden: 'unnerve'},
+            height: 33.0,
+            weight: -1,
+            colors: ['white', 'yellow', 'black', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'meowth',
+            hasBigSprite: true
+            },
 
     });
     thisIndex.indexOrder = indexOrder;
@@ -108,6 +129,7 @@
         {base: 'charizard', species: 'gmax-charizard', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'butterfree', species: 'gmax-butterfree', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'pikachu', species: 'gmax-pikachu', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'meowth', species: 'gmax-meowth', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
