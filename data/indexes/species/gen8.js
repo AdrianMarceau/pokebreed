@@ -248,6 +248,27 @@
             prevEvolution: 'snorlax',
             hasBigSprite: true
             },
+        'gmax-garbodor': {
+            order: thisIndex.afterOrder('garbodor'),
+            token: 'gmax-garbodor',
+            name: 'Gigantamax Garbodor',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'garbodor',
+            number: 569,
+            types: ['poison'],
+            baseStats: {hp: 800, phAttack: 95, phDefense: 82, spAttack: 60, spDefense: 82, speed: 75},
+            abilities: {0: 'stench', 1: 'weak-armor', hidden: 'aftermath'},
+            height: 21.0,
+            weight: -1,
+            colors: ['green', 'brown', 'white', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['mineral'],
+            prevEvolution: 'garbodor',
+            hasBigSprite: true
+            },
 
     });
     thisIndex.indexOrder = indexOrder;
@@ -265,6 +286,7 @@
         {base: 'lapras', species: 'gmax-lapras', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'eevee', species: 'gmax-eevee', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'snorlax', species: 'gmax-snorlax', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'garbodor', species: 'gmax-garbodor', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
