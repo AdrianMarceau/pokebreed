@@ -673,6 +673,31 @@
             prevEvolution: 'politoed'
             },
 
+        // Cross-gen Gigantamax Forms
+
+        'gmax-alolan-meowth': {
+            order: thisIndex.afterOrder('persian', 3),
+            token: 'gmax-alolan-meowth',
+            name: 'Gigantamax Alolan Meowth',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formClass3: 'regional-variant',
+            formToken: 'gmax-alolan',
+            baseSpecies: 'meowth',
+            number: 52,
+            types: ['dark'],
+            baseStats: {hp: 400, phAttack: 35, phDefense: 35, spAttack: 50, spDefense: 40, speed: 90},
+            abilities: {0: 'pickup', 1: 'technician', hidden: 'rattled'},
+            height: 33.0,
+            weight: -1,
+            colors: ['gray', 'black', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'alolan-meowth',
+            hasBigSprite: true
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
@@ -1320,6 +1345,8 @@
         {base: 'machamp', species: 'burst-machamp', method: 'burst-evolution', value: 'fighting-spirit', method2: 'type-surge', value2: 'fighting'},
 
         {base: 'ditto', species: 'super-ditto', method: 'level-up', value: 10, method2: 'fusion-species', value2: 'ditto', switch: 'and'},
+
+        {base: 'alolan-meowth', species: 'gmax-alolan-meowth', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
