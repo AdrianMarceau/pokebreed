@@ -141,6 +141,27 @@
             prevEvolution: 'machamp',
             hasBigSprite: true
             },
+        'gmax-gengar': {
+            order: thisIndex.afterOrder('gengar', 2),
+            token: 'gmax-gengar',
+            name: 'Gigantamax Gengar',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'gengar',
+            number: 94,
+            types: ['ghost', 'poison'],
+            baseStats: {hp: 600, phAttack: 65, phDefense: 60, spAttack: 130, spDefense: 75, speed: 110},
+            abilities: {0: 'cursed-body'},
+            height: 20.0,
+            weight: -1,
+            colors: ['purple', 'red', 'pink', 'white'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'gengar',
+            hasBigSprite: true
+            },
 
     });
     thisIndex.indexOrder = indexOrder;
@@ -153,6 +174,7 @@
         {base: 'pikachu', species: 'gmax-pikachu', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'meowth', species: 'gmax-meowth', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'machamp', species: 'gmax-machamp', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'gengar', species: 'gmax-gengar', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
