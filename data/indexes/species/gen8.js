@@ -183,6 +183,27 @@
             prevEvolution: 'kingler',
             hasBigSprite: true
             },
+        'gmax-lapras': {
+            order: thisIndex.afterOrder('lapras'),
+            token: 'gmax-lapras',
+            name: 'Gigantamax Lapras',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'lapras',
+            number: 131,
+            types: ['water', 'ice'],
+            baseStats: {hp: 1300, phAttack: 85, phDefense: 80, spAttack: 85, spDefense: 95, speed: 60},
+            abilities: {0: 'water-absorb', 1: 'shell-armor', hidden: 'hydration'},
+            height: 24.0,
+            weight: -1,
+            colors: ['blue', 'white'],
+            eggCycles: 40,
+            eggGroups: ['monster', 'water-1'],
+            prevEvolution: 'lapras',
+            hasBigSprite: true
+            },
 
     });
     thisIndex.indexOrder = indexOrder;
@@ -197,6 +218,7 @@
         {base: 'machamp', species: 'gmax-machamp', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'gengar', species: 'gmax-gengar', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'kingler', species: 'gmax-kingler', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'lapras', species: 'gmax-lapras', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
