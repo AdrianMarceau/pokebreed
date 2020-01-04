@@ -204,6 +204,28 @@
             prevEvolution: 'lapras',
             hasBigSprite: true
             },
+        'gmax-eevee': {
+            order: thisIndex.afterOrder('eevee', 1),
+            token: 'gmax-eevee',
+            name: 'Gigantamax Eevee',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'eevee',
+            number: 133,
+            types: ['normal'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 550, phAttack: 55, phDefense: 50, spAttack: 45, spDefense: 65, speed: 55},
+            abilities: {0: 'run-away', 1: 'adaptability', hidden: 'anticipation'},
+            height: 0.3,
+            weight: 6.5,
+            colors: ['brown', 'white'],
+            eggCycles: 35,
+            eggGroups: ['field'],
+            prevEvolution: 'eevee',
+            hasBigSprite: true
+            },
 
     });
     thisIndex.indexOrder = indexOrder;
@@ -219,6 +241,7 @@
         {base: 'gengar', species: 'gmax-gengar', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'kingler', species: 'gmax-kingler', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'lapras', species: 'gmax-lapras', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'eevee', species: 'gmax-eevee', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
