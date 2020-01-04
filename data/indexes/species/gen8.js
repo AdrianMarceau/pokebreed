@@ -269,6 +269,29 @@
             prevEvolution: 'garbodor',
             hasBigSprite: true
             },
+        'gmax-melmetal': {
+            order: thisIndex.afterOrder('melmetal'),
+            token: 'gmax-melmetal',
+            name: 'Gigantamax Melmetal',
+            class: 'mythical',
+            class2: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'melmetal',
+            number: 809,
+            types: ['steel'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 1200, phAttack: 120, phDefense: 120, spAttack: 120, spDefense: 120, speed: 120},
+            abilities: {0: 'static'},
+            height: 25.0,
+            weight: -1,
+            colors: ['gray', 'yellow', 'black', 'red'],
+            eggCycles: 60,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'melmetal',
+            hasBigSprite: true
+            },
 
     });
     thisIndex.indexOrder = indexOrder;
@@ -287,6 +310,7 @@
         {base: 'eevee', species: 'gmax-eevee', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'snorlax', species: 'gmax-snorlax', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'garbodor', species: 'gmax-garbodor', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'melmetal', species: 'gmax-melmetal', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
