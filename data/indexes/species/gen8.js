@@ -162,6 +162,27 @@
             prevEvolution: 'gengar',
             hasBigSprite: true
             },
+        'gmax-kingler': {
+            order: thisIndex.afterOrder('kingler'),
+            token: 'gmax-kingler',
+            name: 'Gigantamax Kingler',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'kingler',
+            number: 99,
+            types: ['water'],
+            baseStats: {hp: 550, phAttack: 130, phDefense: 115, spAttack: 50, spDefense: 50, speed: 75},
+            abilities: {0: 'hyper-cutter', 1: 'shell-armor', hidden: 'sheer-force'},
+            height: 19.0,
+            weight: -1,
+            colors: ['red', 'white'],
+            eggCycles: 20,
+            eggGroups: ['water-3'],
+            prevEvolution: 'kingler',
+            hasBigSprite: true
+            },
 
     });
     thisIndex.indexOrder = indexOrder;
@@ -175,6 +196,7 @@
         {base: 'meowth', species: 'gmax-meowth', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'machamp', species: 'gmax-machamp', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'gengar', species: 'gmax-gengar', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'kingler', species: 'gmax-kingler', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
