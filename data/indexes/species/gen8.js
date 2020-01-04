@@ -119,6 +119,28 @@
             prevEvolution: 'meowth',
             hasBigSprite: true
             },
+        'gmax-machamp': {
+            order: thisIndex.afterOrder('machamp', 2),
+            token: 'gmax-machamp',
+            name: 'Gigantamax Machamp',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'machamp',
+            number: 68,
+            types: ['fighting'],
+            genderRatio: {male: 0.75, female: 0.25},
+            baseStats: {hp: 900, phAttack: 130, phDefense: 80, spAttack: 65, spDefense: 85, speed: 55},
+            abilities: {0: 'guts', 1: 'no-guard', hidden: 'steadfast'},
+            height: 1.6,
+            weight: 130,
+            colors: ['gray', 'yellow', 'red', 'white'],
+            eggCycles: 20,
+            eggGroups: ['human-like'],
+            prevEvolution: 'machamp',
+            hasBigSprite: true
+            },
 
     });
     thisIndex.indexOrder = indexOrder;
@@ -130,6 +152,7 @@
         {base: 'butterfree', species: 'gmax-butterfree', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'pikachu', species: 'gmax-pikachu', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'meowth', species: 'gmax-meowth', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'machamp', species: 'gmax-machamp', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
