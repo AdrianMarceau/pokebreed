@@ -56,6 +56,27 @@
             prevEvolution: 'charizard',
             hasBigSprite: true
             },
+        'gmax-butterfree': {
+            order: thisIndex.afterOrder('butterfree'),
+            token: 'gmax-butterfree',
+            name: 'Gigantamax Butterfree',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'butterfree',
+            number: 12,
+            types: ['bug', 'flying'],
+            baseStats: {hp: 600, phAttack: 45, phDefense: 50, spAttack: 90, spDefense: 80, speed: 70},
+            abilities: {0: 'compound-eyes', hidden: 'tinted-lens'},
+            height: 17.0,
+            weight: -1,
+            colors: ['green', 'purple', 'white', 'red', 'blue', 'black'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            prevEvolution: 'butterfree',
+            hasBigSprite: true
+            },
 
     });
     thisIndex.indexOrder = indexOrder;
@@ -64,6 +85,7 @@
     thisIndex.addNextEvolutions([
 
         {base: 'charizard', species: 'gmax-charizard', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'butterfree', species: 'gmax-butterfree', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
