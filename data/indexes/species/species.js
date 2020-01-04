@@ -32,6 +32,7 @@
             var newInfo = newIndex[newToken];
             if (typeof newInfo.gameGeneration === 'undefined'){ newInfo.gameGeneration = PokemonSpeciesIndex.currentGeneration; }
             if (typeof newInfo.gameRegion === 'undefined'){ newInfo.gameRegion = PokemonSpeciesIndex.currentRegion; }
+            if (typeof newInfo.hasBigSprite === 'undefined'){ newInfo.hasBigSprite = false; }
             }
         Object.assign(PokemonSpeciesIndex.indexList, newIndex);
     }

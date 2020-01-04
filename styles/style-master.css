@@ -679,6 +679,16 @@ body[data-speed="warp"] .panel .overview.main .details.pokemon .list.pokemon li[
     width: 40px;
     height: 30px;
 }
+.panel .species span.sprite.pkmn.basesize,
+.panel .pokemon span.sprite.pkmn.basesize {
+    width: 40px;
+    height: 30px;
+}
+.panel .species span.sprite.pkmn.fullsize,
+.panel .pokemon span.sprite.pkmn.fullsize {
+    width: 68px;
+    height: 68px;
+}
 body[data-speed="pause"] .panel span.sprite,
 body[data-speed="warp"] .panel span.sprite {
     -webkit-transition: background-image 0s;
@@ -708,6 +718,13 @@ body[data-speed="fast"] .panel span.sprite {
     pointer-events: none;
     width: 40px;
     height: 30px;
+}
+.panel .overview.main .details.pokemon .list .sprite.pkmn.fullsize {
+    width: 68px;
+    height: 68px;
+    top: -28px;
+    left: -14px;
+
 }
 body[data-speed="normal"] .panel .overview.main .details.pokemon .list .sprite {
     -webkit-animation-duration: 1s;
@@ -2099,7 +2116,7 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 .panel .buttons .info .group.pokedex .list {
     padding: 8px 5px 5px;
     margin: 0 auto;
-    overflow: hidden;
+    overflow: visible;
     background-color: #2d2d30;
     border-radius: 4px;
     box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.1);
@@ -2198,6 +2215,7 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     height: 100%;
     text-align: center;
     transition: top 0.3s, right 0.3s, width 0.3s, height 0.3s, text-align 0.3s;
+    /* overflow: hidden; */
 }
 .panel .buttons .info .group.pokedex .list .species .bubble .sprites .sprite {
     display: block;
@@ -2210,6 +2228,15 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     opacity: 0;
     width: 0;
 }
+
+.panel .buttons .info .group.pokedex .list .species .bubble .sprites .sprite.pkmn.basesize {
+
+}
+.panel .buttons .info .group.pokedex .list .species .bubble .sprites .sprite.pkmn.fullsize {
+    top: -28px;
+    left: -9px;
+}
+
 .panel .buttons .info .group.pokedex .list .species .traits {
 
 }

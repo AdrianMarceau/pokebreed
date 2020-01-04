@@ -350,6 +350,12 @@
         image-rendering: pixelated;                 /* CSS3 Proposed?       */
         -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
     }
+    .panel .overview.main .details.pokemon .list .sprite.pkmn.fullsize {
+        width: 134px;
+        height: 134px;
+        top: -46px;
+        left: -28px;
+    }
     .panel .overview.main .details.pokemon .list li.jump .sprite {
         transform: translate3d(0, -2px, 0);
     }
@@ -405,6 +411,12 @@
         image-rendering: optimize-contrast;         /* CSS3 Proposed       */
         image-rendering: pixelated;                 /* CSS3 Proposed?       */
         -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
+    }
+    .panel .overview.main .details.pokemon .list .sprite.pkmn.fullsize {
+        width: 134px;
+        height: 134px;
+        top: -46px;
+        left: -28px;
     }
     .panel .overview.main .details.pokemon .list li.jump .sprite {
         transform: translate3d(0, -2px, 0);
@@ -477,6 +489,12 @@
         image-rendering: pixelated;                 /* CSS3 Proposed?       */
         -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
     }
+    .panel .overview.main .details.pokemon .list .sprite.pkmn.fullsize {
+        width: 134px;
+        height: 134px;
+        top: -46px;
+        left: -28px;
+    }
     .panel .overview.main .details.pokemon .list li.jump .sprite {
         transform: translate3d(0, -2px, 0);
     }
@@ -546,6 +564,12 @@
         image-rendering: optimize-contrast;         /* CSS3 Proposed       */
         image-rendering: pixelated;                 /* CSS3 Proposed?       */
         -ms-interpolation-mode: nearest-neighbor;   /* IE8+                */
+    }
+    .panel .overview.main .details.pokemon .list .sprite.pkmn.fullsize {
+        width: 134px;
+        height: 134px;
+        top: -46px;
+        left: -28px;
     }
     .panel .overview.main .details.pokemon .list li.jump .sprite {
         transform: translate3d(0, -2px, 0);

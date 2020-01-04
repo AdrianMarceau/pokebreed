@@ -1407,13 +1407,10 @@
 
             // Loop through individual species and pre-generate certain attributes
             for (var key = 0; key < PokemonSpeciesIndexTokens.length; key++){
-                var token = PokemonSpeciesIndexTokens[key];
 
-                // Calculate life, breed, and influence points now so we don't have to later
+                // Collect the token and info from the index
+                var token = PokemonSpeciesIndexTokens[key];
                 var indexInfo = PokemonSpeciesIndex[token];
-                if (typeof indexInfo.lifePoints === 'undefined'){ indexInfo.lifePoints = calculateLifePoints(indexInfo['baseStats']); }
-                if (typeof indexInfo.breedPoints === 'undefined'){ indexInfo.breedPoints = calculateBreedPoints(indexInfo['baseStats']); }
-                if (typeof indexInfo.influencePoints === 'undefined'){ indexInfo.influencePoints = calculateInfluencePoints(indexInfo); }
 
                 // DEBUG CHECKS FOR REQUIRED DATA
                 //if (typeof indexInfo.eggCycles === 'undefined'){ //console.log('eggCycles are undefined for ', token, indexInfo); }
@@ -1448,6 +1445,11 @@
                 // If class or formClass are not set, create them as empty strings
                 if (typeof indexInfo.class === 'undefined'){ indexInfo.class = ''; }
                 if (typeof indexInfo.formClass === 'undefined'){ indexInfo.formClass = ''; }
+
+                // Calculate life, breed, and influence points now so we don't have to later
+                if (typeof indexInfo.lifePoints === 'undefined'){ indexInfo.lifePoints = calculateLifePoints(indexInfo['baseStats']); }
+                if (typeof indexInfo.breedPoints === 'undefined'){ indexInfo.breedPoints = calculateBreedPoints(indexInfo['baseStats']); }
+                if (typeof indexInfo.influencePoints === 'undefined'){ indexInfo.influencePoints = calculateInfluencePoints(indexInfo); }
 
                 // Generate this pokemon's full gender ratio index
                 indexInfo.hasOneGender = false;
@@ -1704,6 +1706,11 @@
                 if (tokenA.indexOf('zygarde') !== -1){ zygardeA = true; }
                 if (tokenB.indexOf('zygarde') !== -1){ zygardeB = true; }
 
+                var gmaxA = false;
+                var gmaxB = false;
+                if (infoA['class'] === 'gigantamax'){ gmaxA = true; }
+                if (infoB['class'] === 'gigantamax'){ gmaxB = true; }
+
                 var arceusA = false;
                 var arceusB = false;
                 if (tokenA === 'arceus'){ arceusA = true; }
@@ -1730,6 +1737,9 @@
                 if (infoB['formClass'] === 'gender-variant' && typeof infoB['prevEvolution'] === 'undefined'){ genderVariantB = true; }
 
                 if (false){ return 0; }
+
+                //else if (gmaxA && !gmaxB){ return -1; }
+                //else if (!gmaxA && gmaxB){ return 1; }
 
                 else if (arceusA && !arceusB){ return 1; }
                 else if (!arceusA && arceusB){ return -1; }
@@ -1905,14 +1915,17 @@
             });
 
         // Loop through all the starters again and collect their tokens (also update orders)
+        nextPokemonSID = {};
         var starterCounts = {};
         var starterPokemon = [];
         var starterPokemonTokens = [];
         var starterSeed = 0;
         for (var key = 0; key < thisZoneData.currentPokemon.length; key++){
             var starterInfo = thisZoneData.currentPokemon[key];
+            var starterIndexInfo = PokemonSpeciesIndex[starterInfo.token];
             starterPokemon.push([starterInfo.token, starterInfo.gender]);
             starterInfo.order = key;
+            starterInfo.sid = getNextPokemonSID(starterIndexInfo.basicEvolution);
             starterSeed += PokemonSpeciesDexOrder.indexOf(starterInfo.token) + 1;
             var countToken = starterInfo.token+'/'+starterInfo.gender;
             if (typeof starterCounts[countToken] === 'undefined'){ starterCounts[countToken] = 0; }
@@ -2417,15 +2430,28 @@
     }
 
     // Define a function for generating a pokemon's icon image markup
-    function getPokemonIcon(token, egg, info, returnProps){
-        if (typeof egg !== 'boolean'){ egg = false; }
+    function getPokemonIcon(token, isEgg, info, returnProps, context){
+        if (typeof isEgg !== 'boolean'){ isEgg = false; }
         if (typeof info === 'undefined'){ info = {}; }
         if (typeof returnProps !== 'boolean'){ returnProps = false; }
+        if (typeof context === 'undefined'){ context = ''; }
 
         var indexInfo = PokemonSpeciesIndex[token];
         var iconImage = 'images/icons/';
         var iconClass = 'sprite ';
         var iconStyle = '';
+
+        // Check if we should be using the big sprite here
+        var useBigSprite;
+        if (context === 'box'
+            && typeof indexInfo['hasBigSprite'] !== 'undefined'
+            && indexInfo['hasBigSprite'] === true){
+            iconClass +=  'fullsize ';
+            useBigSprite = true;
+        } else {
+            iconClass +=  'basesize ';
+            useBigSprite = false;
+        }
 
         var filter = '';
         if (typeof info.variantHueOffset !== 'undefined'){ filter += 'hue-rotate('+ info.variantHueOffset +'deg) '; }
@@ -2433,8 +2459,9 @@
         iconStyle += filter.length ? '-webkit-filter: '+ filter +'; filter: '+ filter +'; ' : '';
 
         var markup = '';
-        if (egg){
+        if (isEgg){
 
+            iconClass += 'egg ';
             iconImage += 'eggs/'+indexInfo['types'][0]+'.png';
             //markup += '<img class="'+ iconClass +'"'+ iconStyle +' src="'+ iconImage +'" data-token="'+ token +'" />';
             markup += '<span class="'+ iconClass +'" style="background-image: url('+ iconImage +'); '+ iconStyle +'" data-token="'+ token +'"></span>';
@@ -2446,6 +2473,7 @@
 
             } else {
 
+            iconClass += 'pkmn ';
             iconImage += 'pokemon/';
 
             // Check if the pokemon has the ILLUSION ability, else generate it's token normally
@@ -2472,6 +2500,9 @@
                 else { iconImage += indexInfo['number']+'.png'; }
 
                 }
+
+            // If we're supposed to use the big sprite, tweak the filename now
+            if (useBigSprite === true){ iconImage = iconImage.replace(/\.png$/, '.fullsize.png'); }
 
             //markup += '<img class="'+ iconClass +'"'+ iconStyle +' src="'+ iconImage +'" data-token="'+ token +'" />';
             markup += '<span class="'+ iconClass +'"'+ iconStyle +' style="background-image: url('+ iconImage +'); '+ iconStyle +'" data-token="'+ token +'"></span>';
@@ -2504,7 +2535,7 @@
         if (pokeInfo.eggCycles === 0){
 
             //console.log('this '+pokeInfo.token+' has hatched, show it (cycles:'+pokeInfo.eggCycles+')');
-            var pokeIcon =  '<span class="swrap"><i>' + getPokemonIcon(pokeInfo.token, false, pokeInfo) + '</i></span>';
+            var pokeIcon =  '<span class="swrap"><i>' + getPokemonIcon(pokeInfo.token, false, pokeInfo, false, 'box') + '</i></span>';
             var pokeCount = '<span class="count growth">+'+pokeInfo.growthCycles+'</span>';
             var extraMarkup = '';
             if (pokeInfo.watchFlag === true){ extraMarkup += '<span class="tag watched"></span> '; }
@@ -2532,7 +2563,7 @@
             } else if (pokeInfo.eggCycles > 0){
 
             //console.log('this '+pokeInfo.token+' has not hatched, show it (cycles:'+pokeInfo.eggCycles+')');
-            var pokeIcon =  '<span class="swrap"><i>' + getPokemonIcon(pokeInfo.token, true, pokeInfo) + '</i></span>';
+            var pokeIcon =  '<span class="swrap"><i>' + getPokemonIcon(pokeInfo.token, true, pokeInfo, false, 'box') + '</i></span>';
             var pokeCount = '<span class="count egg">-'+pokeInfo.eggCycles+'</span>';
             var extraMarkup = '';
             if (pokeInfo.watchFlag === true){ extraMarkup += '<span class="tag watched"></span> '; }
@@ -2763,7 +2794,8 @@
                 var pokemonIsSpecial = false;
                 if (pokemonData['class'] === 'legendary'
                     || pokemonData['class'] === 'mythical'
-                    || pokemonData['class'] === 'ultra-beast'){
+                    || pokemonData['class'] === 'ultra-beast'
+                    || pokemonData['class'] === 'gigantamax'){
                     pokemonIsSpecial = true;
                     }
 
@@ -2803,7 +2835,7 @@
                     }
 
                 // Collect the pokemon's image icon
-                var pokemonIcon = getPokemonIcon(pokemonToken, false, customData);
+                var pokemonIcon = getPokemonIcon(pokemonToken, false, customData, false, 'buttons');
 
                 // Generate the pokemon's name for the hover
                 var pokemonName = pokemonData.name;
@@ -3082,7 +3114,8 @@
                 var pokemonIsSpecial = false;
                 if (pokeIndex['class'] === 'legendary'
                     || pokeIndex['class'] === 'mythical'
-                    || pokeIndex['class'] === 'ultra-beast'){
+                    || pokeIndex['class'] === 'ultra-beast'
+                    || pokeIndex['class'] === 'gigantamax'){
                     pokemonIsSpecial = true;
                     }
 
@@ -3092,6 +3125,7 @@
                 if (thisGeneration !== lastGeneration){
                     var addBreak = true;
                     if (pokeIndex.class === 'baby'){ addBreak = false; }
+                    else if (pokeIndex.formClasses.indexOf('gigantamax-form') !== -1){ addBreak = false; }
                     else if (pokeIndex.formClass === 'mega-evolution'){ addBreak = false; }
                     else if (pokeIndex.formClass === 'burst-evolution'){ addBreak = false; }
                     else if (pokeIndex.formClass === 'regional-variant'){ addBreak = false; }
@@ -3130,7 +3164,7 @@
                             && pokeIndex.baseForm.length > 0){
                     customData.formToken = typeof pokeIndex.dexBaseForm !== 'undefined' ? pokeIndex.dexBaseForm : pokeIndex.baseForm; // Random/seasonal/color form with base
                     }
-                var pokeIcon = getPokemonIcon(pokeToken, false, customData);
+                var pokeIcon = getPokemonIcon(pokeToken, false, customData, false, 'pokedex');
                 var pokemonGen = typeof pokeIndex.dexGeneration !== 'undefined' ? pokeIndex.dexGeneration : pokeIndex.gameGeneration;
                 var pokemonBaseGen = pokeIndex.baseGameGeneration;
                 var pokeLegNum = (pokemonGen === 'x' || pokemonGen === 'r') && typeof pokeIndex.dexNumber !== 'undefined' ? pokeIndex.dexNumber : pokeIndex.number;
@@ -3526,8 +3560,14 @@
                 else if (pokeIndex.class === 'mythical'){ stageText.push('Mythical Pokémon'); showEvoStage = false; }
                 else if (pokeIndex.class === 'ultra-beast'){ stageText.push('Ultra Beast'); showEvoStage = false; }
                 }
-            if (typeof pokeIndex.formClass !== 'undefined'){
-                if (pokeIndex.formClass === 'mega-evolution'){ stageText.push('Mega Evolution'); showEvoStage = false; }
+            if (typeof pokeIndex.formClasses !== 'undefined'){
+                if (pokeIndex.formClasses.indexOf('gigantamax-form') !== -1){ stageText.push('Gigantamax Form'); showEvoStage = false; }
+                else if (pokeIndex.formClasses.indexOf('mega-evolution') !== -1){ stageText.push('Mega Evolution'); showEvoStage = false; }
+                else if (pokeIndex.formClasses.indexOf('burst-evolution') !== -1){ stageText.push('Burst Evolution'); showEvoStage = false; }
+                else if (pokeIndex.formClasses.indexOf('primal-reversion') !== -1){ stageText.push('Primal Reversion'); showEvoStage = false; }
+                } else if (typeof pokeIndex.formClass !== 'undefined'){
+                if (pokeIndex.formClass === 'gigantamax-form'){ stageText.push('Gigantamax Form'); showEvoStage = false; }
+                else if (pokeIndex.formClass === 'mega-evolution'){ stageText.push('Mega Evolution'); showEvoStage = false; }
                 else if (pokeIndex.formClass === 'burst-evolution'){ stageText.push('Burst Evolution'); showEvoStage = false; }
                 else if (pokeIndex.formClass === 'primal-reversion'){ stageText.push('Primal Reversion'); showEvoStage = false; }
                 }
@@ -3582,9 +3622,18 @@
     // Define a function for getting the next pokemon ID
     var nextPokemonID = 0;
     function getNextPokemonID(){
-        var nextID = nextPokemonID;
         nextPokemonID++;
+        var nextID = nextPokemonID;
         return nextID;
+    }
+
+    // Define a function for getting the next pokemon SID
+    var nextPokemonSID = {};
+    function getNextPokemonSID(pokemonToken){
+        if (typeof nextPokemonSID[pokemonToken] === 'undefined'){ nextPokemonSID[pokemonToken] = 0; }
+        nextPokemonSID[pokemonToken]++;
+        var nextSID = nextPokemonSID[pokemonToken];
+        return nextSID;
     }
 
     // Define a function for adding a new pokemon to a zone
@@ -3673,6 +3722,7 @@
         var newPokemon = {
             order: thisZoneData.currentPokemon.length,
             id: getNextPokemonID(),
+            sid: getNextPokemonSID(indexData.basicEvolution),
             token: pokemonToken,
             types: indexData.types,
             eggCycles: eggCycles,
@@ -4257,7 +4307,7 @@
                 var liClass = 'species ';
                 liClass += 'type '+pokeInfo['types'][0]+' ';
                 if (typeof pokeInfo['types'][1] !== 'undefined'){ liClass += pokeInfo['types'][1]+'2 '; }
-                pokeIcon = getPokemonIcon(pokeInfo.token);
+                pokeIcon = getPokemonIcon(pokeInfo.token, false, {}, false, 'sidebar');
                 var thisMarkup = '<li class="'+liClass+'" data-token="'+poke+'">'+
                         '<div class="bubble">'+
                             '<span class="icon">'+ pokeIcon +'</span> '+
@@ -4276,7 +4326,7 @@
 
             // Print out a block for the total eggs added
             if (totalEggCount > 0){
-                pokeIcon = getPokemonIcon('ditto', true);
+                pokeIcon = getPokemonIcon('ditto', true, {}, false, 'sidebar');
                 speciesListMarkup += '<li class="species type normal">'+
                         '<div class="bubble">'+
                             '<span class="icon">'+ pokeIcon +'</span> '+
@@ -4315,7 +4365,7 @@
                 var liClass = 'species ';
                 liClass += 'type '+pokeInfo['types'][0]+' ';
                 if (typeof pokeInfo['types'][1] !== 'undefined'){ liClass += pokeInfo['types'][1]+'2 '; }
-                pokeIcon = getPokemonIcon(pokeInfo.token);
+                pokeIcon = getPokemonIcon(pokeInfo.token, false, {}, false, 'sidebar');
                 var thisMarkup = '<li class="'+liClass+'" data-token="'+poke+'">'+
                         '<div class="bubble">'+
                             '<span class="icon">'+ pokeIcon +'</span> '+
@@ -4337,7 +4387,7 @@
                 var totalEggs = 0;
                 var eggSpecies = Object.keys(addedPokemonEggs);
                 for (var i = 0; i < eggSpecies.length; i++){ totalEggs += addedPokemonEggs[eggSpecies[i]]; }
-                pokeIcon = getPokemonIcon('ditto', true);
+                pokeIcon = getPokemonIcon('ditto', true, {}, false, 'sidebar');
                 speciesListMarkup += '<li class="species type normal">'+
                         '<div class="bubble">'+
                             '<span class="icon">'+ pokeIcon +'</span> '+
@@ -4397,7 +4447,7 @@
                             || PokemonSpeciesSeen[pokeInfo.token] === 0)){
                         liClass += 'unknown ';
                         }
-                    pokeIcon = getPokemonIcon(pokeInfo.token);
+                    pokeIcon = getPokemonIcon(pokeInfo.token, false, {}, false, 'sidebar');
                     visitorListMarkup += '<li class="'+liClass+'">'+
                             '<div class="bubble">'+
                                 '<span class="icon">'+ pokeIcon +'</span> '+
@@ -4467,8 +4517,9 @@
 
         // Collect image data for this pokemon's icon sprite
         var $spriteImage = $pokeCell.find('.sprite:not(.overlay)').first();
-        var spriteData = getPokemonIcon(pokeInfo.token, isEgg, pokeInfo, true);
+        var spriteData = getPokemonIcon(pokeInfo.token, isEgg, pokeInfo, true, 'box');
         var newImage = spriteData.image;
+        var newClass = spriteData.class;
 
         // Check if this pokemon has just evolved or changed forms
         var imageChanged = false;
@@ -4478,6 +4529,7 @@
         //console.log('pokeInfo = ', pokeInfo.id, pokeInfo.token);
         //console.log('currentImage = ', currentImage);
         //console.log('newImage = ', newImage);
+        //console.log('newClass = ', newClass);
 
         // If this Pokemon has just hatched, remove overlay and replace sprite
         if (justHatched){ $pokeCell.find('.sprite.overlay').remove(); }
@@ -4485,7 +4537,7 @@
         // If this pokemon's current image doesn't match what it should be, change it now
         if (!isEgg && imageChanged){
 
-            $spriteImage.css({backgroundImage:'url("'+ newImage +'")'});
+            $spriteImage.attr('class', newClass).css({backgroundImage:'url("'+ newImage +'")'});
             $spriteImage.attr('data-token', pokeInfo.token);
 
             }
@@ -5125,6 +5177,7 @@
         //if (zoneDate.year > 0){ zoneDate.month += 1; }
         thisZoneData.date = zoneDate;
 
+        //console.log('###############\n#--- Day #'+thisZoneData.day, '---#\n###############');
         //console.log('Day #'+thisZoneData.day, zoneDate);
         //console.log('PokeboxDaysPassed = ', PokeboxDaysPassed);
         //console.log('zoneDate = ', zoneDate);
@@ -5384,6 +5437,7 @@
         // Collect references to current zone stats
         var currentZoneStats = thisZoneData.currentStats;
         var currentTypeStats = currentZoneStats['types'];
+        var currentClassStats = currentZoneStats['class'];
         var currentSpeciesStats = currentZoneStats['species'];
         var currentBaseStats = currentZoneStats['baseStats'];
 
@@ -5432,6 +5486,7 @@
         var totalUltraEnergy = typeof currentZoneStats['totalUltraEnergy'] !== 'undefined' ? currentZoneStats['totalUltraEnergy'] : 0;
         var currentAncientPower = typeof currentZoneStats['currentAncientPower'] !== 'undefined' ? currentZoneStats['currentAncientPower'] : 0;
         var totalAncientPower = typeof currentZoneStats['totalAncientPower'] !== 'undefined' ? currentZoneStats['totalAncientPower'] : 0;
+        var currentGigantamaxNum = typeof currentClassStats['gigantamax'] !== 'undefined' ? currentClassStats['gigantamax'] : 0;
 
         // First, loop through all the non-egg pokemon and increment growth cycle
         if (thisZoneData.currentPokemon.length){
@@ -5581,8 +5636,10 @@
                     && indexInfo.nextEvolutions.length){
 
                     // Count the number of active species related to this pokemon
+                    var possibleNextEvolutions = indexInfo.nextEvolutions.slice(0);
                     var numRelatedPokemon = countRelatedZonePokemon(pokemonInfo.token);
                     var numSamePokemon = typeof currentSpeciesStats[pokemonInfo.token] !== 'undefined' ? currentSpeciesStats[pokemonInfo.token] : 1;
+                    //console.log('|- possibleNextEvolutions = ', possibleNextEvolutions);
                     //console.log('|- numRelatedPokemon = ', numRelatedPokemon);
                     //console.log('|- numSamePokemon = ', numSamePokemon);
 
@@ -5606,6 +5663,30 @@
                         }
                     //console.log('|- allowTradeEvolution = ', allowTradeEvolution);
 
+                    // If this pokemon has a Gigantamax form AND has the necessary gene, remove other evos
+                    var hasGigantamaxForm = false;
+                    var hasGigantamaxFactor = false;
+                    for (var i = 0; i < possibleNextEvolutions.length; i++){
+                        if (hasGigantamaxForm && hasGigantamaxFactor){ break; }
+                        var nextEvolution = possibleNextEvolutions[i];
+                        var nextEvolutionInfo = PokemonSpeciesIndex[nextEvolution.species];
+                        for (j = 1; j <= 3; j++){
+                            var m = j > 0 ? (j + 1) : '';
+                            if (nextEvolution['method'+m] === 'gigantamax-factor'){
+                                hasGigantamaxForm = true;
+                                if ((pokemonInfo.sid % nextEvolution['value'+m]) === 0){
+                                    hasGigantamaxFactor = true;
+                                    possibleNextEvolutions = [];
+                                    possibleNextEvolutions.push(nextEvolution);
+                                    break;
+                                    }
+                                }
+                            }
+                        }
+                    //console.log('hasGigantamaxForm =', hasGigantamaxForm);
+                    //console.log('hasGigantamaxFactor =', hasGigantamaxFactor);
+                    //console.log('|- possibleNextEvolutions = ', possibleNextEvolutions);
+
                     // Define a function for testing if an evolution method is true
                     var fusionPokemonToBeRemoved = false;
                     function calculateEvolutionChance(pokemonInfo, methodToken, methodValue, methodNum, nextEvolution, prevChanceValue){
@@ -5620,6 +5701,16 @@
 
                         // Calculate chance value in case we need it
                         var chanceValue = Math.seededRandomChance();
+
+                        /*
+                        // If this pokemon is going to Gigantamax, prevent all other evos
+                        if (hasGigantamaxForm
+                            && hasGigantamaxFactor
+                            && methodToken !== 'burst-evolution'
+                            && methodToken !== 'gigantamax-factor'){
+                            return 0;
+                        }
+                        */
 
                         // Level-up evolutions are triggered by current growth cycles alone
                         if (methodToken === 'level-up'
@@ -5661,9 +5752,12 @@
                             if (numRelatedPokemon >= methodValue){
                                 var existingKingOrQueen = getZonePokemonByFilter({token:nextSpeciesToken,gender:pokemonInfo.gender});
                                 var existingMegaKingOrQueen = getZonePokemonByFilter({token:'mega-'+nextSpeciesToken,gender:pokemonInfo.gender});
+                                var existingGigantamax = getZonePokemonByFilter({token:'gmax-'+nextSpeciesToken});
                                 //console.log('existingKingOrQueen =', existingKingOrQueen);
+                                //console.log('existingGigantamax =', existingGigantamax);
                                 if (!existingKingOrQueen.length
-                                    && !existingMegaKingOrQueen.length){
+                                    && !existingMegaKingOrQueen.length
+                                    && !existingGigantamax.length){
                                     //console.log('success! '+pokemonInfo.token+' '+pokemonInfo.id+' will evolve into '+nextSpeciesToken);
                                     pendingEvolutionLimits[nextSpeciesToken+'/'+pokemonInfo.gender] = 1;
                                     //console.log('pendingEvolutionLimits =', pendingEvolutionLimits);
@@ -5834,8 +5928,29 @@
 
                         // Form-based evolutions are triggered immediately if the pokemon is in that form
                         if (methodToken === 'form'
-                            && pokemonInfo.formToken === methodValue){
+                            && pokemonInfo.key % methodValue === 0){
                             return 1;
+                            }
+
+                        // Nth-of-ID evolutions are triggered immediately if the pokemon's ID is multiple of value
+                        if (methodToken === 'nth-of-id'
+                            && pokemonInfo.id % methodValue === 0){
+                            return 1;
+                            }
+
+                        // Nth-of-SID evolutions are triggered immediately if the pokemon's SID is multiple of value
+                        if (methodToken === 'nth-of-sid'
+                            && (pokemonInfo.sid % methodValue) === 0){
+                            return 1;
+                            }
+
+                        // Gigantamax forms are triggered immediately if the pokemon's SID is multiple of a value and no others exist ATM
+                        if (methodToken === 'gigantamax-factor'
+                            && (pokemonInfo.sid % methodValue) === 0
+                            && currentGigantamaxNum === 0){
+                            //console.log('methodToken =', methodToken, 'pokemonInfo.sid =', pokemonInfo.sid, 'methodValue =', methodValue, 'currentGigantamaxNum =', currentGigantamaxNum);
+                            //console.log('gigantamax-factor TRIGGERED!');
+                            return 1 + methodValue;
                             }
 
                         // Season-based evolutions are triggered immediately if the current season is a match
@@ -5863,8 +5978,8 @@
                             }
 
                         // Burst and mega evolutions trigger automatically when this pokemon reaches adulthood
-                        if ((methodToken === 'burst-evolution'
-                            || methodToken === 'mega-evolution')
+                        if ((methodToken === 'mega-evolution'
+                            || methodToken === 'burst-evolution')
                             && pokemonInfo.reachedAdulthood === true){
                             return 1;
                             }
@@ -5882,10 +5997,10 @@
 
                     // Create an array for queued evolutions (in case many) and start looping to check each
                     var queuedEvolutions = [];
-                    for (var i = 0; i < indexInfo.nextEvolutions.length; i++){
+                    for (var i = 0; i < possibleNextEvolutions.length; i++){
 
                         // Collect the details of the next evolution
-                        var nextEvolution = indexInfo.nextEvolutions[i];
+                        var nextEvolution = possibleNextEvolutions[i];
                         var nextEvolutionInfo = PokemonSpeciesIndex[nextEvolution.species];
 
                         // Define vars to count the number of trigged evos and switch type
@@ -5903,7 +6018,7 @@
                                 }
                             }
 
-                        //console.log('|- Checking indexInfo.nextEvolutions['+i+'] = ', nextEvolution, nextEvolutionInfo, 'switchKind:'+switchKind);
+                        //console.log('|- Checking possibleNextEvolutions['+i+'] = ', nextEvolution, nextEvolutionInfo, 'switchKind:'+switchKind);
 
                         // Define a variable to hold the trigger chance value
                         var triggeredChance = 0;
@@ -5963,7 +6078,7 @@
                             //console.log('pendingEvolutionLimits = ', pendingEvolutionLimits);
                             var nextEvoLimit = 0;
                             if (typeof pendingEvolutionLimits[nextEvolution.species] !== 'undefined'){ nextEvoLimit = pendingEvolutionLimits[nextEvolution.species]; }
-                            else if (typeof pendingEvolutionLimits[nextEvolution.species+'/'+pokemonInfo] !== 'undefined'){ nextEvoLimit = pendingEvolutionLimits[nextEvolution.species+'/'+pokemonInfo]; }
+                            else if (typeof pendingEvolutionLimits[nextEvolution.species+'/'+pokemonInfo.gender] !== 'undefined'){ nextEvoLimit = pendingEvolutionLimits[nextEvolution.species+'/'+pokemonInfo.gender]; }
                             if (nextEvoLimit > 0){
                                 var numNextSpecies = 0;
                                 if (typeof currentSpeciesStats[nextEvolution.species] !== 'undefined'){ numNextSpecies += currentSpeciesStats[nextEvolution.species]; }
@@ -6144,7 +6259,12 @@
                 // If this pokemon has reached adulthood, every day they loose a little growth
                 if (pokemonInfo.reachedAdulthood === true
                     && pokemonLifePoints !== -1){
-                    pokemonInfo.growthCycles -= Math.ceil(pokemonLifePoints * 0.10);
+                    if (indexInfo.formClasses.indexOf('gigantamax-form') !== -1){
+                        pokemonInfo.growthCycles -= 1; // last as long as possible
+                        } else {
+                        pokemonInfo.growthCycles -= Math.ceil(pokemonLifePoints * 0.10);
+                        }
+                    if (pokemonInfo.growthCycles < 0){ pokemonInfo.growthCycles = 0; }
                     }
 
                 }
@@ -6694,6 +6814,7 @@
             var currentMythicalNum = typeof zoneStats['class']['mythical'] !== 'undefined' ? zoneStats['class']['mythical'] : 0;
             var currentLegendaryNum = typeof zoneStats['class']['legendary'] !== 'undefined' ? zoneStats['class']['legendary'] : 0;
             var currentUltraBeastNum = typeof zoneStats['class']['ultra-beast'] !== 'undefined' ? zoneStats['class']['ultra-beast'] : 0;
+            var currentGigantamaxNum = typeof zoneStats['class']['gigantamax'] !== 'undefined' ? zoneStats['class']['gigantamax'] : 0;
             var currentArceusNum = typeof zoneStats['species']['arceus'] !== 'undefined' ? zoneStats['species']['arceus'] : 0;
 
             // Check to see if certain kinds of pokemon are being repelled
@@ -7545,8 +7666,14 @@
             }
 
         // Multiply influence points if this pokemon is a mega or burst evolution
-        if (typeof indexInfo.formClass !== 'undefined'){
-            if (indexInfo.formClass === 'burst-evolution'){ influencePoints = influencePoints * 4;  }
+        if (typeof indexInfo.formClasses !== 'undefined'){
+            if (indexInfo.formClasses.indexOf('gigantamax-form') !== -1){ influencePoints = influencePoints * 100;  }
+            else if (indexInfo.formClasses.indexOf('burst-evolution') !== -1){ influencePoints = influencePoints * 4;  }
+            else if (indexInfo.formClasses.indexOf('mega-evolution') !== -1){ influencePoints = influencePoints * 6;  }
+            else if (indexInfo.formClasses.indexOf('primal-reversion') !== -1){ influencePoints = influencePoints * 8;  }
+            } else if (typeof indexInfo.formClass !== 'undefined'){
+            if (indexInfo.formClass === 'gigantamax-form'){ influencePoints = influencePoints * 100;  }
+            else if (indexInfo.formClass === 'burst-evolution'){ influencePoints = influencePoints * 4;  }
             else if (indexInfo.formClass === 'mega-evolution'){ influencePoints = influencePoints * 6;  }
             else if (indexInfo.formClass === 'primal-reversion'){ influencePoints = influencePoints * 8;  }
             }
