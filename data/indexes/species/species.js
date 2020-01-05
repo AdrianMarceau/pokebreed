@@ -117,9 +117,15 @@
         if (typeof altBaseEvolution.base !== 'undefined'
             && typeof PokemonSpeciesIndex.indexList[altBaseEvolution.base] !== 'undefined'){
             var basePokemon = PokemonSpeciesIndex.indexList[altBaseEvolution.base];
-            if (typeof basePokemon.altBaseEvolutions === 'undefined'){ basePokemon.altBaseEvolutions = []; }
-            basePokemon.altBaseEvolutions.push(altBaseEvolution);
             //console.log('|- basePokemon = ', basePokemon);
+            if (typeof basePokemon.altBaseEvolutions === 'undefined'
+                || (typeof altBaseEvolution.clear !== 'undefined' && altBaseEvolution.clear === true)){
+                basePokemon.altBaseEvolutions = [];
+                }
+            if (typeof altBaseEvolution.species !== 'undefined'
+                && typeof PokemonSpeciesIndex.indexList[altBaseEvolution.species] !== 'undefined'){
+                basePokemon.altBaseEvolutions.push(altBaseEvolution);
+                }
             }
     }
 

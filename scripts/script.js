@@ -5798,6 +5798,18 @@
                             return returnValue;
                             }
 
+                        // Inverse-Type-value evolutions always trigger but with variable chance values
+                        if (methodToken === 'inverse-type-value'){
+                            var returnValue = 0;
+                            var appealTypes = typeof methodValue === 'string' ? [methodValue] : methodValue;
+                            for (var i = 0; i < appealTypes.length; i++){
+                                var appealType = appealTypes[i];
+                                var appealValue = currentTypeStats[appealType];
+                                returnValue += appealValue * -1;
+                                }
+                            return returnValue;
+                            }
+
                         // Type-appeal/crisis evolutions trigger when the relevant field stats are especially high
                         if (methodToken === 'type-appeal'
                             || methodToken === 'type-surge'){
@@ -5826,6 +5838,20 @@
                                     }
                                 }
                             if (returnValue > 0){ return returnValue; }
+                            }
+
+                        // Type-appeal/crisis evolutions trigger when the relevant field stats are especially high
+                        if (methodToken === 'type-stable'){
+                            var appealTypes = typeof methodValue === 'string' ? [methodValue] : methodValue;
+                            var typeIsStable = true;
+                            for (var i = 0; i < appealTypes.length; i++){
+                                var appealType = appealTypes[i];
+                                if (currentTypeStats[appealType] <= -20
+                                    && currentTypeStats[appealType] >= 20){
+                                    typeIsStable = false;
+                                    }
+                                }
+                            return typeIsStable ? 1 : 0;
                             }
 
                         // Stat-appeal evolutions trigger when the relevant base stats are especially high

@@ -189,6 +189,47 @@
                 method: 'level-up',
                 value: 42
                 }],
+            altBaseEvolutions: [{
+                species: 'mr-mime',
+                method: 'type-warning',
+                value: 'ice'
+                },{
+                species: 'farfetchd',
+                method: 'type-appeal',
+                value: 'fairy'
+                }]
+            },
+
+        'galarian-corsola': {
+            order: thisIndex.afterOrder('corsola', 1),
+            token: 'galarian-corsola',
+            name: 'Galarian Corsola',
+            formClass: 'regional-variant',
+            formToken: 'galarian',
+            baseSpecies: 'corsola',
+            baseGameGeneration: 2,
+            number: 222,
+            types: ['ghost'],
+            genderRatio: {male: 0.25, female: 0.75},
+            baseStats: {hp: 60, phAttack: 55, phDefense: 100, spAttack: 65, spDefense: 100, speed: 30},
+            abilities: {0: 'weak-armor', hidden: 'cursed-body'},
+            height: 0.6,
+            weight: 0.5,
+            colors: ['gray', 'white'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'water-3'],
+            nextEvolutions: [{
+                species: 'cursola',
+                method: 'level-up',
+                value: 38
+                }],
+            altBaseEvolutions: [{
+                species: 'corsola',
+                method: 'type-surge',
+                value: 'water',
+                method: 'inverse-type-value',
+                value: 'fire'
+                }]
             },
 
     });
@@ -251,6 +292,23 @@
             eggCycles: 25,
             eggGroups: ['human-like'],
             prevEvolution: 'galarian-mr-mime'
+            },
+
+        'cursola': {
+            order: thisIndex.afterOrder('corsola', 2),
+            token: 'cursola',
+            name: 'Cursola',
+            number: 864,
+            baseGameGeneration: 2,
+            types: ['ghost'],
+            baseStats: {hp: 60, phAttack: 95, phDefense: 50, spAttack: 145, spDefense: 130, speed: 30},
+            abilities: {0: 'weak-armor', hidden: 'perish-body'},
+            height: 1.0,
+            weight: 0.4,
+            colors: ['white', 'gray', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'water-3'],
+            prevEvolution: 'galarian-corsola'
             },
 
 
@@ -559,17 +617,27 @@
 
         // Regional Forms
 
-        {base: 'meowth', species: 'galarian-meowth', method: 'type-warning', value: 'normal', method2: 'type-warning', value2: 'dark'},
-        {base: 'meowth', species: 'galarian-meowth', method: 'type-appeal', value: 'steel'},
-        {base: 'alolan-meowth', species: 'galarian-meowth', method: 'type-warning', value: 'dark', method2: 'type-warning', value2: 'normal'},
-        {base: 'alolan-meowth', species: 'galarian-meowth', method: 'type-appeal', value: 'steel'},
+        {base: 'meowth', clear: true}, // replace-all
+            {base: 'meowth', species: 'meowth', method: 'type-value', value: 'normal'},
+            {base: 'alolan-meowth', species: 'alolan-meowth', method: 'type-value', value: 'dark'},
+            {base: 'galarian-meowth', species: 'galarian-meowth', method: 'type-value', value: 'steel'},
+            {base: 'alolan-meowth', species: 'meowth', method: 'type-warning', value: 'dark', method2: 'type-value', value2: 'normal'},
+            {base: 'galarian-meowth', species: 'meowth', method: 'type-warning', value: 'steel', method2: 'type-value', value2: 'normal'},
+            {base: 'meowth', species: 'alolan-meowth', method: 'type-warning', value: 'normal', method2: 'type-value', value2: 'dark'},
+            {base: 'galarian-meowth', species: 'alolan-meowth', method: 'type-warning', value: 'steel', method2: 'type-value', value2: 'dark'},
+            {base: 'meowth', species: 'galarian-meowth', method: 'type-warning', value: 'normal', method2: 'type-value', value2: 'steel'},
+            {base: 'alolan-meowth', species: 'galarian-meowth', method: 'type-warning', value: 'dark', method2: 'type-value', value2: 'steel'},
 
-        {base: 'ponyta', species: 'galarian-ponyta', method: 'type-warning', value: 'fire'},
-        {base: 'ponyta', species: 'galarian-ponyta', method: 'type-appeal', value: 'psychic'},
+        {base: 'ponyta', species: 'galarian-ponyta', method: 'type-warning', value: 'fire', method2: 'type-appeal', value2: 'psychic'},
+        {base: 'ponyta', species: 'galarian-ponyta', method: 'type-warning', value: 'fire', method2: 'type-surge', value2: 'poison'},
 
-        {base: 'farfetchd', species: 'galarian-farfetchd', method: 'type-warning', value: 'normal'},
-        {base: 'farfetchd', species: 'galarian-farfetchd', method: 'type-appeal', value: 'fighting'},
-        {base: 'farfetchd', species: 'galarian-farfetchd', method: 'type-surge', value: 'grass'},
+        {base: 'farfetchd', species: 'galarian-farfetchd', method: 'type-warning', value: 'normal', method2: 'type-appeal', value2: 'fighting'},
+        {base: 'farfetchd', species: 'galarian-farfetchd', method: 'type-warning', value: 'normal', method2: 'type-surge', value2: 'grass'},
+
+        {base: 'corsola', species: 'corsola', method: 'type-value', value: 'water'},
+        {base: 'corsola', species: 'galarian-corsola', method: 'type-warning', value: 'water'},
+        {base: 'corsola', species: 'galarian-corsola', method: 'type-surge', value: 'fire'},
+
 
         ]);
 
