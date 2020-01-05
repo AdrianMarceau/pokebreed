@@ -232,6 +232,61 @@
                 }]
             },
 
+        'galarian-zigzagoon': {
+            order: thisIndex.afterOrder('linoone', 1),
+            token: 'galarian-zigzagoon',
+            name: 'Galarian Zigzagoon',
+            formClass: 'regional-variant',
+            formToken: 'galarian',
+            baseSpecies: 'zigzagoon',
+            baseGameGeneration: 3,
+            number: 263,
+            types: ['dark', 'normal'],
+            baseStats: {hp: 38, phAttack: 30, phDefense: 41, spAttack: 30, spDefense: 41, speed: 60},
+            abilities: {0: 'pickup', 1: 'gluttony', hidden: 'quick-feet'},
+            height: 0.4,
+            weight: 17.5,
+            colors: ['white', 'black', 'red'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'galarian-linoone',
+                method: 'level-up',
+                value: 20
+                }],
+            altBaseEvolutions: [{
+                species: 'zigzagoon',
+                method: 'type-warning',
+                value: 'dark'
+                }]
+            },
+        'galarian-linoone': {
+            order: thisIndex.afterOrder('linoone', 2),
+            token: 'galarian-linoone',
+            name: 'Galarian Linoone',
+            formClass: 'regional-variant',
+            formToken: 'galarian',
+            baseSpecies: 'linoone',
+            baseGameGeneration: 3,
+            number: 264,
+            types: ['dark', 'normal'],
+            baseStats: {hp: 78, phAttack: 70, phDefense: 61, spAttack: 50, spDefense: 61, speed: 100},
+            abilities: {0: 'pickup', 1: 'gluttony', hidden: 'quick-feet'},
+            height: 0.5,
+            weight: 32.5,
+            colors: ['black', 'white', 'red'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            prevEvolution: 'galarian-zigzagoon',
+            nextEvolutions: [{
+                species: 'obstagoon',
+                method: 'type-appeal',
+                value: 'dark',
+                method2: 'level-up',
+                value2: 35
+                }]
+            },
+
     });
     thisIndex.indexOrder = indexOrder;
 
@@ -309,6 +364,23 @@
             eggCycles: 20,
             eggGroups: ['water-1', 'water-3'],
             prevEvolution: 'galarian-corsola'
+            },
+
+        'obstagoon': {
+            order: thisIndex.afterOrder('linoone', 3),
+            token: 'obstagoon',
+            name: 'Obstagoon',
+            baseGameGeneration: 3,
+            number: 862,
+            types: ['dark', 'normal'],
+            baseStats: {hp: 93, phAttack: 90, phDefense: 101, spAttack: 60, spDefense: 81, speed: 95},
+            abilities: {0: 'reckless', 1: 'guts', hidden: 'defiant'},
+            height: 1.6,
+            weight: 46.0,
+            colors: ['black', 'gray', 'white', 'red'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            prevEvolution: 'galarian-linoone'
             },
 
 
@@ -637,6 +709,9 @@
         {base: 'corsola', species: 'corsola', method: 'type-value', value: 'water'},
         {base: 'corsola', species: 'galarian-corsola', method: 'type-warning', value: 'water'},
         {base: 'corsola', species: 'galarian-corsola', method: 'type-surge', value: 'fire'},
+
+        {base: 'zigzagoon', species: 'galarian-zigzagoon', method: 'type-warning', value: 'normal', method2: 'type-appeal', value2: 'dark'},
+        {base: 'zigzagoon', species: 'galarian-zigzagoon', method: 'type-surge', value: 'dark'},
 
 
         ]);
