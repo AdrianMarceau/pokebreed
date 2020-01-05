@@ -165,13 +165,16 @@
             },
 
         'galarian-mr-mime': {
-            order: thisIndex.afterOrder('mr-mime', 3),
+            order: thisIndex.afterOrder('mr-mime', 1),
             token: 'galarian-mr-mime',
             name: 'Galarian Mr. Mime',
             formClass: 'regional-variant',
             formToken: 'galarian',
             baseSpecies: 'mr-mime',
+            baseGameGeneration: 1,
             number: 122,
+            displayNumber: 122.1,
+            dexNumber: 122.1,
             types: ['ice', 'psychic'],
             baseStats: {hp: 50, phAttack: 65, phDefense: 65, spAttack: 90, spDefense: 90, speed: 100},
             abilities: {0: 'vital-spirit', 1: 'screen-cleaner', hidden: 'ice-body'},
@@ -232,10 +235,12 @@
             },
 
         'mr-rime': {
-            order: thisIndex.afterOrder('mr-mime', 3),
+            order: thisIndex.afterOrder('mr-mime', 2),
             token: 'mr-rime',
             name: 'Mr. Rime',
             number: 866,
+            displayNumber: 122.2,
+            dexNumber: 122.2,
             baseGameGeneration: 1,
             types: ['ice', 'psychic'],
             baseStats: {hp: 62, phAttack: 135, phDefense: 95, spAttack: 68, spDefense: 82, speed: 65},

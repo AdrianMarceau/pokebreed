@@ -1170,6 +1170,8 @@
             name: 'Mime Jr.',
             class: 'baby',
             number: 439,
+            displayNumber: 121.9,
+            dexNumber: 121.9,
             types: ['psychic', 'fairy'],
             baseStats: {hp: 20, phAttack: 25, phDefense: 45, spAttack: 70, spDefense: 90, speed: 60},
             abilities: {0: 'soundproof', 1: 'filter', hidden: 'technician'},
