@@ -636,7 +636,7 @@
             },
 
         'ms-mime': {
-            order: thisIndex.afterOrder('mr-mime'),
+            order: thisIndex.afterOrder('mr-mime', 2),
             token: 'ms-mime',
             name: 'Ms. Mime',
             formClass: 'gender-variant',
@@ -649,11 +649,55 @@
             abilities: {0: 'soundproof', 1: 'filter', hidden: 'technician'},
             height: 1.3,
             weight: 54.5,
-            colors: ['blue', 'pink', 'white', 'red'],
+            colors: ['red', 'blue', 'white', 'pink'],
             eggCycles: 25,
             eggPartner: 'mr-mime',
             eggGroups: ['human-like'],
             prevEvolution: 'mime-jr'
+            },
+        'galarian-ms-mime': {
+            order: thisIndex.afterOrder('mr-mime', 4),
+            token: 'galarian-ms-mime',
+            name: 'Galarian Ms. Mime',
+            formClass: 'regional-variant',
+            formClass2: 'gender-variant',
+            formToken: 'galarian-female',
+            number: 122,
+            dexNumber: 1024.1,
+            types: ['psychic', 'ice'],
+            genderRatio: {female: 1.0000},
+            baseStats: {hp: 60, phAttack: 55, phDefense: 65, spAttack: 90, spDefense: 90, speed: 100},
+            abilities: {0: 'vital-spirit', 1: 'screen-cleaner', hidden: 'ice-body'},
+            height: 1.4,
+            weight: 56.8,
+            colors: ['blue', 'red', 'white', 'pink'],
+            eggCycles: 25,
+            eggPartner: 'galarian-mr-mime',
+            eggGroups: ['human-like'],
+            prevEvolution: 'mime-jr',
+            nextEvolutions: [{
+                species: 'ms-rime',
+                method: 'level-up',
+                value: 42
+                }],
+            },
+        'ms-rime': {
+            order: thisIndex.afterOrder('mr-mime', 5),
+            token: 'ms-rime',
+            name: 'Ms. Rime',
+            formClass: 'gender-variant',
+            formToken: 'female',
+            number: 866,
+            baseGameGeneration: 1,
+            types: ['psychic', 'ice'],
+            baseStats: {hp: 72, phAttack: 125, phDefense: 95, spAttack: 68, spDefense: 82, speed: 65},
+            abilities: {0: 'tangled-feet', 1: 'screen-cleaner', hidden: 'ice-body'},
+            height: 1.5,
+            weight: 54.2,
+            colors: ['blue', 'red', 'white', 'black', 'yellow'],
+            eggCycles: 25,
+            eggGroups: ['human-like'],
+            prevEvolution: 'galarian-ms-mime'
             },
 
         'buzzqwill': {
@@ -1336,11 +1380,13 @@
     // Update previous gen pokemon with new gender ratio data
     thisIndex.addGenderRatios([
         {base: 'mr-mime', ratio: {male: 1.0000}},
+        {base: 'galarian-mr-mime', ratio: {male: 1.0000}},
         ]);
 
     // Update previous gen pokemon with new gender ratio data
     thisIndex.addEggPartners([
         {base: 'mr-mime', species: 'ms-mime'},
+        {base: 'galarian-mr-mime', species: 'galarian-ms-mime'},
         ]);
 
     // Update previous gen pokemon with new next evolution data
@@ -1348,8 +1394,11 @@
 
         {base: 'girafarig', species: 'mega-girafarig', method: 'mega-evolution', value: 'girafarigite'},
 
-        {base: 'mime-jr', species: 'mr-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'male', method3: 'level-up', value3: 25, replace: true},
-        {base: 'mime-jr', species: 'ms-mime', method: 'affection', value: 'high', method2: 'gender', value2: 'female', method3: 'level-up', value3: 25},
+        {base: 'mime-jr', species: 'mr-mime', method: 'affection', value: 'high', method2: 'level-up', value2: 25, method3: 'type-value', value3: 'fairy', method4: 'gender', value4: 'male', replace: true},
+        {base: 'mime-jr', species: 'galarian-mr-mime', method: 'affection', value: 'high', method2: 'level-up', value2: 25, method3: 'type-value', value3: 'ice', method4: 'gender', value4: 'male'},
+
+        {base: 'mime-jr', species: 'ms-mime', method: 'affection', value: 'high', method2: 'level-up', value2: 25, method3: 'type-value', value3: 'fairy', method4: 'gender', value4: 'female'},
+        {base: 'mime-jr', species: 'galarian-ms-mime', method: 'affection', value: 'high', method2: 'level-up', value2: 25, method3: 'type-value', value3: 'ice', method4: 'gender', value4: 'female'},
 
         {base: 'weepinbell', species: 'meandrabel', method: 'type-surge', value: 'poison', method2: 'type-warning', value2: 'grass', method3: 'level-up', value3: 41},
 

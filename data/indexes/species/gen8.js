@@ -164,6 +164,30 @@
             prevEvolution: 'koffing'
             },
 
+        'galarian-mr-mime': {
+            order: thisIndex.afterOrder('mr-mime', 3),
+            token: 'galarian-mr-mime',
+            name: 'Galarian Mr. Mime',
+            formClass: 'regional-variant',
+            formToken: 'galarian',
+            baseSpecies: 'mr-mime',
+            number: 122,
+            types: ['ice', 'psychic'],
+            baseStats: {hp: 50, phAttack: 65, phDefense: 65, spAttack: 90, spDefense: 90, speed: 100},
+            abilities: {0: 'vital-spirit', 1: 'screen-cleaner', hidden: 'ice-body'},
+            height: 1.4,
+            weight: 56.8,
+            colors: ['blue', 'white', 'black'],
+            eggCycles: 25,
+            eggGroups: ['human-like'],
+            prevEvolution: 'mime-jr',
+            nextEvolutions: [{
+                species: 'mr-rime',
+                method: 'level-up',
+                value: 42
+                }],
+            },
+
     });
     thisIndex.indexOrder = indexOrder;
 
@@ -205,6 +229,23 @@
             eggCycles: 20,
             eggGroups: ['flying', 'field'],
             prevEvolution: 'galarian-farfetchd'
+            },
+
+        'mr-rime': {
+            order: thisIndex.afterOrder('mr-mime', 3),
+            token: 'mr-rime',
+            name: 'Mr. Rime',
+            number: 866,
+            baseGameGeneration: 1,
+            types: ['ice', 'psychic'],
+            baseStats: {hp: 62, phAttack: 135, phDefense: 95, spAttack: 68, spDefense: 82, speed: 65},
+            abilities: {0: 'tangled-feet', 1: 'screen-cleaner', hidden: 'ice-body'},
+            height: 1.5,
+            weight: 58.2,
+            colors: ['black', 'blue', 'white', 'red', 'yellow'],
+            eggCycles: 25,
+            eggGroups: ['human-like'],
+            prevEvolution: 'galarian-mr-mime'
             },
 
 
@@ -485,8 +526,11 @@
 
         // Regional Evolutions
 
-        {base: 'koffing', species: 'weezing', method: 'level-up', value: 35, method2: 'type-appeal', value2: 'poison', replace: true}, // level-up
-        {base: 'koffing', species: 'galarian-weezing', method: 'level-up', value: 35, method2: 'type-appeal', value2: 'fairy'}, // level-up + galar-region
+        {base: 'koffing', species: 'weezing', method: 'level-up', value: 35, method2: 'type-value', value2: 'poison', replace: true}, // level-up
+        {base: 'koffing', species: 'galarian-weezing', method: 'level-up', value: 35, method2: 'type-value', value2: 'fairy'}, // level-up + galar-region
+
+        {base: 'mime-jr', species: 'mr-mime', method: 'affection', value: 'high', method2: 'level-up', value2: 25, method3: 'type-value', value3: 'fairy', replace: true}, // affection + level-up
+        {base: 'mime-jr', species: 'galarian-mr-mime', method: 'affection', value: 'high', method2: 'level-up', value2: 25, method3: 'type-value', value3: 'ice'}, // affection + level-up + galar-region
 
         // Gigantamax Forms
 

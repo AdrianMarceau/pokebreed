@@ -5786,6 +5786,18 @@
                                 }
                             }
 
+                        // Type-value evolutions always trigger but with variable chance values
+                        if (methodToken === 'type-value'){
+                            var returnValue = 0;
+                            var appealTypes = typeof methodValue === 'string' ? [methodValue] : methodValue;
+                            for (var i = 0; i < appealTypes.length; i++){
+                                var appealType = appealTypes[i];
+                                var appealValue = currentTypeStats[appealType];
+                                returnValue += appealValue;
+                                }
+                            return returnValue;
+                            }
+
                         // Type-appeal/crisis evolutions trigger when the relevant field stats are especially high
                         if (methodToken === 'type-appeal'
                             || methodToken === 'type-surge'){
