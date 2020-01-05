@@ -5446,7 +5446,7 @@
 
         // Reset the pending evolution limits array so we can refil if necessary
         pendingEvolutionLimits = {};
-        //console.log('\npendingEvolutionLimits =', pendingEvolutionLimits);
+        //console.log('\n----------\nresetting pendingEvolutionLimits =', pendingEvolutionLimits);
 
         // Define variables nessary for calculating color forms and collect data
         var colorKey = 0;
@@ -5688,8 +5688,10 @@
                     //console.log('|- possibleNextEvolutions = ', possibleNextEvolutions);
 
                     // Define a function for testing if an evolution method is true
+                    var switchKind = 'and';
                     var fusionPokemonToBeRemoved = false;
                     function calculateEvolutionChance(pokemonInfo, methodToken, methodValue, methodNum, nextEvolution, prevChanceValue){
+                        //console.log('|-- calculateEvolutionChance('+pokemonInfo.token+'/'+pokemonInfo.id+', '+methodToken+', '+methodValue+', ...)');
                         //console.log('|-- calculateEvolutionChance(pokemonInfo, methodToken, methodValue, methodNum, nextEvolution, prevChanceValue)', pokemonInfo, methodToken, methodValue, methodNum, nextEvolution, prevChanceValue);
 
                         // Define reference to species count var
@@ -5713,9 +5715,12 @@
                         */
 
                         // Level-up evolutions are triggered by current growth cycles alone
-                        if (methodToken === 'level-up'
-                            && pokemonInfo.growthCycles >= methodValue){
-                            return 1;
+                        if (methodToken === 'level-up'){
+                            //console.log('checking level-up for '+pokemonInfo.token+'/'+pokemonInfo.id+' \n| currentLevel =', pokemonInfo.growthCycles, '| requiredLevel = ', methodValue);
+                            if (pokemonInfo.growthCycles >= methodValue){
+                                //console.log('success! '+pokemonInfo.token+'/'+pokemonInfo.id+' level-up into '+nextSpeciesToken+' allowed');
+                                return 1;
+                                }
                             }
 
                         // Happiness-based evolutions are triggered by attract type appeal values
@@ -5748,19 +5753,17 @@
 
                         // Royalty-based evolutions trigger if there are enough relatives but a leader doesn't exist yet
                         if (methodToken === 'royal-ascension'){
-                            //console.log('royal-ascension', nextSpeciesToken, numRelatedPokemon, nextSpeciesCount);
+                            //console.log('checking royal-ascension for '+pokemonInfo.token+'/'+pokemonInfo.id+'/'+pokemonInfo.gender+' ');
+                            //console.log('-- nextSpeciesToken =', nextSpeciesToken, '| numRelatedPokemon = ', numRelatedPokemon, '| nextSpeciesCount =', nextSpeciesCount);
                             if (numRelatedPokemon >= methodValue){
                                 var existingKingOrQueen = getZonePokemonByFilter({token:nextSpeciesToken,gender:pokemonInfo.gender});
                                 var existingMegaKingOrQueen = getZonePokemonByFilter({token:'mega-'+nextSpeciesToken,gender:pokemonInfo.gender});
-                                var existingGigantamax = getZonePokemonByFilter({token:'gmax-'+nextSpeciesToken});
-                                //console.log('existingKingOrQueen =', existingKingOrQueen);
-                                //console.log('existingGigantamax =', existingGigantamax);
+                                //console.log('-- existingKingOrQueen =', existingKingOrQueen, '| existingMegaKingOrQueen =', existingMegaKingOrQueen);
                                 if (!existingKingOrQueen.length
-                                    && !existingMegaKingOrQueen.length
-                                    && !existingGigantamax.length){
-                                    //console.log('success! '+pokemonInfo.token+' '+pokemonInfo.id+' will evolve into '+nextSpeciesToken);
+                                    && !existingMegaKingOrQueen.length){
+                                    //console.log('-- success! '+pokemonInfo.token+'/'+pokemonInfo.id+'/'+pokemonInfo.gender+' royal-ascension into '+nextSpeciesToken+'/'+pokemonInfo.id+'/'+pokemonInfo.gender+' allowed');
                                     pendingEvolutionLimits[nextSpeciesToken+'/'+pokemonInfo.gender] = 1;
-                                    //console.log('pendingEvolutionLimits =', pendingEvolutionLimits);
+                                    //console.log('-- new pendingEvolutionLimits =', pendingEvolutionLimits);
                                     return 1 + (numRelatedPokemon * 100);
                                     }
                                 }
@@ -6008,9 +6011,9 @@
                         var triggeredMethods = 0;
                         var forceEvo = false;
                         if (typeof nextEvolution.switch !== 'undefined'){
-                            var switchKind = nextEvolution.switch;
+                            switchKind = nextEvolution.switch;
                             } else {
-                            var switchKind = 'and';
+                            switchKind = 'and';
                             if (pokemonInfo.reachedAdulthood === true
                                 && (nextEvolution.method === 'mega-evolution'
                                     || nextEvolution.method === 'primal-reversion')){
@@ -6061,6 +6064,12 @@
                                 prevMethodValue = methodValue;
                                 prevChanceValue = chanceValue;
 
+                                if (switchKind === 'and'
+                                    && chanceValue === 0
+                                    && forceEvo !== true){
+                                    break;
+                                    }
+
                                 } else {
                                 break;
                                 }
@@ -6075,24 +6084,39 @@
                             var allowEvo = true;
 
                             // If there are limits on the number of a specific evo right now, check if we need to block
-                            //console.log('pendingEvolutionLimits = ', pendingEvolutionLimits);
+                            //console.log('current pendingEvolutionLimits = ', pendingEvolutionLimits);
+
+                            var nextEvoSpecies = nextEvolution.species;
+                            var nextEvoSpeciesAndGender = nextEvoSpecies+'/'+pokemonInfo.gender;
                             var nextEvoLimit = 0;
-                            if (typeof pendingEvolutionLimits[nextEvolution.species] !== 'undefined'){ nextEvoLimit = pendingEvolutionLimits[nextEvolution.species]; }
-                            else if (typeof pendingEvolutionLimits[nextEvolution.species+'/'+pokemonInfo.gender] !== 'undefined'){ nextEvoLimit = pendingEvolutionLimits[nextEvolution.species+'/'+pokemonInfo.gender]; }
+                            if (typeof pendingEvolutionLimits[nextEvoSpeciesAndGender] !== 'undefined'){ nextEvoLimit = pendingEvolutionLimits[nextEvoSpeciesAndGender]; }
+                            //else if (typeof pendingEvolutionLimits[nextEvoSpecies] !== 'undefined'){ nextEvoLimit = pendingEvolutionLimits[nextEvoSpecies]; }
+
+                            //console.log('nextEvoSpecies = ', nextEvoSpecies, '| nextEvoSpeciesAndGender = ', nextEvoSpeciesAndGender, '| nextEvoLimit =', nextEvoLimit);
+                            //console.log('-- nextEvoSpeciesAndGender = ', nextEvoSpeciesAndGender, '| nextEvoLimit =', nextEvoLimit);
+
                             if (nextEvoLimit > 0){
-                                var numNextSpecies = 0;
-                                if (typeof currentSpeciesStats[nextEvolution.species] !== 'undefined'){ numNextSpecies += currentSpeciesStats[nextEvolution.species]; }
-                                if (typeof newPokemonThisCycle[nextEvolution.species] !== 'undefined'){ numNextSpecies += newPokemonThisCycle[nextEvolution.species]; }
-                                //console.log('currentSpeciesStats['+nextEvolution.species+'] = ', currentSpeciesStats[nextEvolution.species]);
-                                //console.log('newPokemonThisCycle['+nextEvolution.species+'] = ', newPokemonThisCycle[nextEvolution.species]);
-                                //console.log('numNextSpecies = ', numNextSpecies);
-                                if (numNextSpecies >= nextEvoLimit){
+                                var numExistingNextSpecies = 0;
+
+                                if (typeof currentSpeciesStats[nextEvoSpeciesAndGender] !== 'undefined'){ numExistingNextSpecies += currentSpeciesStats[nextEvoSpeciesAndGender]; }
+                                //else if (typeof currentSpeciesStats[nextEvoSpecies] !== 'undefined'){ numExistingNextSpecies += currentSpeciesStats[nextEvoSpecies]; }
+                                //console.log('- currentSpeciesStats['+nextEvoSpeciesAndGender+'] = ', currentSpeciesStats[nextEvoSpeciesAndGender]);
+                                //console.log('- currentSpeciesStats['+nextEvoSpecies+'] = ', currentSpeciesStats[nextEvoSpecies]);
+
+                                if (typeof newPokemonThisCycle[nextEvoSpeciesAndGender] !== 'undefined'){ numExistingNextSpecies += newPokemonThisCycle[nextEvoSpeciesAndGender]; }
+                                //else if (typeof newPokemonThisCycle[nextEvoSpecies] !== 'undefined'){ numExistingNextSpecies += newPokemonThisCycle[nextEvoSpecies]; }
+                                //console.log('- newPokemonThisCycle['+nextEvoSpeciesAndGender+'] = ', newPokemonThisCycle[nextEvoSpeciesAndGender]);
+                                //console.log('- newPokemonThisCycle['+nextEvoSpecies+'] = ', newPokemonThisCycle[nextEvoSpecies]);
+
+                                //console.log('numExistingNextSpecies = ', numExistingNextSpecies);
+
+                                if (numExistingNextSpecies >= nextEvoLimit){
                                     allowEvo = false;
                                     }
                                 }
 
                             // If allowed, we can proceed with queueing the current evo
-                            //console.log('allowEvo = ', allowEvo);
+                            //console.log('allowEvo = ', allowEvo, '\n-------------');
                             if (allowEvo){
                                 var queuedEvolution = {token: nextEvolution.species, types: nextEvolutionInfo.types, chance: triggeredChance};
                                 if (typeof nextEvolution.form !== 'undefined'){ queuedEvolution.form = nextEvolution.form; }
