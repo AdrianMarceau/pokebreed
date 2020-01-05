@@ -145,6 +145,25 @@
                 }]
             },
 
+        'galarian-weezing': {
+            order: thisIndex.afterOrder('weezing', 1),
+            token: 'galarian-weezing',
+            name: 'Galarian Weezing',
+            formClass: 'regional-variant',
+            formToken: 'galarian',
+            baseSpecies: 'weezing',
+            number: 110,
+            types: ['poison', 'fairy'],
+            baseStats: {hp: 65, phAttack: 90, phDefense: 120, spAttack: 85, spDefense: 70, speed: 60},
+            abilities: {0: 'levitate', 1: 'neutralizing-gas', 'hidden': 'misty-surge'},
+            height: 3.0,
+            weight: 16.0,
+            colors: ['gray', 'green', 'white', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['amorphous'],
+            prevEvolution: 'koffing'
+            },
+
     });
     thisIndex.indexOrder = indexOrder;
 
@@ -463,6 +482,11 @@
 
     // Update previous gen pokemon with new next evolution data
     thisIndex.addNextEvolutions([
+
+        // Regional Evolutions
+
+        {base: 'koffing', species: 'weezing', method: 'level-up', value: 35, method2: 'type-appeal', value2: 'poison', replace: true}, // level-up
+        {base: 'koffing', species: 'galarian-weezing', method: 'level-up', value: 35, method2: 'type-appeal', value2: 'fairy'}, // level-up + galar-region
 
         // Gigantamax Forms
 
