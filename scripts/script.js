@@ -1706,10 +1706,10 @@
                 if (tokenA.indexOf('zygarde') !== -1){ zygardeA = true; }
                 if (tokenB.indexOf('zygarde') !== -1){ zygardeB = true; }
 
-                var gmaxA = false;
-                var gmaxB = false;
-                if (infoA['class'] === 'gigantamax'){ gmaxA = true; }
-                if (infoB['class'] === 'gigantamax'){ gmaxB = true; }
+                //var gmaxA = false;
+                //var gmaxB = false;
+                //if (infoA['class'] === 'gigantamax'){ gmaxA = true; }
+                //if (infoB['class'] === 'gigantamax'){ gmaxB = true; }
 
                 var arceusA = false;
                 var arceusB = false;
@@ -4158,7 +4158,7 @@
         $pokeList.find('li.new').removeClass('new');
 
         // Sort collected species tokens to keep things together
-        var sortedSpeciesTokens = sortSpeciesTokensByOrder(Object.keys(pokeSpecies));
+        sortedSpeciesTokens = sortSpeciesTokensByAddedThenByOrder(Object.keys(pokeSpecies));
         //if (simulationStarted){ var sortedSpeciesTokens = sortSpeciesTokensByOrder(Object.keys(pokeSpecies), true); }
         //else { var sortedSpeciesTokens = Object.keys(pokeSpecies); }
 
@@ -7621,6 +7621,24 @@
             var orderB = PokemonSpeciesDisplayOrder.indexOf(tokenB);
             var reverse = reverseOrder ? -1 : 1;
             if (orderA < orderB){ return -1 * reverse; }
+            else if (orderA > orderB){ return 1 * reverse; }
+            else { return 0; }
+            });
+        return speciesTokens;
+    }
+
+    // Define a function for sorting species token by index order
+    function sortSpeciesTokensByAddedThenByOrder(speciesTokens, reverseOrder){
+        var addedSpeciesTokens = Object.keys(thisZoneData.addedPokemonSpecies);
+        speciesTokens.sort(function(tokenA, tokenB){
+            var addedA = addedSpeciesTokens.indexOf(PokemonSpeciesIndex[tokenA].basicEvolution);
+            var addedB = addedSpeciesTokens.indexOf(PokemonSpeciesIndex[tokenB].basicEvolution);
+            var orderA = PokemonSpeciesDisplayOrder.indexOf(tokenA);
+            var orderB = PokemonSpeciesDisplayOrder.indexOf(tokenB);
+            var reverse = reverseOrder ? -1 : 1;
+            if (addedA > addedB){ return -1 * reverse; }
+            else if (addedA < addedB){ return 1 * reverse; }
+            else if (orderA < orderB){ return -1 * reverse; }
             else if (orderA > orderB){ return 1 * reverse; }
             else { return 0; }
             });
