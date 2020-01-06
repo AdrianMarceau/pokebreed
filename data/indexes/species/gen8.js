@@ -401,6 +401,40 @@
                 }]
             },
 
+        'galarian-stunfisk': {
+            order: thisIndex.afterOrder('stunfisk', 1),
+            token: 'galarian-stunfisk',
+            name: 'Galarian Stunfisk',
+            formClass: 'regional-variant',
+            formToken: 'galarian',
+            baseSpecies: 'stunfisk',
+            baseGameGeneration: 5,
+            number: 618,
+            types: ['ground', 'steel'],
+            baseStats: {hp: 109, phAttack: 66, phDefense: 84, spAttack: 81, spDefense: 99, speed: 32},
+            abilities: {0: 'mimicry'},
+            height: 0.7,
+            weight: 20.5,
+            colors: ['gray', 'black', 'green', 'red', 'white'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'amorphous'],
+            altBaseEvolutions: [{
+                species: 'galarian-stunfisk',
+                method: 'type-value',
+                value: 'steel',
+                method2: 'type-value',
+                value2: 'ground'
+                },{
+                species: 'stunfisk',
+                method: 'type-warning',
+                value: 'steel',
+                method2: 'type-value',
+                value2: 'electric',
+                method3: 'type-value',
+                value3: 'ground'
+                }]
+            },
+
     });
     thisIndex.indexOrder = indexOrder;
 
@@ -846,6 +880,9 @@
         {base: 'darumaka', species: 'galarian-darumaka', method: 'type-surge', value: 'water', method2: 'type-vs-type', value2: ['water', 'fire']},
 
         {base: 'yamask', species: 'galarian-yamask', method: 'type-surge', value: 'ground'},
+
+        {base: 'stunfisk', species: 'stunfisk', method: 'type-value', value: 'electric', method2: 'type-value', value2: 'ground'},
+        {base: 'stunfisk', species: 'galarian-stunfisk', method: 'type-warning', value: 'electric', method2: 'type-value', value2: 'steel', method3: 'type-value', value3: 'ground'},
 
 
         ]);
