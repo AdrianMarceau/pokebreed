@@ -370,6 +370,37 @@
             prevEvolution: 'galarian-darmanitan'
             },
 
+        'galarian-yamask': {
+            order: thisIndex.afterOrder('cofagrigus', 1),
+            token: 'galarian-yamask',
+            name: 'Galarian Yamask',
+            formClass: 'regional-variant',
+            formToken: 'galarian',
+            baseSpecies: 'yamask',
+            baseGameGeneration: 5,
+            number: 562,
+            types: ['ground', 'ghost'],
+            baseStats: {hp: 38, phAttack: 55, phDefense: 85, spAttack: 30, spDefense: 65, speed: 30},
+            abilities: {0: 'wandering-spirit'},
+            height: 0.5,
+            weight: 1.5,
+            colors: ['black', 'white', 'purple', 'red'],
+            eggCycles: 25,
+            eggGroups: ['mineral', 'amorphous'],
+            nextEvolutions: [{
+                species: 'runerigus',
+                method: 'level-up',
+                value: 34,
+                method2: 'type-surge',
+                value2: 'ground'
+                }],
+            altBaseEvolutions: [{
+                species: 'yamask',
+                method: 'type-warning',
+                value: 'ground'
+                }]
+            },
+
     });
     thisIndex.indexOrder = indexOrder;
 
@@ -466,6 +497,22 @@
             prevEvolution: 'galarian-linoone'
             },
 
+        'runerigus': {
+            order: thisIndex.afterOrder('cofagrigus', 2),
+            token: 'runerigus',
+            name: 'Runerigus',
+            baseGameGeneration: 5,
+            number: 867,
+            types: ['ground', 'ghost'],
+            baseStats: {hp: 58, phAttack: 95, phDefense: 145, spAttack: 50, spDefense: 105, speed: 30},
+            abilities: {0: 'wandering-spirit'},
+            height: 1.6,
+            weight: 66.6,
+            colors: ['white', 'black', 'red', 'purple'],
+            eggCycles: 25,
+            eggGroups: ['mineral', 'amorphous'],
+            prevEvolution: 'galarian-yamask'
+            },
 
         });
     thisIndex.indexOrder = indexOrder;
@@ -797,6 +844,8 @@
 
         {base: 'darumaka', species: 'galarian-darumaka', method: 'type-warning', value: 'fire', method2: 'type-value', value2: 'ice'},
         {base: 'darumaka', species: 'galarian-darumaka', method: 'type-surge', value: 'water', method2: 'type-vs-type', value2: ['water', 'fire']},
+
+        {base: 'yamask', species: 'galarian-yamask', method: 'type-surge', value: 'ground'},
 
 
         ]);
