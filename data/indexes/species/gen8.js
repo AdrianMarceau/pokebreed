@@ -505,6 +505,67 @@
             prevEvolution: 'thwackey'
             },
 
+        'scorbunny': {
+            order: indexOrder++,
+            token: 'scorbunny',
+            name: 'Scorbunny',
+            isStarterPokemon: true,
+            number: 813,
+            types: ['fire'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 50, phAttack: 65, phDefense: 50, spAttack: 40, spDefense: 40, speed: 65},
+            abilities: {0: 'blaze', hidden: 'libero'},
+            height: 0.3,
+            weight: 4.5,
+            colors: ['white', 'orange', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field', 'human-like'],
+            nextEvolutions: [{
+                species: 'raboot',
+                method: 'level-up',
+                value: 16
+                }]
+            },
+        'raboot': {
+            order: indexOrder++,
+            token: 'raboot',
+            name: 'Raboot',
+            isStarterPokemon: true,
+            number: 814,
+            types: ['fire'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 65, phAttack: 86, phDefense: 60, spAttack: 55, spDefense: 60, speed: 94},
+            abilities: {0: 'blaze', hidden: 'libero'},
+            height: 0.6,
+            weight: 9.0,
+            colors: ['gray', 'black', 'red', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field', 'human-like'],
+            prevEvolution: 'scorbunny',
+            nextEvolutions: [{
+                species: 'cinderace',
+                method: 'level-up',
+                value: 35
+                }]
+            },
+        'cinderace': {
+            order: indexOrder++,
+            token: 'cinderace',
+            name: 'Cinderace',
+            isStarterPokemon: true,
+            number: 815,
+            types: ['fire'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 80, phAttack: 116, phDefense: 75, spAttack: 65, spDefense: 75, speed: 119},
+            abilities: {0: 'blaze', hidden: 'libero'},
+            height: 1.4,
+            weight: 33.0,
+            colors: ['white', 'red', 'yellow', 'black'],
+            eggCycles: 20,
+            eggGroups: ['field', 'human-like'],
+            prevEvolution: 'raboot'
+            },
+
         'perrserker': {
             order: thisIndex.afterOrder('persian', 6),
             token: 'perrserker',
