@@ -5810,6 +5810,16 @@
                             return returnValue;
                             }
 
+                        // Type-vs-type evolutions trigger when type1 is greater than type2
+                        if (methodToken === 'type-vs-type'){
+                            var appealTypes = typeof methodValue === 'string' ? [methodValue] : methodValue;
+                            var typeValue1 = currentTypeStats[appealTypes[0]];
+                            var typeValue2 = currentTypeStats[appealTypes[1]];
+                            if (typeValue1 > typeValue2){ return 1 + (typeValue1 - typeValue2); }
+                            else if (typeValue1 < typeValue2){ return -1 + (typeValue1 - typeValue2); }
+                            else { return 0; }
+                            }
+
                         // Type-appeal/crisis evolutions trigger when the relevant field stats are especially high
                         if (methodToken === 'type-appeal'
                             || methodToken === 'type-surge'){
@@ -7420,8 +7430,8 @@
             } else {
             //console.log('return indexInfo.altBaseEvolutions', indexInfo.altBaseEvolutions);
             if (includeAlts && typeof indexInfo.altBaseEvolutions !== 'undefined'){
-                //console.log('\npokemonGetBaseEvolution('+pokeToken+', '+includeBaby+', '+includeAlts+')');
-                //console.log('includeAlts && typeof indexInfo.altBaseEvolutions !== \'undefined\' = ', indexInfo.altBaseEvolutions);
+                //console.log('\npokemonGetBaseEvolution('+pokeToken+', includeBaby:'+includeBaby+', includeAlts:'+includeAlts+')');
+                //console.log('| -- indexInfo.altBaseEvolutions =', indexInfo.altBaseEvolutions);
 
                 // Collect refs to zone stats and special energy/power counters
                 var zoneStats = thisZoneData.currentStats;
@@ -7439,58 +7449,98 @@
                     //console.log('baseEvolution['+ i +'] = ', baseEvolution);
                     //console.log('zoneStats[\'types\'][baseEvolution.value] = ', zoneStats['types'][baseEvolution.value]);
 
-                    // Calculate TYPE APPEAL & SURGE effects on base evolution
-                    if ((baseEvolution.method === 'type-appeal'
-                        && zoneStats['types'][baseEvolution.value] >= 20)
-                        || (baseEvolution.method === 'type-surge'
-                        && zoneStats['types'][baseEvolution.value] >= 40)){
-                        queuedBaseEvolutionsTokens.push(baseEvolution.species);
-                        queuedBaseEvolutions.push({
-                            token: baseEvolution.species,
-                            chance: (baseEvolution.method === 'type-appeal' ? 2 : 3) + zoneStats['types'][baseEvolution.value]
-                            });
+                    var allowBaseEvolution = false;
+                    var baseEvolutionSpecies = baseEvolution['species'];
+                    var baseEvolutionChance = 0;
+                    for (var j = 1; j < 10; j++){
+                        var m = j > 1 ? j : '';
 
-                        // Calculate TYPE WARNING & CRISIS effects on base evolution
-                        } else if ((baseEvolution.method === 'type-warning'
-                        && zoneStats['types'][baseEvolution.value] <= -5)
-                        || baseEvolution.method === 'type-crisis'
-                        && zoneStats['types'][baseEvolution.value] <= -10){
-                        queuedBaseEvolutionsTokens.push(baseEvolution.species);
-                        queuedBaseEvolutions.push({
-                            token: baseEvolution.species,
-                            chance: (baseEvolution.method === 'type-warning' ? 2 : 3) + ((zoneStats['types'][baseEvolution.value] * -1)  * 2)
-                            });
+                        if (typeof baseEvolution['method'+m] === 'undefined'){ break; }
+                        else if (typeof baseEvolution['value'+m] === 'undefined'){ break; }
 
-                        // Calculate ULTRA ENERGY effects on base evolution
-                        } else if (baseEvolution.method === 'ultra-energy'
-                        && ((baseEvolution.value === 'high' && currentUltraEnergy >= 6)
-                            || (baseEvolution.value === 'low' && currentUltraEnergy < 3)
-                            || (baseEvolution.value === 'none' && currentUltraEnergy === 0))){
-                        queuedBaseEvolutionsTokens.push(baseEvolution.species);
-                        queuedBaseEvolutions.push({
-                            token: baseEvolution.species,
-                            chance: (currentUltraEnergy * totalUltraEnergy)
-                            });
+                        var baseEvolutionMethod = baseEvolution['method'+m];
+                        var baseEvolutionValue = baseEvolution['value'+m];
+                        //console.log(pokeToken+' to '+baseEvolutionSpecies+' w/ ', baseEvolutionMethod, baseEvolutionValue, '...');
 
-                        // Calculate CHANCE effects on base evolution
-                        } else if (baseEvolution.method === 'chance'
-                        && (Math.seededRandomChance() < baseEvolution.value)){
-                        queuedBaseEvolutionsTokens.push(baseEvolution.species);
-                        queuedBaseEvolutions.push({
-                            token: baseEvolution.species,
-                            chance: 2 + zoneStats['types'][indexInfo.types[0]]
-                            });
+                        // Calculate TYPE APPEAL & SURGE effects on base evolution
+                        if ((baseEvolutionMethod === 'type-appeal'
+                            && zoneStats['types'][baseEvolutionValue] >= 20)
+                            || (baseEvolutionMethod === 'type-surge'
+                            && zoneStats['types'][baseEvolutionValue] >= 40)){
 
-                        // Process ALWAYS conditions on base evolution
-                        } else if (baseEvolution.method === 'always'){
-                        queuedBaseEvolutionsTokens.push(baseEvolution.species);
-                        queuedBaseEvolutions.push({
-                            token: baseEvolution.species,
-                            chance: 100 + i
-                            });
+                            allowBaseEvolution = true;
+                            baseEvolutionChance += (baseEvolutionMethod === 'type-appeal' ? 2 : 3) + zoneStats['types'][baseEvolutionValue];
+
+                            // Calculate TYPE WARNING & CRISIS effects on base evolution
+                            } else if ((baseEvolutionMethod === 'type-warning'
+                            && zoneStats['types'][baseEvolutionValue] <= -5)
+                            || baseEvolutionMethod === 'type-crisis'
+                            && zoneStats['types'][baseEvolutionValue] <= -10){
+
+                            allowBaseEvolution = true;
+                            baseEvolutionChance += (baseEvolutionMethod === 'type-warning' ? 2 : 3) + ((zoneStats['types'][baseEvolutionValue] * -1)  * 2);
+
+                            // Calculate TYPE VS TYPE effects on base evolution
+                            } else if (baseEvolutionMethod === 'type-vs-type'
+                                && zoneStats['types'][baseEvolutionValue[0]] > zoneStats['types'][baseEvolutionValue[1]]){
+
+                            allowBaseEvolution = true;
+                            baseEvolutionChance += 2 + (zoneStats['types'][baseEvolutionValue[0]] - zoneStats['types'][baseEvolutionValue[1]]);
+
+                            //console.log(pokeToken+' to '+baseEvolutionSpecies+' w/ type-vs-type', baseEvolutionValue, (zoneStats['types'][baseEvolutionValue[0]] +' > '+ zoneStats['types'][baseEvolutionValue[1]]), 'allowBaseEvolution!, baseEvolutionChance =', baseEvolutionChance);
+
+                            // Calculate ULTRA ENERGY effects on base evolution
+                            } else if (baseEvolutionMethod === 'ultra-energy'
+                            && ((baseEvolutionValue === 'high' && currentUltraEnergy >= 6)
+                                || (baseEvolutionValue === 'low' && currentUltraEnergy < 3)
+                                || (baseEvolutionValue === 'none' && currentUltraEnergy === 0))){
+
+                            allowBaseEvolution = true;
+                            baseEvolutionChance += (currentUltraEnergy * totalUltraEnergy);
+
+                            // Calculate CHANCE effects on base evolution
+                            } else if (baseEvolutionMethod === 'chance'
+                            && (Math.seededRandomChance() < baseEvolutionValue)){
+
+                            allowBaseEvolution = true;
+                            baseEvolutionChance += 2 + zoneStats['types'][indexInfo.types[0]];
+
+                            // Process ALWAYS conditions on base evolution
+                            } else if (baseEvolutionMethod === 'always'){
+
+                            allowBaseEvolution = true;
+                            baseEvolutionChance += 100 + i;
+
+                            // Otherwise prevent this base evolution if no other conditions met
+                            } else {
+
+                            allowBaseEvolution = false;
+                            baseEvolutionSpecies = '';
+                            baseEvolutionChance = 0;
+                            //console.log('...failed a condition!', baseEvolutionChance+'% chance');
+                            break;
+
+                            }
+
+                        //console.log('...passed all conditions!', baseEvolutionChance+'% chance');
 
                         }
+
+                    // Queue the base evolution if it matches all conditions
+                    if (allowBaseEvolution
+                        && baseEvolutionSpecies.length
+                        && baseEvolutionChance > 0){
+                        //console.log('allowBaseEvolution from '+pokeToken+' to '+baseEvolutionSpecies+' w/ '+baseEvolutionChance+'% chance!');
+                        queuedBaseEvolutionsTokens.push(baseEvolutionSpecies);
+                        queuedBaseEvolutions.push({
+                            token: baseEvolutionSpecies,
+                            chance: baseEvolutionChance
+                            });
+                        }
+
                     }
+
+                // Automatically queue the normal base evo with the primary type as the weight vs others
                 if (queuedBaseEvolutionsTokens.indexOf(indexInfo.token) === -1){
                     queuedBaseEvolutionsTokens.push(indexInfo.token);
                     queuedBaseEvolutions.push({
@@ -7498,6 +7548,8 @@
                         chance: 1 + zoneStats['types'][indexInfo.types[0]]
                         });
                     }
+
+                // If eligable base evos were found, analyze and return one of 'em
                 if (queuedBaseEvolutions.length > 0){
                     //console.log('queuedBaseEvolutions for '+indexInfo.token+' = ', queuedBaseEvolutions);
                     queuedBaseEvolutions.sort(function(a, b){
@@ -7507,12 +7559,15 @@
                         });
                     var selectedBaseEvolution = queuedBaseEvolutions[0].token;
                     //console.log('selectedBaseEvolution = ', selectedBaseEvolution);
+                    //console.log('return selectedBaseEvolution', selectedBaseEvolution, '\n----------');
                     return selectedBaseEvolution;
                     } else {
+                    //console.log('return baseToken', baseToken, '\n----------');
                     return baseToken;
                     }
+
                 } else {
-                //console.log('return baseToken', baseToken);
+                //console.log('return baseToken', baseToken, '\n----------');
                 return baseToken;
                 }
             }
