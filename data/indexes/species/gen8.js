@@ -627,6 +627,41 @@
             prevEvolution: 'drizzile'
             },
 
+        'skwovet': {
+            order: indexOrder++,
+            token: 'skwovet',
+            name: 'Skwovet',
+            number: 819,
+            types: ['normal'],
+            baseStats: {hp: 50, phAttack: 40, phDefense: 40, spAttack: 70, spDefense: 40, speed: 70},
+            abilities: {0: 'cheek-pouch', hidden: 'gluttony'},
+            height: 0.3,
+            weight: 2.5,
+            colors: ['brown', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'greedent',
+                method: 'level-up',
+                value: 24
+                }]
+            },
+        'greedent': {
+            order: indexOrder++,
+            token: 'greedent',
+            name: 'Greedent',
+            number: 820,
+            types: ['normal'],
+            baseStats: {hp: 65, phAttack: 60, phDefense: 55, spAttack: 95, spDefense: 55, speed: 90},
+            abilities: {0: 'cheek-pouch', hidden: 'gluttony'},
+            height: 0.6,
+            weight: 6.0,
+            colors: ['brown', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'skwovet'
+            },
+
         'perrserker': {
             order: thisIndex.afterOrder('persian', 6),
             token: 'perrserker',
