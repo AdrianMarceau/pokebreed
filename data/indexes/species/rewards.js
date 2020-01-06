@@ -52,7 +52,7 @@
         'shadow-mega-mewtwo': {
             order: indexOrder++,
             token: 'shadow-mega-mewtwo',
-            name: 'Shadow Mega Mewtwo',
+            name: 'Mega Shadow Mewtwo',
             class: 'legendary',
             formClass: 'shadow-variant',
             formClass2: 'mega-evolution',

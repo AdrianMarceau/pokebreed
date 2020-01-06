@@ -287,6 +287,89 @@
                 }]
             },
 
+        'galarian-darumaka': {
+            order: thisIndex.afterOrder('zen-darmanitan', 1),
+            token: 'galarian-darumaka',
+            name: 'Galarian Darumaka',
+            formClass: 'regional-variant',
+            formToken: 'galarian',
+            baseSpecies: 'darumaka',
+            baseGameGeneration: 5,
+            number: 554,
+            types: ['ice'],
+            baseStats: {hp: 70, phAttack: 90, phDefense: 45, spAttack: 15, spDefense: 45, speed: 50},
+            abilities: {0: 'hustle', hidden: 'inner-focus'},
+            height: 0.7,
+            weight: 40.0,
+            colors: ['white', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'galarian-darmanitan',
+                method: 'type-appeal',
+                value: 'ice',
+                method2: 'level-up',
+                value2: 20
+                }],
+            altBaseEvolutions: [{
+                species: 'darumaka',
+                method: 'type-warning',
+                value: 'ice',
+                method2: 'type-value',
+                value2: 'fire'
+                }, {
+                species: 'darumaka',
+                method: 'type-surge',
+                value: 'fire',
+                method2: 'type-vs-type',
+                value2: ['fire', 'water']
+                }]
+            },
+        'galarian-darmanitan': {
+            order: thisIndex.afterOrder('zen-darmanitan', 2),
+            token: 'galarian-darmanitan',
+            name: 'Galarian Darmanitan',
+            formClass: 'regional-variant',
+            formToken: 'galarian',
+            baseSpecies: 'darmanitan',
+            baseGameGeneration: 5,
+            number: 555,
+            types: ['ice'],
+            baseStats: {hp: 105, phAttack: 140, phDefense: 55, spAttack: 30, spDefense: 55, speed: 95},
+            abilities: {0: 'gorilla-tactics', hidden: 'zen-mode'},
+            height: 1.7,
+            weight: 120.0,
+            colors: ['white', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'galarian-darumaka',
+            nextEvolutions: [{
+                species: 'galarian-zen-darmanitan',
+                method: 'burst-evolution',
+                value: 'zen-mode'
+                }]
+            },
+        'galarian-zen-darmanitan': {
+            order: thisIndex.afterOrder('zen-darmanitan', 3),
+            token: 'galarian-zen-darmanitan',
+            name: 'Zen Galarian Darmanitan',
+            formClass: 'burst-evolution',
+            formClass2: 'regional-variant',
+            formToken: 'galarian-zen',
+            baseSpecies: 'zen-darmanitan',
+            baseGameGeneration: 5,
+            number: 555,
+            types: ['ice', 'fire'],
+            baseStats: {hp: 105, phAttack: 160, phDefense: 55, spAttack: 30, spDefense: 55, speed: 135},
+            abilities: {0: 'zen-mode'},
+            height: 1.3,
+            weight: 92.9,
+            colors: ['white', 'orange', 'yellow', 'red'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'galarian-darmanitan'
+            },
+
     });
     thisIndex.indexOrder = indexOrder;
 
@@ -706,12 +789,14 @@
         {base: 'farfetchd', species: 'galarian-farfetchd', method: 'type-warning', value: 'normal', method2: 'type-appeal', value2: 'fighting'},
         {base: 'farfetchd', species: 'galarian-farfetchd', method: 'type-warning', value: 'normal', method2: 'type-surge', value2: 'grass'},
 
-        {base: 'corsola', species: 'corsola', method: 'type-value', value: 'water'},
-        {base: 'corsola', species: 'galarian-corsola', method: 'type-warning', value: 'water'},
-        {base: 'corsola', species: 'galarian-corsola', method: 'type-surge', value: 'fire'},
+        {base: 'corsola', species: 'galarian-corsola', method: 'type-warning', value: 'water', method2: 'type-value', value2: 'ghost'},
+        {base: 'corsola', species: 'galarian-corsola', method: 'type-surge', value: 'fire', method2: 'type-vs-type', value2: ['fire', 'water']},
 
         {base: 'zigzagoon', species: 'galarian-zigzagoon', method: 'type-warning', value: 'normal', method2: 'type-appeal', value2: 'dark'},
         {base: 'zigzagoon', species: 'galarian-zigzagoon', method: 'type-surge', value: 'dark'},
+
+        {base: 'darumaka', species: 'galarian-darumaka', method: 'type-warning', value: 'fire', method2: 'type-value', value2: 'ice'},
+        {base: 'darumaka', species: 'galarian-darumaka', method: 'type-surge', value: 'water', method2: 'type-vs-type', value2: ['water', 'fire']},
 
 
         ]);
