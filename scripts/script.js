@@ -109,14 +109,14 @@
             thisDeviceWidth = $(window).width();
             thisDeviceHeight = $(window).height();
             var $mvp = $('#myViewport');
-            //console.log('$mvp = ', $mvp);
+            // //console.log('$mvp = ', $mvp);
             //alert('thisDeviceWidth = ' + thisDeviceWidth + '\n ' + 'thisDeviceHeight = ' + thisDeviceHeight);
             if ($mvp.length && thisDeviceWidth <= 534) { $mvp.attr('content','width=534'); }
             else if ($mvp.length){ $mvp.attr('content','width=device-width, initial-scale=1'); }
             };
         $(window).resize(updateDeviceWidth);
         updateDeviceWidth();
-        //console.log('thisDeviceWidth = ', thisDeviceWidth);
+        // //console.log('thisDeviceWidth = ', thisDeviceWidth);
 
         // Populate the app details with global values if set
         if (typeof window.PokemonAppLastUpdated !== 'undefined'){ appLastUpdated = window.PokemonAppLastUpdated; }
@@ -127,14 +127,14 @@
 
         // Overwrite the default index load value if set
         if (typeof window.PokemonAllowedGenerationsMax !== 'undefined'){ maxIndexKeyToLoad = window.PokemonAllowedGenerationsMax; }
-        //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
+        // //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
 
         // Use the loaded generation settings to decide script filenames to load
         requiredIndexFiles.push(''); // Always add base class file first
         for (var i = 1; i <= maxIndexKeyToLoad; i++){ requiredIndexFiles.push('gen'+(i < maxIndexKeyAllowed ? i : 'x')); }
         requiredIndexFiles.push('rewards'); // Always add the global rewards file
-        //console.log('requiredIndexFiles = ', requiredIndexFiles);
-        //console.log('loadedIndexFiles = ', loadedIndexFiles);
+        // //console.log('requiredIndexFiles = ', requiredIndexFiles);
+        // //console.log('loadedIndexFiles = ', loadedIndexFiles);
 
         // Check to ensure we have access to LOCAL STORAGE
         if (typeof window.localStorage !== 'undefined'){
@@ -142,29 +142,29 @@
             // Prevent certain local storage settings from being loaded in FREE MODE
             if (!appFreeMode){
 
-                //console.log('NOT in free mode, let us LOAD');
+                // //console.log('NOT in free mode, let us LOAD');
 
                 // Load the TOTAL DAYS PASSED if it's been saved
                 var savedPokeboxDaysPassed = window.localStorage.getItem('PokeboxDaysPassed');
                 if (typeof savedPokeboxDaysPassed !== 'undefined'){ PokeboxDaysPassed = savedPokeboxDaysPassed ? parseInt(savedPokeboxDaysPassed) : 0; }
-                //console.log('savedPokeboxDaysPassed = ', savedPokeboxDaysPassed, typeof savedPokeboxDaysPassed);
-                //console.log('PokeboxDaysPassed = ', PokeboxDaysPassed, typeof PokeboxDaysPassed);
+                // //console.log('savedPokeboxDaysPassed = ', savedPokeboxDaysPassed, typeof savedPokeboxDaysPassed);
+                // //console.log('PokeboxDaysPassed = ', PokeboxDaysPassed, typeof PokeboxDaysPassed);
 
                 // Load the list of earned POKEBOX REWARD TOKENS if they've been saved
                 var storageName = ('PokeboxRewards');
                 var savedPokeboxRewards = window.localStorage.getItem(storageName);
                 if (typeof savedPokeboxRewards === 'string'){ PokeboxRewards = JSON.parse(savedPokeboxRewards); }
-                //console.log('storageName = ', storageName);
-                //console.log('savedPokeboxRewards = ', savedPokeboxRewards);
-                //console.log('PokeboxRewards = ', PokeboxRewards);
+                // //console.log('storageName = ', storageName);
+                // //console.log('savedPokeboxRewards = ', savedPokeboxRewards);
+                // //console.log('PokeboxRewards = ', PokeboxRewards);
 
                 // Load the list of earned POKEBOX POPUPS SEEN if they've been saved
                 var storageName = ('PokeboxPopupsSeen');
                 var savedPokeboxPopupsSeen = window.localStorage.getItem(storageName);
                 if (typeof savedPokeboxPopupsSeen === 'string'){ PokeboxPopupsSeen = JSON.parse(savedPokeboxPopupsSeen); }
-                //console.log('storageName = ', storageName);
-                //console.log('savedPokeboxPopupsSeen = ', savedPokeboxPopupsSeen);
-                //console.log('PokeboxPopupsSeen = ', PokeboxPopupsSeen);
+                // //console.log('storageName = ', storageName);
+                // //console.log('savedPokeboxPopupsSeen = ', savedPokeboxPopupsSeen);
+                // //console.log('PokeboxPopupsSeen = ', PokeboxPopupsSeen);
 
                 }
 
@@ -172,21 +172,21 @@
                 var storageName = !appFreeMode ? ('CurrentButtonFilters' + (maxIndexKeyToLoad < maxIndexKeyAllowed ? 'Gen' + maxIndexKeyToLoad : '')) : 'FreeButtonFilters';
                 var savedCurrentButtonFilters = window.localStorage.getItem(storageName);
                 if (typeof savedCurrentButtonFilters === 'string'){ currentButtonFilters = JSON.parse(savedCurrentButtonFilters); }
-                //console.log('storageName = ', storageName);
-                //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
-                //console.log('maxIndexKeyAllowed = ', maxIndexKeyAllowed);
-                //console.log('savedCurrentButtonFilters = ', savedCurrentButtonFilters);
-                //console.log('currentButtonFilters = ', currentButtonFilters);
+                // //console.log('storageName = ', storageName);
+                // //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
+                // //console.log('maxIndexKeyAllowed = ', maxIndexKeyAllowed);
+                // //console.log('savedCurrentButtonFilters = ', savedCurrentButtonFilters);
+                // //console.log('currentButtonFilters = ', currentButtonFilters);
 
                 // Load settings for any POKEDEX filters
                 var storageName = ('CurrentPokedexFilters' + (maxIndexKeyToLoad < maxIndexKeyAllowed ? 'Gen' + maxIndexKeyToLoad : ''));
                 var savedCurrentPokedexFilters = window.localStorage.getItem(storageName);
                 if (typeof savedCurrentPokedexFilters === 'string'){ currentPokedexFilters = JSON.parse(savedCurrentPokedexFilters); }
-                //console.log('storageName = ', storageName);
-                //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
-                //console.log('maxIndexKeyAllowed = ', maxIndexKeyAllowed);
-                //console.log('savedCurrentPokedexFilters = ', savedCurrentPokedexFilters);
-                //console.log('currentPokedexFilters = ', currentPokedexFilters);
+                // //console.log('storageName = ', storageName);
+                // //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
+                // //console.log('maxIndexKeyAllowed = ', maxIndexKeyAllowed);
+                // //console.log('savedCurrentPokedexFilters = ', savedCurrentPokedexFilters);
+                // //console.log('currentPokedexFilters = ', currentPokedexFilters);
 
             }
 
@@ -286,7 +286,7 @@
 
     // Define a function for starting the simulation and day
     function buildSimulator(){
-        //console.log('Building the simulation!');
+        // //console.log('Building the simulation!');
 
         // Collect local references to global indexes
         PokemonSpeciesIndex = window.PokemonSpeciesIndex.indexList;
@@ -377,7 +377,7 @@
 
             // If this is the PAUSE button
             if (control === 'pause'){
-                //console.log('trigger a PAUSE action', typeof dayTimeoutID, dayTimeoutID);
+                // //console.log('trigger a PAUSE action', typeof dayTimeoutID, dayTimeoutID);
                 if (dayTimeoutSpeed === 'pause' && dayTimeoutID === false){ return false; }
                 prevSpeedToken = dayTimeoutSpeed;
                 prevSpeedDuration = dayTimeoutDuration;
@@ -393,7 +393,7 @@
                 }
             // Else if this is the PLAY button
             else if (control === 'play'){
-                //console.log('trigger a PLAY action');
+                // //console.log('trigger a PLAY action');
                 if (dayTimeoutSpeed !== 'pause'){ return false; }
                 dayTimeoutSpeed = prevSpeedToken !== false ? prevSpeedToken : 'normal';
                 dayTimeoutDuration = prevSpeedDuration !== false ? prevSpeedDuration : speedValues[dayTimeoutSpeed];
@@ -407,7 +407,7 @@
                 }
             // Else if this is the SPEED button
             else if (control.match(/^(slow|fast|warp)$/)){
-                //console.log('trigger a SPEED action', control);
+                // //console.log('trigger a SPEED action', control);
                 // If the speed has NOT been selected, switch now (else revert to normal)
                 if (dayTimeoutSpeed !== control){
                     dayTimeoutSpeed = control;
@@ -473,7 +473,7 @@
         // Generate events for the select-pokemon filters
         var allowedFilterTargets = ['buttons', 'pokedex'];
         var $filterDivs = $('.filter[data-filter]', $pokePanelFilters);
-        //console.log('$filterDivs.length = ', $filterDivs.length);
+        // //console.log('$filterDivs.length = ', $filterDivs.length);
         $filterDivs.each(function(){
 
             // Collect refs to this div and the options inside it
@@ -482,23 +482,23 @@
             var filterKind = $filterDiv.attr('data-filter');
             var $filterOptions = $filterDiv.find('.option[data-'+ filterKind +']');
             var $activeFilter = $filterOptions.find('.option.active');
-            //console.log('filterKind = ', filterKind);
-            //console.log('$filterOptions.length = ', $filterOptions.length);
+            // //console.log('filterKind = ', filterKind);
+            // //console.log('$filterOptions.length = ', $filterOptions.length);
             var filterTarget = $filterParent.attr('data-target');
-            //console.log('filterTarget = ', filterTarget);
+            // //console.log('filterTarget = ', filterTarget);
             if (allowedFilterTargets.indexOf(filterTarget) === -1){ return true; }
             if (filterTarget === 'buttons'){
                 if (typeof currentButtonFilters[filterKind] === 'undefined'){
                     currentButtonFilters[filterKind] = 'all';
                     }
-                //console.log('currentButtonFilters['+ filterKind +'] = ', currentButtonFilters[filterKind]);
+                // //console.log('currentButtonFilters['+ filterKind +'] = ', currentButtonFilters[filterKind]);
                 } else if (filterTarget === 'pokedex'){
                 if (typeof currentPokedexFilters[filterKind] === 'undefined'){
                     if (filterKind === 'mode'){ currentPokedexFilters[filterKind] = 'legacy'; }
                     else if (filterKind === 'gen'){ currentPokedexFilters[filterKind] = 1; }
                     else { currentPokedexFilters[filterKind] = 'all'; }
                     }
-                //console.log('currentPokedexFilters['+ filterKind +'] = ', currentPokedexFilters[filterKind]);
+                // //console.log('currentPokedexFilters['+ filterKind +'] = ', currentPokedexFilters[filterKind]);
                 }
             $filterOptions.bind('click', function(){
 
@@ -511,8 +511,8 @@
                     && optionValue !== 'r'){
                     optionValue = parseInt(optionValue);
                     }
-                //console.log('filterKind = ', filterKind);
-                //console.log('optionValue = ', optionValue);
+                // //console.log('filterKind = ', filterKind);
+                // //console.log('optionValue = ', optionValue);
 
                 // Check if we're dealing with button or pokedex filters
                 if (filterTarget === 'buttons'){
@@ -520,36 +520,36 @@
                     // Add and apply pokemon button filters now that they've been updated
                     currentButtonFilters[filterKind] = optionValue;
                     applyPokemonButtonFilters();
-                    //console.log('currentButtonFilters = ', currentButtonFilters);
+                    // //console.log('currentButtonFilters = ', currentButtonFilters);
 
                     // Update local storage with the the new filter values
                     if (typeof window.localStorage !== 'undefined'){
                         var storageName = !appFreeMode ? ('CurrentButtonFilters' + (maxIndexKeyToLoad < maxIndexKeyAllowed ? 'Gen' + maxIndexKeyToLoad : '')) : 'FreeButtonFilters';
                         var savedCurrentButtonFilters = JSON.stringify(currentButtonFilters);
                         window.localStorage.setItem(storageName, savedCurrentButtonFilters);
-                        //console.log('storageName = ', storageName);
-                        //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
-                        //console.log('maxIndexKeyAllowed = ', maxIndexKeyAllowed);
-                        //console.log('savedCurrentButtonFilters = ', savedCurrentButtonFilters);
+                        // //console.log('storageName = ', storageName);
+                        // //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
+                        // //console.log('maxIndexKeyAllowed = ', maxIndexKeyAllowed);
+                        // //console.log('savedCurrentButtonFilters = ', savedCurrentButtonFilters);
                         }
 
                     } else if (filterTarget === 'pokedex'){
-                    //console.log('filterTarget = ', filterTarget);
+                    // //console.log('filterTarget = ', filterTarget);
 
                     // Add and apply pokemon button filters now that they've been updated
                     currentPokedexFilters[filterKind] = optionValue;
                     applyPokemonPokedexFilters();
-                    //console.log('currentPokedexFilters = ', currentPokedexFilters);
+                    // //console.log('currentPokedexFilters = ', currentPokedexFilters);
 
                     // Update local storage with the the new filter values
                     if (typeof window.localStorage !== 'undefined'){
                         var storageName = ('CurrentPokedexFilters' + (maxIndexKeyToLoad < maxIndexKeyAllowed ? 'Gen' + maxIndexKeyToLoad : ''));
                         var savedCurrentPokedexFilters = JSON.stringify(currentPokedexFilters);
                         window.localStorage.setItem(storageName, savedCurrentPokedexFilters);
-                        //console.log('storageName = ', storageName);
-                        //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
-                        //console.log('maxIndexKeyAllowed = ', maxIndexKeyAllowed);
-                        //console.log('savedCurrentPokedexFilters = ', savedCurrentPokedexFilters);
+                        // //console.log('storageName = ', storageName);
+                        // //console.log('maxIndexKeyToLoad = ', maxIndexKeyToLoad);
+                        // //console.log('maxIndexKeyAllowed = ', maxIndexKeyAllowed);
+                        // //console.log('savedCurrentPokedexFilters = ', savedCurrentPokedexFilters);
                         }
 
                     }
@@ -667,18 +667,18 @@
 
             // Immediately return if control key is pressed
             if (e.ctrlKey === true){ return true; }
-            //console.log('----');
+            // //console.log('----');
 
             // Collect the name of the currently pressed key
             var keyName = typeof keyCodeMap[e.which] !== 'undefined' ? keyCodeMap[e.which] : false;
-            //console.log('key =', e.which, '=', keyName);
+            // //console.log('key =', e.which, '=', keyName);
 
             // Check to see which phase of the simulation we're currently in
             var currentPhase = 'select-starters';
             if (!$('.popup.overlay').hasClass('hidden')){ currentPhase = 'popup-window'; }
             else if (simulationStarted){ currentPhase = 'simulation-running'; }
             else if (!simulationStarted && $('.select-pokemon', $panelButtons).hasClass('hidden')){ currentPhase = 'simulation-over'; }
-            //console.log('currentPhase', currentPhase, 'e.which', e.which);
+            // //console.log('currentPhase', currentPhase, 'e.which', e.which);
 
             // Predefine validity flag so we know whether to cancel default later
             var validAction = false;
@@ -699,7 +699,7 @@
 
             // CONTEXT-SENSITIVE SHORTCUTS (POPUP-WINDOW)
             if (currentPhase === 'popup-window'){
-                //console.log('POPUP KEY ', keyName); // continue/next
+                // //console.log('POPUP KEY ', keyName); // continue/next
                 switch (keyName){
                     // CONTEXT/NEXT BUTTON shortcuts
                     case 'space':
@@ -710,13 +710,13 @@
 
             // CONTEXT-SENSITIVE SHORTCUTS (SELECT-STARTERS)
             if (currentPhase === 'select-starters'){
-                //console.log('SELECTION KEY ', keyName); // filter/ditto/seed/start
+                // //console.log('SELECTION KEY ', keyName); // filter/ditto/seed/start
 
                 // Check to see which button panel has been highlighted, if any
                 var currentPanel = '';
                 var $currentPanel = $('.focus-panel.hasfocus', $panelButtons);
                 if ($currentPanel.length){ currentPanel = $currentPanel.attr('data-panel'); }
-                //console.log('currentPanel =', currentPanel);
+                // //console.log('currentPanel =', currentPanel);
 
                 // Cotinue to process keyboard-specific shortcuts for this phase
                 switch (keyName){
@@ -769,26 +769,26 @@
                         {
                         validAction = true;
                         var arrowDir = keyName.replace('Arrow', '');
-                        //console.log('--');
-                        //console.log('arrowDir = ', arrowDir);
+                        // //console.log('--');
+                        // //console.log('arrowDir = ', arrowDir);
                         if (currentPanel === 'select-pokemon'){
-                            //console.log('focus button to the', arrowDir);
+                            // //console.log('focus button to the', arrowDir);
                             var selectorClass = '.button:not(.disabled):not(.hidden)';
                             var activeClass = '.hasfocus';
                             } else {
-                            //console.log('shift selected filter', arrowDir);
+                            // //console.log('shift selected filter', arrowDir);
                             var selectorClass = '.option:not(.disabled):not(.hidden)';
                             var activeClass = '.active';
                             }
                         var $visible = $currentPanel.find(selectorClass);
                         var bcount = $visible.length;
-                        //console.log('buttons =', bcount);
-                        //console.log('columns =', pokeGridSize.columns);
-                        //console.log('rows =', pokeGridSize.rows);
+                        // //console.log('buttons =', bcount);
+                        // //console.log('columns =', pokeGridSize.columns);
+                        // //console.log('rows =', pokeGridSize.rows);
                         var $current = $currentPanel.find(selectorClass).filter(activeClass);
                         var currentKey = parseInt($current.attr('data-key'));
-                        //console.log('$current.key =', currentKey);
-                        //console.log('$current.token =', $current.attr('data-token'));
+                        // //console.log('$current.key =', currentKey);
+                        // //console.log('$current.token =', $current.attr('data-token'));
                         // Navigate pokemon button grid differently then horizotal filter buttons
                         if (currentPanel === 'select-pokemon'){
                             // pokemon navigation (left/right/up/down + loop at all sides)
@@ -846,7 +846,7 @@
 
             // CONTEXT-SENSITIVE SHORTCUTS (SIMULATION RUNNING)
             if (currentPhase === 'simulation-running'){
-                //console.log('PROGRESS KEY ', keyName); // play/pause/stop/speed
+                // //console.log('PROGRESS KEY ', keyName); // play/pause/stop/speed
                 switch (keyName){
                     // PAUSE/PLAY BUTTON shortcuts
                     case 'space':
@@ -870,7 +870,7 @@
                     case 'leftBrace':
                         {
                         validAction = true;
-                        //console.log('slower than '+dayTimeoutSpeed+'!');
+                        // //console.log('slower than '+dayTimeoutSpeed+'!');
                         switch (dayTimeoutSpeed){
                             case 'warp': { $fastButton.trigger('click'); break; }
                             case 'fast': { $fastButton.trigger('click'); break; }
@@ -884,7 +884,7 @@
                     case 'rightBrace':
                         {
                         validAction = true;
-                        //console.log('faster than '+dayTimeoutSpeed+'!');
+                        // //console.log('faster than '+dayTimeoutSpeed+'!');
                         switch (dayTimeoutSpeed){
                             case 'slow': { $slowButton.trigger('click'); break; }
                             case 'normal': { $fastButton.trigger('click'); break; }
@@ -898,7 +898,7 @@
 
             // CONTEXT-SENSITIVE SHORTCUTS (SIMULATION OVER)
             if (currentPhase === 'simulation-over'){
-                //console.log('PRE-SELECT KEY ', keyName); // restart/ew
+                // //console.log('PRE-SELECT KEY ', keyName); // restart/ew
                 switch (keyName){
                     // RE-USE STARTERS BUTTON shortcuts
                     case 'leftArrow':
@@ -940,7 +940,7 @@
         // Bind the overlay and the close button to the close action
         $popupOverlay.bind('click', function(e){
             e.preventDefault();
-            //console.log('popup overlay clicked');
+            // //console.log('popup overlay clicked');
             //closePopupWindow();
             });
 
@@ -948,14 +948,14 @@
         $popupWindow.bind('click', function(e){
             e.preventDefault();
             e.stopPropagation();
-            //console.log('popup window clicked');
+            // //console.log('popup window clicked');
             });
 
         // Pre-bind an event for the continue button (closes the window)
         $popupWindow.on('click', '.button.continue', function(e){
             e.preventDefault();
             savePokeboxPopupsSeen();
-            //console.log('continue button clicked');
+            // //console.log('continue button clicked');
             closePopupWindow(function(){
                 if (popupWindowQueue.length > 0){
                     var panelConfig = popupWindowQueue.shift();
@@ -968,7 +968,7 @@
         $popupWindow.on('click', '.button.next', function(e){
             e.preventDefault();
             savePokeboxPopupsSeen();
-            //console.log('next button clicked');
+            // //console.log('next button clicked');
             if (popupWindowQueue.length > 0){
                 var panelConfig = popupWindowQueue.shift();
                 openPopupWindow(panelConfig);
@@ -984,14 +984,14 @@
 
     // Define a function for queueing popup windows to be displayed
     function queuePopupWindow(panelConfig){
-        //console.log('queuePopupWindow(panelConfig)', panelConfig)
+        // //console.log('queuePopupWindow(panelConfig)', panelConfig)
         popupWindowQueue.push(panelConfig);
     }
 
     // Define a function for queueing popup windows to be displayed
     var queuedPopupTimeout = false;
     function showQueuedPopups(){
-        //console.log('showQueuedPopups()', popupWindowQueue.length);
+        // //console.log('showQueuedPopups()', popupWindowQueue.length);
         if (queuedPopupTimeout !== false){ clearTimeout(queuedPopupTimeout); }
         queuedPopupTimeout = setTimeout(function(){
             if (popupWindowQueue.length > 0){
@@ -1004,7 +1004,7 @@
     // Define a function for opening content in a new popup window
     var simRunningBeforePopup = false;
     function openPopupWindow(panelConfig){
-        //console.log('openPopupWindow(panelConfig)', panelConfig);
+        // //console.log('openPopupWindow(panelConfig)', panelConfig);
 
         // Auto-generate certain config values if not explicitly set
         if (typeof panelConfig.id === 'undefined'){ return false; }
@@ -1020,14 +1020,14 @@
         var newPanelWrapMarkup = '';
         var panelTokens = Object.keys(panelConfig);
         for (var i = 0; i < panelTokens.length; i++){
-            //console.log('-----');
+            // //console.log('-----');
 
             var panelToken = panelTokens[i];
             var panelContent = panelConfig[panelToken];
             var panelStyle = '';
             var panelMarkup = '';
-            //console.log('panelToken = ', typeof panelToken, panelToken);
-            //console.log('panelContent = ', typeof panelContent, panelContent);
+            // //console.log('panelToken = ', typeof panelToken, panelToken);
+            // //console.log('panelContent = ', typeof panelContent, panelContent);
 
             // Skip irrelevant config areas
             if (panelToken === 'id'){ continue; }
@@ -1056,8 +1056,8 @@
 
                 }
 
-            //console.log('panelStyle = ', typeof panelStyle, panelStyle);
-            //console.log('panelMarkup = ', typeof panelMarkup, panelMarkup);
+            // //console.log('panelStyle = ', typeof panelStyle, panelStyle);
+            // //console.log('panelMarkup = ', typeof panelMarkup, panelMarkup);
 
             // Put it all together into the popup window
             if (panelStyle.length || panelMarkup.length){
@@ -1112,7 +1112,7 @@
 
     // Define a function for checking events that might require popups
     function checkPopupEventTriggers(){
-        //console.log('checkPopupEventTriggers()');
+        // //console.log('checkPopupEventTriggers()');
 
         // Check to see if FREE MODE or NORMAL MODE before walking through events
         if (appFreeMode){
@@ -1200,12 +1200,12 @@
                 }
 
             // Show the UNLOCK STARTERS message if they've been unlocked but not shown
-            //console.log('starterRewardIndex = ', starterRewardIndex);
+            // //console.log('starterRewardIndex = ', starterRewardIndex);
             var starterRewardCount = Object.keys(starterRewardIndex).length;
             for (var i = 0; i < starterRewardCount; i++){
                 var rewardInfo = starterRewardIndex[i];
                 if (typeof rewardInfo === 'undefined'){ continue; }
-                //console.log('starterRewardIndex = ', starterRewardIndex);
+                // //console.log('starterRewardIndex = ', starterRewardIndex);
                 var genNumber = rewardInfo['gen'];
                 var regionToken = rewardInfo['region'];
                 var unlockCount = rewardInfo['count'];
@@ -1226,12 +1226,12 @@
                 }
 
             // Show the UNLOCK SHADOW POKEMON message if they've been unlocked but not shown
-            //console.log('shadowRewardIndex = ', shadowRewardIndex);
+            // //console.log('shadowRewardIndex = ', shadowRewardIndex);
             var shadowRewardCount = Object.keys(shadowRewardIndex).length;
             for (var i = 0; i < shadowRewardCount; i++){
                 var rewardInfo = shadowRewardIndex[i];
                 if (typeof rewardInfo === 'undefined'){ continue; }
-                //console.log('shadowRewardIndex['+ i  +'] = ', rewardInfo);
+                // //console.log('shadowRewardIndex['+ i  +'] = ', rewardInfo);
                 var shadowToken = rewardInfo['species'];
                 var unlockCount = rewardInfo['count'];
                 var eventID = 'unlocked-'+ shadowToken;
@@ -1250,12 +1250,12 @@
                 }
 
             // Show the UNLOCK SHINING POKEMON message if they've been unlocked but not shown
-            //console.log('shiningRewardIndex = ', shiningRewardIndex);
+            // //console.log('shiningRewardIndex = ', shiningRewardIndex);
             var shiningRewardCount = Object.keys(shiningRewardIndex).length;
             for (var i = 0; i < shiningRewardCount; i++){
                 var rewardInfo = shiningRewardIndex[i];
                 if (typeof rewardInfo === 'undefined'){ continue; }
-                //console.log('shiningRewardIndex['+ i  +'] = ', rewardInfo);
+                // //console.log('shiningRewardIndex['+ i  +'] = ', rewardInfo);
                 var shiningToken = rewardInfo['species'];
                 var unlockCount = rewardInfo['count'];
                 var eventID = 'unlocked-'+ shiningToken;
@@ -1368,7 +1368,7 @@
     var pokeButtonSizes = {};
     var pokeGridSize = {};
     function refreshPokeButtonSizes(){
-        //console.log('refreshPokeButtonSizes()');
+        // //console.log('refreshPokeButtonSizes()');
         var $panel = $focusPanels['select-pokemon'];
         var $buttons = $panel.find('.button:not(.disabled):not(.hidden)');
         var $button = $buttons.first();
@@ -1378,11 +1378,11 @@
         pokeButtonSizes.width = $button.outerWidth(true);
         pokeGridSize.columns = Math.floor(pokePanelSizes.width / pokeButtonSizes.width); // column count based on available width
         pokeGridSize.rows = Math.floor(pokePanelSizes.height / pokeButtonSizes.height); // max visible rows, not necessarily full
-        //console.log('$panel =', $panel);
-        //console.log('$button =', $button);
-        //console.log('pokePanelSizes =', pokePanelSizes);
-        //console.log('pokeButtonSizes =', pokeButtonSizes);
-        //console.log('pokeGridSize =', pokeGridSize);
+        // //console.log('$panel =', $panel);
+        // //console.log('$button =', $button);
+        // //console.log('pokePanelSizes =', pokePanelSizes);
+        // //console.log('pokeButtonSizes =', pokeButtonSizes);
+        // //console.log('pokeGridSize =', pokeGridSize);
     }
 
     // Define a function for resetting zone data to default values
@@ -1413,7 +1413,7 @@
                 var indexInfo = PokemonSpeciesIndex[token];
 
                 // DEBUG CHECKS FOR REQUIRED DATA
-                //if (typeof indexInfo.eggCycles === 'undefined'){ //console.log('eggCycles are undefined for ', token, indexInfo); }
+                //if (typeof indexInfo.eggCycles === 'undefined'){ // //console.log('eggCycles are undefined for ', token, indexInfo); }
 
                 // If the number has been defined, add it to the above list
                 if (typeof indexInfo.number !== 'undefined'
@@ -1544,7 +1544,7 @@
 
                     // Pokemon is hidden so let's add it to this hidden token list
                     hiddenPokemonTokens.push(indexInfo.token);
-                    //console.log('add ' + indexInfo.token + ' to hiddenPokemonTokens', hiddenPokemonTokens);
+                    // //console.log('add ' + indexInfo.token + ' to hiddenPokemonTokens', hiddenPokemonTokens);
 
                     }
 
@@ -1552,12 +1552,12 @@
                 }
 
             /*
-            //console.log('totalSpecialPokemon = ', totalSpecialPokemon);
-            //console.log('totalLegendaryPokemon = ', totalLegendaryPokemon);
-            //console.log('totalMythicalPokemon = ', totalMythicalPokemon);
-            //console.log('totalUltraBeasts = ', totalUltraBeasts);
-            //console.log('PokemonSpeciesIndexTokens.length = ', PokemonSpeciesIndexTokens.length);
-            //console.log('numRequiredToCompletePokedex = ', (PokemonSpeciesIndexTokens.length - totalSpecialPokemon));
+            // //console.log('totalSpecialPokemon = ', totalSpecialPokemon);
+            // //console.log('totalLegendaryPokemon = ', totalLegendaryPokemon);
+            // //console.log('totalMythicalPokemon = ', totalMythicalPokemon);
+            // //console.log('totalUltraBeasts = ', totalUltraBeasts);
+            // //console.log('PokemonSpeciesIndexTokens.length = ', PokemonSpeciesIndexTokens.length);
+            // //console.log('numRequiredToCompletePokedex = ', (PokemonSpeciesIndexTokens.length - totalSpecialPokemon));
             */
 
             // Create a sorted list of pokemon species tokens so we don't have to later
@@ -1661,10 +1661,10 @@
 
                 });
 
-            //console.log('Tyrogue = ', PokemonSpeciesDexOrder.indexOf('tyrogue'), PokemonSpeciesIndex['tyrogue'].sortNumber, PokemonSpeciesDexOrder.indexOf('tyrogue') < PokemonSpeciesDexOrder.indexOf('hitmonlee'), PokemonSpeciesIndex['tyrogue'].sortNumber < PokemonSpeciesIndex['hitmonlee'].sortNumber);
-            //console.log('Hitmonlee = ', PokemonSpeciesDexOrder.indexOf('hitmonlee'), PokemonSpeciesIndex['hitmonlee'].sortNumber, PokemonSpeciesDexOrder.indexOf('hitmonlee') < PokemonSpeciesDexOrder.indexOf('hitmonchan'), PokemonSpeciesIndex['hitmonlee'].sortNumber < PokemonSpeciesIndex['hitmonchan'].sortNumber);
-            //console.log('Hitmonchan = ', PokemonSpeciesDexOrder.indexOf('hitmonchan'), PokemonSpeciesIndex['hitmonchan'].sortNumber, PokemonSpeciesDexOrder.indexOf('hitmonchan') < PokemonSpeciesDexOrder.indexOf('hitmontop'), PokemonSpeciesIndex['hitmonchan'].sortNumber < PokemonSpeciesIndex['hitmontop'].sortNumber);
-            //console.log('Hitmontop = ', PokemonSpeciesDexOrder.indexOf('hitmontop'), PokemonSpeciesIndex['hitmontop'].sortNumber, PokemonSpeciesDexOrder.indexOf('hitmontop') > PokemonSpeciesDexOrder.indexOf('hitmonchan'), PokemonSpeciesIndex['hitmontop'].sortNumber > PokemonSpeciesIndex['hitmonchan'].sortNumber);
+            // //console.log('Tyrogue = ', PokemonSpeciesDexOrder.indexOf('tyrogue'), PokemonSpeciesIndex['tyrogue'].sortNumber, PokemonSpeciesDexOrder.indexOf('tyrogue') < PokemonSpeciesDexOrder.indexOf('hitmonlee'), PokemonSpeciesIndex['tyrogue'].sortNumber < PokemonSpeciesIndex['hitmonlee'].sortNumber);
+            // //console.log('Hitmonlee = ', PokemonSpeciesDexOrder.indexOf('hitmonlee'), PokemonSpeciesIndex['hitmonlee'].sortNumber, PokemonSpeciesDexOrder.indexOf('hitmonlee') < PokemonSpeciesDexOrder.indexOf('hitmonchan'), PokemonSpeciesIndex['hitmonlee'].sortNumber < PokemonSpeciesIndex['hitmonchan'].sortNumber);
+            // //console.log('Hitmonchan = ', PokemonSpeciesDexOrder.indexOf('hitmonchan'), PokemonSpeciesIndex['hitmonchan'].sortNumber, PokemonSpeciesDexOrder.indexOf('hitmonchan') < PokemonSpeciesDexOrder.indexOf('hitmontop'), PokemonSpeciesIndex['hitmonchan'].sortNumber < PokemonSpeciesIndex['hitmontop'].sortNumber);
+            // //console.log('Hitmontop = ', PokemonSpeciesDexOrder.indexOf('hitmontop'), PokemonSpeciesIndex['hitmontop'].sortNumber, PokemonSpeciesDexOrder.indexOf('hitmontop') > PokemonSpeciesDexOrder.indexOf('hitmonchan'), PokemonSpeciesIndex['hitmontop'].sortNumber > PokemonSpeciesIndex['hitmonchan'].sortNumber);
 
             // Sort the display list in national order, BUT with family lines together and inverted (parents on top)
             PokemonSpeciesDisplayOrder.sort(function(tokenA, tokenB){
@@ -1790,7 +1790,7 @@
 
                 });
 
-            //console.log('PokemonSpeciesDisplayOrder = ', PokemonSpeciesDisplayOrder);
+            // //console.log('PokemonSpeciesDisplayOrder = ', PokemonSpeciesDisplayOrder);
 
             // Loop through the index searching for basic pokemon
             for (var key = 0; key < PokemonSpeciesIndexTokens.length; key++){
@@ -1862,7 +1862,7 @@
     var firstSimulation = false;
     var simulationStarted = false;
     function startSimulation(){
-        //console.log('startSimulation()');
+        // //console.log('startSimulation()');
 
         // If user has no progress, this is first sim
         firstSimulation = PokeboxDaysPassed === 0 ? true : false;
@@ -1932,14 +1932,14 @@
             if (starterPokemonTokens.indexOf(starterInfo.token) === -1){ starterPokemonTokens.push(starterInfo.token); }
             starterCounts[countToken]++;
             }
-        //console.log('starterPokemon = ', starterPokemon);
-        //console.log('starterSeed = ', starterSeed);
+        // //console.log('starterPokemon = ', starterPokemon);
+        // //console.log('starterSeed = ', starterSeed);
 
         // Push this list of starters into the history array
         StarterPokemonHistory.push(starterPokemon);
         StarterPokemonSeed = starterSeed;
-        //console.log('StarterPokemonHistory = ', StarterPokemonHistory);
-        //console.log('StarterPokemonSeed = ', StarterPokemonSeed);
+        // //console.log('StarterPokemonHistory = ', StarterPokemonHistory);
+        // //console.log('StarterPokemonSeed = ', StarterPokemonSeed);
 
         // Generate the seed text to add to the footer for copy/paste
         var starterList = [];
@@ -1973,7 +1973,7 @@
 
     // Define a function for ending the current simulation and doing cleanup
     function endCurrentSimulation(){
-        //console.log('endCurrentSimulation()');
+        // //console.log('endCurrentSimulation()');
 
         // Set the start flag to false
         simulationStarted = false;
@@ -2012,7 +2012,7 @@
 
         // Reset the global randomization seed
         Math.seed = 1;
-        //console.log('\n Math.seed reset to ', Math.seed);
+        // //console.log('\n Math.seed reset to ', Math.seed);
 
         // Update the overiew with cleared data
         updateOverview();
@@ -2027,7 +2027,7 @@
 
     // Define a function for restarting the current simulation (with same seeds)
     function restartCurrentSimulation(){
-        //console.log('restartCurrentSimulation()');
+        // //console.log('restartCurrentSimulation()');
 
         // First end the current simulation
         endCurrentSimulation();
@@ -2061,15 +2061,15 @@
 
         // Collect the last set of starters used and then use them again
         var prevStarters = StarterPokemonHistory[StarterPokemonHistory.length - 1];
-        //console.log('prevStarters = ', prevStarters);
+        // //console.log('prevStarters = ', prevStarters);
         if (typeof prevStarters !== 'undefined'){
             for (var key = 0; key < prevStarters.length; key++){
                 var starterInfo = prevStarters[key];
                 var starterToken = starterInfo[0];
                 var starterGender = starterInfo[1];
-                //console.log('starterInfo = ', starterInfo);
-                //console.log('starterToken = ', starterInfo);
-                //console.log('starterGender = ', starterInfo);
+                // //console.log('starterInfo = ', starterInfo);
+                // //console.log('starterToken = ', starterInfo);
+                // //console.log('starterGender = ', starterInfo);
                 addPokemonToZone(starterToken, false, false, false, {gender:starterGender});
                 }
             }
@@ -2082,7 +2082,7 @@
 
     // Define a function for resetting the simulator (so we can select different seeds)
     function resetSimulator(){
-        //console.log('resetSimulator()');
+        // //console.log('resetSimulator()');
 
         // First end the current simulation
         endCurrentSimulation();
@@ -2158,7 +2158,7 @@
             && typeof requiredIndexFiles[indexKey] !== 'undefined'){
             requestedScripts++;
             var fileToken = requiredIndexFiles[indexKey];
-            //console.log('loading requiredIndexFiles['+indexKey+'] = ', fileToken);
+            // //console.log('loading requiredIndexFiles['+indexKey+'] = ', fileToken);
             if (fileToken === ''){ var fileName = 'species.min.js'; }
             else { var fileName = fileToken +'.min.js'; }
             filePath = 'data/indexes/species/'+ fileName +'?v'+ appVersionNumber;
@@ -2166,7 +2166,7 @@
                 loadedScripts++;
                 loadedIndexFiles.push(fileToken);
                 $pokePanelLoading.append('.'); // append loading dot
-                //console.log('loaded filePath = ', filePath);
+                // //console.log('loaded filePath = ', filePath);
                 return preloadPokemonIndex(onReady, indexKey + 1);
                 });
             } else {
@@ -2180,14 +2180,14 @@
     // Define a function for pre-generating slots to put pokemon into
     var pokemonRequiredToStart = 10;
     function generateZonePokemonSlots(){
-        //console.log('generateZonePokemonSlots()');
+        // //console.log('generateZonePokemonSlots()');
         $pokePanelLoading.append('.'); // append loading dot
         var $pokeSlots = $('.pokemon .list.slots', $panelMainOverview);
-        //console.log('$pokeSlots = ', $pokeSlots);
-        //console.log('thisZoneData.capacity = ', thisZoneData.capacity);
+        // //console.log('$pokeSlots = ', $pokeSlots);
+        // //console.log('thisZoneData.capacity = ', thisZoneData.capacity);
         var slotMarkup = '';
         for (var i = 0; i < thisZoneData.capacity; i++){
-            //console.log('append another slot');
+            // //console.log('append another slot');
             var liClass = 'slot';
             if (i < pokemonRequiredToStart){ liClass += ' waiting'; }
             slotMarkup += '<li class="'+liClass+'"></li>';
@@ -2206,11 +2206,11 @@
         $('.pokedex .count .current', $panelBanner).html(pokedexCurrent);
         $('.pokedex .count .total', $panelBanner).html(pokedexTotal);
         $('.pokedex .count .percent', $panelBanner).html(pokedexPercent+'%');
-        //console.log('pokedexCurrent = ', pokedexCurrent);
-        //console.log('PokemonSpeciesIndexTokens.length = ', PokemonSpeciesIndexTokens.length);
-        //console.log('hiddenPokemonTokens.length = ', hiddenPokemonTokens.length);
-        //console.log('pokedexTotal = ', pokedexTotal);
-        //console.log('pokedexPercent = ', pokedexPercent);
+        // //console.log('pokedexCurrent = ', pokedexCurrent);
+        // //console.log('PokemonSpeciesIndexTokens.length = ', PokemonSpeciesIndexTokens.length);
+        // //console.log('hiddenPokemonTokens.length = ', hiddenPokemonTokens.length);
+        // //console.log('pokedexTotal = ', pokedexTotal);
+        // //console.log('pokedexPercent = ', pokedexPercent);
 
     }
 
@@ -2351,21 +2351,21 @@
         if (appFreeMode){ return false; }
         if (typeof window.localStorage === 'undefined'){ return false; }
         var savedPokemonSpeciesSeen = window.localStorage.getItem('PokemonSpeciesSeen');
-        //console.log('savedPokemonSpeciesSeen = ', savedPokemonSpeciesSeen);
+        // //console.log('savedPokemonSpeciesSeen = ', savedPokemonSpeciesSeen);
         if (typeof savedPokemonSpeciesSeen === 'string'){
             savedPokemonSpeciesSeen = JSON.parse(savedPokemonSpeciesSeen);
             // If legacy tokens exist, rewrite save data with new names
-            //console.log('legacyTokenMap = ', JSON.stringify(legacyTokenMap), jQuery.isEmptyObject(legacyTokenMap));
+            // //console.log('legacyTokenMap = ', JSON.stringify(legacyTokenMap), jQuery.isEmptyObject(legacyTokenMap));
             if (!jQuery.isEmptyObject(legacyTokenMap)){
                 var legacyTokens = Object.keys(legacyTokenMap);
-                //console.log('legacyTokens = ', legacyTokens);
+                // //console.log('legacyTokens = ', legacyTokens);
                 for (var i = 0; i < legacyTokens.length; i++){
                     var legacyToken = legacyTokens[i];
                     var newToken = legacyTokenMap[legacyToken];
                     if (typeof savedPokemonSpeciesSeen[legacyToken] !== 'undefined'
                         && typeof savedPokemonSpeciesSeen[newToken] === 'undefined'
                         && hiddenPokemonTokens.indexOf(newToken) === -1){
-                        //console.log('rewriting ', legacyToken, ' to ', newToken);
+                        // //console.log('rewriting ', legacyToken, ' to ', newToken);
                         savedPokemonSpeciesSeen[newToken] = savedPokemonSpeciesSeen[legacyToken] + 0;
                         delete savedPokemonSpeciesSeen[legacyToken];
                         }
@@ -2373,26 +2373,26 @@
                 }
             // Collect saved tokens now that they've been filtered/rewritten
             var savedTokens = Object.keys(savedPokemonSpeciesSeen);
-            //console.log('savedTokens = ', savedTokens);
-            //console.log('PokemonSpeciesIndexTokens = ', PokemonSpeciesIndexTokens);
+            // //console.log('savedTokens = ', savedTokens);
+            // //console.log('PokemonSpeciesIndexTokens = ', PokemonSpeciesIndexTokens);
             for (var i = 0; i < savedTokens.length; i++){
                 var savedToken = savedTokens[i];
                 var savedData = savedPokemonSpeciesSeen[savedToken];
-                //console.log('savedToken = ', savedToken);
-                //console.log('savedData = ', savedData);
-                //console.log('PokemonSpeciesIndexTokens.indexOf('+ savedToken +') = ', PokemonSpeciesIndexTokens.indexOf(savedToken));
+                // //console.log('savedToken = ', savedToken);
+                // //console.log('savedData = ', savedData);
+                // //console.log('PokemonSpeciesIndexTokens.indexOf('+ savedToken +') = ', PokemonSpeciesIndexTokens.indexOf(savedToken));
                 if (PokemonSpeciesIndexTokens.indexOf(savedToken) !== -1
                     && hiddenPokemonTokens.indexOf(savedToken) === -1){
                     PokemonSpeciesSeen[savedToken] = savedData;
                     }
                 }
             }
-        //console.log('PokemonSpeciesSeen = ', PokemonSpeciesSeen);
+        // //console.log('PokemonSpeciesSeen = ', PokemonSpeciesSeen);
     }
 
     // Define a function for generating type styles for display
     function generateTypeStyles(){
-        //console.log('generateTypeStyles()');
+        // //console.log('generateTypeStyles()');
         $pokePanelLoading.append('.'); // append loading dot
         var styleSheet = '';
         for (var key = 0; key < PokemonTypesIndexTokens.length; key++){
@@ -2410,7 +2410,7 @@
 
     // Define a function to generate the appropriate type filter buttons
     function generateTypeFilterButtons(){
-        //console.log('generateTypeFilterButtons()');
+        // //console.log('generateTypeFilterButtons()');
 
         // Generate type filter buttons based on loaded type indexes
         var typeFilterMarkup = '';
@@ -2423,7 +2423,7 @@
                 typeFilterMarkup += '<img src="images/icons/types/'+token+'.png" alt="'+info.name+'" />';
             typeFilterMarkup += '</a>';
             }
-        //console.log('typeFilterMarkup = ', typeFilterMarkup);
+        // //console.log('typeFilterMarkup = ', typeFilterMarkup);
         var $filterTypesOptions = $('.filter-pokemon .filter.types .options', $panelButtons);
         $filterTypesOptions.empty().append(typeFilterMarkup);
 
@@ -2534,7 +2534,7 @@
         // Check if the pokemon is in its egg before drawing the sprite
         if (pokeInfo.eggCycles === 0){
 
-            //console.log('this '+pokeInfo.token+' has hatched, show it (cycles:'+pokeInfo.eggCycles+')');
+            // //console.log('this '+pokeInfo.token+' has hatched, show it (cycles:'+pokeInfo.eggCycles+')');
             var pokeIcon =  '<span class="swrap"><i>' + getPokemonIcon(pokeInfo.token, false, pokeInfo, false, 'box') + '</i></span>';
             var pokeCount = '<span class="count growth">+'+pokeInfo.growthCycles+'</span>';
             var extraMarkup = '';
@@ -2562,7 +2562,7 @@
 
             } else if (pokeInfo.eggCycles > 0){
 
-            //console.log('this '+pokeInfo.token+' has not hatched, show it (cycles:'+pokeInfo.eggCycles+')');
+            // //console.log('this '+pokeInfo.token+' has not hatched, show it (cycles:'+pokeInfo.eggCycles+')');
             var pokeIcon =  '<span class="swrap"><i>' + getPokemonIcon(pokeInfo.token, true, pokeInfo, false, 'box') + '</i></span>';
             var pokeCount = '<span class="count egg">-'+pokeInfo.eggCycles+'</span>';
             var extraMarkup = '';
@@ -2596,7 +2596,7 @@
     // Define a function for calculating current pokedex totals
     var currentPokedexTotals = {};
     function recalculatePokedexTotals(){
-        //console.log('recalculatePokedexTotals()');
+        // //console.log('recalculatePokedexTotals()');
 
         // Define variables for counting certain things
         var pokedexTotals = {
@@ -2621,7 +2621,7 @@
             // Collect data for this pokemon from the index
             var pokeToken = PokemonSpeciesIndexTokens[i];
             var pokeIndex = PokemonSpeciesIndex[pokeToken];
-            //console.log('pokeIndex = ', pokeToken, pokeIndex);
+            // //console.log('pokeIndex = ', pokeToken, pokeIndex);
 
             // Check to see which class of pokemon this is
             var pokemonKind = 'common';
@@ -2665,29 +2665,29 @@
         pokedexTotals.totalNonHiddenPokemon = pokedexTotals.totalPokemon - hiddenPokemonTokens.length;
 
         // Update the parent array with calculated pokedex totals
-        //console.log('pokedexTotals = ', pokedexTotals);
+        // //console.log('pokedexTotals = ', pokedexTotals);
         currentPokedexTotals = pokedexTotals;
 
     }
 
     // Define a function for checking if we've unlocked special pokemon
     function hasUnlockedSpecialPokemon(){
-        //console.log('\nhasUnlockedSpecialPokemon()');
+        // //console.log('\nhasUnlockedSpecialPokemon()');
         // Check to see if we can allow special pokemon to be selected yet
         var allowSpecialPokemon = false;
         var requiredEncounters = currentPokedexTotals.totalCommonPokemon;
-        //console.log('requiredEncounters = ', requiredEncounters);
-        //console.log('totalCommonPokemonEncountered = ', currentPokedexTotals.totalCommonPokemonEncountered);
+        // //console.log('requiredEncounters = ', requiredEncounters);
+        // //console.log('totalCommonPokemonEncountered = ', currentPokedexTotals.totalCommonPokemonEncountered);
         if (currentPokedexTotals.totalCommonPokemonEncountered >= requiredEncounters){ allowSpecialPokemon = true; }
         return allowSpecialPokemon;
     }
 
     // Define a function for checking if we've unlocked the final pokemon
     function hasUnlockedFinalPokemon(){
-        //console.log('\nhasUnlockedFinalPokemon()');
+        // //console.log('\nhasUnlockedFinalPokemon()');
         var requiredEncounters = currentPokedexTotals.totalNonHiddenPokemon - 1;
-        //console.log('requiredEncounters = ', requiredEncounters);
-        //console.log('totalPokemonEncountered = ', currentPokedexTotals.totalPokemonEncountered);
+        // //console.log('requiredEncounters = ', requiredEncounters);
+        // //console.log('totalPokemonEncountered = ', currentPokedexTotals.totalPokemonEncountered);
         if (currentPokedexTotals.totalPokemonEncountered >= requiredEncounters){ return true; }
         return false;
     }
@@ -2701,7 +2701,7 @@
     // Define a function for calculating our completion percent
     function calculatePokedexCompletion(){
         var completePercent = Math.ceil((currentPokedexTotals.totalPokemonEncountered / currentPokedexTotals.totalNonHiddenPokemon) * 1000) / 10;
-        //console.log('Math.ceil(('+ currentPokedexTotals.totalPokemonEncountered +' / '+ currentPokedexTotals.totalNonHiddenPokemon +') * 1000) / 10 = ', completePercent);
+        // //console.log('Math.ceil(('+ currentPokedexTotals.totalPokemonEncountered +' / '+ currentPokedexTotals.totalNonHiddenPokemon +') * 1000) / 10 = ', completePercent);
         return completePercent;
     }
 
@@ -2709,7 +2709,7 @@
     var freeStarterPokemon = [];
     function generatePokemonButtons(){
 
-        //console.log('generatePokemonButtons()');
+        // //console.log('generatePokemonButtons()');
         $pokePanelLoading.append('.'); // append loading dot
 
         // Count the number of species seen so far
@@ -2732,7 +2732,7 @@
             for (var i = 0; i < starterRewardCount; i++){
                 var rewardInfo = starterRewardIndex[i];
                 if (typeof rewardInfo === 'undefined'){ continue; }
-                //console.log('rewardInfo = ', i, rewardInfo);
+                // //console.log('rewardInfo = ', i, rewardInfo);
                 var startTokens = rewardInfo['species'];
                 if (PokeboxRewards.indexOf('gen'+ rewardInfo['gen'] +'-starters') !== -1){
                     for (var j = 0; j < startTokens.length; j++){ freeStarterPokemon.push(startTokens[j]); }
@@ -2744,7 +2744,7 @@
             for (var i = 0; i < shadowRewardCount; i++){
                 var rewardInfo = shadowRewardIndex[i];
                 if (typeof rewardInfo === 'undefined'){ continue; }
-                //console.log('rewardInfo = ', i, rewardInfo);
+                // //console.log('rewardInfo = ', i, rewardInfo);
                 if (PokeboxRewards.indexOf(rewardInfo['species']) !== -1){
                     freeStarterPokemon.push(rewardInfo['species']);
                     }
@@ -2755,7 +2755,7 @@
             for (var i = 0; i < shiningRewardCount; i++){
                 var rewardInfo = shiningRewardIndex[i];
                 if (typeof rewardInfo === 'undefined'){ continue; }
-                //console.log('rewardInfo = ', i, rewardInfo);
+                // //console.log('rewardInfo = ', i, rewardInfo);
                 if (PokeboxRewards.indexOf(rewardInfo['species']) !== -1){
                     freeStarterPokemon.push(rewardInfo['species']);
                     }
@@ -2767,7 +2767,7 @@
             // Unlock the final pokemon ARCEUS if the user has encountered every other species
             if (PokeboxRewards.indexOf('arceus') !== -1){ freeStarterPokemon.push('arceus'); }
 
-            //console.log('freeStarterPokemon = ', freeStarterPokemon);
+            // //console.log('freeStarterPokemon = ', freeStarterPokemon);
 
             }
 
@@ -2785,10 +2785,10 @@
 
                 // Collect the pokemon's token, data, and types
                 var pokemonToken = BasicPokemonSpeciesIndexTokens[key];
-                //console.log('pokemonToken = ', pokemonToken);
+                // //console.log('pokemonToken = ', pokemonToken);
                 var pokemonData = PokemonSpeciesIndex[pokemonToken];
                 var pokemonTypes = pokemonData.types;
-                //console.log('pokemonTypes = ', pokemonTypes);
+                // //console.log('pokemonTypes = ', pokemonTypes);
 
                 // Check to see if this pokemon is special in some way
                 var pokemonIsSpecial = false;
@@ -2919,8 +2919,8 @@
 
                 }
 
-            //console.log('shownGens = ', shownGens);
-            //console.log('shownTypes = ', shownTypes);
+            // //console.log('shownGens = ', shownGens);
+            // //console.log('shownTypes = ', shownTypes);
 
             // Append generated markup to the panel at once
             if (!$('.buttonwrap', $pokePanelSelectButtons).length){ $pokePanelSelectButtons.append('<div class="buttonwrap"></div>'); }
@@ -2930,7 +2930,7 @@
             // Remove the loading dotts
             $pokePanelLoading.parent().addClass('loaded');
             $pokePanelLoading.remove();
-            //console.log('JUST removed the loading panel');
+            // //console.log('JUST removed the loading panel');
 
             // Atach a scrollbar to the markup panel
             $pokePanelSelectButtons.find('.buttonwrap').perfectScrollbar({suppressScrollX: true});
@@ -2942,7 +2942,7 @@
                 $(this).on('load', function(){
                     loadedImages++;
                     if (loadedImages === $buttonImages.length){
-                        //console.log('update scrollbar');
+                        // //console.log('update scrollbar');
                         $pokePanelSelectButtons.find('.buttonwrap').perfectScrollbar('update');
                         }
                     });
@@ -2954,8 +2954,8 @@
             // Bind the global click event for the poke panel select buttons
             $('button[data-action]', $pokePanelSelectButtons).bind('click', pokeSelectButtonClickEvent);
 
-            //console.log('shownGens = ', shownGens);
-            //console.log('shownTypes = ', shownTypes);
+            // //console.log('shownGens = ', shownGens);
+            // //console.log('shownTypes = ', shownTypes);
 
             // Re-apply the pokemon button filter now that they've been updated
             applyPokemonButtonFilters();
@@ -2980,7 +2980,7 @@
             if (shownGens.indexOf('x') === -1){ $thisFilterWrapper.find('.filter .option[data-gen="x"]').addClass('hidden'); }
             if (shownGens.indexOf('r') === -1){ $thisFilterWrapper.find('.filter .option[data-gen="r"]').addClass('hidden'); }
             var numGenButtons = $thisFilterWrapper.find('.filter .option[data-gen]:not(.hidden)').length;
-            //console.log('numGenButtons = ', numGenButtons);
+            // //console.log('numGenButtons = ', numGenButtons);
             $thisFilterWrapper.find('.options[data-count]').attr('data-count', numGenButtons);
 
             // We're ready to show the filter panel now too (and reset more buttons)
@@ -3006,7 +3006,7 @@
     // Define a function for checking to see if the ditto button should be shown
     function checkDittoButtonAllowed(){
         if (simulationStarted === true){ return; }
-        //console.log('checkDittoButtonAllowed()');
+        // //console.log('checkDittoButtonAllowed()');
 
         // Hide and disable the ditto button by default
         var $dittoButton = $('.button.add-ditto', $pokePanelFilters);
@@ -3029,7 +3029,7 @@
     // Define a function for checking to see if the arceus button should be shown
     function checkArceusButtonAllowed(){
         if (simulationStarted === true){ return; }
-        //console.log('checkArceusButtonAllowed()');
+        // //console.log('checkArceusButtonAllowed()');
 
         // Hide and disable the arceus button by default
         var $arceusButton = $('.button.add-arceus', $pokePanelFilters);
@@ -3052,7 +3052,7 @@
     // Define a function for checking to see if the seed button should be shown
     function checkSeedButtonAllowed(){
         if (simulationStarted === true){ return; }
-        //console.log('checkSeedButtonAllowed()');
+        // //console.log('checkSeedButtonAllowed()');
 
         // Hide and disable the seed button by default
         var $seedButton = $('.button.enter-seed', $pokePanelFilters);
@@ -3075,7 +3075,7 @@
     // Define a function for generating the pokedex tab's content for the user
     function generatePokemonPokedex(){
 
-        //console.log('generatePokemonPokedex()');
+        // //console.log('generatePokemonPokedex()');
         //$pokePanelLoading.append('.'); // append loading dot
 
         // Remove the hidden class from the pokedex link
@@ -3097,7 +3097,7 @@
             var lastGeneration = false;
             var pokedexMarkup = [];
             for (var key = 0; key < PokemonSpeciesDexOrder.length; key++){
-                //console.log('pokedex markup ', key);
+                // //console.log('pokedex markup ', key);
 
                 // Collect the number and index info for this pokemon
                 var pokeNum = key + 1;
@@ -3216,8 +3216,8 @@
                 }
             $pokedexList.append(pokedexMarkup.join(''));
 
-            //console.log('shownGens = ', shownGens);
-            //console.log('shownTypes = ', shownTypes);
+            // //console.log('shownGens = ', shownGens);
+            // //console.log('shownTypes = ', shownTypes);
 
             // Re-apply the pokemon pokedex filters now that they've been updated
             applyPokemonPokedexFilters();
@@ -3237,7 +3237,7 @@
     // Define a function for updating the pokedex with currently seen species
     var seenSpeciesTokensCache = [];
     function updatePokemonPokedex(){
-        //console.log('-----\nupdatePokemonPokedex()');
+        // //console.log('-----\nupdatePokemonPokedex()');
 
         // If we're in the free mode, the pokedex is already complete
         if (appFreeMode){ return false; }
@@ -3274,7 +3274,7 @@
 
     // Define a function that loops through all pokemon buttons and hides/shows based on current filters
     function applyPokemonButtonFilters(){
-        //console.log('applyPokemonButtonFilters', currentButtonFilters);
+        // //console.log('applyPokemonButtonFilters', currentButtonFilters);
 
         // Collect keys for different filter kinds
         var currentButtonFiltersKeys = Object.keys(currentButtonFilters);
@@ -3314,15 +3314,15 @@
             $filterDivs.filter('[data-filter="type"]').removeClass('hidden disabled');
             }
 
-        //console.log('currentGenFilter = ', currentGenFilter);
-        //console.log('currentTypeFilter = ', currentTypeFilter);
+        // //console.log('currentGenFilter = ', currentGenFilter);
+        // //console.log('currentTypeFilter = ', currentTypeFilter);
 
         // Hide all pokemon buttons by default then loop through to see which match the filter and can be shown
         var $pokemonButtons = $pokePanelSelectButtons.find('.button[data-kind="pokemon"]');
         $pokemonButtons.addClass('hidden');
         $pokemonButtons.each(function(){
             var $button = $(this);
-            //console.log('\nCheck ' + $button.attr('data-token') + ' for matches...', currentButtonFilters);
+            // //console.log('\nCheck ' + $button.attr('data-token') + ' for matches...', currentButtonFilters);
             var isMatch = true;
             for (var i = 0; i < currentButtonFiltersKeys.length; i++){
                 var filterKind = currentButtonFiltersKeys[i];
@@ -3330,7 +3330,7 @@
                 if (filterKind === 'type'){ currentValue = currentTypeFilter; }
                 if (currentValue === 'all'){ continue; }
                 var thisValue = $button.attr('data-'+filterKind);
-                //console.log('|- Does ' + filterKind + ' match current value ' + currentValue + ' ? thisValue = ', thisValue);
+                // //console.log('|- Does ' + filterKind + ' match current value ' + currentValue + ' ? thisValue = ', thisValue);
                 if (filterKind === 'gen'){
                     thisValue = (thisValue !== 'x' && thisValue !== 'r') ? parseInt(thisValue) : thisValue;
                     if (thisValue !== currentValue){ isMatch = false; break; }
@@ -3349,8 +3349,8 @@
         else { var sortBy = ['data-legnum', 'data-modnum']; }
         //else if (currentButtonFilters['mode'] === 'legacy'){ var sortBy = ['data-legnum', 'data-modnum']; }
         //else if (currentButtonFilters['mode'] === 'modern'){ var sortBy = ['data-modnum', 'data-legnum']; }
-        //console.log('currentGenFilter = ', currentGenFilter);
-        //console.log('sortBy = ', sortBy);
+        // //console.log('currentGenFilter = ', currentGenFilter);
+        // //console.log('sortBy = ', sortBy);
         var $sortedButtons = $pokemonButtons.sort(function(a, b){
             var $a = $(a), $b = $(b);
             var aToken = $a.attr('data-token'), bToken = $b.attr('data-token');
@@ -3388,7 +3388,7 @@
                 else {return 0; }
                 }
             });
-        //console.log('Inserting sorted results...');
+        // //console.log('Inserting sorted results...');
         $sortedButtons.each(function(){ $(this).attr('data-key', 0); });
         $sortedButtons.filter(':not(.hidden):not(.disabled)').each(function(key){ $(this).attr('data-key', key); });
         $('.buttonwrap', $pokePanelSelectButtons).empty().html($sortedButtons);
@@ -3403,7 +3403,7 @@
 
     // Define a function that loops through all pokemon dex entries and hides/shows based on current filters
     function applyPokemonPokedexFilters(){
-        //console.log('applyPokemonPokedexFilters', currentPokedexFilters);
+        // //console.log('applyPokemonPokedexFilters', currentPokedexFilters);
 
         // Collect keys for different filter kinds
         var currentPokedexFiltersKeys = Object.keys(currentPokedexFilters);
@@ -3460,7 +3460,7 @@
         $pokemonEntries.addClass('hidden');
         $pokemonEntries.each(function(){
             var $entry = $(this);
-            //console.log('\nCheck ' + $entry.attr('data-token') + ' for matches...', currentPokedexFilters);
+            // //console.log('\nCheck ' + $entry.attr('data-token') + ' for matches...', currentPokedexFilters);
             var isMatch = true;
             for (var i = 0; i < currentPokedexFiltersKeys.length; i++){
                 var filterKind = currentPokedexFiltersKeys[i];
@@ -3470,7 +3470,7 @@
                 var filterAttr = filterKind;
                 if (filterKind === 'gen' && currentModeFilter !== 'legacy'){ filterAttr = 'basegen'; }
                 var thisValue = $entry.attr('data-'+filterAttr);
-                //console.log('|- Does ' + filterKind + ' match current value ' + currentValue + ' ? thisValue = ', thisValue);
+                // //console.log('|- Does ' + filterKind + ' match current value ' + currentValue + ' ? thisValue = ', thisValue);
                 if (filterKind === 'gen'){
                     thisValue = thisValue !== 'x' && thisValue !== 'r' ? parseInt(thisValue) : thisValue;
                     if (thisValue !== currentValue){ isMatch = false; break; }
@@ -3492,8 +3492,8 @@
         if (currentGenFilter === 'all'){ var sortBy = ['data-modnum', 'data-legnum']; } //data-key
         else if (currentModeFilter === 'legacy'){ var sortBy = ['data-legnum', 'data-modnum']; }
         else if (currentModeFilter === 'modern'){ var sortBy = ['data-modnum', 'data-legnum']; }
-        //console.log('currentPokedexFilters[\'mode\'] = ', currentModeFilter);
-        //console.log('sortBy = ', sortBy);
+        // //console.log('currentPokedexFilters[\'mode\'] = ', currentModeFilter);
+        // //console.log('sortBy = ', sortBy);
         var $sortedEntries = $pokemonEntries.sort(function(a, b){
             var $a = $(a), $b = $(b);
             var aToken = $a.attr('data-token'), bToken = $b.attr('data-token');
@@ -3518,7 +3518,7 @@
                 else {return 0; }
                 }
             });
-        //console.log('Inserting sorted results...');
+        // //console.log('Inserting sorted results...');
         $('.list', $pokePanelPokedexEntries).empty().html($sortedEntries);
 
         // Update the pokedex totals for how many are showing, unlocked, and overall
@@ -3638,7 +3638,7 @@
 
     // Define a function for adding a new pokemon to a zone
     function addPokemonToZone(pokemonToken, isEgg, reduceCycles, isVisitor, customData){
-        //console.log('addPokemonToZone(pokemonToken:'+pokemonToken+', isEgg:'+isEgg+', reduceCycles:'+reduceCycles+', isVisitor:'+isVisitor+', customData:'+JSON.stringify(customData)+')');
+        // //console.log('addPokemonToZone(pokemonToken:'+pokemonToken+', isEgg:'+isEgg+', reduceCycles:'+reduceCycles+', isVisitor:'+isVisitor+', customData:'+JSON.stringify(customData)+')');
         if (typeof PokemonSpeciesIndex[pokemonToken] === 'undefined'){ return false; }
         if (typeof isEgg !== 'boolean'){ isEgg = true; }
         if (typeof reduceCycles !== 'number'){ reduceCycles = 0; }
@@ -3688,8 +3688,8 @@
                 }
             }
 
-        //console.log('reduceCycles = ', reduceCycles);
-        //console.log('eggCycles = ', eggCycles);
+        // //console.log('reduceCycles = ', reduceCycles);
+        // //console.log('eggCycles = ', eggCycles);
 
         // Calculate this pokemon's gender based on ratios
         var pokeGender = 'none';
@@ -3716,7 +3716,7 @@
                     }
                 }
             }
-        //console.log('pokemonToken / pokeGender = ', pokemonToken, pokeGender);
+        // //console.log('pokemonToken / pokeGender = ', pokemonToken, pokeGender);
 
         // Generate new pokemon data with required parameters
         var newPokemon = {
@@ -3733,7 +3733,7 @@
             reachedAdulthood: false,
             };
 
-        //console.log('newPokemon = ', newPokemon);
+        // //console.log('newPokemon = ', newPokemon);
 
         // If custom data was provdied, use it to overwrite above
         if (!jQuery.isEmptyObject(customData)){
@@ -3770,7 +3770,7 @@
         // If variations are allowed, randomize and see if we're lucky
         var variationChance = increaseColourVariations ? 0.25 : 0.75;
         if (allowVariant && Math.random() >= variationChance){
-            //console.log('allowVariant for '+ pokemonToken +'! ');
+            // //console.log('allowVariant for '+ pokemonToken +'! ');
 
             // Generate several random numbers to use later
             var randNum = Math.random() * 100; //Math.seededRandomChance();
@@ -3818,21 +3818,21 @@
                 var ratioTotal = formRatios.reduce(function(a, b) { return a + b; }, 0);
                 var randomKey = Math.floor((Math.seededRandomChance() / 100) * ratioTotal);
                 var keyLimit = 0;
-                //console.log('\n\npossibleForms = ', possibleForms);
-                //console.log('formRatios = ', formRatios);
-                //console.log('ratioTotal = ', ratioTotal);
-                //console.log('randomKey = ', randomKey);
-                //console.log('keyLimit = ', keyLimit);
+                // //console.log('\n\npossibleForms = ', possibleForms);
+                // //console.log('formRatios = ', formRatios);
+                // //console.log('ratioTotal = ', ratioTotal);
+                // //console.log('randomKey = ', randomKey);
+                // //console.log('keyLimit = ', keyLimit);
                 for (var i = 0; i < possibleForms.length; i++){
                     var formToken = possibleForms[i];
                     var formChance = indexData['possibleFormsRatio'][i];
                     keyLimit += formChance;
-                    //console.log('\nformToken('+ i +') = ', formToken);
-                    //console.log('formChance('+ i +') = ', formChance);
-                    //console.log('keyLimit = ', keyLimit);
+                    // //console.log('\nformToken('+ i +') = ', formToken);
+                    // //console.log('formChance('+ i +') = ', formChance);
+                    // //console.log('keyLimit = ', keyLimit);
                     if ((randomKey + 1) <= keyLimit){
                         var randomForm = formToken;
-                        //console.log('randomForm = ', randomForm);
+                        // //console.log('randomForm = ', randomForm);
                         break;
                         }
                     }
@@ -3891,7 +3891,7 @@
         // Push the new pokemon to the list and collect its key
         var newKey = thisZoneData.currentPokemon.length;
         thisZoneData.currentPokemon.push(newPokemon);
-        //console.log('newKey / newPokemon = ', newKey, JSON.stringify(newPokemon));
+        // //console.log('newKey / newPokemon = ', newKey, JSON.stringify(newPokemon));
 
         // Add this pokemon's cell markup to the container div
         var cellMarkup = generatePokemonCellMarkup(newPokemon, newKey);
@@ -3933,14 +3933,14 @@
 
     // Define a function for getting an array of zone pokemon matching a filter
     function getZonePokemonByFilter(filterParams, sortResults, matchMode){
-        //console.log('getZonePokemonByFilter(filterParams, matchMode):before', filterParams, matchMode);
+        // //console.log('getZonePokemonByFilter(filterParams, matchMode):before', filterParams, matchMode);
         if (typeof filterParams !== 'object'){ return false; }
         else if (jQuery.isEmptyObject(filterParams)){ return false; }
         if (typeof sortResults === 'undefined'){ sortResults = true; }
         if (typeof matchMode !== 'string'){ matchMode = 'and'; }
         matchMode = matchMode.toLowerCase();
         if (matchMode !== 'and' && matchMode !== 'or'){ matchMode = 'and'; }
-        //console.log('getZonePokemonByFilter(filterParams, matchMode):after', filterParams, matchMode);
+        // //console.log('getZonePokemonByFilter(filterParams, matchMode):after', filterParams, matchMode);
         var filterParamsTokens = Object.keys(filterParams);
         var pokemonMatches = [];
         if (thisZoneData.currentPokemon.length){
@@ -3990,19 +3990,19 @@
 
     // Define functions for getting a pokemon by ID, token, type, and more
     function getZonePokemonByID(pokemonID){
-        //console.log('getZonePokemonByID(pokemonID)', pokemonID);
+        // //console.log('getZonePokemonByID(pokemonID)', pokemonID);
         if (typeof pokemonID !== 'number'){ return false; }
         var pokemonMatches = getZonePokemonByFilter({id:pokemonID}, false);
         return pokemonMatches;
     }
     function getZonePokemonByToken(pokemonToken){
-        //console.log('getZonePokemonByToken(pokemonToken)', pokemonToken);
+        // //console.log('getZonePokemonByToken(pokemonToken)', pokemonToken);
         if (typeof pokemonToken !== 'string'){ return false; }
         var pokemonMatches = getZonePokemonByFilter({token:pokemonToken}, false);
         return pokemonMatches;
     }
     function getZonePokemonByType(pokemonType){
-        //console.log('getZonePokemonByType(pokemonType)', pokemonType);
+        // //console.log('getZonePokemonByType(pokemonType)', pokemonType);
         if (typeof pokemonType1 !== 'string'){ return false; }
         var pokemonMatches = getZonePokemonByFilter({type:pokemonType}, false, 'or');
         return pokemonMatches;
@@ -4011,8 +4011,8 @@
     // Define a function for updating the overview panel and stats
     var updateTimeout = false;
     function updateOverview(onComplete){
-        //console.log('----------\nupdateOverview()');
-        //console.log('thisZoneData = ', thisZoneData);
+        // //console.log('----------\nupdateOverview()');
+        // //console.log('thisZoneData = ', thisZoneData);
 
         // Compensate for missing onComplete function
         if (typeof onComplete !== 'function'){ onComplete = function(){}; }
@@ -4028,9 +4028,9 @@
                 pokeSpeciesActive[pokemonInfo.token] += 1;
                 }
             }
-        //console.log('pokeSpeciesActive = ', pokeSpeciesActive);
-        //console.log('thisZoneData.addedPokemonSpecies = ', thisZoneData.addedPokemonSpecies);
-        //console.log('thisZoneData.currentStats[\'eggs\'] = ', thisZoneData.currentStats['eggs']);
+        // //console.log('pokeSpeciesActive = ', pokeSpeciesActive);
+        // //console.log('thisZoneData.addedPokemonSpecies = ', thisZoneData.addedPokemonSpecies);
+        // //console.log('thisZoneData.currentStats[\'eggs\'] = ', thisZoneData.currentStats['eggs']);
 
         // Calculate diversity score for the current inhabitants
         var totalActiveUnits = 0;
@@ -4065,11 +4065,11 @@
         $('.timer .count .total', $panelBanner).html(numberWithCommas(PokeboxDaysPassed));
         $('.pokedex .count .current', $panelBanner).html(pokedexCurrent);
         $('.pokedex .count .percent', $panelBanner).html(pokedexPercent+'%');
-        //console.log('pokedexCurrent = ', pokedexCurrent);
-        //console.log('PokemonSpeciesIndexTokens.length = ', PokemonSpeciesIndexTokens.length);
-        //console.log('hiddenPokemonTokens.length = ', hiddenPokemonTokens.length);
-        //console.log('pokedexTotal = ', pokedexTotal);
-        //console.log('pokedexPercent = ', pokedexPercent);
+        // //console.log('pokedexCurrent = ', pokedexCurrent);
+        // //console.log('PokemonSpeciesIndexTokens.length = ', PokemonSpeciesIndexTokens.length);
+        // //console.log('hiddenPokemonTokens.length = ', hiddenPokemonTokens.length);
+        // //console.log('pokedexTotal = ', pokedexTotal);
+        // //console.log('pokedexPercent = ', pokedexPercent);
 
         // Generate the biome name using the field and the region
         var biomeName = thisZoneData.name;
@@ -4088,14 +4088,14 @@
         dateString.push(strPad('00', thisZoneData.date.month, true));
         dateString.push(strPad('00', thisZoneData.date.day, true));
         dateString = dateString.join(' / ');
-        //console.log('dateString = ', dateString);
+        // //console.log('dateString = ', dateString);
         switch (thisZoneData.date.month){
             case 12: case 1: case 2: { { thisZoneData.season = 'winter'; break; } }
             case 3: case 4: case 5: { { thisZoneData.season = 'spring'; break; } }
             case 6: case 7: case 8: { { thisZoneData.season = 'summer'; break; } }
             case 9: case 10: case 11: { { thisZoneData.season = 'autumn'; break; } }
             }
-        //console.log('thisZoneData.season = ', thisZoneData.season);
+        // //console.log('thisZoneData.season = ', thisZoneData.season);
 
         // Update the zone details
         $('.zone .name .data', $panelMainOverview).text(biomeName);
@@ -4139,7 +4139,7 @@
                 pokeSpecies[pokemonInfo.token] += 1;
                 }
             }
-        //console.log('pokeSpecies(All) = ', pokeSpeciesActive);
+        // //console.log('pokeSpecies(All) = ', pokeSpeciesActive);
 
         // Loop through each species and update the pokemon list
         var $pokeDetails = $('.details.pokemon', $panelMainOverview);
@@ -4167,8 +4167,8 @@
         for (var key = 0; key < sortedSpeciesTokens.length; key++){
             var token = sortedSpeciesTokens[key];
             var pokeList = getZonePokemonByToken(token);
-            //console.log('------\n key/token', key, token);
-            //console.log('pokeList = ', pokeList);
+            // //console.log('------\n key/token', key, token);
+            // //console.log('pokeList = ', pokeList);
             for (var key2 = 0; key2 < pokeList.length; key2++){
                 cellKey++;
                 var pokeInfo = pokeList[key2];
@@ -4291,7 +4291,7 @@
         var speciesListMarkup = '';
         var totalEggCount = 0;
         if (!jQuery.isEmptyObject(currentPokemonSpecies)){
-            //console.log('currentPokemonSpecies = ', currentPokemonSpecies);
+            // //console.log('currentPokemonSpecies = ', currentPokemonSpecies);
 
             // Loop through and print out all the individual species stats
             var markupToAppend = '';
@@ -4315,13 +4315,13 @@
                             '<span class="val">&times;'+ pokeCount + '</span>'+
                         '</div>'+
                     '</li>';
-                //console.log(pokeInfo.token, 'hiddenPokemon', pokeInfo.isHiddenPokemon);
+                // //console.log(pokeInfo.token, 'hiddenPokemon', pokeInfo.isHiddenPokemon);
                 if (pokeInfo.isHiddenPokemon === true){ markupToAppend += thisMarkup; }
                 else { speciesListMarkup += thisMarkup; }
                 numCurrentSpecies++;
                 numCurrentShown++;
                 }
-            //console.log('markupToAppend = ', markupToAppend);
+            // //console.log('markupToAppend = ', markupToAppend);
             speciesListMarkup += markupToAppend;
 
             // Print out a block for the total eggs added
@@ -4352,7 +4352,7 @@
         //$alltimeSpeciesList.empty();
         var speciesListMarkup = '';
         if (!jQuery.isEmptyObject(addedPokemonSpecies)){
-            //console.log('addedPokemonSpecies = ', addedPokemonSpecies);
+            // //console.log('addedPokemonSpecies = ', addedPokemonSpecies);
 
             // Loop through and print out all the individual species stats
             var markupToAppend = '';
@@ -4373,13 +4373,13 @@
                             '<span class="val">&times;'+ pokeCount +'</span>'+
                         '</div>'+
                     '</li>';
-                //console.log(pokeInfo.token, 'hiddenPokemon', pokeInfo.isHiddenPokemon);
+                // //console.log(pokeInfo.token, 'hiddenPokemon', pokeInfo.isHiddenPokemon);
                 if (pokeInfo.isHiddenPokemon === true){ markupToAppend += thisMarkup; }
                 else { speciesListMarkup += thisMarkup; }
                 numAllTimeSpecies++;
                 numAllTimeShown++;
                 }
-            //console.log('markupToAppend = ', markupToAppend);
+            // //console.log('markupToAppend = ', markupToAppend);
             speciesListMarkup += markupToAppend;
 
             // Print out a block for the total eggs added
@@ -4436,9 +4436,9 @@
                     var pokePercent = typeof visitor.chance === 'number' && visitor.chance > 0 ? Math.ceil((visitor.chance / totalVisitorChance) * 100) : 0;
                     usedPercent += pokePercent;
                     if (usedPercent > 100){ pokePercent -= (usedPercent - 100); }
-                    //console.log('visitor = ', visitor);
-                    //console.log('pokeInfo = ', pokeInfo);
-                    //console.log('pokePercent = ', pokePercent);
+                    // //console.log('visitor = ', visitor);
+                    // //console.log('pokeInfo = ', pokeInfo);
+                    // //console.log('pokePercent = ', pokePercent);
                     var liClass = 'species ';
                     liClass += 'type '+pokeInfo['types'][0]+' ';
                     if (typeof pokeInfo['types'][1] !== 'undefined'){ liClass += pokeInfo['types'][1]+'2 '; }
@@ -4526,10 +4526,10 @@
         var currentImage = pokeInfo.currentImage || false;
         if (currentImage !== spriteData.image){ imageChanged = true; }
         pokeInfo.currentImage = newImage;
-        //console.log('pokeInfo = ', pokeInfo.id, pokeInfo.token);
-        //console.log('currentImage = ', currentImage);
-        //console.log('newImage = ', newImage);
-        //console.log('newClass = ', newClass);
+        // //console.log('pokeInfo = ', pokeInfo.id, pokeInfo.token);
+        // //console.log('currentImage = ', currentImage);
+        // //console.log('newImage = ', newImage);
+        // //console.log('newClass = ', newClass);
 
         // If this Pokemon has just hatched, remove overlay and replace sprite
         if (justHatched){ $pokeCell.find('.sprite.overlay').remove(); }
@@ -4706,14 +4706,14 @@
             if (typeof info['secret'] === 'undefined'){ continue; }
             rewardIndex[stringToPassValue(info['secret'])] = info['species'];
             }
-        //console.log('rewardIndex = ', rewardIndex);
+        // //console.log('rewardIndex = ', rewardIndex);
 
         // Collect and parse the seed if it's given, else do nothing
         var rawSeed = prompt(
             'Starter seeds can be found in the footer of an active PokéBox. \n'
             + 'Please enter a starter seed below (or any fragment of it):');
         if (rawSeed && rawSeed.length > 0){
-            //console.log('rawSeed = ', rawSeed);
+            // //console.log('rawSeed = ', rawSeed);
 
             // Check to see if the seed is actually a password and unlock rewards if true then return
             var passValue = stringToPassValue(rawSeed);
@@ -4730,7 +4730,7 @@
 
             // Otherwise we can continue parsing the password normally for actual Pokemon amounts
             var seedPokemon = parsePokeBoxSeed(rawSeed);
-            //console.log('seedPokemon = ', seedPokemon);
+            // //console.log('seedPokemon = ', seedPokemon);
             if (seedPokemon
                 || seedPokemon.length){
                 var blockedPokemon = [];
@@ -4744,12 +4744,12 @@
                     var isFree = freeStarterPokemon.indexOf(starterToken) !== -1 ? true : false;
                     var isSeen = typeof PokemonSpeciesSeen[starterToken] !== 'undefined' && PokemonSpeciesSeen[starterToken] > 0 ? true : false;
                     var isSpecial = indexInfo.isSpecialPokemon === true ? true : false;
-                    //console.log('starterToken = ', starterToken);
-                    //console.log('starterGender = ', typeof starterGender, starterGender);
-                    //console.log('isFree = ', isFree);
-                    //console.log('isBasic = ', isBasic);
-                    //console.log('isSeen = ', isSeen);
-                    //console.log('indexInfo = ', indexInfo);
+                    // //console.log('starterToken = ', starterToken);
+                    // //console.log('starterGender = ', typeof starterGender, starterGender);
+                    // //console.log('isFree = ', isFree);
+                    // //console.log('isBasic = ', isBasic);
+                    // //console.log('isSeen = ', isSeen);
+                    // //console.log('indexInfo = ', indexInfo);
                     // Check to see if we can allow this pokemon to be added
                     var allowPokemon = true;
                     if (!appFreeMode && !isFree){
@@ -4933,7 +4933,7 @@
                 // Loop through sub-stats for and increment relevant values
                 for (var subKey = 0; subKey < subZoneStats.length; subKey++){
                     var subStat = subZoneStats[subKey];
-                    //console.log('pokeToken('+ pokeToken +') / subStat('+ subStat +')');
+                    // //console.log('pokeToken('+ pokeToken +') / subStat('+ subStat +')');
                     if (subStat === 'colors'
                         && (pokeToken === 'vivillon'
                             || pokeToken === 'kecleon')){
@@ -4977,7 +4977,7 @@
 
             }
 
-        //console.log('currentZoneStats(Day '+thisZoneData.day+'A) = ', currentZoneStats);
+        // //console.log('currentZoneStats(Day '+thisZoneData.day+'A) = ', currentZoneStats);
 
         // SPECIAL BOX EFFECT : Reverse type appeal if the appropriate flag is active
         if (thisZoneData.currentEffects['reverseTypeAppeal'] === true){
@@ -4993,18 +4993,18 @@
             }
 
         // Loop though and re-sort all the zone stats based on their values
-        //console.log('\n-----');
+        // //console.log('\n-----');
         var zoneStatTokens = Object.keys(currentZoneStats);
         for (var key1 = 0; key1 < zoneStatTokens.length; key1++){
-            //console.log('zoneStatTokens['+key1+']', zoneStatTokens[key1]);
+            // //console.log('zoneStatTokens['+key1+']', zoneStatTokens[key1]);
             var statToken = zoneStatTokens[key1];
             var zoneStats = currentZoneStats[statToken];
             var sortedStatKeys = getSortedKeys(zoneStats);
-            //console.log('unsortedStatKeys', Object.keys(zoneStats));
-            //console.log('sortedStatKeys', sortedStatKeys);
+            // //console.log('unsortedStatKeys', Object.keys(zoneStats));
+            // //console.log('sortedStatKeys', sortedStatKeys);
             var sortedList = {};
             for (var key2 = 0; key2 < sortedStatKeys.length; key2++){
-                //console.log('sortedStatKeys['+key2+']', sortedStatKeys[key2]);
+                // //console.log('sortedStatKeys['+key2+']', sortedStatKeys[key2]);
                 var statKey = sortedStatKeys[key2];
                 var statValue = zoneStats[statKey];
                 sortedList[statKey] = statValue;
@@ -5012,8 +5012,8 @@
             currentZoneStats[statToken] = sortedList;
             }
 
-        //console.log('currentZoneStats(Day '+thisZoneData.day+'B) = ', currentZoneStats);
-        //console.log('thisZoneData.currentStats = ', thisZoneData.currentStats);
+        // //console.log('currentZoneStats(Day '+thisZoneData.day+'B) = ', currentZoneStats);
+        // //console.log('thisZoneData.currentStats = ', thisZoneData.currentStats);
 
         // (GEN 7+) If we're in the right generation, calculate Ultra Space mechanics
         if (maxIndexKeyToLoad >= 7){
@@ -5082,8 +5082,8 @@
 
             }
 
-        //console.log('Day '+ thisZoneData.day +' | currentZoneFlags = ', currentZoneFlags);
-        //console.log('currentZoneStats(Day '+thisZoneData.day+'A) = ', currentZoneStats);
+        // //console.log('Day '+ thisZoneData.day +' | currentZoneFlags = ', currentZoneFlags);
+        // //console.log('currentZoneStats(Day '+thisZoneData.day+'A) = ', currentZoneStats);
 
         // Calculate the current type difference (delta) between the highest attract vs highest repel
         currentZoneStats['typesDiff'] = 0;
@@ -5095,7 +5095,7 @@
             var lowTypeValue = currentZoneStats['types'][typeTokens[typeTokens.length - 1]];
             var typeValueDiff = highTypeValue - lowTypeValue;
             currentZoneStats['typesDiff'] = typeValueDiff;
-            //console.log('Day '+ thisZoneData.day +' | typeValueDiff = ', typeValueDiff);
+            // //console.log('Day '+ thisZoneData.day +' | typeValueDiff = ', typeValueDiff);
             var extremeTypeAppeal = typeValueDiff >= 250 ? true : false;
             if (extremeTypeAppeal && currentZoneFlags.indexOf('extremeTypeAppeal') === -1){ currentZoneFlags.push('extremeTypeAppeal'); }
             else if (!extremeTypeAppeal && currentZoneFlags.indexOf('extremeTypeAppeal') !== -1){ arrayRemoveByValue(currentZoneFlags, 'extremeTypeAppeal'); }
@@ -5177,10 +5177,10 @@
         //if (zoneDate.year > 0){ zoneDate.month += 1; }
         thisZoneData.date = zoneDate;
 
-        //console.log('###############\n#--- Day #'+thisZoneData.day, '---#\n###############');
-        //console.log('Day #'+thisZoneData.day, zoneDate);
-        //console.log('PokeboxDaysPassed = ', PokeboxDaysPassed);
-        //console.log('zoneDate = ', zoneDate);
+        // //console.log('###############\n#--- Day #'+thisZoneData.day, '---#\n###############');
+        // //console.log('Day #'+thisZoneData.day, zoneDate);
+        // //console.log('PokeboxDaysPassed = ', PokeboxDaysPassed);
+        // //console.log('zoneDate = ', zoneDate);
 
         // Update the odd/even class on the pokemon sprite wrapper
         //var isEven = thisZoneData.day % 2 === 0 ? true : false;
@@ -5193,17 +5193,17 @@
         // If this is the very first day, let's update our random seed
         if (thisZoneData.day === 1){
             Math.seed = 1;
-            //console.log('\n Math.seed reset to ', Math.seed);
+            // //console.log('\n Math.seed reset to ', Math.seed);
             for (var i = 0; i < thisZoneData.currentPokemon.length; i++){
                 var pokeToken = thisZoneData.currentPokemon[i].token;
                 Math.seed += PokemonSpeciesIndex[pokeToken].number;
                 }
-            //console.log('|- Starter-adjusted Math.seed is ', Math.seed);
+            // //console.log('|- Starter-adjusted Math.seed is ', Math.seed);
             }
         //var randomNumber = Math.seededRandom(0, 100);
-        //console.log('Day #'+thisZoneData.day);
-        //console.log('Math.seed = ', Math.seed);
-        //console.log('randomNumber = ', randomNumber);
+        // //console.log('Day #'+thisZoneData.day);
+        // //console.log('Math.seed = ', Math.seed);
+        // //console.log('randomNumber = ', randomNumber);
 
         // Update growth, egg, etc, cycles if allowed
         if (simulationStarted
@@ -5269,7 +5269,7 @@
                 // Update local storage with the new day total
                 var savePokeboxDaysPassed = PokeboxDaysPassed;
                 window.localStorage.setItem('PokeboxDaysPassed', savePokeboxDaysPassed);
-                //console.log('savePokeboxDaysPassed = ', savePokeboxDaysPassed);
+                // //console.log('savePokeboxDaysPassed = ', savePokeboxDaysPassed);
 
                 // Update local storage with the current seen pokemon index
                 if (true){
@@ -5277,11 +5277,11 @@
                     var savedPokemonSpeciesSeen = window.localStorage.getItem('PokemonSpeciesSeen');
                     if (typeof savedPokemonSpeciesSeen === 'string'){ savedPokemonSpeciesSeen = JSON.parse(savedPokemonSpeciesSeen); }
                     else { savedPokemonSpeciesSeen = {}; }
-                    //console.log('savedPokemonSpeciesSeen = ', savedPokemonSpeciesSeen);
+                    // //console.log('savedPokemonSpeciesSeen = ', savedPokemonSpeciesSeen);
                     // Merge the local array into the saved one, and then re-strinify it
                     var mergedPokemonSpeciesSeen = JSON.stringify(jQuery.extend({}, savedPokemonSpeciesSeen, PokemonSpeciesSeen));
                     window.localStorage.setItem('PokemonSpeciesSeen', mergedPokemonSpeciesSeen);
-                    //console.log('mergedPokemonSpeciesSeen = ', mergedPokemonSpeciesSeen);
+                    // //console.log('mergedPokemonSpeciesSeen = ', mergedPokemonSpeciesSeen);
                     }
 
                 // Update local storage with the current pokebox rewards index
@@ -5367,9 +5367,9 @@
             var imageName = newBallKind !== 'base' ? 'pokeball_'+ newBallKind +'.png' : 'pokeball.png';
             $pokeBall.attr('src', 'images/' + imageName);
             }
-        //console.log('currentBallKind', currentBallKind);
-        //console.log('newBallKind', newBallKind);
-        //console.log('completionPercent', completionPercent);
+        // //console.log('currentBallKind', currentBallKind);
+        // //console.log('newBallKind', newBallKind);
+        // //console.log('completionPercent', completionPercent);
 
     }
 
@@ -5389,7 +5389,7 @@
     // Define a function for calculating the current Vivillon pattern
     var currentVivillonPattern = '';
     function recalculateVivillonPattern(){
-        //console.log('recalculateVivillonPattern()');
+        // //console.log('recalculateVivillonPattern()');
 
         // If there the Vivillon line on the field, pre-calculate current colour stats
         if (typeof PokemonSpeciesIndex['vivillon'] !== 'undefined'
@@ -5413,13 +5413,13 @@
                 possibleFormsChances[formToken] = formChance;
                 }
             var possibleFormRanking = getSortedKeys(possibleFormsChances);
-            //console.log('possibleFormsColors = ', possibleFormsColors);
-            //console.log('possibleFormsChances = ', possibleFormsChances);
-            //console.log('possibleFormRanking = ', possibleFormRanking);
+            // //console.log('possibleFormsColors = ', possibleFormsColors);
+            // //console.log('possibleFormsChances = ', possibleFormsChances);
+            // //console.log('possibleFormRanking = ', possibleFormRanking);
 
             // Update the current pattern var with the top result
             currentVivillonPattern = possibleFormRanking[0];
-            //console.log('currentVivillonPattern = ', currentVivillonPattern);
+            // //console.log('currentVivillonPattern = ', currentVivillonPattern);
 
             }
 
@@ -5446,7 +5446,7 @@
 
         // Reset the pending evolution limits array so we can refil if necessary
         pendingEvolutionLimits = {};
-        //console.log('\n----------\nresetting pendingEvolutionLimits =', pendingEvolutionLimits);
+        // //console.log('\n----------\nresetting pendingEvolutionLimits =', pendingEvolutionLimits);
 
         // Define variables nessary for calculating color forms and collect data
         var colorKey = 0;
@@ -5474,12 +5474,12 @@
             }
         var topColorsCount = topColors.length;
         var maxTopColorsKey = topColorsCount - 1;
-        //console.log('colorStats = ', colorStats);
-        //console.log('colorStatsRounded = ', colorStatsRounded);
-        //console.log('topColor = ', topColor);
-        //console.log('topColors = ', topColors);
-        //console.log('topColorsCount = ', topColorsCount);
-        //console.log('maxTopColorsKey = ', maxTopColorsKey);
+        // //console.log('colorStats = ', colorStats);
+        // //console.log('colorStatsRounded = ', colorStatsRounded);
+        // //console.log('topColor = ', topColor);
+        // //console.log('topColors = ', topColors);
+        // //console.log('topColorsCount = ', topColorsCount);
+        // //console.log('maxTopColorsKey = ', maxTopColorsKey);
 
         // Collect refs to zone stats and special energy/power counters
         var currentUltraEnergy = typeof currentZoneStats['currentUltraEnergy'] !== 'undefined' ? currentZoneStats['currentUltraEnergy'] : 0;
@@ -5494,7 +5494,7 @@
 
                 var pokemonInfo = thisZoneData.currentPokemon[key];
                 var indexInfo = PokemonSpeciesIndex[pokemonInfo.token];
-                //console.log('-----\nChecking evolution data for ' + pokemonInfo.token, pokemonInfo, indexInfo);
+                // //console.log('-----\nChecking evolution data for ' + pokemonInfo.token, pokemonInfo, indexInfo);
 
                 // Always increment the days old, even in egg form
                 pokemonInfo.daysOld += 1;
@@ -5523,7 +5523,7 @@
                 // Collect this Pokemon's local/current and index info from the DB
                 var pokemonInfo = thisZoneData.currentPokemon[key];
                 var indexInfo = PokemonSpeciesIndex[pokemonInfo.token];
-                //console.log('-----\nChecking evolution data for ' + pokemonInfo.token, pokemonInfo, indexInfo);
+                // //console.log('-----\nChecking evolution data for ' + pokemonInfo.token, pokemonInfo, indexInfo);
 
                 // Collect this Pokemon's life points and adjust if necessary
                 var pokemonLifePoints = indexInfo.lifePoints;
@@ -5561,7 +5561,7 @@
                         colorKey++;
                         if (topColors.length > 1){
                             var keyMod = colorKey % topColorsCount;
-                            //console.log('colorKey = '+ colorKey +' | topColorsCount = '+ topColorsCount +' | keyMod = '+ keyMod);
+                            // //console.log('colorKey = '+ colorKey +' | topColorsCount = '+ topColorsCount +' | keyMod = '+ keyMod);
                             pokemonInfo.formToken = topColors[keyMod];
                             } else {
                             pokemonInfo.formToken = topColor;
@@ -5592,9 +5592,9 @@
                         // Check if type appeal exists yet, else simply collect the base form
                         var typeAppealDiff = sumValues(thisZoneData.currentStats['types']);
                         var typeAppealExists = typeof typeAppealDiff === 'number' && typeAppealDiff !== 0 ? true : false;
-                        //console.log('thisZoneData.currentStats[\'types\'] = ', thisZoneData.currentStats['types']);
-                        //console.log('typeAppealDiff = ', typeAppealDiff);
-                        //console.log('typeAppealExists = ', typeAppealExists);
+                        // //console.log('thisZoneData.currentStats[\'types\'] = ', thisZoneData.currentStats['types']);
+                        // //console.log('typeAppealDiff = ', typeAppealDiff);
+                        // //console.log('typeAppealExists = ', typeAppealExists);
                         if (typeAppealExists === true){
                             triggerTokens.sort(function(f1, f2){
                                 var t1 = possibleFormsTriggers[f1];
@@ -5639,9 +5639,9 @@
                     var possibleNextEvolutions = indexInfo.nextEvolutions.slice(0);
                     var numRelatedPokemon = countRelatedZonePokemon(pokemonInfo.token);
                     var numSamePokemon = typeof currentSpeciesStats[pokemonInfo.token] !== 'undefined' ? currentSpeciesStats[pokemonInfo.token] : 1;
-                    //console.log('|- possibleNextEvolutions = ', possibleNextEvolutions);
-                    //console.log('|- numRelatedPokemon = ', numRelatedPokemon);
-                    //console.log('|- numSamePokemon = ', numSamePokemon);
+                    // //console.log('|- possibleNextEvolutions = ', possibleNextEvolutions);
+                    // //console.log('|- numRelatedPokemon = ', numRelatedPokemon);
+                    // //console.log('|- numSamePokemon = ', numSamePokemon);
 
                     // Check if this pokemon is happy based on field multipliers that match its type(s)
                     var pokemonHappiness = 0;
@@ -5651,7 +5651,7 @@
                         if (currentTypeStats[pokemonInfo.types[1]] > 0){ pokemonHappiness += Math.ceil(currentTypeStats[pokemonInfo.types[1]] / 10); }
                         else if (currentTypeStats[pokemonInfo.types[1]] < 0){ pokemonHappiness -= Math.ceil(currentTypeStats[pokemonInfo.types[1]] / 5); }
                         }
-                    //console.log('|- pokemonHappiness = ', pokemonHappiness);
+                    // //console.log('|- pokemonHappiness = ', pokemonHappiness);
 
                     // Check to see if this pokemon is allowed to evolve by trade this cycle
                     var allowTradeEvolution = false;
@@ -5661,7 +5661,7 @@
                         } else {
                         allowTradeEvolution = allowedTradeEvolutions[pokemonInfo.token];
                         }
-                    //console.log('|- allowTradeEvolution = ', allowTradeEvolution);
+                    // //console.log('|- allowTradeEvolution = ', allowTradeEvolution);
 
                     // If this pokemon has a Gigantamax form AND has the necessary gene, remove other evos
                     var hasGigantamaxForm = false;
@@ -5683,16 +5683,16 @@
                                 }
                             }
                         }
-                    //console.log('hasGigantamaxForm =', hasGigantamaxForm);
-                    //console.log('hasGigantamaxFactor =', hasGigantamaxFactor);
-                    //console.log('|- possibleNextEvolutions = ', possibleNextEvolutions);
+                    // //console.log('hasGigantamaxForm =', hasGigantamaxForm);
+                    // //console.log('hasGigantamaxFactor =', hasGigantamaxFactor);
+                    // //console.log('|- possibleNextEvolutions = ', possibleNextEvolutions);
 
                     // Define a function for testing if an evolution method is true
                     var switchKind = 'and';
                     var fusionPokemonToBeRemoved = false;
                     function calculateEvolutionChance(pokemonInfo, methodToken, methodValue, methodNum, nextEvolution, prevChanceValue){
-                        //console.log('|-- calculateEvolutionChance('+pokemonInfo.token+'/'+pokemonInfo.id+', '+methodToken+', '+methodValue+', ...)');
-                        //console.log('|-- calculateEvolutionChance(pokemonInfo, methodToken, methodValue, methodNum, nextEvolution, prevChanceValue)', pokemonInfo, methodToken, methodValue, methodNum, nextEvolution, prevChanceValue);
+                        // //console.log('|-- calculateEvolutionChance('+pokemonInfo.token+'/'+pokemonInfo.id+', '+methodToken+', '+methodValue+', ...)');
+                        // //console.log('|-- calculateEvolutionChance(pokemonInfo, methodToken, methodValue, methodNum, nextEvolution, prevChanceValue)', pokemonInfo, methodToken, methodValue, methodNum, nextEvolution, prevChanceValue);
 
                         // Define reference to species count var
                         var currentSpeciesStats = thisZoneData.currentStats['species'];
@@ -5716,9 +5716,9 @@
 
                         // Level-up evolutions are triggered by current growth cycles alone
                         if (methodToken === 'level-up'){
-                            //console.log('checking level-up for '+pokemonInfo.token+'/'+pokemonInfo.id+' \n| currentLevel =', pokemonInfo.growthCycles, '| requiredLevel = ', methodValue);
+                            // //console.log('checking level-up for '+pokemonInfo.token+'/'+pokemonInfo.id+' \n| currentLevel =', pokemonInfo.growthCycles, '| requiredLevel = ', methodValue);
                             if (pokemonInfo.growthCycles >= methodValue){
-                                //console.log('success! '+pokemonInfo.token+'/'+pokemonInfo.id+' level-up into '+nextSpeciesToken+' allowed');
+                                // //console.log('success! '+pokemonInfo.token+'/'+pokemonInfo.id+' level-up into '+nextSpeciesToken+' allowed');
                                 return 1;
                                 }
                             }
@@ -5753,17 +5753,17 @@
 
                         // Royalty-based evolutions trigger if there are enough relatives but a leader doesn't exist yet
                         if (methodToken === 'royal-ascension'){
-                            //console.log('checking royal-ascension for '+pokemonInfo.token+'/'+pokemonInfo.id+'/'+pokemonInfo.gender+' ');
-                            //console.log('-- nextSpeciesToken =', nextSpeciesToken, '| numRelatedPokemon = ', numRelatedPokemon, '| nextSpeciesCount =', nextSpeciesCount);
+                            // //console.log('checking royal-ascension for '+pokemonInfo.token+'/'+pokemonInfo.id+'/'+pokemonInfo.gender+' ');
+                            // //console.log('-- nextSpeciesToken =', nextSpeciesToken, '| numRelatedPokemon = ', numRelatedPokemon, '| nextSpeciesCount =', nextSpeciesCount);
                             if (numRelatedPokemon >= methodValue){
                                 var existingKingOrQueen = getZonePokemonByFilter({token:nextSpeciesToken,gender:pokemonInfo.gender});
                                 var existingMegaKingOrQueen = getZonePokemonByFilter({token:'mega-'+nextSpeciesToken,gender:pokemonInfo.gender});
-                                //console.log('-- existingKingOrQueen =', existingKingOrQueen, '| existingMegaKingOrQueen =', existingMegaKingOrQueen);
+                                // //console.log('-- existingKingOrQueen =', existingKingOrQueen, '| existingMegaKingOrQueen =', existingMegaKingOrQueen);
                                 if (!existingKingOrQueen.length
                                     && !existingMegaKingOrQueen.length){
-                                    //console.log('-- success! '+pokemonInfo.token+'/'+pokemonInfo.id+'/'+pokemonInfo.gender+' royal-ascension into '+nextSpeciesToken+'/'+pokemonInfo.id+'/'+pokemonInfo.gender+' allowed');
+                                    // //console.log('-- success! '+pokemonInfo.token+'/'+pokemonInfo.id+'/'+pokemonInfo.gender+' royal-ascension into '+nextSpeciesToken+'/'+pokemonInfo.id+'/'+pokemonInfo.gender+' allowed');
                                     pendingEvolutionLimits[nextSpeciesToken+'/'+pokemonInfo.gender] = 1;
-                                    //console.log('-- new pendingEvolutionLimits =', pendingEvolutionLimits);
+                                    // //console.log('-- new pendingEvolutionLimits =', pendingEvolutionLimits);
                                     return 1 + (numRelatedPokemon * 100);
                                     }
                                 }
@@ -5929,24 +5929,24 @@
 
                             // If the previous method was unsuccessful, return now
                             if (methodNum > 1 && prevChanceValue === 0){ return 0; }
-                            //console.log('pokemonInfo.token = ', pokemonInfo.token);
-                            //console.log('methodToken = ', methodToken);
-                            //console.log('methodValue = ', methodValue);
-                            //console.log('methodNum = ', methodNum);
-                            //console.log('prevChanceValue = ', prevChanceValue);
+                            // //console.log('pokemonInfo.token = ', pokemonInfo.token);
+                            // //console.log('methodToken = ', methodToken);
+                            // //console.log('methodValue = ', methodValue);
+                            // //console.log('methodNum = ', methodNum);
+                            // //console.log('prevChanceValue = ', prevChanceValue);
 
                             // Find a copy of the other species to merge with, then remove it from play
                             var possibleFusions = getZonePokemonByToken(methodValue);
                             possibleFusions.sort(function(a, b){ return a.growthCycles > b.growthCycles ? -1 : (a.growthCycles < b.growthCycles ? 1 : 0); });
-                            //console.log('possibleFusions = ', possibleFusions);
+                            // //console.log('possibleFusions = ', possibleFusions);
 
                             // Collect the fusion pokemon if set
                             var fusionPokemon = possibleFusions[0];
-                            //console.log('fusionPokemon = ', fusionPokemon);
+                            // //console.log('fusionPokemon = ', fusionPokemon);
                             if (fusionPokemon.id === pokemonInfo.id){
                                 if (possibleFusions.length > 1){ fusionPokemon = possibleFusions[1]; }
                                 else { fusionPokemon = false; }
-                                //console.log('fusionPokemon(B) = ', fusionPokemon);
+                                // //console.log('fusionPokemon(B) = ', fusionPokemon);
                                 }
 
                             // If a fusion was collected, return now
@@ -5999,8 +5999,8 @@
                         if (methodToken === 'gigantamax-factor'
                             && (pokemonInfo.sid % methodValue) === 0
                             && currentGigantamaxNum === 0){
-                            //console.log('methodToken =', methodToken, 'pokemonInfo.sid =', pokemonInfo.sid, 'methodValue =', methodValue, 'currentGigantamaxNum =', currentGigantamaxNum);
-                            //console.log('gigantamax-factor TRIGGERED!');
+                            // //console.log('methodToken =', methodToken, 'pokemonInfo.sid =', pokemonInfo.sid, 'methodValue =', methodValue, 'currentGigantamaxNum =', currentGigantamaxNum);
+                            // //console.log('gigantamax-factor TRIGGERED!');
                             return 1 + methodValue;
                             }
 
@@ -6069,7 +6069,7 @@
                                 }
                             }
 
-                        //console.log('|- Checking possibleNextEvolutions['+i+'] = ', nextEvolution, nextEvolutionInfo, 'switchKind:'+switchKind);
+                        // //console.log('|- Checking possibleNextEvolutions['+i+'] = ', nextEvolution, nextEvolutionInfo, 'switchKind:'+switchKind);
 
                         // Define a variable to hold the trigger chance value
                         var triggeredChance = 0;
@@ -6084,12 +6084,12 @@
                                 && typeof nextEvolution['value'+mt] !== 'undefined'){
 
                                 totalMethods++;
-                                //console.log('Checking method #'+m+' for '+indexInfo.token+'... | totalMethods = ', totalMethods);
+                                // //console.log('Checking method #'+m+' for '+indexInfo.token+'... | totalMethods = ', totalMethods);
 
                                 var methodToken = nextEvolution['method'+mt];
                                 var methodValue = nextEvolution['value'+mt];
-                                //console.log('|-- methodToken = ', methodToken);
-                                //console.log('|-- methodValue = ', methodValue);
+                                // //console.log('|-- methodToken = ', methodToken);
+                                // //console.log('|-- methodValue = ', methodValue);
 
                                 // Calculate the chance value based on the evo type (always allow level-up evos)
                                 var chanceValue = 0;
@@ -6097,14 +6097,14 @@
                                     || !onlyLevelUpEvolutions){
                                     var chanceValue = calculateEvolutionChance(pokemonInfo, methodToken, methodValue, m, nextEvolution, prevChanceValue);
                                     }
-                                //console.log('|-- chanceValue = ', chanceValue);
+                                // //console.log('|-- chanceValue = ', chanceValue);
 
                                 if (chanceValue > 0){
 
                                     triggeredMethods++;
                                     triggeredChance += chanceValue;
-                                    //console.log('|-- totalMethods++; | totalMethods = ', totalMethods);
-                                    //console.log('|-- triggeredChance += '+chanceValue+'; | triggeredChance = ', triggeredChance);
+                                    // //console.log('|-- totalMethods++; | totalMethods = ', totalMethods);
+                                    // //console.log('|-- triggeredChance += '+chanceValue+'; | triggeredChance = ', triggeredChance);
 
                                     }
 
@@ -6132,7 +6132,7 @@
                             var allowEvo = true;
 
                             // If there are limits on the number of a specific evo right now, check if we need to block
-                            //console.log('current pendingEvolutionLimits = ', pendingEvolutionLimits);
+                            // //console.log('current pendingEvolutionLimits = ', pendingEvolutionLimits);
 
                             var nextEvoSpecies = nextEvolution.species;
                             var nextEvoSpeciesAndGender = nextEvoSpecies+'/'+pokemonInfo.gender;
@@ -6140,23 +6140,23 @@
                             if (typeof pendingEvolutionLimits[nextEvoSpeciesAndGender] !== 'undefined'){ nextEvoLimit = pendingEvolutionLimits[nextEvoSpeciesAndGender]; }
                             //else if (typeof pendingEvolutionLimits[nextEvoSpecies] !== 'undefined'){ nextEvoLimit = pendingEvolutionLimits[nextEvoSpecies]; }
 
-                            //console.log('nextEvoSpecies = ', nextEvoSpecies, '| nextEvoSpeciesAndGender = ', nextEvoSpeciesAndGender, '| nextEvoLimit =', nextEvoLimit);
-                            //console.log('-- nextEvoSpeciesAndGender = ', nextEvoSpeciesAndGender, '| nextEvoLimit =', nextEvoLimit);
+                            // //console.log('nextEvoSpecies = ', nextEvoSpecies, '| nextEvoSpeciesAndGender = ', nextEvoSpeciesAndGender, '| nextEvoLimit =', nextEvoLimit);
+                            // //console.log('-- nextEvoSpeciesAndGender = ', nextEvoSpeciesAndGender, '| nextEvoLimit =', nextEvoLimit);
 
                             if (nextEvoLimit > 0){
                                 var numExistingNextSpecies = 0;
 
                                 if (typeof currentSpeciesStats[nextEvoSpeciesAndGender] !== 'undefined'){ numExistingNextSpecies += currentSpeciesStats[nextEvoSpeciesAndGender]; }
                                 //else if (typeof currentSpeciesStats[nextEvoSpecies] !== 'undefined'){ numExistingNextSpecies += currentSpeciesStats[nextEvoSpecies]; }
-                                //console.log('- currentSpeciesStats['+nextEvoSpeciesAndGender+'] = ', currentSpeciesStats[nextEvoSpeciesAndGender]);
-                                //console.log('- currentSpeciesStats['+nextEvoSpecies+'] = ', currentSpeciesStats[nextEvoSpecies]);
+                                // //console.log('- currentSpeciesStats['+nextEvoSpeciesAndGender+'] = ', currentSpeciesStats[nextEvoSpeciesAndGender]);
+                                // //console.log('- currentSpeciesStats['+nextEvoSpecies+'] = ', currentSpeciesStats[nextEvoSpecies]);
 
                                 if (typeof newPokemonThisCycle[nextEvoSpeciesAndGender] !== 'undefined'){ numExistingNextSpecies += newPokemonThisCycle[nextEvoSpeciesAndGender]; }
                                 //else if (typeof newPokemonThisCycle[nextEvoSpecies] !== 'undefined'){ numExistingNextSpecies += newPokemonThisCycle[nextEvoSpecies]; }
-                                //console.log('- newPokemonThisCycle['+nextEvoSpeciesAndGender+'] = ', newPokemonThisCycle[nextEvoSpeciesAndGender]);
-                                //console.log('- newPokemonThisCycle['+nextEvoSpecies+'] = ', newPokemonThisCycle[nextEvoSpecies]);
+                                // //console.log('- newPokemonThisCycle['+nextEvoSpeciesAndGender+'] = ', newPokemonThisCycle[nextEvoSpeciesAndGender]);
+                                // //console.log('- newPokemonThisCycle['+nextEvoSpecies+'] = ', newPokemonThisCycle[nextEvoSpecies]);
 
-                                //console.log('numExistingNextSpecies = ', numExistingNextSpecies);
+                                // //console.log('numExistingNextSpecies = ', numExistingNextSpecies);
 
                                 if (numExistingNextSpecies >= nextEvoLimit){
                                     allowEvo = false;
@@ -6164,7 +6164,7 @@
                                 }
 
                             // If allowed, we can proceed with queueing the current evo
-                            //console.log('allowEvo = ', allowEvo, '\n-------------');
+                            // //console.log('allowEvo = ', allowEvo, '\n-------------');
                             if (allowEvo){
                                 var queuedEvolution = {token: nextEvolution.species, types: nextEvolutionInfo.types, chance: triggeredChance};
                                 if (typeof nextEvolution.form !== 'undefined'){ queuedEvolution.form = nextEvolution.form; }
@@ -6181,7 +6181,7 @@
                     if (queuedEvolutions.length > 0){
 
                         // Sort the evolution possibilities by highest chance, then pick first
-                        //console.log('<< queuedEvolutions for '+pokemonInfo.token+' = ', 'pokemonInfo:'+JSON.stringify(pokemonInfo), 'queuedEvolutions:'+JSON.stringify(queuedEvolutions));
+                        // //console.log('<< queuedEvolutions for '+pokemonInfo.token+' = ', 'pokemonInfo:'+JSON.stringify(pokemonInfo), 'queuedEvolutions:'+JSON.stringify(queuedEvolutions));
                         queuedEvolutions.sort(function(a, b){
                             if (a.chance > b.chance){ return -1; }
                             else if (a.chance < b.chance){ return 1; }
@@ -6189,8 +6189,8 @@
                             });
                         var selectedEvolution = queuedEvolutions[0];
                         var selectedEvolutionData = PokemonSpeciesIndex[selectedEvolution.token];
-                        //console.log('<< selectedEvolution = ', selectedEvolution);
-                        //console.log('<< selectedEvolutionData = ', selectedEvolutionData);
+                        // //console.log('<< selectedEvolution = ', selectedEvolution);
+                        // //console.log('<< selectedEvolutionData = ', selectedEvolutionData);
 
                         // Create an entry for this species and in the global count if not exists
                         var evolvedPokemonSpecies = thisZoneData.evolvedPokemonSpecies;
@@ -6200,7 +6200,7 @@
                         // Create or update an entry for new pokemon this cycle
                         if (typeof newPokemonThisCycle[selectedEvolution.token] === 'undefined'){ newPokemonThisCycle[selectedEvolution.token] = 0; }
                         newPokemonThisCycle[selectedEvolution.token]++;
-                        //console.log('newPokemonThisCycle = ', newPokemonThisCycle);
+                        // //console.log('newPokemonThisCycle = ', newPokemonThisCycle);
 
                         // And then apply the evolution to the pokemon's data
                         var backupToken = pokemonInfo.token;
@@ -6385,8 +6385,8 @@
         var currentTypeStats = currentZoneStats['types'];
         var zoneCapacityPercent = ((thisZoneData.currentPokemon.length / thisZoneData.capacity) * 100);
         var zoneIsOvercrowded = zoneCapacityPercent >= 99 ? true : false;
-        //console.log('zoneCapacityPercent = ', zoneCapacityPercent);
-        //console.log('zoneIsOvercrowded = ', zoneIsOvercrowded);
+        // //console.log('zoneCapacityPercent = ', zoneCapacityPercent);
+        // //console.log('zoneIsOvercrowded = ', zoneIsOvercrowded);
 
         // If we're already at high capacity, do not initiate breeding
         if (zoneIsOvercrowded){ return false; }
@@ -6414,7 +6414,7 @@
                     }
                 }
             }
-        //console.log('pokeSpecies = ', pokeSpecies);
+        // //console.log('pokeSpecies = ', pokeSpecies);
 
         // Loop through species and check to see if any should breed
         if (!jQuery.isEmptyObject(pokeSpecies)){
@@ -6422,7 +6422,7 @@
             // Collect a list of species tokens sorted by speed stat
             //var sortedSpeciesTokens = sortSpeciesTokensBySpeed(Object.keys(pokeSpecies));
             var sortedSpeciesTokens = sortSpeciesTokensByBreedPoints(Object.keys(pokeSpecies));
-           //console.log('----------\nChecking breeding options for sortedSpeciesTokens', sortedSpeciesTokens);
+           // //console.log('----------\nChecking breeding options for sortedSpeciesTokens', sortedSpeciesTokens);
 
             // Pre-count the number of Ditto on the field
             var existingDitto = typeof pokeSpecies['ditto'] !== 'undefined' ? pokeSpecies['ditto']['none'] : 0;
@@ -6434,7 +6434,7 @@
 
             // Pre-count the number of Arceus on the field
             var existingArceus = typeof pokeSpecies['arceus'] !== 'undefined' ? pokeSpecies['arceus']['none'] : 0;
-            //console.log('existingArceus = ', existingArceus);
+            // //console.log('existingArceus = ', existingArceus);
 
             // Prevent breeding of these special exception species
             var preventBreeding = ['zygarde-cell', 'shadow-variant', 'shining-variant'];
@@ -6446,9 +6446,9 @@
 
                 // Collect the token and index info for the species
                 var pokeToken = sortedSpeciesTokens[key];
-                //console.log('----------\nChecking breeding options for sortedSpeciesTokens['+key+'] ('+pokeToken+' x'+pokeSpecies[pokeToken]+')');
+                // //console.log('----------\nChecking breeding options for sortedSpeciesTokens['+key+'] ('+pokeToken+' x'+pokeSpecies[pokeToken]+')');
                 var indexInfo = PokemonSpeciesIndex[pokeToken];
-               //console.log('|- ['+ pokeToken +'] indexInfo.lifePoints = ' + indexInfo.lifePoints + ' | indexInfo.breedPoints = ' + indexInfo.breedPoints+ ' | indexInfo.baseStats = ', indexInfo.baseStats);
+               // //console.log('|- ['+ pokeToken +'] indexInfo.lifePoints = ' + indexInfo.lifePoints + ' | indexInfo.breedPoints = ' + indexInfo.breedPoints+ ' | indexInfo.baseStats = ', indexInfo.baseStats);
 
                 // Check to see if this is legendary or special
                 var isLegendary = false;
@@ -6480,22 +6480,22 @@
 
                 // Skip ahead if this species is incapable of breeding
                 if (indexInfo.eggGroups.indexOf('ditto') !== -1){
-                    //console.log(pokeToken+' cannot breed with itself\n-----');
+                    // //console.log(pokeToken+' cannot breed with itself\n-----');
                     continue;
                     } else if (pokeToken === 'arceus'){
-                    //console.log(pokeToken+' cannot breed with itself\n-----');
+                    // //console.log(pokeToken+' cannot breed with itself\n-----');
                     continue;
                     } else if (isLegendary && !allowLegendaryBreeding){
-                    //console.log('legendaries like '+pokeToken+' cannot breed at all\n-----');
+                    // //console.log('legendaries like '+pokeToken+' cannot breed at all\n-----');
                     continue;
                     } else if (!isLegendary && indexInfo.eggGroups.indexOf('undiscovered') !== -1){
-                    //console.log(pokeToken+' cannot breed at all\n-----');
+                    // //console.log(pokeToken+' cannot breed at all\n-----');
                     continue;
                     }
 
                 var baseEvolution = pokemonGetBaseEvolution(pokeToken, true, false);
                 var baseEvolutionInfo = PokemonSpeciesIndex[baseEvolution];
-                //console.log('pokeToken('+pokeToken+') | baseEvolution('+baseEvolution+')');
+                // //console.log('pokeToken('+pokeToken+') | baseEvolution('+baseEvolution+')');
 
                 // Define new unit count at zero with an empty token
                 var newUnits = 0;
@@ -6510,14 +6510,14 @@
                 if (!isLegendary && !indexInfo.hasOneGender){
 
                     // No egg partner exists so we can proceed normally
-                    //console.log('|- '+baseEvolution+' has no egg partner, proceed normally');
+                    // //console.log('|- '+baseEvolution+' has no egg partner, proceed normally');
 
                     // Not legendary and not single-gender so we can proceed normally
-                    //console.log('|- '+baseEvolution+' is not legendary & not single-gendered, proceed normally');
+                    // //console.log('|- '+baseEvolution+' is not legendary & not single-gendered, proceed normally');
 
                     // Count existing eggs for this species
                     var currentEggs = typeof pokeEggs[baseEvolution] !== 'undefined' ? pokeEggs[baseEvolution] : 0;
-                    //console.log('|- currentEggs('+baseEvolution+'/'+currentEggs+')');
+                    // //console.log('|- currentEggs('+baseEvolution+'/'+currentEggs+')');
 
                     // Genderless pokemon breed with any other and ditto, otherwise pairs are required
                     if (indexInfo.speciesGender === 'none'){
@@ -6525,7 +6525,7 @@
                         // NONE gendered pokemon can make exactly half their total number plus ditto
                         var eggGenerators = pokeSpecies[pokeToken]['none'] + existingDitto;
                         var newUnits = Math.floor(eggGenerators / 2);
-                        //console.log('|- NONE | eggGenerators('+pokeToken+'/'+eggGenerators+') | newUnits('+newUnits+')');
+                        // //console.log('|- NONE | eggGenerators('+pokeToken+'/'+eggGenerators+') | newUnits('+newUnits+')');
 
                         } else {
 
@@ -6533,19 +6533,19 @@
                         if (pokeSpecies[pokeToken]['female'] === pokeSpecies[pokeToken]['male']){
                             var eggGenerators = pokeSpecies[pokeToken]['female'] + pokeSpecies[pokeToken]['male'] + existingDitto;
                             var newUnits = Math.floor(eggGenerators / 2);
-                            //console.log('|- F=M | eggGenerators('+pokeToken+'/'+eggGenerators+') | newUnits('+newUnits+')');
+                            // //console.log('|- F=M | eggGenerators('+pokeToken+'/'+eggGenerators+') | newUnits('+newUnits+')');
                         } else if (pokeSpecies[pokeToken]['female'] < pokeSpecies[pokeToken]['male']){
                             var eggGenerators = pokeSpecies[pokeToken]['female'] + existingDitto;
                             var newUnits = Math.min(eggGenerators, pokeSpecies[pokeToken]['male']);
-                            //console.log('|- F<M | eggGenerators('+pokeToken+'/'+eggGenerators+') | newUnits('+newUnits+')');
-                            //console.log('|- pokeSpecies['+pokeToken+'] = ', pokeSpecies[pokeToken]);
-                            //console.log('|- existingDitto = ', existingDitto);
-                            //console.log('|- eggGenerators = ', eggGenerators);
-                            //console.log('|- newUnits = ', newUnits);
+                            // //console.log('|- F<M | eggGenerators('+pokeToken+'/'+eggGenerators+') | newUnits('+newUnits+')');
+                            // //console.log('|- pokeSpecies['+pokeToken+'] = ', pokeSpecies[pokeToken]);
+                            // //console.log('|- existingDitto = ', existingDitto);
+                            // //console.log('|- eggGenerators = ', eggGenerators);
+                            // //console.log('|- newUnits = ', newUnits);
                             } else {
                             var eggGenerators = pokeSpecies[pokeToken]['female'];
                             var newUnits = Math.min(eggGenerators, pokeSpecies[pokeToken]['male'] + existingDitto);
-                            //console.log('|- F>M | eggGenerators('+pokeToken+'/'+eggGenerators+') | newUnits('+newUnits+')');
+                            // //console.log('|- F>M | eggGenerators('+pokeToken+'/'+eggGenerators+') | newUnits('+newUnits+')');
                             }
 
                         }
@@ -6553,10 +6553,10 @@
                     // Ensure we do not create more units then there already are eggs
                     if (newUnits > currentEggs){
                         newUnits -= currentEggs;
-                        //console.log('(!) newUnits -= currentEggs = newUnits('+newUnits+')');
+                        // //console.log('(!) newUnits -= currentEggs = newUnits('+newUnits+')');
                         } else {
                         newUnits = 0;
-                        //console.log('(!) eggLimit reached | newUnits = 0');
+                        // //console.log('(!) eggLimit reached | newUnits = 0');
                         }
 
                     }
@@ -6566,21 +6566,21 @@
                     // An egg partner exists so special pairings are required
                     if (typeof indexInfo['eggPartner'] === 'undefined' !== 'undefined'){
                         var eggPartner = indexInfo['eggPartner'];
-                        //console.log('|- '+pokeToken+' has an egg partner in '+eggPartner+', check pairs');
+                        // //console.log('|- '+pokeToken+' has an egg partner in '+eggPartner+', check pairs');
                         } else if (typeof baseEvolutionInfo['eggPartner'] === 'undefined' !== 'undefined'){
                         var eggPartner = baseEvolutionInfo['eggPartner'];
-                        //console.log('|- '+baseEvolution+' has an egg partner in '+eggPartner+', check pairs');
+                        // //console.log('|- '+baseEvolution+' has an egg partner in '+eggPartner+', check pairs');
                         }
 
                     var baseUnits = pokeSpecies[pokeToken][indexInfo.speciesGender];
                     var baseEggs = typeof pokeEggs[baseEvolution] !== 'undefined' ? pokeEggs[baseEvolution] : 0;
-                    //console.log('|- baseUnits('+pokeToken+'/'+baseUnits+') | baseEggs('+baseEvolution+'/'+baseEggs+')');
+                    // //console.log('|- baseUnits('+pokeToken+'/'+baseUnits+') | baseEggs('+baseEvolution+'/'+baseEggs+')');
 
                     var oppositeGender = indexInfo.speciesGender !== 'female' ? 'female' : 'male';
                     var partnerInfo = typeof pokeSpecies[eggPartner] !== 'undefined' ? pokeSpecies[eggPartner] : false;
                     var partnerUnits = partnerInfo && typeof partnerInfo[oppositeGender] !== 'undefined' ? partnerInfo[oppositeGender] : 0;
                     var partnerEggs = partnerInfo && typeof pokeEggs[eggPartner] !== 'undefined' ? pokeEggs[eggPartner] : 0;
-                    //console.log('|- partnerUnits('+eggPartner+'/'+partnerUnits+') | partnerEggs('+eggPartner+'/'+partnerEggs+')');
+                    // //console.log('|- partnerUnits('+eggPartner+'/'+partnerUnits+') | partnerEggs('+eggPartner+'/'+partnerEggs+')');
 
                     if (indexInfo.eggLimit === -1){ var baseToPartnerPairs = Math.max(baseUnits, partnerUnits); }
                     else if (typeof indexInfo.eggLimit !== 'undefined'){ var baseToPartnerPairs = Math.min((baseUnits * indexInfo.eggLimit), partnerUnits); }
@@ -6588,29 +6588,29 @@
                     //var baseToPartnerPairs = Math.min(baseUnits, partnerUnits);
                     var leftOverBaseUnits = baseToPartnerPairs < baseUnits ? baseUnits - baseToPartnerPairs : 0;
                     var baseToDittoPairs = existingDitto > 0 ? Math.max(leftOverBaseUnits, existingDitto) : 0;
-                    //console.log('|- baseToPartnerPairs('+baseToPartnerPairs+') | leftOverBaseUnits('+leftOverBaseUnits+') | baseToDittoPairs('+baseToDittoPairs+')');
+                    // //console.log('|- baseToPartnerPairs('+baseToPartnerPairs+') | leftOverBaseUnits('+leftOverBaseUnits+') | baseToDittoPairs('+baseToDittoPairs+')');
 
                     newUnits = baseToPartnerPairs + baseToDittoPairs;
                     var currentEggs = baseEvolution !== eggPartner ? (baseEggs + partnerEggs) : baseEggs;
-                    //console.log('|- newUnits('+newUnits+') | currentEggs('+currentEggs+')');
+                    // //console.log('|- newUnits('+newUnits+') | currentEggs('+currentEggs+')');
 
                     // If partner pokemon have already produced eggs, include in this count
                     if (typeof eggsToAddIndex[pokeToken] !== 'undefined'){
                         currentEggs += eggsToAddIndex[pokeToken];
-                        //console.log('|- currentEggs += eggsToAddIndex['+pokeToken+'] | currentEggs('+currentEggs+')');
+                        // //console.log('|- currentEggs += eggsToAddIndex['+pokeToken+'] | currentEggs('+currentEggs+')');
                         }
                     if (typeof eggsToAddIndex[eggPartner] !== 'undefined'){
                         currentEggs += eggsToAddIndex[eggPartner];
-                        //console.log('|- currentEggs += eggsToAddIndex['+eggPartner+'] | currentEggs('+currentEggs+')');
+                        // //console.log('|- currentEggs += eggsToAddIndex['+eggPartner+'] | currentEggs('+currentEggs+')');
                         }
 
                     // Ensure we do not create more units then there already are eggs
                     if (newUnits > currentEggs){
                         newUnits -= currentEggs;
-                        //console.log('(!) newUnits -= currentEggs = newUnits('+newUnits+')');
+                        // //console.log('(!) newUnits -= currentEggs = newUnits('+newUnits+')');
                         } else {
                         newUnits = 0;
-                        //console.log('(!) eggLimit reached | newUnits = 0');
+                        // //console.log('(!) eggLimit reached | newUnits = 0');
                         }
 
                     }
@@ -6636,36 +6636,36 @@
                     if (!isLegendary || pokeToken === 'manaphy'){ newUnits += existingDitto > 0 ? Math.max(baseUnits, existingDitto) : 0; }
                     // Only legendaries and mythicals can request an egg from Arceus
                     if (isLegendary){ newUnits += existingArceus > 0 ? Math.max(baseUnits, existingArceus) : 0; }
-                    //console.log('|- baseUnits('+pokeToken+'/'+baseUnits+') | currentEggs('+baseEvolution+'/'+currentEggs+') | newUnits('+newUnitsToken+'/'+newUnits+')');
+                    // //console.log('|- baseUnits('+pokeToken+'/'+baseUnits+') | currentEggs('+baseEvolution+'/'+currentEggs+') | newUnits('+newUnitsToken+'/'+newUnits+')');
 
                     // If partner pokemon have already produced eggs, include in this count
                     if (typeof eggsToAddIndex[pokeToken] !== 'undefined'){
                         currentEggs += eggsToAddIndex[pokeToken];
-                        //console.log('|- currentEggs += eggsToAddIndex['+pokeToken+'] | currentEggs('+currentEggs+')');
+                        // //console.log('|- currentEggs += eggsToAddIndex['+pokeToken+'] | currentEggs('+currentEggs+')');
                         }
 
                     // Ensure we do not create more units then there already are eggs
                     if (newUnits > currentEggs){
                         newUnits -= currentEggs;
-                        //console.log('(!) newUnits -= currentEggs = newUnits('+newUnits+')');
+                        // //console.log('(!) newUnits -= currentEggs = newUnits('+newUnits+')');
                         } else {
                         newUnits = 0;
-                        //console.log('(!) eggLimit reached | newUnits = 0');
+                        // //console.log('(!) eggLimit reached | newUnits = 0');
                         }
 
                     }
 
                 // If new units should be made, loop through and do it now
                 if (newUnits > 0){
-                    //console.log('---\nAdding new units...');
+                    // //console.log('---\nAdding new units...');
                     for (var i = 0; i < newUnits; i++){
                         var pokeEggSpecies = pokemonGetBaseEvolution(newUnitsToken, true, true);
-                        //console.log('|- pokemonGetBaseEvolution('+newUnitsToken+', true, true) = ', pokeEggSpecies);
+                        // //console.log('|- pokemonGetBaseEvolution('+newUnitsToken+', true, true) = ', pokeEggSpecies);
                         if (typeof eggsToAddIndex[pokeEggSpecies] === 'undefined'){ eggsToAddIndex[pokeEggSpecies] = 0; }
                         eggsToAddIndex[pokeEggSpecies] += 1;
                         eggsToAddCount += 1;
-                        //console.log('|- eggsToAddIndex['+pokeEggSpecies+'] += 1 |= ', eggsToAddIndex[pokeEggSpecies]);
-                        //console.log('|- eggsToAddCount += 1 |= ', eggsToAddCount);
+                        // //console.log('|- eggsToAddIndex['+pokeEggSpecies+'] += 1 |= ', eggsToAddIndex[pokeEggSpecies]);
+                        // //console.log('|- eggsToAddCount += 1 |= ', eggsToAddCount);
                         }
                     }
 
@@ -6673,12 +6673,12 @@
 
             // Loop through through and generate required eggs, in order,
             // one per species, until done or at capacity
-            //console.log('----------\nLoop through through and generate required eggs...');
+            // //console.log('----------\nLoop through through and generate required eggs...');
             var eggsAddedCount = 0;
             var eggsToAddIndexTokens = !jQuery.isEmptyObject(eggsToAddIndex) ? Object.keys(eggsToAddIndex) : [];
             if (eggsAddedCount < eggsToAddCount){
-                //console.log('(eggsAddedCount('+eggsAddedCount+') < eggsToAddCount('+eggsToAddCount+')) && (thisZoneData.currentPokemon.length('+thisZoneData.currentPokemon.length+') < thisZoneData.capacity('+thisZoneData.capacity+'))');
-                //console.log('eggsToAddIndex = ', eggsToAddIndex);
+                // //console.log('(eggsAddedCount('+eggsAddedCount+') < eggsToAddCount('+eggsToAddCount+')) && (thisZoneData.currentPokemon.length('+thisZoneData.currentPokemon.length+') < thisZoneData.capacity('+thisZoneData.capacity+'))');
+                // //console.log('eggsToAddIndex = ', eggsToAddIndex);
                 for (var key = 0; key < eggsToAddIndexTokens.length; key++){
 
                     // Collect the token and index data for the new baby
@@ -6686,19 +6686,19 @@
                     var pokeIndex = PokemonSpeciesIndex[pokeToken];
                     var allowEgg = true;
                     if (typeof pokeIndex === 'undefined'){
-                        //console.log('undefined!!!');
-                        //console.log('pokeToken', typeof pokeToken, pokeToken);
-                        //console.log('pokeIndex', typeof pokeIndex, pokeIndex);
+                        // //console.log('undefined!!!');
+                        // //console.log('pokeToken', typeof pokeToken, pokeToken);
+                        // //console.log('pokeIndex', typeof pokeIndex, pokeIndex);
                         continue;
                         }
-                    //console.log('eggsToAddIndexTokens['+key+'] = ', pokeToken, pokeIndex);
+                    // //console.log('eggsToAddIndexTokens['+key+'] = ', pokeToken, pokeIndex);
 
                     // Check again to see if we're at overcrowded capacity
                     if (allowEgg){
                         zoneCapacityPercent = ((thisZoneData.currentPokemon.length / thisZoneData.capacity) * 100);
                         zoneIsOvercrowded = zoneCapacityPercent >= 99 ? true : false;
-                        //console.log('zoneCapacityPercent = ', zoneCapacityPercent);
-                        //console.log('zoneIsOvercrowded = ', zoneIsOvercrowded);
+                        // //console.log('zoneCapacityPercent = ', zoneCapacityPercent);
+                        // //console.log('zoneIsOvercrowded = ', zoneIsOvercrowded);
                         if (zoneIsOvercrowded){ allowEgg = false; }
                         }
 
@@ -6706,16 +6706,16 @@
                     if (allowEgg){
                         var appealPoints = 0;
                         var minAppealRequired = pokeIndex.eggCycles * -1;
-                        //console.log('\n-----');
-                        //console.log(pokeToken + ' | minAppealRequired = ' + minAppealRequired + ' | appealPoints = ' + appealPoints);
+                        // //console.log('\n-----');
+                        // //console.log(pokeToken + ' | minAppealRequired = ' + minAppealRequired + ' | appealPoints = ' + appealPoints);
                         for (var i = 0; i < pokeIndex.types.length; i++){
                             var type = pokeIndex.types[i];
                             if (typeof currentTypeStats[type] !== 'undefined'){
-                                //console.log('appealPoints('+appealPoints+') += currentTypeStats['+type+']('+currentTypeStats[type]+');');
+                                // //console.log('appealPoints('+appealPoints+') += currentTypeStats['+type+']('+currentTypeStats[type]+');');
                                 appealPoints += currentTypeStats[type];
                                 }
                             }
-                        //console.log(pokeToken + ' | minAppealRequired = ' + minAppealRequired + ' | appealPoints = ' + appealPoints);
+                        // //console.log(pokeToken + ' | minAppealRequired = ' + minAppealRequired + ' | appealPoints = ' + appealPoints);
                         if (appealPoints < minAppealRequired){ allowEgg = false; }
                         }
 
@@ -6764,7 +6764,7 @@
 
     // Define a function for updating the current box's biome, if necessary
     function updateBoxBiome(){
-        //console.log('updateBoxBiome()');
+        // //console.log('updateBoxBiome()');
 
         // Under normal circumstances, do NOT use type appeal for biome
         var currentZoneStats = thisZoneData.currentStats;
@@ -6798,7 +6798,7 @@
                 }
             }
 
-        //console.log('currentTypes = ', currentTypes);
+        // //console.log('currentTypes = ', currentTypes);
 
         // Loop through the field index and use type-counts to determine chances
         var selectedField = false;
@@ -6818,9 +6818,9 @@
                     fieldChance += appealValue * typeVal;
                     }
                 }
-            //console.log(fieldToken+' = ', fieldInfo);
-            //console.log('|-- typeVal = ', typeVal);
-            //console.log('|-- fieldChance = ', fieldChance);
+            // //console.log(fieldToken+' = ', fieldInfo);
+            // //console.log('|-- typeVal = ', typeVal);
+            // //console.log('|-- fieldChance = ', fieldChance);
             if (fieldChance > 0){
                 possibleFields.push({
                     field: fieldToken,
@@ -6829,7 +6829,7 @@
                 }
             }
 
-        //console.log('possibleFields = ', possibleFields);
+        // //console.log('possibleFields = ', possibleFields);
 
         // If there were no appropriate fields, do nothing for now
         if (possibleFields.length === 0){ return false; }
@@ -6840,14 +6840,14 @@
             else if (fieldA.chance < fieldB.chance){ return 1; }
             else { return 0; }
             });
-        //console.log('topFields = ', possibleFields[0]['field'], possibleFields[1]['field'], possibleFields[2]['field']);
+        // //console.log('topFields = ', possibleFields[0]['field'], possibleFields[1]['field'], possibleFields[2]['field']);
         if (possibleFields[0].chance > 0
             && possibleFields[0]['field'] !== thisZoneData.field){
             var fieldToken = possibleFields[0]['field'];
             var fieldInfo = PokemonFieldsIndex[fieldToken];
             thisZoneData.field = fieldToken;
             thisZoneData.name = fieldInfo.name;
-            //console.log('change to field '+fieldToken);
+            // //console.log('change to field '+fieldToken);
             var newImage = 'images/fields/'+fieldToken+'-fullsize.png';
             $('.details.pokemon .field .bg', $panelMainOverview).css({backgroundImage:'url('+ newImage +')'});
             }
@@ -6856,7 +6856,7 @@
 
     // Define a function for calculating visitor appeal values
     function recalculateVisitorAppeal(){
-        //console.log('recalculateVisitorAppeal()');
+        // //console.log('recalculateVisitorAppeal()');
 
         // SPECIAL BOX EFFECT : Repel all visitor pokemon if the appropriate flag is active
         if (thisZoneData.currentEffects['repelAllVisitors'] === true){
@@ -6895,13 +6895,13 @@
             var naturalEncounterRates = repelBasicVisitors || repelSpecialVisitors ? false : true;
             var increaseSpecialVisitors = thisZoneData.currentEffects['increaseSpecialVisitors'] ? true : false;
 
-            //console.log('----------- = ');
-            //console.log('currentMythicalNum = ', currentMythicalNum);
-            //console.log('currentLegendaryNum = ', currentLegendaryNum);
-            //console.log('increaseSpecialVisitors = ', increaseSpecialVisitors);
-            //console.log('repelBasicVisitors = ', repelBasicVisitors);
-            //console.log('repelSpecialVisitors = ', repelSpecialVisitors);
-            //console.log('naturalEncounterRates = ', naturalEncounterRates);
+            // //console.log('----------- = ');
+            // //console.log('currentMythicalNum = ', currentMythicalNum);
+            // //console.log('currentLegendaryNum = ', currentLegendaryNum);
+            // //console.log('increaseSpecialVisitors = ', increaseSpecialVisitors);
+            // //console.log('repelBasicVisitors = ', repelBasicVisitors);
+            // //console.log('repelSpecialVisitors = ', repelSpecialVisitors);
+            // //console.log('naturalEncounterRates = ', naturalEncounterRates);
 
             // If we're using NATURAL encounter rates, we do BASIC for most of the year and SPECIAL at the end
             if (naturalEncounterRates){
@@ -6951,8 +6951,8 @@
 
                 }
 
-            //console.log('eventPokemonChanceBases = ', eventPokemonChanceBases);
-            //console.log('eventPokemonChanceBoosters = ', eventPokemonChanceBoosters);
+            // //console.log('eventPokemonChanceBases = ', eventPokemonChanceBases);
+            // //console.log('eventPokemonChanceBoosters = ', eventPokemonChanceBoosters);
 
             // (GEN 1+) DITTO appears more 6 months into the year when the box is nearly empty
             eventPokemonChanceBoosters['ditto'] = 0;
@@ -6974,8 +6974,8 @@
                     // Check if type appeal is critical or extreme right now
                     var extremeTypeAppeal = zoneFlags.indexOf('extremeTypeAppeal') !== -1 ? true : false;
                     var criticalTypeAppeal = zoneFlags.indexOf('criticalTypeAppeal') !== -1 ? true : false;
-                    //console.log('extremeTypeAppeal = ', extremeTypeAppeal);
-                    //console.log('criticalTypeAppeal = ', criticalTypeAppeal);
+                    // //console.log('extremeTypeAppeal = ', extremeTypeAppeal);
+                    // //console.log('criticalTypeAppeal = ', criticalTypeAppeal);
 
                     // Cound the current number of cells and cores (in all their forms) in the box
                     var numZygardeCells = typeof zoneStats['species']['zygarde-cell'] !== 'undefined' ? zoneStats['species']['zygarde-cell'] : 0;
@@ -6995,14 +6995,14 @@
                         numZygardeCores += zoneStats['species']['zygarde-complete'];
                         numZygardeCells += 3 * zoneStats['species']['zygarde-complete'];
                         }
-                    //console.log('numZygardeCells = ', numZygardeCells);
-                    //console.log('numZygardeCores = ', numZygardeCores);
+                    // //console.log('numZygardeCells = ', numZygardeCells);
+                    // //console.log('numZygardeCores = ', numZygardeCores);
 
                     // Summon cells only until there are a max of three in the box
                     if (numZygardeCores < 1
                         && numZygardeCells < 3
                         && (extremeTypeAppeal || criticalTypeAppeal)){
-                        //console.log('try to add a cell');
+                        // //console.log('try to add a cell');
                         eventBase = 0 + (extremeTypeAppeal ? 100 : 0) + (criticalTypeAppeal ? 100 : 0);
                         eventBoost = 0 + (extremeTypeAppeal ? 2 : 0) + (criticalTypeAppeal ? 2 : 0);
                         eventPokemonChanceBases['zygarde-cell'] = eventBase;
@@ -7012,7 +7012,7 @@
                     // Summon a single core when at least three cells are currently in the box
                     if (numZygardeCores < 1
                         && numZygardeCells >= 3){
-                        //console.log('try to add a core');
+                        // //console.log('try to add a core');
                         eventBase = 100 * numZygardeCells;
                         eventBoost = 2 * numZygardeCells;
                         eventPokemonChanceBases['zygarde-core'] = eventBase;
@@ -7046,9 +7046,9 @@
                 var currentLunala = typeof zoneStats['species']['lunala'] !== 'undefined' ? zoneStats['species']['lunala'] : 0;
                 var currentSolgaleo = typeof zoneStats['species']['solgaleo'] !== 'undefined' ? zoneStats['species']['solgaleo'] : 0;
                 var necrozmaAdded = typeof addedSpecies['necrozma'] !== 'undefined' ? addedSpecies['necrozma'] : 0;
-                //console.log('currentLunala = ', currentLunala);
-                //console.log('currentSolgaleo = ', currentSolgaleo);
-                //console.log('necrozmaAdded = ', necrozmaAdded);
+                // //console.log('currentLunala = ', currentLunala);
+                // //console.log('currentSolgaleo = ', currentSolgaleo);
+                // //console.log('necrozmaAdded = ', necrozmaAdded);
                 if ((currentLunala + currentSolgaleo) > 0
                     && necrozmaAdded < 1){
                     eventBoost = ((thisZoneData.date.month + 1) / 12) + currentLunala + currentSolgaleo;
@@ -7056,8 +7056,8 @@
                     if (currentUltraBeastNum > 0){ eventBase *= (currentUltraBeastNum + 1); }
                     eventPokemonChanceBases['necrozma'] = eventBase;
                     eventPokemonChanceBoosters['necrozma'] = eventBoost;
-                    //console.log('eventBoost = ', eventBoost);
-                    //console.log('eventBase = ', eventBase);
+                    // //console.log('eventBoost = ', eventBoost);
+                    // //console.log('eventBase = ', eventBase);
                     }
                 }
 
@@ -7068,7 +7068,7 @@
                 var silvallyHasAppeared = zoneFlags.indexOf('silvallyHasAppeared') !== -1;
                 var totalUltraEnergy = typeof zoneStats['totalUltraEnergy'] !== 'undefined' ? zoneStats['totalUltraEnergy'] : 0;
                 var currentUltraEnergy = typeof zoneStats['currentUltraEnergy'] !== 'undefined' ? zoneStats['currentUltraEnergy'] : 0;
-                //console.log('totalUltraEnergy = ' + totalUltraEnergy + ' | currentUltraEnergy = ' + currentUltraEnergy);
+                // //console.log('totalUltraEnergy = ' + totalUltraEnergy + ' | currentUltraEnergy = ' + currentUltraEnergy);
                 if (boxHasUltraEnergy
                     && !silvallyHasAppeared
                     && currentUltraBeastNum < 3
@@ -7103,9 +7103,9 @@
 
             }
 
-        //console.log(thisZoneData.date.year + ' / ' + thisZoneData.date.month + ' / ' + thisZoneData.date.day);
-        //console.log('eventPokemonChanceBases = ', eventPokemonChanceBases);
-        //console.log('eventPokemonChanceBoosters = ', eventPokemonChanceBoosters);
+        // //console.log(thisZoneData.date.year + ' / ' + thisZoneData.date.month + ' / ' + thisZoneData.date.day);
+        // //console.log('eventPokemonChanceBases = ', eventPokemonChanceBases);
+        // //console.log('eventPokemonChanceBoosters = ', eventPokemonChanceBoosters);
         //window.eventPokemonChanceBoosters = eventPokemonChanceBoosters;
 
         // SPECIAL BOX EFFECT : Ignore species appeal entirely if the appropriate flag is active
@@ -7125,15 +7125,15 @@
                             && thisZoneData.currentStats['species'][speciesToken] > 0)
                             && (typeof thisZoneData.currentStats['species'][pokeToken] === 'undefined'
                             || thisZoneData.currentStats['species'][pokeToken] <= 3)){
-                            //console.log('pokeToken = '+pokeToken+' | speciesToken = '+speciesToken+'');
-                            //console.log('thisZoneData.currentStats[\'species\']['+speciesToken+'] = ', thisZoneData.currentStats['species'][speciesToken]);
-                            //console.log('thisZoneData.currentStats[\'species\']['+pokeToken+'] = ', thisZoneData.currentStats['species'][pokeToken]);
+                            // //console.log('pokeToken = '+pokeToken+' | speciesToken = '+speciesToken+'');
+                            // //console.log('thisZoneData.currentStats[\'species\']['+speciesToken+'] = ', thisZoneData.currentStats['species'][speciesToken]);
+                            // //console.log('thisZoneData.currentStats[\'species\']['+pokeToken+'] = ', thisZoneData.currentStats['species'][pokeToken]);
                             speciesAppealIndex[pokeToken] = thisZoneData.currentStats['species'][speciesToken];
                             }
                         }
                     }
                 }
-            //console.log('speciesAppealIndex = ', speciesAppealIndex);
+            // //console.log('speciesAppealIndex = ', speciesAppealIndex);
             }
 
         // Collect a reference to the current type stats
@@ -7146,7 +7146,7 @@
         allowedVisitorTokens = allowedVisitorTokens.concat(BasicPokemonSpeciesIndexTokens);
         if (!jQuery.isEmptyObject(speciesAppealIndex)){ allowedVisitorTokens = allowedVisitorTokens.concat(Object.keys(speciesAppealIndex)); }
         allowedVisitorTokens = Array.from(new Set(allowedVisitorTokens));
-        //console.log('allowedVisitorTokens = ', allowedVisitorTokens);
+        // //console.log('allowedVisitorTokens = ', allowedVisitorTokens);
 
         // Loop through basic pokemon and calculate chances of each
         var rankedZoneStats = Object.keys(currentTypeStats);
@@ -7203,9 +7203,9 @@
                     numAddedCurrently += thisZoneData.currentStats['species'][relToken];
                     }
                 }
-            //console.log('relatedSpecies = ', pokeToken, pokeInfo.relatedSpecies);
-            //console.log('numAddedAlready = ', pokeToken, numAddedAlready);
-            //console.log('numAddedCurrently = ', pokeToken, numAddedCurrently);
+            // //console.log('relatedSpecies = ', pokeToken, pokeInfo.relatedSpecies);
+            // //console.log('numAddedAlready = ', pokeToken, numAddedAlready);
+            // //console.log('numAddedCurrently = ', pokeToken, numAddedCurrently);
 
             // Check to see if this is a persistent visitor (which is to say it can show up any number of times)
             var repeatVisitor = typeof pokeInfo.repeatVisitor !== 'undefined' ? pokeInfo.repeatVisitor : false;
@@ -7264,11 +7264,11 @@
 
             // Increase the chance of this pokemon appearing based on species appeal
             if (typeof speciesAppealIndex[pokeToken] !== 'undefined'){
-                //console.log('speciesAppealIndex['+pokeToken+'] = ', speciesAppealIndex[pokeToken]);
+                // //console.log('speciesAppealIndex['+pokeToken+'] = ', speciesAppealIndex[pokeToken]);
                 if (pokeChance < 0){ pokeChance = 0; }
                 pokeChance += 2;
                 pokeChance *= speciesAppealIndex[pokeToken];
-                //console.log('pokeChance = ', pokeChance);
+                // //console.log('pokeChance = ', pokeChance);
             }
 
             // Check to see if this visitor requires a certain other species to appear
@@ -7284,20 +7284,20 @@
                 }
 
             // Decrease the chance if there is already a colony of this species
-            //console.log('repeatVisitor ', pokeToken, repeatVisitor);
-            //console.log('numAddedAlready ', pokeToken, numAddedAlready);
+            // //console.log('repeatVisitor ', pokeToken, repeatVisitor);
+            // //console.log('numAddedAlready ', pokeToken, numAddedAlready);
             if (!repeatVisitor && numAddedAlready > 0){
                 if (numAddedAlready > 1){ pokeChance -= numAddedAlready; }
-                //console.log('pokeChance ', pokeToken, pokeChance);
+                // //console.log('pokeChance ', pokeToken, pokeChance);
                 if (isSpecialPokemon){
                     if (numAddedCurrently >= 1){ pokeChance = 0; }
                     else if (numAddedAlready >= 3){ pokeChance = 0; }
-                    //console.log('pokeChance ', pokeToken, pokeChance);
+                    // //console.log('pokeChance ', pokeToken, pokeChance);
                     } else {
                     if (numAddedCurrently === 1){ pokeChance *= 2.0; }
                     else if (numAddedCurrently >= 3){ pokeChance = 0; }
                     else if (numAddedAlready >= 6){ pokeChance = 0; }
-                    //console.log('pokeChance ', pokeToken, pokeChance);
+                    // //console.log('pokeChance ', pokeToken, pokeChance);
                     }
                 }
 
@@ -7331,19 +7331,19 @@
                 else { return 0; }
                 });
             }
-        //console.log('pokemonVisitorChances = ', pokemonVisitorChances);
-        //console.log('pokemonVisitorChances(top20) = ', pokemonVisitorChances[0], pokemonVisitorChances[1], pokemonVisitorChances[2], pokemonVisitorChances.slice(0, 20));
-        //console.log('pokemonVisitorChances(top100) = ', pokemonVisitorChances[0], pokemonVisitorChances[1], pokemonVisitorChances[2], pokemonVisitorChances.slice(0, 100));
+        // //console.log('pokemonVisitorChances = ', pokemonVisitorChances);
+        // //console.log('pokemonVisitorChances(top20) = ', pokemonVisitorChances[0], pokemonVisitorChances[1], pokemonVisitorChances[2], pokemonVisitorChances.slice(0, 20));
+        // //console.log('pokemonVisitorChances(top100) = ', pokemonVisitorChances[0], pokemonVisitorChances[1], pokemonVisitorChances[2], pokemonVisitorChances.slice(0, 100));
 
         // Update the parent appeal index with the current sorted chances
         thisZoneData.currentStats['visitorAppeal'] = pokemonVisitorChances;
-        //console.log('thisZoneData.currentStats[\'visitorAppeal\'] = ', thisZoneData.currentStats['visitorAppeal']);
+        // //console.log('thisZoneData.currentStats[\'visitorAppeal\'] = ', thisZoneData.currentStats['visitorAppeal']);
 
     }
 
     // Define a function for triggering a zone visitor
     function triggerZoneVisitor(visitorKind){
-        //console.log('triggerZoneVisitor(visitorKind)', visitorKind);
+        // //console.log('triggerZoneVisitor(visitorKind)', visitorKind);
         if (typeof visitorKind !== 'string'){ visitorKind = 'auto'; }
 
         // If we're already at capacity, we cannot add any more pokemon
@@ -7352,7 +7352,7 @@
         // Collect visitor appeal and sum all the chance values (return false if zero)
         var currentVisitorAppeal = thisZoneData.currentStats['visitorAppeal'];
         var currentVisitorAppealTotal = sumValuesByKey(currentVisitorAppeal, 'chance', true);
-        //console.log('currentVisitorAppealTotal = ', currentVisitorAppealTotal, currentVisitorAppeal);
+        // //console.log('currentVisitorAppealTotal = ', currentVisitorAppealTotal, currentVisitorAppeal);
         if (!(currentVisitorAppealTotal > 0)){ return false; }
 
         // Collect the visitor token based on kind, either directly or whatever is next in line
@@ -7367,7 +7367,7 @@
             }
 
         // If visitor token was not set, we should return early
-        //console.log('visitorToken = ', visitorToken);
+        // //console.log('visitorToken = ', visitorToken);
         if (visitorToken === false){ return false; }
 
         // Collect the visitor's info and then add it to the zone
@@ -7394,7 +7394,7 @@
 
     // Define a function for getting the base evolution of a pokemon
     function pokemonGetBasicEvolution(pokeToken, includeBaby, includeAlts){
-        //console.log('pokemonGetBasicEvolution(pokeToken('+pokeToken+'), includeBaby('+includeBaby+'))');
+        // //console.log('pokemonGetBasicEvolution(pokeToken('+pokeToken+'), includeBaby('+includeBaby+'))');
         if (typeof pokeToken === 'undefined'){ return false; }
         if (typeof includeBaby !== 'boolean'){ includeBaby = true; }
         if (typeof includeAlts !== 'boolean'){ includeAlts = true; }
@@ -7411,27 +7411,27 @@
 
     // Define a function for getting the base evolution of a pokemon
     function pokemonGetBaseEvolution(pokeToken, includeBaby, includeAlts){
-        //console.log('pokemonGetBaseEvolution('+pokeToken+', '+includeBaby+', '+includeAlts+')');
+        // //console.log('pokemonGetBaseEvolution('+pokeToken+', '+includeBaby+', '+includeAlts+')');
         if (typeof pokeToken === 'undefined'){ return false; }
         if (typeof includeBaby !== 'boolean'){ includeBaby = true; }
         if (typeof includeAlts !== 'boolean'){ includeAlts = true; }
         var baseToken = pokeToken;
         var indexInfo = PokemonSpeciesIndex[baseToken];
-        //console.log('indexInfo = ', indexInfo);
+        // //console.log('indexInfo = ', indexInfo);
         if (typeof indexInfo.prevEvolution !== 'undefined'){
             var prevInfo = PokemonSpeciesIndex[indexInfo.prevEvolution];
             if (!includeBaby && prevInfo.class === 'baby'){
-                //console.log('!includeBaby && prevInfo.class === \'baby\' | return baseToken', baseToken);
+                // //console.log('!includeBaby && prevInfo.class === \'baby\' | return baseToken', baseToken);
                 return baseToken;
                 } else {
-                //console.log('return indexInfo.prevEvolution', indexInfo.prevEvolution);
+                // //console.log('return indexInfo.prevEvolution', indexInfo.prevEvolution);
                 return pokemonGetBaseEvolution(indexInfo.prevEvolution, includeBaby, includeAlts);
                 }
             } else {
-            //console.log('return indexInfo.altBaseEvolutions', indexInfo.altBaseEvolutions);
+            // //console.log('return indexInfo.altBaseEvolutions', indexInfo.altBaseEvolutions);
             if (includeAlts && typeof indexInfo.altBaseEvolutions !== 'undefined'){
-                //console.log('\npokemonGetBaseEvolution('+pokeToken+', includeBaby:'+includeBaby+', includeAlts:'+includeAlts+')');
-                //console.log('| -- indexInfo.altBaseEvolutions =', indexInfo.altBaseEvolutions);
+                 //console.log('\npokemonGetBaseEvolution('+pokeToken+', includeBaby:'+includeBaby+', includeAlts:'+includeAlts+')');
+                 //console.log('| -- indexInfo.altBaseEvolutions =', indexInfo.altBaseEvolutions);
 
                 // Collect refs to zone stats and special energy/power counters
                 var zoneStats = thisZoneData.currentStats;
@@ -7446,8 +7446,8 @@
                 for (var i = 0; i < indexInfo.altBaseEvolutions.length; i++){
                     var baseEvolution = indexInfo.altBaseEvolutions[i];
                     var baseEvolutionInfo = PokemonSpeciesIndex[baseEvolution.species];
-                    //console.log('baseEvolution['+ i +'] = ', baseEvolution);
-                    //console.log('zoneStats[\'types\'][baseEvolution.value] = ', zoneStats['types'][baseEvolution.value]);
+                    // //console.log('baseEvolution['+ i +'] = ', baseEvolution);
+                    // //console.log('zoneStats[\'types\'][baseEvolution.value] = ', zoneStats['types'][baseEvolution.value]);
 
                     var allowBaseEvolution = false;
                     var baseEvolutionSpecies = baseEvolution['species'];
@@ -7460,7 +7460,7 @@
 
                         var baseEvolutionMethod = baseEvolution['method'+m];
                         var baseEvolutionValue = baseEvolution['value'+m];
-                        //console.log(pokeToken+' to '+baseEvolutionSpecies+' w/ ', baseEvolutionMethod, baseEvolutionValue, '...');
+                         //console.log('checking '+pokeToken+' to '+baseEvolutionSpecies+' w/ ', baseEvolutionMethod, baseEvolutionValue, (baseEvolutionMethod.indexOf('type') !== -1 ? JSON.stringify(zoneStats['types']) : ''), '...');
 
                         // Calculate TYPE APPEAL & SURGE effects on base evolution
                         if ((baseEvolutionMethod === 'type-appeal'
@@ -7480,6 +7480,12 @@
                             allowBaseEvolution = true;
                             baseEvolutionChance += (baseEvolutionMethod === 'type-warning' ? 2 : 3) + ((zoneStats['types'][baseEvolutionValue] * -1)  * 2);
 
+                            // Calculate TYPE VALUE effects on base evolution
+                            } else if (baseEvolutionMethod === 'type-value'){
+
+                            allowBaseEvolution = true;
+                            baseEvolutionChance += zoneStats['types'][baseEvolutionValue];
+
                             // Calculate TYPE VS TYPE effects on base evolution
                             } else if (baseEvolutionMethod === 'type-vs-type'
                                 && zoneStats['types'][baseEvolutionValue[0]] > zoneStats['types'][baseEvolutionValue[1]]){
@@ -7487,7 +7493,7 @@
                             allowBaseEvolution = true;
                             baseEvolutionChance += 2 + (zoneStats['types'][baseEvolutionValue[0]] - zoneStats['types'][baseEvolutionValue[1]]);
 
-                            //console.log(pokeToken+' to '+baseEvolutionSpecies+' w/ type-vs-type', baseEvolutionValue, (zoneStats['types'][baseEvolutionValue[0]] +' > '+ zoneStats['types'][baseEvolutionValue[1]]), 'allowBaseEvolution!, baseEvolutionChance =', baseEvolutionChance);
+                             //console.log(pokeToken+' to '+baseEvolutionSpecies+' w/ type-vs-type', baseEvolutionValue, (zoneStats['types'][baseEvolutionValue[0]] +' > '+ zoneStats['types'][baseEvolutionValue[1]]), 'allowBaseEvolution!, baseEvolutionChance =', baseEvolutionChance);
 
                             // Calculate ULTRA ENERGY effects on base evolution
                             } else if (baseEvolutionMethod === 'ultra-energy'
@@ -7515,14 +7521,18 @@
                             } else {
 
                             allowBaseEvolution = false;
-                            baseEvolutionSpecies = '';
                             baseEvolutionChance = 0;
-                            //console.log('...failed a condition!', baseEvolutionChance+'% chance');
+                             //console.log('...didn\'t pass any conditions!', baseEvolutionChance+'% chance');
                             break;
 
                             }
 
-                        //console.log('...passed all conditions!', baseEvolutionChance+'% chance');
+                        if (allowBaseEvolution
+                            && baseEvolutionChance > 0){
+                             //console.log('...passed all conditions!', baseEvolutionChance+'% chance');
+                            } else {
+                             //console.log('...didn\'t pass all conditions!', baseEvolutionChance+'% chance');
+                            }
 
                         }
 
@@ -7530,7 +7540,7 @@
                     if (allowBaseEvolution
                         && baseEvolutionSpecies.length
                         && baseEvolutionChance > 0){
-                        //console.log('allowBaseEvolution from '+pokeToken+' to '+baseEvolutionSpecies+' w/ '+baseEvolutionChance+'% chance!');
+                         //console.log('allowBaseEvolution from '+pokeToken+' to '+baseEvolutionSpecies+' w/ '+baseEvolutionChance+'% chance!');
                         queuedBaseEvolutionsTokens.push(baseEvolutionSpecies);
                         queuedBaseEvolutions.push({
                             token: baseEvolutionSpecies,
@@ -7545,29 +7555,32 @@
                     queuedBaseEvolutionsTokens.push(indexInfo.token);
                     queuedBaseEvolutions.push({
                         token: indexInfo.token,
-                        chance: 1 + zoneStats['types'][indexInfo.types[0]]
+                        chance: 1 + ((typeof indexInfo.types[1] !== 'undefined'
+                            ? ((zoneStats['types'][indexInfo.types[0]] + zoneStats['types'][indexInfo.types[1]]) / 2)
+                            : (zoneStats['types'][indexInfo.types[0]])
+                            ) / (queuedBaseEvolutionsTokens.length >= 1 ? queuedBaseEvolutionsTokens.length : 1))
                         });
                     }
 
                 // If eligable base evos were found, analyze and return one of 'em
-                if (queuedBaseEvolutions.length > 0){
-                    //console.log('queuedBaseEvolutions for '+indexInfo.token+' = ', queuedBaseEvolutions);
+                if (queuedBaseEvolutionsTokens.length > 0){
+                     //console.log('queuedBaseEvolutions for '+indexInfo.token+' = ', queuedBaseEvolutions);
                     queuedBaseEvolutions.sort(function(a, b){
                         if (a.chance > b.chance){ return -1; }
                         else if (a.chance < b.chance){ return 1; }
                         else { return 0; }
                         });
                     var selectedBaseEvolution = queuedBaseEvolutions[0].token;
-                    //console.log('selectedBaseEvolution = ', selectedBaseEvolution);
-                    //console.log('return selectedBaseEvolution', selectedBaseEvolution, '\n----------');
+                     //console.log('selectedBaseEvolution = ', selectedBaseEvolution);
+                     //console.log('return selectedBaseEvolution', selectedBaseEvolution, '\n----------');
                     return selectedBaseEvolution;
                     } else {
-                    //console.log('return baseToken', baseToken, '\n----------');
+                     //console.log('return baseToken', baseToken, '\n----------');
                     return baseToken;
                     }
 
                 } else {
-                //console.log('return baseToken', baseToken, '\n----------');
+                // //console.log('return baseToken', baseToken, '\n----------');
                 return baseToken;
                 }
             }
@@ -7650,7 +7663,7 @@
             else if (pokeInfoA.lifePoints > pokeInfoB.lifePoints){ return 1 * reverseOrder; }
             else { return 0; }
             });
-        //console.log('sortSpeciesTokensByLifePoints() = ', speciesTokens);
+        // //console.log('sortSpeciesTokensByLifePoints() = ', speciesTokens);
         return speciesTokens;
     }
 
@@ -7664,7 +7677,7 @@
             else if (pokeInfoA.breedPoints > pokeInfoB.breedPoints){ return 1 * reverseOrder; }
             else { return 0; }
             });
-        //console.log('sortSpeciesTokensByBreedPoints() = ', speciesTokens);
+        // //console.log('sortSpeciesTokensByBreedPoints() = ', speciesTokens);
         return speciesTokens;
     }
 
@@ -7691,8 +7704,8 @@
             relatedSpeciesTokens.push(baseToken);
             var nextEvolutions = pokemonGetNextEvolutions(baseToken);
             if (nextEvolutions.length > 0){
-                //console.log('(0)nextEvolutions = ', nextEvolutions);
-                //console.log('(0)nextEvolutions.length = ', nextEvolutions.length);
+                // //console.log('(0)nextEvolutions = ', nextEvolutions);
+                // //console.log('(0)nextEvolutions.length = ', nextEvolutions.length);
                 for (var key = 0; key < nextEvolutions.length; key++){
 
                     // Add stage 2 and check for stage 3
@@ -7702,8 +7715,8 @@
                     relatedSpeciesTokens.push(nextToken);
                     nextEvolutions2 = pokemonGetNextEvolutions(nextToken);
                     if (nextEvolutions2.length > 0){
-                        //console.log('(1)nextEvolutions2 = ', nextEvolutions2);
-                        //console.log('(1)nextEvolutions2.length = ', nextEvolutions2.length);
+                        // //console.log('(1)nextEvolutions2 = ', nextEvolutions2);
+                        // //console.log('(1)nextEvolutions2.length = ', nextEvolutions2.length);
                         for (var key2 = 0; key2 < nextEvolutions2.length; key2++){
 
                             // Add stage 3 and check for stage 4
@@ -7713,8 +7726,8 @@
                             relatedSpeciesTokens.push(nextToken);
                             nextEvolutions3 = pokemonGetNextEvolutions(nextToken);
                             if (nextEvolutions3.length > 0){
-                                //console.log('(2)nextEvolutions3 = ', nextEvolutions3);
-                                //console.log('(2)nextEvolutions3.length = ', nextEvolutions3.length);
+                                // //console.log('(2)nextEvolutions3 = ', nextEvolutions3);
+                                // //console.log('(2)nextEvolutions3.length = ', nextEvolutions3.length);
                                 for (var key3 = 0; key3 < nextEvolutions3.length; key3++){
 
                                     // Add stage 4 and (there is no stage 5)
@@ -7922,20 +7935,20 @@
 
     // Define a function for parsing a starter pokemon seed (string to array)
     function parsePokeBoxSeed(seedString){
-        //console.log('seedString = ', seedString);
+        // //console.log('seedString = ', seedString);
         var rawString = seedString;
         //var seedData = rawString.match(/^`?`?\[\s?PBS\s+\|\s+(.*)?\s+\|\s+(.*)?\s?\]`?`?$/i);
         rawString = rawString.replace(' ♂', '-m', rawString).replace(' ♀', '-f', rawString);
         rawString = rawString.replace(/×\s/g, '×1 ', rawString);
-        //console.log('rawString = ', rawString);
+        // //console.log('rawString = ', rawString);
         var seedData = rawString.match(/^[`]{0,}\[?(?:PBS\s+\|\s+)?([^|]+)?(?:\s+\|\s+(?:v[0-9]+\.[0-9]+\.[0-9]+[a-z]?))?\]?[`]{0,}$/i);
         //var seedString = rawString.replace(/^[`]{0,}\[?(?:PBS\s+\|\s+)?([^|]+)?(?:\s+\|\s+(?:v[0-9]+\.[0-9]+\.[0-9]+[a-z]?))?\]?[`]{0,}$/i, '$1');
-        //console.log('seedData = ', seedData);
-        //console.log('seedString = ', seedString);
+        // //console.log('seedData = ', seedData);
+        // //console.log('seedString = ', seedString);
         if (seedData !== null){
-            //console.log('seed string was okay!');
+            // //console.log('seed string was okay!');
             var rawList = seedData[1].match(/\s+\/\s+/) ? seedData[1].split(/\s+\/\s+/) : [seedData[1]];
-            //console.log('rawList = ', rawList);
+            // //console.log('rawList = ', rawList);
             var pokeList = [];
             var genderTrans = {m:'male',f:'female',n:'none'};
             for (var i = 0; i < rawList.length; i++){
@@ -7943,8 +7956,8 @@
                 if (!rawValue.match(/\s(?:×|x)?\s?([0-9mf×x\/]+)$/i)){ rawValue += ' ×1'; }
                 var rawInfo = rawValue.match(/^(\S+)\s(?:×|x)?\s?([0-9mf×x\/]+)$/i);
                 if (rawInfo === null){ rawInfo = rawValue.match(/^(\S+\s\S+)\s(?:×|x)?\s?([0-9mf×x\/]+)$/i); }
-                //console.log('rawValue = ', typeof rawValue, rawValue);
-                //console.log('rawInfo = ', typeof rawInfo, rawInfo);
+                // //console.log('rawValue = ', typeof rawValue, rawValue);
+                // //console.log('rawInfo = ', typeof rawInfo, rawInfo);
                 if (rawInfo !== null
                     && typeof rawInfo[1] !== 'undefined'){
                     var pokeName = rawInfo[1];
@@ -7960,25 +7973,25 @@
                         }
                     var pokeCounts = rawInfo[2].toLowerCase().replace(/(×|x)+/, '').split(/\//);
                     var pokeIndex = PokemonSpeciesIndex[pokeToken];
-                    //console.log('\tpokeToken = ', pokeToken);
-                    //console.log('\tpokeCounts = ', pokeCounts);
-                    //console.log('\tpokeIndex = ', pokeIndex);
+                    // //console.log('\tpokeToken = ', pokeToken);
+                    // //console.log('\tpokeCounts = ', pokeCounts);
+                    // //console.log('\tpokeIndex = ', pokeIndex);
                     if (typeof pokeIndex === 'undefined'){ continue; }
                     for (var j = 0; j < pokeCounts.length; j++){
                         var raw = pokeCounts[j].match(/^([0-9]+)(f|m)?$/);
                         var count = parseInt(raw[1]);
                         var gender = genderTrans[raw[2] || 'n'];
-                        //console.log('count / gender = ', count, gender);
+                        // //console.log('count / gender = ', count, gender);
                         if (pokeIndex.hasNoGender && gender !== 'none'){ gender = 'none'; }
                         else if (pokeIndex.hasOneGender && gender !== pokeIndex.speciesGender){ gender = 'none'; }
                         for (var k = 0; k < count; k++){ pokeList.push(gender !== 'none' ? [pokeToken, gender] : [pokeToken]); }
                         }
                     }
                 }
-            //console.log('pokeList ', pokeList);
+            // //console.log('pokeList ', pokeList);
             return pokeList;
             } else {
-            //console.log('seed string was invalid');
+            // //console.log('seed string was invalid');
             return false;
             }
     }
@@ -8003,7 +8016,7 @@
         for (var i = 0; i < starterRewardCount; i++){
             var rewardInfo = starterRewardIndex[i];
             if (typeof rewardInfo === 'undefined'){ continue; }
-            //console.log('rewardInfo = ', i, rewardInfo);
+            // //console.log('rewardInfo = ', i, rewardInfo);
             if (seenSpeciesTokens.length >= rewardInfo['count']
                 && PokeboxRewards.indexOf('gen'+ rewardInfo['gen'] +'-starters') === -1){
                 PokeboxRewards.push('gen'+ rewardInfo['gen'] +'-starters');
@@ -8015,7 +8028,7 @@
         for (var i = 0; i < shadowRewardCount; i++){
             var rewardInfo = shadowRewardIndex[i];
             if (typeof rewardInfo === 'undefined'){ continue; }
-            //console.log('rewardInfo = ', i, rewardInfo);
+            // //console.log('rewardInfo = ', i, rewardInfo);
             if (PokeboxDaysPassed >= rewardInfo['count']
                 && PokeboxRewards.indexOf(rewardInfo['species']) === -1){
                 PokeboxRewards.push(rewardInfo['species']);
@@ -8027,7 +8040,7 @@
         for (var i = 0; i < shiningRewardCount; i++){
             var rewardInfo = shiningRewardIndex[i];
             if (typeof rewardInfo === 'undefined'){ continue; }
-            //console.log('rewardInfo = ', i, rewardInfo);
+            // //console.log('rewardInfo = ', i, rewardInfo);
             if (PokeboxDaysPassed >= rewardInfo['count']
                 && PokeboxRewards.indexOf(rewardInfo['species']) === -1){
                 PokeboxRewards.push(rewardInfo['species']);
@@ -8059,13 +8072,13 @@
         var savedPokeboxRewards = window.localStorage.getItem('PokeboxRewards');
         if (typeof savedPokeboxRewards === 'string'){ savedPokeboxRewards = JSON.parse(savedPokeboxRewards); }
         else { savedPokeboxRewards = []; }
-        //console.log('currentPokeboxRewards = ', PokeboxRewards);
-        //console.log('savedPokeboxRewards = ', savedPokeboxRewards);
+        // //console.log('currentPokeboxRewards = ', PokeboxRewards);
+        // //console.log('savedPokeboxRewards = ', savedPokeboxRewards);
 
         // Merge the local array into the saved one, and then re-strinify it
         var mergedPokeboxRewards = JSON.stringify(savedPokeboxRewards.concat(PokeboxRewards).filter(function(v, i, s) { return s.indexOf(v) === i; }));
         window.localStorage.setItem('PokeboxRewards', mergedPokeboxRewards);
-        //console.log('mergedPokeboxRewards = ', mergedPokeboxRewards);
+        // //console.log('mergedPokeboxRewards = ', mergedPokeboxRewards);
 
     }
 
@@ -8080,19 +8093,19 @@
         var savedPokeboxPopupsSeen = window.localStorage.getItem('PokeboxPopupsSeen');
         if (typeof savedPokeboxPopupsSeen === 'string'){ savedPokeboxPopupsSeen = JSON.parse(savedPokeboxPopupsSeen); }
         else { savedPokeboxPopupsSeen = []; }
-        //console.log('currentPokeboxPopupsSeen = ', PokeboxPopupsSeen);
-        //console.log('savedPokeboxPopupsSeen = ', savedPokeboxPopupsSeen);
+        // //console.log('currentPokeboxPopupsSeen = ', PokeboxPopupsSeen);
+        // //console.log('savedPokeboxPopupsSeen = ', savedPokeboxPopupsSeen);
 
         // Merge the local array into the saved one, and then re-strinify it
         var mergedPokeboxPopupsSeen = JSON.stringify(savedPokeboxPopupsSeen.concat(PokeboxPopupsSeen).filter(function(v, i, s) { return s.indexOf(v) === i; }));
         window.localStorage.setItem('PokeboxPopupsSeen', mergedPokeboxPopupsSeen);
-        //console.log('mergedPokeboxPopupsSeen = ', mergedPokeboxPopupsSeen);
+        // //console.log('mergedPokeboxPopupsSeen = ', mergedPokeboxPopupsSeen);
 
     }
 
     // Update the math object with a seeded random functon
     Math.seed = 1;
-    //console.log('\n Math.seed set to ', Math.seed);
+    // //console.log('\n Math.seed set to ', Math.seed);
     Math.seededRandom = function(min, max){
         min = min || 0;
         max = max || 1;
