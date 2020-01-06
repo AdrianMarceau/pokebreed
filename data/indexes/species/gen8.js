@@ -566,6 +566,67 @@
             prevEvolution: 'raboot'
             },
 
+        'sobble': {
+            order: indexOrder++,
+            token: 'sobble',
+            name: 'Sobble',
+            isStarterPokemon: true,
+            number: 816,
+            types: ['water'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 50, phAttack: 40, phDefense: 40, spAttack: 70, spDefense: 40, speed: 70},
+            abilities: {0: 'torrent', hidden: 'sniper'},
+            height: 0.3,
+            weight: 4.0,
+            colors: ['blue', 'yellow', 'white'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'field'],
+            nextEvolutions: [{
+                species: 'drizzile',
+                method: 'level-up',
+                value: 16
+                }]
+            },
+        'drizzile': {
+            order: indexOrder++,
+            token: 'drizzile',
+            name: 'Drizzile',
+            isStarterPokemon: true,
+            number: 817,
+            types: ['water'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 65, phAttack: 60, phDefense: 55, spAttack: 95, spDefense: 55, speed: 90},
+            abilities: {0: 'torrent', hidden: 'sniper'},
+            height: 0.7,
+            weight: 11.5,
+            colors: ['blue', 'green', 'purple', 'white'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'field'],
+            prevEvolution: 'sobble',
+            nextEvolutions: [{
+                species: 'inteleon',
+                method: 'level-up',
+                value: 35
+                }]
+            },
+        'inteleon': {
+            order: indexOrder++,
+            token: 'inteleon',
+            name: 'Inteleon',
+            isStarterPokemon: true,
+            number: 818,
+            types: ['water'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 70, phAttack: 85, phDefense: 65, spAttack: 125, spDefense: 65, speed: 120},
+            abilities: {0: 'torrent', hidden: 'sniper'},
+            height: 1.9,
+            weight: 45.2,
+            colors: ['blue', 'black', 'yellow', 'white'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'field'],
+            prevEvolution: 'drizzile'
+            },
+
         'perrserker': {
             order: thisIndex.afterOrder('persian', 6),
             token: 'perrserker',
