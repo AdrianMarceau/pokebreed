@@ -444,6 +444,67 @@
 
         // Base Pokedex
 
+        'grookey': {
+            order: indexOrder++,
+            token: 'grookey',
+            name: 'Grookey',
+            isStarterPokemon: true,
+            number: 810,
+            types: ['grass'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 50, phAttack: 65, phDefense: 50, spAttack: 40, spDefense: 40, speed: 65},
+            abilities: {0: 'overgrow', hidden: 'grassy-surge'},
+            height: 0.3,
+            weight: 5.0,
+            colors: ['green', 'yellow', 'brown', 'orange'],
+            eggCycles: 20,
+            eggGroups: ['field', 'grass'],
+            nextEvolutions: [{
+                species: 'thwackey',
+                method: 'level-up',
+                value: 16
+                }]
+            },
+        'thwackey': {
+            order: indexOrder++,
+            token: 'thwackey',
+            name: 'Thwackey',
+            isStarterPokemon: true,
+            number: 811,
+            types: ['grass'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 70, phAttack: 85, phDefense: 70, spAttack: 55, spDefense: 60, speed: 80},
+            abilities: {0: 'overgrow', hidden: 'grassy-surge'},
+            height: 0.7,
+            weight: 14.0,
+            colors: ['green', 'brown', 'orange', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['field', 'grass'],
+            prevEvolution: 'grookey',
+            nextEvolutions: [{
+                species: 'rillaboom',
+                method: 'level-up',
+                value: 35
+                }]
+            },
+        'rillaboom': {
+            order: indexOrder++,
+            token: 'rillaboom',
+            name: 'Rillaboom',
+            isStarterPokemon: true,
+            number: 812,
+            types: ['grass'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 100, phAttack: 125, phDefense: 90, spAttack: 60, spDefense: 70, speed: 85},
+            abilities: {0: 'overgrow', hidden: 'grassy-surge'},
+            height: 2.1,
+            weight: 90.0,
+            colors: ['brown', 'green', 'gray', 'orange'],
+            eggCycles: 20,
+            eggGroups: ['field', 'grass'],
+            prevEvolution: 'thwackey'
+            },
+
         'perrserker': {
             order: thisIndex.afterOrder('persian', 6),
             token: 'perrserker',
