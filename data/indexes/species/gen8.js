@@ -662,6 +662,61 @@
             prevEvolution: 'skwovet'
             },
 
+        'rookidee': {
+            order: indexOrder++,
+            token: 'rookidee',
+            name: 'Rookidee',
+            number: 821,
+            types: ['flying'],
+            baseStats: {hp: 38, phAttack: 47, phDefense: 35, spAttack: 33, spDefense: 35, speed: 57},
+            abilities: {0: 'keen-eye', 1: 'unnerve', hidden: 'big-pecks'},
+            height: 0.2,
+            weight: 1.8,
+            colors: ['black', 'blue', 'yellow', 'gray', 'red'],
+            eggCycles: 15,
+            eggGroups: ['flying'],
+            nextEvolutions: [{
+                species: 'corvisquire',
+                method: 'level-up',
+                value: 18
+                }]
+            },
+        'corvisquire': {
+            order: indexOrder++,
+            token: 'corvisquire',
+            name: 'Corvisquire',
+            number: 822,
+            types: ['flying'],
+            baseStats: {hp: 68, phAttack: 67, phDefense: 55, spAttack: 43, spDefense: 55, speed: 77},
+            abilities: {0: 'keen-eye', 1: 'unnerve', hidden: 'big-pecks'},
+            height: 0.8,
+            weight: 16.0,
+            colors: ['black', 'blue', 'gray', 'red'],
+            eggCycles: 15,
+            eggGroups: ['flying'],
+            prevEvolution: 'rookidee',
+            nextEvolutions: [{
+                species: 'corviknight',
+                method: 'level-up',
+                value: 38
+                }]
+            },
+        'corviknight': {
+            order: indexOrder++,
+            token: 'corviknight',
+            name: 'Corviknight',
+            number: 823,
+            types: ['flying', 'steel'],
+            baseStats: {hp: 98, phAttack: 87, phDefense: 105, spAttack: 53, spDefense: 85, speed: 67},
+            abilities: {0: 'pressure', 1: 'unnerve', hidden: 'mirror-armor'},
+            height: 2.2,
+            weight: 75.0,
+            colors: ['black', 'gray', 'red'],
+            eggCycles: 15,
+            eggGroups: ['flying'],
+            prevEvolution: 'corvisquire'
+            },
+
         'perrserker': {
             order: thisIndex.afterOrder('persian', 6),
             token: 'perrserker',
@@ -1035,6 +1090,28 @@
             hasBigSprite: true
             },
 
+        'gmax-corviknight': {
+            order: thisIndex.afterOrder('corviknight'),
+            token: 'gmax-corviknight',
+            name: 'Gigantamax Corviknight',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'corviknight',
+            number: 823,
+            types: ['flying', 'steel'],
+            baseStats: {hp: 980, phAttack: 87, phDefense: 105, spAttack: 53, spDefense: 85, speed: 67},
+            abilities: {0: 'pressure', 1: 'unnerve', hidden: 'mirror-armor'},
+            height: 14.0,
+            weight: -1,
+            colors: ['black', 'red', 'gray'],
+            eggCycles: 15,
+            eggGroups: ['flying'],
+            prevEvolution: 'corviknight',
+            hasBigSprite: true
+            },
+
     });
     thisIndex.indexOrder = indexOrder;
 
@@ -1063,6 +1140,8 @@
         {base: 'snorlax', species: 'gmax-snorlax', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'garbodor', species: 'gmax-garbodor', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'melmetal', species: 'gmax-melmetal', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+
+        {base: 'corviknight', species: 'gmax-corviknight', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
