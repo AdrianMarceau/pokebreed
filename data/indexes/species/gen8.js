@@ -717,6 +717,61 @@
             prevEvolution: 'corvisquire'
             },
 
+        'blipbug': {
+            order: indexOrder++,
+            token: 'blipbug',
+            name: 'Blipbug',
+            number: 824,
+            types: ['bug'],
+            baseStats: {hp: 25, phAttack: 20, phDefense: 20, spAttack: 25, spDefense: 45, speed: 45},
+            abilities: {0: 'swarm', 1: 'compound-eyes', hidden: 'telepathy'},
+            height: 0.4,
+            weight: 8.0,
+            colors: ['blue', 'yellow', 'white'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            nextEvolutions: [{
+                species: 'dottler',
+                method: 'level-up',
+                value: 10
+                }]
+            },
+        'dottler': {
+            order: indexOrder++,
+            token: 'dottler',
+            name: 'Dottler',
+            number: 825,
+            types: ['bug', 'psychic'],
+            baseStats: {hp: 50, phAttack: 35, phDefense: 80, spAttack: 50, spDefense: 90, speed: 30},
+            abilities: {0: 'swarm', 1: 'compound-eyes', hidden: 'telepathy'},
+            height: 0.4,
+            weight: 19.5,
+            colors: ['yellow', 'blue', 'orange'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            prevEvolution: 'blipbug',
+            nextEvolutions: [{
+                species: 'orbeetle',
+                method: 'level-up',
+                value: 30
+                }]
+            },
+        'orbeetle': {
+            order: indexOrder++,
+            token: 'orbeetle',
+            name: 'Orbeetle',
+            number: 826,
+            types: ['bug', 'psychic'],
+            baseStats: {hp: 60, phAttack: 45, phDefense: 110, spAttack: 80, spDefense: 120, speed: 90},
+            abilities: {0: 'swarm', 1: 'frisk', hidden: 'telepathy'},
+            height: 0.4,
+            weight: 40.8,
+            colors: ['red', 'blue', 'black', 'yellow', 'white'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            prevEvolution: 'dottler'
+            },
+
         'perrserker': {
             order: thisIndex.afterOrder('persian', 6),
             token: 'perrserker',
@@ -1111,6 +1166,27 @@
             prevEvolution: 'corviknight',
             hasBigSprite: true
             },
+        'gmax-orbeetle': {
+            order: thisIndex.afterOrder('orbeetle'),
+            token: 'gmax-orbeetle',
+            name: 'Gigantamax Orbeetle',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'orbeetle',
+            number: 826,
+            types: ['bug', 'psychic'],
+            baseStats: {hp: 600, phAttack: 45, phDefense: 110, spAttack: 80, spDefense: 120, speed: 90},
+            abilities: {0: 'swarm', 1: 'frisk', hidden: 'telepathy'},
+            height: 14.0,
+            weight: -1,
+            colors: ['red', 'blue', 'yellow', 'black', 'white'],
+            eggCycles: 15,
+            eggGroups: ['bug'],
+            prevEvolution: 'orbeetle',
+            hasBigSprite: true
+            },
 
     });
     thisIndex.indexOrder = indexOrder;
@@ -1142,6 +1218,7 @@
         {base: 'melmetal', species: 'gmax-melmetal', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         {base: 'corviknight', species: 'gmax-corviknight', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'orbeetle', species: 'gmax-orbeetle', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
