@@ -824,6 +824,41 @@
             prevEvolution: 'nickit'
             },
 
+        'gossifleur': {
+            order: indexOrder++,
+            token: 'gossifleur',
+            name: 'Gossifleur',
+            number: 829,
+            types: ['grass'],
+            baseStats: {hp: 40, phAttack: 40, phDefense: 60, spAttack: 40, spDefense: 60, speed: 10},
+            abilities: {0: 'cotton-down', 1: 'regenerator', hidden: 'effect-spore'},
+            height: 0.4,
+            weight: 2.2,
+            colors: ['yellow', 'red', 'green'],
+            eggCycles: 20,
+            eggGroups: ['grass'],
+            nextEvolutions: [{
+                species: 'eldegoss',
+                method: 'level-up',
+                value: 20
+                }]
+            },
+        'eldegoss': {
+            order: indexOrder++,
+            token: 'eldegoss',
+            name: 'Eldegoss',
+            number: 830,
+            types: ['grass'],
+            baseStats: {hp: 60, phAttack: 50, phDefense: 90, spAttack: 80, spDefense: 120, speed: 60},
+            abilities: {0: 'cotton-down', 1: 'regenerator', hidden: 'effect-spore'},
+            height: 0.5,
+            weight: 2.5,
+            colors: ['white', 'green', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['grass'],
+            prevEvolution: 'gossifleur'
+            },
+
         'sirfetchd': {
             order: thisIndex.afterOrder('farfetchd', 2),
             token: 'sirfetchd',
