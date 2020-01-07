@@ -789,6 +789,41 @@
             prevEvolution: 'galarian-meowth'
             },
 
+        'nickit': {
+            order: indexOrder++,
+            token: 'nickit',
+            name: 'Nickit',
+            number: 827,
+            types: ['dark'],
+            baseStats: {hp: 40, phAttack: 28, phDefense: 28, spAttack: 47, spDefense: 52, speed: 50},
+            abilities: {0: 'run-away', 1: 'unburden', hidden: 'stakeout'},
+            height: 0.6,
+            weight: 8.9,
+            colors: ['brown', 'black', 'white'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'thievul',
+                method: 'level-up',
+                value: 18
+                }]
+            },
+        'thievul': {
+            order: indexOrder++,
+            token: 'thievul',
+            name: 'Thievul',
+            number: 828,
+            types: ['dark'],
+            baseStats: {hp: 70, phAttack: 58, phDefense: 58, spAttack: 87, spDefense: 92, speed: 90},
+            abilities: {0: 'run-away', 1: 'unburden', hidden: 'stakeout'},
+            height: 1.2,
+            weight: 19.9,
+            colors: ['brown', 'black', 'white'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            prevEvolution: 'nickit'
+            },
+
         'sirfetchd': {
             order: thisIndex.afterOrder('farfetchd', 2),
             token: 'sirfetchd',
