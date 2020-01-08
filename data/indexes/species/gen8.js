@@ -929,6 +929,41 @@
             prevEvolution: 'chewtle'
             },
 
+        'yamper': {
+            order: indexOrder++,
+            token: 'yamper',
+            name: 'Yamper',
+            number: 835,
+            types: ['electric'],
+            baseStats: {hp: 59, phAttack: 45, phDefense: 50, spAttack: 40, spDefense: 50, speed: 26},
+            abilities: {0: 'ball-fetch', hidden: 'rattled'},
+            height: 0.3,
+            weight: 13.5,
+            colors: ['brown', 'yellow', 'white', 'green'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'boltund',
+                method: 'level-up',
+                value: 25
+                }]
+            },
+        'boltund': {
+            order: indexOrder++,
+            token: 'boltund',
+            name: 'Boltund',
+            number: 836,
+            types: ['electric'],
+            baseStats: {hp: 69, phAttack: 90, phDefense: 60, spAttack: 90, spDefense: 60, speed: 121},
+            abilities: {0: 'strong-jaw', hidden: 'competitive'},
+            height: 1.0,
+            weight: 34.0,
+            colors: ['yellow', 'black', 'white', 'green'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'yamper'
+            },
+
         'sirfetchd': {
             order: thisIndex.afterOrder('farfetchd', 2),
             token: 'sirfetchd',
