@@ -894,6 +894,41 @@
             prevEvolution: 'wooloo'
             },
 
+        'chewtle': {
+            order: indexOrder++,
+            token: 'chewtle',
+            name: 'Chewtle',
+            number: 833,
+            types: ['water'],
+            baseStats: {hp: 50, phAttack: 64, phDefense: 50, spAttack: 38, spDefense: 38, speed: 44},
+            abilities: {0: 'strong-jaw', 1: 'shell-armor', hidden: 'swift-swim'},
+            height: 0.3,
+            weight: 8.5,
+            colors: ['blue', 'yellow', 'brown', 'white'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'water-1'],
+            nextEvolutions: [{
+                species: 'drednaw',
+                method: 'level-up',
+                value: 22
+                }]
+            },
+        'drednaw': {
+            order: indexOrder++,
+            token: 'drednaw',
+            name: 'Drednaw',
+            number: 834,
+            types: ['water', 'rock'],
+            baseStats: {hp: 90, phAttack: 115, phDefense: 90, spAttack: 48, spDefense: 68, speed: 74},
+            abilities: {0: 'strong-jaw', 1: 'shell-armor', hidden: 'swift-swim'},
+            height: 1.0,
+            weight: 115.5,
+            colors: ['blue', 'yellow', 'brown', 'white'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'water-1'],
+            prevEvolution: 'chewtle'
+            },
+
         'sirfetchd': {
             order: thisIndex.afterOrder('farfetchd', 2),
             token: 'sirfetchd',
@@ -1292,6 +1327,27 @@
             prevEvolution: 'orbeetle',
             hasBigSprite: true
             },
+        'gmax-drednaw': {
+            order: thisIndex.afterOrder('drednaw'),
+            token: 'gmax-drednaw',
+            name: 'Gigantamax Drednaw',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'drednaw',
+            number: 834,
+            types: ['water', 'rock'],
+            baseStats: {hp: 900, phAttack: 115, phDefense: 90, spAttack: 48, spDefense: 68, speed: 74},
+            abilities: {0: 'strong-jaw', 1: 'shell-armor', hidden: 'swift-swim'},
+            height: 24.0,
+            weight: -1,
+            colors: ['blue', 'yellow', 'brown', 'white'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'water-1'],
+            prevEvolution: 'drednaw',
+            hasBigSprite: true
+            },
 
     });
     thisIndex.indexOrder = indexOrder;
@@ -1324,6 +1380,7 @@
 
         {base: 'corviknight', species: 'gmax-corviknight', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'orbeetle', species: 'gmax-orbeetle', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'drednaw', species: 'gmax-drednaw', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
