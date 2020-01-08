@@ -859,6 +859,41 @@
             prevEvolution: 'gossifleur'
             },
 
+        'wooloo': {
+            order: indexOrder++,
+            token: 'wooloo',
+            name: 'Wooloo',
+            number: 831,
+            types: ['normal'],
+            baseStats: {hp: 42, phAttack: 40, phDefense: 55, spAttack: 40, spDefense: 45, speed: 48},
+            abilities: {0: 'fluffy', 1: 'run-away', hidden: 'bulletproof'},
+            height: 0.6,
+            weight: 6.0,
+            colors: ['white', 'black', 'gray', 'pink', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            nextEvolutions: [{
+                species: 'dubwool',
+                method: 'level-up',
+                value: 24
+                }]
+            },
+        'dubwool': {
+            order: indexOrder++,
+            token: 'dubwool',
+            name: 'Dubwool',
+            number: 832,
+            types: ['normal'],
+            baseStats: {hp: 72, phAttack: 80, phDefense: 100, spAttack: 60, spDefense: 90, speed: 88},
+            abilities: {0: 'fluffy', 1: 'steadfast', hidden: 'bulletproof'},
+            height: 1.3,
+            weight: 43.0,
+            colors: ['white', 'gray', 'black', 'brown', 'yellow'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            prevEvolution: 'wooloo'
+            },
+
         'sirfetchd': {
             order: thisIndex.afterOrder('farfetchd', 2),
             token: 'sirfetchd',
