@@ -5979,7 +5979,16 @@
 
                         // Form-based evolutions are triggered immediately if the pokemon is in that form
                         if (methodToken === 'form'
-                            && pokemonInfo.key % methodValue === 0){
+                            && pokemonInfo.formToken === methodValue){
+                            return 1;
+                            }
+
+                        // Season-based evolutions are triggered immediately if the current season is a match
+                        if (methodToken === 'season'
+                            && (
+                                (typeof methodValue === 'string' && thisZoneData.season === methodValue)
+                                || (Array.isArray(methodValue) && methodValue.indexOf(thisZoneData.season) !== -1)
+                                )){
                             return 1;
                             }
 
@@ -6002,12 +6011,6 @@
                             // //console.log('methodToken =', methodToken, 'pokemonInfo.sid =', pokemonInfo.sid, 'methodValue =', methodValue, 'currentGigantamaxNum =', currentGigantamaxNum);
                             // //console.log('gigantamax-factor TRIGGERED!');
                             return 1 + methodValue;
-                            }
-
-                        // Season-based evolutions are triggered immediately if the current season is a match
-                        if (methodToken === 'season'
-                            && thisZoneData.season === methodValue){
-                            return 1;
                             }
 
                         // Adulthood-based evolutions are triggered immediately if the pokemon is of a specific age

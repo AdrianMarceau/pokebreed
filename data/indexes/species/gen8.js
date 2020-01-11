@@ -1019,6 +1019,64 @@
             prevEvolution: 'carkol'
             },
 
+        'applin': {
+            order: indexOrder++,
+            token: 'applin',
+            name: 'Applin',
+            number: 840,
+            types: ['grass', 'dragon'],
+            baseStats: {hp: 40, phAttack: 40, phDefense: 80, spAttack: 40, spDefense: 40, speed: 20},
+            abilities: {0: 'ripen', 1: 'gluttony', 'hidden': 'bulletproof'},
+            height: 0.2,
+            weight: 0.5,
+            colors: ['red', 'green', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['grass', 'dragon'],
+            nextEvolutions: [{
+                species: 'flapple',
+                method: 'level-up',
+                value: 30,
+                method2: 'season',
+                value2: ['spring', 'summer']
+                }, {
+                species: 'appletun',
+                method: 'level-up',
+                value: 30,
+                method2: 'season',
+                value2: ['autumn', 'winter']
+                }]
+            },
+        'flapple': {
+            order: indexOrder++,
+            token: 'flapple',
+            name: 'Flapple',
+            number: 841,
+            types: ['grass', 'dragon'],
+            baseStats: {hp: 70, phAttack: 110, phDefense: 80, spAttack: 95, spDefense: 60, speed: 70},
+            abilities: {0: 'ripen', 1: 'gluttony', 'hidden': 'hustle'},
+            height: 0.3,
+            weight: 1.0,
+            colors: ['yellow', 'red', 'green'],
+            eggCycles: 20,
+            eggGroups: ['grass', 'dragon'],
+            prevEvolution: 'applin'
+            },
+        'appletun': {
+            order: indexOrder++,
+            token: 'appletun',
+            name: 'Appletun',
+            number: 842,
+            types: ['grass', 'dragon'],
+            baseStats: {hp: 110, phAttack: 85, phDefense: 80, spAttack: 100, spDefense: 80, speed: 30},
+            abilities: {0: 'ripen', 1: 'gluttony', 'hidden': 'thick-fat'},
+            height: 0.4,
+            weight: 13.0,
+            colors: ['green', 'yellow', 'red'],
+            eggCycles: 20,
+            eggGroups: ['grass', 'dragon'],
+            prevEvolution: 'applin'
+            },
+
         'sirfetchd': {
             order: thisIndex.afterOrder('farfetchd', 2),
             token: 'sirfetchd',
@@ -1451,12 +1509,54 @@
             types: ['rock', 'fire'],
             baseStats: {hp: 1100, phAttack: 80, phDefense: 120, spAttack: 80, spDefense: 90, speed: 30},
             abilities: {0: 'steam-engine', 1: 'flame-body', 'hidden': 'flash-fire'},
-            height: 2.8,
-            weight: 310.5,
+            height: 42.0,
+            weight: -1,
             colors: ['black', 'red', 'orange'],
             eggCycles: 15,
             eggGroups: ['mineral'],
             prevEvolution: 'coalossal',
+            hasBigSprite: true
+            },
+        'gmax-flapple': {
+            order: thisIndex.afterOrder('flapple'),
+            token: 'flapple',
+            name: 'Gigantamax Flapple',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'flapple',
+            number: 841,
+            types: ['grass', 'dragon'],
+            baseStats: {hp: 700, phAttack: 110, phDefense: 80, spAttack: 95, spDefense: 60, speed: 70},
+            abilities: {0: 'ripen', 1: 'gluttony', 'hidden': 'hustle'},
+            height: 24.0,
+            weight: -1,
+            colors: ['yellow', 'red', 'green'],
+            eggCycles: 20,
+            eggGroups: ['grass', 'dragon'],
+            prevEvolution: 'flapple',
+            hasBigSprite: true
+            },
+        'gmax-appletun': {
+            order: thisIndex.afterOrder('appletun'),
+            token: 'appletun',
+            name: 'Gigantamax Appletun',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'appletun',
+            number: 842,
+            types: ['grass', 'dragon'],
+            baseStats: {hp: 1100, phAttack: 85, phDefense: 80, spAttack: 100, spDefense: 80, speed: 30},
+            abilities: {0: 'ripen', 1: 'gluttony', 'hidden': 'thick-fat'},
+            height: 24.0,
+            weight: -1,
+            colors: ['yellow', 'red', 'green'],
+            eggCycles: 20,
+            eggGroups: ['grass', 'dragon'],
+            prevEvolution: 'appletun',
             hasBigSprite: true
             },
 
@@ -1493,6 +1593,8 @@
         {base: 'orbeetle', species: 'gmax-orbeetle', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'drednaw', species: 'gmax-drednaw', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'coalossal', species: 'gmax-coalossal', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'flapple', species: 'gmax-flapple', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'appletun', species: 'gmax-appletun', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
