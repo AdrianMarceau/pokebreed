@@ -964,6 +964,61 @@
             prevEvolution: 'yamper'
             },
 
+        'rolycoly': {
+            order: indexOrder++,
+            token: 'rolycoly',
+            name: 'Rolycoly',
+            number: 837,
+            types: ['rock'],
+            baseStats: {hp: 30, phAttack: 40, phDefense: 50, spAttack: 40, spDefense: 50, speed: 30},
+            abilities: {0: 'steam-engine', 1: 'heat-proof', 'hidden': 'flash-fire'},
+            height: 0.3,
+            weight: 12.0,
+            colors: ['black', 'gray', 'red'],
+            eggCycles: 15,
+            eggGroups: ['mineral'],
+            nextEvolutions: [{
+                species: 'carkol',
+                method: 'level-up',
+                value: 18
+                }]
+            },
+        'carkol': {
+            order: indexOrder++,
+            token: 'carkol',
+            name: 'Carkol',
+            number: 838,
+            types: ['rock', 'fire'],
+            baseStats: {hp: 80, phAttack: 60, phDefense: 90, spAttack: 60, spDefense: 70, speed: 50},
+            abilities: {0: 'steam-engine', 1: 'flame-body', 'hidden': 'flash-fire'},
+            height: 1.1,
+            weight: 78.0,
+            colors: ['black', 'red'],
+            eggCycles: 15,
+            eggGroups: ['mineral'],
+            prevEvolution: 'rolycoly',
+            nextEvolutions: [{
+                species: 'coalossal',
+                method: 'level-up',
+                value: 34
+                }]
+            },
+        'coalossal': {
+            order: indexOrder++,
+            token: 'coalossal',
+            name: 'Coalossal',
+            number: 839,
+            types: ['rock', 'fire'],
+            baseStats: {hp: 110, phAttack: 80, phDefense: 120, spAttack: 80, spDefense: 90, speed: 30},
+            abilities: {0: 'steam-engine', 1: 'flame-body', 'hidden': 'flash-fire'},
+            height: 2.8,
+            weight: 310.5,
+            colors: ['black', 'red', 'orange'],
+            eggCycles: 15,
+            eggGroups: ['mineral'],
+            prevEvolution: 'carkol'
+            },
+
         'sirfetchd': {
             order: thisIndex.afterOrder('farfetchd', 2),
             token: 'sirfetchd',
@@ -1383,6 +1438,27 @@
             prevEvolution: 'drednaw',
             hasBigSprite: true
             },
+        'gmax-coalossal': {
+            order: thisIndex.afterOrder('coalossal'),
+            token: 'gmax-coalossal',
+            name: 'Gigantamax Coalossal',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'coalossal',
+            number: 839,
+            types: ['rock', 'fire'],
+            baseStats: {hp: 1100, phAttack: 80, phDefense: 120, spAttack: 80, spDefense: 90, speed: 30},
+            abilities: {0: 'steam-engine', 1: 'flame-body', 'hidden': 'flash-fire'},
+            height: 2.8,
+            weight: 310.5,
+            colors: ['black', 'red', 'orange'],
+            eggCycles: 15,
+            eggGroups: ['mineral'],
+            prevEvolution: 'coalossal',
+            hasBigSprite: true
+            },
 
     });
     thisIndex.indexOrder = indexOrder;
@@ -1416,6 +1492,7 @@
         {base: 'corviknight', species: 'gmax-corviknight', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'orbeetle', species: 'gmax-orbeetle', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'drednaw', species: 'gmax-drednaw', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'coalossal', species: 'gmax-coalossal', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
