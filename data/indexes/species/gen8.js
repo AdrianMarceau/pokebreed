@@ -1422,6 +1422,64 @@
             prevEvolution: 'hattrem'
             },
 
+        'impidimp': {
+            order: indexOrder++,
+            token: 'impidimp',
+            name: 'Impidimp',
+            number: 859,
+            types: ['dark', 'fairy'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 45, phAttack: 45, phDefense: 30, spAttack: 55, spDefense: 40, speed: 50},
+            abilities: {0: 'prankster', 1: 'frisk', 'hidden': 'pickpocket'},
+            height: 0.4,
+            weight: 5.5,
+            colors: ['pink', 'purple', 'red'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'human-like'],
+            nextEvolutions: [{
+                species: 'morgrem',
+                method: 'level-up',
+                value: 32
+                }]
+            },
+        'morgrem': {
+            order: indexOrder++,
+            token: 'morgrem',
+            name: 'Morgrem',
+            number: 860,
+            types: ['dark', 'fairy'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 65, phAttack: 60, phDefense: 45, spAttack: 75, spDefense: 55, speed: 70},
+            abilities: {0: 'prankster', 1: 'frisk', 'hidden': 'pickpocket'},
+            height: 0.8,
+            weight: 12.5,
+            colors: ['pink', 'purple', 'green', 'red'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'human-like'],
+            prevEvolution: 'impidimp',
+            nextEvolutions: [{
+                species: 'grimmsnarl',
+                method: 'level-up',
+                value: 42
+                }]
+            },
+        'grimmsnarl': {
+            order: indexOrder++,
+            token: 'grimmsnarl',
+            name: 'Grimmsnarl',
+            number: 861,
+            types: ['dark', 'fairy'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 95, phAttack: 120, phDefense: 65, spAttack: 95, spDefense: 75, speed: 60},
+            abilities: {0: 'prankster', 1: 'frisk', 'hidden': 'pickpocket'},
+            height: 1.5,
+            weight: 61.0,
+            colors: ['black', 'green', 'red', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'human-like'],
+            prevEvolution: 'morgrem'
+            },
+
         'sirfetchd': {
             order: thisIndex.afterOrder('farfetchd', 2),
             token: 'sirfetchd',
@@ -1989,6 +2047,28 @@
             prevEvolution: 'hatterene',
             hasBigSprite: true
             },
+        'gmax-grimmsnarl': {
+            order: thisIndex.afterOrder('grimmsnarl'),
+            token: 'gmax-grimmsnarl',
+            name: 'Gigantamax Grimmsnarl',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'grimmsnarl',
+            number: 861,
+            types: ['dark', 'fairy'],
+            genderRatio: {male: 1.0000},
+            baseStats: {hp: 950, phAttack: 120, phDefense: 65, spAttack: 95, spDefense: 75, speed: 60},
+            abilities: {0: 'prankster', 1: 'frisk', 'hidden': 'pickpocket'},
+            height: 32.0,
+            weight: -1,
+            colors: ['black', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'human-like'],
+            prevEvolution: 'grimmsnarl',
+            hasBigSprite: true
+            },
 
     });
     thisIndex.indexOrder = indexOrder;
@@ -2029,6 +2109,7 @@
         {base: 'toxtricity', species: 'gmax-toxtricity', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'centiskorch', species: 'gmax-centiskorch', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'hatterene', species: 'gmax-hatterene', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'grimmsnarl', species: 'gmax-grimmsnarl', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
