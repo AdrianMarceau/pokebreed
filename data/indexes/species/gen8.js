@@ -1127,15 +1127,15 @@
             eggGroups: ['water-1', 'flying'],
             nextEvolutions: [{
                 species: 'gulping-cramorant',
-                method: 'burst-evolution',
-                value: 'big-mouth-energy',
+                method: 'level-up',
+                value: 25,
                 method2: 'fusion-species',
                 value2: 'arrokuda',
                 switch: 'and'
                 },{
                 species: 'gorging-cramorant',
-                method: 'burst-evolution',
-                value: 'big-mouth-energy',
+                method: 'level-up',
+                value: 25,
                 method2: 'fusion-species',
                 value2: 'pikachu',
                 switch: 'and'
@@ -1150,7 +1150,7 @@
             baseSpecies: 'cramorant',
             number: 845,
             types: ['flying', 'water'],
-            baseStats: {hp: 70, phAttack: 85, phDefense: 55, spAttack: 85, spDefense: 95, speed: 85},
+            baseStats: {hp: 70, phAttack: 185, phDefense: 55, spAttack: 85, spDefense: 95, speed: 85},
             abilities: {0: 'gulp-missile'},
             height: 0.8,
             weight: 19.0,
@@ -1168,7 +1168,7 @@
             baseSpecies: 'cramorant',
             number: 845,
             types: ['flying', 'water'],
-            baseStats: {hp: 70, phAttack: 85, phDefense: 55, spAttack: 85, spDefense: 95, speed: 85},
+            baseStats: {hp: 70, phAttack: 85, phDefense: 55, spAttack: 185, spDefense: 95, speed: 85},
             abilities: {0: 'gulp-missile'},
             height: 0.8,
             weight: 24.0,
@@ -1176,6 +1176,41 @@
             eggCycles: 20,
             eggGroups: ['water-1', 'flying'],
             prevEvolution: 'cramorant'
+            },
+
+        'arrokuda': {
+            order: indexOrder++,
+            token: 'arrokuda',
+            name: 'Arrokuda',
+            number: 846,
+            types: ['water'],
+            baseStats: {hp: 41, phAttack: 63, phDefense: 40, spAttack: 40, spDefense: 30, speed: 66},
+            abilities: {0: 'swift-swim', hidden: 'propeller-tail'},
+            height: 0.5,
+            weight: 1.0,
+            colors: ['brown', 'yellow', 'white', 'orange'],
+            eggCycles: 20,
+            eggGroups: ['water-2'],
+            nextEvolutions: [{
+                species: 'barraskewda',
+                method: 'level-up',
+                value: 26
+                }]
+            },
+        'barraskewda': {
+            order: indexOrder++,
+            token: 'barraskewda',
+            name: 'Barraskewda',
+            number: 847,
+            types: ['water'],
+            baseStats: {hp: 61, phAttack: 123, phDefense: 60, spAttack: 60, spDefense: 50, speed: 136},
+            abilities: {0: 'swift-swim', hidden: 'propeller-tail'},
+            height: 1.3,
+            weight: 30.0,
+            colors: ['brown', 'yellow', 'orange', 'white'],
+            eggCycles: 20,
+            eggGroups: ['water-2'],
+            prevEvolution: 'arrokuda'
             },
 
         'sirfetchd': {
@@ -1757,6 +1792,35 @@
         {base: 'stunfisk', species: 'stunfisk', method: 'type-value', value: 'electric', method2: 'type-value', value2: 'ground'},
         {base: 'stunfisk', species: 'galarian-stunfisk', method: 'type-warning', value: 'electric', method2: 'type-value', value2: 'steel', method3: 'type-value', value3: 'ground'},
 
+
+        ]);
+
+    // Update previous gen pokemon with known species appeal data
+    thisIndex.addSpeciesAppealValues([
+
+        // Predator/prey relationships
+        {base: 'cramorant', species: 'arrokuda'},
+
+        // Symbiotic relationships
+        // ---
+
+        // Rival relationships
+        // ---
+
+        // Romantic relationships
+        // ---
+
+        // Feeding/pollination relationships
+        // ---
+
+        // One-sided (theft) relationships
+        // ---
+
+        // Mistaken identify relationships
+        // ---
+
+        // Legendary trigger relationships
+        // ---
 
         ]);
 
