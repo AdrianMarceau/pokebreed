@@ -1225,7 +1225,7 @@
             height: 2.2,
             weight: 7.6,
             colors: ['purple', 'white'],
-            eggCycles: 20,
+            eggCycles: 25,
             eggGroups: ['undiscovered'],
             nextEvolutions: [{
                 species: 'toxtricity',
@@ -1251,6 +1251,41 @@
             eggCycles: 25,
             eggGroups: ['human-like'],
             prevEvolution: 'toxel'
+            },
+
+        'sizzlipede': {
+            order: indexOrder++,
+            token: 'sizzlipede',
+            name: 'Sizzlipede',
+            number: 850,
+            types: ['fire', 'bug'],
+            baseStats: {hp: 50, phAttack: 65, phDefense: 45, spAttack: 50, spDefense: 50, speed: 45},
+            abilities: {0: 'flash-fire', 1: 'white-smoke', hidden: 'flame-body'},
+            height: 0.7,
+            weight: 1.0,
+            colors: ['red', 'brown', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['bug'],
+            nextEvolutions: [{
+                species: 'centiskorch',
+                method: 'level-up',
+                value: 28
+                }]
+            },
+        'centiskorch': {
+            order: indexOrder++,
+            token: 'centiskorch',
+            name: 'Centiskorch',
+            number: 851,
+            types: ['fire', 'bug'],
+            baseStats: {hp: 100, phAttack: 115, phDefense: 65, spAttack: 90, spDefense: 90, speed: 65},
+            abilities: {0: 'flash-fire', 1: 'white-smoke', hidden: 'flame-body'},
+            height: 3.0,
+            weight: 720.0,
+            colors: ['red', 'yellow', 'brown', 'orange'],
+            eggCycles: 20,
+            eggGroups: ['bug'],
+            prevEvolution: 'sizzlipede'
             },
 
         'sirfetchd': {
@@ -1777,6 +1812,27 @@
             prevEvolution: 'toxtricity',
             hasBigSprite: true
             },
+        'gmax-centiskorch': {
+            order: thisIndex.afterOrder('centiskorch'),
+            token: 'gmax-centiskorch',
+            name: 'Gigantamax Centiskorch',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'centiskorch',
+            number: 851,
+            types: ['fire', 'bug'],
+            baseStats: {hp: 1000, phAttack: 115, phDefense: 65, spAttack: 90, spDefense: 90, speed: 65},
+            abilities: {0: 'flash-fire', 1: 'white-smoke', hidden: 'flame-body'},
+            height: 75.0,
+            weight: -1,
+            colors: ['red', 'yellow', 'orange', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['bug'],
+            prevEvolution: 'centiskorch',
+            hasBigSprite: true
+            },
 
     });
     thisIndex.indexOrder = indexOrder;
@@ -1815,6 +1871,7 @@
         {base: 'appletun', species: 'gmax-appletun', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'sandaconda', species: 'gmax-sandaconda', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'toxtricity', species: 'gmax-toxtricity', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'centiskorch', species: 'gmax-centiskorch', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
