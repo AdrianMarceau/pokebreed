@@ -1213,6 +1213,46 @@
             prevEvolution: 'arrokuda'
             },
 
+        'toxel': {
+            order: indexOrder++,
+            token: 'toxel',
+            name: 'Toxel',
+            class: 'baby',
+            number: 848,
+            types: ['electric', 'poison'],
+            baseStats: {hp: 52, phAttack: 57, phDefense: 75, spAttack: 35, spDefense: 50, speed: 46},
+            abilities: {0: 'rattled', 1: 'static', hidden: 'klutz'},
+            height: 2.2,
+            weight: 7.6,
+            colors: ['purple', 'white'],
+            eggCycles: 20,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'toxtricity',
+                method: 'level-up',
+                value: 30
+                }]
+            },
+        'toxtricity': {
+            order: indexOrder++,
+            token: 'toxtricity',
+            name: 'Toxtricity',
+            formClass: 'random-variant',
+            possibleForms: ['amped', 'low-key'],
+            randomizeForms: true,
+            baseForm: 'amped',
+            number: 849,
+            types: ['electric', 'poison'],
+            baseStats: {hp: 75, phAttack: 98, phDefense: 70, spAttack: 114, spDefense: 70, speed: 75},
+            abilities: {0: 'punk-rock', 1: 'plus', hidden: 'technician'},
+            height: 1.6,
+            weight: 40.0,
+            colors: ['purple', 'yellow'],
+            eggCycles: 25,
+            eggGroups: ['human-like'],
+            prevEvolution: 'toxel'
+            },
+
         'sirfetchd': {
             order: thisIndex.afterOrder('farfetchd', 2),
             token: 'sirfetchd',
@@ -1716,6 +1756,27 @@
             prevEvolution: 'sandaconda',
             hasBigSprite: true
             },
+        'gmax-toxtricity': {
+            order: thisIndex.afterOrder('toxtricity'),
+            token: 'gmax-toxtricity',
+            name: 'Gigantamax Toxtricity',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'toxtricity',
+            number: 849,
+            types: ['electric', 'poison'],
+            baseStats: {hp: 750, phAttack: 98, phDefense: 70, spAttack: 114, spDefense: 70, speed: 75},
+            abilities: {0: 'punk-rock', 1: 'minus', hidden: 'technician'},
+            height: 21.0,
+            weight: -1,
+            colors: ['purple', 'pink', 'yellow', 'blue'],
+            eggCycles: 25,
+            eggGroups: ['human-like'],
+            prevEvolution: 'toxtricity',
+            hasBigSprite: true
+            },
 
     });
     thisIndex.indexOrder = indexOrder;
@@ -1753,6 +1814,7 @@
         {base: 'flapple', species: 'gmax-flapple', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'appletun', species: 'gmax-appletun', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'sandaconda', species: 'gmax-sandaconda', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'toxtricity', species: 'gmax-toxtricity', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
