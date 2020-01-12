@@ -6403,8 +6403,10 @@
         // Check to see if we're at high (99%) zone capacity already
         var currentZoneStats = thisZoneData.currentStats;
         var currentTypeStats = currentZoneStats['types'];
+        var currentSpeciesStats = currentZoneStats['species'];
         var zoneCapacityPercent = ((thisZoneData.currentPokemon.length / thisZoneData.capacity) * 100);
         var zoneIsOvercrowded = zoneCapacityPercent >= 99 ? true : false;
+        var zoneMaxColonySize = Math.ceil(thisZoneData.size / 3);
         // //console.log('zoneCapacityPercent = ', zoneCapacityPercent);
         // //console.log('zoneIsOvercrowded = ', zoneIsOvercrowded);
 
@@ -6458,6 +6460,15 @@
 
             // Prevent breeding of these special exception species
             var preventBreeding = ['zygarde-cell', 'shadow-variant', 'shining-variant'];
+
+            // Define a list of pokemon that have overpopulated and need to cool it
+            var currentSpeciesTokens = Object.keys(currentSpeciesStats);
+            var numRelatedPokemonCache = {};
+            for (var i = 0; i < currentSpeciesTokens.length; i++){
+                var token = currentSpeciesTokens[i];
+                var baseToken = PokemonSpeciesIndex[token]['baseEvolution'];
+                if (typeof numRelatedPokemonCache[baseToken] === 'undefined'){ numRelatedPokemonCache[baseToken] = countRelatedZonePokemon(baseToken); }
+                }
 
             // First generate an array of eggs to add (by species) with counts
             var eggsToAddIndex = {};
@@ -6516,6 +6527,13 @@
                 var baseEvolution = pokemonGetBaseEvolution(pokeToken, true, false);
                 var baseEvolutionInfo = PokemonSpeciesIndex[baseEvolution];
                 //console.log('pokeToken('+pokeToken+') | baseEvolution('+baseEvolution+')');
+
+                // If this pokemon is currently prevented from breeding, continue now
+                if (numRelatedPokemonCache[baseEvolution] >= zoneMaxColonySize){
+                    //console.log(pokeToken+' cannot breed any '+baseEvolution+' due to overcrowding!');
+                    //console.log('numRelatedPokemonCache['+baseEvolution+']('+numRelatedPokemonCache[baseEvolution]+') > zoneMaxColonySize('+zoneMaxColonySize+')\n-----');
+                    continue;
+                    }
 
                 // Define new unit count at zero with an empty token
                 var newUnits = 0;
@@ -6763,6 +6781,7 @@
                         // Check to Super Ditto reductions and then add new egg to the zone
                         if (existingSuperDitto > 0){ addPokemonToZone(pokeToken, true, existingSuperDitto); }
                         else { addPokemonToZone(pokeToken, true); }
+                        numRelatedPokemonCache[pokeToken] += 1;
 
                         // Increment the egg count and delete from index if now empty
                         eggsAddedCount++;

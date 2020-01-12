@@ -1235,8 +1235,8 @@
                 species: 'diancie',
                 method: 'level-up',
                 value: 100,
-                method2: 'royal-ascension',
-                value2: 75
+                method2: 'nth-of-sid',
+                value2: 100
                 }]
             },
 
