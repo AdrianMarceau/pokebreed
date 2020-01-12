@@ -1364,6 +1364,64 @@
             prevEvolution: 'sinistea'
             },
 
+        'hatenna': {
+            order: indexOrder++,
+            token: 'hatenna',
+            name: 'Hatenna',
+            number: 856,
+            types: ['psychic', 'fairy'],
+            genderRatio: {female: 1.0000},
+            baseStats: {hp: 42, phAttack: 30, phDefense: 45, spAttack: 56, spDefense: 53, speed: 39},
+            abilities: {0: 'healer', 1: 'anticipation', 'hidden': 'magic-bounce'},
+            height: 0.4,
+            weight: 3.4,
+            colors: ['pink', 'blue', 'white'],
+            eggCycles: 20,
+            eggGroups: ['fairy'],
+            nextEvolutions: [{
+                species: 'hattrem',
+                method: 'level-up',
+                value: 32
+                }]
+            },
+        'hattrem': {
+            order: indexOrder++,
+            token: 'hattrem',
+            name: 'Hattrem',
+            number: 857,
+            types: ['psychic', 'fairy'],
+            genderRatio: {female: 1.0000},
+            baseStats: {hp: 57, phAttack: 40, phDefense: 65, spAttack: 86, spDefense: 73, speed: 49},
+            abilities: {0: 'healer', 1: 'anticipation', 'hidden': 'magic-bounce'},
+            height: 0.6,
+            weight: 4.8,
+            colors: ['blue', 'pink', 'white'],
+            eggCycles: 20,
+            eggGroups: ['fairy'],
+            prevEvolution: 'hatenna',
+            nextEvolutions: [{
+                species: 'hatterene',
+                method: 'level-up',
+                value: 42
+                }]
+            },
+        'hatterene': {
+            order: indexOrder++,
+            token: 'hatterene',
+            name: 'Hatterene',
+            number: 858,
+            types: ['psychic', 'fairy'],
+            genderRatio: {female: 1.0000},
+            baseStats: {hp: 57, phAttack: 90, phDefense: 95, spAttack: 136, spDefense: 103, speed: 29},
+            abilities: {0: 'healer', 1: 'anticipation', 'hidden': 'magic-bounce'},
+            height: 2.1,
+            weight: 5.1,
+            colors: ['blue', 'pink', 'white'],
+            eggCycles: 20,
+            eggGroups: ['fairy'],
+            prevEvolution: 'hattrem'
+            },
+
         'sirfetchd': {
             order: thisIndex.afterOrder('farfetchd', 2),
             token: 'sirfetchd',
@@ -1909,6 +1967,28 @@
             prevEvolution: 'centiskorch',
             hasBigSprite: true
             },
+        'gmax-hatterene': {
+            order: thisIndex.afterOrder('hatterene'),
+            token: 'gmax-hatterene',
+            name: 'Gigantamax Hatterene',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'hatterene',
+            number: 858,
+            types: ['psychic', 'fairy'],
+            genderRatio: {female: 1.0000},
+            baseStats: {hp: 570, phAttack: 90, phDefense: 95, spAttack: 136, spDefense: 103, speed: 29},
+            abilities: {0: 'healer', 1: 'anticipation', 'hidden': 'magic-bounce'},
+            height: 26.0,
+            weight: -1,
+            colors: ['pink', 'white', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['fairy'],
+            prevEvolution: 'hatterene',
+            hasBigSprite: true
+            },
 
     });
     thisIndex.indexOrder = indexOrder;
@@ -1948,6 +2028,7 @@
         {base: 'sandaconda', species: 'gmax-sandaconda', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'toxtricity', species: 'gmax-toxtricity', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'centiskorch', species: 'gmax-centiskorch', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'hatterene', species: 'gmax-hatterene', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
