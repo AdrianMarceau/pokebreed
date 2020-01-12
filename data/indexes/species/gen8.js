@@ -1077,6 +1077,41 @@
             prevEvolution: 'applin'
             },
 
+        'silicobra': {
+            order: indexOrder++,
+            token: 'silicobra',
+            name: 'Silicobra',
+            number: 843,
+            types: ['ground'],
+            baseStats: {hp: 52, phAttack: 57, phDefense: 75, spAttack: 35, spDefense: 50, speed: 46},
+            abilities: {0: 'sand-spit', 1: 'shed-skin', hidden: 'sand-veil'},
+            height: 2.2,
+            weight: 7.6,
+            colors: ['brown', 'white', 'green'],
+            eggCycles: 20,
+            eggGroups: ['field', 'dragon'],
+            nextEvolutions: [{
+                species: 'sandaconda',
+                method: 'level-up',
+                value: 36
+                }]
+            },
+        'sandaconda': {
+            order: indexOrder++,
+            token: 'sandaconda',
+            name: 'Sandaconda',
+            number: 844,
+            types: ['ground'],
+            baseStats: {hp: 72, phAttack: 107, phDefense: 125, spAttack: 65, spDefense: 70, speed: 71},
+            abilities: {0: 'sand-spit', 1: 'shed-skin', hidden: 'sand-veil'},
+            height: 3.8,
+            weight: 65.5,
+            colors: ['brown', 'white', 'black', 'green'],
+            eggCycles: 20,
+            eggGroups: ['field', 'dragon'],
+            prevEvolution: 'silicobra'
+            },
+
         'sirfetchd': {
             order: thisIndex.afterOrder('farfetchd', 2),
             token: 'sirfetchd',
@@ -1559,6 +1594,27 @@
             prevEvolution: 'appletun',
             hasBigSprite: true
             },
+        'gmax-sandaconda': {
+            order: thisIndex.afterOrder('sandaconda'),
+            token: 'gmax-sandaconda',
+            name: 'Gigantamax Sandaconda',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'sandaconda',
+            number: 844,
+            types: ['ground'],
+            baseStats: {hp: 720, phAttack: 107, phDefense: 125, spAttack: 65, spDefense: 70, speed: 71},
+            abilities: {0: 'sand-spit', 1: 'shed-skin', hidden: 'sand-veil'},
+            height: 22.0,
+            weight: -1,
+            colors: ['brown', 'white', 'black', 'green'],
+            eggCycles: 20,
+            eggGroups: ['field', 'dragon'],
+            prevEvolution: 'sandaconda',
+            hasBigSprite: true
+            },
 
     });
     thisIndex.indexOrder = indexOrder;
@@ -1595,6 +1651,7 @@
         {base: 'coalossal', species: 'gmax-coalossal', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'flapple', species: 'gmax-flapple', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'appletun', species: 'gmax-appletun', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'sandaconda', species: 'gmax-sandaconda', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
