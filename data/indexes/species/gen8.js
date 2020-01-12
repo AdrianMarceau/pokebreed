@@ -1327,6 +1327,43 @@
             prevEvolution: 'clobbopus'
             },
 
+        'sinistea': {
+            order: indexOrder++,
+            token: 'sinistea',
+            name: 'Sinistea',
+            number: 854,
+            types: ['ghost'],
+            baseStats: {hp: 40, phAttack: 45, phDefense: 45, spAttack: 74, spDefense: 54, speed: 50},
+            abilities: {0: 'weak-armor', hidden: 'cursed-body'},
+            height: 0.1,
+            weight: 0.2,
+            colors: ['blue', 'white', 'purple', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['mineral', 'amorphous'],
+            nextEvolutions: [{
+                species: 'polteageist',
+                method: 'type-appeal',
+                value: 'ghost',
+                method: 'level-up',
+                value: 30
+                }]
+            },
+        'polteageist': {
+            order: indexOrder++,
+            token: 'polteageist',
+            name: 'Polteageist',
+            number: 855,
+            types: ['ghost'],
+            baseStats: {hp: 60, phAttack: 65, phDefense: 65, spAttack: 134, spDefense: 114, speed: 70},
+            abilities: {0: 'weak-armor', hidden: 'cursed-body'},
+            height: 0.2,
+            weight: 0.4,
+            colors: ['blue', 'white', 'purple', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['mineral', 'amorphous'],
+            prevEvolution: 'sinistea'
+            },
+
         'sirfetchd': {
             order: thisIndex.afterOrder('farfetchd', 2),
             token: 'sirfetchd',
