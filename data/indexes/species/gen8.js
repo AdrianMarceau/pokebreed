@@ -1288,6 +1288,45 @@
             prevEvolution: 'sizzlipede'
             },
 
+        'clobbopus': {
+            order: indexOrder++,
+            token: 'clobbopus',
+            name: 'Clobbopus',
+            number: 852,
+            types: ['fighting'],
+            subType: 'water',
+            baseStats: {hp: 50, phAttack: 68, phDefense: 60, spAttack: 50, spDefense: 50, speed: 32},
+            abilities: {0: 'limber', hidden: 'technician'},
+            height: 0.6,
+            weight: 4.0,
+            colors: ['white', 'orange', 'black', 'green'],
+            eggCycles: 25,
+            eggGroups: ['water-1', 'human-like'],
+            nextEvolutions: [{
+                species: 'grapploct', // taunt
+                method: 'happiness',
+                value: 'high',
+                method2: 'level-up',
+                value2: 25
+                }]
+            },
+        'grapploct': {
+            order: indexOrder++,
+            token: 'grapploct',
+            name: 'Grapploct',
+            number: 853,
+            types: ['fighting'],
+            subType: 'water',
+            baseStats: {hp: 80, phAttack: 118, phDefense: 90, spAttack: 70, spDefense: 80, speed: 42},
+            abilities: {0: 'limber', hidden: 'technician'},
+            height: 1.6,
+            weight: 39.0,
+            colors: ['blue', 'black', 'yellow', 'green'],
+            eggCycles: 25,
+            eggGroups: ['water-1', 'human-like'],
+            prevEvolution: 'clobbopus'
+            },
+
         'sirfetchd': {
             order: thisIndex.afterOrder('farfetchd', 2),
             token: 'sirfetchd',
@@ -1919,6 +1958,8 @@
 
         // Predator/prey relationships
         {base: 'cramorant', species: 'arrokuda'},
+        {base: 'grapploct', species: 'golisopod'},
+        {base: 'golisopod', species: 'grapploct'},
 
         // Symbiotic relationships
         // ---

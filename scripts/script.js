@@ -4919,6 +4919,8 @@
 
                 // Check to see if this pokemon has any subtypes from abilities
                 var subTypes = [];
+                if (typeof pokeIndex.subType !== 'undefined'){ subTypes.push(pokeIndex.subType); }
+                else if (typeof pokeIndex.subTypes !== 'undefined'){ subTypes = pokeIndex.subTypes.slice(0); }
                 if (pokeAbilities.indexOf('steelworker') !== -1){ subTypes.push('steel'); }
                 if (pokeAbilities.indexOf('aquatic') !== -1){ subTypes.push('water'); }
                 for (var key2 = 0; key2 < subTypes.length; key2++){
@@ -4926,13 +4928,13 @@
                     var typeInfo = PokemonTypesIndex[typeToken];
                     // Add +1 appeal point for this pokemon's type
                     if (typeof currentZoneStats['types'][typeToken] === 'undefined'){ currentZoneStats['types'][typeToken] = 0; }
-                    currentZoneStats['types'][typeToken] += 1.00 * pokeIndex.influencePoints;
+                    currentZoneStats['types'][typeToken] += 0.5 * pokeIndex.influencePoints;
                     // Add -1 appeal point for any type this pokemon is predator to
                     if (typeInfo['matchups']['strengths'].length){
                         for (var key4 = 0; key4 < typeInfo['matchups']['strengths'].length; key4++){
                             var type = typeInfo['matchups']['strengths'][key4];
                             if (typeof currentZoneStats['types'][type] === 'undefined'){ currentZoneStats['types'][type] = 0; }
-                            currentZoneStats['types'][type] -= 0.50 * pokeIndex.influencePoints;
+                            currentZoneStats['types'][type] -= 0.25 * pokeIndex.influencePoints;
                             }
                         }
                     }
