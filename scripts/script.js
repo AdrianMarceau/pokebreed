@@ -4516,11 +4516,19 @@
         // Update the position of this pokemon based on cell key
         var colPercent = 100 / thisZoneData.sizeCols;
         var cellPosition = convertKeyToTableCell(cellKey, thisZoneData.sizeCols);
-        var cellTop = ((cellPosition.row - 1) * colPercent)+'%';
-        var cellLeft = ((cellPosition.col - 1) * colPercent)+'%';
+        var cellStyle = {zIndex: cellKey};
+        if (!hasFainted){
+            var reverseOrder = cellPosition.row % 2 === 0 ? true : false;
+            var cellTopValue = ((cellPosition.row - 1) * colPercent)+'%';
+            var cellSideValue = ((cellPosition.col - 1) * colPercent)+'%';
+            var cellSideName = !reverseOrder ? 'left' : 'right';
+            var cellAutoSideName = cellSideName !== 'left' ? 'left' : 'right';
+            cellStyle['top'] = cellTopValue;
+            cellStyle[cellSideName] = cellSideValue;
+            cellStyle[cellAutoSideName] = 'auto';
+            }
         $pokeCell.attr('data-key', cellKey);
-        if (!hasFainted){ $pokeCell.css({zIndex: cellKey, top: cellTop, left: cellLeft}); }
-        else { $pokeCell.css({zIndex: cellKey}); }
+        $pokeCell.css(cellStyle);
 
         // Collect image data for this pokemon's icon sprite
         var $spriteImage = $pokeCell.find('.sprite:not(.overlay)').first();
