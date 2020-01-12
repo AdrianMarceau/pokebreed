@@ -772,23 +772,6 @@
             prevEvolution: 'dottler'
             },
 
-        'perrserker': {
-            order: thisIndex.afterOrder('persian', 6),
-            token: 'perrserker',
-            name: 'Perrserker',
-            number: 863,
-            baseGameGeneration: 1,
-            types: ['steel'],
-            baseStats: {hp: 70, phAttack: 110, phDefense: 100, spAttack: 50, spDefense: 60, speed: 50},
-            abilities: {0: 'battle-armor', 1: 'tough-claws', hidden: 'steely-spirit'},
-            height: 0.8,
-            weight: 28.0,
-            colors: ['gray', 'brown', 'black', 'yellow', 'white'],
-            eggCycles: 20,
-            eggGroups: ['field'],
-            prevEvolution: 'galarian-meowth'
-            },
-
         'nickit': {
             order: indexOrder++,
             token: 'nickit',
@@ -1480,6 +1463,57 @@
             prevEvolution: 'morgrem'
             },
 
+        'obstagoon': {
+            order: thisIndex.afterOrder('linoone', 3),
+            token: 'obstagoon',
+            name: 'Obstagoon',
+            baseGameGeneration: 3,
+            number: 862,
+            types: ['dark', 'normal'],
+            baseStats: {hp: 93, phAttack: 90, phDefense: 101, spAttack: 60, spDefense: 81, speed: 95},
+            abilities: {0: 'reckless', 1: 'guts', hidden: 'defiant'},
+            height: 1.6,
+            weight: 46.0,
+            colors: ['black', 'gray', 'white', 'red'],
+            eggCycles: 15,
+            eggGroups: ['field'],
+            prevEvolution: 'galarian-linoone'
+            },
+
+        'perrserker': {
+            order: thisIndex.afterOrder('persian', 6),
+            token: 'perrserker',
+            name: 'Perrserker',
+            number: 863,
+            baseGameGeneration: 1,
+            types: ['steel'],
+            baseStats: {hp: 70, phAttack: 110, phDefense: 100, spAttack: 50, spDefense: 60, speed: 50},
+            abilities: {0: 'battle-armor', 1: 'tough-claws', hidden: 'steely-spirit'},
+            height: 0.8,
+            weight: 28.0,
+            colors: ['gray', 'brown', 'black', 'yellow', 'white'],
+            eggCycles: 20,
+            eggGroups: ['field'],
+            prevEvolution: 'galarian-meowth'
+            },
+
+        'cursola': {
+            order: thisIndex.afterOrder('corsola', 2),
+            token: 'cursola',
+            name: 'Cursola',
+            number: 864,
+            baseGameGeneration: 2,
+            types: ['ghost'],
+            baseStats: {hp: 60, phAttack: 95, phDefense: 50, spAttack: 145, spDefense: 130, speed: 30},
+            abilities: {0: 'weak-armor', hidden: 'perish-body'},
+            height: 1.0,
+            weight: 0.4,
+            colors: ['white', 'gray', 'pink'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'water-3'],
+            prevEvolution: 'galarian-corsola'
+            },
+
         'sirfetchd': {
             order: thisIndex.afterOrder('farfetchd', 2),
             token: 'sirfetchd',
@@ -1514,40 +1548,6 @@
             eggCycles: 25,
             eggGroups: ['human-like'],
             prevEvolution: 'galarian-mr-mime'
-            },
-
-        'cursola': {
-            order: thisIndex.afterOrder('corsola', 2),
-            token: 'cursola',
-            name: 'Cursola',
-            number: 864,
-            baseGameGeneration: 2,
-            types: ['ghost'],
-            baseStats: {hp: 60, phAttack: 95, phDefense: 50, spAttack: 145, spDefense: 130, speed: 30},
-            abilities: {0: 'weak-armor', hidden: 'perish-body'},
-            height: 1.0,
-            weight: 0.4,
-            colors: ['white', 'gray', 'pink'],
-            eggCycles: 20,
-            eggGroups: ['water-1', 'water-3'],
-            prevEvolution: 'galarian-corsola'
-            },
-
-        'obstagoon': {
-            order: thisIndex.afterOrder('linoone', 3),
-            token: 'obstagoon',
-            name: 'Obstagoon',
-            baseGameGeneration: 3,
-            number: 862,
-            types: ['dark', 'normal'],
-            baseStats: {hp: 93, phAttack: 90, phDefense: 101, spAttack: 60, spDefense: 81, speed: 95},
-            abilities: {0: 'reckless', 1: 'guts', hidden: 'defiant'},
-            height: 1.6,
-            weight: 46.0,
-            colors: ['black', 'gray', 'white', 'red'],
-            eggCycles: 15,
-            eggGroups: ['field'],
-            prevEvolution: 'galarian-linoone'
             },
 
         'runerigus': {
