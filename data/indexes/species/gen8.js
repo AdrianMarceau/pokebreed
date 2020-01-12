@@ -1112,6 +1112,72 @@
             prevEvolution: 'silicobra'
             },
 
+        'cramorant': {
+            order: indexOrder++,
+            token: 'cramorant',
+            name: 'Cramorant',
+            number: 845,
+            types: ['flying', 'water'],
+            baseStats: {hp: 70, phAttack: 85, phDefense: 55, spAttack: 85, spDefense: 95, speed: 85},
+            abilities: {0: 'gulp-missile'},
+            height: 0.8,
+            weight: 18.0,
+            colors: ['blue', 'yellow', 'green', 'gray'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'flying'],
+            nextEvolutions: [{
+                species: 'gulping-cramorant',
+                method: 'burst-evolution',
+                value: 'big-mouth-energy',
+                method2: 'fusion-species',
+                value2: 'arrokuda',
+                switch: 'and'
+                },{
+                species: 'gorging-cramorant',
+                method: 'burst-evolution',
+                value: 'big-mouth-energy',
+                method2: 'fusion-species',
+                value2: 'pikachu',
+                switch: 'and'
+                }]
+            },
+        'gulping-cramorant': {
+            order: indexOrder++,
+            token: 'gulping-cramorant',
+            name: 'Gulping Cramorant',
+            formClass: 'form-variant',
+            formToken: 'gulping',
+            baseSpecies: 'cramorant',
+            number: 845,
+            types: ['flying', 'water'],
+            baseStats: {hp: 70, phAttack: 85, phDefense: 55, spAttack: 85, spDefense: 95, speed: 85},
+            abilities: {0: 'gulp-missile'},
+            height: 0.8,
+            weight: 19.0,
+            colors: ['blue', 'brown', 'yellow', 'green', 'gray'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'flying'],
+            prevEvolution: 'cramorant'
+            },
+        'gorging-cramorant': {
+            order: indexOrder++,
+            token: 'gorging-cramorant',
+            name: 'Gorging Cramorant',
+            formClass: 'form-variant',
+            formToken: 'gorging',
+            baseSpecies: 'cramorant',
+            number: 845,
+            types: ['flying', 'water'],
+            baseStats: {hp: 70, phAttack: 85, phDefense: 55, spAttack: 85, spDefense: 95, speed: 85},
+            abilities: {0: 'gulp-missile'},
+            height: 0.8,
+            weight: 24.0,
+            colors: ['yellow', 'blue', 'green', 'gray'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'flying'],
+            prevEvolution: 'cramorant'
+            },
+
         'sirfetchd': {
             order: thisIndex.afterOrder('farfetchd', 2),
             token: 'sirfetchd',
