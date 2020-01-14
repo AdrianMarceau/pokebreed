@@ -1447,6 +1447,13 @@
                 if (typeof indexInfo.class === 'undefined'){ indexInfo.class = ''; }
                 if (typeof indexInfo.formClass === 'undefined'){ indexInfo.formClass = ''; }
 
+                // If the pokemon's form is determined by specific color calculations, add to necessary list
+                if ((typeof indexInfo.colorizedForms !== 'undefined' && indexInfo.colorizedForms === true)
+                    && (typeof indexInfo.dynamicForms === 'undefined' || indexInfo.dynamicForms === false)
+                    && colorizedFormsRequired.indexOf(indexInfo.token) === -1){
+                    colorizedFormsRequired.push(indexInfo.token);
+                    }
+
                 // Calculate life, breed, and influence points now so we don't have to later
                 if (typeof indexInfo.lifePoints === 'undefined'){ indexInfo.lifePoints = calculateLifePoints(indexInfo['baseStats']); }
                 if (typeof indexInfo.breedPoints === 'undefined'){ indexInfo.breedPoints = calculateBreedPoints(indexInfo['baseStats']); }
@@ -1477,6 +1484,7 @@
                 // Add a reference to this pokemon's base evolution
                 indexInfo.baseEvolution = pokemonGetBaseEvolution(indexInfo.token, true, false);
                 indexInfo.basicEvolution = pokemonGetBasicEvolution(indexInfo.token, false, false);
+                indexInfo.evoLineNumber = 'e' + PokemonSpeciesIndex[indexInfo.baseEvolution].number;
 
                 // If this pokemon's evolutions are a clone of another, reference that here
                 if (typeof indexInfo.cloneEvolutions !== 'undefined'
@@ -3655,7 +3663,7 @@
         addedPokemonSpecies[pokemonToken]++;
 
         // Create an entry for this species in the global count if not exists
-        var evoLineNumber = 'e' + PokemonSpeciesIndex[indexData.baseEvolution].number;
+        var evoLineNumber = indexData.evoLineNumber;
         var addedPokemonByEvoLineNumber = thisZoneData.addedPokemonByEvoLineNumber;
         if (typeof addedPokemonByEvoLineNumber[evoLineNumber] === 'undefined'){ addedPokemonByEvoLineNumber[evoLineNumber] = 0; }
         addedPokemonByEvoLineNumber[evoLineNumber]++;
@@ -3861,14 +3869,23 @@
         // If this pokemon has a colorized form, decide it now
         if (typeof indexData['colorizedForms'] !== 'undefined'
             && indexData['colorizedForms'] === true){
-            var colorStats = thisZoneData.currentStats['colors'];
-            if (typeof colorStats !== 'undefined'
-                && !jQuery.isEmptyObject(colorStats)){
-                var topColor = Object.keys(colorStats)[0];
-                newPokemon.formToken = topColor;
+            if (colorizedFormsRequired.indexOf(pokemonToken) !== -1){
+                if (!isVisitor){ recalculateColorizedForms(pokemonToken); }
+                if (typeof currentColorizedForms[pokemonToken] !== 'undefined'
+                    && currentColorizedForms[pokemonToken].length > 0){
+                    newPokemon.formToken = currentColorizedForms[pokemonToken];
+                    }
                 } else {
-                newPokemon.formToken = indexData['baseForm'];
+                var colorStats = thisZoneData.currentStats['colors'];
+                if (typeof colorStats !== 'undefined'
+                    && !jQuery.isEmptyObject(colorStats)){
+                    var topColor = Object.keys(colorStats)[0];
+                    newPokemon.formToken = topColor;
+                    }
                 }
+                if (!newPokemon.formToken){
+                    newPokemon.formToken = indexData['baseForm'];
+                    }
             }
 
         // If field variant, change the form based on the current biome
@@ -4952,8 +4969,8 @@
                     var subStat = subZoneStats[subKey];
                     // //console.log('pokeToken('+ pokeToken +') / subStat('+ subStat +')');
                     if (subStat === 'colors'
-                        && (pokeToken === 'vivillon'
-                            || pokeToken === 'kecleon')){
+                        && typeof pokeIndex.excludeFromColorStats !== 'undefined'
+                        && pokeIndex.excludeFromColorStats === true){
                         continue;
                         }
                     if (typeof pokeIndex[subStat] !== 'undefined'){
@@ -5134,9 +5151,8 @@
             && (thisZoneData.day === 1
                 || thisZoneData.day % 10 === 0)){
 
-            // Recalculate the current vivillon pattern
-            currentVivillonPattern = '';
-            recalculateVivillonPattern();
+            // Recalculate any colorized patterns
+            recalculateColorizedForms();
 
             // Recalculate the current visitor appeal values
             recalculateVisitorAppeal();
@@ -5403,43 +5419,102 @@
         $pokedexScoreContainer.html(numberWithCommas(currentScore));
     }
 
-    // Define a function for calculating the current Vivillon pattern
-    var currentVivillonPattern = '';
-    function recalculateVivillonPattern(){
-        // //console.log('recalculateVivillonPattern()');
+    // Define a function for calculating the current forms for pokemon with colorized patterns
+    var currentColorizedForms = {};
+    var colorizedFormsRequired = [];
+    function recalculateColorizedForms(preloadToken){
+        //console.log('<<-----\n');
+        //console.log('recalculateColorizedForms(', preloadToken, ')');
+        //console.log('- OLD ', {colorizedFormsRequired: colorizedFormsRequired, currentColorizedForms: currentColorizedForms});
+        if (typeof preloadToken !== 'string' || preloadToken.length < 1){ preloadToken = false; }
 
-        // If there the Vivillon line on the field, pre-calculate current colour stats
-        if (typeof PokemonSpeciesIndex['vivillon'] !== 'undefined'
-            && currentVivillonPattern === ''){
+        // Collect the current color stats for the zone before continuing
+        var currentColourStats = thisZoneData.currentStats['colors'];
+        var addedPokemonByEvoLineNumber = thisZoneData.addedPokemonByEvoLineNumber;
+        //console.log('- ', {currentColourStats: currentColourStats, addedPokemonByEvoLineNumber: addedPokemonByEvoLineNumber});
 
-            // Loop through and calculate likelihood of each pattern
-            var currentColourStats = thisZoneData.currentStats['colors'];
-            var possibleFormsColors = PokemonSpeciesIndex['vivillon']['possibleFormsColors'];
-            var possibleFormsColorsTokens = Object.keys(possibleFormsColors);
-            var possibleFormsChances = {};
-            for (var key = 0; key < possibleFormsColorsTokens.length; key++){
-                var formToken = possibleFormsColorsTokens[key];
-                var formChance = 0;
-                var formColors = possibleFormsColors[formToken];
-                for (var i = 0; i < formColors.length; i++){
-                    var formColor = formColors[i];
-                    if (typeof currentColourStats[formColor] !== 'undefined'){
-                        formChance += currentColourStats[formColor];
+        // Loop through required colorized forms and process where applicable
+        for (var reqKey = 0; reqKey < colorizedFormsRequired.length; reqKey++){
+
+            // Collect the token requiring colorization
+            var pokeToken = colorizedFormsRequired[reqKey];
+            var pokeIndex = PokemonSpeciesIndex[pokeToken];
+            var numAdded = typeof addedPokemonByEvoLineNumber[pokeIndex.evoLineNumber] !== 'undefined' ? addedPokemonByEvoLineNumber[pokeIndex.evoLineNumber] : 0;
+            //console.log('-- checking if colors needed for ', pokeToken, pokeIndex.evoLineNumber);
+
+            // If there the any of this pokemon line on the field, pre-calculate current colour stats
+            if (typeof pokeIndex['possibleFormsColors'] !== 'undefined'
+                && (numAdded > 0 || pokeToken === preloadToken)){
+                //console.log('--- colors needed w/ '+addedPokemonByEvoLineNumber[pokeIndex.evoLineNumber]+' related units on-field');
+
+                // Loop through and calculate likelihood of each pattern
+                var colorizedFormToken = '';
+                var possibleFormsColors = pokeIndex['possibleFormsColors'];
+                var possibleFormsColorsTokens = Object.keys(possibleFormsColors);
+                var possibleFormsChances = {};
+                for (var key = 0; key < possibleFormsColorsTokens.length; key++){
+                    var formToken = possibleFormsColorsTokens[key];
+                    var formChance = 0;
+                    var formColors = possibleFormsColors[formToken];
+                    for (var i = 0; i < formColors.length; i++){
+                        var formColor = formColors[i];
+                        if (typeof currentColourStats[formColor] !== 'undefined'){
+                            formChance += currentColourStats[formColor] / formColors.length;
+                            }
                         }
+                    possibleFormsChances[formToken] = formChance;
                     }
-                possibleFormsChances[formToken] = formChance;
-                }
-            var possibleFormRanking = getSortedKeys(possibleFormsChances);
-            // //console.log('possibleFormsColors = ', possibleFormsColors);
-            // //console.log('possibleFormsChances = ', possibleFormsChances);
-            // //console.log('possibleFormRanking = ', possibleFormRanking);
+                var possibleFormRanking = getSortedKeys(possibleFormsChances);
+                //console.log('--- possibleFormsColors = ', possibleFormsColors);
+                //console.log('--- possibleFormsChances = ', possibleFormsChances);
+                //console.log('--- possibleFormRanking = ', possibleFormRanking);
 
-            // Update the current pattern var with the top result
-            currentVivillonPattern = possibleFormRanking[0];
-            // //console.log('currentVivillonPattern = ', currentVivillonPattern);
+                // Update the current pattern var with the top result
+                colorizedFormToken += possibleFormRanking[0];
+                //console.log('---> colorizedFormToken = ', colorizedFormToken);
+
+                // If this pokemon's forms are also decorated, make sure we append that too
+                if (typeof pokeIndex['decoratedForms'] !== 'undefined'
+                    && pokeIndex['decoratedForms'] === true
+                    && typeof pokeIndex['possibleDecorationsColors'] !== 'undefined'){
+
+                    // Loop through and calculate likelihood of each pattern
+                    var possibleDecorationsColors = pokeIndex['possibleDecorationsColors'];
+                    var possibleDecorationsColorsTokens = Object.keys(possibleDecorationsColors);
+                    var possibleDecorationsChances = {};
+                    for (var key = 0; key < possibleDecorationsColorsTokens.length; key++){
+                        var decorationToken = possibleDecorationsColorsTokens[key];
+                        var decorationChance = 0;
+                        var decorationColors = possibleDecorationsColors[decorationToken];
+                        for (var i = 0; i < decorationColors.length; i++){
+                            var decorationColor = decorationColors[i];
+                            if (typeof currentColourStats[decorationColor] !== 'undefined'){
+                                decorationChance += currentColourStats[decorationColor] / decorationColors.length;
+                                }
+                            }
+                        possibleDecorationsChances[decorationToken] = decorationChance;
+                        }
+                    var possibleDecorationRanking = getSortedKeys(possibleDecorationsChances);
+                    //console.log('--- possibleDecorationsColors = ', possibleDecorationsColors);
+                    //console.log('--- possibleDecorationsChances = ', possibleDecorationsChances);
+                    //console.log('--- possibleDecorationRanking = ', possibleDecorationRanking);
+
+                    // Update the current pattern var with the top result
+                    colorizedFormToken += '-x-' + possibleDecorationRanking[possibleDecorationRanking.length - 1];
+                    //console.log('---> colorizedFormToken = ', colorizedFormToken);
+
+                    }
+
+                // Update the current pattern var with the top result
+                currentColorizedForms[pokeToken] = colorizedFormToken;
+                //console.log('---> currentColorizedForms['+pokeToken+'] = ', currentColorizedForms[pokeToken]);
+
+                }
 
             }
 
+        //console.log('| NEW ', {colorizedFormsRequired: colorizedFormsRequired, currentColorizedForms: currentColorizedForms});
+        //console.log('----->>\n');
     }
 
     // Define a function for updating growth cycles
@@ -6228,9 +6303,21 @@
                         pokemonInfo.types = selectedEvolution.types;
                         pokemonInfo.growthCooldown += 10;
 
-                        // If the selected evolution was Vivillon, we need to calculate its form
-                        if (selectedEvolution.token === 'vivillon'){
-                            pokemonInfo.formToken = currentVivillonPattern;
+                        if (colorizedFormsRequired.indexOf(selectedEvolution.token) !== -1){
+                            //console.log('(!!!) upcoming ', selectedEvolution.token, ' needs a colorized form (', selectedEvolutionData.colorizedForms, ')! ', currentColorizedForms);
+                            //console.log('(...) we should use ', currentColorizedForms[selectedEvolution.token], ' !');
+                        }
+
+                        // If the selected evolution is colorized and we have one available, use it now
+                        if (typeof selectedEvolutionData.colorizedForms !== 'undefined'
+                            && selectedEvolutionData.colorizedForms === true){
+                            //console.log(selectedEvolution.token, ' colorizedForms === true and ', currentColorizedForms[selectedEvolution.token]);
+                            if (typeof currentColorizedForms[selectedEvolution.token] !== 'undefined'
+                                && currentColorizedForms[selectedEvolution.token].length > 0){
+                                pokemonInfo.formToken = currentColorizedForms[selectedEvolution.token];
+                                } else if (typeof selectedEvolutionData.baseForm !== 'undefined') {
+                                pokemonInfo.formToken =  selectedEvolutionData.baseForm;
+                                }
                             }
                         // Otherwise if this pokemon has a randomized form, decide it now
                         else if (typeof selectedEvolutionData['randomizeForms'] !== 'undefined'
@@ -7682,12 +7769,10 @@
     function sortSpeciesTokensByAddedThenByOrder(speciesTokens, reverseOrder){
         var addedEvoLineNumbers = Object.keys(thisZoneData.addedPokemonByEvoLineNumber);
         speciesTokens.sort(function(tokenA, tokenB){
-            var baseA = PokemonSpeciesIndex[tokenA].baseEvolution;
-            var baseB = PokemonSpeciesIndex[tokenB].baseEvolution;
-            var baseNumA = 'e' + PokemonSpeciesIndex[baseA].number;
-            var baseNumB = 'e' + PokemonSpeciesIndex[baseB].number;
-            var addedA = addedEvoLineNumbers.indexOf(baseNumA);
-            var addedB = addedEvoLineNumbers.indexOf(baseNumB);
+            var evoLineA = PokemonSpeciesIndex[tokenA].evoLineNumber;
+            var evoLineB = PokemonSpeciesIndex[tokenB].evoLineNumber;
+            var addedA = addedEvoLineNumbers.indexOf(evoLineA);
+            var addedB = addedEvoLineNumbers.indexOf(evoLineB);
             var orderA = PokemonSpeciesDisplayOrder.indexOf(tokenA);
             var orderB = PokemonSpeciesDisplayOrder.indexOf(tokenB);
             var reverse = reverseOrder ? -1 : 1;
