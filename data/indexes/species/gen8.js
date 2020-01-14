@@ -1650,6 +1650,22 @@
             prevEvolution: 'milcery'
             },
 
+        'falinks': {
+            order: indexOrder++,
+            token: 'falinks',
+            name: 'Falinks',
+            number: 870,
+            types: ['fighting'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 65, phAttack: 100, phDefense: 100, spAttack: 70, spDefense: 60, speed: 75},
+            abilities: {0: 'battle-armor', 'hidden': 'defiant'},
+            height: 3.0,
+            weight: 62.0,
+            colors: ['yellow', 'red', 'black', 'white'],
+            eggCycles: 25,
+            eggGroups: ['fairy', 'mineral']
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
