@@ -1920,6 +1920,7 @@
             formClass: 'color-variant',
             dynamicForms: true,
             colorizedForms: true,
+            excludeFromColorStats: true,
             possibleForms: ['red', 'blue', 'yellow', 'green', 'purple', 'orange', 'grey', 'black', 'white', 'brown', 'pink'],
             baseForm: 'green',
             types: ['normal'],

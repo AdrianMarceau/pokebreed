@@ -364,6 +364,8 @@
             name: 'Vivillon',
             number: 666,
             formClass: 'color-variant',
+            colorizedForms: true,
+            excludeFromColorStats: true,
             possibleForms: [
                 'meadow', 'archipelago', 'continental', 'elegant', 'garden',
                 'high-plains', 'icy-snow', 'jungle', 'marine', 'modern',

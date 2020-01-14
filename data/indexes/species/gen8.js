@@ -1567,6 +1567,89 @@
             prevEvolution: 'galarian-yamask'
             },
 
+        'milcery': {
+            order: indexOrder++,
+            token: 'milcery',
+            name: 'Milcery',
+            number: 868,
+            excludeFromColorStats: true,
+            types: ['fairy'],
+            genderRatio: {female: 1.0000},
+            baseStats: {hp: 45, phAttack: 40, phDefense: 40, spAttack: 50, spDefense: 61, speed: 34},
+            abilities: {0: 'sweet-veil', hidden: 'aroma-veil'},
+            height: 0.2,
+            weight: 0.3,
+            colors: ['white'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'amorphous'],
+            nextEvolutions: [{
+                species: 'alcremie',
+                method: 'happiness',
+                value: 'high',
+                method: 'level-up',
+                value: 30
+                }]
+            },
+        'alcremie': {
+            order: indexOrder++,
+            token: 'alcremie',
+            name: 'Alcremie',
+            number: 869,
+            formClass: 'color-variant',
+            excludeFromColorStats: true,
+            colorizedForms: true,
+            possibleForms: [
+                'vanilla-cream',
+                'ruby-cream', 'mint-cream', 'lemon-cream',
+                'matcha-cream', 'lavendar-cream', 'orange-cream',
+                'salted-cream', 'charcoal-cream',
+                'caramel-swirl', 'ruby-swirl', 'citrus-swirl',
+                'rainbow-swirl', 'rocket-swirl'
+                ],
+            possibleFormsColors: {
+                'vanilla-cream': ['pink'],
+                'ruby-cream': ['red'],
+                'mint-cream': ['blue'],
+                'lemon-cream': ['yellow'],
+                'matcha-cream': ['green'],
+                'lavendar-cream': ['purple'],
+                'orange-cream': ['orange'],
+                'salted-cream': ['white'],
+                'charcoal-cream': ['black', 'gray'],
+                'caramel-swirl': ['brown', 'white'],
+                'ruby-swirl': ['red', 'brown'],
+                'citrus-swirl': ['orange', 'yellow'],
+                'rainbow-swirl': ['yellow', 'pink', 'blue'],
+                'rocket-swirl': ['white', 'pink', 'blue']
+                },
+            decoratedForms: true,
+            possibleDecorations: [
+                'strawberries', 'blueberries',
+                'hearts', 'stars', 'clovers',
+                'flowers', 'ribbons'
+                ],
+            possibleDecorationsColors: {
+                'strawberries': ['red'],
+                'blueberries': ['blue'],
+                'hearts': ['pink'],
+                'stars': ['yellow'],
+                'clovers': ['green'],
+                'flowers': ['orange'],
+                'ribbons': ['purple'],
+                },
+            baseForm: 'vanilla-cream-x-strawberries',
+            types: ['fairy'],
+            genderRatio: {female: 1.0000},
+            baseStats: {hp: 65, phAttack: 60, phDefense: 75, spAttack: 110, spDefense: 121, speed: 64},
+            abilities: {0: 'sweet-veil', hidden: 'aroma-veil'},
+            height: 0.3,
+            weight: 0.5,
+            colors: ['white', 'pink', 'red'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'amorphous'],
+            prevEvolution: 'milcery'
+            },
+
         });
     thisIndex.indexOrder = indexOrder;
 
@@ -2069,6 +2152,28 @@
             prevEvolution: 'grimmsnarl',
             hasBigSprite: true
             },
+        'gmax-alcremie': {
+            order: thisIndex.afterOrder('alcremie'),
+            token: 'gmax-alcremie',
+            name: 'Gigantamax Alcremie',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'alcremie',
+            number: 869,
+            types: ['fairy'],
+            genderRatio: {female: 1.0000},
+            baseStats: {hp: 650, phAttack: 60, phDefense: 75, spAttack: 110, spDefense: 121, speed: 64},
+            abilities: {0: 'sweet-veil', hidden: 'aroma-veil'},
+            height: 30.0,
+            weight: -1,
+            colors: ['white', 'pink', 'yellow', 'blue', 'orange', 'purple', 'green', 'red'],
+            eggCycles: 20,
+            eggGroups: ['fairy', 'amorphous'],
+            prevEvolution: 'alcremie',
+            hasBigSprite: true
+            },
 
     });
     thisIndex.indexOrder = indexOrder;
@@ -2110,6 +2215,7 @@
         {base: 'centiskorch', species: 'gmax-centiskorch', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'hatterene', species: 'gmax-hatterene', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'grimmsnarl', species: 'gmax-grimmsnarl', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'alcremie', species: 'gmax-alcremie', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
