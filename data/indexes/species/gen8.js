@@ -189,15 +189,6 @@
                 method: 'level-up',
                 value: 42
                 }],
-            altBaseEvolutions: [{
-                species: 'mr-mime',
-                method: 'type-warning',
-                value: 'ice'
-                },{
-                species: 'farfetchd',
-                method: 'type-appeal',
-                value: 'fairy'
-                }]
             },
 
         'galarian-corsola': {
@@ -1664,6 +1655,21 @@
             colors: ['yellow', 'red', 'black', 'white'],
             eggCycles: 25,
             eggGroups: ['fairy', 'mineral']
+            },
+
+        'pincurchin': {
+            order: indexOrder++,
+            token: 'pincurchin',
+            name: 'Pincurchin',
+            number: 871,
+            types: ['electric'],
+            baseStats: {hp: 48, phAttack: 101, phDefense: 95, spAttack: 91, spDefense: 85, speed: 15},
+            abilities: {0: 'lightning-rod', 'hidden': 'electric-surge'},
+            height: 0.3,
+            weight: 1.0,
+            colors: ['black', 'yellow'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'amorphous']
             },
 
         });
