@@ -1672,6 +1672,45 @@
             eggGroups: ['water-1', 'amorphous']
             },
 
+        'snom': {
+            order: indexOrder++,
+            token: 'snom',
+            name: 'Snom',
+            number: 872,
+            types: ['ice', 'bug'],
+            baseStats: {hp: 30, phAttack: 25, phDefense: 35, spAttack: 45, spDefense: 30, speed: 20},
+            abilities: {0: 'shield-dust', hidden: 'ice-scales'},
+            height: 0.3,
+            weight: 3.8,
+            colors: ['white'],
+            eggCycles: 20,
+            eggGroups: ['bug'],
+            nextEvolutions: [{
+                species: 'frosmoth',
+                method: 'happiness',
+                value: 'high',
+                method2: 'level-up',
+                value2: 15
+                }]
+            },
+        'frosmoth': {
+            order: indexOrder++,
+            token: 'frosmoth',
+            name: 'Frosmoth',
+            number: 873,
+            types: ['ice', 'bug'],
+            baseStats: {hp: 70, phAttack: 65, phDefense: 60, spAttack: 125, spDefense: 90, speed: 65},
+            abilities: {0: 'shield-dust', hidden: 'ice-scales'},
+            height: 1.3,
+            weight: 42.0,
+            colors: ['white', 'gray', 'blue'],
+            eggCycles: 20,
+            eggGroups: ['bug'],
+            prevEvolution: 'snom'
+            },
+
+
+
         });
     thisIndex.indexOrder = indexOrder;
 
