@@ -3192,7 +3192,10 @@
                             &&  (pokeIndex.formClasses.indexOf('regional-variant') !== -1
                                 || pokeIndex.formClasses.indexOf('ancient-variant') !== -1
                                 || pokeIndex.formClasses.indexOf('box-variant') !== -1)){
-                                if (pokeIndex.formToken.match(/(^|-)?(alolan|proto|altered)(-|$)?/)){ pokeTraits.push('<i class="nonwild"></i>'); }
+                                if (typeof pokeIndex.formToken !== 'undefined'
+                                    && pokeIndex.formToken.match(/(^|-)?(alolan|galarian|proto|altered)(-|$)?/)){
+                                    pokeTraits.push('<i class="nonwild"></i>');
+                                }
                             }
                         }
                     }
