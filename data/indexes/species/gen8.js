@@ -1709,6 +1709,42 @@
             prevEvolution: 'snom'
             },
 
+        'eiscue': {
+            order: indexOrder++,
+            token: 'eiscue',
+            name: 'Eiscue',
+            number: 875,
+            types: ['ice'],
+            baseStats: {hp: 75, phAttack: 80, phDefense: 110, spAttack: 65, spDefense: 90, speed: 50},
+            abilities: {0: 'ice-face'},
+            height: 1.4,
+            weight: 89.0,
+            colors: ['blue', 'black', 'white'],
+            eggCycles: 25,
+            eggGroups: ['water-1', 'field'],
+            nextEvolutions: [{
+                species: 'noice-face-eiscue',
+                method: 'type-crisis',
+                value: 'ice'
+                }]
+            },
+        'noice-face-eiscue': {
+            order: indexOrder++,
+            token: 'noice-face-eiscue',
+            name: 'Noice Face Eiscue',
+            number: 875,
+            formToken: 'noice-face',
+            types: ['ice'],
+            baseStats: {hp: 75, phAttack: 80, phDefense: 70, spAttack: 65, spDefense: 50, speed: 130},
+            abilities: {0: 'ice-face'},
+            height: 1.4,
+            weight: 69.0,
+            colors: ['blue', 'black', 'white'],
+            eggCycles: 25,
+            eggGroups: ['water-1', 'field'],
+            prevEvolution: 'eiscue'
+            },
+
 
 
         });
