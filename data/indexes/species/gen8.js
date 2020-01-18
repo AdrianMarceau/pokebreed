@@ -1745,6 +1745,52 @@
             prevEvolution: 'eiscue'
             },
 
+        'indeedee-f': {
+            order: indexOrder++,
+            token: 'indeedee-f',
+            name: 'Indeedee \u2640',
+            formClass: 'gender-variant',
+            formToken: 'female',
+            number: 876,
+            types: ['psychic', 'normal'],
+            genderRatio: {female: 1.000},
+            baseStats: {hp: 70, phAttack: 55, phDefense: 65, spAttack: 95, spDefense: 105, speed: 85},
+            abilities: {0: 'own-tempo', 1: 'synchronize', hidden: 'psychic-surge'},
+            height: 0.9,
+            weight: 28.0,
+            colors: ['white', 'blue', 'brown'],
+            eggCycles: 40,
+            eggPartner: 'indeedee-m',
+            eggGroups: ['fairy'],
+            altBaseEvolutions: [{
+                species: 'indeedee-m',
+                method: 'chance',
+                value: 50
+                }]
+            },
+        'indeedee-m': {
+            order: indexOrder++,
+            token: 'indeedee-m',
+            name: 'Indeedee \u2642',
+            formClass: 'gender-variant',
+            formToken: 'male',
+            number: 876,
+            types: ['psychic', 'normal'],
+            genderRatio: {male: 1.000},
+            baseStats: {hp: 60, phAttack: 65, phDefense: 55, spAttack: 105, spDefense: 95, speed: 95},
+            abilities: {0: 'inner-focus', 1: 'synchronize', hidden: 'psychic-surge'},
+            height: 0.9,
+            weight: 28.0,
+            colors: ['blue', 'white', 'brown'],
+            eggCycles: 40,
+            eggPartner: 'indeedee-f',
+            eggGroups: ['fairy'],
+            altBaseEvolutions: [{
+                species: 'indeedee-f',
+                method: 'chance',
+                value: 50
+                }]
+            },
 
 
         });
