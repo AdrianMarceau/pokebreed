@@ -2836,6 +2836,7 @@
                     customData.formToken = pokemonData.formToken; // Preset form
                     } else if ((pokemonData.randomizeForms === true
                         || pokemonData.seasonalForms === true
+                        || pokemonData.altMonthlyForms === true
                         || pokemonData.colorizedForms === true
                         || pokemonData.fieldForms === true)
                             && typeof pokemonData.baseForm !== 'undefined'
@@ -3167,6 +3168,7 @@
                     customData.formToken = pokeIndex.formToken; // Preset form
                     } else if ((pokeIndex.randomizeForms === true
                         || pokeIndex.seasonalForms === true
+                        || pokeIndex.altMonthlyForms === true
                         || pokeIndex.colorizedForms === true
                         || pokeIndex.fieldForms === true)
                             && typeof pokeIndex.baseForm !== 'undefined'
@@ -3867,6 +3869,13 @@
             && typeof indexData['possibleForms'] !== 'undefined'){
             if (thisZoneData.season.length){ newPokemon.formToken = thisZoneData.season; }
             else { newPokemon.formToken = indexData['baseForm']; }
+            }
+
+        // If this pokemon has a monthly form, decide it now
+        if (typeof indexData['altMonthlyForms'] !== 'undefined'
+            && indexData['altMonthlyForms'] === true){
+            newPokemon.birthMonth = typeof thisZoneData.date.month !== 'undefined' ? thisZoneData.date.month : 1;
+            newPokemon.formToken = indexData['baseForm'];
             }
 
         // If this pokemon has a colorized form, decide it now
@@ -4950,6 +4959,7 @@
                 if (typeof pokeIndex.subType !== 'undefined'){ subTypes.push(pokeIndex.subType); }
                 else if (typeof pokeIndex.subTypes !== 'undefined'){ subTypes = pokeIndex.subTypes.slice(0); }
                 if (pokeAbilities.indexOf('steelworker') !== -1){ subTypes.push('steel'); }
+                if (pokeAbilities.indexOf('hunger-switch') !== -1){ subTypes.push(pokeInfo.formToken === 'fullbelly' ? 'electric' : 'dark'); }
                 if (pokeAbilities.indexOf('aquatic') !== -1){ subTypes.push('water'); }
                 for (var key2 = 0; key2 < subTypes.length; key2++){
                     var typeToken = subTypes[key2];
@@ -5648,6 +5658,21 @@
                             } else {
                             pokemonInfo.formToken = thisZoneData.season;
                             }
+                        }
+
+                    // If seasonal variant, change the form based on the current month
+                    if (indexInfo.formClasses.indexOf('monthly-variant') !== -1
+                        && typeof pokemonInfo.birthMonth !== 'undefined'
+                        && thisZoneData.date.month > 0){
+
+                        if (typeof indexInfo['altMonthlyForms'] !== 'undefined'
+                            && indexInfo['altMonthlyForms'] === true){
+
+                            var altKey = pokemonInfo.birthMonth % 2 === thisZoneData.date.month % 2 ? 0 : 1;
+                            pokemonInfo.formToken = indexInfo['possibleForms'][altKey];
+
+                            }
+
                         }
 
                     // If colorized variant, change the form based on the current top color

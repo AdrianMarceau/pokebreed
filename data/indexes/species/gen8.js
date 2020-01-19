@@ -1792,6 +1792,30 @@
                 }]
             },
 
+        'morpeko': {
+            order: indexOrder++,
+            token: 'morpeko',
+            name: 'Morpeko',
+            number: 877,
+            formClass: 'monthly-variant',
+            dynamicForms: true,
+            altMonthlyForms: true,
+            possibleForms: ['fullbelly', 'hangry'],
+            possibleFormsColors: {
+                'fullbelly': ['yellow', 'brown', 'black', 'pink'],
+                'hangry': ['purple', 'black', 'red'],
+                },
+            baseForm: 'fullbelly',
+            types: ['electric', 'dark'],
+            baseStats: {hp: 75, phAttack: 80, phDefense: 110, spAttack: 65, spDefense: 90, speed: 50},
+            abilities: {0: 'hunger-switch'},
+            height: 0.3,
+            weight: 3.0,
+            colors: ['yellow', 'brown', 'black', 'pink'],
+            eggCycles: 10,
+            eggGroups: ['field', 'fairy']
+            },
+
 
         });
     thisIndex.indexOrder = indexOrder;
