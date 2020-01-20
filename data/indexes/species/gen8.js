@@ -1853,6 +1853,75 @@
             prevEvolution: 'cufant'
             },
 
+        'dracozolt': {
+            order: indexOrder++,
+            token: 'dracozolt',
+            name: 'Dracozolt',
+            isFossilPokemon: true,
+            eventOnlyPokemon: true,
+            number: 880,
+            types: ['electric', 'dragon'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 90, phAttack: 100, phDefense: 90, spAttack: 80, spDefense: 70, speed: 75},
+            abilities: {0: 'volt-absorb', 1: 'hustle', 'hidden': 'sand-rush'},
+            height: 1.8,
+            weight: 190.0,
+            colors: ['green', 'red', 'yellow'],
+            eggCycles: 35,
+            eggGroups: ['undiscovered']
+            },
+        'arctozolt': {
+            order: indexOrder++,
+            token: 'arctozolt',
+            name: 'Arctozolt',
+            isFossilPokemon: true,
+            eventOnlyPokemon: true,
+            number: 881,
+            types: ['electric', 'ice'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 90, phAttack: 100, phDefense: 90, spAttack: 90, spDefense: 80, speed: 55},
+            abilities: {0: 'volt-absorb', 1: 'static', 'hidden': 'slush-rush'},
+            height: 2.3,
+            weight: 150.0,
+            colors: ['blue', 'white', 'yellow'],
+            eggCycles: 35,
+            eggGroups: ['undiscovered']
+            },
+        'dracovish': {
+            order: indexOrder++,
+            token: 'dracovish',
+            name: 'Dracovish',
+            isFossilPokemon: true,
+            eventOnlyPokemon: true,
+            number: 882,
+            types: ['water', 'dragon'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 90, phAttack: 90, phDefense: 100, spAttack: 70, spDefense: 80, speed: 75},
+            abilities: {0: 'water-absorb', 1: 'strong-jaw', 'hidden': 'sand-rush'},
+            height: 2.3,
+            weight: 215.0,
+            colors: ['green', 'blue', 'red', 'white'],
+            eggCycles: 35,
+            eggGroups: ['undiscovered']
+            },
+        'arctovish': {
+            order: indexOrder++,
+            token: 'arctovish',
+            name: 'Arctovish',
+            isFossilPokemon: true,
+            eventOnlyPokemon: true,
+            number: 883,
+            types: ['water', 'ice'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 90, phAttack: 90, phDefense: 100, spAttack: 80, spDefense: 90, speed: 55},
+            abilities: {0: 'water-absorb', 1: 'ice-body', 'hidden': 'slush-rush'},
+            height: 2.0,
+            weight: 175.0,
+            colors: ['blue', 'white'],
+            eggCycles: 35,
+            eggGroups: ['undiscovered']
+            },
+
 
         });
     thisIndex.indexOrder = indexOrder;
