@@ -1816,6 +1816,43 @@
             eggGroups: ['field', 'fairy']
             },
 
+        'cufant': {
+            order: indexOrder++,
+            token: 'cufant',
+            name: 'Cufant',
+            number: 878,
+            types: ['steel'],
+            baseStats: {hp: 72, phAttack: 80, phDefense: 49, spAttack: 40, spDefense: 49, speed: 40},
+            abilities: {0: 'sheer-force', hidden: 'heavy-metal'},
+            height: 1.2,
+            weight: 100.0,
+            colors: ['orange', 'green', 'yellow', 'white'],
+            eggCycles: 25,
+            eggGroups: ['field', 'mineral'],
+            nextEvolutions: [{
+                species: 'copperajah',
+                method: 'happiness',
+                value: 'high',
+                method2: 'level-up',
+                value2: 15
+                }]
+            },
+        'copperajah': {
+            order: indexOrder++,
+            token: 'copperajah',
+            name: 'Copperajah',
+            number: 879,
+            types: ['steel'],
+            baseStats: {hp: 122, phAttack: 130, phDefense: 69, spAttack: 80, spDefense: 69, speed: 30},
+            abilities: {0: 'sheer-force', hidden: 'heavy-metal'},
+            height: 3.0,
+            weight: 650.0,
+            colors: ['green', 'yellow', 'white'],
+            eggCycles: 25,
+            eggGroups: ['field', 'mineral'],
+            prevEvolution: 'cufant'
+            },
+
 
         });
     thisIndex.indexOrder = indexOrder;
@@ -2341,6 +2378,27 @@
             prevEvolution: 'alcremie',
             hasBigSprite: true
             },
+        'gmax-copperajah': {
+            order: thisIndex.afterOrder('copperajah'),
+            token: 'gmax-copperajah',
+            name: 'Gigantamax Copperajah',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'copperajah',
+            number: 879,
+            types: ['steel'],
+            baseStats: {hp: 1220, phAttack: 130, phDefense: 69, spAttack: 80, spDefense: 69, speed: 30},
+            abilities: {0: 'sheer-force', hidden: 'heavy-metal'},
+            height: 23.0,
+            weight: -1,
+            colors: ['green', 'white', 'yellow'],
+            eggCycles: 25,
+            eggGroups: ['field', 'mineral'],
+            prevEvolution: 'copperajah',
+            hasBigSprite: true
+            },
 
     });
     thisIndex.indexOrder = indexOrder;
@@ -2383,6 +2441,7 @@
         {base: 'hatterene', species: 'gmax-hatterene', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'grimmsnarl', species: 'gmax-grimmsnarl', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'alcremie', species: 'gmax-alcremie', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'copperajah', species: 'gmax-copperajah', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
