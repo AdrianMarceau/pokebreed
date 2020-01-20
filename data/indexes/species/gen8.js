@@ -1922,6 +1922,21 @@
             eggGroups: ['undiscovered']
             },
 
+        'duraludon': {
+            order: indexOrder++,
+            token: 'duraludon',
+            name: 'Duraludon',
+            number: 884,
+            types: ['steel', 'dragon'],
+            baseStats: {hp: 70, phAttack: 95, phDefense: 115, spAttack: 120, spDefense: 80, speed: 85},
+            abilities: {0: 'light-metal', 1: 'heavy-metal', 'hidden': 'stalwart'},
+            height: 1.8,
+            weight: 40.0,
+            colors: ['gray', 'blue', 'red'],
+            eggCycles: 30,
+            eggGroups: ['mineral', 'dragon']
+            },
+
 
         });
     thisIndex.indexOrder = indexOrder;
@@ -2468,6 +2483,27 @@
             prevEvolution: 'copperajah',
             hasBigSprite: true
             },
+        'gmax-duraludon': {
+            order: thisIndex.afterOrder('duraludon'),
+            token: 'gmax-duraludon',
+            name: 'Gigantamax Duraludon',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'duraludon',
+            number: 884,
+            types: ['steel', 'dragon'],
+            baseStats: {hp: 700, phAttack: 95, phDefense: 115, spAttack: 120, spDefense: 80, speed: 85},
+            abilities: {0: 'light-metal', 1: 'heavy-metal', 'hidden': 'stalwart'},
+            height: 43.0,
+            weight: -1,
+            colors: ['gray', 'blue', 'black', 'red'],
+            eggCycles: 30,
+            eggGroups: ['mineral', 'dragon'],
+            prevEvolution: 'duraludon',
+            hasBigSprite: true
+            },
 
     });
     thisIndex.indexOrder = indexOrder;
@@ -2511,6 +2547,7 @@
         {base: 'grimmsnarl', species: 'gmax-grimmsnarl', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'alcremie', species: 'gmax-alcremie', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'copperajah', species: 'gmax-copperajah', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'duraludon', species: 'gmax-duraludon', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
