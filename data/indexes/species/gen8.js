@@ -1937,6 +1937,63 @@
             eggGroups: ['mineral', 'dragon']
             },
 
+        'dreepy': {
+            order: indexOrder++,
+            token: 'dreepy',
+            name: 'Dreepy',
+            number: 885,
+            types: ['dragon', 'ghost'],
+            baseStats: {hp: 28, phAttack: 60, phDefense: 30, spAttack: 40, spDefense: 30, speed: 82},
+            abilities: {0: 'clear-body', 1: 'infiltrator', 'hidden': 'cursed-body'},
+            height: 0.5,
+            weight: 2.0,
+            colors: ['green', 'red', 'yellow'],
+            eggCycles: 40,
+            eggGroups: ['amorphous', 'dragon'],
+            nextEvolutions: [{
+                species: 'drakloak',  // official Lv50 evo too high for PokeBox, had to be changed
+                method: 'level-up',
+                value: 30,
+                method2: 'happiness',
+                value2: 'high',
+                }]
+            },
+        'drakloak': {
+            order: indexOrder++,
+            token: 'drakloak',
+            name: 'Drakloak',
+            number: 886,
+            types: ['dragon', 'ghost'],
+            baseStats: {hp: 68, phAttack: 80, phDefense: 50, spAttack: 60, spDefense: 50, speed: 102},
+            abilities: {0: 'clear-body', 1: 'infiltrator', 'hidden': 'cursed-body'},
+            height: 1.4,
+            weight: 11.0,
+            colors: ['green', 'black', 'yellow', 'red'],
+            eggCycles: 40,
+            eggGroups: ['amorphous', 'dragon'],
+            prevEvolution: 'dreepy',
+            nextEvolutions: [{
+                species: 'dragapult',
+                method: 'level-up',
+                value: 60
+                }]
+            },
+        'dragapult': {
+            order: indexOrder++,
+            token: 'dragapult',
+            name: 'Dragapult',
+            number: 887,
+            types: ['dragon', 'ghost'],
+            baseStats: {hp: 88, phAttack: 120, phDefense: 75, spAttack: 100, spDefense: 75, speed: 142},
+            abilities: {0: 'clear-body', 1: 'infiltrator', 'hidden': 'cursed-body'},
+            height: 3.0,
+            weight: 50.0,
+            colors: ['green', 'black', 'red', 'yellow'],
+            eggCycles: 40,
+            eggGroups: ['amorphous', 'dragon'],
+            prevEvolution: 'drakloak'
+            },
+
 
         });
     thisIndex.indexOrder = indexOrder;
