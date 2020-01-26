@@ -2078,6 +2078,24 @@
             prevEvolution: 'zamazenta'
             },
 
+        'eternatus': {
+            order: indexOrder++,
+            token: 'eternatus',
+            name: 'Eternatus',
+            class: 'legendary',
+            eventOnlyPokemon: true,
+            number: 890,
+            types: ['poison', 'dragon'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 140, phAttack: 85, phDefense: 95, spAttack: 145, spDefense: 95, speed: 130},
+            abilities: {0: 'pressure'},
+            height: 20.0,
+            weight: 950.0,
+            colors: ['purple', 'red', 'black'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
 
         });
     thisIndex.indexOrder = indexOrder;
@@ -2646,6 +2664,30 @@
             hasBigSprite: true
             },
 
+        'emax-eternatus': {
+            order: indexOrder++,
+            token: 'emax-eternatus',
+            name: 'Eternamax Eternatus',
+            class: 'legendary',
+            class2: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'emax',
+            baseSpecies: 'eternatus',
+            number: 890,
+            types: ['poison', 'dragon'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 255, phAttack: 115, phDefense: 250, spAttack: 125, spDefense: 250, speed: 130},
+            abilities: {0: 'pressure'},
+            height: 100.0,
+            weight: -1,
+            colors: ['purple', 'black', 'red'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'eternatus',
+            hasBigSprite: true
+            },
+
     });
     thisIndex.indexOrder = indexOrder;
 
@@ -2689,6 +2731,8 @@
         {base: 'alcremie', species: 'gmax-alcremie', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'copperajah', species: 'gmax-copperajah', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'duraludon', species: 'gmax-duraludon', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+
+        {base: 'eternatus', species: 'emax-eternatus', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 1},
 
         ]);
 
