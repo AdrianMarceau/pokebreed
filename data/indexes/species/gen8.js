@@ -1994,6 +1994,90 @@
             prevEvolution: 'drakloak'
             },
 
+        zacian: {
+            order: indexOrder++,
+            token: 'zacian',
+            name: 'Zacian',
+            class: 'legendary',
+            number: 888,
+            types: ['fairy'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 92, phAttack: 130, phDefense: 115, spAttack: 80, spDefense: 115, speed: 138},
+            abilities: {0: 'intrepid-sword'},
+            height: 2.8,
+            weight: 110.0,
+            colors: ['blue', 'white', 'red', 'black'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'crowned-zacian',
+                method: 'burst-evolution',
+                value: 'rusted-sword'
+                }]
+            },
+        'crowned-zacian': {
+            order: indexOrder++,
+            token: 'crowned-zacian',
+            name: 'Crowned Zacian',
+            class: 'legendary',
+            formClass: 'burst-evolution',
+            formToken: 'crowned',
+            baseSpecies: 'zacian',
+            number: 888,
+            types: ['fairy', 'steel'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 92, phAttack: 170, phDefense: 115, spAttack: 80, spDefense: 115, speed: 148},
+            abilities: {0: 'intrepid-sword'},
+            height: 2.8,
+            weight: 355.0,
+            colors: ['blue', 'yellow', 'red', 'white', 'black'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'zacian'
+            },
+
+        zamazenta: {
+            order: indexOrder++,
+            token: 'zamazenta',
+            name: 'Zamazenta',
+            class: 'legendary',
+            number: 889,
+            types: ['fighting'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 92, phAttack: 130, phDefense: 115, spAttack: 80, spDefense: 115, speed: 138},
+            abilities: {0: 'dauntless-shield'},
+            height: 2.9,
+            weight: 210.0,
+            colors: ['red', 'white', 'blue', 'black'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'crowned-zamazenta',
+                method: 'burst-evolution',
+                value: 'rusted-shield'
+                }]
+            },
+        'crowned-zamazenta': {
+            order: indexOrder++,
+            token: 'crowned-zamazenta',
+            name: 'Crowned Zamazenta',
+            class: 'legendary',
+            formClass: 'burst-evolution',
+            formToken: 'crowned',
+            baseSpecies: 'zamazenta',
+            number: 889,
+            types: ['fighting', 'steel'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 92, phAttack: 130, phDefense: 145, spAttack: 80, spDefense: 145, speed: 128},
+            abilities: {0: 'dauntless-shield'},
+            height: 2.9,
+            weight: 785.0,
+            colors: ['red', 'yellow', 'blue', 'white', 'black'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'zamazenta'
+            },
+
 
         });
     thisIndex.indexOrder = indexOrder;
