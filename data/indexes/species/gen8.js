@@ -2083,7 +2083,6 @@
             token: 'eternatus',
             name: 'Eternatus',
             class: 'legendary',
-            eventOnlyPokemon: true,
             number: 890,
             types: ['poison', 'dragon'],
             genderRatio: {none: 1.000},

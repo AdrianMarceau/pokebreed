@@ -39,6 +39,8 @@
     var ultraEnergySpecies = [];
     var ultraBeastSpecies = [];
 
+    var dynamaxEnergySpecies = [];
+
     var globalSpeciesEffects = {};
 
     // GLOBAL ZONE DATA
@@ -1519,7 +1521,18 @@
 
                 // If this pokemon has ultra energy or is in ultra beast, add it to the parent array
                 if (indexInfo.class === 'ultra-beast'){ ultraBeastSpecies.push(indexInfo.token); }
-                if (indexInfo.class === 'ultra-beast' || indexInfo.hasUltraEnergy === true){ ultraEnergySpecies.push(indexInfo.token); }
+                if (indexInfo.class === 'ultra-beast'
+                    || (typeof indexInfo.class2 !== 'undefined' && indexInfo.class2 === 'ultra-beast')
+                    || indexInfo.hasUltraEnergy === true){
+                    ultraEnergySpecies.push(indexInfo.token);
+                    }
+
+                // If this pokemon has dynamax energy, add it to the parent array
+                if (indexInfo.class === 'gigantamax'
+                    || (typeof indexInfo.class2 !== 'undefined' && indexInfo.class2 === 'gigantamax')
+                    || indexInfo.hasDynamaxEnergy === true){
+                    dynamaxEnergySpecies.push(indexInfo.token);
+                    }
 
                 // Push this pokemon's name into the translation index (so it's easier to parse seeds)
                 globalNameToTokenIndex[indexInfo.name] = indexInfo.token;
@@ -5129,8 +5142,51 @@
 
             }
 
-        // //console.log('Day '+ thisZoneData.day +' | currentZoneFlags = ', currentZoneFlags);
-        // //console.log('currentZoneStats(Day '+thisZoneData.day+'A) = ', currentZoneStats);
+        // (GEN 8+) If we're in the right generation, calculate Dynamax / Gigantamax mechanics
+        if (maxIndexKeyToLoad >= 8){
+
+            // Check to see if Eternatus has appeared in the box
+            if (currentZoneFlags.indexOf('eternatusHasAppeared') === -1){
+                var eternatusHasAppeared = false;
+                if ((typeof currentZoneStats['species']['eternatus'] !== 'undefined'
+                    && currentZoneStats['species']['eternatus'] > 0)
+                    || (typeof currentZoneStats['species']['emax-eternatus'] !== 'undefined'
+                    && currentZoneStats['species']['emax-eternatus'] > 0)){
+                    eternatusHasAppeared = true;
+                    }
+                if (eternatusHasAppeared){
+                    currentZoneFlags.push('eternatusHasAppeared');
+                    }
+                }
+
+            // Check for the presence of DYNAMAX ENERGY and GMAX POKEMON
+            if (true){
+
+                // Check to see if the box has traces of Dynamax Energy inside (it stays)
+                var totalDynamaxEnergy = 0;
+                var currentDynamaxEnergy = 0;
+                for (var i = 0; i < dynamaxEnergySpecies.length; i++){
+                    var token = dynamaxEnergySpecies[i];
+                    if (typeof addedSpecies[token] !== 'undefined'){
+                        totalDynamaxEnergy += addedSpecies[token];
+                        }
+                    if (typeof currentZoneStats['species'][token] !== 'undefined'){
+                        currentDynamaxEnergy += currentZoneStats['species'][token];
+                        }
+                    }
+                currentZoneStats['totalDynamaxEnergy'] = totalDynamaxEnergy;
+                currentZoneStats['currentDynamaxEnergy'] = currentDynamaxEnergy;
+                if (totalDynamaxEnergy > 0
+                    && currentZoneFlags.indexOf('boxHasDynamaxEnergy') === -1){
+                    currentZoneFlags.push('boxHasDynamaxEnergy');
+                    }
+
+                }
+
+            }
+
+        //console.log('Day '+ thisZoneData.day +' | currentZoneFlags = ', currentZoneFlags);
+        //console.log('currentZoneStats(Day '+thisZoneData.day+'A) = ', currentZoneStats);
 
         // Calculate the current type difference (delta) between the highest attract vs highest repel
         currentZoneStats['typesDiff'] = 0;
@@ -5541,6 +5597,7 @@
 
         // Collect references to current zone stats
         var currentZoneStats = thisZoneData.currentStats;
+        var currentZoneFlags = thisZoneData.currentFlags;
         var currentTypeStats = currentZoneStats['types'];
         var currentClassStats = currentZoneStats['class'];
         var currentSpeciesStats = currentZoneStats['species'];
@@ -5783,22 +5840,32 @@
                         }
                     // //console.log('|- allowTradeEvolution = ', allowTradeEvolution);
 
-                    // If this pokemon has a Gigantamax form AND has the necessary gene, remove other evos
+                    // If this pokemon has a Gigantamax form AND has the necessary gene and isn't about to faint, remove other evos
                     var hasGigantamaxForm = false;
                     var hasGigantamaxFactor = false;
-                    for (var i = 0; i < possibleNextEvolutions.length; i++){
-                        if (hasGigantamaxForm && hasGigantamaxFactor){ break; }
-                        var nextEvolution = possibleNextEvolutions[i];
-                        var nextEvolutionInfo = PokemonSpeciesIndex[nextEvolution.species];
-                        for (j = 1; j <= 3; j++){
-                            var m = j > 0 ? (j + 1) : '';
-                            if (nextEvolution['method'+m] === 'gigantamax-factor'){
-                                hasGigantamaxForm = true;
-                                if ((pokemonInfo.sid % nextEvolution['value'+m]) === 0){
-                                    hasGigantamaxFactor = true;
-                                    possibleNextEvolutions = [];
-                                    possibleNextEvolutions.push(nextEvolution);
-                                    break;
+                    if (pokemonInfo.growthCycles >= (pokemonLifePoints / 2)){
+                        for (var i = 0; i < possibleNextEvolutions.length; i++){
+                            if (hasGigantamaxForm && hasGigantamaxFactor){ break; }
+                            var nextEvolution = possibleNextEvolutions[i];
+                            var nextEvolutionInfo = PokemonSpeciesIndex[nextEvolution.species];
+                            for (j = 1; j <= 3; j++){
+                                var m = j > 0 ? (j + 1) : '';
+                                if (nextEvolution['method'+m] === 'gigantamax-factor'){
+                                    hasGigantamaxForm = true;
+                                    var gigantamaxFactor = nextEvolution['value'+m];
+                                    if ((typeof currentZoneStats['species']['eternatus'] !== 'undefined'
+                                        && currentZoneStats['species']['eternatus'] > 0)
+                                        || (typeof currentZoneStats['species']['emax-eternatus'] !== 'undefined'
+                                        && currentZoneStats['species']['emax-eternatus'] > 0)){
+                                        gigantamaxFactor = Math.ceil(gigantamaxFactor / 3);
+                                        }
+                                    if ((pokemonInfo.sid % gigantamaxFactor) === 0){
+                                        nextEvolution['value'+m] = gigantamaxFactor;
+                                        hasGigantamaxFactor = true;
+                                        possibleNextEvolutions = [];
+                                        possibleNextEvolutions.push(nextEvolution);
+                                        break;
+                                        }
                                     }
                                 }
                             }
@@ -6128,8 +6195,8 @@
                         if (methodToken === 'gigantamax-factor'
                             && (pokemonInfo.sid % methodValue) === 0
                             && currentGigantamaxNum === 0){
-                            // //console.log('methodToken =', methodToken, 'pokemonInfo.sid =', pokemonInfo.sid, 'methodValue =', methodValue, 'currentGigantamaxNum =', currentGigantamaxNum);
-                            // //console.log('gigantamax-factor TRIGGERED!');
+                            //console.log('methodToken =', methodToken, 'pokemonInfo.sid =', pokemonInfo.sid, 'methodValue =', methodValue, 'currentGigantamaxNum =', currentGigantamaxNum);
+                            //console.log('gigantamax-factor TRIGGERED!');
                             return 1 + methodValue;
                             }
 
@@ -6330,6 +6397,13 @@
                         pokemonInfo.token = selectedEvolution.token;
                         pokemonInfo.types = selectedEvolution.types;
                         pokemonInfo.growthCooldown += 10;
+
+                        // If the selected evolution is a dynamax/gigantamax, increment the counter
+                        if (selectedEvolutionData.class === 'gigantamax'
+                            || (typeof selectedEvolutionData.class2 !== 'undefined' && selectedEvolutionData.class2 === 'gigantamax')){
+                            currentGigantamaxNum += 1;
+                            //console.log('currentGigantamaxNum = ', currentGigantamaxNum);
+                            }
 
                         if (colorizedFormsRequired.indexOf(selectedEvolution.token) !== -1){
                             //console.log('(!!!) upcoming ', selectedEvolution.token, ' needs a colorized form (', selectedEvolutionData.colorizedForms, ')! ', currentColorizedForms);
@@ -7248,7 +7322,7 @@
                     }
                 }
 
-            // (GEN 7+) Type: Null are summoned when the box has too many ultra beasts (silvally eats them)
+            // (GEN 7+) Type: Null is summoned when the box has too many ultra beasts (silvally eats them)
             eventPokemonChanceBoosters['type-null'] = 0;
             if (maxIndexKeyToLoad >= 7){
                 var boxHadUltraBeasts = zoneFlags.indexOf('boxHadUltraBeasts') !== -1;
@@ -7260,6 +7334,25 @@
                     if (currentUltraBeastNum > 0){ eventBase *= (currentUltraBeastNum + 1); }
                     eventPokemonChanceBases['type-null'] = eventBase;
                     eventPokemonChanceBoosters['type-null'] = eventBoost;
+                    }
+                }
+
+            // (GEN 8+) Eternatus is summoned when the box has too much dynamax energy
+            eventPokemonChanceBoosters['eternatus'] = 0;
+            if (maxIndexKeyToLoad >= 8){
+                var boxHasDynamaxEnergy = zoneFlags.indexOf('boxHasDynamaxEnergy') !== -1;
+                var eternatusHasAppeared = zoneFlags.indexOf('eternatusHasAppeared') !== -1;
+                var totalDynamaxEnergy = typeof zoneStats['totalDynamaxEnergy'] !== 'undefined' ? zoneStats['totalDynamaxEnergy'] : 0;
+                var currentDynamaxEnergy = typeof zoneStats['currentDynamaxEnergy'] !== 'undefined' ? zoneStats['currentDynamaxEnergy'] : 0;
+                //console.log('totalDynamaxEnergy = ' + totalDynamaxEnergy + ' | currentDynamaxEnergy = ' + currentDynamaxEnergy);
+                if (boxHasDynamaxEnergy
+                    && !eternatusHasAppeared
+                    && totalDynamaxEnergy >= 3
+                    && currentDynamaxEnergy === 0){
+                    eventBoost = ((thisZoneData.date.month + 1) / 12) + totalDynamaxEnergy;
+                    eventBase = 100 * eventBoost;
+                    eventPokemonChanceBases['eternatus'] = eventBase;
+                    eventPokemonChanceBoosters['eternatus'] = eventBoost;
                     }
                 }
 
