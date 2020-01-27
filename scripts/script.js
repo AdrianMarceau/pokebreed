@@ -7191,8 +7191,8 @@
 
                 }
 
-            // //console.log('eventPokemonChanceBases = ', eventPokemonChanceBases);
-            // //console.log('eventPokemonChanceBoosters = ', eventPokemonChanceBoosters);
+            //console.log('eventPokemonChanceBases = ', eventPokemonChanceBases);
+            //console.log('eventPokemonChanceBoosters = ', eventPokemonChanceBoosters);
 
             // (GEN 1+) DITTO appears more 6 months into the year when the box is nearly empty
             eventPokemonChanceBoosters['ditto'] = 0;
@@ -7425,7 +7425,7 @@
             var pokeClass = typeof pokeInfo.visitorClass !== 'undefined' ? pokeInfo.visitorClass : pokeInfo.class;
             var pokeFormClass = typeof pokeInfo.formClass !== 'undefined' ? pokeInfo.formClass : '';
             var isBasicPokemon = pokeClass === '' ? true : false;
-            var isSpecialPokemon = false;
+            var isSpecialPokemon = typeof pokeInfo.isSpecialPokemon !== 'undefined' ? pokeInfo.isSpecialPokemon : false;
             if (pokeClass !== ''
                 && (pokeClass === 'legendary'
                     || pokeClass === 'mythical'
@@ -7568,7 +7568,7 @@
             if (typeof eventPokemonChanceBoosters[pokeToken] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters[pokeToken]; }
             if (typeof eventPokemonChanceBoosters['*'] !== 'undefined'){ pokeChance *= eventPokemonChanceBoosters['*']; }
 
-            // Reduce chance slightly if this is a rare fossile pokemon
+            // Reduce chance slightly if this is a rare fossil pokemon
             if (pokeInfo.isFossilPokemon === true){ pokeChance -= (pokeChance * 0.20); }
 
             // If the chance was more than zero, push into the queue

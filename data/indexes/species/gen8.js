@@ -2805,4 +2805,7 @@
 
         ]);
 
+    // Add each of this region's starter pokemon to the global reward index
+    PokeBoxAPI.addStarterRewardToIndex({region: 'galar', gen: 8, count: 809, 'species': ['grookey', 'scorbunny', 'sobble']});
+
 })();
