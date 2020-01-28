@@ -35,6 +35,7 @@
     var totalLegendaryPokemon = 0;
     var totalMythicalPokemon = 0;
     var totalUltraBeasts = 0;
+    var totalFossilPokemon = 0;
 
     var ultraEnergySpecies = [];
     var ultraBeastSpecies = [];
@@ -1212,7 +1213,6 @@
                 var genNumber = rewardInfo['gen'];
                 var regionToken = rewardInfo['region'];
                 var unlockCount = rewardInfo['count'];
-                var startTokens = rewardInfo['species'];
                 if (unlockCount === 0){ continue; }
                 var eventID = 'unlocked-gen'+ genNumber +'-starters';
                 if (PokeboxRewards.indexOf('gen'+ genNumber +'-starters') !== -1
@@ -1562,6 +1562,9 @@
                     else if (indexInfo.class === 'ultra-beast'){ totalUltraBeasts++; }
                     if (indexInfo.isSpecialPokemon){ totalSpecialPokemon++; }
 
+                    // If this pokemon is in a sub-special class, incremeent appropriate counters
+                    if (typeof indexInfo.isFossilPokemon !== 'undefined' && indexInfo.isFossilPokemon === true){ totalFossilPokemon++; }
+
                     } else {
 
                     // Pokemon is hidden so let's add it to this hidden token list
@@ -1578,6 +1581,7 @@
             // //console.log('totalLegendaryPokemon = ', totalLegendaryPokemon);
             // //console.log('totalMythicalPokemon = ', totalMythicalPokemon);
             // //console.log('totalUltraBeasts = ', totalUltraBeasts);
+            // //console.log('totalFossilPokemon = ', totalFossilPokemon);
             // //console.log('PokemonSpeciesIndexTokens.length = ', PokemonSpeciesIndexTokens.length);
             // //console.log('numRequiredToCompletePokedex = ', (PokemonSpeciesIndexTokens.length - totalSpecialPokemon));
             */
@@ -2633,6 +2637,8 @@
             totalMythicalPokemonEncountered: 0,
             totalUltraBeasts: 0,
             totalUltraBeastsEncountered: 0,
+            totalFossilPokemon: 0,
+            totalFossilPokemonEncountered: 0,
             totalsByGeneration: {},
             currentPokedexScore: 0
             };
@@ -2671,8 +2677,14 @@
                 pokedexTotals.totalMythicalPokemon++;
                 if (pokemonEncountered){ pokedexTotals.totalMythicalPokemonEncountered++; }
                 } else if (pokemonKind === 'ultra-beast'){
-                pokedexTotals.totalUltraBeastPokemon++;
-                if (pokemonEncountered){ pokedexTotals.totalUltraBeastPokemonEncountered++; }
+                pokedexTotals.totalUltraBeasts++;
+                if (pokemonEncountered){ pokedexTotals.totalUltraBeastsEncountered++; }
+                }
+
+            // Incremenet any totals specific to their sub-kind/sub-class
+            if (typeof pokeIndex.isFossilPokemon !== 'undefined' && pokeIndex.isFossilPokemon === true){
+                pokedexTotals.totalFossilPokemon++;
+                if (pokemonEncountered){ pokedexTotals.totalFossilPokemonEncountered++; }
                 }
 
             // And now increment the generation totals
@@ -8534,11 +8546,13 @@
         getPokemonTypesIndexTokens: function(){ return JSON.parse(JSON.stringify(PokemonTypesIndexTokens)); },
         getNationalDexNumbers: function(){ return JSON.parse(JSON.stringify(nationalDexNumbers)); },
         getMissingDexNumbers: function(){ return JSON.parse(JSON.stringify(missingDexNumbers)); },
+        getPokedexTotals: function(){ return JSON.parse(JSON.stringify(currentPokedexTotals)); },
         getPokemonTotals: function(){ return {
             specialPokemon: totalSpecialPokemon,
             legendaryPokemon: totalLegendaryPokemon,
             mythicalPokemon: totalMythicalPokemon,
             ultraBeasts: totalUltraBeasts,
+            fossilPokemon: totalFossilPokemon,
             maxDexNumber: maxDexNumber,
             nationalDexNumbers: nationalDexNumbers.length,
             missingDexNumbers: missingDexNumbers.length
