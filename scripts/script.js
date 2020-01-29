@@ -7275,23 +7275,6 @@
 
                 }
 
-            // (GEN 8+) MELTAN are summoned in bulk as soon as a single one appears
-            if (maxIndexKeyToLoad >= 8){
-                if (typeof addedSpecies['meltan'] !== 'undefined'){
-                    if (addedSpecies['meltan'] >= 1
-                        && addedSpecies['meltan'] < 4){
-                        eventBoost = 30 * addedSpecies['meltan'];
-                        eventPokemonChanceBoosters['meltan'] = eventBoost;
-                        PokemonSpeciesIndex['meltan']['visitorClass'] = '';
-                        } else if (addedSpecies['meltan'] >= 4){
-                        eventPokemonChanceBoosters['meltan'] = 0;
-                        } else {
-                        if (typeof eventPokemonChanceBoosters['meltan'] !== 'undefined'){ delete eventPokemonChanceBoosters['meltan']; }
-                        if (typeof PokemonSpeciesIndex['meltan']['visitorClass'] !== 'undefined'){ delete PokemonSpeciesIndex['meltan']['visitorClass']; }
-                        }
-                    }
-                }
-
             // (GEN 7+) Necrozma is summoned to devour the light of Lunala or Solgaleo when they appear
             eventPokemonChanceBoosters['necrozma'] = 0;
             if (maxIndexKeyToLoad >= 7){
@@ -7346,6 +7329,23 @@
                     if (currentUltraBeastNum > 0){ eventBase *= (currentUltraBeastNum + 1); }
                     eventPokemonChanceBases['type-null'] = eventBase;
                     eventPokemonChanceBoosters['type-null'] = eventBoost;
+                    }
+                }
+
+            // (GEN 7+) MELTAN are summoned in bulk as soon as a single one appears
+            if (maxIndexKeyToLoad >= 7){
+                if (typeof addedSpecies['meltan'] !== 'undefined'){
+                    if (addedSpecies['meltan'] >= 1
+                        && addedSpecies['meltan'] < 4){
+                        eventBoost = 30 * addedSpecies['meltan'];
+                        eventPokemonChanceBoosters['meltan'] = eventBoost;
+                        PokemonSpeciesIndex['meltan']['visitorClass'] = '';
+                        } else if (addedSpecies['meltan'] >= 4){
+                        eventPokemonChanceBoosters['meltan'] = 0;
+                        } else {
+                        if (typeof eventPokemonChanceBoosters['meltan'] !== 'undefined'){ delete eventPokemonChanceBoosters['meltan']; }
+                        if (typeof PokemonSpeciesIndex['meltan']['visitorClass'] !== 'undefined'){ delete PokemonSpeciesIndex['meltan']['visitorClass']; }
+                        }
                     }
                 }
 
