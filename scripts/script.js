@@ -7480,6 +7480,7 @@
 
             // Check to see if this is a persistent visitor (which is to say it can show up any number of times)
             var repeatVisitor = typeof pokeInfo.repeatVisitor !== 'undefined' ? pokeInfo.repeatVisitor : false;
+            var oneTimeVisitor = typeof pokeInfo.oneTimeVisitor !== 'undefined' ? pokeInfo.oneTimeVisitor : false;
 
             // Apply any event-specific species or class boosters to the chance rating
             if (typeof eventPokemonChanceBases['*'] !== 'undefined'){ pokeChance = eventPokemonChanceBases['*']; }
@@ -7560,7 +7561,10 @@
             if (!repeatVisitor && numAddedAlready > 0){
                 if (numAddedAlready > 1){ pokeChance -= numAddedAlready; }
                 // //console.log('pokeChance ', pokeToken, pokeChance);
-                if (isSpecialPokemon){
+                if (oneTimeVisitor){
+                    if (numAddedCurrently >= 1){ pokeChance = 0; }
+                    else if (numAddedAlready >= 1){ pokeChance = 0; }
+                } else if (isSpecialPokemon){
                     if (numAddedCurrently >= 1){ pokeChance = 0; }
                     else if (numAddedAlready >= 3){ pokeChance = 0; }
                     // //console.log('pokeChance ', pokeToken, pokeChance);
