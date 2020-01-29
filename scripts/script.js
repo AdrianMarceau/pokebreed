@@ -7275,7 +7275,7 @@
 
                 }
 
-            // (GEN 7+) Necrozma is summoned to devour the light of Lunala or Solgaleo when they appear
+            // (GEN 7+) NECROZMA is summoned to devour the light of Lunala or Solgaleo when they appear
             eventPokemonChanceBoosters['necrozma'] = 0;
             if (maxIndexKeyToLoad >= 7){
                 var currentLunala = typeof zoneStats['species']['lunala'] !== 'undefined' ? zoneStats['species']['lunala'] : 0;
@@ -7296,7 +7296,7 @@
                     }
                 }
 
-            // (GEN 7+) Ultra beasts are summoned when the box has too much ultra energy (and no silvally)
+            // (GEN 7+) ULTRA BEASTS are summoned when the box has too much ultra energy (and no silvally)
             eventPokemonChanceBoosters['ultra-beast'] = 0;
             if (maxIndexKeyToLoad >= 7){
                 var boxHasUltraEnergy = zoneFlags.indexOf('boxHasUltraEnergy') !== -1;
@@ -7317,7 +7317,7 @@
                     }
                 }
 
-            // (GEN 7+) Type: Null is summoned when the box has too many ultra beasts (silvally eats them)
+            // (GEN 7+) TYPE: NULL is summoned when the box has too many ultra beasts (silvally eats them)
             eventPokemonChanceBoosters['type-null'] = 0;
             if (maxIndexKeyToLoad >= 7){
                 var boxHadUltraBeasts = zoneFlags.indexOf('boxHadUltraBeasts') !== -1;
@@ -7349,7 +7349,7 @@
                     }
                 }
 
-            // (GEN 8+) Eternatus is summoned when the box has too much dynamax energy
+            // (GEN 8+) ETERNATUS is summoned when the box has too much dynamax energy
             eventPokemonChanceBoosters['eternatus'] = 0;
             if (maxIndexKeyToLoad >= 8){
                 var boxHasDynamaxEnergy = zoneFlags.indexOf('boxHasDynamaxEnergy') !== -1;
@@ -7366,6 +7366,19 @@
                     eventPokemonChanceBases['eternatus'] = eventBase;
                     eventPokemonChanceBoosters['eternatus'] = eventBoost;
                     }
+                }
+
+            // (GEN 8+) HYBRID FOSSILS may only appear when specific egg group ratios are present
+            eventPokemonChanceBoosters['dracozolt'] = 0;
+            eventPokemonChanceBoosters['arctozolt'] = 0;
+            eventPokemonChanceBoosters['dracovish'] = 0;
+            eventPokemonChanceBoosters['arctovish'] = 0;
+            if (maxIndexKeyToLoad >= 8){
+                var currentEggGroups = thisZoneData.currentStats.eggGroups;
+                if (currentEggGroups['flying'] >= 1 && currentEggGroups['dragon'] >= 1){ delete eventPokemonChanceBoosters['dracozolt']; }
+                if (currentEggGroups['flying'] >= 1 && currentEggGroups['monster'] >= 1){ delete eventPokemonChanceBoosters['arctozolt']; }
+                if (currentEggGroups['water-2'] >= 1 && currentEggGroups['dragon'] >= 1){ delete eventPokemonChanceBoosters['dracovish']; }
+                if (currentEggGroups['water-2'] >= 1 && currentEggGroups['monster'] >= 1){ delete eventPokemonChanceBoosters['arctovish']; }
                 }
 
             // (GEN X+) Shadow and Shining are never summoned as visitors and can only be unlocked via events/passwords
