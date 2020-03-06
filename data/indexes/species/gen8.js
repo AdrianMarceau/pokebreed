@@ -2781,18 +2781,39 @@
         {base: 'cramorant', species: 'arrokuda'},
         {base: 'grapploct', species: 'golisopod'},
         {base: 'golisopod', species: 'grapploct'},
+        {base: 'rookidee', species: 'grubbin'},
+        {base: 'bunnelby', species: 'corviknight'},
+        {base: 'steenee', species: 'corvisquire'},
+        {base: 'dwebble', species: 'roggenrola'},
+        {base: 'dwebble', species: 'rolycoly'},
+        {base: 'beheeyem', species: 'dubwool'},
+        {base: 'weavile', species: 'mamoswine'},
+        {base: 'wailmer', species: 'wishiwashi'},
 
         // Symbiotic relationships
-        // ---
+        {base: 'joltik', species: 'yamper'},
+        {base: 'dwebble', species: 'hippowdon'},
 
         // Rival relationships
-        // ---
+        {base: 'boltund', species: 'thievul'},
+        {base: 'thievul', species: 'boltund'},
+        {base: 'persian', species: 'perrserker'},
+        {base: 'perrserker', species: 'persian'},
+        {base: 'bisharp', species: 'fraxure'},
+        {base: 'fraxure', species: 'bisharp'},
+        {base: 'purrloin', species: 'nickit'},
+        {base: 'nickit', species: 'purrloin'},
+        {base: 'pangoro', species: 'obstagoon'},
+        {base: 'obstagoon', species: 'pangoro'},
 
         // Romantic relationships
         // ---
 
         // Feeding/pollination relationships
-        // ---
+        {base: 'galarian-darumaka', species: 'snover'},
+        {base: 'galarian-weezing', species: 'trubbish'},
+        {base: 'cutiefly', species: 'gossifleur'},
+        {base: 'combee', species: 'appletun'},
 
         // One-sided (theft) relationships
         // ---
