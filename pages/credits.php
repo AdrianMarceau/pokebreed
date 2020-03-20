@@ -21,6 +21,12 @@
             <a class="link" target="_blank" href="https://github.com/Zarel/Pokémon-Showdown/blob/master/data/pokedex.js">https://github.com/Zarel/Pokémon-Showdown/blob/master/data/pokedex.js</a>
         </p>
         <p>
+            Box-sized sprites for Gen 8 Pokémon (because the official one are too big for the app) are credited to: <br />
+            The <a class="link" target="_blank" href="https://docs.google.com/spreadsheets/d/1acgzAjh0dnFRQnjZu8kSjS177rKCzpFfEHRLtwuuXRU/edit#gid=0">Gen8 Sprite Project</a>
+            via the <a class="link" target="_blank" href="https://www.smogon.com/forums/threads/sword-shield-sprite-project.3647722/">Smogon Forums</a> community
+            and compiled by <a class="link" target="_blank" href="https://www.deviantart.com/leparagon/art/Gen-8-Icon-sprites-40x30-823261656">leparagon</a>
+        </p>
+        <p>
             Custom sprites for any new forms and/or unofficial Pokémon were created by the artists below and provided with permission to use in PokéBox:
         </p>
         <ul>
