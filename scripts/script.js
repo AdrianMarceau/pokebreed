@@ -5613,6 +5613,7 @@
         var currentTypeStats = currentZoneStats['types'];
         var currentClassStats = currentZoneStats['class'];
         var currentSpeciesStats = currentZoneStats['species'];
+        var currentColourStats = thisZoneData.currentStats['colors'];
         var currentBaseStats = currentZoneStats['baseStats'];
 
         // Define a variable to hold (temporary) allowed trade evolutions this cycle
@@ -6071,8 +6072,23 @@
                             var returnValue = 0;
                             for (var i = 0; i < appealTypes.length; i++){
                                 var appealType = appealTypes[i];
-                                if (currentBaseStats[appealType] >= (appealLevel * 20)){
+                                if (currentBaseStats[appealType] >= 0){
                                     returnValue += 1 + (currentBaseStats[appealType] * appealLevel);
+                                    }
+                                }
+                            if (returnValue > 0){ return returnValue; }
+                            }
+
+                        // Stat-appeal evolutions trigger when the relevant base colors are especially high
+                        if (methodToken === 'color-appeal'
+                            || methodToken === 'color-surge'){
+                            var appealLevel = methodToken === 'color-surge' ? 2 : 1;
+                            var appealColours = typeof methodValue === 'string' ? [methodValue] : methodValue;
+                            var returnValue = 0;
+                            for (var i = 0; i < appealColours.length; i++){
+                                var appealColour = appealColours[i];
+                                if (currentColourStats[appealColour] >= 0){
+                                    returnValue += 1 + (currentColourStats[appealColour] * appealLevel);
                                     }
                                 }
                             if (returnValue > 0){ return returnValue; }

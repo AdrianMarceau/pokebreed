@@ -1202,19 +1202,24 @@
             eggCycles: 25,
             eggGroups: ['undiscovered'],
             nextEvolutions: [{
-                species: 'toxtricity',
+                species: 'amped-toxtricity',
                 method: 'level-up',
-                value: 30
+                value: 30,
+                method2: 'color-appeal',
+                value2: ['yellow', 'orange']
+                },{
+                species: 'lowkey-toxtricity',
+                method: 'level-up',
+                value: 30,
+                method2: 'color-appeal',
+                value2: ['blue', 'green']
                 }]
             },
-        'toxtricity': {
+        'amped-toxtricity': {
             order: indexOrder++,
-            token: 'toxtricity',
-            name: 'Toxtricity',
-            formClass: 'random-variant',
-            possibleForms: ['amped', 'low-key'],
-            randomizeForms: true,
-            baseForm: 'amped',
+            token: 'amped-toxtricity',
+            name: 'Amped Toxtricity',
+            formToken: 'amped',
             number: 849,
             types: ['electric', 'poison'],
             baseStats: {hp: 75, phAttack: 98, phDefense: 70, spAttack: 114, spDefense: 70, speed: 75},
@@ -1222,6 +1227,22 @@
             height: 1.6,
             weight: 40.0,
             colors: ['purple', 'yellow'],
+            eggCycles: 25,
+            eggGroups: ['human-like'],
+            prevEvolution: 'toxel'
+            },
+        'lowkey-toxtricity': {
+            order: indexOrder++,
+            token: 'lowkey-toxtricity',
+            name: 'Lowkey Toxtricity',
+            formToken: 'lowkey',
+            number: 849,
+            types: ['electric', 'poison'],
+            baseStats: {hp: 75, phAttack: 98, phDefense: 70, spAttack: 114, spDefense: 70, speed: 75},
+            abilities: {0: 'punk-rock', 1: 'minus', hidden: 'technician'},
+            height: 1.6,
+            weight: 40.0,
+            colors: ['purple', 'blue'],
             eggCycles: 25,
             eggGroups: ['human-like'],
             prevEvolution: 'toxel'
@@ -2512,15 +2533,36 @@
             prevEvolution: 'sandaconda',
             hasBigSprite: true
             },
-        'gmax-toxtricity': {
-            order: thisIndex.afterOrder('toxtricity'),
-            token: 'gmax-toxtricity',
-            name: 'Gigantamax Toxtricity',
+        'gmax-amped-toxtricity': {
+            order: thisIndex.afterOrder('amped-toxtricity'),
+            token: 'gmax-amped-toxtricity',
+            name: 'Gigantamax Amped Toxtricity',
             class: 'gigantamax',
             formClass: 'burst-evolution',
             formClass2: 'gigantamax-form',
-            formToken: 'gmax',
-            baseSpecies: 'toxtricity',
+            formToken: 'gmax-amped',
+            baseSpecies: 'amped-toxtricity',
+            number: 849,
+            types: ['electric', 'poison'],
+            baseStats: {hp: 750, phAttack: 98, phDefense: 70, spAttack: 114, spDefense: 70, speed: 75},
+            abilities: {0: 'punk-rock', 1: 'plus', hidden: 'technician'},
+            height: 21.0,
+            weight: -1,
+            colors: ['purple', 'pink', 'yellow', 'blue'],
+            eggCycles: 25,
+            eggGroups: ['human-like'],
+            prevEvolution: 'amped-toxtricity',
+            hasBigSprite: true
+            },
+        'gmax-lowkey-toxtricity': {
+            order: thisIndex.afterOrder('lowkey-toxtricity'),
+            token: 'gmax-lowkey-toxtricity',
+            name: 'Gigantamax Lowkey Toxtricity',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax-lowkey',
+            baseSpecies: 'lowkey-toxtricity',
             number: 849,
             types: ['electric', 'poison'],
             baseStats: {hp: 750, phAttack: 98, phDefense: 70, spAttack: 114, spDefense: 70, speed: 75},
@@ -2530,7 +2572,7 @@
             colors: ['purple', 'pink', 'yellow', 'blue'],
             eggCycles: 25,
             eggGroups: ['human-like'],
-            prevEvolution: 'toxtricity',
+            prevEvolution: 'lowkey-toxtricity',
             hasBigSprite: true
             },
         'gmax-centiskorch': {
@@ -2723,7 +2765,8 @@
         {base: 'flapple', species: 'gmax-flapple', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'appletun', species: 'gmax-appletun', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'sandaconda', species: 'gmax-sandaconda', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
-        {base: 'toxtricity', species: 'gmax-toxtricity', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'amped-toxtricity', species: 'gmax-amped-toxtricity', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'lowkey-toxtricity', species: 'gmax-lowkey-toxtricity', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'centiskorch', species: 'gmax-centiskorch', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'hatterene', species: 'gmax-hatterene', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'grimmsnarl', species: 'gmax-grimmsnarl', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
