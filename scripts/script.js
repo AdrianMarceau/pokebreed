@@ -7544,10 +7544,17 @@
                 }
 
             // Increase the chance of this pokemon appearing based on region appeal
-            var regionVal = 0.02;
+            var regionVal = 0.20;
             if (typeof thisZoneData.currentStats['gameRegion'][pokeInfo.gameRegion] !== 'undefined'
                 && thisZoneData.currentStats['gameRegion'][pokeInfo.gameRegion] !== 0){
                 pokeChance += thisZoneData.currentStats['gameRegion'][pokeInfo.gameRegion] * regionVal;
+                }
+
+            // Increase the chance of this pokemon appearing based on generation appeal
+            var genAppeal = 0.10;
+            if (typeof thisZoneData.currentStats['gameRegion'][pokeInfo.gameGeneration] !== 'undefined'
+                && thisZoneData.currentStats['gameRegion'][pokeInfo.gameGeneration] !== 0){
+                pokeChance += thisZoneData.currentStats['gameRegion'][pokeInfo.gameGeneration] * genAppeal;
                 }
 
             // Increase the chance of this pokemon appearing based on colour appeal
@@ -7636,8 +7643,8 @@
                 });
             }
         // //console.log('pokemonVisitorChances = ', pokemonVisitorChances);
-        // //console.log('pokemonVisitorChances(top20) = ', pokemonVisitorChances[0], pokemonVisitorChances[1], pokemonVisitorChances[2], pokemonVisitorChances.slice(0, 20));
-        // //console.log('pokemonVisitorChances(top100) = ', pokemonVisitorChances[0], pokemonVisitorChances[1], pokemonVisitorChances[2], pokemonVisitorChances.slice(0, 100));
+        //console.log('pokemonVisitorChances(top20) = ', pokemonVisitorChances[0], pokemonVisitorChances[1], pokemonVisitorChances[2], pokemonVisitorChances.slice(0, 20));
+        //console.log('pokemonVisitorChances(top100) = ', pokemonVisitorChances[0], pokemonVisitorChances[1], pokemonVisitorChances[2], pokemonVisitorChances.slice(0, 100));
 
         // Update the parent appeal index with the current sorted chances
         thisZoneData.currentStats['visitorAppeal'] = pokemonVisitorChances;
