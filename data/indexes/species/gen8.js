@@ -1730,6 +1730,21 @@
             prevEvolution: 'snom'
             },
 
+        'stonjourner': {
+            order: indexOrder++,
+            token: 'stonjourner',
+            name: 'Stonjourner',
+            number: 874,
+            types: ['rock'],
+            baseStats: {hp: 100, phAttack: 125, phDefense: 135, spAttack: 20, spDefense: 20, speed: 70},
+            abilities: {0: 'power-spot'},
+            height: 2.5,
+            weight: 520.0,
+            colors: ['gray', 'brown', 'white'],
+            eggCycles: 25,
+            eggGroups: ['mineral']
+            },
+
         'eiscue': {
             order: indexOrder++,
             token: 'eiscue',
