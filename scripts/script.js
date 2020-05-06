@@ -5041,6 +5041,12 @@
                             if (subStat === 'class' && subToken === ''){ subToken = 'common'; }
                             if (typeof currentZoneStats[subStat][subToken] === 'undefined'){ currentZoneStats[subStat][subToken] = 0; }
                             currentZoneStats[subStat][subToken] += 1;
+                            // If there's a secondary version of this field, include that too
+                            if (typeof pokeIndex[subStat+'2'] !== 'undefined'){
+                                var subToken2 = pokeIndex[subStat+'2'];
+                                if (typeof currentZoneStats[subStat][subToken2] === 'undefined'){ currentZoneStats[subStat][subToken2] = 0; }
+                                currentZoneStats[subStat][subToken2] += 1;
+                                }
                             }
                         }
                     }
@@ -5853,6 +5859,12 @@
                         }
                     // //console.log('|- allowTradeEvolution = ', allowTradeEvolution);
 
+                    // Check to see if Eternatus is active and/or in its Gigantamax form
+                    var eternatusIsActive = false;
+                    var emaxEternatusIsActive = false;
+                    if (typeof currentZoneStats['species']['eternatus'] !== 'undefined' && currentZoneStats['species']['eternatus'] > 0){ eternatusIsActive = true; }
+                    if (typeof currentZoneStats['species']['emax-eternatus'] !== 'undefined' && currentZoneStats['species']['emax-eternatus'] > 0){ eternatusIsActive = true; emaxEternatusIsActive = true; }
+
                     // If this pokemon has a Gigantamax form AND has the necessary gene and isn't about to faint, remove other evos
                     var hasGigantamaxForm = false;
                     var hasGigantamaxFactor = false;
@@ -5866,12 +5878,6 @@
                                 if (nextEvolution['method'+m] === 'gigantamax-factor'){
                                     hasGigantamaxForm = true;
                                     var gigantamaxFactor = nextEvolution['value'+m];
-                                    if ((typeof currentZoneStats['species']['eternatus'] !== 'undefined'
-                                        && currentZoneStats['species']['eternatus'] > 0)
-                                        || (typeof currentZoneStats['species']['emax-eternatus'] !== 'undefined'
-                                        && currentZoneStats['species']['emax-eternatus'] > 0)){
-                                        gigantamaxFactor = Math.ceil(gigantamaxFactor / 3);
-                                        }
                                     if ((pokemonInfo.sid % gigantamaxFactor) === 0){
                                         nextEvolution['value'+m] = gigantamaxFactor;
                                         hasGigantamaxFactor = true;
@@ -6222,8 +6228,9 @@
                         // Gigantamax forms are triggered immediately if the pokemon's SID is multiple of a value and no others exist ATM
                         if (methodToken === 'gigantamax-factor'
                             && (pokemonInfo.sid % methodValue) === 0
-                            && currentGigantamaxNum === 0){
-                            //console.log('methodToken =', methodToken, 'pokemonInfo.sid =', pokemonInfo.sid, 'methodValue =', methodValue, 'currentGigantamaxNum =', currentGigantamaxNum);
+                            && (currentGigantamaxNum === 0 || eternatusIsActive)
+                            ){
+                            //console.log(pokemonInfo.token+' | ', 'methodToken =', methodToken, 'pokemonInfo.sid =', pokemonInfo.sid, 'methodValue =', methodValue, 'currentGigantamaxNum =', currentGigantamaxNum);
                             //console.log('gigantamax-factor TRIGGERED!');
                             return 1 + methodValue;
                             }
@@ -6386,7 +6393,7 @@
                             if (allowEvo){
                                 var queuedEvolution = {token: nextEvolution.species, types: nextEvolutionInfo.types, chance: triggeredChance};
                                 if (typeof nextEvolution.form !== 'undefined'){ queuedEvolution.form = nextEvolution.form; }
-                                if (fusionPokemonToBeRemoved !== false){ queuedEvolution.fusion = fusionPokemonToBeRemoved.id; }
+                                if (fusionPokemonToBeRemoved !== false){ queuedEvolution.fusion = [fusionPokemonToBeRemoved.id, fusionPokemonToBeRemoved.sid]; }
                                 if (typeof nextEvolution.castoff !== 'undefined'){ queuedEvolution.castoff = nextEvolution.castoff; }
                                 queuedEvolutions.push(queuedEvolution);
                                 }
@@ -6516,7 +6523,10 @@
                         if (typeof selectedEvolution.fusion !== 'undefined'){
 
                             // Remove the fusion component from the zone
-                            removePokemonByID(selectedEvolution.fusion);
+                            removePokemonByID(selectedEvolution.fusion[0]);
+
+                            // Update this pokemon's SID with that of the fusion component if lower
+                            if (pokemonInfo.sid < selectedEvolution.fusion[1]){ pokemonInfo.sid = selectedEvolution.fusion[1]; }
 
                             // Push an event to the analytics
                             if (typeof ga !== 'undefined'){
