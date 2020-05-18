@@ -1,8 +1,13 @@
 <?
 
 // Define the global cache time and version number
-$last_updated = '2020-05-05';
-$version_number = '0.17.2';
+$last_updated = '2020-05-18';
+$version_number = '0.17.4';
+
+// Set the access control headers to allow others to use it
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST");
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 
 // If requested, print out the version number and exit
 if (!empty($_GET['return'])){
