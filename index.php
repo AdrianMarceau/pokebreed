@@ -46,10 +46,10 @@ if (isset($_GET['gen'])
         <? } ?>
         <meta name="keywords" content="pokemon, pokemon simulator, pokemon eggs, pokemon breeding, pokemon evolution, pokemon biomes, pokemon types, baby pokemon" />
         <meta name="description" content="PokéBox is a web-app that simulates the biomes, relationships, breeding, evolution, and life-cycles of every single official Pokémon and form (plus a few others).  Use type appeal to lure new and different species to your box on a quest to complete your Global Pokédex." />
-        <meta id="myViewport" name="viewport" content="width=device-width, initial-scale=1">
+        <meta id="myViewport" name="viewport" content="width=device-width, initial-scale=1, min-width=524">
         <base href="<?= POKEBS_ROOT_URL ?>" />
         <link type="text/css" rel="stylesheet" href="styles/style-base.min.css?v<?= $version_number ?>" />
-        <link type="text/css" rel="stylesheet" href="styles/jquery.scrollbar.min.css?v<?= $version_number ?>" />
+        <link type="text/css" rel="stylesheet" href="styles/jquery.scrollbar-mod.min.css?v<?= $version_number ?>" />
         <!--  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous"> -->
         <link type="text/css" rel="stylesheet" href="styles/style-master.min.css?v<?= $version_number ?>" />
         <link type="text/css" rel="stylesheet" href="styles/style-responsive.min.css?v<?= $version_number ?>" />
@@ -67,7 +67,7 @@ if (isset($_GET['gen'])
         </script>
         <? } ?>
     </head>
-    <body data-speed="normal" data-mode="<?= $is_free_mode ? 'free' : 'normal' ?>">
+    <body data-speed="normal" data-mode="<?= $is_free_mode ? 'free' : 'normal' ?>" data-running="false">
         <div class="panel" data-view="simulator">
 
             <div class="banner">
@@ -99,7 +99,9 @@ if (isset($_GET['gen'])
                     <img class="icon" src="images/timer.png" />
                 </div>
                 <? if (!$is_free_mode){ ?>
-                    <a class="delete_savedata" title="Delete All Save Data?"><i>&times;</i></a>
+                    <a class="save_to_cloud hidden" title="Save Data to the Cloud?"><i>&#8679;</i></a>
+                    <a class="load_from_cloud hidden" title="Load Data from the Cloud?"><i>&#8681;</i></a>
+                    <a class="delete_savedata hidden" title="Delete All Save Data?"><i>&times;</i></a>
                 <? } ?>
             </div>
 
@@ -164,7 +166,7 @@ if (isset($_GET['gen'])
                     <a class="link icon discord" href="https://discord.gg/8jsSYt5" target="_blank" title="Join us on Discord!"><span>discord</span></a>
                     <a class="link pokedex hidden wait" data-tab="pokedex"><span>pokédex</span><span>&hellip;</span></a>
                     <? if (!$is_free_mode){ ?>
-                        <span class="count score hidden wait"><span>&#x20bd;</span> <span class="total">-</span></span>
+                        <span class="count score hidden wait" title="Box Value (Score)"><span class="unit">&#x20bd;</span> <span class="total">-</span></span>
                     <? } else { ?>
                         <a class="link mode" href="/"><span>&laquo; normal mode</span></a>
                     <? } ?>
@@ -187,6 +189,7 @@ if (isset($_GET['gen'])
             </div>
 
         </div>
+        <script type="text/javascript" src="scripts/viewport-min-width.js"></script>
         <script type="text/javascript" src="scripts/jquery-3.3.1.min.js"></script>
         <script type="text/javascript" src="scripts/jquery.scrollbar.min.js"></script>
         <script type="text/javascript" src="scripts/polyfill.localstorage.js"></script>

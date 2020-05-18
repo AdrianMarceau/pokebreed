@@ -17,6 +17,11 @@ body {
     position: relative;
     min-height: 100vh;
 }
+@media screen and (max-device-width: 480px){
+  body{
+    -webkit-text-size-adjust: none;
+  }
+}
 
 .panel {
     min-width: 500px;
@@ -180,9 +185,6 @@ body[data-mode="free"] .panel .banner .version {
     margin-right: 3px;
     position: relative;
 }
-.panel .banner .counter.pokedex:hover .icon {
-    /* bottom: 1px; */
-}
 .panel .banner .counter.timer .icon {
     margin-left: 3px;
 }
@@ -230,17 +232,29 @@ body[data-mode="free"] .panel .banner .counter.pokedex .count .total {
     box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0);
     transition: background-color 0.4s, box-shadow 0.4s;
 }
-body:not([data-mode="free"]) .panel .banner .counter.pokedex:hover,
 body:not([data-mode="free"]) .panel .banner .counter.pokedex.active {
     background-color: rgba(0, 0, 0, 0.11);
     box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.11);
 }
+@media (hover) {
+    body:not([data-mode="free"]) .panel .banner .counter.pokedex:hover {
+        background-color: rgba(0, 0, 0, 0.11);
+        box-shadow: inset 1px 1px 2px rgba(0, 0, 0, 0.11);
+    }
+}
 
+.panel .banner .save_to_cloud,
+.panel .banner .load_from_cloud,
 .panel .banner .delete_savedata {
     display: block;
     width: auto;
     height: auto;
-    padding: 3px 6px;
+    padding: 0;
+    min-width: 10px;
+    width: 24px;
+    height: 24px;
+    overflow: hidden;
+    box-sizing: border-box;
     position: absolute;
     top: 6px;
     right: 6px;
@@ -254,25 +268,150 @@ body:not([data-mode="free"]) .panel .banner .counter.pokedex.active {
     -moz-border-radius: 8px;
     border-radius: 8px;
     cursor: pointer;
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#58585b+0,464649+100 */
-    background: rgb(171, 58, 58); /* Old browsers */
-    background: -moz-linear-gradient(top, rgba(171, 58, 58, 1) 0%, rgba(97, 20, 41, 1) 120%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(171, 58, 58, 1) 0%,rgba(97, 20, 41, 1) 120%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, rgba(171, 58, 58, 1) 0%,rgba(97, 20, 41, 1) 120%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ab3a3a', endColorstr='#611429',GradientType=0 ); /* IE6-9 */
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffffff+0,ffffff+40,ffffff+50,000000+100&0.15+0,0+40,0+50,0.2+100 */
+    background: -moz-linear-gradient(-45deg,  rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 50%, rgba(0,0,0,0.2) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg,  rgba(255,255,255,0.15) 0%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 50%,rgba(0,0,0,0.2) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg,  rgba(255,255,255,0.15) 0%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 50%,rgba(0,0,0,0.2) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#26ffffff', endColorstr='#33000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
-.panel .banner .delete_savedata:hover {
-    color: #efefef;
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#58585b+0,464649+100 */
-    background: rgb(189, 66, 66); /* Old browsers */
-    background: -moz-linear-gradient(top, rgba(189, 66, 66, 1) 0%, rgba(97, 20, 41, 1) 120%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(189, 66, 66, 1) 0%,rgba(97, 20, 41, 1) 120%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, rgba(189, 66, 66, 1) 0%,rgba(97, 20, 41, 1) 120%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bd4242', endColorstr='#611429',GradientType=0 ); /* IE6-9 */
+@media (hover) {
+    .panel .banner .save_to_cloud:hover,
+    .panel .banner .load_from_cloud:hover,
+    .panel .banner .delete_savedata:hover {
+        color: #efefef;
+        /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ffffff+1,ffffff+40,ffffff+50,000000+100&0.2+1,0+40,0+50,0.25+100 */
+        background: -moz-linear-gradient(-45deg,  rgba(255,255,255,0.2) 1%, rgba(255,255,255,0) 40%, rgba(255,255,255,0) 50%, rgba(0,0,0,0.25) 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(-45deg,  rgba(255,255,255,0.2) 1%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 50%,rgba(0,0,0,0.25) 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(135deg,  rgba(255,255,255,0.2) 1%,rgba(255,255,255,0) 40%,rgba(255,255,255,0) 50%,rgba(0,0,0,0.25) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33ffffff', endColorstr='#40000000',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    }
 }
+.panel .banner .save_to_cloud i,
+.panel .banner .load_from_cloud i,
 .panel .banner .delete_savedata i {
     display: inline-block;
     font-style: normal;
+    text-align: left;
+    direction: ltr;
+    text-indent: -9999px;
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
+    background-image: url(../images/button-icons.png);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: auto 24px;
+    position: relative;
+    top: -1px;
+    left: -1px;
+}
+.panel .banner .save_to_cloud i {
+    background-position: 0 0;
+}
+.panel .banner .load_from_cloud i {
+    background-position: -24px 0;
+}
+.panel .banner .delete_savedata i {
+    background-position: -48px 0;
+}
+.panel .banner .delete_savedata {
+    right: 6px;
+    background-color: rgb(171, 58, 58);
+}
+@media (hover) {
+    .panel .banner .delete_savedata:hover {
+        background-color: rgb(171, 58, 58);
+    }
+}
+.panel .banner .load_from_cloud {
+    right: 35px;
+    background-color: rgb(151, 71, 202);
+}
+@media (hover) {
+    .panel .banner .load_from_cloud:hover {
+        background-color: rgb(151, 71, 202);
+    }
+}
+.panel .banner .save_to_cloud {
+    right: 64px;
+    background-color: rgb(52, 130, 54);
+}
+@media (hover) {
+    .panel .banner .save_to_cloud:hover {
+        background-color: rgb(52, 130, 54);
+    }
+}
+.panel .banner .save_to_cloud.hidden,
+.panel .banner .load_from_cloud.hidden,
+.panel .banner .delete_savedata.hidden {
+    display: none;
+}
+body[data-running="true"] .panel .banner .save_to_cloud,
+body[data-running="true"] .panel .banner .load_from_cloud,
+body[data-running="true"] .panel .banner .delete_savedata {
+    display: none;
+}
+
+.panel .banner .save_to_cloud,
+.panel .banner .load_from_cloud {
+    transform: scale(1, 1) rotate(0deg);
+    transition: transform 2.0s, top 2.0;
+}
+
+.panel .banner .save_to_cloud.success,
+.panel .banner .load_from_cloud.success {
+    -webkit-animation: cloud-button-success 2s 1; /* Safari 4+ */
+    -moz-animation:    cloud-button-success 2s 1; /* Fx 5+ */
+    -o-animation:      cloud-button-success 2s 1; /* Opera 12+ */
+    animation:         cloud-button-success 2s 1; /* IE 10+, Fx 29+ */
+}
+.panel .banner .save_to_cloud.success i {
+    -webkit-animation: cloud-save-icon-success 2s 1; /* Safari 4+ */
+    -moz-animation:    cloud-save-icon-success 2s 1; /* Fx 5+ */
+    -o-animation:      cloud-save-icon-success 2s 1; /* Opera 12+ */
+    animation:         cloud-save-icon-success 2s 1; /* IE 10+, Fx 29+ */
+}
+.panel .banner .load_from_cloud.success i {
+    -webkit-animation: cloud-load-icon-success 2s 1; /* Safari 4+ */
+    -moz-animation:    cloud-load-icon-success 2s 1; /* Fx 5+ */
+    -o-animation:      cloud-load-icon-success 2s 1; /* Opera 12+ */
+    animation:         cloud-load-icon-success 2s 1; /* IE 10+, Fx 29+ */
+}
+/*
+@-webkit-keyframes cloud-button-success {
+  0%   { transform: scale(1, 1); }
+  50% { transform: scale(1.4, 1.4); }
+  100%   { transform: scale(1, 1); }
+}
+@-moz-keyframes cloud-button-success {
+  0%   { transform: scale(1, 1); }
+  50% { transform: scale(1.4, 1.4); }
+  100%   { transform: scale(1, 1); }
+}
+@-o-keyframes cloud-button-success {
+  0%   { transform: scale(1, 1); }
+  50% { transform: scale(1.4, 1.4); }
+  100%   { transform: scale(1, 1); }
+}
+*/
+@keyframes cloud-button-success {
+    51%   { transform: scale(1, 1); }
+    75% { transform: scale(1.4, 1.4); }
+    100%   { transform: scale(1, 1); }
+}
+@keyframes cloud-save-icon-success {
+    0%   { top: -1px; }
+    25%   { top: -20px; }
+    26%   { display: none; top: 20px; }
+    27%   { top: 20px; }
+    50%   { top: -1px; }
+}
+@keyframes cloud-load-icon-success {
+    0%   { top: -1px; }
+    25%   { top: 20px; }
+    26%   { display: none; top: -20px; }
+    27%   { top: -20px; }
+    50%   { top: -1px; }
 }
 
 
@@ -1268,9 +1407,11 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     background-color: #373739;
     width: 6px;
 }
-.panel .overview .ps-container:hover > .ps-scrollbar-x-rail,
-.panel .overview .ps-container:hover > .ps-scrollbar-y-rail {
-    opacity: 0.9;
+@media (hover) {
+    .panel .overview .ps-container:hover > .ps-scrollbar-x-rail,
+    .panel .overview .ps-container:hover > .ps-scrollbar-y-rail {
+        opacity: 0.9;
+    }
 }
 .panel .overview .ps-container:not(.ps-active-y) > .ps-scrollbar-y-rail {
     opacity: 0;
@@ -1347,9 +1488,10 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     outline: none;
     transform: translate(0, 0);
 }
-.panel .buttons button:hover {
-    background: #EFEFEF;
-    /*transform: translate(1px, 1px);*/
+@media (hover) {
+    .panel .buttons button:hover {
+        background: #EFEFEF;
+    }
 }
 .panel .buttons button:before {
     content: "";
@@ -1363,8 +1505,10 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     pointer-events: none;
     background-color: rgba(0, 0, 0, 0.1);
 }
-.panel .buttons button:hover:before {
-    background-color: rgba(0, 0, 0, 0.0);
+@media (hover) {
+    .panel .buttons button:hover:before {
+        background-color: rgba(0, 0, 0, 0.0);
+    }
 }
 .panel .buttons button .plus {
     position: absolute;
@@ -1394,11 +1538,13 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     transform: translate(0, 0);
     outline: none;
 }
-.panel .buttons button:hover .sprite {
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
-    -webkit-animation: SpriteBounce 0.3s steps(1) infinite;
-    animation: SpriteBounce 0.3s steps(1) infinite;
+@media (hover) {
+    .panel .buttons button:hover .sprite {
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
+        -webkit-animation: SpriteBounce 0.3s steps(1) infinite;
+        animation: SpriteBounce 0.3s steps(1) infinite;
+    }
 }
 .panel .buttons button strong {
     margin: 0 auto;
@@ -1547,9 +1693,11 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     background-color: #646468;
     width: 6px;
 }
-.panel .buttons .select-pokemon .ps-container:hover > .ps-scrollbar-x-rail,
-.panel .buttons .select-pokemon .ps-container:hover > .ps-scrollbar-y-rail {
-    opacity: 0.9;
+@media (hover) {
+    .panel .buttons .select-pokemon .ps-container:hover > .ps-scrollbar-x-rail,
+    .panel .buttons .select-pokemon .ps-container:hover > .ps-scrollbar-y-rail {
+        opacity: 0.9;
+    }
 }
 .panel .buttons .select-pokemon .ps-container:not(.ps-active-y) > .ps-scrollbar-y-rail {
     opacity: 0;
@@ -1712,16 +1860,25 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     filter: brightness(0.6);
     transition: opacity 0.2s, filter 0.2s;
 }
-.panel .buttons .filter-pokemon .filter .options .option:hover,
 .panel .buttons .filter-pokemon .filter .options .option.active {
     text-decoration: none;
     background-color: #4F4F4F;
     color: #FFFFFF;
 }
-.panel .buttons .filter-pokemon .filter .options .option:hover img,
 .panel .buttons .filter-pokemon .filter .options .option.active img {
     opacity: 1.0;
     filter: brightness(1.0);
+}
+@media (hover) {
+    .panel .buttons .filter-pokemon .filter .options .option:hover {
+        text-decoration: none;
+        background-color: #4F4F4F;
+        color: #FFFFFF;
+    }
+    .panel .buttons .filter-pokemon .filter .options .option:hover img {
+        opacity: 1.0;
+        filter: brightness(1.0);
+    }
 }
 .panel .buttons .filter-pokemon .filter.disabled .label,
 .panel .buttons .filter-pokemon .filter.disabled .options .option,
@@ -1857,8 +2014,10 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     height: 26px;
     background-position: 0 0;
 }
-.panel .buttons .controls .control:hover {
-    background-color: #525256;
+@media (hover) {
+    .panel .buttons .controls .control:hover {
+        background-color: #525256;
+    }
 }
 .panel .buttons .controls .control.active {
     background-color: #757575;
@@ -1869,9 +2028,12 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     height: 26px;
     background-color: #2d2d30;
 }
-.panel .buttons .filter-pokemon .button:hover {
-    background-color: #4e4e4e;
+@media (hover) {
+    .panel .buttons .filter-pokemon .button:hover {
+        background-color: #4e4e4e;
+    }
 }
+
 .panel .buttons .filter-pokemon .button:before {
     width: 20px;
     height: 20px;
@@ -1888,9 +2050,12 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     right: 10px;
     top: 218px;
 }
-.panel .buttons .controls .control.start:hover {
-    background-color: #373739;
+@media (hover) {
+    .panel .buttons .controls .control.start:hover {
+        background-color: #373739;
+    }
 }
+
 .panel .buttons .controls .control.start:before {
     top: 84px;
     left: 16px;
@@ -1910,16 +2075,18 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 .panel .buttons .controls .control.start.ready:before {
     opacity: 0.8;
 }
-.panel .buttons .controls .control.start.ready:hover {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#58585b+0,464649+100 */
-    background: #416bbe; /* Old browsers */
-    background: -moz-linear-gradient(top, rgba(65,107,190,1) 0%, rgba(29,44,94,1) 120%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(65,107,190,1) 0%,rgba(29,44,94,1) 120%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, rgba(65,107,190,1) 0%,rgba(29,44,94,1) 120%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3a5fab', endColorstr='#1d2c5e',GradientType=0 ); /* IE6-9 */
-}
-.panel .buttons .controls .control.start.ready:hover:before {
-    opacity: 1.0;
+@media (hover) {
+    .panel .buttons .controls .control.start.ready:hover {
+        /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#58585b+0,464649+100 */
+        background: #416bbe; /* Old browsers */
+        background: -moz-linear-gradient(top, rgba(65,107,190,1) 0%, rgba(29,44,94,1) 120%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top, rgba(65,107,190,1) 0%,rgba(29,44,94,1) 120%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom, rgba(65,107,190,1) 0%,rgba(29,44,94,1) 120%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3a5fab', endColorstr='#1d2c5e',GradientType=0 ); /* IE6-9 */
+    }
+    .panel .buttons .controls .control.start.ready:hover:before {
+        opacity: 1.0;
+    }
 }
 
 .panel .buttons .controls .control.start:not(.ready) {
@@ -1974,8 +2141,10 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     margin: 0;
     transition: width 0.2s;
 }
-.panel .buttons .controls .control.stop:hover {
-    background-color: #c03535;
+@media (hover) {
+    .panel .buttons .controls .control.stop:hover {
+        background-color: #c03535;
+    }
 }
 .panel .buttons .controls .control.stop span {
     display: block;
@@ -2023,14 +2192,19 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 .panel .buttons .controls .control.restart {
     background-color: #3263b7;
 }
-.panel .buttons .controls .control.restart:hover {
-    background-color: #396bc0;
+@media (hover) {
+    .panel .buttons .controls .control.restart:hover {
+        background-color: #396bc0;
+    }
 }
+
 .panel .buttons .controls .control.new {
     background-color: #2b8441;
 }
-.panel .buttons .controls .control.new:hover {
-    background-color: #318c48;
+@media (hover) {
+    .panel .buttons .controls .control.new:hover {
+        background-color: #318c48;
+    }
 }
 
 
@@ -2086,10 +2260,15 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     color: #f3de91;
     text-decoration: none;
 }
-.panel .buttons .info a[href]:hover,
 .panel .buttons .info a.active {
     color: #f7e9b6;
     text-decoration: underline;
+}
+@media (hover) {
+    .panel .buttons .info a[href]:hover {
+        color: #f7e9b6;
+        text-decoration: underline;
+    }
 }
 .panel .buttons .info .group {
     display: block;
@@ -2300,32 +2479,6 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     width: 100%;
 }
 
-/*
-.panel .buttons .info .group.pokedex .list li:hover .species:not(.unknown) {
-    width: 250px;
-}
-.panel .buttons .info .group.pokedex .list li:hover .species:not(.unknown) .bubble .num,
-.panel .buttons .info .group.pokedex .list li:hover .species:not(.unknown) .bubble .name {
-    opacity: 1.0;
-    max-width: 100%;
-}
-.panel .buttons .info .group.pokedex .list li:hover .species:not(.unknown) .bubble .sprites {
-    width: 90px;
-    height: 30px;
-    text-align: right;
-    top: 2px;
-    right: 2px;
-}
-.panel .buttons .info .group.pokedex .list li:hover .species:not(.unknown) .bubble .sprites .sprite {
-    float: right;
-    margin-left: -20px;
-}
-.panel .buttons .info .group.pokedex .list li:hover .species:not(.unknown) .bubble .sprites .sprite + .sprite {
-    opacity: 1.0;
-    width: 40px;
-}
-*/
-
 .panel .buttons .info .group.pokedex > .totals {
     display: block;
     float: right;
@@ -2360,8 +2513,18 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     font-size: 80%;
     color: #cacaca;
 }
+.panel .buttons a.save_to_cloud,
+.panel .buttons a.load_from_cloud,
 .panel .buttons a.delete_savedata {
     cursor: pointer;
+}
+.panel .buttons a.save_to_cloud {
+    color: green;
+}
+.panel .buttons a.load_from_cloud {
+    color: blue;
+}
+.panel .buttons a.delete_savedata {
     color: #ce4949;
 }
 
@@ -2405,12 +2568,18 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
     -webkit-border-radius: 3px;
     border-radius: 3px;
 }
-.panel .buttons .info.links .link:hover,
-.panel .buttons .info.links .link.active,
-.panel .buttons .info.links .count:hover {
+.panel .buttons .info.links .link.active {
     text-decoration: none;
     color: #b0b0b0;
     background-color: rgba(0, 0, 0, 0.2);
+}
+@media (hover) {
+    .panel .buttons .info.links .link:hover,
+    .panel .buttons .info.links .count:hover {
+        text-decoration: none;
+        color: #b0b0b0;
+        background-color: rgba(0, 0, 0, 0.2);
+    }
 }
 
 .panel .buttons .info[data-tab="help"] {
@@ -2456,6 +2625,7 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 .panel .buttons .info.links .link.pokedex,
 .panel .buttons .info.links .count.score {
     float: left;
+    position: relative;
 }
 .panel .buttons .info.links .link.pokedex.active,
 .panel .buttons .info.links .count.score.active {
@@ -2465,6 +2635,25 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 body[data-mode="free"] .panel .buttons .info.links .link.pokedex.active,
 body[data-mode="free"] .panel .buttons .info.links .count.score.active {
     background-color: #3b8e3b;
+}
+.panel .buttons .info.links .count.score {
+    padding-left: 22px;
+}
+.panel .buttons .info.links .count.score .unit {
+    display: inline-block;
+    position: absolute;
+    top: -2px;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    text-align: left;
+    direction: ltr;
+    text-indent: -9999px;
+    overflow: hidden;
+    background-image: url(../images/button-icons.png);
+    background-repeat: no-repeat;
+    background-size: auto 24px;
+    background-position: -120px 0;
 }
 .panel .buttons .info.links .link.icon span,
 .panel .buttons .info.links .link.mode span,
@@ -2536,8 +2725,10 @@ body[data-mode="free"] .panel .buttons .info.links .count.score.active {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3a5fab', endColorstr='#1d2c5e',GradientType=0 ); /* IE6-9 */
     color: #e0e0e0;
 }
-.panel .buttons .info.links .link.mode:hover {
-    color: #e2e2e2;
+@media (hover) {
+    .panel .buttons .info.links .link.mode:hover {
+        color: #e2e2e2;
+    }
 }
 
 .panel .buttons .info .group.modes {
@@ -2699,14 +2890,40 @@ body[data-mode="free"] .panel .buttons .info.links .count.score.active {
     cursor: pointer;
     transition: color 0.2s, background-color 0.2s;
 }
-.popup.window > .wrap > .buttons .button:hover {
-    color: #ffffff;
-    background-color: #2e4a84;
+@media (hover) {
+    .popup.window > .wrap > .buttons .button:hover {
+        color: #ffffff;
+        background-color: #2e4a84;
+    }
 }
 .popup.window > .wrap > .buttons .button.next,
 .popup.window > .wrap > .buttons .button.continue,
+.popup.window > .wrap > .buttons .button.cancel,
 .popup.window > .wrap > .buttons .button:first-child:last-child {
     width: 100%;
+}
+
+.popup.window > .wrap > .buttons .button.save_to_cloud,
+.popup.window > .wrap > .buttons .button.load_from_cloud {
+    width: 100%;
+}
+.popup.window > .wrap > .buttons .button.save_to_cloud {
+    background-color: rgb(33, 95, 35);
+}
+.popup.window > .wrap > .buttons .button.load_from_cloud {
+    background-color: rgb(105, 37, 147);
+}
+
+.popup.window > .wrap > .buttons .button.cancel {
+    font-size: 11px;
+    padding: 2px 10px;
+    background-color: #791e1e;
+    color: #c6c6c6;
+}
+@media (hover) {
+    .popup.window > .wrap > .buttons .button.cancel:hover {
+        color: #ffffff;
+    }
 }
 
 
@@ -2723,4 +2940,132 @@ body[data-mode="free"] .panel .buttons .info.links .count.score.active {
 .panel .buttons .filter-pokemon .filter.types.hasfocus {
     /* border: 2px solid rgba(255, 255, 255, 0.6); */
     border-color: rgba(255, 255, 255, 0.6);
+}
+
+
+/* -- POPUP WINDOW / CLOUD FORM STYLES -- */
+
+.popup.window .cloud-form {
+    display: block;
+    margin: 0 auto;
+}
+.popup.window .cloud-form.save {
+
+}
+.popup.window .cloud-form.load {
+
+}
+.popup.window .cloud-form .intro {
+    display: block;
+    margin: 0 auto 8px;
+    font-size: 105%;
+}
+.popup.window .cloud-form .fields {
+    display: block;
+    margin: 0 auto 8px;
+    font-size: 90%;
+    line-height: 1.6;
+}
+.popup.window .cloud-form .field {
+    display: block;
+    margin: 0 auto 4px;
+}
+.popup.window .cloud-form input[type="text"],
+.popup.window .cloud-form input[type="password"] {
+    display: inline-block;
+    border: 1px solid #121212;
+    background-color: #242424;
+    color: #ffffff;
+    font-size: inherit;
+    padding: 3px 6px;
+    transition: border-color 0.5s;
+}
+.popup.window .cloud-form input[type="text"].has_error,
+.popup.window .cloud-form input[type="password"].has_error {
+    border-color: #a72d2d;
+}
+.popup.window .cloud-form .tip {
+    display: block;
+    margin: 0 auto 2px;
+    font-size: 80%;
+    line-height: 1.4;
+    color: #c79a57;
+}
+.popup.window .cloud-form .tip:before {
+    content: "(!)";
+    padding-right: 5px;
+}
+.popup.window .cloud-form .tip.red {
+    color: #d66e6e;
+}
+.popup.window .cloud-form .tip .small {
+    font-size: 80%;
+}
+
+
+.popup.window .cloud-form .field > strong {
+    display: inline-block;
+    text-align: center;
+    min-width: 90px;
+}
+.popup.window .cloud-form .field {
+    text-align: left;
+    padding-left: calc(50% - (330px / 2));
+}
+.popup.window .cloud-form .field .eye {
+    display: inline-block;
+    position: relative;
+    line-height: 1;
+    cursor: pointer;
+    border: 1px solid #121212;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    padding: 2px;
+    text-align: center;
+    width: 25px;
+    height: 20px;
+    background-color: #242424;
+    color: #dedede;
+    transition: background-color 0.3s;
+
+    text-indent: -9999px;
+    direction: ltr;
+    background-image: url(../images/button-icons.png);
+    background-repeat: no-repeat;
+    background-size: auto 24px;
+    background-position: -96px;
+
+}
+@media (hover) {
+    .popup.window .cloud-form .field .eye:hover {
+        background-color: #474747;
+        color: #ffffff;
+        background-position: -72px;
+    }
+}
+.popup.window .cloud-form .field input[type="password"] + .eye {
+    background-position: -96px;
+}
+@media (hover) {
+    .popup.window .cloud-form .field input[type="password"] + .eye:hover {
+        background-position: -72px;
+    }
+}
+.popup.window .cloud-form .field input[type="text"] + .eye {
+    background-position: -72px;
+}
+@media (hover) {
+    .popup.window .cloud-form .field input[type="text"] + .eye:hover {
+        background-position: -96px;
+    }
+}
+
+.popup.window[data-id="system_save-to-cloud"],
+.popup.window[data-id="system_load-from-cloud"] {
+    top: 105px;
+}
+.popup.window[data-id="system_save-to-cloud"] > .wrap,
+.popup.window[data-id="system_load-from-cloud"] > .wrap {
+    padding-bottom: 75px;
 }

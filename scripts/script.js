@@ -286,6 +286,36 @@
             return false;
             });
 
+        // Add a click event for the save-to-cloud button (w/ name & pass popup)
+        $('a.save_to_cloud', $panelDiv).bind('click', function(e){
+            e.preventDefault();
+            //console.log('attempting to save data to cloud...');
+            var eventID = 'system_save-to-cloud';
+            var cloudFormMarkup = getCloudSaveFormMarkup();
+            openPopupWindow({
+                id: eventID,
+                banner: 'system_save-to-cloud',
+                buttons: {save_to_cloud: 'Save to Cloud', cancel: 'Cancel'},
+                textbox: cloudFormMarkup
+                });
+            return false;
+            });
+
+        // Add a click event for the load-to-cloud button (w/ name & pass popup)
+        $('a.load_from_cloud', $panelDiv).bind('click', function(e){
+            e.preventDefault();
+            //console.log('attempting to load data from cloud...');
+            var eventID = 'system_load-from-cloud';
+            var cloudFormMarkup = getCloudLoadFormMarkup();
+            openPopupWindow({
+                id: eventID,
+                banner: 'system_load-from-cloud',
+                buttons: {load_from_cloud: 'Load from Cloud', cancel: 'Cancel'},
+                textbox: cloudFormMarkup
+                });
+            return false;
+            });
+
     });
 
     // Define a function for starting the simulation and day
@@ -355,6 +385,14 @@
 
         // Update the overview with current details before starting
         updateOverview();
+
+        // Unhide the save/load/delete buttons if appropriate to do so
+        if (!appFreeMode && typeof window.localStorage !== 'undefined'){
+            if (PokeboxDaysPassed > 0 && PokemonSpeciesSeen !== {}){ $('a.save_to_cloud', $panelDiv).removeClass('hidden'); }
+            //else if (PokeboxDaysPassed === 0 || PokemonSpeciesSeen === {}){ $('a.load_from_cloud', $panelDiv).removeClass('hidden'); }
+            $('a.load_from_cloud', $panelDiv).removeClass('hidden');
+            $('a.delete_savedata', $panelDiv).removeClass('hidden');
+            }
 
     }
 
@@ -708,7 +746,14 @@
                     // CONTEXT/NEXT BUTTON shortcuts
                     case 'space':
                     case 'enter':
-                        { validAction = true; $('.popup .button:last-child').trigger('click'); break; }
+                        {
+                        var numButtons = $('.popup .button').length;
+                        if (numButtons === 1){
+                            validAction = true;
+                            $('.popup .button:last-child').trigger('click');
+                            }
+                        break;
+                        }
                     }
                 }
 
@@ -944,7 +989,7 @@
         // Bind the overlay and the close button to the close action
         $popupOverlay.bind('click', function(e){
             e.preventDefault();
-            // //console.log('popup overlay clicked');
+            //console.log('popup overlay clicked');
             //closePopupWindow();
             });
 
@@ -952,14 +997,14 @@
         $popupWindow.bind('click', function(e){
             e.preventDefault();
             e.stopPropagation();
-            // //console.log('popup window clicked');
+            //console.log('popup window clicked');
             });
 
         // Pre-bind an event for the continue button (closes the window)
         $popupWindow.on('click', '.button.continue', function(e){
             e.preventDefault();
             savePokeboxPopupsSeen();
-            // //console.log('continue button clicked');
+            //console.log('continue button clicked');
             closePopupWindow(function(){
                 if (popupWindowQueue.length > 0){
                     var panelConfig = popupWindowQueue.shift();
@@ -972,12 +1017,55 @@
         $popupWindow.on('click', '.button.next', function(e){
             e.preventDefault();
             savePokeboxPopupsSeen();
-            // //console.log('next button clicked');
+            //console.log('next button clicked');
             if (popupWindowQueue.length > 0){
                 var panelConfig = popupWindowQueue.shift();
                 openPopupWindow(panelConfig);
                 } else {
                 closePopupWindow();
+                }
+            });
+
+        // Pre-bind an event for the cancel button (closes the window)
+        $popupWindow.on('click', '.button.cancel', function(e){
+            e.preventDefault();
+            //console.log('cancel button clicked');
+            closePopupWindow();
+            });
+
+        // Pre-bind an event for the eye button (show/hide password)
+        $popupWindow.on('click', '.field .eye', function(e){
+            e.preventDefault();
+            //console.log('eye button clicked');
+            var $field = $(this).prev('input');
+            if ($field.is('[type="password"]')){ $field.attr('type', 'text'); }
+            else { $field.attr('type', 'password'); }
+            });
+
+        // Pre-bind an event for the save button (attempt to save to cloud)
+        $popupWindow.on('click', '.button.save_to_cloud', function(e){
+            e.preventDefault();
+            //console.log('save button clicked');
+            if (validateCloudFormInputs()){
+                $('a.save_to_cloud', $panelDiv).removeClass('success');
+                exportPokeBoxSaveData(function(){
+                    closePopupWindow();
+                    $('a.save_to_cloud', $panelDiv).addClass('success');
+                    });
+
+                }
+            });
+
+        // Pre-bind an event for the load button (attempt to load from cloud)
+        $popupWindow.on('click', '.button.load_from_cloud', function(e){
+            e.preventDefault();
+            //console.log('load button clicked');
+            if (validateCloudFormInputs()){
+                $('a.load_from_cloud', $panelDiv).removeClass('success');
+                importPokeBoxSaveData(function(){
+                    closePopupWindow();
+                    $('a.load_from_cloud', $panelDiv).addClass('success');
+                    });
                 }
             });
 
@@ -1073,6 +1161,9 @@
 
             }
 
+        // Assign the ID to the popup window in case of special styling
+        $popupWindow.attr('data-id', panelConfig.id);
+
         // Empty the panel of existing markup and replace it
         var $panelWrap = $popupWindow.find('> .wrap');
         $panelWrap.empty().append(newPanelWrapMarkup);
@@ -1102,6 +1193,7 @@
         $popupOverlay.css({opacity:1});
         $popupOverlay.animate({opacity:0}, 200, 'linear', function(){
             $(this).addClass('hidden');
+            $popupWindow.removeAttr('data-id');
             if (typeof onComplete === 'function'){ return onComplete(); }
             else { return true; }
             });
@@ -1895,6 +1987,7 @@
 
         // Set the start flag to true
         simulationStarted = true;
+        $('body').attr('data-running', 'true');
 
         // Clear the current focus panel
         selectFocusPanel('');
@@ -2003,6 +2096,7 @@
 
         // Set the start flag to false
         simulationStarted = false;
+        $('body').attr('data-running', 'false');
 
         // Reset the day timeout so we can start fresh
         if (dayTimeoutID !== false){ clearTimeout(dayTimeoutID); }
@@ -8445,6 +8539,241 @@
 
     }
 
+    // Define the keys that can be exported/imported to/from localStorage
+    var cloudLockName = '';
+    var cloudKeyCode = '';
+    var cloudCompatibleStorageKeys = [
+        'PokeboxDaysPassed', 'PokeboxPopupsSeen',
+        'PokeboxRewards', 'PokemonSpeciesSeen',
+        'CurrentPokedexFilters'
+        ];
+    var allowEmptyCloudStorageKeys = [
+        'CurrentPokedexFilters'
+        ];
+
+    // Define a function for validating the cloud form inputs from the popup window
+    function validateCloudFormInputs(){
+
+        // Return if we don't have access to local storage or we're not allowed to save
+        if (appFreeMode){ return false; }
+        if (typeof window.localStorage === 'undefined'){ return false; }
+
+        // Collect the lock name and key code fields and collect their values
+        $lockNameField = $popupWindow.find('input[name="lock_name"]');
+        $keyCodeField = $popupWindow.find('input[name="key_code"]');
+        cloudLockName = $lockNameField.val().trim();
+        cloudKeyCode = $keyCodeField.val().trim();
+
+        // Define a variable to hold the error state, default to false
+        var formHasError = false;
+        $lockNameField.removeClass('has_error');
+        $lockNameField.removeClass('has_error');
+
+        // Check to ensure the fields are not empty
+        if (cloudLockName === false || !cloudLockName.length){ $lockNameField.addClass('has_error'); formHasError = true; }
+        if (cloudKeyCode === false || !cloudKeyCode.length){ $keyCodeField.addClass('has_error'); formHasError = true; }
+        if (formHasError){ return false; }
+
+        // Check to ensure the fields are betwen min/max lengths
+        if (cloudLockName.length < 8 || cloudLockName.length > 32){ $lockNameField.addClass('has_error'); formHasError = true; }
+        if (cloudKeyCode.length < 8 || cloudKeyCode.length > 32){ $keyCodeField.addClass('has_error'); formHasError = true; }
+        if (formHasError){ return false; }
+
+        // Ensure the lock name is only alphanumeric
+        if (!cloudLockName.match(/^[-_a-z0-9\.]+$/i)){ $lockNameField.addClass('has_error'); formHasError = true; }
+        if (formHasError){ return false; }
+
+        // Otherwise we can return true
+        return true;
+
+    }
+
+    // Define a function for exporting PokeBox save data from localStorage to the cloud
+    function exportPokeBoxSaveData(onComplete){
+
+        // Return if we don't have access to local storage or we're not allowed to save
+        if (appFreeMode){ return false; }
+        if (typeof window.localStorage === 'undefined'){ return false; }
+
+        // Loop through compatible storage keys and collect data for export file
+        //console.log('window.localStorage =', window.localStorage);
+        //console.log('cloudCompatibleStorageKeys =', cloudCompatibleStorageKeys);
+        var localStorageExport = {};
+        for (var i = 0; i < cloudCompatibleStorageKeys.length; i++){
+            var storageKey = cloudCompatibleStorageKeys[i];
+            localStorageExport[storageKey] = typeof window.localStorage[storageKey] !== 'undefined' ? window.localStorage[storageKey] : false;
+            //console.log('localStorageExport['+storageKey+'] =', localStorageExport[storageKey]);
+            if ((localStorageExport[storageKey] === false || !localStorageExport[storageKey].length)
+                && allowEmptyCloudStorageKeys.indexOf(storageKey) === -1){
+                //console.log('localStorageExport['+storageKey+'] is empty! \nUnable to export!');
+                return false;
+                }
+
+            }
+
+        // Collect the cloud save name and password, then send the data
+        //var cloudLockName = 'Default';
+        //var cloudKeyCode = 'Default';
+        if (cloudLockName === false || !cloudLockName.length){ return false; }
+        if (cloudKeyCode === false || !cloudKeyCode.length){ return false; }
+        var cloudSaveData = JSON.stringify(localStorageExport);
+        //console.log('cloudLockName = ', cloudLockName);
+        //console.log('cloudKeyCode = ', cloudKeyCode);
+        //console.log('cloudSaveData = ', cloudSaveData);
+        $.ajax({
+            type: "POST",
+            url: 'scripts/cloudSave.php',
+            data: {'lock': cloudLockName, key: cloudKeyCode, data: cloudSaveData},
+            success: function(data){
+                if (data.length && data.match(/^success|error/)){
+                    var response = data.split('\n');
+                    var status = response.shift();
+                    var messages = response.slice(0, response.length);
+                    //console.log('status =', status);
+                    //console.log('messages =', messages);
+                    if (typeof onComplete === 'function'){ return onComplete(); }
+                    else { return true; }
+                    } else {
+                    //console.log('data =', data);
+                    return false;
+                    }
+                }
+            });
+
+    }
+
+
+    // Define a function for importing PokeBox save data from the cloud to localStorage
+    var importReloadTimeout = false;
+    function importPokeBoxSaveData(onComplete){
+
+        // Return if we don't have access to local storage or we're not allowed to save
+        if (appFreeMode){ return false; }
+        if (typeof window.localStorage === 'undefined'){ return false; }
+
+        // Collect the lock name and key code fields for later
+        $lockNameField = $popupWindow.find('input[name="lock_name"]');
+        $keyCodeField = $popupWindow.find('input[name="key_code"]');
+
+        // Collect the cloud save name and password, then send the data
+        //var cloudLockName = 'Default';
+        //var cloudKeyCode = 'Default';
+        if (cloudLockName === false || !cloudLockName.length){ return false; }
+        if (cloudKeyCode === false || !cloudKeyCode.length){ return false; }
+        var cloudSaveData = false;
+        //console.log('cloudLockName = ', cloudLockName);
+        //console.log('cloudKeyCode = ', cloudKeyCode);
+        //console.log('cloudSaveData = ', cloudSaveData);
+        $.ajax({
+            type: "POST",
+            url: 'scripts/cloudLoad.php',
+            data: {'lock': cloudLockName, key: cloudKeyCode},
+            success: function(data){
+                if (data.length && data.match(/^success|error/)){
+                    var response = data.split('\n');
+                    var status = response.shift().trim();
+                    var savedata = '';
+                    var messages = '';
+                    if (response.length > 1){ savedata = response.pop().trim(); }
+                    messages = response.slice(0, response.length);
+                    //console.log('status =', status);
+                    //console.log('messages =', messages);
+                    //console.log('savedata =', savedata.length, savedata);
+                    if (status === 'success' && savedata.length){
+                        var localStorageImport = JSON.parse(savedata);
+                        //console.log('localStorageImport =', localStorageImport);
+                        for (var i = 0; i < cloudCompatibleStorageKeys.length; i++){
+                            var storageKey = cloudCompatibleStorageKeys[i];
+                            //console.log('checking localStorageImport['+storageKey+']:', localStorageImport[storageKey]);
+                            if (typeof localStorageImport[storageKey] !== 'undefined'
+                                && localStorageImport[storageKey].length){
+                                //console.log('setting window.localStorage['+storageKey+'] to:', localStorageImport[storageKey]);
+                                window.localStorage[storageKey] = localStorageImport[storageKey];
+                                }
+                            }
+                        if (typeof onComplete === 'function'){ onComplete(); }
+                        if (importReloadTimeout !== false){ clearTimeout(importReloadTimeout); }
+                        importReloadTimeout = setTimeout(function(){ window.location = window.location.href; }, 2500);
+                        return true;
+                        } else {
+                        alert('Error: '+messages);
+                        $lockNameField.addClass('has_error');
+                        $keyCodeField.addClass('has_error');
+                        return false;
+                        }
+                    } else {
+                    //console.log('data =', data);
+                    $lockNameField.addClass('has_error');
+                    $keyCodeField.addClass('has_error');
+                    return false;
+                    }
+                }
+            });
+
+    }
+
+    // Define a function for generating cloud save form markup
+    var cloudSaveFormMarkup = '';
+    function getCloudSaveFormMarkup(){
+        if (cloudSaveFormMarkup === ''){
+            cloudSaveFormMarkup =
+                '<div class="cloud-form save">' +
+                    '<div class="intro">' +
+                        'Use the form below to save your data to the cloud!<br /> ' +
+                        'Please enter a unique lock and key combination: ' +
+                    '</div>' +
+                    '<div class="fields">' +
+                        '<div class="field"><strong>Lock Name:</strong> <input class="textbox" type="text" name="lock_name" value="{{cloud_lock_name}}" size="32" maxlength="32" /></div> ' +
+                        '<div class="field"><strong>Key Code:</strong> <input class="textbox" type="password" name="key_code" value="{{cloud_key_code}}" size="32" maxlength=32"" /> <i class="eye">&#128065;</i></div> ' +
+                    '</div>' +
+                    '<div class="tip red">Please do not use personal info or passwords used on other websites!</div> ' +
+                    '<div class="tip">Locks &amp; keys are between 8-32 chars in length. Keys are case-sensitive!</div> ' +
+                    '<div class="tip">Lock &amp; key combinations cannot be retrieved or reset if lost!</div> ' +
+                '</div>';
+            }
+        var cloudFormMarkup = cloudSaveFormMarkup;
+        cloudFormMarkup = cloudFormMarkup.replace('{{cloud_lock_name}}', cloudLockName);
+        cloudFormMarkup = cloudFormMarkup.replace('{{cloud_key_code}}', cloudKeyCode);
+        return cloudFormMarkup;
+    }
+
+
+    // Define a function for generating cloud load form markup
+    var cloudLoadFormMarkup = '';
+    function getCloudLoadFormMarkup(){
+        if (cloudLoadFormMarkup === ''){
+            cloudLoadFormMarkup =
+                '<div class="cloud-form load">' +
+                    '<div class="intro">' +
+                        'Use the form below to load your data from the cloud!<br /> ' +
+                        'Please enter the unique lock and key combination: ' +
+                    '</div>' +
+                    '<div class="fields">' +
+                        '<div class="field"><strong>Lock Name:</strong> <input class="textbox" type="text" name="lock_name" value="'+cloudLockName+'" placeholder="" size="32" maxlength="32" /></div> ' +
+                        '<div class="field"><strong>Key Code:</strong> <input class="textbox" type="password" name="key_code" value="'+cloudKeyCode+'" placeholder="" size="32" maxlength=32"" /> <i class="eye">&#128065;</i></div> ' +
+                    '</div>' +
+                    '{{existing_progress_message}}' +
+                    '<div class="tip">Locks &amp; keys are between 8-32 chars in length. Keys are case-sensitive!</div> ' +
+                    '<div class="tip">Lock &amp; key combinations cannot be retrieved or reset if lost!</div> ' +
+                '</div>';
+            }
+        var cloudFormMarkup = cloudLoadFormMarkup;
+        cloudFormMarkup = cloudFormMarkup.replace('{{cloud_lock_name}}', cloudLockName);
+        cloudFormMarkup = cloudFormMarkup.replace('{{cloud_key_code}}', cloudKeyCode);
+        if (PokeboxDaysPassed > 0 && PokemonSpeciesSeen !== {}){
+            //var numSeen = Object.keys(PokemonSpeciesSeen).length;
+            var dexPercent = $('.counter.pokedex', $panelBanner).find('.percent').text();
+            var numDays = PokeboxDaysPassed;
+            cloudFormMarkup = cloudFormMarkup.replace('{{existing_progress_message}}',
+                '<div class="tip red">Local progress <strong class="small">('+dexPercent+' in '+numDays+' days)</strong> will be overwritten by the loaded data!</div> '
+                );
+            } else {
+            cloudFormMarkup = cloudFormMarkup.replace('{{existing_progress_message}}', '');
+            }
+        return cloudFormMarkup;
+    }
+
+
     // Update the math object with a seeded random functon
     Math.seed = 1;
     // //console.log('\n Math.seed set to ', Math.seed);
@@ -8617,7 +8946,7 @@
             starterPokemon:starterRewardIndex,
             shadowPokemon:shadowRewardIndex,
             shiningPokemon:shiningRewardIndex
-            })); },
+            })); }
         };
 
 })();

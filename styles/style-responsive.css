@@ -303,6 +303,9 @@
         padding: 8px 6px;
         font-size: 13px;
     }
+    .panel .buttons .info.links .count.score .unit {
+        top: 4px;
+    }
 
 }
 
