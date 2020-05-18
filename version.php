@@ -2,7 +2,7 @@
 
 // Define the global cache time and version number
 $last_updated = '2020-05-18';
-$version_number = '0.17.4';
+$version_number = '0.17.5';
 
 // Set the access control headers to allow others to use it
 header("Access-Control-Allow-Origin: *");
