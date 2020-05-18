@@ -1401,9 +1401,10 @@
             if (PokeboxRewards.indexOf('pokedex-complete') !== -1
                 && PokeboxPopupsSeen.indexOf(eventID) === -1){
                 var seenCount = Object.keys(PokemonSpeciesSeen).length;
+                var totalScore = currentPokedexTotals.currentPokedexScore;
                 queuePopupWindow({
                     id: eventID,
-                    banner: 'congrats-final',
+                    banner: 'congrats-final-1'+(totalScore > 0 ? '' : 'b'),
                     buttons: {next: 'Next'},
                         textbox: '<em>Wow!! Congratulations! You\'ve encountered every <br />' +
                             'single Pokémon there is to see! Every last one! <br />' +
@@ -1411,19 +1412,27 @@
                     });
                 queuePopupWindow({
                     id: eventID,
-                    banner: 'congrats-final-2',
+                    banner: 'congrats-final-2'+(totalScore > 0 ? '' : 'b'),
                     buttons: {next: 'Next'},
-                        textbox: '<em>Since we started our research, we\'ve seen <br />' +
-                            'a total of <strong>'+ seenCount +' Pokémon </strong> over <strong>'+ numberWithCommas(PokeboxDaysPassed) +' Days</strong> and <br />' +
-                            'raised <strong>'+ numberWithCommas(currentPokedexTotals.currentPokedexScore) +' <span>&#x20bd;</span></strong> in funding. That\'s amazing!!</em> <br /> '
+                        textbox: totalScore > 0
+                            ? ('<em>Since we started our research, we\'ve seen <br />' +
+                                'a total of <strong>'+ seenCount +' Pokémon </strong> over <strong>'+ numberWithCommas(PokeboxDaysPassed) +' Days</strong> and <br />' +
+                                'raised <strong>'+ numberWithCommas(totalScore) +' <span>&#x20bd;</span></strong> in funding. That\'s amazing!!</em> <br /> ')
+                            : ('<em>Since we started our research, we\'ve seen <br />' +
+                                'a total of <strong>'+ seenCount +' Pokémon </strong> over <strong>'+ numberWithCommas(PokeboxDaysPassed) +' Days</strong> but <br />' +
+                                (totalScore === 0 ? 'made' : 'lost')+' <strong>'+ numberWithCommas(totalScore * -1) +' <span>&#x20bd;</span></strong> in funding. That\'s... unfortunate.</em> <br /> ')
                     });
                 queuePopupWindow({
                     id: eventID,
                     banner: 'congrats-final-3',
                     buttons: {continue: 'Until next time!'},
-                        textbox: '<em>I\'m not sure what else to say but to thank<br />' +
-                            'you a hundred more times for all your hard work. <br />' +
-                            'I sincerely hope our paths cross again in the future.</em> '
+                        textbox: totalScore > 0
+                            ? ('<em>I\'m not sure what else to say but to thank<br />' +
+                                'you a hundred more times for all your hard work. <br />' +
+                                'I sincerely hope our paths cross again in the future.</em> ')
+                            : ('<em>Regardless, I wanted to say thank you for all<br />' +
+                                'your hard work. It was a joy working with you and<br />' +
+                                'I sincerely hope our paths cross again in the future.</em> ')
                     });
                 }
 
