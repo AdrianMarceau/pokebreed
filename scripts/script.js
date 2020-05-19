@@ -8629,9 +8629,10 @@
         //console.log('cloudLockName = ', cloudLockName);
         //console.log('cloudKeyCode = ', cloudKeyCode);
         //console.log('cloudSaveData = ', cloudSaveData);
+        var isMigrateMode = typeof window.PokemonAppMigrateMode !== 'undefined' && window.PokemonAppMigrateMode === true ? true : false;
         $.ajax({
             type: "POST",
-            url: 'scripts/cloudSave.php',
+            url: 'scripts/cloudSave.php'+(isMigrateMode ? '?migrate=true' : ''),
             data: {'lock': cloudLockName, key: cloudKeyCode, data: cloudSaveData},
             success: function(data){
                 if (data.length && data.match(/^success|error/)){

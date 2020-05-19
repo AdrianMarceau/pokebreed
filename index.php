@@ -14,7 +14,7 @@
  */
 
 // Require the global config file
-require('config.php');
+require_once('config.php');
 
 // Define the seo index flag as true
 $page_is_indexed = true;
@@ -22,6 +22,15 @@ $page_is_indexed = true;
 // Check if we're in "Free Mode" or not
 $is_free_mode = isset($_GET['freeMode']) && $_GET['freeMode'] === 'true' ? true : false;
 if ($is_free_mode){ $page_is_indexed = false; }
+
+// Check if we're in "Migration" mode or not
+$is_migrate_mode = isset($_GET['migrateMode']) && $_GET['migrateMode'] === 'true' ? true : false;
+if ($is_migrate_mode){ $page_is_indexed = false; }
+
+// Define which "mode" we're in given the above flags
+$current_mode = 'normal';
+if ($is_free_mode){ $current_mode = 'free'; }
+elseif ($is_migrate_mode){ $current_mode = 'migrate'; }
 
 // Collect the max generation number and make sure it doesn't go over
 $max_allowed_generations = 9;
@@ -67,7 +76,16 @@ if (isset($_GET['gen'])
         </script>
         <? } ?>
     </head>
-    <body data-speed="normal" data-mode="<?= $is_free_mode ? 'free' : 'normal' ?>" data-running="false">
+    <body data-speed="normal" data-mode="<?= $current_mode ?>" data-running="false">
+        <? if ($is_migrate_mode){ ?>
+            <div class="migrate_banner">
+                <p>
+                    Save your old data to the cloud using the upload button below, then return
+                    to the main site <a href="<?= POKEBS_ROOT_URL ?>">by clicking here</a>
+                    and download it again using the same lock and key combo.
+                </p>
+            </div>
+        <? } ?>
         <div class="panel" data-view="simulator">
 
             <div class="banner">
@@ -158,10 +176,12 @@ if (isset($_GET['gen'])
                     </div>
                 </div>
                 <div class="info links">
-                    <a class="link" data-tab="about">about</a>
-                    <a class="link" data-tab="help">help</a>
-                    <a class="link" data-tab="credits">credits</a>
-                    <a class="link" data-tab="privacy">privacy</a>
+                    <? if (!$is_migrate_mode){ ?>
+                        <a class="link" data-tab="about">about</a>
+                        <a class="link" data-tab="help">help</a>
+                        <a class="link" data-tab="credits">credits</a>
+                        <a class="link" data-tab="privacy">privacy</a>
+                    <? } ?>
                     <a class="link icon reddit" href="https://www.reddit.com/r/pokebox/" target="_blank" title="Check out our Subreddit!"><span>reddit</span></a>
                     <a class="link icon discord" href="https://discord.gg/8jsSYt5" target="_blank" title="Join us on Discord!"><span>discord</span></a>
                     <a class="link pokedex hidden wait" data-tab="pokedex"><span>pokédex</span><span>&hellip;</span></a>
@@ -171,18 +191,20 @@ if (isset($_GET['gen'])
                         <a class="link mode" href="/"><span>&laquo; normal mode</span></a>
                     <? } ?>
                 </div>
-                <div class="info hidden" data-tab="about">
-                    <? require('pages/about.php'); ?>
-                </div>
-                <div class="info hidden" data-tab="help">
-                    <? require('pages/help.php'); ?>
-                </div>
-                <div class="info hidden" data-tab="credits">
-                    <? require('pages/credits.php'); ?>
-                </div>
-                <div class="info hidden" data-tab="privacy">
-                    <? require('pages/privacy.php'); ?>
-                </div>
+                <? if (!$is_migrate_mode){ ?>
+                    <div class="info hidden" data-tab="about">
+                        <? require('pages/about.php'); ?>
+                    </div>
+                    <div class="info hidden" data-tab="help">
+                        <? require('pages/help.php'); ?>
+                    </div>
+                    <div class="info hidden" data-tab="credits">
+                        <? require('pages/credits.php'); ?>
+                    </div>
+                    <div class="info hidden" data-tab="privacy">
+                        <? require('pages/privacy.php'); ?>
+                    </div>
+                <? } ?>
                 <div class="info hidden" data-tab="pokedex">
                     <? require('pages/pokedex.php'); ?>
                 </div>
@@ -203,6 +225,7 @@ if (isset($_GET['gen'])
             window.PokemonAppFreeMode = <?= isset($_GET['freeMode']) && $_GET['freeMode'] === 'true' ? 'true' : 'false' ?>;
             window.PokemonAppBaseHref = '<?= POKEBS_ROOT_URL ?>';
             window.PokemonAllowedGenerationsMax = <?= $allowed_generations ?>;
+            <? if ($is_migrate_mode){ echo 'window.PokemonAppMigrateMode = true;'.PHP_EOL; } ?>
 
         </script>
         <? if (!$is_local && GA_ACCOUNT_ID){ ?>

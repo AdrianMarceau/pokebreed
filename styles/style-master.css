@@ -59,12 +59,20 @@ body {
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3a5fab', endColorstr='#1d2c5e',GradientType=0 ); /* IE6-9 */
 }
 body[data-mode="free"] .panel .banner {
-    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#58585b+0,464649+100 */
-    background: rgb(59, 171, 59); /* Old browsers */
-    background: -moz-linear-gradient(top, rgba(59, 171, 59, 1) 0%, rgba(29, 94, 35, 1) 120%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(top, rgba(59, 171, 59, 1) 0%,rgba(29, 94, 35, 1) 120%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(to bottom, rgba(59, 171, 59, 1) 0%,rgba(29, 94, 35, 1) 120%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3a5fab', endColorstr='#1d2c5e',GradientType=0 ); /* IE6-9 */
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#3bab3b+0,1d5e23+100 */
+    background: rgb(59,171,59); /* Old browsers */
+    background: -moz-linear-gradient(-45deg,  rgba(59,171,59,1) 0%, rgba(29,94,35,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg,  rgba(59,171,59,1) 0%,rgba(29,94,35,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg,  rgba(59,171,59,1) 0%,rgba(29,94,35,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3bab3b', endColorstr='#1d5e23',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+body[data-mode="migrate"] .panel .banner {
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#a90329+0,6d0019+100 */
+    background: rgb(169,3,41); /* Old browsers */
+    background: -moz-linear-gradient(-45deg,  rgba(169,3,41,1) 0%, rgba(109,0,25,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg,  rgba(169,3,41,1) 0%,rgba(109,0,25,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg,  rgba(169,3,41,1) 0%,rgba(109,0,25,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 }
 .panel .banner:before {
     content: "";
@@ -3068,4 +3076,44 @@ body[data-mode="free"] .panel .buttons .info.links .count.score.active {
 .popup.window[data-id="system_save-to-cloud"] > .wrap,
 .popup.window[data-id="system_load-from-cloud"] > .wrap {
     padding-bottom: 75px;
+}
+
+/* -- MIGRATION MODE STYLES -- */
+
+body[data-mode="migrate"] .migrate_banner {
+    display: block;
+    margin: -10px -10px 10px;
+    padding: 6px 12px;
+    border-bottom: 2px solid #1b1b1d;
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#a90329+0,6d0019+100 */
+    background: rgb(169,3,41); /* Old browsers */
+    background: -moz-linear-gradient(-45deg,  rgba(169,3,41,1) 0%, rgba(109,0,25,1) 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(-45deg,  rgba(169,3,41,1) 0%,rgba(109,0,25,1) 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(135deg,  rgba(169,3,41,1) 0%,rgba(109,0,25,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a90329', endColorstr='#6d0019',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+body[data-mode="migrate"] .migrate_banner p {
+    font-size: 12px;
+    line-height: 1.4;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+    max-width: 460px;
+}
+body[data-mode="migrate"] .migrate_banner p a {
+    color: inherit;
+}
+body[data-mode="migrate"] .panel .banner .load_from_cloud,
+body[data-mode="migrate"] .panel .overview.main,
+body[data-mode="migrate"] .panel .midwrap,
+body[data-mode="migrate"] .panel .buttons .controls,
+body[data-mode="migrate"] .panel .buttons .select-pokemon[data-panel],
+body[data-mode="migrate"] .panel .buttons .filter-pokemon,
+body[data-mode="migrate"] .panel .buttons .starter-pokemon {
+    display: none;
+}
+body[data-mode="migrate"] .panel .banner .save_to_cloud {
+    right: 34px;
+}
+body[data-mode="migrate"] .panel .buttons .info.links {
+    border-top: 0 none transparent;
 }

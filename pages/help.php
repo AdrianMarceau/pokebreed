@@ -46,6 +46,17 @@
             </ul>
         </div>
     </div>
+    <div class="group">
+        <h2>Legacy Save Data</h2>
+        <p>
+            <? $migrate_url = str_replace('https://', 'http://', POKEBS_ROOT_URL).'migrate.php'; ?>
+            If you used PokéBox before it was upgraded to use SSL and be more secure, your
+            old save data will not be seen by the current version of the app. Please use the
+            dedicated <a href="<?= $migrate_url ?>">migration page</a> to push
+            your data up into the cloud and then come back here to pull it back down again.
+            Apologies for the inconvenience but thank you for your understanding.
+        </p>
+    </div>
     <div class="group hotkeys">
         <h2>Keyboard Controls</h2>
         <div>

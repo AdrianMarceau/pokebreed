@@ -40,15 +40,16 @@ SetOutputFilter DEFLATE
 # Turn on URL rewriting and set the base
 RewriteEngine on
 
-# Redirect requires for minified files to the appropriate scripts
-#RewriteCond %{REQUEST_FILENAME} -d [OR]
+# Redirect required for minified files to the appropriate scripts
 RewriteCond %{REQUEST_FILENAME} -f
-RewriteRule (.*) - [S=5]
-#
+RewriteRule (.*) - [S=3]
 RewriteRule ^styles/([-_a-z0-9\.]+)\.min\.css$ styles/style.php?file=styles/$1.css [L]
 RewriteRule ^scripts/([-_a-z0-9\.]+)\.min\.js$ scripts/script.php?file=scripts/$1.js [L]
 RewriteRule ^data/([-_a-z0-9\.\/]+)\.min\.js$ scripts/script.php?file=data/$1.js [L]
-#
+
+# Rewrite required for various mode and content filters
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule (.*) - [S=3]
 RewriteRule ^g(?:en)?([0-9a-z]+)/$ index.php?gen=$1 [L]
 RewriteRule ^free-mode/$ index.php?freeMode=true [L]
 RewriteRule ^g(?:en)?([0-9a-z]+)/free-mode/$ index.php?freeMode=true&gen=$1 [L]
