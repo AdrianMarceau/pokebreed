@@ -110,18 +110,33 @@
     $(document).ready(function(){
 
         // Collect devide width and make sure it auto-updates
+        var minDeviceWidth = 534;
         var updateDeviceWidth = function(){
             thisDeviceWidth = $(window).width();
             thisDeviceHeight = $(window).height();
             var $mvp = $('#myViewport');
             // //console.log('$mvp = ', $mvp);
             //alert('thisDeviceWidth = ' + thisDeviceWidth + '\n ' + 'thisDeviceHeight = ' + thisDeviceHeight);
-            if ($mvp.length && thisDeviceWidth <= 534) { $mvp.attr('content','width=534'); }
+            if ($mvp.length && thisDeviceWidth <= minDeviceWidth) { $mvp.attr('content','width=534'); }
             else if ($mvp.length){ $mvp.attr('content','width=device-width, initial-scale=1'); }
             };
         $(window).resize(updateDeviceWidth);
         updateDeviceWidth();
-        // //console.log('thisDeviceWidth = ', thisDeviceWidth);
+        //console.log('thisDeviceWidth = ', thisDeviceWidth);
+
+        // Check if we're being displayed in an iframe and adapt accordingly
+        if (window.parent !== window.top){
+            //console.log('We are in an iframe...');
+            //console.log('thisDeviceWidth ', thisDeviceWidth, 'vs minDeviceWidth =', minDeviceWidth);
+            if (thisDeviceWidth < minDeviceWidth){
+                //console.log('current window is too small, provide fullscreen option');
+                var forceZoomLevel = Math.round((thisDeviceWidth / minDeviceWidth) * 1000) / 1000;
+                //console.log('set zoom to ', forceZoomLevel);
+                $('<style type="text/css"> body { zoom: '+forceZoomLevel+'; -moz-transform: scale('+forceZoomLevel+'); -moz-transform-origin: 0 0; } </style>').appendTo('head');
+                $('.panel .banner .logo').wrap('<a class="logo" href="'+appBaseHref+'" target="_blank"></a>');
+                $('.panel .banner .logo .logo').removeClass('logo');
+                }
+            }
 
         // Populate the app details with global values if set
         if (typeof window.PokemonAppLastUpdated !== 'undefined'){ appLastUpdated = window.PokemonAppLastUpdated; }

@@ -2839,6 +2839,9 @@ body[data-mode="free"] .panel .buttons .info.links .count.score.active {
 .popup.window > .wrap > .banner {
     height: 125px;
     border: 1px solid #0c0c0c;
+    background-size: 100% auto;
+    background-size: cover;
+    background-position: center center;
 }
 
 .popup.window > .wrap > .textbox {
