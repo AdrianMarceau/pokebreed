@@ -2152,6 +2152,11 @@
         // Process any popups messages that have been generated
         checkPopupEventTriggers();
 
+        // Unhide the save/load/delete buttons if appropriate to do so
+        if (!appFreeMode && typeof window.localStorage !== 'undefined'){
+            if (PokeboxDaysPassed > 0 && PokemonSpeciesSeen !== {}){ $('a.save_to_cloud', $panelDiv).removeClass('hidden'); }
+            }
+
     }
 
     // Define a function for restarting the current simulation (with same seeds)
