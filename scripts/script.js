@@ -7,6 +7,7 @@
     var appVersionNumber = '0.1.0'; // first version
     var appDebugMode = false; // debug mode
     var appFreeMode = false; // free-mode (show all pokemon)
+    var appMigrateMode = false; // migrate-mode (legacy save-data tool)
     var appBaseHref = '';
 
     var maxIndexKeyToLoad = 9;
@@ -127,6 +128,7 @@
         if (typeof window.PokemonAppVersionNumber !== 'undefined'){ appVersionNumber = window.PokemonAppVersionNumber; }
         if (typeof window.PokemonAppDebugMode !== 'undefined'){ appDebugMode = window.PokemonAppDebugMode; }
         if (typeof window.PokemonAppFreeMode !== 'undefined'){ appFreeMode = window.PokemonAppFreeMode; }
+        if (typeof window.PokemonAppMigrateMode !== 'undefined'){ appMigrateMode = window.PokemonAppMigrateMode; }
         if (typeof window.PokemonAppBaseHref !== 'undefined'){ appBaseHref = window.PokemonAppBaseHref; }
 
         // Overwrite the default index load value if set
@@ -1216,6 +1218,12 @@
             // FREE MODE EVENTS
 
             // .. no events in free mode
+
+            } else if (appMigrateMode){
+
+            // MIGRATE MODE EVENTS
+
+            // .. no events in migrate mode
 
             } else {
 
@@ -8634,10 +8642,9 @@
         //console.log('cloudLockName = ', cloudLockName);
         //console.log('cloudKeyCode = ', cloudKeyCode);
         //console.log('cloudSaveData = ', cloudSaveData);
-        var isMigrateMode = typeof window.PokemonAppMigrateMode !== 'undefined' && window.PokemonAppMigrateMode === true ? true : false;
         $.ajax({
             type: "POST",
-            url: 'scripts/cloudSave.php'+(isMigrateMode ? '?migrate=true' : ''),
+            url: 'scripts/cloudSave.php'+(appMigrateMode ? '?migrate=true' : ''),
             data: {'lock': cloudLockName, key: cloudKeyCode, data: cloudSaveData},
             success: function(data){
                 if (data.length && data.match(/^success|error/)){
