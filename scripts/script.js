@@ -1060,28 +1060,40 @@
             });
 
         // Pre-bind an event for the save button (attempt to save to cloud)
+        var saveToCloudTimeout = false;
         $popupWindow.on('click', '.button.save_to_cloud', function(e){
             e.preventDefault();
             //console.log('save button clicked');
             if (validateCloudFormInputs()){
-                $('a.save_to_cloud', $panelDiv).removeClass('success');
+                var $saveButton = $('a.save_to_cloud', $panelDiv);
+                $saveButton.removeClass('success');
                 exportPokeBoxSaveData(function(){
                     closePopupWindow();
-                    $('a.save_to_cloud', $panelDiv).addClass('success');
+                    $saveButton.addClass('success');
+                    if (saveToCloudTimeout !== false){ clearTimeout(saveToCloudTimeout); }
+                    saveToCloudTimeout = setTimeout(function(){
+                        $saveButton.removeClass('success');
+                        }, 2100);
                     });
 
                 }
             });
 
         // Pre-bind an event for the load button (attempt to load from cloud)
+        var loadFromCloudTimeout = false;
         $popupWindow.on('click', '.button.load_from_cloud', function(e){
             e.preventDefault();
             //console.log('load button clicked');
             if (validateCloudFormInputs()){
-                $('a.load_from_cloud', $panelDiv).removeClass('success');
+                var $loadButton = $('a.load_from_cloud', $panelDiv);
+                $loadButton.removeClass('success');
                 importPokeBoxSaveData(function(){
                     closePopupWindow();
-                    $('a.load_from_cloud', $panelDiv).addClass('success');
+                    $loadButton.addClass('success');
+                    if (loadFromCloudTimeout !== false){ clearTimeout(loadFromCloudTimeout); }
+                    loadFromCloudTimeout = setTimeout(function(){
+                        $loadButton.removeClass('success');
+                        }, 2100);
                     });
                 }
             });
