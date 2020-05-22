@@ -2132,7 +2132,7 @@ body[data-speed="slow"] .panel .overview.visitors { transition: max-height 1.00s
 .panel .buttons .filter-pokemon .button.add-ditto:before {
     background-image: url(../images/icons/controls/ditto.png);
 }
-.panel .buttons .filter-pokemon .button.add-ditto.super:before {
+.panel .buttons .filter-pokemon .button.add-super-ditto:before {
     background-image: url(../images/icons/controls/super-ditto.png);
 }
 .panel .buttons .filter-pokemon .button.add-arceus:before {

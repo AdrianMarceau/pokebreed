@@ -173,12 +173,14 @@
     }
 
     .panel .buttons .filter-pokemon .button.add-ditto,
+    .panel .buttons .filter-pokemon .button.add-super-ditto,
     .panel .buttons .filter-pokemon .button.add-arceus,
     .panel .buttons .filter-pokemon .button.enter-seed {
         width: 46px;
         height: 46px;
     }
     .panel .buttons .filter-pokemon .button.add-ditto:before,
+    .panel .buttons .filter-pokemon .button.add-super-ditto:before,
     .panel .buttons .filter-pokemon .button.add-arceus:before,
     .panel .buttons .filter-pokemon .button.enter-seed:before {
         width: 40px;

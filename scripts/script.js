@@ -634,6 +634,14 @@
             else { addStarterPokemonToZone('ditto'); }
             });
 
+        // Define a click event for the add super ditto quick button
+        var $superDittoButton = $('.button.add-super-ditto', $pokePanelFilters);
+        $superDittoButton.bind('click', function(e){
+            e.preventDefault();
+            if ($(this).hasClass('disabled') || $(this).hasClass('hidden')){ return false; }
+            addStarterPokemonToZone('super-ditto');
+            });
+
         // Define a click event for the add arceus quick button
         var $arceusButton = $('.button.add-arceus', $pokePanelFilters);
         $arceusButton.bind('click', function(e){
@@ -3175,6 +3183,10 @@
         var $dittoButton = $('.button.add-ditto', $pokePanelFilters);
         $dittoButton.addClass('hidden disabled');
 
+        // Hide and disable the super ditto button by default
+        var $superDittoButton = $('.button.add-super-ditto', $pokePanelFilters);
+        $superDittoButton.addClass('hidden disabled');
+
         // Unhide the ditto button if we're in free mode or we've seen it already
         if (appFreeMode
             || (typeof PokemonSpeciesSeen['ditto'] !== 'undefined'
@@ -3182,9 +3194,21 @@
             $dittoButton.removeClass('hidden');
             }
 
+        // Unhide the super ditto button if we're in free mode or we've seen it already
+        if (appFreeMode
+            || (typeof PokemonSpeciesSeen['super-ditto'] !== 'undefined'
+                && PokemonSpeciesSeen['super-ditto'] > 0)){
+            $superDittoButton.removeClass('hidden');
+            }
+
         // Enable the ditto button only if there's room in the selection panel
         if (thisZoneData.currentPokemon.length < pokemonRequiredToStart){
             $dittoButton.removeClass('disabled');
+            }
+
+        // Enable the super ditto button only if there's room in the selection panel
+        if (thisZoneData.currentPokemon.length < pokemonRequiredToStart){
+            $superDittoButton.removeClass('disabled');
             }
 
     }
