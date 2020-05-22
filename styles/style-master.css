@@ -2995,7 +2995,8 @@ body[data-mode="free"] .panel .buttons .info.links .count.score.active {
 .popup.window .cloud-form input[type="password"].has_error {
     border-color: #a72d2d;
 }
-.popup.window .cloud-form .tip {
+.popup.window .cloud-form .tip,
+.popup.window .cloud-form .autosave {
     display: block;
     margin: 0 auto 2px;
     font-size: 80%;
@@ -3011,6 +3012,18 @@ body[data-mode="free"] .panel .buttons .info.links .count.score.active {
 }
 .popup.window .cloud-form .tip .small {
     font-size: 80%;
+}
+.popup.window .cloud-form .autosave {
+    color: #6eab70;
+    vertical-align: middle;
+    margin-top: 6px;
+}
+.popup.window .cloud-form .autosave .checkbox,
+.popup.window .cloud-form .autosave .label {
+    vertical-align: middle;
+}
+.popup.window .cloud-form .autosave .checkbox {
+    pointer-events: none;
 }
 
 

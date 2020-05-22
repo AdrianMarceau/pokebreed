@@ -1060,42 +1060,26 @@
             });
 
         // Pre-bind an event for the save button (attempt to save to cloud)
-        var saveToCloudTimeout = false;
         $popupWindow.on('click', '.button.save_to_cloud', function(e){
-            e.preventDefault();
             //console.log('save button clicked');
-            if (validateCloudFormInputs()){
-                var $saveButton = $('a.save_to_cloud', $panelDiv);
-                $saveButton.removeClass('success');
-                exportPokeBoxSaveData(function(){
-                    closePopupWindow();
-                    $saveButton.addClass('success');
-                    if (saveToCloudTimeout !== false){ clearTimeout(saveToCloudTimeout); }
-                    saveToCloudTimeout = setTimeout(function(){
-                        $saveButton.removeClass('success');
-                        }, 2100);
-                    });
-
-                }
+            e.preventDefault();
+            triggerSaveToCloud();
             });
 
         // Pre-bind an event for the load button (attempt to load from cloud)
-        var loadFromCloudTimeout = false;
         $popupWindow.on('click', '.button.load_from_cloud', function(e){
-            e.preventDefault();
             //console.log('load button clicked');
-            if (validateCloudFormInputs()){
-                var $loadButton = $('a.load_from_cloud', $panelDiv);
-                $loadButton.removeClass('success');
-                importPokeBoxSaveData(function(){
-                    closePopupWindow();
-                    $loadButton.addClass('success');
-                    if (loadFromCloudTimeout !== false){ clearTimeout(loadFromCloudTimeout); }
-                    loadFromCloudTimeout = setTimeout(function(){
-                        $loadButton.removeClass('success');
-                        }, 2100);
-                    });
-                }
+            e.preventDefault();
+            triggerLoadFromCloud();
+            });
+
+        // Pre-bind an event for any checkboxes (fixes propagation bugs from above)
+        $popupWindow.on('click', '.autosave', function(e){
+            e.preventDefault();
+            var $checkbox = $(this).find('input[type="checkbox"]');
+            //console.log('autosave checkbox clicked');
+            if (!$checkbox.is(':checked')){ $checkbox.prop('checked', true); cloudAutoSave = true; }
+            else { $checkbox.prop('checked', false); cloudAutoSave = false; }
             });
 
         // Now that we're done binding, check for any event triggers
@@ -2190,6 +2174,7 @@
         // Unhide the save/load/delete buttons if appropriate to do so
         if (!appFreeMode && typeof window.localStorage !== 'undefined'){
             if (PokeboxDaysPassed > 0 && PokemonSpeciesSeen !== {}){ $('a.save_to_cloud', $panelDiv).removeClass('hidden'); }
+            if (cloudAutoSave === true && lastCloudAutoSave !== PokeboxDaysPassed){ triggerSaveToCloud(); }
             }
 
     }
@@ -8591,6 +8576,8 @@
     // Define the keys that can be exported/imported to/from localStorage
     var cloudLockName = '';
     var cloudKeyCode = '';
+    var cloudAutoSave = false;
+    var lastCloudAutoSave = 0;
     var cloudCompatibleStorageKeys = [
         'PokeboxDaysPassed', 'PokeboxPopupsSeen',
         'PokeboxRewards', 'PokemonSpeciesSeen',
@@ -8599,6 +8586,49 @@
     var allowEmptyCloudStorageKeys = [
         'CurrentPokedexFilters'
         ];
+
+    // Define a function for triggering the sequence of events leading to a cloud save
+    var saveToCloudTimeout = false;
+    function triggerSaveToCloud(){
+        //console.log('triggerSaveToCloud()');
+        if (validateCloudFormInputs()){
+            var $saveButton = $('a.save_to_cloud', $panelDiv);
+            $saveButton.removeClass('success');
+            var backupCloudAutoSave = cloudAutoSave;
+            cloudAutoSave = false;
+            exportPokeBoxSaveData(function(){
+                closePopupWindow();
+                $saveButton.addClass('success');
+                if (saveToCloudTimeout !== false){ clearTimeout(saveToCloudTimeout); }
+                saveToCloudTimeout = setTimeout(function(){
+                    $saveButton.removeClass('success');
+                    }, 2100);
+                cloudAutoSave = backupCloudAutoSave;
+                lastCloudAutoSave = PokeboxDaysPassed;
+                });
+            }
+    }
+
+    // Define a function for triggering the sequence of events leading to a cloud load
+    var loadFromCloudTimeout = false;
+    function triggerLoadFromCloud(){
+        //console.log('triggerLoadFromCloud()');
+        if (validateCloudFormInputs()){
+            var $loadButton = $('a.load_from_cloud', $panelDiv);
+            $loadButton.removeClass('success');
+            //var backupCloudAutoSave = cloudAutoSave;
+            cloudAutoSave = false;
+            importPokeBoxSaveData(function(){
+                closePopupWindow();
+                $loadButton.addClass('success');
+                if (loadFromCloudTimeout !== false){ clearTimeout(loadFromCloudTimeout); }
+                loadFromCloudTimeout = setTimeout(function(){
+                    $loadButton.removeClass('success');
+                    }, 2100);
+                //cloudAutoSave = backupCloudAutoSave;
+                });
+            }
+    }
 
     // Define a function for validating the cloud form inputs from the popup window
     function validateCloudFormInputs(){
@@ -8778,11 +8808,16 @@
                     '<div class="tip red">Please do not use personal info or passwords used on other websites!</div> ' +
                     '<div class="tip">Locks &amp; keys are between 8-32 chars in length. Keys are case-sensitive!</div> ' +
                     '<div class="tip">Lock &amp; key combinations cannot be retrieved or reset if lost!</div> ' +
+                    '<label class="autosave" for="auto_save">' +
+                        '<input class="checkbox" type="checkbox" name="auto_save" value="1" {{cloud_auto_save}} /> ' +
+                        '<span class="label">Auto-save progress for the rest of this session?</span> ' +
+                    '</label> ' +
                 '</div>';
             }
         var cloudFormMarkup = cloudSaveFormMarkup;
         cloudFormMarkup = cloudFormMarkup.replace('{{cloud_lock_name}}', cloudLockName);
         cloudFormMarkup = cloudFormMarkup.replace('{{cloud_key_code}}', cloudKeyCode);
+        cloudFormMarkup = cloudFormMarkup.replace('{{cloud_auto_save}}', (cloudAutoSave ? ' checked="checked"' : ''));
         return cloudFormMarkup;
     }
 
