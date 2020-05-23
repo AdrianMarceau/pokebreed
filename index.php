@@ -168,6 +168,7 @@ if (isset($_GET['gen'])
                             <a class="button add-super-ditto hidden" title="Add a Super Ditto"><span>Add Super Ditto</span></a>
                             <a class="button add-arceus hidden" title="Add an Arceus"><span>Add Arceus</span></a>
                             <a class="button enter-seed" title="Enter Starter Seed"><span>Enter Seed</span></a>
+                            <a class="button repeat-seed hidden" title="Repeat Last Seed"><span>Repeat Seed</span></a>
                         </div>
                     </div>
                 </div>

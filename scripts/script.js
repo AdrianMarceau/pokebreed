@@ -31,6 +31,7 @@
     var PokemonSpeciesSeen = {};
     var PokeboxPopupsSeen = [];
     var PokeboxRewards = [];
+    var PokeboxLastStarterSeed = false;
 
     var totalSpecialPokemon = 0;
     var totalLegendaryPokemon = 0;
@@ -186,6 +187,14 @@
                 // //console.log('storageName = ', storageName);
                 // //console.log('savedPokeboxPopupsSeen = ', savedPokeboxPopupsSeen);
                 // //console.log('PokeboxPopupsSeen = ', PokeboxPopupsSeen);
+
+                // Load the LAST STARTER SEED if it's been saved
+                var storageName = ('PokeboxLastStarterSeed');
+                var savedPokeboxLastStarterSeed = window.localStorage.getItem(storageName);
+                if (typeof savedPokeboxLastStarterSeed === 'string'){ PokeboxLastStarterSeed = savedPokeboxLastStarterSeed.trim(); }
+                // //console.log('storageName = ', storageName);
+                // //console.log('savedPokeboxLastStarterSeed = ', savedPokeboxLastStarterSeed);
+                // //console.log('PokeboxLastStarterSeed = ', PokeboxLastStarterSeed);
 
                 }
 
@@ -625,6 +634,15 @@
             triggerStarterSeedPrompt();
             });
 
+        // Define a click event for the repeat seed entry button
+        var $repeatSeedButton = $('.button.repeat-seed', $pokePanelFilters);
+        $repeatSeedButton.bind('click', function(e){
+            e.preventDefault();
+            if ($(this).hasClass('disabled') || $(this).hasClass('hidden')){ return false; }
+            if (PokeboxLastStarterSeed === false || !PokeboxLastStarterSeed.length){ return false; }
+            triggerStarterSeedPrompt(PokeboxLastStarterSeed);
+            });
+
         // Define a click event for the add ditto quick button
         var $dittoButton = $('.button.add-ditto', $pokePanelFilters);
         $dittoButton.bind('click', function(e){
@@ -800,6 +818,9 @@
                     // SEED BUTTON shortcuts
                     case 's':
                         { validAction = true; $seedButton.trigger('click'); break; }
+                    // REPEAT SEED BUTTON shortcuts
+                    case 'r':
+                        { validAction = true; $repeatSeedButton.trigger('click'); break; }
                     // ARCEUS BUTTON shortcuts
                     case 'a':
                         { validAction = true; /*$arceusButton.trigger('click');*/ break; }
@@ -2107,10 +2128,11 @@
             if (typeof starterCounts[starterToken+'/female'] !== 'undefined'){ countStrings.push(starterCounts[starterToken+'/female']+'f'); }
             if (typeof starterCounts[starterToken+'/none'] !== 'undefined'){ countStrings.push(starterCounts[starterToken+'/none']); }
             countStrings = countStrings.sort(function(a,b){ return a > b ? 1 : (a < b ? -1 : 0); });
-            starterName += ' &times;'+countStrings.join('/');
+            starterName += ' ×'+countStrings.join('/');
             starterList.push(starterName);
             }
-        var starterText = '``[PBS | '+ starterList.join(' / ') +' | v'+ appVersionNumber +']``';
+        PokeboxLastStarterSeed = starterList.join(' / ');
+        var starterText = '``[PBS | '+ starterList.join(' / ').replace(/×/g, '&times;') +' | v'+ appVersionNumber +']``';
         $('.starter-pokemon .seed', $panelButtons).html(starterText);
         $('.starter-pokemon', $panelButtons).removeClass('hidden');
 
@@ -2123,6 +2145,14 @@
         $controlButtons.filter('.'+ dayTimeoutSpeed).addClass('active');
         $controlButtons.filter('.speed:not(.play):not(.pause)').removeClass('hidden');
         $controlButtons.filter('.play').addClass('active');
+
+        // Update local storage with the the last starter seed if applicable
+        if (!appFreeMode && typeof window.localStorage !== 'undefined'){
+            var storageName = 'PokeboxLastStarterSeed';
+            var savedPokeboxLastStarterSeed = PokeboxLastStarterSeed.trim();
+            window.localStorage.setItem(storageName, savedPokeboxLastStarterSeed);
+            // //console.log('storageName = ', storageName);
+            }
 
     }
 
@@ -3245,6 +3275,10 @@
         var $seedButton = $('.button.enter-seed', $pokePanelFilters);
         $seedButton.addClass('hidden disabled');
 
+        // Hide and disable the repeat seed button by default
+        var $repeatSeedButton = $('.button.repeat-seed', $pokePanelFilters);
+        $repeatSeedButton.addClass('hidden disabled');
+
         // Unhide the seed button if we're run the simulator at least once
         if (appFreeMode
             || PokeboxDaysPassed > 0
@@ -3252,9 +3286,15 @@
             $seedButton.removeClass('hidden');
             }
 
-        // Enable the seed button only if we haven't selected any pokemon yet
+        // Unhide the repeat seed button if a previous seed has been entered already
+        if (PokeboxLastStarterSeed !== false && PokeboxLastStarterSeed.length){
+            $repeatSeedButton.removeClass('hidden');
+            }
+
+        // Enable the seed buttons only if there's room in the starter area
         if (thisZoneData.currentPokemon.length < pokemonRequiredToStart){
             $seedButton.removeClass('disabled');
+            $repeatSeedButton.removeClass('disabled');
             }
 
     }
@@ -4911,7 +4951,11 @@
     }
 
     // Define a function for triggering the starter seed prompt
-    function triggerStarterSeedPrompt(){
+    function triggerStarterSeedPrompt(starterSeed){
+        //console.log('triggerStarterSeedPrompt(', starterSeed, ')');
+
+        // If a starter seed was not provided, default to false
+        if (typeof starterSeed === 'undefined' || !starterSeed.length){ starterSeed = false; }
 
         // Quickly generate a list of password values and unlocks
         var rewardIndex = {};
@@ -4930,11 +4974,11 @@
         // //console.log('rewardIndex = ', rewardIndex);
 
         // Collect and parse the seed if it's given, else do nothing
-        var rawSeed = prompt(
+        var rawSeed = !starterSeed ? prompt(
             'Starter seeds can be found in the footer of an active PokéBox. \n'
-            + 'Please enter a starter seed below (or any fragment of it):');
+            + 'Please enter a starter seed below (or any fragment of it):') : starterSeed;
         if (rawSeed && rawSeed.length > 0){
-            // //console.log('rawSeed = ', rawSeed);
+            //console.log('rawSeed = ', rawSeed);
 
             // Check to see if the seed is actually a password and unlock rewards if true then return
             var passValue = stringToPassValue(rawSeed);
@@ -4951,7 +4995,7 @@
 
             // Otherwise we can continue parsing the password normally for actual Pokemon amounts
             var seedPokemon = parsePokeBoxSeed(rawSeed);
-            // //console.log('seedPokemon = ', seedPokemon);
+            //console.log('seedPokemon = ', seedPokemon);
             if (seedPokemon
                 || seedPokemon.length){
                 var blockedPokemon = [];
@@ -8605,9 +8649,11 @@
     var cloudCompatibleStorageKeys = [
         'PokeboxDaysPassed', 'PokeboxPopupsSeen',
         'PokeboxRewards', 'PokemonSpeciesSeen',
+        'PokeboxLastStarterSeed',
         'CurrentPokedexFilters'
         ];
     var allowEmptyCloudStorageKeys = [
+        'PokeboxLastStarterSeed',
         'CurrentPokedexFilters'
         ];
 

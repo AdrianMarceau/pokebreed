@@ -67,6 +67,7 @@
                 <li>Starter Panel: Use all four <span class="key">[ARROW KEYS]</span> to navigate buttons, <span class="key">[SPACEBAR]</span> to select a Pokémon as a starter</li>
                 <li>Filter Panels: Use <span class="key">[LEFT ARROW]</span> and <span class="key">[RIGHT ARROW]</span> to navigate filters, <span class="key">[UP ARROW]</span> and <span class="key">[DOWN ARROW]</span> to jump to first/last option</li>
                 <li><span class="key">[S]</span> can be used to bring up the seed / starter prompt (type a name or fragment and hit <span class="key">[ENTER]</span>)</li>
+                <li><span class="key">[R]</span> can be used to repeat the most recently used starter seed (assuming one exists)</li>
                 <li><span class="key">[D]</span> can be used to add a Ditto (once unlocked)</li>
                 <li><span class="key">[SHIFT] + [D]</span> can be used to a add Super Ditto (once unlocked)</li>
                 <li><span class="key">[A]</span> can be used to add Arceus (once unlocked)</li>
