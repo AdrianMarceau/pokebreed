@@ -2239,6 +2239,39 @@
             speciesEffects: ['babyLifeBoost']
             },
 
+        'regieleki': {
+            order: indexOrder++,
+            token: 'regieleki',
+            name: 'Regieleki',
+            class: 'legendary',
+            number: 894,
+            types: ['electric'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 80, phAttack: 100, phDefense: 50, spAttack: 100, spDefense: 50, speed: 200},
+            abilities: {0: 'transistor'},
+            height: 1.2,
+            weight: 145.0,
+            colors: ['yellow', 'blue', 'pink'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+        'regidrago': {
+            order: indexOrder++,
+            token: 'regidrago',
+            name: 'Regidrago',
+            class: 'legendary',
+            number: 895,
+            types: ['dragon'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 200, phAttack: 100, phDefense: 50, spAttack: 100, spDefense: 50, speed: 80},
+            abilities: {0: 'dragons-maw'},
+            height: 2.1,
+            weight: 200.0,
+            colors: ['black', 'red', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
 
         });
     thisIndex.indexOrder = indexOrder;
