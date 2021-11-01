@@ -2187,6 +2187,29 @@
             prevEvolution: 'charizard',
             hasBigSprite: true
             },
+        'gmax-blastoise': {
+            order: thisIndex.afterOrder('mega-blastoise'),
+            token: 'gmax-blastoise',
+            name: 'Gigantamax Blastoise',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'blastoise',
+            isStarterPokemon: true,
+            number: 9,
+            types: ['water'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 790, phAttack: 83, phDefense: 100, spAttack: 85, spDefense: 105, speed: 78},
+            abilities: {0: 'torrent', hidden: 'rain-dish'},
+            height: 25,
+            weight: -1,
+            colors: ['grey', 'blue', 'white', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'water-1'],
+            prevEvolution: 'blastoise',
+            hasBigSprite: true
+            },
         'gmax-butterfree': {
             order: thisIndex.afterOrder('butterfree'),
             token: 'gmax-butterfree',
@@ -2785,6 +2808,7 @@
 
         {base: 'venusaur', species: 'gmax-venusaur', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'charizard', species: 'gmax-charizard', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'blastoise', species: 'gmax-blastoise', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'butterfree', species: 'gmax-butterfree', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'pikachu', species: 'gmax-pikachu', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'meowth', species: 'gmax-meowth', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
