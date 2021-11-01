@@ -891,7 +891,7 @@
             abilities: {0: 'oblivious', 1: 'own-tempo', hidden: 'regenerator'},
             height: 2,
             weight: 79.5,
-            colors: ['pink', 'yellow', 'gray', 'white'],
+            colors: ['pink', 'brown', 'gray', 'white'],
             eggCycles: 20,
             eggGroups: ['monster', 'water-1'],
             prevEvolution: 'slowpoke'

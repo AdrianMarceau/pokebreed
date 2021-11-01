@@ -1764,7 +1764,7 @@
             abilities: {0: 'shell-armor'},
             height: 2,
             weight: 120,
-            colors: ['gray', 'pink', 'white', 'yellow'],
+            colors: ['gray', 'pink', 'white', 'brown'],
             eggCycles: 20,
             eggGroups: ['monster', 'water-1'],
             prevEvolution: 'slowbro'

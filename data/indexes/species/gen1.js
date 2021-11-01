@@ -1516,7 +1516,7 @@
             abilities: {0: 'oblivious', 1: 'own-tempo', hidden: 'regenerator'},
             height: 1.2,
             weight: 36,
-            colors: ['pink', 'yellow'],
+            colors: ['pink', 'brown'],
             eggCycles: 20,
             eggGroups: ['monster', 'water-1'],
             nextEvolutions: [{
@@ -1535,7 +1535,7 @@
             abilities: {0: 'oblivious', 1: 'own-tempo', hidden: 'regenerator'},
             height: 1.6,
             weight: 78.5,
-            colors: ['pink', 'yellow', 'gray'],
+            colors: ['pink', 'brown', 'gray'],
             eggCycles: 20,
             eggGroups: ['monster', 'water-1'],
             prevEvolution: 'slowpoke'
