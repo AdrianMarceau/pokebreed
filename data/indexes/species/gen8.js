@@ -2030,7 +2030,7 @@
             prevEvolution: 'drakloak'
             },
 
-        zacian: {
+        'zacian': {
             order: indexOrder++,
             token: 'zacian',
             name: 'Zacian',
@@ -2072,7 +2072,7 @@
             prevEvolution: 'zacian'
             },
 
-        zamazenta: {
+        'zamazenta': {
             order: indexOrder++,
             token: 'zamazenta',
             name: 'Zamazenta',
@@ -2129,6 +2129,72 @@
             colors: ['purple', 'red', 'black'],
             eggCycles: 120,
             eggGroups: ['undiscovered']
+            },
+
+        'kubfu': {
+            order: indexOrder++,
+            token: 'kubfu',
+            name: 'Kubfu',
+            class: 'legendary',
+            number: 891,
+            types: ['fighting'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 60, phAttack: 90, phDefense: 60, spAttack: 53, spDefense: 50, speed: 72},
+            abilities: {0: 'inner-focus'},
+            height: 0.6,
+            weight: 12.0,
+            colors: ['brown', 'white', 'black'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'single-strike-urshifu', // Tower of Darkness
+                method: 'type-appeal',
+                value: 'dark',
+                method2: 'level-up',
+                value2: 60
+                }, {
+                species: 'rapid-strike-urshifu', // Tower of Waters
+                method: 'type-appeal',
+                value: 'water',
+                method2: 'level-up',
+                value2: 60
+                }],
+            },
+        'single-strike-urshifu': {
+            order: indexOrder++,
+            token: 'single-strike-urshifu',
+            name: 'Single Strike Urshifu',
+            formToken: 'single-strike',
+            class: 'legendary',
+            number: 892,
+            types: ['fighting', 'dark'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 100, phAttack: 130, phDefense: 100, spAttack: 63, spDefense: 60, speed: 97},
+            abilities: {0: 'unseen-fist'},
+            height: 1.9,
+            weight: 105.0,
+            colors: ['grey', 'black', 'white', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'kubfu',
+            },
+        'rapid-strike-urshifu': {
+            order: indexOrder++,
+            token: 'rapid-strike-urshifu',
+            name: 'Rapid Strike Urshifu',
+            formToken: 'rapid-strike',
+            class: 'legendary',
+            number: 892,
+            types: ['fighting', 'water'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 100, phAttack: 130, phDefense: 100, spAttack: 63, spDefense: 60, speed: 97},
+            abilities: {0: 'unseen-fist'},
+            height: 1.9,
+            weight: 105.0,
+            colors: ['grey', 'black', 'white', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'kubfu',
             },
 
 
@@ -2836,7 +2902,7 @@
             },
 
         'emax-eternatus': {
-            order: indexOrder++,
+            order: thisIndex.afterOrder('eternatus'),
             token: 'emax-eternatus',
             name: 'Eternamax Eternatus',
             class: 'legendary',
@@ -2856,6 +2922,53 @@
             eggCycles: 120,
             eggGroups: ['undiscovered'],
             prevEvolution: 'eternatus',
+            hasBigSprite: true
+            },
+
+        'gmax-single-strike-urshifu': {
+            order: thisIndex.afterOrder('single-strike-urshifu'),
+            token: 'gmax-single-strike-urshifu',
+            name: 'Gigantamax Single Strike Urshifu',
+            class: 'legendary',
+            class2: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax-single-strike',
+            baseSpecies: 'single-strike-urshifu',
+            number: 892,
+            types: ['fighting', 'dark'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 1000, phAttack: 130, phDefense: 100, spAttack: 63, spDefense: 60, speed: 97},
+            abilities: {0: 'unseen-fist'},
+            height: 29.0,
+            weight: -1,
+            colors: ['white', 'red', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'single-strike-urshifu',
+            hasBigSprite: true
+            },
+        'gmax-rapid-strike-urshifu': {
+            order: thisIndex.afterOrder('rapid-strike-urshifu'),
+            token: 'gmax-rapid-strike-urshifu',
+            name: 'Gigantamax Rapid Strike Urshifu',
+            class: 'legendary',
+            class2: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax-rapid-strike',
+            baseSpecies: 'rapid-strike-urshifu',
+            number: 892,
+            types: ['fighting', 'water'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 1000, phAttack: 130, phDefense: 100, spAttack: 63, spDefense: 60, speed: 97},
+            abilities: {0: 'unseen-fist'},
+            height: 26.0,
+            weight: -1,
+            colors: ['white', 'blue', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'rapid-strike-urshifu',
             hasBigSprite: true
             },
 
@@ -2910,6 +3023,9 @@
         {base: 'duraludon', species: 'gmax-duraludon', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         {base: 'eternatus', species: 'emax-eternatus', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 1},
+
+        {base: 'single-strike-urshifu', species: 'gmax-single-strike-urshifu', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 1},
+        {base: 'rapid-strike-urshifu', species: 'gmax-rapid-strike-urshifu', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 1},
 
         ]);
 
