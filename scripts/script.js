@@ -3092,14 +3092,18 @@
                         if (pokemonData.class === 'ultra-beast'){ pokeTraits.push('<i class="sp ultra"></i>'); }
                         else if (pokemonData.class === 'legendary'){ pokeTraits.push('<i class="sp legendary"></i>'); }
                         else if (pokemonData.class === 'mythical'){ pokeTraits.push('<i class="sp mythical"></i>'); }
-                        } else {
-                        if (pokemonData.isStarterPokemon === true){ pokeTraits.push('<i class="starter"></i>'); }
-                        if (pokemonData.gameGeneration !== pokemonData.baseGameGeneration
-                            &&  (pokemonData.formClasses.indexOf('regional-variant') !== -1
-                                || pokemonData.formClasses.indexOf('ancient-variant') !== -1
-                                || pokemonData.formClasses.indexOf('box-variant') !== -1)){
-                                if (pokemonData.formToken.match(/(^|-)?(alolan|proto|altered)(-|$)?/)){ pokeTraits.push('<i class="nonwild"></i>'); }
-                            }
+                        }
+                    if (pokemonData.isStarterPokemon === true){ pokeTraits.push('<i class="starter"></i>'); }
+                    if (pokemonData.gameGeneration !== pokemonData.baseGameGeneration
+                        &&  (pokemonData.formClasses.indexOf('regional-variant') !== -1
+                            || pokemonData.formClasses.indexOf('ancient-variant') !== -1
+                            || pokemonData.formClasses.indexOf('box-variant') !== -1)){
+                            if (pokemonData.formToken.match(/(^|-)?(alolan|galarian|proto|altered)(-|$)?/)){
+                                if (typeof pokemonData.allowAsVisitor === 'undefined'
+                                    || pokemonData.allowAsVisitor === false){
+                                    pokeTraits.push('<i class="nonwild"></i>');
+                                    }
+                                }
                         }
                     }
 
@@ -3415,17 +3419,19 @@
                         if (pokeIndex.class === 'ultra-beast'){ pokeTraits.push('<i class="sp ultra"></i>'); }
                         else if (pokeIndex.class === 'legendary'){ pokeTraits.push('<i class="sp legendary"></i>'); }
                         else if (pokeIndex.class === 'mythical'){ pokeTraits.push('<i class="sp mythical"></i>'); }
-                        } else {
-                        if (pokeIndex.isStarterPokemon === true){ pokeTraits.push('<i class="starter"></i>'); }
-                        if (pokeIndex.gameGeneration !== pokeIndex.baseGameGeneration
-                            &&  (pokeIndex.formClasses.indexOf('regional-variant') !== -1
-                                || pokeIndex.formClasses.indexOf('ancient-variant') !== -1
-                                || pokeIndex.formClasses.indexOf('box-variant') !== -1)){
-                                if (typeof pokeIndex.formToken !== 'undefined'
-                                    && pokeIndex.formToken.match(/(^|-)?(alolan|galarian|proto|altered)(-|$)?/)){
+                        }
+                    if (pokeIndex.isStarterPokemon === true){ pokeTraits.push('<i class="starter"></i>'); }
+                    if (pokeIndex.gameGeneration !== pokeIndex.baseGameGeneration
+                        &&  (pokeIndex.formClasses.indexOf('regional-variant') !== -1
+                            || pokeIndex.formClasses.indexOf('ancient-variant') !== -1
+                            || pokeIndex.formClasses.indexOf('box-variant') !== -1)){
+                            if (typeof pokeIndex.formToken !== 'undefined'
+                                && pokeIndex.formToken.match(/(^|-)?(alolan|galarian|proto|altered)(-|$)?/)){
+                                if (typeof pokeIndex.allowAsVisitor === 'undefined'
+                                    || pokeIndex.allowAsVisitor === false){
                                     pokeTraits.push('<i class="nonwild"></i>');
+                                    }
                                 }
-                            }
                         }
                     }
 
@@ -7717,22 +7723,31 @@
                     isSpecialPokemon = true;
                 }
 
+            // Define a flag to see if this pokemon is even allowed as a visitor
+            var allowAsVisitor = true;
+
             // Skip if this pokemon's class has been explicitly banned from appearing
-            if (isBasicPokemon && eventPokemonChanceBoosters['basic'] === 0){ continue; }
-            if (isSpecialPokemon && eventPokemonChanceBoosters['special'] === 0){ continue; }
-            if (eventPokemonChanceBoosters[pokeClass] === 0){ continue; }
-            if (eventPokemonChanceBoosters[pokeFormClass] === 0){ continue; }
+            if (isBasicPokemon && eventPokemonChanceBoosters['basic'] === 0){ allowAsVisitor = false; }
+            if (isSpecialPokemon && eventPokemonChanceBoosters['special'] === 0){ allowAsVisitor = false; }
+            if (eventPokemonChanceBoosters[pokeClass] === 0){ allowAsVisitor = false; }
+            if (eventPokemonChanceBoosters[pokeFormClass] === 0){ allowAsVisitor = false; }
 
             // Skip if this is a gift-only starter pokemon
-            if (pokeInfo.isStarterPokemon === true){ continue; }
+            if (pokeInfo.isStarterPokemon === true){ allowAsVisitor = false; }
 
             // Skip if the pokemon is a cross-gen regional / ancient / box variant
             if (pokeInfo.gameGeneration !== pokeInfo.baseGameGeneration
                 && (pokeFormClass === 'regional-variant'
                     || pokeFormClass === 'ancient-variant'
                     || pokeFormClass === 'box-variant')){
-                continue;
+                allowAsVisitor = false
                 }
+
+            // If species has necessary flag, overwrite calc allowAsVisitor value
+            if (typeof pokeInfo.allowAsVisitor !== 'undefined'){ allowAsVisitor = pokeInfo.allowAsVisitor; }
+
+            // If not allowed as a visitor, break from loop immediately
+            if (!allowAsVisitor){ continue; }
 
             // Count the times this species has appear ever and right now
             var numAddedAlready = 0;
