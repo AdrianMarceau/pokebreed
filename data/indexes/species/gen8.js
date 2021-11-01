@@ -2197,6 +2197,48 @@
             prevEvolution: 'kubfu',
             },
 
+        'zarude': {
+            order: indexOrder++,
+            token: 'zarude',
+            name: 'Zarude',
+            class: 'mythical',
+            number: 893,
+            types: ['dark', 'grass'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 105, phAttack: 120, phDefense: 105, spAttack: 70, spDefense: 95, speed: 105},
+            abilities: {0: 'leaf-guard'},
+            height: 1.8,
+            weight: 70.0,
+            colors: ['black', 'grey', 'green', 'white', 'red'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'dada-zarude',
+                method: 'class-exists',
+                value: 'baby'
+                }]
+            },
+        'dada-zarude': {
+            order: indexOrder++,
+            token: 'dada-zarude',
+            name: 'Dada Zarude',
+            class: 'mythical',
+            formClass: 'burst-evolution',
+            formToken: 'dada',
+            number: 893,
+            types: ['dark', 'grass'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 105, phAttack: 120, phDefense: 105, spAttack: 70, spDefense: 95, speed: 105},
+            abilities: {0: 'leaf-guard'},
+            height: 1.8,
+            weight: 70.0,
+            colors: ['black', 'grey', 'pink', 'green', 'white', 'red'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'zarude',
+            speciesEffects: ['babyLifeBoost']
+            },
+
 
         });
     thisIndex.indexOrder = indexOrder;
@@ -3116,7 +3158,7 @@
         // ---
 
         // Legendary trigger relationships
-        // ---
+        {base: 'zarude', species: 'celebi'},
 
         ]);
 
