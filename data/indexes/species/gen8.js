@@ -2305,6 +2305,78 @@
             eggGroups: ['undiscovered']
             },
 
+        'calyrex': {
+            order: indexOrder++,
+            token: 'calyrex',
+            name: 'Calyrex',
+            class: 'legendary',
+            number: 898,
+            types: ['psychic', 'grass'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 80, phDefense: 80, spAttack: 80, spDefense: 80, speed: 80},
+            abilities: {0: 'unnerve'},
+            height: 1.1,
+            weight: 7.7,
+            colors: ['green', 'blue', 'brown', 'white'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'ice-rider-calyrex',
+                method: 'burst-evolution',
+                value: 'reins-of-unity',
+                method2: 'fusion-species',
+                value2: 'glastrier',
+                switch: 'and'
+                }, {
+                species: 'shadow-rider-calyrex',
+                method: 'burst-evolution',
+                value: 'reins-of-unity',
+                method2: 'fusion-species',
+                value2: 'spectrier',
+                switch: 'and'
+                }]
+            },
+        'ice-rider-calyrex': {
+            order: indexOrder++,
+            token: 'ice-rider-calyrex',
+            name: 'Ice Rider Calyrex',
+            class: 'legendary',
+            baseSpecies: 'calyrex',
+            formClass: 'burst-evolution',
+            formToken: 'ice-rider',
+            number: 898,
+            types: ['psychic', 'ice'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 165, phDefense: 150, spAttack: 85, spDefense: 130, speed: 50},
+            abilities: {0: 'as-one'},
+            height: 2.4,
+            weight: 809.1,
+            colors: ['white', 'blue', 'green', 'brown'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'calyrex'
+            },
+        'shadow-rider-calyrex': {
+            order: indexOrder++,
+            token: 'shadow-rider-calyrex',
+            name: 'White Calyrex',
+            class: 'legendary',
+            baseSpecies: 'calyrex',
+            formClass: 'burst-evolution',
+            formToken: 'shadow-rider',
+            number: 898,
+            types: ['psychic', 'ghost'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 85, phDefense: 80, spAttack: 165, spDefense: 100, speed: 150},
+            abilities: {0: 'as-one'},
+            height: 2.4,
+            weight: 53.6,
+            colors: ['black', 'purple', 'green', 'brown', 'white'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'calyrex'
+            },
+
 
         });
     thisIndex.indexOrder = indexOrder;
