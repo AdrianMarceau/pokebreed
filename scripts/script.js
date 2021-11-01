@@ -5192,6 +5192,8 @@
                 if (pokeAbilities.indexOf('steelworker') !== -1){ subTypes.push('steel'); }
                 if (pokeAbilities.indexOf('hunger-switch') !== -1){ subTypes.push(pokeInfo.formToken === 'fullbelly' ? 'electric' : 'dark'); }
                 if (pokeAbilities.indexOf('aquatic') !== -1){ subTypes.push('water'); }
+                if (pokeAbilities.indexOf('transistor') !== -1){ subTypes.push('electric'); }
+                if (pokeAbilities.indexOf('dragons-maw') !== -1){ subTypes.push('dragon'); }
                 for (var key2 = 0; key2 < subTypes.length; key2++){
                     var typeToken = subTypes[key2];
                     var typeInfo = PokemonTypesIndex[typeToken];
