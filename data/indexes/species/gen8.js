@@ -107,6 +107,77 @@
             prevEvolution: 'galarian-ponyta'
             },
 
+        'galarian-slowpoke': {
+            order: thisIndex.afterOrder('slowbro', 3),
+            token: 'galarian-slowpoke',
+            name: 'Galarian Slowpoke',
+            formClass: 'regional-variant',
+            formToken: 'galarian',
+            baseSpecies: 'slowpoke',
+            number: 79,
+            types: ['psychic'],
+            baseStats: {hp: 90, phAttack: 65, phDefense: 65, spAttack: 40, spDefense: 40, speed: 15},
+            abilities: {0: 'gluttony', 1: 'own-tempo', hidden: 'regenerator'},
+            height: 1.2,
+            weight: 36,
+            colors: ['pink', 'yellow', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'water-1'],
+            nextEvolutions: [{
+                species: 'galarian-slowbro',
+                method: 'level-up',
+                value: 37
+                },{
+                species: 'galarian-slowking',
+                method: 'royal-ascension',
+                value: 20,
+                method2: 'level-up',
+                value2: 37,
+                switch: 'and'
+                }],
+            altBaseEvolutions: [{
+                species: 'slowpoke',
+                method: 'type-surge',
+                value: 'water'
+                }]
+            },
+        'galarian-slowbro': {
+            order: thisIndex.afterOrder('slowbro', 4),
+            token: 'galarian-slowbro',
+            name: 'Galarian Slowbro',
+            formClass: 'regional-variant',
+            formToken: 'galarian',
+            baseSpecies: 'slowbro',
+            number: 80,
+            types: ['poison', 'psychic'],
+            baseStats: {hp: 95, phAttack: 100, phDefense: 95, spAttack: 100, spDefense: 70, speed: 30},
+            abilities: {0: 'quick-draw', 1: 'own-tempo', hidden: 'regenerator'},
+            height: 1.6,
+            weight: 78.5,
+            colors: ['pink', 'purple', 'gray', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'water-1'],
+            prevEvolution: 'galarian-slowpoke'
+            },
+        'galarian-slowking': {
+            order: thisIndex.afterOrder('slowbro', 5),
+            token: 'galarian-slowking',
+            name: 'Galarian Slowking',
+            formClass: 'regional-variant',
+            formToken: 'galarian',
+            baseSpecies: 'slowking',
+            number: 199,
+            types: ['poison', 'psychic'],
+            baseStats: {hp: 95, phAttack: 65, phDefense: 80, spAttack: 110, spDefense: 110, speed: 30},
+            abilities: {0: 'curious-medicine', 1: 'own-tempo', hidden: 'regenerator'},
+            height: 2,
+            weight: 79.5,
+            colors: ['pink', 'purple', 'gray', 'black', 'brown', 'green'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'water-1'],
+            prevEvolution: 'galarian-slowpoke'
+            },
+
         'galarian-farfetchd': {
             order: thisIndex.afterOrder('farfetchd', 1),
             token: 'galarian-farfetchd',
@@ -3227,6 +3298,9 @@
 
         {base: 'ponyta', species: 'galarian-ponyta', method: 'type-warning', value: 'fire', method2: 'type-appeal', value2: 'psychic'},
         {base: 'ponyta', species: 'galarian-ponyta', method: 'type-warning', value: 'fire', method2: 'type-surge', value2: 'poison'},
+
+        {base: 'slowpoke', species: 'galarian-slowpoke', method: 'type-crisis', value: 'water', method2: 'type-appeal', value2: 'poison'},
+        {base: 'slowpoke', species: 'galarian-slowpoke', method: 'type-warning', value: 'water', method2: 'type-surge', value2: 'poison'},
 
         {base: 'farfetchd', species: 'galarian-farfetchd', method: 'type-warning', value: 'normal', method2: 'type-appeal', value2: 'fighting'},
         {base: 'farfetchd', species: 'galarian-farfetchd', method: 'type-warning', value: 'normal', method2: 'type-surge', value2: 'grass'},
