@@ -2272,6 +2272,39 @@
             eggGroups: ['undiscovered']
             },
 
+        'glastrier': {
+            order: indexOrder++,
+            token: 'glastrier',
+            name: 'Glastrier',
+            class: 'legendary',
+            number: 896,
+            types: ['ice'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 145, phDefense: 130, spAttack: 65, spDefense: 110, speed: 30},
+            abilities: {0: 'chilling-neigh'},
+            height: 2.2,
+            weight: 800.0,
+            colors: ['white', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+        'spectrier': {
+            order: indexOrder++,
+            token: 'spectrier',
+            name: 'Spectrier',
+            class: 'legendary',
+            number: 897,
+            types: ['ghost'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 65, phDefense: 60, spAttack: 145, spDefense: 80, speed: 130},
+            abilities: {0: 'grim-neigh'},
+            height: 2.0,
+            weight: 45.5,
+            colors: ['black', 'purple'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
 
         });
     thisIndex.indexOrder = indexOrder;
