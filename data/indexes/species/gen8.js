@@ -2141,6 +2141,29 @@
 
         // Gigantamax Forms
 
+        'gmax-venusaur': {
+            order: thisIndex.afterOrder('mega-venusaur'),
+            token: 'gmax-venusaur',
+            name: 'Gigantamax Venusaur',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'venusaur',
+            isStarterPokemon: true,
+            number: 3,
+            types: ['grass', 'poison'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 800, phAttack: 82, phDefense: 83, spAttack: 100, spDefense: 100, speed: 80},
+            abilities: {0: 'overgrow', hidden: 'chlorophyll'},
+            height: 24,
+            weight: -1,
+            colors: ['pink', 'yellow', 'blue', 'green', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'grass'],
+            prevEvolution: 'venusaur',
+            hasBigSprite: true
+            },
         'gmax-charizard': {
             order: thisIndex.afterOrder('mega-charizard-x'),
             token: 'gmax-charizard',
@@ -2760,6 +2783,7 @@
 
         // Gigantamax Forms
 
+        {base: 'venusaur', species: 'gmax-venusaur', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'charizard', species: 'gmax-charizard', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'butterfree', species: 'gmax-butterfree', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'pikachu', species: 'gmax-pikachu', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
