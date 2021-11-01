@@ -3,8 +3,8 @@
 // Define the global cache time and version number
 //$last_updated = '2020-05-22';
 //$version_number = '1.1.0'; // Gen 1-8 complete
-$last_updated = '2021-11-01';
-$version_number = '1.2.0'; // + Gen 8 DLC
+$last_updated = '2021-11-02';
+$version_number = '1.2.31'; // + Gen 8 DLC
 
 // Set the access control headers to allow others to use it
 header("Access-Control-Allow-Origin: *");
