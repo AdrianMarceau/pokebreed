@@ -33,6 +33,7 @@
     var PokeboxRewards = [];
     var PokeboxLastStarterSeed = false;
 
+    var totalBabyPokemon = 0;
     var totalSpecialPokemon = 0;
     var totalLegendaryPokemon = 0;
     var totalMythicalPokemon = 0;
@@ -1693,6 +1694,14 @@
                     for (var i = 0; i < indexInfo.speciesEffects.length; i++){ globalSpeciesEffects[indexInfo.token].push(indexInfo.speciesEffects[i]); }
                     }
 
+                // Check to see if this is a baby pokemon
+                indexInfo.isBabyPokemon = typeof indexInfo.isBabyPokemon !== 'undefined' && indexInfo.isBabyPokemon === true ? true : false;
+                if (indexInfo.class === 'baby'
+                    || indexInfo.class2 === 'baby'
+                    || indexInfo.class3 === 'baby'){
+                    indexInfo.isBabyPokemon = true;
+                    }
+
                 // Check to see if this is a special and / or hidden pokemon
                 indexInfo.isSpecialPokemon = typeof indexInfo.isSpecialPokemon !== 'undefined' && indexInfo.isSpecialPokemon === true ? true : false;
                 if (indexInfo.class === 'legendary'
@@ -1709,6 +1718,7 @@
                     if (indexInfo.class === 'legendary'){ totalLegendaryPokemon++; }
                     else if (indexInfo.class === 'mythical'){ totalMythicalPokemon++; }
                     else if (indexInfo.class === 'ultra-beast'){ totalUltraBeasts++; }
+                    if (indexInfo.isBabyPokemon){ totalBabyPokemon++; }
                     if (indexInfo.isSpecialPokemon){ totalSpecialPokemon++; }
 
                     // If this pokemon is in a sub-special class, incremeent appropriate counters
@@ -3082,14 +3092,18 @@
                         if (pokemonData.class === 'ultra-beast'){ pokeTraits.push('<i class="sp ultra"></i>'); }
                         else if (pokemonData.class === 'legendary'){ pokeTraits.push('<i class="sp legendary"></i>'); }
                         else if (pokemonData.class === 'mythical'){ pokeTraits.push('<i class="sp mythical"></i>'); }
-                        } else {
-                        if (pokemonData.isStarterPokemon === true){ pokeTraits.push('<i class="starter"></i>'); }
-                        if (pokemonData.gameGeneration !== pokemonData.baseGameGeneration
-                            &&  (pokemonData.formClasses.indexOf('regional-variant') !== -1
-                                || pokemonData.formClasses.indexOf('ancient-variant') !== -1
-                                || pokemonData.formClasses.indexOf('box-variant') !== -1)){
-                                if (pokemonData.formToken.match(/(^|-)?(alolan|proto|altered)(-|$)?/)){ pokeTraits.push('<i class="nonwild"></i>'); }
-                            }
+                        }
+                    if (pokemonData.isStarterPokemon === true){ pokeTraits.push('<i class="starter"></i>'); }
+                    if (pokemonData.gameGeneration !== pokemonData.baseGameGeneration
+                        &&  (pokemonData.formClasses.indexOf('regional-variant') !== -1
+                            || pokemonData.formClasses.indexOf('ancient-variant') !== -1
+                            || pokemonData.formClasses.indexOf('box-variant') !== -1)){
+                            if (pokemonData.formToken.match(/(^|-)?(alolan|galarian|proto|altered)(-|$)?/)){
+                                if (typeof pokemonData.allowAsVisitor === 'undefined'
+                                    || pokemonData.allowAsVisitor === false){
+                                    pokeTraits.push('<i class="nonwild"></i>');
+                                    }
+                                }
                         }
                     }
 
@@ -3405,17 +3419,19 @@
                         if (pokeIndex.class === 'ultra-beast'){ pokeTraits.push('<i class="sp ultra"></i>'); }
                         else if (pokeIndex.class === 'legendary'){ pokeTraits.push('<i class="sp legendary"></i>'); }
                         else if (pokeIndex.class === 'mythical'){ pokeTraits.push('<i class="sp mythical"></i>'); }
-                        } else {
-                        if (pokeIndex.isStarterPokemon === true){ pokeTraits.push('<i class="starter"></i>'); }
-                        if (pokeIndex.gameGeneration !== pokeIndex.baseGameGeneration
-                            &&  (pokeIndex.formClasses.indexOf('regional-variant') !== -1
-                                || pokeIndex.formClasses.indexOf('ancient-variant') !== -1
-                                || pokeIndex.formClasses.indexOf('box-variant') !== -1)){
-                                if (typeof pokeIndex.formToken !== 'undefined'
-                                    && pokeIndex.formToken.match(/(^|-)?(alolan|galarian|proto|altered)(-|$)?/)){
+                        }
+                    if (pokeIndex.isStarterPokemon === true){ pokeTraits.push('<i class="starter"></i>'); }
+                    if (pokeIndex.gameGeneration !== pokeIndex.baseGameGeneration
+                        &&  (pokeIndex.formClasses.indexOf('regional-variant') !== -1
+                            || pokeIndex.formClasses.indexOf('ancient-variant') !== -1
+                            || pokeIndex.formClasses.indexOf('box-variant') !== -1)){
+                            if (typeof pokeIndex.formToken !== 'undefined'
+                                && pokeIndex.formToken.match(/(^|-)?(alolan|galarian|proto|altered)(-|$)?/)){
+                                if (typeof pokeIndex.allowAsVisitor === 'undefined'
+                                    || pokeIndex.allowAsVisitor === false){
                                     pokeTraits.push('<i class="nonwild"></i>');
+                                    }
                                 }
-                            }
                         }
                     }
 
@@ -5182,6 +5198,8 @@
                 if (pokeAbilities.indexOf('steelworker') !== -1){ subTypes.push('steel'); }
                 if (pokeAbilities.indexOf('hunger-switch') !== -1){ subTypes.push(pokeInfo.formToken === 'fullbelly' ? 'electric' : 'dark'); }
                 if (pokeAbilities.indexOf('aquatic') !== -1){ subTypes.push('water'); }
+                if (pokeAbilities.indexOf('transistor') !== -1){ subTypes.push('electric'); }
+                if (pokeAbilities.indexOf('dragons-maw') !== -1){ subTypes.push('dragon'); }
                 for (var key2 = 0; key2 < subTypes.length; key2++){
                     var typeToken = subTypes[key2];
                     var typeInfo = PokemonTypesIndex[typeToken];
@@ -5906,6 +5924,13 @@
                 var pokemonLifePoints = indexInfo.lifePoints;
                 if (typeof pokemonInfo.lifePoints !== 'undefined'){ pokemonLifePoints = pokemonInfo.lifePoints; }
 
+                // SPECIAL BOX EFFECT : Increase lifepoints of select class if flag is active
+                if (thisZoneData.currentEffects['babyLifeBoost'] === true
+                    && typeof indexInfo.isBabyPokemon !== 'undefined'
+                    && indexInfo.isBabyPokemon === true){
+                    pokemonLifePoints *= 2; // double life points for baby
+                    }
+
                 // If pokemon is still an egg, skip growth cycles for now
                 if (pokemonInfo.eggCycles > 0){ continue; }
 
@@ -6291,6 +6316,24 @@
                                 var appealColour = appealColours[i];
                                 if (currentColourStats[appealColour] >= 0){
                                     returnValue += 1 + (currentColourStats[appealColour] * appealLevel);
+                                    }
+                                }
+                            if (returnValue > 0){ return returnValue; }
+                            }
+
+                        // Class-appeal evolutions trigger when the relevant class has a high number of pokemon represented
+                        if (methodToken === 'class-exists'
+                            || methodToken === 'class-appeal'
+                            || methodToken === 'class-surge'){
+                            var appealLevel = methodToken === 'class-surge' ? 2 : 1;
+                            var appealTypes = typeof methodValue === 'string' ? [methodValue] : methodValue;
+                            var returnValue = 0;
+                            for (var i = 0; i < appealTypes.length; i++){
+                                var appealType = appealTypes[i];
+                                if (methodToken === 'class-exists' && currentClassStats[appealType] >= 0){
+                                    returnValue += 1 + (currentClassStats[appealType] * appealLevel);
+                                    } else if (currentClassStats[appealType] >= (appealLevel * 20)){
+                                    returnValue += 1 + ((currentClassStats[appealType] * 5) * appealLevel);
                                     }
                                 }
                             if (returnValue > 0){ return returnValue; }
@@ -7680,22 +7723,31 @@
                     isSpecialPokemon = true;
                 }
 
+            // Define a flag to see if this pokemon is even allowed as a visitor
+            var allowAsVisitor = true;
+
             // Skip if this pokemon's class has been explicitly banned from appearing
-            if (isBasicPokemon && eventPokemonChanceBoosters['basic'] === 0){ continue; }
-            if (isSpecialPokemon && eventPokemonChanceBoosters['special'] === 0){ continue; }
-            if (eventPokemonChanceBoosters[pokeClass] === 0){ continue; }
-            if (eventPokemonChanceBoosters[pokeFormClass] === 0){ continue; }
+            if (isBasicPokemon && eventPokemonChanceBoosters['basic'] === 0){ allowAsVisitor = false; }
+            if (isSpecialPokemon && eventPokemonChanceBoosters['special'] === 0){ allowAsVisitor = false; }
+            if (eventPokemonChanceBoosters[pokeClass] === 0){ allowAsVisitor = false; }
+            if (eventPokemonChanceBoosters[pokeFormClass] === 0){ allowAsVisitor = false; }
 
             // Skip if this is a gift-only starter pokemon
-            if (pokeInfo.isStarterPokemon === true){ continue; }
+            if (pokeInfo.isStarterPokemon === true){ allowAsVisitor = false; }
 
             // Skip if the pokemon is a cross-gen regional / ancient / box variant
             if (pokeInfo.gameGeneration !== pokeInfo.baseGameGeneration
                 && (pokeFormClass === 'regional-variant'
                     || pokeFormClass === 'ancient-variant'
                     || pokeFormClass === 'box-variant')){
-                continue;
+                allowAsVisitor = false
                 }
+
+            // If species has necessary flag, overwrite calc allowAsVisitor value
+            if (typeof pokeInfo.allowAsVisitor !== 'undefined'){ allowAsVisitor = pokeInfo.allowAsVisitor; }
+
+            // If not allowed as a visitor, break from loop immediately
+            if (!allowAsVisitor){ continue; }
 
             // Count the times this species has appear ever and right now
             var numAddedAlready = 0;
@@ -7988,8 +8040,9 @@
                             allowBaseEvolution = true;
                             baseEvolutionChance += (baseEvolutionMethod === 'type-appeal' ? 2 : 3) + zoneStats['types'][baseEvolutionValue];
 
-                            // Calculate TYPE WARNING & CRISIS effects on base evolution
-                            } else if ((baseEvolutionMethod === 'type-warning'
+                            }
+                        // Calculate TYPE WARNING & CRISIS effects on base evolution
+                        else if ((baseEvolutionMethod === 'type-warning'
                             && zoneStats['types'][baseEvolutionValue] <= -5)
                             || baseEvolutionMethod === 'type-crisis'
                             && zoneStats['types'][baseEvolutionValue] <= -10){
@@ -7997,8 +8050,9 @@
                             allowBaseEvolution = true;
                             baseEvolutionChance += (baseEvolutionMethod === 'type-warning' ? 2 : 3) + ((zoneStats['types'][baseEvolutionValue] * -1)  * 2);
 
-                            // Calculate TYPE VALUE effects on base evolution
-                            } else if (baseEvolutionMethod === 'type-value'){
+                            }
+                        // Calculate TYPE VALUE effects on base evolution
+                        else if (baseEvolutionMethod === 'type-value'){
 
                             allowBaseEvolution = true;
                             baseEvolutionChance += zoneStats['types'][baseEvolutionValue];
@@ -8012,8 +8066,9 @@
 
                              //console.log(pokeToken+' to '+baseEvolutionSpecies+' w/ type-vs-type', baseEvolutionValue, (zoneStats['types'][baseEvolutionValue[0]] +' > '+ zoneStats['types'][baseEvolutionValue[1]]), 'allowBaseEvolution!, baseEvolutionChance =', baseEvolutionChance);
 
-                            // Calculate ULTRA ENERGY effects on base evolution
-                            } else if (baseEvolutionMethod === 'ultra-energy'
+                            }
+                        // Calculate ULTRA ENERGY effects on base evolution
+                        else if (baseEvolutionMethod === 'ultra-energy'
                             && ((baseEvolutionValue === 'high' && currentUltraEnergy >= 6)
                                 || (baseEvolutionValue === 'low' && currentUltraEnergy < 3)
                                 || (baseEvolutionValue === 'none' && currentUltraEnergy === 0))){
@@ -8021,21 +8076,24 @@
                             allowBaseEvolution = true;
                             baseEvolutionChance += (currentUltraEnergy * totalUltraEnergy);
 
-                            // Calculate CHANCE effects on base evolution
-                            } else if (baseEvolutionMethod === 'chance'
+                            }
+                        // Calculate CHANCE effects on base evolution
+                        else if (baseEvolutionMethod === 'chance'
                             && (Math.seededRandomChance() < baseEvolutionValue)){
 
                             allowBaseEvolution = true;
                             baseEvolutionChance += 2 + zoneStats['types'][indexInfo.types[0]];
 
-                            // Process ALWAYS conditions on base evolution
-                            } else if (baseEvolutionMethod === 'always'){
+                            }
+                        // Process ALWAYS conditions on base evolution
+                        else if (baseEvolutionMethod === 'always'){
 
                             allowBaseEvolution = true;
                             baseEvolutionChance += 100 + i;
 
-                            // Otherwise prevent this base evolution if no other conditions met
-                            } else {
+                            }
+                        // Otherwise prevent this base evolution if no other conditions met
+                        else {
 
                             allowBaseEvolution = false;
                             baseEvolutionChance = 0;
@@ -9081,6 +9139,7 @@
         getMissingDexNumbers: function(){ return JSON.parse(JSON.stringify(missingDexNumbers)); },
         getPokedexTotals: function(){ return JSON.parse(JSON.stringify(currentPokedexTotals)); },
         getPokemonTotals: function(){ return {
+            babyPokemon: totalBabyPokemon,
             specialPokemon: totalSpecialPokemon,
             legendaryPokemon: totalLegendaryPokemon,
             mythicalPokemon: totalMythicalPokemon,

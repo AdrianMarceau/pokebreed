@@ -1516,7 +1516,7 @@
             abilities: {0: 'oblivious', 1: 'own-tempo', hidden: 'regenerator'},
             height: 1.2,
             weight: 36,
-            colors: ['pink', 'yellow'],
+            colors: ['pink', 'brown'],
             eggCycles: 20,
             eggGroups: ['monster', 'water-1'],
             nextEvolutions: [{
@@ -1535,7 +1535,7 @@
             abilities: {0: 'oblivious', 1: 'own-tempo', hidden: 'regenerator'},
             height: 1.6,
             weight: 78.5,
-            colors: ['pink', 'yellow', 'gray'],
+            colors: ['pink', 'brown', 'gray'],
             eggCycles: 20,
             eggGroups: ['monster', 'water-1'],
             prevEvolution: 'slowpoke'
@@ -2428,7 +2428,7 @@
             number: 132,
             types: ['normal'],
             genderRatio: {none: 1.000},
-            lifePoints: 360,
+            lifePoints: 365,
             baseStats: {hp: 48, phAttack: 48, phDefense: 48, spAttack: 48, spDefense: 48, speed: 48},
             abilities: {0: 'limber', hidden: 'imposter'},
             height: 0.3,

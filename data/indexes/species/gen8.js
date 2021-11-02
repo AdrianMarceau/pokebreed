@@ -107,6 +107,77 @@
             prevEvolution: 'galarian-ponyta'
             },
 
+        'galarian-slowpoke': {
+            order: thisIndex.afterOrder('slowbro', 3),
+            token: 'galarian-slowpoke',
+            name: 'Galarian Slowpoke',
+            formClass: 'regional-variant',
+            formToken: 'galarian',
+            baseSpecies: 'slowpoke',
+            number: 79,
+            types: ['psychic'],
+            baseStats: {hp: 90, phAttack: 65, phDefense: 65, spAttack: 40, spDefense: 40, speed: 15},
+            abilities: {0: 'gluttony', 1: 'own-tempo', hidden: 'regenerator'},
+            height: 1.2,
+            weight: 36,
+            colors: ['pink', 'yellow', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'water-1'],
+            nextEvolutions: [{
+                species: 'galarian-slowbro',
+                method: 'level-up',
+                value: 37
+                },{
+                species: 'galarian-slowking',
+                method: 'royal-ascension',
+                value: 20,
+                method2: 'level-up',
+                value2: 37,
+                switch: 'and'
+                }],
+            altBaseEvolutions: [{
+                species: 'slowpoke',
+                method: 'type-surge',
+                value: 'water'
+                }]
+            },
+        'galarian-slowbro': {
+            order: thisIndex.afterOrder('slowbro', 4),
+            token: 'galarian-slowbro',
+            name: 'Galarian Slowbro',
+            formClass: 'regional-variant',
+            formToken: 'galarian',
+            baseSpecies: 'slowbro',
+            number: 80,
+            types: ['poison', 'psychic'],
+            baseStats: {hp: 95, phAttack: 100, phDefense: 95, spAttack: 100, spDefense: 70, speed: 30},
+            abilities: {0: 'quick-draw', 1: 'own-tempo', hidden: 'regenerator'},
+            height: 1.6,
+            weight: 78.5,
+            colors: ['pink', 'purple', 'gray', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'water-1'],
+            prevEvolution: 'galarian-slowpoke'
+            },
+        'galarian-slowking': {
+            order: thisIndex.afterOrder('slowbro', 5),
+            token: 'galarian-slowking',
+            name: 'Galarian Slowking',
+            formClass: 'regional-variant',
+            formToken: 'galarian',
+            baseSpecies: 'slowking',
+            number: 199,
+            types: ['poison', 'psychic'],
+            baseStats: {hp: 95, phAttack: 65, phDefense: 80, spAttack: 110, spDefense: 110, speed: 30},
+            abilities: {0: 'curious-medicine', 1: 'own-tempo', hidden: 'regenerator'},
+            height: 2,
+            weight: 79.5,
+            colors: ['pink', 'purple', 'gray', 'black', 'brown', 'green'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'water-1'],
+            prevEvolution: 'galarian-slowpoke'
+            },
+
         'galarian-farfetchd': {
             order: thisIndex.afterOrder('farfetchd', 1),
             token: 'galarian-farfetchd',
@@ -189,6 +260,70 @@
                 method: 'level-up',
                 value: 42
                 }],
+            },
+
+        'galarian-articuno': {
+            order: thisIndex.afterOrder('articuno', 1),
+            token: 'galarian-articuno',
+            name: 'Galarian Articuno',
+            class: 'legendary',
+            formClass: 'regional-variant',
+            formToken: 'galarian',
+            baseSpecies: 'articuno',
+            baseGameGeneration: 1,
+            number: 144,
+            types: ['psychic', 'flying'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 90, phAttack: 85, phDefense: 85, spAttack: 125, spDefense: 100, speed: 95},
+            abilities: {0: 'competitive'},
+            height: 1.7,
+            weight: 50.9,
+            colors: ['purple', 'white', 'blue'],
+            eggCycles: 80,
+            eggGroups: ['undiscovered'],
+            allowAsVisitor: true
+            },
+        'galarian-zapdos': {
+            order: thisIndex.afterOrder('zapdos', 1),
+            token: 'galarian-zapdos',
+            name: 'Galarian Zapdos',
+            class: 'legendary',
+            formClass: 'regional-variant',
+            formToken: 'galarian',
+            baseSpecies: 'zapdos',
+            baseGameGeneration: 1,
+            number: 145,
+            types: ['fighting', 'flying'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 90, phAttack: 125, phDefense: 90, spAttack: 85, spDefense: 90, speed: 100},
+            abilities: {0: 'defiant'},
+            height: 1.6,
+            weight: 58.2,
+            colors: ['orange', 'black', 'yellow'],
+            eggCycles: 80,
+            eggGroups: ['undiscovered'],
+            allowAsVisitor: true
+            },
+        'galarian-moltres': {
+            order: thisIndex.afterOrder('moltres', 1),
+            token: 'galarian-moltres',
+            name: 'Galarian Moltres',
+            class: 'legendary',
+            formClass: 'regional-variant',
+            formToken: 'galarian',
+            baseSpecies: 'moltres',
+            baseGameGeneration: 1,
+            number: 146,
+            types: ['dark', 'flying'],
+            genderRatio: {none: 1.000},
+            baseStats: {hp: 90, phAttack: 85, phDefense: 90, spAttack: 100, spDefense: 125, speed: 90},
+            abilities: {0: 'berserk'},
+            height: 2.0,
+            weight: 66.0,
+            colors: ['red', 'pink', 'black'],
+            eggCycles: 80,
+            eggGroups: ['undiscovered'],
+            allowAsVisitor: true
             },
 
         'galarian-corsola': {
@@ -2030,7 +2165,7 @@
             prevEvolution: 'drakloak'
             },
 
-        zacian: {
+        'zacian': {
             order: indexOrder++,
             token: 'zacian',
             name: 'Zacian',
@@ -2072,7 +2207,7 @@
             prevEvolution: 'zacian'
             },
 
-        zamazenta: {
+        'zamazenta': {
             order: indexOrder++,
             token: 'zamazenta',
             name: 'Zamazenta',
@@ -2131,6 +2266,252 @@
             eggGroups: ['undiscovered']
             },
 
+        'kubfu': {
+            order: indexOrder++,
+            token: 'kubfu',
+            name: 'Kubfu',
+            class: 'legendary',
+            number: 891,
+            types: ['fighting'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 60, phAttack: 90, phDefense: 60, spAttack: 53, spDefense: 50, speed: 72},
+            abilities: {0: 'inner-focus'},
+            height: 0.6,
+            weight: 12.0,
+            colors: ['brown', 'white', 'black'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'single-strike-urshifu', // Tower of Darkness
+                method: 'type-appeal',
+                value: 'dark',
+                method2: 'level-up',
+                value2: 60
+                }, {
+                species: 'rapid-strike-urshifu', // Tower of Waters
+                method: 'type-appeal',
+                value: 'water',
+                method2: 'level-up',
+                value2: 60
+                }],
+            },
+        'single-strike-urshifu': {
+            order: indexOrder++,
+            token: 'single-strike-urshifu',
+            name: 'Single Strike Urshifu',
+            formToken: 'single-strike',
+            class: 'legendary',
+            number: 892,
+            types: ['fighting', 'dark'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 100, phAttack: 130, phDefense: 100, spAttack: 63, spDefense: 60, speed: 97},
+            abilities: {0: 'unseen-fist'},
+            height: 1.9,
+            weight: 105.0,
+            colors: ['grey', 'black', 'white', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'kubfu',
+            },
+        'rapid-strike-urshifu': {
+            order: indexOrder++,
+            token: 'rapid-strike-urshifu',
+            name: 'Rapid Strike Urshifu',
+            formToken: 'rapid-strike',
+            class: 'legendary',
+            number: 892,
+            types: ['fighting', 'water'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 100, phAttack: 130, phDefense: 100, spAttack: 63, spDefense: 60, speed: 97},
+            abilities: {0: 'unseen-fist'},
+            height: 1.9,
+            weight: 105.0,
+            colors: ['grey', 'black', 'white', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'kubfu',
+            },
+
+        'zarude': {
+            order: indexOrder++,
+            token: 'zarude',
+            name: 'Zarude',
+            class: 'mythical',
+            number: 893,
+            types: ['dark', 'grass'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 105, phAttack: 120, phDefense: 105, spAttack: 70, spDefense: 95, speed: 105},
+            abilities: {0: 'leaf-guard'},
+            height: 1.8,
+            weight: 70.0,
+            colors: ['black', 'grey', 'green', 'white', 'red'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'dada-zarude',
+                method: 'class-exists',
+                value: 'baby'
+                }]
+            },
+        'dada-zarude': {
+            order: indexOrder++,
+            token: 'dada-zarude',
+            name: 'Dada Zarude',
+            class: 'mythical',
+            formClass: 'burst-evolution',
+            formToken: 'dada',
+            number: 893,
+            types: ['dark', 'grass'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 105, phAttack: 120, phDefense: 105, spAttack: 70, spDefense: 95, speed: 105},
+            abilities: {0: 'leaf-guard'},
+            height: 1.8,
+            weight: 70.0,
+            colors: ['black', 'grey', 'pink', 'green', 'white', 'red'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'zarude',
+            speciesEffects: ['babyLifeBoost']
+            },
+
+        'regieleki': {
+            order: indexOrder++,
+            token: 'regieleki',
+            name: 'Regieleki',
+            class: 'legendary',
+            number: 894,
+            types: ['electric'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 80, phAttack: 100, phDefense: 50, spAttack: 100, spDefense: 50, speed: 200},
+            abilities: {0: 'transistor'},
+            height: 1.2,
+            weight: 145.0,
+            colors: ['yellow', 'blue', 'pink'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+        'regidrago': {
+            order: indexOrder++,
+            token: 'regidrago',
+            name: 'Regidrago',
+            class: 'legendary',
+            number: 895,
+            types: ['dragon'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 200, phAttack: 100, phDefense: 50, spAttack: 100, spDefense: 50, speed: 80},
+            abilities: {0: 'dragons-maw'},
+            height: 2.1,
+            weight: 200.0,
+            colors: ['black', 'red', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
+        'glastrier': {
+            order: indexOrder++,
+            token: 'glastrier',
+            name: 'Glastrier',
+            class: 'legendary',
+            number: 896,
+            types: ['ice'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 145, phDefense: 130, spAttack: 65, spDefense: 110, speed: 30},
+            abilities: {0: 'chilling-neigh'},
+            height: 2.2,
+            weight: 800.0,
+            colors: ['white', 'blue'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+        'spectrier': {
+            order: indexOrder++,
+            token: 'spectrier',
+            name: 'Spectrier',
+            class: 'legendary',
+            number: 897,
+            types: ['ghost'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 65, phDefense: 60, spAttack: 145, spDefense: 80, speed: 130},
+            abilities: {0: 'grim-neigh'},
+            height: 2.0,
+            weight: 45.5,
+            colors: ['black', 'purple'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered']
+            },
+
+        'calyrex': {
+            order: indexOrder++,
+            token: 'calyrex',
+            name: 'Calyrex',
+            class: 'legendary',
+            number: 898,
+            types: ['psychic', 'grass'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 80, phDefense: 80, spAttack: 80, spDefense: 80, speed: 80},
+            abilities: {0: 'unnerve'},
+            height: 1.1,
+            weight: 7.7,
+            colors: ['green', 'blue', 'brown', 'white'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            nextEvolutions: [{
+                species: 'ice-rider-calyrex',
+                method: 'burst-evolution',
+                value: 'reins-of-unity',
+                method2: 'fusion-species',
+                value2: 'glastrier',
+                switch: 'and'
+                }, {
+                species: 'shadow-rider-calyrex',
+                method: 'burst-evolution',
+                value: 'reins-of-unity',
+                method2: 'fusion-species',
+                value2: 'spectrier',
+                switch: 'and'
+                }]
+            },
+        'ice-rider-calyrex': {
+            order: indexOrder++,
+            token: 'ice-rider-calyrex',
+            name: 'Ice Rider Calyrex',
+            class: 'legendary',
+            baseSpecies: 'calyrex',
+            formClass: 'burst-evolution',
+            formToken: 'ice-rider',
+            number: 898,
+            types: ['psychic', 'ice'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 165, phDefense: 150, spAttack: 85, spDefense: 130, speed: 50},
+            abilities: {0: 'as-one'},
+            height: 2.4,
+            weight: 809.1,
+            colors: ['white', 'blue', 'green', 'brown'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'calyrex'
+            },
+        'shadow-rider-calyrex': {
+            order: indexOrder++,
+            token: 'shadow-rider-calyrex',
+            name: 'White Calyrex',
+            class: 'legendary',
+            baseSpecies: 'calyrex',
+            formClass: 'burst-evolution',
+            formToken: 'shadow-rider',
+            number: 898,
+            types: ['psychic', 'ghost'],
+            genderRatio: {none: 1.0000},
+            baseStats: {hp: 100, phAttack: 85, phDefense: 80, spAttack: 165, spDefense: 100, speed: 150},
+            abilities: {0: 'as-one'},
+            height: 2.4,
+            weight: 53.6,
+            colors: ['black', 'purple', 'green', 'brown', 'white'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'calyrex'
+            },
+
 
         });
     thisIndex.indexOrder = indexOrder;
@@ -2141,6 +2522,29 @@
 
         // Gigantamax Forms
 
+        'gmax-venusaur': {
+            order: thisIndex.afterOrder('mega-venusaur'),
+            token: 'gmax-venusaur',
+            name: 'Gigantamax Venusaur',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'venusaur',
+            isStarterPokemon: true,
+            number: 3,
+            types: ['grass', 'poison'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 800, phAttack: 82, phDefense: 83, spAttack: 100, spDefense: 100, speed: 80},
+            abilities: {0: 'overgrow', hidden: 'chlorophyll'},
+            height: 24,
+            weight: -1,
+            colors: ['pink', 'yellow', 'blue', 'green', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'grass'],
+            prevEvolution: 'venusaur',
+            hasBigSprite: true
+            },
         'gmax-charizard': {
             order: thisIndex.afterOrder('mega-charizard-x'),
             token: 'gmax-charizard',
@@ -2162,6 +2566,29 @@
             eggCycles: 20,
             eggGroups: ['monster', 'dragon'],
             prevEvolution: 'charizard',
+            hasBigSprite: true
+            },
+        'gmax-blastoise': {
+            order: thisIndex.afterOrder('mega-blastoise'),
+            token: 'gmax-blastoise',
+            name: 'Gigantamax Blastoise',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'blastoise',
+            isStarterPokemon: true,
+            number: 9,
+            types: ['water'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 790, phAttack: 83, phDefense: 100, spAttack: 85, spDefense: 105, speed: 78},
+            abilities: {0: 'torrent', hidden: 'rain-dish'},
+            height: 25,
+            weight: -1,
+            colors: ['grey', 'blue', 'white', 'brown'],
+            eggCycles: 20,
+            eggGroups: ['monster', 'water-1'],
+            prevEvolution: 'blastoise',
             hasBigSprite: true
             },
         'gmax-butterfree': {
@@ -2401,6 +2828,75 @@
             hasBigSprite: true
             },
 
+        'gmax-rillaboom': {
+            order: thisIndex.afterOrder('rillaboom'),
+            token: 'gmax-rillaboom',
+            name: 'Gigantamax Rillaboom',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'rillaboom',
+            isStarterPokemon: true,
+            number: 812,
+            types: ['grass'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 1000, phAttack: 125, phDefense: 90, spAttack: 60, spDefense: 70, speed: 85},
+            abilities: {0: 'overgrow', hidden: 'grassy-surge'},
+            height: 28,
+            weight: -1,
+            colors: ['brown', 'green', 'yellow', 'gray', 'orange'],
+            eggCycles: 20,
+            eggGroups: ['field', 'grass'],
+            prevEvolution: 'rillaboom',
+            hasBigSprite: true
+            },
+        'gmax-cinderace': {
+            order: thisIndex.afterOrder('cinderace'),
+            token: 'gmax-cinderace',
+            name: 'Gigantamax Cinderace',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'cinderace',
+            isStarterPokemon: true,
+            number: 815,
+            types: ['fire'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 800, phAttack: 116, phDefense: 75, spAttack: 65, spDefense: 75, speed: 119},
+            abilities: {0: 'blaze', hidden: 'libero'},
+            height: 27,
+            weight: -1,
+            colors: ['red', 'orange', 'yellow', 'white', 'black'],
+            eggCycles: 20,
+            eggGroups: ['field', 'human-like'],
+            prevEvolution: 'cinderace',
+            hasBigSprite: true
+            },
+        'gmax-inteleon': {
+            order: thisIndex.afterOrder('inteleon'),
+            token: 'gmax-inteleon',
+            name: 'Gigantamax Inteleon',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'inteleon',
+            isStarterPokemon: true,
+            number: 818,
+            types: ['water'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 700, phAttack: 85, phDefense: 65, spAttack: 125, spDefense: 65, speed: 120},
+            abilities: {0: 'torrent', hidden: 'sniper'},
+            height: 40,
+            weight: -1,
+            colors: ['blue', 'black', 'yellow', 'white'],
+            eggCycles: 20,
+            eggGroups: ['water-1', 'field'],
+            prevEvolution: 'inteleon',
+            hasBigSprite: true
+            },
         'gmax-corviknight': {
             order: thisIndex.afterOrder('corviknight'),
             token: 'gmax-corviknight',
@@ -2721,7 +3217,7 @@
             },
 
         'emax-eternatus': {
-            order: indexOrder++,
+            order: thisIndex.afterOrder('eternatus'),
             token: 'emax-eternatus',
             name: 'Eternamax Eternatus',
             class: 'legendary',
@@ -2744,6 +3240,53 @@
             hasBigSprite: true
             },
 
+        'gmax-single-strike-urshifu': {
+            order: thisIndex.afterOrder('single-strike-urshifu'),
+            token: 'gmax-single-strike-urshifu',
+            name: 'Gigantamax Single Strike Urshifu',
+            class: 'legendary',
+            class2: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax-single-strike',
+            baseSpecies: 'single-strike-urshifu',
+            number: 892,
+            types: ['fighting', 'dark'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 1000, phAttack: 130, phDefense: 100, spAttack: 63, spDefense: 60, speed: 97},
+            abilities: {0: 'unseen-fist'},
+            height: 29.0,
+            weight: -1,
+            colors: ['white', 'red', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'single-strike-urshifu',
+            hasBigSprite: true
+            },
+        'gmax-rapid-strike-urshifu': {
+            order: thisIndex.afterOrder('rapid-strike-urshifu'),
+            token: 'gmax-rapid-strike-urshifu',
+            name: 'Gigantamax Rapid Strike Urshifu',
+            class: 'legendary',
+            class2: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax-rapid-strike',
+            baseSpecies: 'rapid-strike-urshifu',
+            number: 892,
+            types: ['fighting', 'water'],
+            genderRatio: {male: 0.875, female: 0.125},
+            baseStats: {hp: 1000, phAttack: 130, phDefense: 100, spAttack: 63, spDefense: 60, speed: 97},
+            abilities: {0: 'unseen-fist'},
+            height: 26.0,
+            weight: -1,
+            colors: ['white', 'blue', 'yellow'],
+            eggCycles: 120,
+            eggGroups: ['undiscovered'],
+            prevEvolution: 'rapid-strike-urshifu',
+            hasBigSprite: true
+            },
+
     });
     thisIndex.indexOrder = indexOrder;
 
@@ -2760,7 +3303,9 @@
 
         // Gigantamax Forms
 
+        {base: 'venusaur', species: 'gmax-venusaur', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'charizard', species: 'gmax-charizard', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'blastoise', species: 'gmax-blastoise', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'butterfree', species: 'gmax-butterfree', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'pikachu', species: 'gmax-pikachu', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'meowth', species: 'gmax-meowth', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
@@ -2773,6 +3318,9 @@
         {base: 'garbodor', species: 'gmax-garbodor', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'melmetal', species: 'gmax-melmetal', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 8},
 
+        {base: 'rillaboom', species: 'gmax-rillaboom', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'cinderace', species: 'gmax-cinderace', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'inteleon', species: 'gmax-inteleon', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'corviknight', species: 'gmax-corviknight', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'orbeetle', species: 'gmax-orbeetle', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
         {base: 'drednaw', species: 'gmax-drednaw', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
@@ -2790,6 +3338,9 @@
         {base: 'duraludon', species: 'gmax-duraludon', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         {base: 'eternatus', species: 'emax-eternatus', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 1},
+
+        {base: 'single-strike-urshifu', species: 'gmax-single-strike-urshifu', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 1},
+        {base: 'rapid-strike-urshifu', species: 'gmax-rapid-strike-urshifu', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 1},
 
         ]);
 
@@ -2811,6 +3362,9 @@
 
         {base: 'ponyta', species: 'galarian-ponyta', method: 'type-warning', value: 'fire', method2: 'type-appeal', value2: 'psychic'},
         {base: 'ponyta', species: 'galarian-ponyta', method: 'type-warning', value: 'fire', method2: 'type-surge', value2: 'poison'},
+
+        {base: 'slowpoke', species: 'galarian-slowpoke', method: 'type-crisis', value: 'water', method2: 'type-appeal', value2: 'poison'},
+        {base: 'slowpoke', species: 'galarian-slowpoke', method: 'type-warning', value: 'water', method2: 'type-surge', value2: 'poison'},
 
         {base: 'farfetchd', species: 'galarian-farfetchd', method: 'type-warning', value: 'normal', method2: 'type-appeal', value2: 'fighting'},
         {base: 'farfetchd', species: 'galarian-farfetchd', method: 'type-warning', value: 'normal', method2: 'type-surge', value2: 'grass'},
@@ -2880,7 +3434,7 @@
         // ---
 
         // Legendary trigger relationships
-        // ---
+        {base: 'zarude', species: 'celebi'},
 
         ]);
 

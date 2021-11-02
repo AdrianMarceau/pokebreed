@@ -1035,6 +1035,30 @@
             prevEvolution: 'beta-munchlax'
             },
 
+        // Custom Gigantamax
+
+        'gmax-dragonite': {
+            order: thisIndex.afterOrder('dragonite'),
+            token: 'gmax-dragonite',
+            name: 'Gigantamax Dragonite',
+            class: 'gigantamax',
+            formClass: 'burst-evolution',
+            formClass2: 'gigantamax-form',
+            formToken: 'gmax',
+            baseSpecies: 'dragonite',
+            number: 149,
+            types: ['dragon', 'flying'],
+            baseStats: {hp: 910, phAttack: 134, phDefense: 95, spAttack: 100, spDefense: 100, speed: 80},
+            abilities: {0: 'inner-focus', hidden: 'multiscale'},
+            height: 26.0,
+            weight: -1,
+            colors: ['blue', 'grey', 'purple', 'yellow'],
+            eggCycles: 40,
+            eggGroups: ['water-1', 'dragon'],
+            prevEvolution: 'dragonite',
+            hasBigSprite: true
+            },
+
         // Newly Discovered Forms
 
         'rocky-castform': {
@@ -1339,7 +1363,10 @@
 
         {base: 'ditto', species: 'super-ditto', method: 'level-up', value: 10, method2: 'fusion-species', value2: 'ditto', switch: 'and'},
 
+        // Gigantamax Forms
+
         {base: 'alolan-meowth', species: 'gmax-alolan-meowth', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
+        {base: 'dragonite', species: 'gmax-dragonite', method: 'burst-evolution', value: 'dynamax-energy', method2: 'gigantamax-factor', value2: 100},
 
         ]);
 
